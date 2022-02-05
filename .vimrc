@@ -70,7 +70,7 @@ imap kj <Esc>
 nmap Y y$
 nmap <Tab> >>
 nmap <S-Tab> <<
-nmap <leader>q ZZ
+nmap <C-w> ZZ
 nmap <leader>h zc
 nmap <leader><leader>h zC
 nmap <leader>l zo
