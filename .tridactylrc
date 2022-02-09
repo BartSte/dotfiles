@@ -10,3 +10,4 @@ set modeindicatorshowkeys true
 
 bind K tabnext
 bind J tabprev
+bind d <Nop>
