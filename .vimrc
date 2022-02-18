@@ -17,7 +17,6 @@ filetype plugin indent on    " required
 if has ('syntax')
     syntax on
 endif
-
 if has('mouse')
     set mouse=a
 endif
@@ -59,13 +58,13 @@ map J }
 map <Leader> <Plug>(easymotion-prefix)
 map <C-s> :w<CR>
 
+inoremap kj <Esc>
+
 noremap <leader><leader>j J
 noremap H ^
 noremap ^ H
 noremap L g_
 noremap g_ L
-
-imap kj <Esc>
 
 nmap Y y$
 nmap <Tab> >>
