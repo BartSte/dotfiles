@@ -5,6 +5,7 @@ call vundle#begin('~/vimfiles/bundle')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'tpope/vim-surround'
 Plugin 'dracula/vim', {'name':'dracula'}
 
 " All of your Plugins must be added before the following line
@@ -45,7 +46,7 @@ set laststatus=2
 set confirm
 set visualbell
 set t_vb=
-set cmdheight=2
+set cmdheight=1
 set notimeout ttimeout ttimeoutlen=200
 set pastetoggle=<F11>
 
@@ -69,13 +70,20 @@ noremap g_ L
 nmap Y y$
 nmap <Tab> >>
 nmap <S-Tab> <<
-nmap <C-w> ZZ
 nmap <leader>h zc
 nmap <leader><leader>h zC
 nmap <leader>l zo
 nmap <leader><leader>l zO
+nmap <C-w> ZZ
+nmap <C-v> "*p
+nmap <C-V> "*P
+nmap <C-c> "*yy
+nmap <C-x> "*dd
 
 vnoremap p pgvy
+vnoremap <C-v> "*p
+vnoremap <C-c> "*y
+vnoremap <C-x> "*d
 
 onoremap K {
 onoremap J }
