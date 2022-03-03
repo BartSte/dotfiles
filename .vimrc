@@ -25,6 +25,8 @@ endif
 colorscheme dracula
 highlight Normal guibg=black guifg=white
 
+set encoding=utf-8
+set fileencoding=utf-8
 set number
 set relativenumber
 set scrolloff=999
@@ -49,6 +51,9 @@ set t_vb=
 set cmdheight=1
 set notimeout ttimeout ttimeoutlen=200
 set pastetoggle=<F11>
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
 
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
