@@ -3,3 +3,5 @@
 	email = b.steensma@fleetcleaner.com
 [gui]
 	recentrepo = C:/Users/barts/kmonad
+[credential "https://gitlab.com"]
+	provider = generic

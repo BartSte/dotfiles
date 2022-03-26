@@ -1,4 +1,4 @@
-set profiledir "C:\Users\barts\AppData\Roaming\Mozilla\Firefox\Profiles\6igmg1bv.default-release"
+set profiledir C:\Users\BartSteensma\AppData\Roaming\Mozilla\Firefox\Profiles\6aj34h13.default-release
 guiset_quiet gui none
 set theme dark
 set searchengine google
