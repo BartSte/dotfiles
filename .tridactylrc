@@ -8,6 +8,7 @@ set hintfiltermode simple
 set allowautofocus false
 set modeindicatorshowkeys true
 
-bind K tabnext
-bind J tabprev
+bind K <C-U>
+bind J <C-D>
 bind d <Nop>
+bind D <Nop>
