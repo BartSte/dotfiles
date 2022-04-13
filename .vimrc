@@ -1,20 +1,30 @@
 call plug#begin()
-Plug 'easymotion/vim-easymotion'
-Plug 'frazrepo/vim-rainbow'
+" Colors 
+Plug 'morhetz/gruvbox'
+Plug 'itchyny/lightline.vim'
+Plug 'vim-python/python-syntax'
+
+" Search, linting, and autocomplete
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'preservim/nerdtree'
-Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-python'}
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
 Plug 'vim-syntastic/syntastic'
-Plug 'vim-test/vim-test'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
-Plug 'itchyny/lightline.vim'
+
+" Navigation
+Plug 'easymotion/vim-easymotion'
+Plug 'frazrepo/vim-rainbow'
+Plug 'preservim/nerdtree'
+
+" Typing
 Plug '907th/vim-auto-save'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+
+" Testing and debugging
+Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-python'}
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-test/vim-test'
 call plug#end()
 
 if has ('syntax')
@@ -31,11 +41,10 @@ else
   set signcolumn=yes
 endif
 
+" Formatting commands
 command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 
-colorscheme gruvbox
-highlight Normal guibg=black
 
 set autoindent
 set backspace=indent,eol,start
@@ -47,10 +56,6 @@ set encoding=utf-8
 set expandtab
 set foldlevel=20
 set foldmethod=indent
-set guifont=Consolas:h11:cANSI
-set guioptions-=T
-set guioptions-=m
-set guioptions-=r
 set hidden
 set ignorecase
 set incsearch
@@ -90,8 +95,9 @@ let g:vimspector_enable_mappings = 'HUMAN'
 let mapleader = " "
 let NERDTreeShowHidden=1
 let g:auto_save = 1
-let g:auto_save_silent = 1
-let g:auto_save_events = ["InsertLeave"]
+let g:auto_save_silent = 0
+let g:auto_save_events = ["WinLeave"]
+let g:python_highlight_all = 1
 
 let g:lightline = {
       \ 'colorscheme': 'powerline',
@@ -107,13 +113,15 @@ let g:lightline = {
       \ },
       \ }
 
+"Insert mode mappings
 imap <C-BS> <C-W>
 inoremap kj <Esc>
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
+"Save
 noremap <C-s> :w<CR>
 
+"Window navigation
 noremap <C-w>h <C-w>H 
 noremap <C-w>j <C-w>J  
 noremap <C-w>k <C-w>K 
@@ -123,56 +131,72 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
+"Buffer navigation
 noremap <C-n> :bnext<CR>
 noremap <C-p> :bprevious<CR>
 noremap <C-b> :Buffers<CR>
 
+"Yanking, deleting, pasting
 nnoremap Y y$
 nnoremap <C-c> "*yy
 nnoremap <C-v> "*p
 nnoremap <C-x> "*dd
 nnoremap <a-v> "*P
 
+"Tabbing
 nnoremap <S-Tab> <<
 nnoremap <Tab> >>
 
+"File navigation
 noremap <a-e> :NERDTreeFocus<CR>
 noremap <a-h> :NERDTreeToggle<CR>
 noremap <a-o> :GFiles<CR>
 noremap <a-O> :Files<CR>
 
+"Git
 noremap <a-g> :G<CR>
 
-noremap <a-t> :TestNearest -strategy=dispatch<cr>
-noremap <a-l> :testlast -strategy=dispatch<CR>
-noremap <a-f> :TestFile -strategy=dispatch<CR>
-noremap <a-s> :TestSuite -strategy=dispatch<CR>
+"Testing
+noremap <a-t> :only<bar>TestNearest -strategy=dispatch<bar>wincmd L<CR>
+noremap <a-l> :testlast -strategy=dispatch_background<bar>aboveleft 25 copen<CR>
+noremap <a-f> :TestFile -strategy=dispatch_background<bar>aboveleft 25 copen<CR>
+noremap <a-s> :TestSuite -strategy=dispatch_background<bar>aboveleft 25 copen<CR>
 
+"Testing & debugging
 noremap <a-T> :TestNearest -strategy=pyunit<CR>
 noremap <a-L> :TestLast -strategy=pyunit<CR>
 noremap <a-F> :TestFile -strategy=pyunit<CR>
 noremap <a-S> :TestSuite -strategy=pyunit<CR>
 
+"Go to shortcuts
 noremap gd <Plug>(coc-definition)
 noremap gl :TestVist<CR>
 noremap gi <Plug>(coc-implementation)
 noremap gr <Plug>(coc-references)
 noremap gy <Plug>(coc-type-definition)
+noremap <leader> <Plug>(easymotion-prefix)
 
+"Formatting and refactoring
 noremap <leader><leader>s :sort<CR>
 noremap <leader>f :Format<CR>
 noremap <leader>i :OR<CR>
 noremap <leader>r <Plug>(coc-rename)
 noremap <leader><leader>j J
 
-noremap <leader> <Plug>(easymotion-prefix)
+"Tab shortcuts
 noremap <leader><leader>tn :tabnew<CR>
 noremap <leader><leader>tc :tabclose<CR>
 noremap <leader><leader>to :tabonly<CR>
 noremap <leader><leader>tn :tabnew<CR>
 noremap <leader><leader>tn :tabnew<CR>
-noremap <leader><leader><leader>v :e ~/.vimrc<CR>
 
+"Config file edit and load
+noremap <leader><leader>v :e ~/.vimrc<CR>
+noremap <leader><leader>g :e ~/.gvimrc<CR>
+noremap <leader><leader><leader>v :so ~/.vimrc<CR>
+noremap <leader><leader><leader>g :so ~/.gvimrc<CR>
+
+"Override default normalmode maps
 noremap H ^
 noremap J }
 noremap K {
@@ -180,11 +204,13 @@ noremap L g_
 noremap ^ H
 noremap g_ L
 
+"Override default operator maps
 onoremap H ^
 onoremap L g_
 onoremap ^ H
 onoremap g_ L
 
+"Folding
 nnoremap <leader><leader>h zC
 nnoremap <leader><leader>l zO
 nnoremap <leader><leader>m zM
@@ -192,6 +218,7 @@ nnoremap <leader>h zc
 nnoremap <leader>l zo
 nnoremap <leader>m zR
 
+"Yanking, deleting, pasting (visual mode)
 vnoremap <C-c> "*y
 vnoremap <C-v> "*p
 vnoremap <C-x> "*d
@@ -199,3 +226,73 @@ vnoremap <S-Tab> <<
 vnoremap <Tab> >>
 vnoremap p pgvy
 
+" A function that enables deleting a buffer that is currently visible is an
+" active window without removing the window. It also ensure there is always 1
+" (empty) buffer present to avoid vim from shutting down.
+function s:Kwbd(kwbdStage)
+  if(a:kwbdStage == 1)
+    if(&modified)
+      let answer = confirm("This buffer has been modified.  Are you sure you want to delete it?", "&Yes\n&No", 2)
+      if(answer != 1)
+        return
+      endif
+    endif
+    if(!buflisted(winbufnr(0)))
+      bd!
+      return
+    endif
+    let s:kwbdBufNum = bufnr("%")
+    let s:kwbdWinNum = winnr()
+    windo call s:Kwbd(2)
+    execute s:kwbdWinNum . 'wincmd w'
+    let s:buflistedLeft = 0
+    let s:bufFinalJump = 0
+    let l:nBufs = bufnr("$")
+    let l:i = 1
+    while(l:i <= l:nBufs)
+      if(l:i != s:kwbdBufNum)
+        if(buflisted(l:i))
+          let s:buflistedLeft = s:buflistedLeft + 1
+        else
+          if(bufexists(l:i) && !strlen(bufname(l:i)) && !s:bufFinalJump)
+            let s:bufFinalJump = l:i
+          endif
+        endif
+      endif
+      let l:i = l:i + 1
+    endwhile
+    if(!s:buflistedLeft)
+      if(s:bufFinalJump)
+        windo if(buflisted(winbufnr(0))) | execute "b! " . s:bufFinalJump | endif
+      else
+        enew
+        let l:newBuf = bufnr("%")
+        windo if(buflisted(winbufnr(0))) | execute "b! " . l:newBuf | endif
+      endif
+      execute s:kwbdWinNum . 'wincmd w'
+    endif
+    if(buflisted(s:kwbdBufNum) || s:kwbdBufNum == bufnr("%"))
+      execute "bd! " . s:kwbdBufNum
+    endif
+    if(!s:buflistedLeft)
+      set buflisted
+      set bufhidden=delete
+      set buftype=
+      setlocal noswapfile
+    endif
+  else
+    if(bufnr("%") == s:kwbdBufNum)
+      let prevbufvar = bufnr("#")
+      if(prevbufvar > 0 && buflisted(prevbufvar) && prevbufvar != s:kwbdBufNum)
+        b #
+      else
+        bn
+      endif
+    endif
+  endif
+endfunction
+
+command! Kwbd call s:Kwbd(1)
+nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
+
+nmap ZZ <Plug>Kwbd
