@@ -3,3 +3,5 @@
 	email = b.steensma@fleetcleaner.com
 [credential "https://gitlab.com"]
 	provider = generic
+[core]
+	autocrlf = false
