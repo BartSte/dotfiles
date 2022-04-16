@@ -4,4 +4,4 @@
 [credential "https://gitlab.com"]
 	provider = generic
 [core]
-	autocrlf = false
+	autocrlf = input
