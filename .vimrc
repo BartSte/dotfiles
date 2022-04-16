@@ -23,6 +23,7 @@ Plug 'tpope/vim-surround'
 Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-python'}
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-test/vim-test'
 call plug#end()
 
@@ -162,6 +163,11 @@ noremap <a-t> :only<bar>TestNearest -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-l> :only<bar>Testlast -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-f> :only<bar>TestFile -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-a> :only<bar>TestSuite<bar>wincmd L<CR>
+=======
+noremap <a-t> :TestNearest -strategy=asyncrun<bar>wincmd L<CR>
+noremap <a-l> :TestLast -strategy=asyncrun<bar>wincmd L<CR>
+noremap <a-f> :TestFile -strategy=asyncrun<bar>wincmd L<CR>
+noremap <a-a> :TestSuite -strategy=asyncrun<bar>wincmd L<CR>
 
 "Testing & debugging
 noremap <a-T> :TestNearest -strategy=pyunit<CR>
