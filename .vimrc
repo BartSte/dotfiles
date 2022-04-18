@@ -89,6 +89,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:test#custom_strategies = {'pyunit': function('PyUnitTestStrategy')}
 let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_install_gadgets = ['debugpy']
 let mapleader = " "
 
 let g:lightline = {
@@ -144,6 +145,8 @@ nnoremap <a-v> "*P
 "Tabbing
 nnoremap <S-Tab> <<
 nnoremap <Tab> >>
+vnoremap <S-Tab> <gv
+vnoremap <Tab> >gv
 
 "File navigation
 execute "set <a-e>=\ee"
@@ -231,8 +234,6 @@ nnoremap <leader>m zR
 vnoremap <C-c> "*y
 vnoremap <C-v> "*p
 vnoremap <C-x> "*d
-vnoremap <S-Tab> <<
-vnoremap <Tab> >>
 vnoremap p pgvy
 
 " A function that enables deleting a buffer that is currently visible is an
