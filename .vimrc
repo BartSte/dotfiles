@@ -1,4 +1,5 @@
-call plug#begin() " Colors 
+call plug#begin() 
+" Colors 
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'vim-python/python-syntax'
@@ -27,28 +28,24 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-test/vim-test'
 call plug#end()
 
-if has ('syntax')
-    syntax on
-endif
-
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-
 " Formatting commands
 command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 
+"" Colorscheme
+syntax on
+colorscheme gruvbox
+let g:gruvbox_contrast_dark='hard'
+set background=dark
+
 set autoindent
+set signcolumn=number
 set backspace=indent,eol,start
 set belloff=all
 set cmdheight=2
 set colorcolumn=80
 set confirm
 set diffopt+=vertical
-set encoding=utf-8
 set expandtab
 set foldlevel=20
 set foldmethod=indent
@@ -80,19 +77,19 @@ function! PyUnitTestStrategy(cmd)
     call vimspector#LaunchWithSettings( #{ configuration: 'pyunit', TestName: testName } )
 endfunction
 
-let g:test#custom_strategies = {'pyunit': function('PyUnitTestStrategy')}
+let NERDTreeShowHidden=1
+let g:auto_save = 1
+let g:auto_save_events = ["WinLeave"]
+let g:auto_save_silent = 0
+let g:python_highlight_all = 1
 let g:rainbow_active = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
+let g:test#custom_strategies = {'pyunit': function('PyUnitTestStrategy')}
 let g:vimspector_enable_mappings = 'HUMAN'
 let mapleader = " "
-let NERDTreeShowHidden=1
-let g:auto_save = 1
-let g:auto_save_silent = 0
-let g:auto_save_events = ["WinLeave"]
-let g:python_highlight_all = 1
 
 let g:lightline = {
       \ 'colorscheme': 'powerline',
@@ -149,6 +146,9 @@ nnoremap <S-Tab> <<
 nnoremap <Tab> >>
 
 "File navigation
+execute "set <a-e>=\ee"
+execute "set <a-h>=\eh"
+execute "set <a-o>=\eo"
 noremap <a-e> :NERDTreeFocus<CR>
 noremap <a-h> :NERDTreeToggle<CR>
 noremap <a-o> :Files<CR>
@@ -163,7 +163,7 @@ noremap <a-t> :only<bar>TestNearest -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-l> :only<bar>Testlast -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-f> :only<bar>TestFile -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-a> :only<bar>TestSuite<bar>wincmd L<CR>
-=======
+
 noremap <a-t> :TestNearest -strategy=asyncrun<bar>wincmd L<CR>
 noremap <a-l> :TestLast -strategy=asyncrun<bar>wincmd L<CR>
 noremap <a-f> :TestFile -strategy=asyncrun<bar>wincmd L<CR>
@@ -176,14 +176,14 @@ noremap <a-F> :TestFile -strategy=pyunit<CR>
 noremap <a-A> :TestSuite -strategy=pyunit<CR>
 
 "Go to shortcuts
+map <leader> <Plug>(easymotion-prefix)
+xmap gh <Plug>VimspectorBalloonEval
 noremap gd <Plug>(coc-definition)
 noremap gl :TestVisit<CR>
 noremap gi <Plug>(coc-implementation)
 noremap gr <Plug>(coc-references)
 noremap gy <Plug>(coc-type-definition)
-noremap <leader> <Plug>(easymotion-prefix)
 noremap gh <Plug>VimspectorBalloonEval
-xmap gh <Plug>VimspectorBalloonEval
 
 "Formatting and refactoring
 noremap <leader><leader>s :sort<CR>
