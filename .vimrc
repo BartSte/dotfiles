@@ -28,6 +28,10 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-test/vim-test'
 call plug#end()
 
+if has("unix") 
+    let g:vimspector_base_dir='/home/barts/.vim/plugged/vimspector'
+endif
+
 " Formatting commands
 command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
@@ -166,11 +170,6 @@ noremap <a-t> :only<bar>TestNearest -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-l> :only<bar>Testlast -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-f> :only<bar>TestFile -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-a> :only<bar>TestSuite<bar>wincmd L<CR>
-
-noremap <a-t> :TestNearest -strategy=asyncrun<bar>wincmd L<CR>
-noremap <a-l> :TestLast -strategy=asyncrun<bar>wincmd L<CR>
-noremap <a-f> :TestFile -strategy=asyncrun<bar>wincmd L<CR>
-noremap <a-a> :TestSuite -strategy=asyncrun<bar>wincmd L<CR>
 
 "Testing & debugging
 noremap <a-T> :TestNearest -strategy=pyunit<CR>
