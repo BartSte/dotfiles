@@ -1,12 +1,10 @@
 if has("gui_win32")
-    set guifont=Consolas:h11:cANSI
+    set guifont=Jetbrains\ Mono:h9
 else
     set guifont=Consolas\ 11
 endif
 
-set guioptions-=T
-set guioptions-=m
-set guioptions-=r
+set guioptions=i
 
 highlight Normal guibg=black
 

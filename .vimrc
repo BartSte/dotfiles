@@ -1,6 +1,7 @@
 call plug#begin() 
-" Colors 
+" Aestatics 
 Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'vim-python/python-syntax'
 
@@ -20,17 +21,17 @@ Plug '907th/vim-auto-save'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
+" Source control
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/gv.vim'
+Plug 'tpope/vim-fugitive'
+
 " Testing and debugging
 Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-python'}
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-test/vim-test'
 call plug#end()
-
-if has("unix") 
-    let g:vimspector_base_dir='/home/barts/.vim/plugged/vimspector'
-endif
 
 " Formatting commands
 command! -nargs=0 Format :call CocActionAsync('format')
@@ -38,8 +39,7 @@ command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeI
 
 "" Colorscheme
 syntax on
-colorscheme gruvbox
-let g:gruvbox_contrast_dark='hard'
+colorscheme onedark
 set background=dark
 
 set autoindent
@@ -82,6 +82,7 @@ function! PyUnitTestStrategy(cmd)
 endfunction
 
 let NERDTreeShowHidden=1
+let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:auto_save = 1
 let g:auto_save_events = ["WinLeave"]
 let g:auto_save_silent = 0
@@ -95,6 +96,8 @@ let g:test#custom_strategies = {'pyunit': function('PyUnitTestStrategy')}
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_install_gadgets = ['debugpy']
 let mapleader = " "
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz;,./<>?!@#$%{[(`}])"~=_789*+\456-|123ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 let g:lightline = {
       \ 'colorscheme': 'powerline',
@@ -127,6 +130,7 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+noremap ZZ <C-w>c
 
 "Buffer navigation
 noremap <C-n> :bnext<CR>
@@ -158,8 +162,9 @@ execute "set <a-h>=\eh"
 execute "set <a-o>=\eo"
 noremap <a-e> :NERDTreeFocus<CR>
 noremap <a-h> :NERDTreeToggle<CR>
-noremap <a-o> :Files<CR>
-noremap <a-O> :GFiles<CR>
+noremap <a-o> :GFiles<CR>
+noremap <a-O> :Files<CR>
+noremap <C-f> :Ag 
 
 "Git
 noremap <a-g> :G 
@@ -169,29 +174,33 @@ noremap <a-G> :vertical G<CR>
 noremap <a-t> :only<bar>TestNearest -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-l> :only<bar>Testlast -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-f> :only<bar>TestFile -strategy=dispatch<bar>wincmd L<CR>
-noremap <a-a> :only<bar>TestSuite<bar>wincmd L<CR>
 
 "Testing & debugging
 noremap <a-T> :TestNearest -strategy=pyunit<CR>
 noremap <a-L> :TestLast -strategy=pyunit<CR>
 noremap <a-F> :TestFile -strategy=pyunit<CR>
-noremap <a-A> :TestSuite -strategy=pyunit<CR>
 
 "Go to shortcuts
 map <leader> <Plug>(easymotion-prefix)
-xmap gh <Plug>VimspectorBalloonEval
-noremap gd <Plug>(coc-definition)
+map gd <Plug>(coc-definition)
+map gh <Plug>VimspectorBalloonEval
+map gi <Plug>(coc-implementation)
+map gr <Plug>(coc-references)
+map gy <Plug>(coc-type-definition)
 noremap gl :TestVisit<CR>
-noremap gi <Plug>(coc-implementation)
-noremap gr <Plug>(coc-references)
-noremap gy <Plug>(coc-type-definition)
-noremap gh <Plug>VimspectorBalloonEval
+xmap gh <Plug>VimspectorBalloonEval
+
+" Markdown
+nmap <a-m> <Plug>MarkdownPreview
+nmap <a-M> <Plug>MarkdownPreviewStop
+nmap <C-m> <Plug>MarkdownPreviewToggle
+
 
 "Formatting and refactoring
+map <leader>r <Plug>(coc-rename)
 noremap <leader><leader>s :sort<CR>
 noremap <leader>f :Format<CR>
 noremap <leader>i :OR<CR>
-noremap <leader>r <Plug>(coc-rename)
 noremap <leader><leader>j J
 
 "Tab shortcuts
@@ -304,7 +313,7 @@ endfunction
 command! Kwbd call s:Kwbd(1)
 nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
 
-nmap ZZ <Plug>Kwbd
+nmap <a-b> <Plug>Kwbd
 
 " Customize vimspector gui
 function! s:CustomiseUI()
