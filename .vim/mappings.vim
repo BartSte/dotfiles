@@ -31,12 +31,11 @@ execute "set <a-V>=\eV"
 execute "set <a-W>=\eW"
 execute "set <a-R>=\eR"
 noremap <a-C> :b vimspector.Console<CR>
-noremap <a-R> :b vimspector.Output:stderr<CR>
+noremap <a-E> :b vimspector.Output:stderr<CR>
 noremap <a-S> :b vimspector.StackTrace<CR>
 noremap <a-V> :b vimspector.Variables<CR>
 noremap <a-W> :b vimspector.Watches<CR>
 noremap <a-R> :b vimspector.output:server<CR>
-
 
 "Yanking, deleting, pasting
 execute "set <a-v>=\ev"
@@ -56,6 +55,7 @@ vnoremap <Tab> >gv
 execute "set <a-e>=\ee"
 execute "set <a-h>=\eh"
 execute "set <a-o>=\eo"
+execute "set <a-O>=\eO"
 noremap <a-e> :NERDTreeFocus<CR>
 noremap <a-h> :NERDTreeToggle<CR>
 noremap <a-o> :GFiles<CR>
@@ -63,16 +63,25 @@ noremap <a-O> :Files<CR>
 noremap <C-f> :Ag 
 
 "Git
+execute "set <a-g>=\eg"
+execute "set <a-G>=\eG"
+execute "set <a-x>=\ex"
 noremap <a-g> :G<space>
 noremap <a-G> :vertical G<CR>
 noremap <a-x> :GV<CR>
 
 "Testing
+execute "set <a-t>=\et"
+execute "set <a-l>=\el"
+execute "set <a-f>=\ef"
 noremap <a-t> :only<bar>TestNearest -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-l> :only<bar>Testlast -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-f> :only<bar>TestFile -strategy=dispatch<bar>wincmd L<CR>
 
 "Testing & debugging
+execute "set <a-T>=\eT"
+execute "set <a-L>=\eL"
+execute "set <a-F>=\eF"
 noremap <a-T> :TestNearest -strategy=pyunit<CR>
 noremap <a-L> :TestLast -strategy=pyunit<CR>
 noremap <a-F> :TestFile -strategy=pyunit<CR>
@@ -86,11 +95,6 @@ map gr <Plug>(coc-references)
 map gy <Plug>(coc-type-definition)
 noremap gl :TestVisit<CR>
 xmap gh <Plug>VimspectorBalloonEval
-
-" Markdown
-nmap <a-m> <Plug>MarkdownPreview
-nmap <a-M> <Plug>MarkdownPreviewStop
-nmap <C-m> <Plug>MarkdownPreviewToggle
 
 "Formatting and refactoring
 map <leader>r <Plug>(coc-rename)
