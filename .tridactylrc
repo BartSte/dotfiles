@@ -8,6 +8,7 @@ set hintfiltermode simple
 set allowautofocus false
 set modeindicatorshowkeys true
 
+bind ZZ d
 bind K <C-U>
 bind J <C-D>
 bind d <Nop>

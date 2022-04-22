@@ -6,8 +6,6 @@ endif
 
 set guioptions=i
 
-highlight Normal guibg=black
-
 " set guicursor+=i-ci:ver25-Cursor/lCursor
 " set guicursor+=o:hor50-Cursor
 " set guicursor+=r-cr:hor20-Cursor/lCursor

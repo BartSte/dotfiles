@@ -1,6 +1,7 @@
 call plug#begin() 
 " Aestatics 
 Plug 'morhetz/gruvbox'
+Plug 'k4yt3x/ayu-vim-darker'
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'vim-python/python-syntax'
@@ -39,8 +40,8 @@ command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeI
 
 "" Colorscheme
 syntax on
-colorscheme onedark
-set background=dark
+let ayucolor="darker" 
+colorscheme ayu
 
 set autoindent
 set signcolumn=number
@@ -130,7 +131,7 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-noremap ZZ <C-w>c
+noremap ZZ :wq<CR>
 
 "Buffer navigation
 noremap <C-n> :bnext<CR>
@@ -167,8 +168,9 @@ noremap <a-O> :Files<CR>
 noremap <C-f> :Ag 
 
 "Git
-noremap <a-g> :G 
+noremap <a-g> :G<space>
 noremap <a-G> :vertical G<CR>
+noremap <a-x> :GV<CR>
 
 "Testing
 noremap <a-t> :only<bar>TestNearest -strategy=dispatch<bar>wincmd L<CR>
