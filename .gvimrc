@@ -1,7 +1,7 @@
 if has("gui_win32")
     set guifont=Jetbrains\ Mono:h9
 else
-    set guifont=Consolas\ 11
+    set guifont=Jetbrains\ Mono\ 10
 endif
 
 set guioptions=i
