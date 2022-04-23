@@ -32,7 +32,7 @@ set noshowmode
 set showcmd
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 set wildmenu
-set wildmode=list:longest
+set wildmode=list,full
 
 " Searching
 set ignorecase
