@@ -8,6 +8,7 @@ set termguicolors
 
 " Tabbing
 set autoindent
+set backspace=indent,eol,start
 set expandtab
 set nostartofline
 set shiftwidth=4
@@ -21,8 +22,6 @@ set laststatus=2
 set number
 set scrolloff=999
 set signcolumn=number
-set statusline=%{FugitiveStatusline()}
-set shortmess+=c
 set relativenumber
 set textwidth=80
 
@@ -35,13 +34,8 @@ set wildmenu
 set wildmode=list,full
 
 " Searching
-set ignorecase
 set incsearch
 set smartcase
-"
-" Keymaps
-set backspace=indent,eol,start
-set pastetoggle=<F11>
 
 " Miscelaneous
 set belloff=all

@@ -37,14 +37,6 @@ noremap <a-V> :b vimspector.Variables<CR>
 noremap <a-W> :b vimspector.Watches<CR>
 noremap <a-R> :b vimspector.output:server<CR>
 
-"Yanking, deleting, pasting
-execute "set <a-v>=\ev"
-nnoremap Y y$
-nnoremap <C-c> "*yy
-nnoremap <C-v> "*p
-nnoremap <C-x> "*dd
-nnoremap <a-v> "*P
-
 "Tabbing
 nnoremap <S-Tab> <<
 nnoremap <Tab> >>
@@ -143,9 +135,26 @@ nnoremap <leader>l zo
 nnoremap <leader>m zR
 
 "Yanking, deleting, pasting (visual mode)
-vnoremap <C-c> "*y
-vnoremap <C-v> "*p
-vnoremap <C-x> "*d
+execute "set <a-v>=\ev"
+nnoremap Y y$
 vnoremap p pgvy
+if has("win32")
+    nnoremap <C-c> "*yy
+    nnoremap <C-v> "*p
+    nnoremap <C-x> "*dd
+    nnoremap <a-v> "*P
 
+    vnoremap <C-c> "*y
+    vnoremap <C-v> "*p
+    vnoremap <C-x> "*d
+else
+    nnoremap <C-c> "+yy
+    nnoremap <C-v> "+p
+    nnoremap <C-x> "+dd
+    nnoremap <a-v> "+P
+
+    vnoremap <C-c> "+y
+    vnoremap <C-v> "+p
+    vnoremap <C-x> "+d
+endif
 
