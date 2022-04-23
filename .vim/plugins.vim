@@ -1,4 +1,4 @@
-call plug#begin() 
+call plug#begin()
 " Aestatics 
 Plug 'morhetz/gruvbox'
 Plug 'k4yt3x/ayu-vim-darker'

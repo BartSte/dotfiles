@@ -15,7 +15,6 @@ set softtabstop=4
 
 " Editor features
 set colorcolumn=80
-set cursorline
 set foldlevel=20
 set foldmethod=indent
 set laststatus=2
@@ -53,3 +52,8 @@ set modifiable
 set nocompatible
 set notimeout ttimeout ttimeoutlen=200
 set updatetime=300
+
+if has("unix")
+    set cursorline "Breaks for window
+endif
+
