@@ -7,3 +7,5 @@ alias lin='/usr/bin/git --git-dir=$HOME/dotfiles-linux.git/ --work-tree=$HOME'
 function gvims () {
     gvim -S $1 -c source ~/.vimrc| source ~/.gvimrc
 }
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
