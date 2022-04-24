@@ -47,11 +47,10 @@ vnoremap <Tab> >gv
 execute "set <a-e>=\ee"
 execute "set <a-h>=\eh"
 execute "set <a-o>=\eo"
-execute "set <a-O>=\eO"
 noremap <a-e> :NERDTreeFocus<CR>
 noremap <a-h> :NERDTreeToggle<CR>
 noremap <a-o> :GFiles<CR>
-noremap <a-O> :Files<CR>
+noremap <C-t> :Files<CR>
 noremap <C-f> :Ag 
 
 "Git
