@@ -41,7 +41,7 @@ let g:lightline = {
       \ },
       \ }
 
-" Set the curson for terminal
+" Set the curson for terminal (only linux)
 if &term =~ "xterm\\|rxvt"
     let &t_SI = "\<Esc>]12;white\x7"
     let &t_EI = "\<Esc>]12;white\x7"
