@@ -24,6 +24,7 @@ set scrolloff=999
 set signcolumn=number
 set relativenumber
 set textwidth=80
+set nowrap
 
 " Command line
 set cmdheight=2

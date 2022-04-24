@@ -1,5 +1,6 @@
 PROMPT_COMMAND='echo -en "\033]0;$(hostname) @ $(pwd)\a"'
 export PS1="\[\033[38;5;2m\]\\$\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;6m\]\W\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;1m\]>\[$(tput sgr0)\] \[$(tput sgr0)\]"
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 alias ..='cd ..'
 alias ...='cd ...'
@@ -29,5 +30,6 @@ function vims () {
 function gvims () {
     gvim -S $1 -c source ~/.vimrc| source ~/.gvimrc
 }
+
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
