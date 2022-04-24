@@ -1,6 +1,6 @@
 PROMPT_COMMAND='echo -en "\033]0;$(hostname) @ $(pwd)\a"'
 export PS1="\[\033[38;5;2m\]\\$\[$(tput sgr0)\] \W \[$(tput sgr0)\]\[\033[38;5;196m\]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')\[$(tput sgr0)\]\[\033[38;5;2m\]>\[$(tput sgr0)\]"
-export FZF_COMPLETION_TRIGGER='jj'
+export FZF_COMPLETION_TRIGGER=''
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 alias ~='cd ~'
