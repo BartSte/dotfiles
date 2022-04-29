@@ -10,7 +10,6 @@ set termguicolors
 set autoindent
 set backspace=indent,eol,start
 set expandtab
-set nostartofline
 set shiftwidth=4
 set softtabstop=4
 
@@ -19,6 +18,7 @@ set colorcolumn=80
 set foldlevel=20
 set foldmethod=indent
 set laststatus=2
+set nostartofline
 set number
 set scrolloff=999
 set signcolumn=number
@@ -36,6 +36,7 @@ set wildmode=list,full
 
 " Searching
 set incsearch
+set ignorecase
 set smartcase
 
 " Miscelaneous
@@ -48,7 +49,9 @@ set nocompatible
 set notimeout ttimeout ttimeoutlen=200
 set updatetime=300
 
-if has("unix")
-    set cursorline "Breaks for window
+if has("win32")
+    set nocursorline "Bug in windows
+else
+    set cursorline
 endif
 

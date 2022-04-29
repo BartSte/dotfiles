@@ -1,6 +1,7 @@
 "Insert mode mappings
 imap <C-BS> <C-W>
 inoremap kj <Esc>
+inoremap <C-=> <space>=<space>
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 "Save
@@ -15,7 +16,6 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-noremap ZZ :wq<CR>
 
 "Buffer navigation
 execute "set <a-b>=\eb"
@@ -30,6 +30,7 @@ execute "set <a-S>=\eS"
 execute "set <a-V>=\eV"
 execute "set <a-W>=\eW"
 execute "set <a-R>=\eR"
+noremap <F7> :VimspectorReset<CR>
 noremap <a-C> :b vimspector.Console<CR>
 noremap <a-E> :b vimspector.Output:stderr<CR>
 noremap <a-S> :b vimspector.StackTrace<CR>
@@ -66,7 +67,7 @@ execute "set <a-t>=\et"
 execute "set <a-l>=\el"
 execute "set <a-f>=\ef"
 noremap <a-t> :only<bar>TestNearest -strategy=dispatch<bar>wincmd L<CR>
-noremap <a-l> :only<bar>Testlast -strategy=dispatch<bar>wincmd L<CR>
+noremap <a-l> :only<bar>TestLast -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-f> :only<bar>TestFile -strategy=dispatch<bar>wincmd L<CR>
 
 "Testing & debugging
@@ -80,19 +81,22 @@ noremap <a-F> :TestFile -strategy=pyunit<CR>
 "Go to shortcuts
 map <leader> <Plug>(easymotion-prefix)
 map gd <Plug>(coc-definition)
+map gD :wincmd v<bar>wincmd l<CR>gd
 map gh <Plug>VimspectorBalloonEval
 map gi <Plug>(coc-implementation)
 map gr <Plug>(coc-references)
 map gy <Plug>(coc-type-definition)
+nmap <silent> ga <Plug>(coc-codeaction-line)
+xmap <silent> ga <Plug>(coc-codeaction-selected)
+nmap <silent> gA <Plug>(coc-codeaction)
 noremap gl :TestVisit<CR>
-xmap gh <Plug>VimspectorBalloonEval
 
 "Formatting and refactoring
 map <leader>r <Plug>(coc-rename)
+" nmap <leader>d :Docstring<CR>
 noremap <leader><leader>s :sort<CR>
 noremap <leader>f :Format<CR>
 noremap <leader>i :OR<CR>
-noremap <leader><leader>j J
 
 "Tab shortcuts
 noremap <leader><leader>tn :tabnew<CR>
@@ -118,6 +122,9 @@ noremap K {
 noremap L g_
 noremap ^ H
 noremap g_ L
+
+noremap <leader><leader>k K
+noremap <leader><leader>j J
 
 "Override default operator maps
 onoremap H ^

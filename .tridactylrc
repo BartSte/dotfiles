@@ -9,6 +9,7 @@ set allowautofocus false
 set modeindicatorshowkeys true
 
 bind ZZ d
+bind <C-b> b
 bind K <C-U>
 bind J <C-D>
 bind d <Nop>
