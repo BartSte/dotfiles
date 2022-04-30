@@ -11,6 +11,9 @@ let g:auto_save = 1
 let g:auto_save_events = ["FocusLost", "WinLeave", "CmdwinEnter"]
 let g:auto_save_silent = 0
 
+let g:coc_config_home = '~/.vim' 
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-pydocstring', 'coc-sh', 'coc-html', 'coc-powershell']
+
 let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0
 
