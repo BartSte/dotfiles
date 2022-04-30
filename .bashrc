@@ -2,7 +2,7 @@ PROMPT_COMMAND='echo -en "\033]0;$(hostname) @ $(pwd)\a"'
 export PS1="\[\033[38;5;2m\]\\$\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;51m\]\W\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;172m\]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')\[$(tput sgr0)\]>\[$(tput sgr0)\]"
 export FZF_COMPLETION_TRIGGER=''
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 alias ~='cd ~'
@@ -27,13 +27,13 @@ alias ll="ls -lv --group-directories-first" # directories first, alphanumeric so
 alias lr='ll -R' # recursive
 alias la='ll -A' # hidden
 
-function vims () {
-    vim -S $1 -c source ~/.vimrc
-}
+# function vims () {
+#     vim -S $1 -c source ~/.vimrc
+# }
 
-function gvims () {
-    gvim -S $1 -c source ~/.vimrc| source ~/.gvimrc
-}
+# function gvims () {
+#     gvim -S $1 -c source ~/.vimrc| source ~/.gvimrc
+# }
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
