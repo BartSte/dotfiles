@@ -1,7 +1,6 @@
 command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 
-
 function! PyUnitTestStrategy(cmd)
     let testName = split(a:cmd)[-1]
     call vimspector#LaunchWithSettings( #{ configuration: 'pyunit', TestName: testName } )

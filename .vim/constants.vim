@@ -14,6 +14,21 @@ let g:auto_save_silent = 0
 let g:coc_config_home = '~/.vim' 
 let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-pydocstring', 'coc-sh', 'coc-html', 'coc-powershell']
 
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'PreProc', 'Normal'],
+  \ 'bg+':     ['bg', 'Normal'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
 let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0
 
