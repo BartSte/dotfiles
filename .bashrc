@@ -27,13 +27,13 @@ alias ll="ls -lv --group-directories-first" # directories first, alphanumeric so
 alias lr='ll -R' # recursive
 alias la='ll -A' # hidden
 
-# function vims () {
-#     vim -S $1 -c source ~/.vimrc
-# }
+function vims () {
+    vim -S $1 -c source ~/.vimrc
+}
 
-# function gvims () {
-#     gvim -S $1 -c source ~/.vimrc| source ~/.gvimrc
-# }
+function gvims () {
+    gvim -S $1 -c source ~/.vimrc| source ~/.gvimrc
+}
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -1,5 +1,14 @@
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all'
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git --ignore AppData --ignore "Reporting Data" --ignore "Fleet Cleaner" -g .'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden
+                            \ --ignore .git 
+                            \ --ignore *.vscode* 
+                            \ --ignore *.dot*
+                            \ --ignore *.venv* 
+                            \ --ignore AppData 
+                            \ --ignore project_data 
+                            \ --ignore "Reporting Data" 
+                            \ --ignore "Fleet Cleaner"
+                            \ -g .'
 
 let NERDTreeShowHidden=1
 
