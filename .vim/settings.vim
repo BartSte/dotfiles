@@ -23,8 +23,11 @@ set number
 set scrolloff=999
 set signcolumn=number
 set relativenumber
-set textwidth=80
+
+" Formatting
 set nowrap
+set textwidth=80
+set fo=""
 
 " Command line
 set cmdheight=2
@@ -47,7 +50,7 @@ set history=500
 set modifiable
 set nocompatible
 set notimeout ttimeout ttimeoutlen=200
-set updatetime=300
+set updatetime=1000
 
 if has("win32")
     set nocursorline "Bug in windows

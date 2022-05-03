@@ -1,14 +1,5 @@
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all'
-let $FZF_DEFAULT_COMMAND = 'ag --hidden
-                            \ --ignore .git 
-                            \ --ignore *.vscode* 
-                            \ --ignore *.dot*
-                            \ --ignore *.venv* 
-                            \ --ignore AppData 
-                            \ --ignore project_data 
-                            \ --ignore "Reporting Data" 
-                            \ --ignore "Fleet Cleaner"
-                            \ -g .'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden -g .'
 
 let NERDTreeShowHidden=1
 
@@ -20,7 +11,7 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz;,./<>?!@#$%{[(`}])"~=_789*+\
 let g:EasyMotion_smartcase = 1
 
 let g:auto_save = 1
-let g:auto_save_events = ["FocusLost", "WinLeave", "CmdwinEnter"]
+let g:auto_save_events = ["FocusLost", "WinLeave", "CursorHold"]
 let g:auto_save_silent = 0
 
 let g:coc_config_home = '~/.vim' 

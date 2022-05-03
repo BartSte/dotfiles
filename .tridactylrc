@@ -3,7 +3,7 @@ guiset_quiet gui none
 set theme dark
 set searchengine google
 set hintnames sort
-set hintchars hjklmgfdsqyuioptrezancxwb<>?!@#$%{[('`}})"~*789+\456-|123=_
+set hintchars hjklmgfdsqyuioptrezancxwb123456789
 set hintfiltermode simple
 set allowautofocus false
 set modeindicatorshowkeys true

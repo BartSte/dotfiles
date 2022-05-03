@@ -1,8 +1,8 @@
- .git
- *.vscode*
- *.dot*
- *.venv*
- AppData
- project_data
- "Reporting Data" 
- "Fleet Cleaner"'
+/.dot*
+/.venv*
+/.vscode*
+/.git
+/AppData
+/Fleet*Cleaner
+/Reporting*Data
+/project_data

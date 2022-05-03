@@ -86,9 +86,9 @@ map gh <Plug>VimspectorBalloonEval
 map gi <Plug>(coc-implementation)
 map gr <Plug>(coc-references)
 map gy <Plug>(coc-type-definition)
-nmap <silent> ga <Plug>(coc-codeaction-line)
-xmap <silent> ga <Plug>(coc-codeaction-selected)
-nmap <silent> gA <Plug>(coc-codeaction)
+nmap <silent> <leader>a <Plug>(coc-codeaction-line)
+xmap <silent> <leader>a <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>A <Plug>(coc-codeaction)
 noremap gl :TestVisit<CR>
 
 "Formatting and refactoring
