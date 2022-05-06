@@ -1,8 +1,9 @@
-/.dot*
-/.venv*
-/.vscode*
-/.git
-/AppData
-/Fleet*Cleaner
-/Reporting*Data
-/project_data
+*.dot*
+*.git*
+*.history*
+*.vscode*
+*AppData*
+*Fleet Cleaner*
+*Reporting Data*
+*project_data*
+*venv*

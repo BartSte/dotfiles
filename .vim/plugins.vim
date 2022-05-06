@@ -1,6 +1,6 @@
 call plug#begin()
 " Aestatics 
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'k4yt3x/ayu-vim-darker'
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
@@ -23,14 +23,12 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
 " Source control
-Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 
 " Testing and debugging
 Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-python'}
 Plug 'tpope/vim-dispatch'
-Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-test/vim-test'
 call plug#end()
 

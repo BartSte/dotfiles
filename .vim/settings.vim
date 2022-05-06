@@ -50,7 +50,7 @@ set history=500
 set modifiable
 set nocompatible
 set notimeout ttimeout ttimeoutlen=200
-set updatetime=1000
+set updatetime=60000
 
 if has("win32")
     set nocursorline "Bug in windows

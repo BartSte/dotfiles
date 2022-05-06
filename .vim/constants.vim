@@ -1,5 +1,5 @@
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all'
-let $FZF_DEFAULT_COMMAND = 'ag --hidden -g .'
+let $FZF_DEFAULT_COMMAND = "ag --hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\\.ignore -g ."
 
 let NERDTreeShowHidden=1
 
@@ -12,10 +12,14 @@ let g:EasyMotion_smartcase = 1
 
 let g:auto_save = 1
 let g:auto_save_events = ["FocusLost", "WinLeave", "CursorHold"]
-let g:auto_save_silent = 0
+let g:auto_save_silent = 1
 
 let g:coc_config_home = '~/.vim' 
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright', 'coc-pydocstring', 'coc-sh', 'coc-html', 'coc-powershell']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright',
+                             \ 'coc-pydocstring', 'coc-sh', 'coc-html', 
+                             \ 'coc-powershell']
+
+let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-P']
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -24,7 +28,7 @@ let g:fzf_colors =
   \ 'fg+':     ['fg', 'PreProc', 'Normal'],
   \ 'bg+':     ['bg', 'Normal'],
   \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
+  \ 'info':    ['fg', 'Label'],
   \ 'border':  ['fg', 'Ignore'],
   \ 'prompt':  ['fg', 'Conditional'],
   \ 'pointer': ['fg', 'Exception'],
@@ -60,6 +64,14 @@ let g:lightline = {
       \   'gitbranch': 'FugitiveHead'
       \ },
       \ }
+
+let g:vimspector_sign_priority = {
+  \    'vimspectorBP':         999,
+  \    'vimspectorBPCond':     2,
+  \    'vimspectorBPLog':      2,
+  \    'vimspectorBPDisabled': 999,
+  \    'vimspectorPC':         999,
+  \ }
 
 " Set the curson for terminal (only linux)
 if &term =~ "xterm\\|rxvt"

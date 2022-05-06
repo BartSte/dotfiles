@@ -1,6 +1,9 @@
 command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
 function! PyUnitTestStrategy(cmd)
     let testName = split(a:cmd)[-1]
     call vimspector#LaunchWithSettings( #{ configuration: 'pyunit', TestName: testName } )

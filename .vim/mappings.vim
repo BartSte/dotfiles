@@ -50,6 +50,13 @@ execute "set <a-h>=\eh"
 execute "set <a-o>=\eo"
 noremap <a-e> :NERDTreeFocus<CR>
 noremap <a-h> :NERDTreeToggle<CR>
+noremap 'a 'A'"
+noremap 's 'S'"
+noremap 'd 'D'"
+noremap 'f 'F'"
+noremap 't 'T'"
+
+"Search
 noremap <a-o> :GFiles<CR>
 noremap <C-t> :Files<CR>
 noremap <C-f> :Ag 
@@ -144,23 +151,10 @@ nnoremap <leader>m zR
 execute "set <a-v>=\ev"
 nnoremap Y y$
 vnoremap p pgvy
-if has("win32")
-    nnoremap <C-c> "*yy
-    nnoremap <C-v> "*p
-    nnoremap <C-x> "*dd
-    nnoremap <a-v> "*P
-
-    vnoremap <C-c> "*y
-    vnoremap <C-v> "*p
-    vnoremap <C-x> "*d
-else
-    nnoremap <C-c> "+yy
-    nnoremap <C-v> "+p
-    nnoremap <C-x> "+dd
-    nnoremap <a-v> "+P
-
-    vnoremap <C-c> "+y
-    vnoremap <C-v> "+p
-    vnoremap <C-x> "+d
-endif
-
+nnoremap <C-c> "*yy
+nnoremap <C-v> "*p
+nnoremap <C-x> "*dd
+nnoremap <a-v> "*P
+vnoremap <C-c> "*y
+vnoremap <C-v> "*p
+vnoremap <C-x> "*d
