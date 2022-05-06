@@ -1,9 +1,9 @@
 call plug#begin()
-" Aestatics 
+" Looks
+Plug 'frazrepo/vim-rainbow'
 Plug 'gruvbox-community/gruvbox'
-Plug 'k4yt3x/ayu-vim-darker'
-Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
+Plug 'k4yt3x/ayu-vim-darker'
 Plug 'vim-python/python-syntax'
 
 " Search, linting, and autocomplete
@@ -14,10 +14,9 @@ Plug 'vim-syntastic/syntastic'
 
 " Navigation
 Plug 'easymotion/vim-easymotion'
-Plug 'frazrepo/vim-rainbow'
 Plug 'preservim/nerdtree'
 
-" Typing
+" Editing
 Plug '907th/vim-auto-save'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -27,7 +26,7 @@ Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 
 " Testing and debugging
-Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-python'}
+Plug 'puremourning/vimspector'
 Plug 'tpope/vim-dispatch'
 Plug 'vim-test/vim-test'
 call plug#end()

@@ -1,7 +1,6 @@
 "Insert mode mappings
 imap <C-BS> <C-W>
 inoremap kj <Esc>
-inoremap <C-=> <space>=<space>
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 "Save
@@ -50,6 +49,11 @@ execute "set <a-h>=\eh"
 execute "set <a-o>=\eo"
 noremap <a-e> :NERDTreeFocus<CR>
 noremap <a-h> :NERDTreeToggle<CR>
+noremap ma mA
+noremap ms mS
+noremap md mD
+noremap mf mF
+noremap mt mT
 noremap 'a 'A'"
 noremap 's 'S'"
 noremap 'd 'D'"
@@ -60,6 +64,7 @@ noremap 't 'T'"
 noremap <a-o> :GFiles<CR>
 noremap <C-t> :Files<CR>
 noremap <C-f> :Ag 
+nnoremap <leader>v :exe "let HlUnderCursor=exists(\"HlUnderCursor\")?HlUnderCursor*-1+1:1"<CR>lh
 
 "Git
 execute "set <a-g>=\eg"

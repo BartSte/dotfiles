@@ -5,10 +5,3 @@ else
 endif
 
 set guioptions=i
-" set guicursor+=i-ci:ver25-Cursor/lCursor
-" set guicursor+=o:hor50-Cursor
-" set guicursor+=r-cr:hor20-Cursor/lCursor
-" set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
-" set guicursor+=ve:ver35-Cursor
-" set guicursor=n-v-c:block-Cursor/lCursor
-

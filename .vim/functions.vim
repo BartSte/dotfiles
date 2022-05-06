@@ -1,6 +1,8 @@
 command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 
+autocmd CursorMoved * exe exists("HlUnderCursor")?HlUnderCursor?printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\')):'match none':""
+
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
@@ -33,7 +35,7 @@ function! s:CustomiseUI()
     nnoremenu <silent>WinBar.Stack :b vimspector.StackTrace<CR>
     nnoremenu <silent>WinBar.Variables :b vimspector.Variables<CR>
     nnoremenu <silent>WinBar.Watches :b vimspector.Watches<CR>
-    b vimspector.Output:stderr
+    b vimspector.Console
 endfunction
 
 augroup MyVimspectorUICustomistaion
