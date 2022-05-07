@@ -38,8 +38,6 @@ let g:fzf_colors =
 let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0
 
-let g:rainbow_active = 1
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1

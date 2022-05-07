@@ -1,10 +1,10 @@
 call plug#begin()
 " Looks
-Plug 'frazrepo/vim-rainbow'
+Plug 'k4yt3x/ayu-vim-darker'
 Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
-Plug 'k4yt3x/ayu-vim-darker'
 Plug 'vim-python/python-syntax'
+Plug 'vim-scripts/CSApprox'
 
 " Search, linting, and autocomplete
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

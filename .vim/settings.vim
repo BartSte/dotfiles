@@ -1,10 +1,15 @@
 " Syntax highlighting
 syntax on
-" filetype on
-" filetype plugin on
-" filetype indent on 
+filetype on
+set showmatch
+
+if &t_Co <= 256
+    set t_Co=256
+else
+    set termguicolors
+endif
+
 colorscheme ayu
-set termguicolors
 
 " Miscelaneous
 set belloff=all
