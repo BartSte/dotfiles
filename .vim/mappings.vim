@@ -123,9 +123,9 @@ noremap <leader><leader>vf :e ~/.vim/functions.vim<CR>
 noremap <leader><leader>vm :e ~/.vim/mappings.vim<CR>
 noremap <leader><leader>vp :e ~/.vim/plugins.vim<CR>
 noremap <leader><leader>vs :e ~/.vim/settings.vim<CR>
-noremap <leader><leader>g :e ~/.gvimrc<CR>
-noremap <leader><leader><leader>v :so ~/.vimrc<CR>
-noremap <leader><leader><leader>g :so ~/.vimrc<bar>so ~/.gvimrc<CR>
+noremap <leader><leader>vo :e ~/.vim/colors.vim<CR>
+noremap <leader><leader>vg :e ~/.gvimrc<CR>
+noremap <leader><leader>% :so %<CR>
 
 "Override default normalmode maps
 noremap H ^

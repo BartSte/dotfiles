@@ -1,16 +1,3 @@
-" Syntax highlighting
-syntax on
-filetype on
-set showmatch
-
-if &t_Co <= 256
-    set t_Co=256
-else
-    set termguicolors
-endif
-
-colorscheme ayu
-
 " Miscelaneous
 set belloff=all
 set diffopt+=vertical
@@ -28,6 +15,8 @@ set shiftwidth=4
 set softtabstop=4
 
 " Editor features
+filetype on
+set showmatch
 set colorcolumn=80
 set foldlevel=20
 set foldmethod=indent
