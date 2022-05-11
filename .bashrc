@@ -18,13 +18,8 @@ alias base='/usr/bin/git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME'
 alias lin='/usr/bin/git --git-dir=$HOME/dotfiles-linux.git/ --work-tree=$HOME'
 
 alias ls='ls -h --color'
-alias lx='ls -lXB' # extension
-alias lk='ls -lSr' # size
-alias lt='ls -ltr' # date
-alias lc='ls -ltcr' # time
-alias lu='ls -ltur' # access time
-alias ll="ls -lv --group-directories-first" # directories first, alphanumeric sorting:
-alias lr='ll -R' # recursive
-alias la='ll -A' # hidden
+alias la='ls -A' 
+alias ll='ls -l'
+alias lal='ls -Al'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
