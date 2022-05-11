@@ -5,6 +5,7 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'vim-python/python-syntax'
 Plug 'vim-scripts/CSApprox'
+Plug 'frazrepo/vim-rainbow'
 
 " Search, linting, and autocomplete
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

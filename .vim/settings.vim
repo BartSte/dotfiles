@@ -16,7 +16,6 @@ set softtabstop=4
 
 " Editor features
 filetype on
-set showmatch
 set colorcolumn=80
 set foldlevel=20
 set foldmethod=indent
