@@ -63,7 +63,7 @@ noremap 't 'T'"
 "Search
 noremap <a-o> :GFiles<CR>
 noremap <C-t> :Files<CR>
-noremap <C-f> :Ag 
+noremap <C-f> :Ag<CR>
 nnoremap <leader>v :exe "let HlUnderCursor=exists(\"HlUnderCursor\")?HlUnderCursor*-1+1:1"<CR>lh
 
 "Git
@@ -94,10 +94,10 @@ noremap <a-F> :TestFile -strategy=pyunit<CR>
 map <leader> <Plug>(easymotion-prefix)
 map gd <Plug>(coc-definition)
 map gD :wincmd v<bar>wincmd l<CR>gd
-map gh <Plug>VimspectorBalloonEval
 map gi <Plug>(coc-implementation)
 map gr <Plug>(coc-references)
 map gy <Plug>(coc-type-definition)
+imap <silent><expr> <c-space> coc#refresh()
 nmap <silent> <leader>a <Plug>(coc-codeaction-line)
 xmap <silent> <leader>a <Plug>(coc-codeaction-selected)
 nmap <silent> <leader>A <Plug>(coc-codeaction)
