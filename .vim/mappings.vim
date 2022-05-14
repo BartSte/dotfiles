@@ -53,17 +53,15 @@ noremap ma mA
 noremap ms mS
 noremap md mD
 noremap mf mF
-noremap mt mT
 noremap 'a 'A'"
 noremap 's 'S'"
 noremap 'd 'D'"
 noremap 'f 'F'"
-noremap 't 'T'"
 
 "Search
 noremap <a-o> :GFiles<CR>
 noremap <C-t> :Files<CR>
-noremap <C-f> :Ag<CR>
+noremap <C-f> :Ag<space>
 nnoremap <leader>v :exe "let HlUnderCursor=exists(\"HlUnderCursor\")?HlUnderCursor*-1+1:1"<CR>lh
 
 "Git
@@ -72,7 +70,7 @@ execute "set <a-G>=\eG"
 execute "set <a-x>=\ex"
 noremap <a-g> :G<space>
 noremap <a-G> :vertical G<CR>
-noremap <a-x> :GV<CR>
+noremap <a-x> :GV<CR>:syntax on<CR>
 
 "Testing
 execute "set <a-t>=\et"

@@ -5,30 +5,32 @@
     "pydocstring.formatter": "google",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": [ "--max-line-length 80" ],
+    "python.linting.flake8Args": [
+        "--max-line-length 80"
+    ],
     "python.linting.pylintEnabled": false,
     "languageserver": {
         "ccls": {
-        "command": "ccls",
-        "filetypes": [
-            "c",
-            "cc",
-            "cpp",
-            "c++",
-            "objc",
-            "objcpp"
-        ],
-        "rootPatterns": [
-            ".ccls",
-            "compile_commands.json",
-            ".git/",
-            ".hg/"
-        ],
-        "initializationOptions": {
-            "cache": {
-                "directory": "/tmp/ccls"
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cc",
+                "cpp",
+                "c++",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
             }
         }
     }
-}
 }
