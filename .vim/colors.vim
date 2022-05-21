@@ -1,4 +1,4 @@
-if &term =~ "screen\\|linux"
+if &t_Co < 256
     set t_Co=256
 else
     set termguicolors
