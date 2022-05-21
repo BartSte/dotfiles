@@ -1,4 +1,4 @@
-if $TERM=='linux'
+if &term =~ "screen\\|linux"
     set t_Co=256
 else
     set termguicolors
