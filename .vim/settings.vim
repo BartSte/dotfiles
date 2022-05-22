@@ -44,9 +44,3 @@ set nowrap
 set textwidth=80
 set fo=""
 
-if has("win32")
-    set nocursorline "Bug in windows
-else
-    set cursorline
-endif
-

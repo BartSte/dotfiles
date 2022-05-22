@@ -4,7 +4,6 @@ Plug 'k4yt3x/ayu-vim-darker'
 Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'vim-python/python-syntax'
-Plug 'vim-scripts/CSApprox'
 Plug 'frazrepo/vim-rainbow'
 
 " Search, linting, and autocomplete

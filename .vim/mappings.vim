@@ -18,7 +18,7 @@ noremap <C-l> <C-w>l
 
 "Buffer navigation
 execute "set <a-b>=\eb"
-execute "set <a-B>=\eb"
+execute "set <a-B>=\eB"
 nmap <a-B> <Plug>Kwbd
 noremap <a-b> :Buffers<CR>
 noremap <C-n> :bnext<CR>
