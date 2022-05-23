@@ -17,9 +17,12 @@ else
     set cursorline
 endif
 
-if &term == 'linux'
+if &t_Co < 256
     set notermguicolors
     colorscheme evening
+elseif &t_Co == 256
+    set notermguicolors
+    colorscheme ayu
 else
     set termguicolors
     colorscheme ayu
