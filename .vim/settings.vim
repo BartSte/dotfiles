@@ -25,7 +25,9 @@ set number
 set scrolloff=999
 set signcolumn=number
 set relativenumber
-set cursorline
+if &term != "win32"
+    set cursorline
+endif
 
 " Command line
 set cmdheight=2
