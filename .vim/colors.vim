@@ -11,9 +11,6 @@ if &term == "xterm"
 endif
 
 if &t_Co >= 256
-    let g:CSApprox_loaded=0
     set termguicolors
-    colorscheme ayu
-elseif &t_Co >= 88
     colorscheme ayu
 endif
