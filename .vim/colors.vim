@@ -10,20 +10,15 @@ if &term == "xterm"
     let &t_EI .= "\<Esc>[0 q"
 endif
 
-"No cursorline for windows and linux terminal
-if has("win32") || &term == 'linux'
-    set nocursorline
-else
-    set cursorline
-endif
-
-if &t_Co < 256
-    set notermguicolors
-    colorscheme evening
-elseif &t_Co == 256
-    set notermguicolors
-    colorscheme ayu
-else
+if has("gui_running")
+    let g:CSApprox_loaded=0
     set termguicolors
     colorscheme ayu
+elseif &t_Co < 88
+    let g:CSApprox_loaded=0
+    colorscheme default
+else 
+    let g:CSApprox_loaded=1
+    colorscheme ayu
 endif
+

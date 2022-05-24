@@ -14,7 +14,7 @@ let g:EasyMotion_smartcase = 1
 let g:auto_save = 1
 let g:auto_save_events = ["FocusLost", "WinLeave"]
 let g:auto_save_silent = 1
-
+     
 let g:coc_config_home = '~/.vim' 
 let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright',
                              \ 'coc-pydocstring', 'coc-sh', 'coc-html', 
