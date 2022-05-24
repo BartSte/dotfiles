@@ -1,6 +1,5 @@
 call plug#begin()
 " Looks
-" Plug 'vim-scripts/CSApprox'
 Plug 'k4yt3x/ayu-vim-darker'
 Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'

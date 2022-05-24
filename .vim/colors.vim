@@ -1,16 +1,26 @@
 syntax on
 
 " Set the curson for xterm
-if &term == "xterm"
-    let &t_SI = "\<Esc>]12;white\x7"
-    let &t_EI = "\<Esc>]12;white\x7"
-    silent !echo -ne "\033]12;white\007"
-    autocmd VimLeave * silent !echo -ne "\033]112\007"
-    let &t_SI .= "\<Esc>[5 q"
-    let &t_EI .= "\<Esc>[0 q"
+if &term =~ "xterm-256color\\|screen-256color"
+    if exists('$TMUX')
+        let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
+        let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
+    else
+        let &t_SI = "\e[5 q"
+        let &t_EI = "\e[2 q"
+    endif
 endif
 
-if &t_Co >= 256
+"Ayu only works with true colors.
+if &term == "xterm-256color"
     set termguicolors
     colorscheme ayu
-endif
+else
+    colorscheme default
+endif 
+
+"TODO ayu only works with true colors. Approximating it with CSApprox does not
+"work well. TMUX is console says it supports 256 but in reality does not. Buttom
+"line, find good solutions without hacking colorschemes or using CSApprox as
+"the latter will break certains highlihgting things. The problem is:
+"highlihgting with tmux screens.
