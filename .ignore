@@ -9,3 +9,6 @@
 *project_data*
 *venv*
 *.swp*
+*.npm*
+*dotfiles.*
+*.python_history*
