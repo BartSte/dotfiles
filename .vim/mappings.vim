@@ -62,7 +62,7 @@ noremap 'f 'F'"
 "Search
 noremap <a-o> :GFiles<CR>
 noremap <C-t> :Files<CR>
-noremap <C-f> :Ag<space>
+noremap <C-a> :Ag<space>
 nnoremap <leader>v :exe "let HlUnderCursor=exists(\"HlUnderCursor\")?HlUnderCursor*-1+1:1"<CR>lh
 
 "Git
