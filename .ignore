@@ -1,6 +1,6 @@
 *__pycache__*
 *.dot*
-*.git*
+.git
 *.history*
 *.vscode*
 *AppData*

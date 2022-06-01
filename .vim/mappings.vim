@@ -50,10 +50,12 @@ execute "set <a-h>=\eh"
 execute "set <a-o>=\eo"
 noremap <a-e> :NERDTreeFocus<CR>
 noremap <a-h> :NERDTreeToggle<CR>
+noremap mt mT
 noremap ma mA
 noremap ms mS
 noremap md mD
 noremap mf mF
+noremap 't 'T'"
 noremap 'a 'A'"
 noremap 's 'S'"
 noremap 'd 'D'"
@@ -104,7 +106,6 @@ noremap gl :TestVisit<CR>
 
 "Formatting and refactoring
 map <leader>r <Plug>(coc-rename)
-" nmap <leader>d :Docstring<CR>
 noremap <leader><leader>s :sort<CR>
 noremap <leader>f :Format<CR>
 noremap <leader>i :OR<CR>
@@ -162,3 +163,7 @@ nnoremap <a-v> "*P
 vnoremap <C-c> "*y
 vnoremap <C-v> "*p
 vnoremap <C-x> "*d
+
+"Quickfix
+nnoremap [q :cp<CR>
+nnoremap ]q :cn<CR>

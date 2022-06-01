@@ -50,13 +50,6 @@ let g:test#custom_strategies = {'pyunit': function('PyUnitTestStrategy')}
 
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_install_gadgets = ['debugpy']
-let g:vimspector_sign_priority = {
-  \    'vimspectorBP':         998,
-  \    'vimspectorBPCond':     2,
-  \    'vimspectorBPLog':      2,
-  \    'vimspectorBPDisabled': 999,
-  \    'vimspectorPC':         999,
-  \ }
 
 let g:lightline = {
       \ 'colorscheme': 'powerline',

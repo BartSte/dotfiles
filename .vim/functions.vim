@@ -35,7 +35,7 @@ function! s:CustomiseUI()
     nnoremenu <silent>WinBar.Stack :b vimspector.StackTrace<CR>
     nnoremenu <silent>WinBar.Variables :b vimspector.Variables<CR>
     nnoremenu <silent>WinBar.Watches :b vimspector.Watches<CR>
-    b vimspector.Console
+    b vimspector.Variables
 endfunction
 
 augroup MyVimspectorUICustomistaion
