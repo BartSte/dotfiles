@@ -1,14 +1,9 @@
-*__pycache__*
-*.dot*
-.git
-*.history*
-*.vscode*
-*AppData*
-*Fleet Cleaner*
-*Reporting Data*
-*project_data*
-*venv*
 *.swp*
-*.npm*
 *dotfiles.*
-*.python_history*
+*venv*
+.dot
+.git
+.npm
+.python_history
+.vscode
+__pycache__
