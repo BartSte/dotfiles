@@ -12,7 +12,7 @@ endif
 
 set termguicolors
 set background=dark
-colorscheme gruvbox
-
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_bold=0
+
+colorscheme gruvbox
