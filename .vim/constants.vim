@@ -20,22 +20,6 @@ let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright',
                              \ 'coc-pydocstring', 'coc-sh', 'coc-html', 
                              \ 'coc-powershell']
 
-let g:fzf_preview_window = ['hidden', 'ctrl-P']
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'PreProc', 'Normal'],
-  \ 'bg+':     ['bg', 'Normal'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'Label'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
 let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0
 
@@ -52,7 +36,7 @@ let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_install_gadgets = ['debugpy']
 
 let g:lightline = {
-      \ 'colorscheme': 'powerline',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],

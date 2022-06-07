@@ -30,6 +30,7 @@ execute "set <a-S>=\eS"
 execute "set <a-V>=\eV"
 execute "set <a-W>=\eW"
 execute "set <a-R>=\eR"
+execute "set <a-P>=\eP"
 noremap <F7> :VimspectorReset<CR>
 noremap <a-C> :b vimspector.Console<CR>
 noremap <a-E> :b vimspector.Output:stderr<CR>
@@ -37,6 +38,7 @@ noremap <a-S> :b vimspector.StackTrace<CR>
 noremap <a-V> :b vimspector.Variables<CR>
 noremap <a-W> :b vimspector.Watches<CR>
 noremap <a-R> :b vimspector.output:server<CR>
+noremap <a-P> :VimspectorBreakpoints<CR>
 
 "Tabbing
 nnoremap <S-Tab> <<
