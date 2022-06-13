@@ -18,7 +18,7 @@ if &term == "alacritty"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
     set background=dark
-    let g:gruvbox_contrast_dark='hard'
+    let g:gruvbox_contrast_dark='medium'
     let g:gruvbox_bold=0
     colorscheme gruvbox
 endif
