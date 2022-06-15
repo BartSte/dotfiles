@@ -9,6 +9,7 @@ if &term == "xterm-256color"
     let g:gruvbox_contrast_dark='medium'
     let g:gruvbox_bold=0
     colorscheme gruvbox
+    hi Normal guibg=NONE ctermbg=NONE
 endif
 
 if &term == "alacritty"
@@ -21,9 +22,11 @@ if &term == "alacritty"
     let g:gruvbox_contrast_dark='medium'
     let g:gruvbox_bold=0
     colorscheme gruvbox
+    hi Normal guibg=NONE ctermbg=NONE
 endif
 
 if &term == "linux"
     set notermguicolors
     colorscheme evening
 endif
+
