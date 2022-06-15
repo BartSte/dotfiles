@@ -9,6 +9,7 @@
         "--max-line-length 80"
     ],
     "python.linting.pylintEnabled": false,
+    "git.enableGutters": false,
     "languageserver": {
         "ccls": {
             "command": "ccls",
