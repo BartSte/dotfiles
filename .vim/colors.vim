@@ -8,6 +8,7 @@ if &term == "xterm-256color"
     set background=dark
     let g:gruvbox_contrast_dark='medium'
     let g:gruvbox_bold=0
+    let g:gruvbox_invert_signs=0
     colorscheme gruvbox
     hi Normal guibg=NONE ctermbg=NONE
 endif
@@ -21,6 +22,7 @@ if &term == "alacritty"
     set background=dark
     let g:gruvbox_contrast_dark='medium'
     let g:gruvbox_bold=0
+    let g:gruvbox_invert_signs=0
     colorscheme gruvbox
     hi Normal guibg=NONE ctermbg=NONE
 endif
