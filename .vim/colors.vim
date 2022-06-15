@@ -2,18 +2,30 @@ syntax on
 
 " Set the curson for xterm
 if &term == "xterm-256color"
-  " 1 or 0 -> blinking block
-  " 3 -> blinking underscore
-  " 5 -> blinking vertical bar
-  " 6 -> solid vertical bar
     let &t_SI = "\e[6 q"
     let &t_EI = "\e[2 q"
+    set termguicolors
+    set background=dark
+    let g:gruvbox_contrast_dark='medium'
+    let g:gruvbox_bold=0
+    let g:gruvbox_invert_signs=0
+    colorscheme gruvbox
 endif
 
-let g:gruvbox_contrast_dark='medium'
-let g:gruvbox_bold=0
-let g:gruvbox_invert_signs=0
+if &term == "alacritty"
+    let &t_SI = "\e[6 q"
+    let &t_EI = "\e[2 q"
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+    set background=dark
+    let g:gruvbox_contrast_dark='medium'
+    let g:gruvbox_bold=0
+    let g:gruvbox_invert_signs=0
+    colorscheme gruvbox
+endif
 
-set termguicolors
-set background=dark
-colorscheme gruvbox
+if &term == "linux"
+    set notermguicolors
+    colorscheme evening
+endif

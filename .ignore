@@ -1,10 +1,10 @@
 *.swp*
-*dotfiles.*
 *venv*
-.dot
-.git
+*.git
+.cache
 .npm
 .python_history
+node_modules
 .vscode
 __pycache__
 visual
