@@ -14,6 +14,11 @@ if &term == "alacritty"
     source ~/.vim/colorscheme.vim
 endif
 
+if &term == "win32"
+    set termguicolors
+    colorscheme gruvbox
+endif
+
 if &term == "linux"
     set notermguicolors
     colorscheme evening
