@@ -196,7 +196,7 @@ colors:
     # hard contrast: background = '#1d2021'
     # medium contrast: background = '#282828'
     # soft contrast: background = '#32302f'
-    background: '#1d2021'
+    background: '#282828'
     foreground: '#ebdbb2'
 
   # Normal colors
@@ -325,7 +325,7 @@ colors:
   # Whether or not `window.opacity` applies to all cell backgrounds or only to
   # the default background. When set to `true` all cells will be transparent
   # regardless of their background color.
-  #transparent_background_colors: false
+  transparent_background_colors: true
 
 # Bell
 #
