@@ -1,3 +1,5 @@
+nnoremap <leader><leader>w :set fo=""<CR>:set wrap<CR>
+
 "Insert mode mappings
 imap <C-BS> <C-W>
 inoremap kj <Esc>
