@@ -2,8 +2,6 @@ import:
   - ~/alacritty-lin.yml
   - ~/alacritty-win.yml
 
-window:
-
 scrolling:
   history: 10000
   multiplier: 3
