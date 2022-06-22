@@ -9,14 +9,17 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 noremap <C-s> :w<CR>
 
 "Window navigation
-noremap <C-w>h <C-w>H 
-noremap <C-w>j <C-w>J  
-noremap <C-w>k <C-w>K 
-noremap <C-w>l <C-w>L 
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+nnoremap <C-w>h <C-w>H 
+nnoremap <C-w>j <C-w>J  
+nnoremap <C-w>k <C-w>K 
+nnoremap <C-w>l <C-w>L 
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Bug in wsl -> ctrl-h sends z
+nnoremap z <C-w>h
 
 "Buffer navigation
 execute "set <a-b>=\eb"
