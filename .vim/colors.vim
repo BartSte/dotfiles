@@ -4,9 +4,6 @@ if has('termguicolors')
     set termguicolors
     colorscheme gruvbox
     set background=dark
-else
-    set notermguicolors
-    colorscheme evening
 endif
 
 let &t_SI = "\e[6 q"
