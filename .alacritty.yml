@@ -2,25 +2,9 @@ import:
   - ~/alacritty-lin.yml
   - ~/alacritty-win.yml
 
-window:
-
 scrolling:
   history: 10000
   multiplier: 3
-
-font:
-  normal:
-    family: JetBrains Mono
-    style: Regular
-  bold:
-    family: JetBrains Mono
-    style: Bold
-  italic:
-    family: JetBrains Mono
-    style: Italic
-  bold_italic:
-    family: JetBrains Mono
-    style: Bold Italic
 
 colors:
   primary:

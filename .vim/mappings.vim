@@ -2,7 +2,7 @@ nnoremap <leader><leader>w :set fo=""<CR>:set wrap<CR>
 
 "Insert mode mappings
 imap <C-BS> <C-W>
-inoremap kj <Esc>
+inoremap <C-f> <Esc>
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 "Save
@@ -71,7 +71,7 @@ noremap 'f 'F'"
 "Search
 noremap <a-o> :GFiles<CR>
 noremap <C-t> :Files<CR>
-noremap <C-f> :Ag<space>
+noremap <C-g> :Ag<space>
 nnoremap <leader>v :exe "let HlUnderCursor=exists(\"HlUnderCursor\")?HlUnderCursor*-1+1:1"<CR>lh
 
 "Git
