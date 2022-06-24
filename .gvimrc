@@ -1,4 +1,4 @@
 set guifont=JetBrains\ Mono:h10
 set guioptions=i
-source ~/.vim/colorscheme.vim
+colorscheme gruvbox
 set background=dark
