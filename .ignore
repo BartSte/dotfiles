@@ -1,11 +1,14 @@
 *.swp*
-*venv*
-*.git
-.cache
-.npm
-.python_history
-node_modules
-.vscode
-__pycache__
-visual
-Reporting Data
+.venv/
+venv/
+*venv*/
+*.git/
+.git/
+.cache/
+.npm/
+.python_history/
+node_modules/
+.vscode/
+__pycache__/
+visual/
+Reporting Data/
