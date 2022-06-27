@@ -2,6 +2,20 @@ import:
   - ~/alacritty-lin.yml
   - ~/alacritty-win.yml
 
+font:
+  normal:
+    family: JetBrainsMono Nerd Font
+    style: Regular
+  bold:
+    family: JetBrainsMono Nerd Font
+    style: Bold
+  italic:
+    family: JetBrainsMono Nerd Font
+    style: Italic
+  bold_italic:
+    family: JetBrainsMono Nerd Font
+    style: Bold Italic
+    
 scrolling:
   history: 10000
   multiplier: 3
