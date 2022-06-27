@@ -3,8 +3,10 @@ nnoremap <leader><leader>w :set fo=""<CR>:set wrap<CR>
 "Insert mode mappings
 imap <C-BS> <C-W>
 inoremap <C-f> <Esc>
+inoremap <C-s> <NOP>
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 "Save
 noremap <C-s> :w<CR>
 

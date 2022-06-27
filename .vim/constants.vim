@@ -1,3 +1,4 @@
+let $SHELL='cmd.exe'
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all'
 let $FZF_DEFAULT_COMMAND = "ag --hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\\.ignore -g ."
 
@@ -16,9 +17,9 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz;,./<>?!@#$%{[(`}])"~=_789*+\
 let g:EasyMotion_smartcase = 1
 
 let g:auto_save = 1
-let g:auto_save_events = ["FocusLost", "WinLeave"]
+let g:auto_save_events = ["WinLeave", "InsertLeave"]
 let g:auto_save_silent = 1
-     
+
 let g:coc_config_home = '~/.vim' 
 let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright',
                              \ 'coc-pydocstring', 'coc-sh', 'coc-html', 
@@ -27,10 +28,10 @@ let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright',
 let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0
 
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
 
 let g:rainbow_active = 1
 
@@ -52,3 +53,4 @@ let g:lightline = {
       \   'gitbranch': 'FugitiveHead'
       \ },
       \ }
+
