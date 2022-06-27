@@ -11,7 +11,6 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'vim-syntastic/syntastic'
 
 " Navigation
 Plug 'easymotion/vim-easymotion'

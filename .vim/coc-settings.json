@@ -2,14 +2,19 @@
     "powershell.integratedConsole.executeInCurrentScope": false,
     "powershell.integratedConsole.focusConsoleOnExecute": false,
     "powershell.integratedConsole.showOnStartup": false,
+
     "pydocstring.formatter": "google",
+
     "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": [
         "--max-line-length 80"
+
     ],
-    "python.linting.pylintEnabled": false,
+
     "git.enableGutters": false,
+
     "languageserver": {
         "ccls": {
             "command": "ccls",
