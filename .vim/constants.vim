@@ -1,8 +1,8 @@
 if has("win32")
-    let $SHELL='cmd.exe'
+    let $SHELL = 'cmd.exe'
 endif
 
-let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all'
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 100% --reverse --border'
 let $FZF_DEFAULT_COMMAND = "ag --hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\\.ignore -g ."
 
 let NERDTreeShowHidden=1
