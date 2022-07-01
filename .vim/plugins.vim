@@ -6,6 +6,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'vim-python/python-syntax'
 Plug 'frazrepo/vim-rainbow'
+Plug 'machakann/vim-highlightedyank'
 
 " Search, linting, and autocomplete
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
