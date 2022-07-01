@@ -28,6 +28,8 @@ let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-pyright',
                              \ 'coc-pydocstring', 'coc-sh', 'coc-html', 
                              \ 'coc-powershell']
 
+let g:highlightedyank_highlight_duration = 200
+
 let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0
 
