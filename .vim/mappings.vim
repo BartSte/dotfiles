@@ -41,7 +41,7 @@ execute "set <a-P>=\eP"
 noremap <F7> :VimspectorReset<CR>
 noremap <a-C> :b vimspector.Console<CR>
 noremap <a-E> :b vimspector.Output:stderr<CR>
-noremap <a-S> :b vimspector.StackTrace<CR>
+noremap <a-A> :b vimspector.StackTrace<CR>
 noremap <a-V> :b vimspector.Variables<CR>
 noremap <a-W> :b vimspector.Watches<CR>
 noremap <a-R> :b vimspector.output:server<CR>
@@ -91,14 +91,17 @@ execute "set <a-f>=\ef"
 noremap <a-t> :only<bar>TestNearest -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-l> :only<bar>TestLast -strategy=dispatch<bar>wincmd L<CR>
 noremap <a-f> :only<bar>TestFile -strategy=dispatch<bar>wincmd L<CR>
+noremap <a-s> :only<bar>TestSuite -strategy=dispatch<bar>wincmd L<CR>
 
 "Testing & debugging
 execute "set <a-T>=\eT"
 execute "set <a-L>=\eL"
 execute "set <a-F>=\eF"
+execute "set <a-S>=\eF"
 noremap <a-T> :TestNearest -strategy=pyunit<CR>
 noremap <a-L> :TestLast -strategy=pyunit<CR>
 noremap <a-F> :TestFile -strategy=pyunit<CR>
+noremap <a-S> :TestSuite -strategy=pyunit<CR>
 
 "Go to shortcuts
 map <leader> <Plug>(easymotion-prefix)
