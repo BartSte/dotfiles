@@ -1,3 +1,4 @@
-dotfiles.git
-dotfiles-linux.git
-dotfiles-windows.git
+dotfiles.git\
+dotfiles-linux.git\
+dotfiles-secret.git\
+dotfiles-windows.git\
