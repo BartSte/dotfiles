@@ -1,3 +1,4 @@
+*.swp
 dotfiles.git\
 dotfiles-linux.git\
 dotfiles-secret.git\
