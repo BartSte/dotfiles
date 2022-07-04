@@ -1,5 +1,5 @@
 import:
-  - ~/alacritty-lin.yml
+  - ~/dotfiles-linux/alacritty/alacritty.yml
   - ~/alacritty-win.yml
 
 font:
