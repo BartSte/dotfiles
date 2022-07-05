@@ -1,6 +1,6 @@
 import:
-  - ~/alacritty-lin.yml
-  - ~/alacritty-win.yml
+  - ~/dotfiles-linux/alacritty/alacritty.yml
+  - ~/dotfiles-windows/alacritty/alacritty.yml
 
 font:
   normal:
