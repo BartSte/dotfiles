@@ -5,7 +5,7 @@ set hidden
 set history=500
 set modifiable
 set nocompatible
-set notimeout ttimeout ttimeoutlen=200
+set notimeout
 
 " Tabbing
 set autoindent

@@ -15,6 +15,7 @@ let mapleader = " "
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_bold=0
 let g:gruvbox_invert_signs=0
+let g:gruvbox_guisp_fallback='fg'
 
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz;,./<>?!@#$%{[(`}])"~=_789*+\456-|123ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:EasyMotion_smartcase = 1

@@ -1,10 +1,13 @@
 nnoremap <leader><leader>w :set fo=""<CR>:set wrap<CR>
 
 "Insert mode mappings
+execute "set <a-q>=\eq"
 imap <C-BS> <C-W>
-inoremap <C-f> <Esc>
+map <C-f> <Esc>
+imap <C-f> <Esc>
 inoremap jj <Esc>
 inoremap <C-s> <NOP>
+inoremap <a-q> <space>=<space>
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
