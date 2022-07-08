@@ -6,6 +6,8 @@ set history=500
 set modifiable
 set nocompatible
 set notimeout
+set updatetime=300
+set shortmess+=c
 
 " Tabbing
 set autoindent

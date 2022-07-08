@@ -8,8 +8,6 @@ imap <C-f> <Esc>
 inoremap jj <Esc>
 inoremap <C-s> <NOP>
 inoremap <a-q> <space>=<space>
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 "Save
 noremap <C-s> :w<CR>
@@ -109,19 +107,10 @@ noremap <a-S> :TestSuite -strategy=pyunit<CR>
 
 "Go to shortcuts
 map <leader> <Plug>(easymotion-prefix)
-map gd <Plug>(coc-definition)
 map gD :wincmd v<bar>wincmd l<CR>gd
-map gi <Plug>(coc-implementation)
-map gr <Plug>(coc-references)
-map gy <Plug>(coc-type-definition)
-imap <silent><expr> <c-space> coc#refresh()
-nmap <silent> <leader>a <Plug>(coc-codeaction-line)
-xmap <silent> <leader>a <Plug>(coc-codeaction-selected)
-nmap <silent> <leader>A <Plug>(coc-codeaction)
 noremap gl :TestVisit<CR>
 
 "Formatting and refactoring
-map <leader>r <Plug>(coc-rename)
 noremap <leader><leader>s :sort<CR>
 noremap <leader>f :Format<CR>
 noremap <leader>i :OR<CR>
@@ -183,3 +172,42 @@ vnoremap <C-x> "*d
 "Quickfix
 nnoremap [q :cp<CR>
 nnoremap ]q :cn<CR>
+
+"Coc
+execute "set <a-k>=\ek"
+
+map gd <Plug>(coc-definition)
+map gi <Plug>(coc-implementation)
+map gr <Plug>(coc-references)
+map gy <Plug>(coc-type-definition)
+map <leader>r <Plug>(coc-rename)
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent><leader>a <Plug>(coc-codeaction)
+xmap <silent><leader>a <Plug>(coc-codeaction-selected)
+nmap <silent><leader>A <Plug>(coc-codeaction-line)
+nmap <silent><leader>q  <Plug>(coc-fix-current)
+xmap <leader>f  <Plug>(coc-format-selected)
+nnoremap <silent> <a-k> :call ShowDocumentation()<CR>
+
+nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <leader>ca  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
+nnoremap <silent><leader>cl <Plug>(coc-codelens-action)
+
+imap <silent><expr> <c-a> coc#refresh()
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : CheckBackspace() ? "\<TAB>" : coc#refresh()
+inoremap <silent><expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+else
+    inoremap <silent><expr> <c-@> coc#refresh()
+endif
