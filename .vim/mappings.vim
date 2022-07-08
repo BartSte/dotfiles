@@ -184,9 +184,9 @@ map <leader>r <Plug>(coc-rename)
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent><leader>a <Plug>(coc-codeaction)
-xmap <silent><leader>a <Plug>(coc-codeaction-selected)
-nmap <silent><leader>A <Plug>(coc-codeaction-line)
+nmap <silent><leader>a  <Plug>(coc-codeaction)
+xmap <silent><leader>a  <Plug>(coc-codeaction-selected)
+nmap <silent><leader>A  <Plug>(coc-codeaction-line)
 nmap <silent><leader>q  <Plug>(coc-fix-current)
 xmap <leader>f  <Plug>(coc-format-selected)
 nnoremap <silent> <a-k> :call ShowDocumentation()<CR>
@@ -200,6 +200,7 @@ nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
 nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
 nnoremap <silent><leader>cl <Plug>(coc-codelens-action)
+nnoremap <silent><leader>cd :CocToggle<CR>
 
 imap <silent><expr> <c-a> coc#refresh()
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"

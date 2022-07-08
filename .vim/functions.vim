@@ -1,6 +1,15 @@
 command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+ 
+function! CocToggle()
+    if g:coc_enabled
+        CocDisable
+    else
+        CocEnable
+    endif
+endfunction
+command! CocToggle :call CocToggle()
 
 augroup mygroup
   autocmd!
