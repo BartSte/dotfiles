@@ -1,9 +1,11 @@
 if has("win32")
     let $SHELL = 'cmd.exe'
+    let $FZF_DEFAULT_COMMAND = "ag --hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\\.ignore -g ."
+else
+    let $FZF_DEFAULT_COMMAND = "ag --hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\/.ignore -g ."
 endif
 
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 100% --reverse --border'
-let $FZF_DEFAULT_COMMAND = "ag --hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\\.ignore -g ."
 
 let NERDTreeShowHidden=1
 let NERDTreeMapMenu='a'
@@ -15,12 +17,13 @@ let mapleader = " "
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_bold=0
 let g:gruvbox_invert_signs=0
+let g:gruvbox_guisp_fallback='fg'
 
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz;,./<>?!@#$%{[(`}])"~=_789*+\456-|123ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:EasyMotion_smartcase = 1
 
 let g:auto_save = 1
-let g:auto_save_events = ["WinLeave", "InsertLeave"]
+let g:auto_save_events = ["InsertLeave"]
 let g:auto_save_silent = 1
 
 let g:coc_config_home = '~/.vim' 

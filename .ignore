@@ -1,4 +1,5 @@
 *.swp*
+plugged/
 *tmp*/
 .venv/
 venv/

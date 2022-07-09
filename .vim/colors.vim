@@ -9,10 +9,6 @@ endif
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 
-if &term == "xterm-256color"
-    hi Normal guibg=NONE ctermbg=NONE
-endif
-
 if &term == "alacritty"
     hi Normal guibg=NONE ctermbg=NONE
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
