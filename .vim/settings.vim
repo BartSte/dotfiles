@@ -41,7 +41,7 @@ set noshowmode
 set showcmd
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 set wildmenu
-set wildmode=list,full
+set wildoptions=pum,fuzzy
 
 " Searching
 set incsearch
