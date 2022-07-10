@@ -55,6 +55,14 @@ nnoremap <Tab> >>
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 
+" set <F15>=[1;5I
+" set <F16>=[1;6I
+" nmap <F15> <C-Tab>
+" nmap <F16> <C-S-Tab>
+" imap <F15> <C-Tab>
+" imap <F16> <C-S-Tab>
+
+
 "File navigation
 execute "set <a-e>=\ee"
 execute "set <a-h>=\eh"
