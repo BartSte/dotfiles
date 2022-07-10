@@ -52,6 +52,6 @@ key_bindings:
   - { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown }
   - { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop    }
   - { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
-  - { key: Tab,       mods: Control,                    chars: "\x1b[1;5I" }
-  - { key: Tab,       mods: Control|Shift,              chars: "\x1b[1;6I" }
+  - { key: Tab,       mods: Control,                    chars: "\x1bw" }
+  - { key: Tab,       mods: Control|Shift,              chars: "\x1bq" }
 

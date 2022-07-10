@@ -1,13 +1,13 @@
 nnoremap <leader><leader>w :set fo=""<CR>:set wrap<CR>
 
 "Insert mode mappings
-execute "set <a-q>=\eq"
+execute "set <a-y>=\ey"
 imap <C-BS> <C-W>
 map <C-f> <Esc>
 imap <C-f> <Esc>
 inoremap jj <Esc>
 inoremap <C-s> <NOP>
-inoremap <a-q> <space>=<space>
+inoremap <a-y> <space>=<space>
 
 "Save
 noremap <C-s> :w<CR>
