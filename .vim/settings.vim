@@ -10,7 +10,6 @@ set shortmess+=c
 set noswapfile
 set nobackup
 set nowritebackup
-set updatetime=300
 
 " Tabbing
 set autoindent
