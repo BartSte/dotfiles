@@ -1,13 +1,13 @@
 nnoremap <leader><leader>w :set fo=""<CR>:set wrap<CR>
 
 "Insert mode mappings
-execute "set <a-y>=\ey"
+execute "set <a-q>=\ey"
 imap <C-BS> <C-W>
 map <C-f> <Esc>
 imap <C-f> <Esc>
 inoremap jj <Esc>
 inoremap <C-s> <NOP>
-inoremap <a-y> <space>=<space>
+inoremap <a-q> <space>=<space>
 
 "Save
 noremap <C-s> :w<CR>
@@ -55,14 +55,6 @@ nnoremap <Tab> >>
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 
-" set <F15>=[1;5I
-" set <F16>=[1;6I
-" nmap <F15> <C-Tab>
-" nmap <F16> <C-S-Tab>
-" imap <F15> <C-Tab>
-" imap <F16> <C-S-Tab>
-
-
 "File navigation
 execute "set <a-e>=\ee"
 execute "set <a-h>=\eh"
@@ -84,7 +76,9 @@ noremap 'f 'F'"
 noremap <a-o> :GFiles<CR>
 noremap <C-t> :Files<CR>
 noremap <C-g> :Ag<space>
-nnoremap <leader>v :exe "let HlUnderCursor=exists(\"HlUnderCursor\")?HlUnderCursor*-1+1:1"<CR>lh
+nnoremap <leader>v :set hlsearch! hlsearch?<CR>
+nnoremap <leader>/ *#:set hlsearch<CR>
+
 
 "Git
 execute "set <a-g>=\eg"
