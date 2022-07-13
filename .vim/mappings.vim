@@ -1,4 +1,4 @@
-nnoremap <leader><leader>w :set fo=""<CR>:set wrap<CR>
+noremap <leader><leader>w :set fo=""<CR>:set wrap<CR>
 
 "Insert mode mappings
 execute "set <a-q>=\ey"

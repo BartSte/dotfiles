@@ -1,8 +1,7 @@
 call plug#begin()
 " Looks
 Plug 'gruvbox-community/gruvbox'
-Plug 'itchyny/lightline.vim'
-Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-python/python-syntax'
 Plug 'frazrepo/vim-rainbow'
 Plug 'machakann/vim-highlightedyank'

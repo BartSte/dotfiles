@@ -6,13 +6,18 @@ else
 endif
 
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 100% --reverse --border'
-
+  
 let NERDTreeShowHidden=1
 let NERDTreeMapMenu='a'
 
 let ayucolor="darker" 
 
 let mapleader = " "
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_bold=0
@@ -47,18 +52,3 @@ let g:test#custom_strategies = {'pyunit': function('PyUnitTestStrategy')}
 
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_install_gadgets = ['debugpy']
-
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'filetype', 'fileencoding' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \ }
-
