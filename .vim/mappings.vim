@@ -5,7 +5,6 @@ execute "set <a-q>=\ey"
 imap <C-BS> <C-W>
 map <C-f> <Esc>
 imap <C-f> <Esc>
-inoremap jj <Esc>
 inoremap <C-s> <NOP>
 inoremap <a-q> <space>=<space>
 
@@ -76,8 +75,8 @@ noremap 'f 'F'"
 noremap <a-o> :GFiles<CR>
 noremap <C-t> :Files<CR>
 noremap <C-g> :Ag<space>
-nnoremap <leader>v :set hlsearch! hlsearch?<CR>
-nnoremap <leader>/ *#:set hlsearch! hlsearch?<CR>
+nnoremap <leader>/ *#:set hlsearch<CR>
+nnoremap <leader><leader>/ :set hlsearch! hlsearch?<CR>
 
 
 "Git
