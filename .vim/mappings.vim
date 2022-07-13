@@ -3,7 +3,7 @@ nnoremap <leader><leader>w :set fo=""<CR>:set wrap<CR>
 "Insert mode mappings
 execute "set <a-q>=\ey"
 imap <C-BS> <C-W>
-map <C-f> <Esc>
+imap <C-h> <C-W>  # <C-h> is send by alacritty when hitting <C-BS>
 imap <C-f> <Esc>
 inoremap <C-s> <NOP>
 inoremap <a-q> <space>=<space>
