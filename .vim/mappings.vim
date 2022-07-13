@@ -77,7 +77,7 @@ noremap <a-o> :GFiles<CR>
 noremap <C-t> :Files<CR>
 noremap <C-g> :Ag<space>
 nnoremap <leader>v :set hlsearch! hlsearch?<CR>
-nnoremap <leader>/ *#:set hlsearch<CR>
+nnoremap <leader>/ *#:set hlsearch! hlsearch?<CR>
 
 
 "Git
@@ -186,7 +186,7 @@ map <leader>r <Plug>(coc-rename)
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent><leader>a  <Plug>(coc-codeaction)
+nmap <silent><leader>a  <Plug>(coc-codeaction-selected)
 xmap <silent><leader>a  <Plug>(coc-codeaction-selected)
 nmap <silent><leader>A  <Plug>(coc-codeaction-line)
 nmap <silent><leader>q  <Plug>(coc-fix-current)
