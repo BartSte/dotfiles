@@ -19,6 +19,12 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
+let b:airline_whitespace_disabled = 1
+let g:airline_experimental = 1
+let g:airline_detect_modified=1
+let g:airline_detect_paste=1
+let g:airline_detect_spell=1
+
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_bold=0
 let g:gruvbox_invert_signs=0
