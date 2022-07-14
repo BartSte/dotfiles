@@ -18,12 +18,17 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-
-let b:airline_whitespace_disabled = 1
+let g:airline#extensions#whitespace#enabled = 0
 let g:airline_experimental = 1
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
 let g:airline_detect_spell=1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.colnr = ' Co:'
+let g:airline_symbols.linenr = ' Ln:'
+let g:airline_symbols.maxlinenr = ''
 
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_bold=0
