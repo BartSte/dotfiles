@@ -91,10 +91,10 @@ noremap <a-x> :GV<CR>:syntax on<CR>
 execute "set <a-t>=\et"
 execute "set <a-l>=\el"
 execute "set <a-f>=\ef"
-noremap <a-t> :only<bar>TestNearest -strategy=dispatch<bar>wincmd L<CR>
-noremap <a-l> :only<bar>TestLast -strategy=dispatch<bar>wincmd L<CR>
-noremap <a-f> :only<bar>TestFile -strategy=dispatch<bar>wincmd L<CR>
-noremap <a-s> :only<bar>TestSuite -strategy=dispatch<bar>wincmd L<CR>
+noremap <a-t> :only<bar>TestNearest -v -strategy=dispatch<bar>wincmd L<CR>
+noremap <a-l> :only<bar>TestLast -v -strategy=dispatch<bar>wincmd L<CR>
+noremap <a-f> :only<bar>TestFile -v -strategy=dispatch<bar>wincmd L<CR>
+noremap <a-s> :only<bar>TestSuite -v -strategy=dispatch<bar>wincmd L<CR>
 
 "Testing & debugging
 execute "set <a-T>=\eT"

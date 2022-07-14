@@ -10,8 +10,6 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 1
 let NERDTreeShowHidden=1
 let NERDTreeMapMenu='a'
 
-let ayucolor="darker" 
-
 let mapleader = " "
 
 let g:airline#extensions#tabline#enabled = 1
