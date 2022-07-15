@@ -3,7 +3,7 @@ noremap <leader><leader>w :set fo=""<CR>:set wrap<CR>
 "Insert mode mappings
 execute "set <a-q>=\ey"
 imap <C-BS> <C-W>
-imap <C-h> <C-W>  # <C-h> is send by alacritty when hitting <C-BS>
+imap <C-h> <C-W>
 imap <C-f> <Esc>
 inoremap <C-s> <NOP>
 inoremap <a-q> <space>=<space>
@@ -26,8 +26,7 @@ nnoremap z <C-w>h
 
 "Buffer navigation
 execute "set <a-b>=\eb"
-execute "set <a-B>=\eB"
-nmap <a-B> <Plug>Kwbd
+nmap <c-b> <Plug>Kwbd
 noremap <a-b> :Buffers<CR>
 noremap <C-n> :bnext<CR>
 noremap <C-p> :bprevious<CR>
@@ -185,25 +184,22 @@ map <leader>r <Plug>(coc-rename)
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent><leader>a  <Plug>(coc-codeaction-selected)
-xmap <silent><leader>a  <Plug>(coc-codeaction-selected)
-nmap <silent><leader>A  <Plug>(coc-codeaction-line)
-nmap <silent><leader>q  <Plug>(coc-fix-current)
+xmap <silent>ca <Plug>(coc-codeaction-selected)
+nmap <silent>ca <Plug>(coc-codeaction-line)
+nmap <silent>cq <Plug>(coc-fix-current)
 xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>u :call CocAction('diagnosticRefresh')<CR>
 nnoremap <silent> <a-k> :call ShowDocumentation()<CR>
 
-nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
-nnoremap <silent><nowait> <leader>ca  :<C-u>CocList diagnostics<cr>
-nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
-nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
-nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
-nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
-nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
-nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
-nnoremap <silent><leader>cl <Plug>(coc-codelens-action)
-nnoremap <silent><leader>cd :CocToggle<CR>
+" nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
+" nnoremap <silent><nowait> <leader>ca  :<C-u>CocList diagnostics<cr>
+" nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
+" nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
+" nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
+" nnoremap <silent><nowait> <leader>cl  :<C-u>CocList -I symbols<cr>
+" nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
+" nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
 
-imap <silent><expr> <c-a> coc#refresh()
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : CheckBackspace() ? "\<TAB>" : coc#refresh()
 inoremap <silent><expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"

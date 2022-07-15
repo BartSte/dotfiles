@@ -1,15 +1,20 @@
+" Recommended by Coc
+set encoding=utf-8
+set hidden
+set nobackup
+set nowritebackup
+set shortmess+=c
+set updatetime=300
+set signcolumn=number
+
 " Miscelaneous
 set belloff=all
 set diffopt+=vertical
-set hidden
 set history=500
 set modifiable
 set nocompatible
 set notimeout
-set shortmess+=c
 set noswapfile
-set nobackup
-set nowritebackup
 
 " Tabbing
 set autoindent
@@ -27,7 +32,6 @@ set laststatus=2
 set nostartofline
 set number
 set scrolloff=999
-set signcolumn=number
 set relativenumber
 set mouse=a
 if &term != "win32"
