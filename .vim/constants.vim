@@ -58,6 +58,7 @@ let g:syntastic_check_on_wq = 0
 
 let g:rainbow_active = 1
 
+let test#python#runner = 'pyunit'
 let g:test#custom_strategies = {'pyunit': function('PyUnitTestStrategy')}
 
 let g:vimspector_enable_mappings = 'HUMAN'
