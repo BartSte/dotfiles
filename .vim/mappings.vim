@@ -1,4 +1,4 @@
-noremap <leader><leader>w :set fo=""<CR>:set wrap<CR>
+noremap <leader><leader>w :set fo=""<CR>:set wrap! wrap?<CR>
 
 "Insert mode mappings
 execute "set <a-q>=\eq"
@@ -123,14 +123,14 @@ noremap <leader><leader>tn :tabnew<CR>
 noremap <leader><leader>tn :tabnew<CR>
 
 "Config file edit and load
-noremap <leader><leader>vc :e ~/.vim/constants.vim<CR>
-noremap <leader><leader>vf :e ~/.vim/functions.vim<CR>
-noremap <leader><leader>vm :e ~/.vim/mappings.vim<CR>
-noremap <leader><leader>vp :e ~/.vim/plugins.vim<CR>
-noremap <leader><leader>vs :e ~/.vim/settings.vim<CR>
-noremap <leader><leader>vo :e ~/.vim/colors.vim<CR>
-noremap <leader><leader>vg :e ~/.gvimrc<CR>
-noremap <leader><leader>% :so %<CR>
+noremap <leader>vc :e ~/.vim/constants.vim<CR>
+noremap <leader>vf :e ~/.vim/functions.vim<CR>
+noremap <leader>vm :e ~/.vim/mappings.vim<CR>
+noremap <leader>vp :e ~/.vim/plugins.vim<CR>
+noremap <leader>vs :e ~/.vim/settings.vim<CR>
+noremap <leader>vo :e ~/.vim/colors.vim<CR>
+noremap <leader>vg :e ~/.gvimrc<CR>
+noremap <leader>% :so %<CR>
 
 "Override default normalmode maps
 noremap H ^
@@ -180,6 +180,7 @@ xmap <silent>ca <Plug>(coc-codeaction-selected)
 nmap <silent>ca <Plug>(coc-codeaction-line)
 nmap <silent>cq <Plug>(coc-fix-current)
 xmap <leader>f  <Plug>(coc-format-selected)
+nnoremap <leader>cs z=
 nnoremap <silent> <a-k> :call ShowDocumentation()<CR>
 
 " nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
