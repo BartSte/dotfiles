@@ -1,7 +1,7 @@
 noremap <leader><leader>w :set fo=""<CR>:set wrap<CR>
 
 "Insert mode mappings
-execute "set <a-q>=\ey"
+execute "set <a-q>=\eq"
 imap <C-BS> <C-W>
 imap <C-h> <C-W>
 imap <C-f> <Esc>
@@ -158,16 +158,8 @@ nnoremap <leader>l zo
 nnoremap <leader>m zR
 
 "Yanking, deleting, pasting (visual mode)
-execute "set <a-v>=\ev"
 nnoremap Y y$
 vnoremap p pgvy
-nnoremap <C-c> "*yy
-nnoremap <C-v> "*p
-nnoremap <C-x> "*dd
-nnoremap <a-v> "*P
-vnoremap <C-c> "*y
-vnoremap <C-v> "*p
-vnoremap <C-x> "*d
 
 "Quickfix
 nnoremap [q :cp<CR>
@@ -188,7 +180,6 @@ xmap <silent>ca <Plug>(coc-codeaction-selected)
 nmap <silent>ca <Plug>(coc-codeaction-line)
 nmap <silent>cq <Plug>(coc-fix-current)
 xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>u :call CocAction('diagnosticRefresh')<CR>
 nnoremap <silent> <a-k> :call ShowDocumentation()<CR>
 
 " nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
@@ -199,6 +190,9 @@ nnoremap <silent> <a-k> :call ShowDocumentation()<CR>
 " nnoremap <silent><nowait> <leader>cl  :<C-u>CocList -I symbols<cr>
 " nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
 " nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
+
+inoremap <C-l> <Plug>(coc-snippets-expand)
+xnoremap <C-l> <Plug>(coc-convert-snippet)
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : CheckBackspace() ? "\<TAB>" : coc#refresh()

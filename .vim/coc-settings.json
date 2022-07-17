@@ -1,15 +1,13 @@
 {
     "diagnostic.enableMessage": "jump",
-    "diagnostic.errorSign": "⛔",
+    "diagnostic.errorSign": "!!!",
     "diagnostic.level": "warning",
     "diagnostic.messageTarget": "echo",
 
-    "hover.target": "echo",
-    "signature.target": "float",
-    "suggest.floatEnable": false,
-    "notification.disabledProgressSources": ["*"],
     "coc.preferences.floatActions": false,
     "coc.preferences.messageLevel": "warning",
+
+    "hover.target": "echo",
 
     "pydocstring.formatter": "google",
     "python.analysis.diagnosticMode": "openFilesOnly",
@@ -22,5 +20,11 @@
     "powershell.integratedConsole.showOnStartup": false,
     "powershell.integratedConsole.focusConsoleOnExecute": false,
     "powershell.integratedConsole.executeInCurrentScope": false,
-    "powershell.debugging.createTemporaryIntegratedConsole": false
+    "powershell.debugging.createTemporaryIntegratedConsole": false,
+
+    "notification.disabledProgressSources": ["*"],
+    "signature.target": "echo",
+    "suggest.floatEnable": true,
+
+    "snippets.userSnippetsDirectory": "$HOME/.vim"
 }
