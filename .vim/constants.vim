@@ -44,7 +44,7 @@ let g:coc_config_home = '~/.vim'
 let g:coc_snippet_next = '<tab>'
 let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-pydocstring', 
                              \ 'coc-sh', 'coc-html', 'coc-vimlsp', 
-                             \ 'coc-powershell']
+                             \ 'coc-powershell', 'coc-snippets']
 
 let g:highlightedyank_highlight_duration = 200
 

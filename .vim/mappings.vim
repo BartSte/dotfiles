@@ -26,8 +26,8 @@ nnoremap z <C-w>h
 
 "Buffer navigation
 execute "set <a-b>=\eb"
-nmap <c-b> <Plug>Kwbd
-noremap <a-b> :Buffers<CR>
+nmap <a-b> <Plug>Kwbd
+noremap <C-b> :Buffers<CR>
 noremap <C-n> :bnext<CR>
 noremap <C-p> :bprevious<CR>
 
@@ -90,10 +90,10 @@ noremap <a-x> :GV<CR>:syntax on<CR>
 execute "set <a-t>=\et"
 execute "set <a-l>=\el"
 execute "set <a-f>=\ef"
-noremap <a-t> :only<bar>TestNearest -v -strategy=dispatch<bar>wincmd L<CR>
-noremap <a-l> :only<bar>TestLast -v -strategy=dispatch<bar>wincmd L<CR>
-noremap <a-f> :only<bar>TestFile -v -strategy=dispatch<bar>wincmd L<CR>
-noremap <a-s> :only<bar>TestSuite -v -strategy=dispatch<bar>wincmd L<CR>
+noremap <a-t> :only<bar>TestNearest -strategy=dispatch -v<bar>wincmd L<CR>
+noremap <a-l> :only<bar>TestLast -strategy=dispatch -v<bar>wincmd L<CR>
+noremap <a-f> :only<bar>TestFile -strategy=dispatch -v<bar>wincmd L<CR>
+noremap <a-s> :only<bar>TestSuite -strategy=dispatch -v<bar>wincmd L<CR>
 
 "Testing & debugging
 execute "set <a-T>=\eT"
@@ -111,7 +111,8 @@ map gD :wincmd v<bar>wincmd l<CR>gd
 noremap gl :TestVisit<CR>
 
 "Formatting and refactoring
-noremap <leader><leader>s :sort<CR>
+noremap <leader>cc :sort<CR>
+vnoremap <leader>cl !python $HOME/dotfiles/scripts/sorters/sort_variable_length.py<CR>
 noremap <leader>f :Format<CR>
 noremap <leader>i :OR<CR>
 
@@ -165,7 +166,7 @@ vnoremap p pgvy
 nnoremap [q :cp<CR>
 nnoremap ]q :cn<CR>
 
-"Coc
+"oc
 execute "set <a-k>=\ek"
 
 map gd <Plug>(coc-definition)
@@ -200,4 +201,4 @@ inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : CheckBackspace() ? "\<TA
 inoremap <silent><expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 inoremap <silent><expr> <c-@> coc#refresh()
-inoremap <silent> <C-s> <C-r>=CocActionAsync('showSignatureHelp')<CR>
+inoremap <silent> <C-p> <C-r>=CocActionAsync('showSignatureHelp')<CR>
