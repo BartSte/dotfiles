@@ -5,6 +5,8 @@ from unittest import TestCase
 
 class TestSortVariableLength(TestCase):
 
+    EXPECTED = b'\n=;\nx = 1;\nxx = 2;\nxxx = 3;\nxxxx = 4;\nxxxxx === 5;\n'
+
     def test(self) -> None:
         """TODO
         """
@@ -12,7 +14,6 @@ class TestSortVariableLength(TestCase):
         program = './sort_variable_length.py'
         command = f'cat {test_lines} | {executable} {program}' 
         stdout = check_output(command, shell=True)
-        print(stdout)
-        self.assertTrue(True)
+        self.assertEqual(self.EXPECTED, stdout)
 
 
