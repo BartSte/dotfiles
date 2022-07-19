@@ -1,8 +1,9 @@
 {
     "diagnostic.enableMessage": "always",
     "diagnostic.errorSign": "!!",
-    "diagnostic.level": "warning",
-    "diagnostic.messageTarget": "echo",
+    "diagnostic.hintSign": "??",
+    "diagnostic.level": "hint",
+    "diagnostic.messageTarget": "float",
 
     "coc.preferences.floatActions": true,
     "coc.preferences.messageLevel": "warning",
