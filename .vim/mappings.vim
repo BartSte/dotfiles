@@ -1,7 +1,7 @@
 "Insert mode mappings
 execute "set <a-q>=\eq"
-imap <C-BS> <C-W>
-imap <C-f> <Esc>
+inoremap <C-h> <C-W>
+inoremap <C-f> <Esc>
 inoremap <C-s> <NOP>
 inoremap <a-q> <space>=<space>
 
