@@ -187,12 +187,13 @@ xnoremap <C-l> <Plug>(coc-convert-snippet)
 noremap <silent> <leader><leader>w :set fo=""<CR>:set wrap! wrap?<CR>
 
 " In powershell, <C-h> sends `Îz'. As a workaround, F13 is assigned to this
-" sequence. 
+" sequence. <C-Delete> should delete the wordt in front (Linux). In windows
+" <C-Delete> sends only Î, so it cannot be mapped. Therefore I choose <C-d> for
+" this in stead of <C-Delete>.
 execute "set <F13>=\xce\x7a"
 inoremap <F13> <C-W>
 nnoremap <F13> <C-w>h
 
-" C-Delete should delete the wordt in front (Linux). Since <C-Delete> sends only
-" Î in windows, it cannot be mapped.
 execute "set <F14>=\e[3;5~"
-inoremap <F14> <Esc>dEwi
+inoremap <F14> <Esc>dEi
+inoremap <C-d> <Esc>dEi
