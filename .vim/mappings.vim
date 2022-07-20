@@ -1,5 +1,6 @@
-" Bug in wsl -> ctrl-h sends z
-nnoremap z <C-w>h
+" <C-h> does not work in powershell. So I mapped <C-h> to send the character 
+" \x18 though alacritty which stands for <C-x>.
+nnoremap <C-x> <C-w>h
 
 " Toggle line wrap
 noremap <leader><leader>w :set fo=""<CR>:set wrap! wrap?<CR>
@@ -182,18 +183,8 @@ xmap <silent>ca <Plug>(coc-codeaction-selected)
 nmap <silent>ca <Plug>(coc-codeaction-line)
 nmap <silent>cq <Plug>(coc-fix-current)
 xmap <leader>f  <Plug>(coc-format-selected)
-nnoremap <leader>cs z=
 nnoremap <silent> <a-k> :call ShowDocumentation()<CR>
 nnoremap <silent> <a-d> li<Esc>
-
-" nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
-" nnoremap <silent><nowait> <leader>ca  :<C-u>CocList diagnostics<cr>
-" nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
-" nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
-" nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
-" nnoremap <silent><nowait> <leader>cl  :<C-u>CocList -I symbols<cr>
-" nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
-" nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
 
 inoremap <C-l> <Plug>(coc-snippets-expand)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
