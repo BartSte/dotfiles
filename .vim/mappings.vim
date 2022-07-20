@@ -191,8 +191,7 @@ noremap <silent> <leader><leader>w :set fo=""<CR>:set wrap! wrap?<CR>
 " <C-Delete> sends only Î, so it cannot be mapped. Therefore I choose <C-d> for
 " this in stead of <C-Delete>.
 execute "set <F13>=\xce\x7a"
+execute "set <a-d>=\ed"
 inoremap <F13> <C-W>
 nnoremap <F13> <C-w>h
-
-execute "set <a-d>=\ed"
 inoremap <a-d> <C-o>dE
