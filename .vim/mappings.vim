@@ -189,5 +189,6 @@ noremap <silent> <leader><leader>w :set fo=""<CR>:set wrap! wrap?<CR>
 " In powershell, <C-h> sends `Îz'. As a workaround, F13 is assigned to this
 " sequence.
 execute "set <F13>=\xce\x7a"
-imap <F13> <C-W>
+inoremap <F13> <C-W>
 nnoremap <F13> <C-w>h
+
