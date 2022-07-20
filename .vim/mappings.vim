@@ -1,6 +1,6 @@
-" <C-h> does not work in powershell. So I mapped <C-h> to send the character 
-" \x18 though alacritty which stands for <C-x>.
-nnoremap <C-x> <C-w>h
+" In powershell, <C-h> sends a `z'.
+nnoremap z <C-w>h
+nnoremap <leader>z= z=
 
 " Toggle line wrap
 noremap <leader><leader>w :set fo=""<CR>:set wrap! wrap?<CR>
