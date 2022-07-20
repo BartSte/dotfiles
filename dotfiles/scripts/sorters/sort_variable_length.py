@@ -1,6 +1,5 @@
 from sys import stdin
 
-
 def find_equal_sign(obj: str) -> int:
     """Returns the index of the = sign.
 

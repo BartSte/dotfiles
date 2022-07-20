@@ -3,15 +3,13 @@
     "diagnostic.errorSign": "!!",
     "diagnostic.hintSign": "??",
     "diagnostic.level": "hint",
-    "diagnostic.messageTarget": "float",
+    "diagnostic.messageTarget": "echo",
 
     "coc.preferences.floatActions": true,
     "coc.preferences.messageLevel": "warning",
 
-    "hover.target": "float",
-
-    "pydocstring.formatter": "google",
     "python.analysis.diagnosticMode": "openFilesOnly",
+    "pydocstring.formatter": "google",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": [
@@ -24,8 +22,6 @@
     "powershell.debugging.createTemporaryIntegratedConsole": false,
 
     "notification.disabledProgressSources": ["*"],
-    "signature.target": "float",
-    "suggest.floatEnable": true,
 
     "snippets.userSnippetsDirectory": "$HOME/.vim"
 }

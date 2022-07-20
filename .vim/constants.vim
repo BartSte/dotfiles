@@ -36,6 +36,7 @@ let g:gruvbox_guisp_fallback='fg'
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz;,./<>?!@#$%{[(`}])"~=_789*+\456-|123ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:EasyMotion_smartcase = 1
 
+
 let g:auto_save = 1
 let g:auto_save_events = ["WinLeave", "InsertLeave"]
 let g:auto_save_silent = 1

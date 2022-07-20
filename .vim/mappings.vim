@@ -1,3 +1,7 @@
+" Bug in wsl -> ctrl-h sends z
+nnoremap z <C-w>h
+
+" Toggle line wrap
 noremap <leader><leader>w :set fo=""<CR>:set wrap! wrap?<CR>
 
 "Insert mode mappings
@@ -20,9 +24,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-" Bug in wsl -> ctrl-h sends z
-nnoremap z <C-w>h
 
 "Buffer navigation
 execute "set <a-b>=\eb"
@@ -183,6 +184,7 @@ nmap <silent>cq <Plug>(coc-fix-current)
 xmap <leader>f  <Plug>(coc-format-selected)
 nnoremap <leader>cs z=
 nnoremap <silent> <a-k> :call ShowDocumentation()<CR>
+nnoremap <silent> <a-d> li<Esc>
 
 " nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
 " nnoremap <silent><nowait> <leader>ca  :<C-u>CocList diagnostics<cr>
