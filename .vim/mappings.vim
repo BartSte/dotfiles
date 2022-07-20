@@ -1,9 +1,11 @@
 "Insert mode mappings
 execute "set <a-q>=\eq"
+execute "set <F14>=\e[3;5~"
 inoremap <C-h> <C-W>
 inoremap <C-f> <Esc>
 inoremap <C-s> <NOP>
 inoremap <a-q> <space>=<space>
+inoremap <F14> <Esc>dEwi
 
 "Save
 noremap <C-s> :w<CR>
