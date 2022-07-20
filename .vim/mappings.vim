@@ -194,6 +194,5 @@ execute "set <F13>=\xce\x7a"
 inoremap <F13> <C-W>
 nnoremap <F13> <C-w>h
 
-execute "set <F14>=\e[3;5~"
-inoremap <F14> <Esc>dEi
-inoremap <C-d> <Esc>dEi
+execute "set <a-d>=\ed"
+inoremap <a-d> <C-o>dE
