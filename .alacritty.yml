@@ -54,5 +54,6 @@ key_bindings:
   - { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
   - { key: Tab,       mods: Control,                    chars: "\e[1;5I" }
   - { key: Tab,       mods: Control|Shift,              chars: "\e[1;6I" }
+  - { key: Delete,    mods: Control,                    chars: "\e[3;5~" }
   - { key: Space,     mods: Control,                    chars: "\x00"}
   - { key: Back,      mods: Control,                    chars: "\x08"}

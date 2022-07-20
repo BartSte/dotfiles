@@ -1,11 +1,9 @@
 "Insert mode mappings
 execute "set <a-q>=\eq"
-execute "set <F14>=\e[3;5~"
 inoremap <C-h> <C-W>
 inoremap <C-f> <Esc>
 inoremap <C-s> <NOP>
 inoremap <a-q> <space>=<space>
-inoremap <F14> <Esc>dEwi
 
 "Save
 noremap <C-s> :w<CR>
@@ -189,8 +187,12 @@ xnoremap <C-l> <Plug>(coc-convert-snippet)
 noremap <silent> <leader><leader>w :set fo=""<CR>:set wrap! wrap?<CR>
 
 " In powershell, <C-h> sends `Îz'. As a workaround, F13 is assigned to this
-" sequence.
+" sequence. 
 execute "set <F13>=\xce\x7a"
 inoremap <F13> <C-W>
 nnoremap <F13> <C-w>h
 
+" C-Delete should delete the wordt in front (Linux). Since <C-Delete> sends only
+" Î in windows, it cannot be mapped.
+execute "set <F14>=\e[3;5~"
+inoremap <F14> <Esc>dEwi
