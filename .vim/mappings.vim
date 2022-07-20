@@ -1,14 +1,6 @@
-" In powershell, <C-h> sends a `z'.
-nnoremap z <C-w>h
-nnoremap <leader>z= z=
-
-" Toggle line wrap
-noremap <leader><leader>w :set fo=""<CR>:set wrap! wrap?<CR>
-
 "Insert mode mappings
 execute "set <a-q>=\eq"
 imap <C-BS> <C-W>
-imap <C-h> <C-W>
 imap <C-f> <Esc>
 inoremap <C-s> <NOP>
 inoremap <a-q> <space>=<space>
@@ -16,7 +8,10 @@ inoremap <a-q> <space>=<space>
 "Save
 noremap <C-s> :w<CR>
 
-"Window navigation
+"Navigation
+map <leader> <Plug>(easymotion-prefix)
+map gD :wincmd v<bar>wincmd l<CR>gd
+noremap gl :TestVisit<CR>
 nnoremap <C-w>h <C-w>H 
 nnoremap <C-w>j <C-w>J  
 nnoremap <C-w>k <C-w>K 
@@ -33,6 +28,7 @@ noremap <C-b> :Buffers<CR>
 noremap <C-n> :bnext<CR>
 noremap <C-p> :bprevious<CR>
 
+"Vimspector
 execute "set <a-C>=\eC"
 execute "set <a-E>=\eE"
 execute "set <a-S>=\eS"
@@ -79,7 +75,6 @@ noremap <C-g> :Ag<space>
 nnoremap <leader>/ *#:set hlsearch<CR>
 nnoremap <leader><leader>/ :set hlsearch! hlsearch?<CR>
 
-
 "Git
 execute "set <a-g>=\eg"
 execute "set <a-G>=\eG"
@@ -106,11 +101,6 @@ noremap <a-T> :TestNearest -strategy=pyunit<CR>
 noremap <a-L> :TestLast -strategy=pyunit<CR>
 noremap <a-F> :TestFile -strategy=pyunit<CR>
 noremap <a-S> :TestSuite -strategy=pyunit<CR>
-
-"Go to shortcuts
-map <leader> <Plug>(easymotion-prefix)
-map gD :wincmd v<bar>wincmd l<CR>gd
-noremap gl :TestVisit<CR>
 
 "Formatting and refactoring
 noremap <leader>cc :sort<CR>
@@ -142,7 +132,6 @@ noremap K {
 noremap L g_
 noremap ^ H
 noremap g_ L
-
 noremap <leader><leader>k K
 noremap <leader><leader>j J
 
@@ -168,30 +157,37 @@ vnoremap p pgvy
 nnoremap [q :cp<CR>
 nnoremap ]q :cn<CR>
 
-"oc
+"Coc
 execute "set <a-k>=\ek"
 
+inoremap <C-l> <Plug>(coc-snippets-expand)
+inoremap <silent> <C-p> <C-r>=CocActionAsync('showSignatureHelp')<CR>
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : CheckBackspace() ? "\<TAB>" : coc#refresh()
+inoremap <silent><expr> <c-@> coc#refresh()
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+map <leader>r <Plug>(coc-rename)
 map gd <Plug>(coc-definition)
 map gi <Plug>(coc-implementation)
 map gr <Plug>(coc-references)
 map gy <Plug>(coc-type-definition)
-map <leader>r <Plug>(coc-rename)
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-xmap <silent>ca <Plug>(coc-codeaction-selected)
 nmap <silent>ca <Plug>(coc-codeaction-line)
 nmap <silent>cq <Plug>(coc-fix-current)
-xmap <leader>f  <Plug>(coc-format-selected)
 nnoremap <silent> <a-k> :call ShowDocumentation()<CR>
-nnoremap <silent> <a-d> li<Esc>
 
-inoremap <C-l> <Plug>(coc-snippets-expand)
+xmap <leader>f  <Plug>(coc-format-selected)
+xmap <silent>ca <Plug>(coc-codeaction-selected)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
 
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : CheckBackspace() ? "\<TAB>" : coc#refresh()
-inoremap <silent><expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Toggle line wrap
+noremap <silent> <leader><leader>w :set fo=""<CR>:set wrap! wrap?<CR>
 
-inoremap <silent><expr> <c-@> coc#refresh()
-inoremap <silent> <C-p> <C-r>=CocActionAsync('showSignatureHelp')<CR>
+" In powershell, <C-h> sends `Îz'. As a workaround, F13 is assigned to this
+" sequence.
+execute "set <F13>=\xce\x7a"
+imap <F13> <C-W>
+nnoremap <F13> <C-w>h
