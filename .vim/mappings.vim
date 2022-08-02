@@ -3,6 +3,7 @@ source ~/.vim/alt.vim
 "Insert mode mappings
 inoremap <C-h> <C-W>
 inoremap <C-f> <Esc>
+inoremap jj <Esc>
 inoremap <C-s> <NOP>
 inoremap <a-q> <space>=<space>
 
