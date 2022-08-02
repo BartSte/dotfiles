@@ -16,3 +16,10 @@ node_modules/
 __pycache__/
 visual/
 Reporting Data/
+.fonts/
+Trash/
+.cargo/
+message_cache/
+go/
+yay/
+.mozilla/
