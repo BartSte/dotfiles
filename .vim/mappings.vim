@@ -119,8 +119,8 @@ noremap <leader>vg :e ~/.gvimrc<CR>
 noremap <leader>% :so %<CR>
 
 "Quickfix
-nnoremap [q :cp<CR>
-nnoremap ]q :cn<CR>
+nnoremap { :cp<CR>
+nnoremap } :cn<CR>
 
 "Coc
 inoremap <C-l> <Plug>(coc-snippets-expand)
@@ -148,7 +148,7 @@ xmap <silent>ca <Plug>(coc-codeaction-selected)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
 
 " Toggle line wrap
-noremap <silent> <leader><leader>w :set fo=""<CR>:set wrap! wrap?<CR>
+noremap <silent> <leader><leader>w :setlocal fo=""<CR>:setlocal wrap! wrap?<CR>
 
 " In powershell, <C-h> sends `Îz'. As a workaround, F13 is assigned to this
 " sequence. <C-Delete> should delete the wordt in front (Linux). In windows
