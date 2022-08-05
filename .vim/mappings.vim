@@ -3,6 +3,7 @@ source ~/.vim/alt.vim
 "Insert mode mappings
 inoremap <C-h> <C-W>
 inoremap <C-f> <Esc>
+inoremap jj <Esc>
 inoremap <C-s> <NOP>
 inoremap <a-q> <space>=<space>
 
@@ -125,10 +126,13 @@ nnoremap } :cn<CR>
 "Coc
 inoremap <C-l> <Plug>(coc-snippets-expand)
 inoremap <silent> <C-p> <C-r>=CocActionAsync('showSignatureHelp')<CR>
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : CheckBackspace() ? "\<TAB>" : coc#refresh()
 inoremap <silent><expr> <c-@> coc#refresh()
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-inoremap <silent><expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm() 
+                                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1):
+                                \ <SID>check_back_space() ? "\<Tab>" :
+                                \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 map <leader>r <Plug>(coc-rename)
 map gd <Plug>(coc-definition)
