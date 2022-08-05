@@ -95,3 +95,6 @@ This repos are inspired on the following projects:
 
 - [dotfiles for windows](https://github.com/jayharris/dotfiles-windows)
 - [polybar-connection](https://github.com/BartSte/polybar-collection)
+- [polybar-bluetooth](https://github.com/msaitz/polybar-bluetooth)
+- [mutt-oauth2](https://github.com/muttmua/mutt/blob/master/contrib/mutt_oauth2.py)
+- [tmux-sessionizer](https://github.com/ThePrimeagen/.dotfiles/)

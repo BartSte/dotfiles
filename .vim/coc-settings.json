@@ -7,6 +7,7 @@
 
     "coc.preferences.floatActions": true,
     "coc.preferences.messageLevel": "warning",
+    "coc.preferences.useQuickfixForLocations": true,
 
     "python.analysis.diagnosticMode": "openFilesOnly",
     "pydocstring.formatter": "google",

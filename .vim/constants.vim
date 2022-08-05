@@ -43,6 +43,8 @@ let g:auto_save_silent = 1
 
 let g:coc_config_home = '~/.vim' 
 let g:coc_snippet_next = '<tab>'
+let g:coc_disable_transparent_cursor = 1
+let g:coc_terminal_height = 2
 let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-pydocstring', 
                              \ 'coc-sh', 'coc-html', 'coc-vimlsp', 
                              \ 'coc-powershell', 'coc-snippets']
