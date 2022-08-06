@@ -62,6 +62,7 @@ noremap <a-P> :VimspectorBreakpoints<CR>
 "File navigation
 noremap <a-e> :NERDTreeFocus<CR>
 noremap <a-h> :NERDTreeToggle<CR>
+noremap <a-j> :NERDTreeFind<CR>
 noremap mt mT
 noremap ma mA
 noremap ms mS
@@ -116,6 +117,7 @@ noremap <leader>vm :e ~/.vim/mappings.vim<CR>
 noremap <leader>vp :e ~/.vim/plugins.vim<CR>
 noremap <leader>vs :e ~/.vim/settings.vim<CR>
 noremap <leader>vo :e ~/.vim/colors.vim<CR>
+noremap <leader>vv :e ~/.vimrc<CR>
 noremap <leader>vg :e ~/.gvimrc<CR>
 noremap <leader>% :so %<CR>
 
@@ -129,10 +131,6 @@ inoremap <silent> <C-p> <C-r>=CocActionAsync('showSignatureHelp')<CR>
 inoremap <silent><expr> <c-@> coc#refresh()
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm() 
                                 \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1):
-                                \ <SID>check_back_space() ? "\<Tab>" :
-                                \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 map <leader>r <Plug>(coc-rename)
 map gd <Plug>(coc-definition)

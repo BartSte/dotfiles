@@ -12,7 +12,7 @@ let NERDTreeMapMenu='a'
 
 let mapleader = " "
 
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -36,9 +36,8 @@ let g:gruvbox_guisp_fallback='fg'
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz;,./<>?!@#$%{[(`}])"~=_789*+\456-|123ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:EasyMotion_smartcase = 1
 
-
 let g:auto_save = 1
-let g:auto_save_events = ["WinLeave", "InsertLeave"]
+let g:auto_save_events = ["InsertLeave", "CursorHold"]
 let g:auto_save_silent = 1
 
 let g:coc_config_home = '~/.vim' 

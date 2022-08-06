@@ -4,8 +4,9 @@ set hidden
 set nobackup
 set nowritebackup
 set shortmess+=c
-set updatetime=300
+set updatetime=1000
 set signcolumn=number
+set noswapfile
 
 " Miscelaneous
 set belloff=all
@@ -14,7 +15,6 @@ set history=500
 set modifiable
 set nocompatible
 set notimeout
-set noswapfile
 
 " Tabbing
 set autoindent
@@ -54,5 +54,4 @@ set smartcase
 " Formatting
 set nowrap
 set textwidth=80
-set fo=""
 
