@@ -47,7 +47,6 @@ let g:coc_terminal_height = 2
 let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-pydocstring', 
                              \ 'coc-sh', 'coc-html', 'coc-vimlsp', 
                              \ 'coc-powershell', 'coc-snippets']
-
 let g:highlightedyank_highlight_duration = 200
 
 let g:python_highlight_all = 1

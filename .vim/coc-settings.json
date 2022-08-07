@@ -4,11 +4,9 @@
     "diagnostic.hintSign": "??",
     "diagnostic.level": "hint",
     "diagnostic.messageTarget": "echo",
-
     "coc.preferences.floatActions": true,
     "coc.preferences.messageLevel": "warning",
     "coc.preferences.useQuickfixForLocations": true,
-
     "python.analysis.diagnosticMode": "openFilesOnly",
     "pydocstring.formatter": "google",
     "python.linting.enabled": true,
@@ -16,13 +14,37 @@
     "python.linting.flake8Args": [
         "--max-line-length 80"
     ],
-
     "powershell.integratedConsole.showOnStartup": false,
     "powershell.integratedConsole.focusConsoleOnExecute": false,
     "powershell.integratedConsole.executeInCurrentScope": false,
     "powershell.debugging.createTemporaryIntegratedConsole": false,
+    "notification.disabledProgressSources": [
+        "*"
+    ],
+    "snippets.userSnippetsDirectory": "$HOME/.vim",
 
-    "notification.disabledProgressSources": ["*"],
-
-    "snippets.userSnippetsDirectory": "$HOME/.vim"
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cc",
+                "cpp",
+                "c++",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        }
+    }
 }
