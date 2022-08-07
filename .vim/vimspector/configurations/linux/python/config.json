@@ -2,7 +2,6 @@
     "configurations": {
         "Python: Run current script": {
             "adapter": "debugpy",
-            "filetypes": ["python"],
             "configuration": {
                 "request": "launch",
                 "program": "${file}"

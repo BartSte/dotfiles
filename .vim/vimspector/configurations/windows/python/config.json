@@ -1,0 +1,11 @@
+{
+    "configurations": {
+        "Python: Run current script": {
+            "adapter": "debugpy",
+            "configuration": {
+                "request": "launch",
+                "program": "${file}"
+            }
+        }
+    }
+}
