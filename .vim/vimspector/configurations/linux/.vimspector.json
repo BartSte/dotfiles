@@ -1,0 +1,15 @@
+{
+    "configurations": {
+        "Python: Run current script": {
+            "default":true,
+            "adapter": "debugpy",
+            "filetypes": [
+                "py", ".py"
+            ],
+            "configuration": {
+                "request": "launch",
+                "program": "${file}"
+            }
+        }
+    }
+}
