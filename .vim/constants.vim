@@ -1,10 +1,4 @@
-if has("win32")
-    let $SHELL = 'cmd.exe'
-    let $FZF_DEFAULT_COMMAND = "ag --hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\\.ignore -g ."
-else
-    let $FZF_DEFAULT_COMMAND = "ag --hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\/.ignore -g ."
-endif
-
+let $FZF_DEFAULT_COMMAND = "ag --hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\\.ignore -g ."
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 100% --reverse --border'
   
 let NERDTreeShowHidden=1
