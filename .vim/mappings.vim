@@ -137,16 +137,15 @@ map gd <Plug>(coc-definition)
 map gi <Plug>(coc-implementation)
 map gr <Plug>(coc-references)
 map gy <Plug>(coc-type-definition)
+nmap <silent><leader>ca <Plug>(coc-codeaction-line)
+nmap <silent><leader>cq <Plug>(coc-fix-current)
+nmap <leader>cd <Plug>(coc-action-toggleDiagnosticsBuffer)
 
 nmap <silent> <a-c> :CocDiagnostics<CR>
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent>ca <Plug>(coc-codeaction-line)
-nmap <silent>cq <Plug>(coc-fix-current)
 nnoremap <silent> <a-k> :call ShowDocumentation()<CR>
 
-xmap <leader>f  <Plug>(coc-format-selected)
-xmap <silent>ca <Plug>(coc-codeaction-selected)
+xmap <silent><leader>f  <Plug>(coc-format-selected)
+xmap <silent><leader>ca <Plug>(coc-codeaction-selected)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
 
 " Toggle line wrap

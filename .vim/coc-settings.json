@@ -22,7 +22,10 @@
         "*"
     ],
     "snippets.userSnippetsDirectory": "$HOME/.vim",
-
+    "suggest.formatItems": [
+        "abbr"
+    ],
+    "suggest.noselect": true,
     "languageserver": {
         "ccls": {
             "command": "ccls",

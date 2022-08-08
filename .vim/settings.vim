@@ -45,6 +45,8 @@ set showcmd
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 set wildmenu
 set wildoptions=pum,fuzzy
+set pumheight=10
+set completeopt=menu
 
 " Searching
 set incsearch
@@ -54,4 +56,3 @@ set smartcase
 " Formatting
 set nowrap
 set textwidth=80
-
