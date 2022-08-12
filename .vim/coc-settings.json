@@ -4,11 +4,11 @@
     "diagnostic.hintSign": "??",
     "diagnostic.level": "hint",
     "diagnostic.messageTarget": "echo",
-    "coc.preferences.floatActions": true,
-    "coc.preferences.messageLevel": "warning",
+    "diagnostic.highlighLimit": 200,
     "coc.preferences.useQuickfixForLocations": true,
-    "python.analysis.diagnosticMode": "openFilesOnly",
     "pydocstring.formatter": "google",
+    "pyright.disableProgressNotifications": true,
+    "python.analysis.diagnosticMode": "openFilesOnly",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": [
@@ -26,6 +26,14 @@
         "abbr"
     ],
     "suggest.noselect": true,
+    "suggest.floatConfig": {
+        "border": true,
+        "rounded": true,
+        "highlight": "GruvboxFg1",
+        "borderhighlight": "GruvboxAquaUnderline"
+    },
+    "signature.preferShownAbove": true,
+    "signature.enable": false,
     "languageserver": {
         "ccls": {
             "command": "ccls",

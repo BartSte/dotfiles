@@ -1,6 +1,5 @@
 " Coc
 command! -nargs=0 Format :call CocActionAsync('format')
-command! -nargs=? Fold :calL CocAction('fold', <f-args>)
 command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
  
 function! ShowDocumentation()

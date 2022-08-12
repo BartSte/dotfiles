@@ -31,7 +31,7 @@ nnoremap Y y$
 vnoremap p pgvy
 
 "Navigation
-map <leader> <Plug>(easymotion-prefix)
+map <silent><leader> <Plug>(easymotion-prefix)
 map gD :wincmd v<bar>wincmd l<CR>gd
 noremap gl :TestVisit<CR>
 nnoremap <C-w>h <C-w>H 
@@ -99,7 +99,7 @@ noremap <a-S> :TestSuite -strategy=pyunit<CR>
 
 "Formatting and refactoring
 noremap <leader>cc :sort<CR>
-vnoremap <leader>cl !python $HOME/dotfiles/scripts/sorters/sort_variable_length.py<CR>
+vnoremap <leader>cl :!python $HOME/dotfiles/scripts/sorters/sort_variable_length.py<CR>
 noremap <leader><BS> :Format<CR>
 noremap <leader>i :OR<CR>
 

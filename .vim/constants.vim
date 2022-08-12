@@ -1,4 +1,4 @@
-let $FZF_DEFAULT_COMMAND = "ag --hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\\.ignore -g ."
+let $FZF_DEFAULT_COMMAND = expand('fd --hidden --no-ignore-vcs --ignore-file $HOME/.ignore -t f')
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 100% --reverse --border'
   
 let NERDTreeShowHidden=1
@@ -45,11 +45,6 @@ let g:highlightedyank_highlight_duration = 200
 
 let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0
-
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
 
 let g:rainbow_active = 1
 
