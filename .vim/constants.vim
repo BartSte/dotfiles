@@ -48,8 +48,8 @@ let g:python_highlight_space_errors = 0
 
 let g:rainbow_active = 1
 
-let test#python#runner = 'pyunit'
-let g:test#custom_strategies = {'pyunit': function('PyUnitTestStrategy')}
+let test#python#runner = 'unittest'
+let g:test#custom_strategies = {'pyunit': function('UnitTestStrategy')}
 
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_install_gadgets = ['debugpy','vscode-cpptools']
