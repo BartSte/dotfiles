@@ -21,6 +21,7 @@ endif
 let g:airline_symbols.colnr = ' Co:'
 let g:airline_symbols.linenr = ' Ln:'
 let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols_ascii = 1
 
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_bold=0
