@@ -91,10 +91,10 @@ noremap <a-f> :only<bar>TestFile -strategy=dispatch -v<bar>wincmd L<CR>
 noremap <a-s> :only<bar>TestSuite -strategy=dispatch -v<bar>wincmd L<CR>
 
 "Testing & debugging
-noremap <a-T> :TestNearest -strategy=pyunit<CR>
-noremap <a-L> :TestLast -strategy=pyunit<CR>
-noremap <a-F> :TestFile -strategy=pyunit<CR>
-noremap <a-S> :TestSuite -strategy=pyunit<CR>
+noremap <a-T> :TestNearest -strategy=unittest<CR>
+noremap <a-L> :TestLast -strategy=unittest<CR>
+noremap <a-F> :TestFile -strategy=unittest<CR>
+noremap <a-S> :TestSuite -strategy=unittest<CR>
 
 "Formatting and refactoring
 noremap <leader>cc :sort<CR>

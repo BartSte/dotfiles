@@ -18,9 +18,9 @@ command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>, "--hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\\.ignore", fzf#vim#with_preview(), <bang>0)
 
 " Vimspector
-function! PyUnitTestStrategy(cmd)
+function! UnitTestStrategy(cmd)
     let testName = split(a:cmd)[-1]
-    call vimspector#LaunchWithSettings( #{ configuration: 'pyunit', TestName: testName } )
+    call vimspector#LaunchWithSettings( #{ configuration: 'unittest', TestName: testName } )
 endfunction
 
 " Customize vimspector gui

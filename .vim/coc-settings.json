@@ -1,11 +1,24 @@
 {
     "diagnostic.enableMessage": "always",
     "diagnostic.errorSign": "!!",
+    "diagnostic.highlighLimit": 200,
     "diagnostic.hintSign": "??",
     "diagnostic.level": "hint",
-    "diagnostic.messageTarget": "echo",
-    "diagnostic.highlighLimit": 200,
+    "diagnostic.messageTarget": "float",
+    "diagnostic.floatConfig": {
+        "border": true,
+        "rounded": true,
+        "highlight": "GruvboxFg1",
+        "borderhighlight": "GruvboxAquaUnderline"
+    },
+
     "coc.preferences.useQuickfixForLocations": true,
+    "hover.floatConfig": {
+        "border": true,
+        "rounded": true,
+        "highlight": "GruvboxFg1",
+        "borderhighlight": "GruvboxAquaUnderline"
+    },
     "pydocstring.formatter": "google",
     "pyright.disableProgressNotifications": true,
     "python.analysis.diagnosticMode": "openFilesOnly",
@@ -34,6 +47,12 @@
     },
     "signature.preferShownAbove": true,
     "signature.enable": false,
+    "signature.floatConfig": {
+        "border": true,
+        "rounded": true,
+        "highlight": "GruvboxFg1",
+        "borderhighlight": "GruvboxAquaUnderline"
+    },
     "languageserver": {
         "ccls": {
             "command": "ccls",
