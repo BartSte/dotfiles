@@ -44,7 +44,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 "Buffer navigation
-nmap <a-b> <Plug>Kwbd
+map <silent><a-b> :b#<bar>bd#<CR>
 noremap <C-b> :Buffers<CR>
 noremap <C-n> :bnext<CR>
 noremap <C-p> :bprevious<CR>
