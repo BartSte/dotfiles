@@ -1,7 +1,6 @@
 {
     "diagnostic.enableMessage": "always",
     "diagnostic.errorSign": "!!",
-    "diagnostic.highlighLimit": 200,
     "diagnostic.hintSign": "??",
     "diagnostic.level": "hint",
     "diagnostic.messageTarget": "float",
@@ -13,6 +12,8 @@
     },
 
     "coc.preferences.useQuickfixForLocations": true,
+    "dialog.floatHighlight": "GruvboxFg1",
+    "dialog.floatBorderHighlight": "GruvboxAquaUnderline",
     "hover.floatConfig": {
         "border": true,
         "rounded": true,

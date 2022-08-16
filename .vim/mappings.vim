@@ -2,9 +2,10 @@ source ~/.vim/alt.vim
 
 "Insert mode mappings
 inoremap <C-h> <C-W>
+inoremap <C-BS> <C-W>
+inoremap <C-Del> <C-o>dE
 inoremap <C-f> <Esc>
 inoremap <C-s> <NOP>
-inoremap <a-q> <space>=<space>
 
 "Override default mappings
 noremap H ^

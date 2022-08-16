@@ -3,7 +3,6 @@ syntax on
 if has('termguicolors')
     set termguicolors
     colorscheme gruvbox
-    set background=dark
 endif
 
 let &t_SI = "\e[6 q"
