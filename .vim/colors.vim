@@ -2,6 +2,7 @@ syntax on
 
 if has('termguicolors')
     set termguicolors
+    set background=dark
     colorscheme gruvbox
 endif
 
