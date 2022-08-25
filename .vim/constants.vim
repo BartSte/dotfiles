@@ -38,11 +38,11 @@ let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-pydocstring',
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz;,./<>?!@#$%{[(`}])"~=_789*+\456-|123ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:EasyMotion_smartcase = 1
 
-let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-p']
+let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-p']
 
 let g:fzf_colors =
     \ { 'fg':    ['fg', 'GruvboxFg1'],
-    \ 'bg':      ['bg', 'GruvboxBg3'],
+    \ 'bg':      ['bg', 'NONE'],
     \ 'hl':      ['fg', 'Comment'],
     \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
     \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
