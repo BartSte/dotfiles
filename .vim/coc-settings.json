@@ -10,7 +10,6 @@
         "highlight": "GruvboxFg1",
         "borderhighlight": "GruvboxAquaUnderline"
     },
-
     "coc.preferences.useQuickfixForLocations": true,
     "dialog.floatHighlight": "GruvboxFg1",
     "dialog.floatBorderHighlight": "GruvboxAquaUnderline",
@@ -67,9 +66,8 @@
             ],
             "rootPatterns": [
                 ".ccls",
-                "compile_commands.json",
-                ".git/",
-                ".hg/"
+                "buid/compile_commands.json",
+                ".git/"
             ],
             "initializationOptions": {
                 "cache": {
@@ -78,7 +76,8 @@
             },
             "client": {
                 "snippetSupport": true
-            }
+            },
+            "compilationDatabaseDirectory": "build"
         }
     }
 }
