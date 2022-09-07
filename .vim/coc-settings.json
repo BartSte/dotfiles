@@ -21,6 +21,7 @@
     },
     "pydocstring.formatter": "google",
     "pyright.disableProgressNotifications": true,
+    "pyright.inlayHints.enable": false,
     "python.analysis.diagnosticMode": "openFilesOnly",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
@@ -66,18 +67,15 @@
             ],
             "rootPatterns": [
                 ".ccls",
-                "buid/compile_commands.json",
+                "build/compile_commands.json",
                 ".git/"
             ],
             "initializationOptions": {
                 "cache": {
                     "directory": ".ccls-cache"
-                }
-            },
-            "client": {
-                "snippetSupport": true
-            },
-            "compilationDatabaseDirectory": "build"
+                },
+                "compilationDatabaseDirectory": "build"
+            }
         }
     }
 }
