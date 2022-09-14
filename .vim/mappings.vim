@@ -17,6 +17,7 @@ noremap g_ L
 noremap <C-s> :w<CR>
 noremap <leader>o J
 
+nnoremap <C-y> <C-i>
 nnoremap <S-Tab> <<
 nnoremap <Tab> >>
 vnoremap <S-Tab> <gv
@@ -44,7 +45,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 "Buffer navigation
-map <silent><a-b> :b#<bar>bd#<CR>
+map <silent><a-b> <Plug>Kwbd
 noremap <C-b> :Buffers<CR>
 noremap <C-n> :bnext<CR>
 noremap <C-p> :bprevious<CR>
