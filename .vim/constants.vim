@@ -31,7 +31,9 @@ let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-pydocstring',
                              \ 'coc-sh', 'coc-html', 'coc-vimlsp', 
                              \ 'coc-powershell', 'coc-snippets', 'coc-clangd']
 
-let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz;,./<>?!@#$%{[(`}])"~=_788*+\456-|123ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+" let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz;,./<>?!@#$%{[(`}])"~=_788*+\456-|123ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'BCEIMNOPQRTUVWXYZGHASLDKFJ'
 let g:EasyMotion_smartcase = 0
 
 let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-s']
