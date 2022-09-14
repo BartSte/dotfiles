@@ -32,7 +32,17 @@ nnoremap Y y$
 vnoremap p pgvy
 
 "Navigation
-map <silent><leader> <Plug>(easymotion-prefix)
+map <Leader> <Plug>(easymotion-prefix)
+
+map <leader>a <Plug>(easymotion-jumptoanywhere)
+map <leader>s <Plug>(easymotion-bd-f)
+map <leader>l <Plug>(easymotion-bd-jk)
+map <leader><leader>w <Plug>(easymotion-bd-w)
+
+nmap <leader>s <Plug>(easymotion-overwin-f)
+nmap <leader>l <Plug>(easymotion-overwin-line)
+nmap <leader><leader>w <Plug>(easymotion-overwin-w)
+
 map gD :wincmd v<bar>wincmd l<CR>gd
 noremap gl :TestVisit<CR>
 nnoremap <C-w>h <C-w>H 
@@ -152,7 +162,7 @@ xmap <silent><leader>ca <Plug>(coc-codeaction-selected)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
 
 " Toggle line wrap
-noremap <silent> <leader><leader>w :setlocal fo=""<CR>:setlocal wrap! wrap?<CR>
+noremap <silent> <leader><leader>cw :setlocal fo=""<CR>:setlocal wrap! wrap?<CR>
 
 " In powershell, <C-h> sends `Îz'. As a workaround, F13 is assigned to this
 " sequence. <C-Delete> should delete the wordt in front (Linux). In windows
