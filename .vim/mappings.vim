@@ -99,7 +99,7 @@ noremap <a-S> :TestSuite -strategy=unittest<CR>
 
 "Formatting and refactoring
 noremap <leader>cc :sort<CR>
-vnoremap <leader>cl :!python $HOME/dotfiles/scripts/sorters/sort_variable_length.py<CR>
+vnoremap <leader>cl :!sort_variable_length<CR>
 noremap <leader><BS> :Format<CR>
 noremap <leader>i :OR<CR>
 

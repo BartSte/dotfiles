@@ -4,6 +4,7 @@
 *venv*/
 *cache*/
 .cargo/
+.conan
 .dotfiles*/
 .fonts/
 .git/
@@ -27,4 +28,3 @@ yay/
 gadgets/
 chrysalis/
 Temp/
-

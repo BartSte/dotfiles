@@ -1,9 +1,11 @@
+#!/usr/bin/python3
 from sys import stdin
 
 
 def sort_variable_length(lines: str) -> str:
-    """Sorts lines of variables definitions base on the number of characters
-    before the `=' sign.
+    """First sort all lines based on their total length. Next, sort the lines 
+    based on the number of characters before the `=' sign. If no equal sign is
+    found, the line is ignored.
 
     Args:
         lines (str): variable definitions separated by `\n'.
@@ -12,6 +14,7 @@ def sort_variable_length(lines: str) -> str:
         str: sorted variable definitions separated by `\n'.
     """
     as_list = lines.splitlines()
+    as_list.sort(key=len)
     as_list.sort(key=find_equal_sign)
     return '\n'.join(as_list)
 
