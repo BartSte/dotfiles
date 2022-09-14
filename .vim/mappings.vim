@@ -98,7 +98,9 @@ noremap <a-F> :TestFile -strategy=unittest<CR>
 noremap <a-S> :TestSuite -strategy=unittest<CR>
 
 "Formatting and refactoring
-noremap <leader>cc :sort<CR>
+noremap <leader>cc vip:sort<CR>
+vnoremap <leader>cc :sort<CR>
+noremap <leader>cl vip:!sort_variable_length<CR>
 vnoremap <leader>cl :!sort_variable_length<CR>
 noremap <leader><BS> :Format<CR>
 noremap <leader>i :OR<CR>
