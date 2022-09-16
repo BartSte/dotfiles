@@ -19,6 +19,7 @@ Plug 'preservim/nerdtree'
 Plug '907th/vim-auto-save'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " Source control
 Plug 'junegunn/gv.vim'

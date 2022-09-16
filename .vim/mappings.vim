@@ -9,15 +9,15 @@ inoremap <C-s> <NOP>
 
 "Override default mappings
 noremap H ^
-noremap J }
-noremap K {
+noremap J :keepjumps normal! }<cr>
+noremap K :keepjumps normal! {<cr>
 noremap L g_
 noremap ^ H
 noremap g_ L
 noremap <C-s> :w<CR>
 noremap <leader>o J
 
-nnoremap <C-y> <C-i>
+nnoremap <C-;> <C-i>
 nnoremap <S-Tab> <<
 nnoremap <Tab> >>
 vnoremap <S-Tab> <gv
@@ -162,7 +162,7 @@ xmap <silent><leader>ca <Plug>(coc-codeaction-selected)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
 
 " Toggle line wrap
-noremap <silent> <leader><leader>cw :setlocal fo=""<CR>:setlocal wrap! wrap?<CR>
+noremap <silent> <leader>cw :setlocal fo=""<CR>:setlocal wrap! wrap?<CR>
 
 " In powershell, <C-h> sends `Îz'. As a workaround, F13 is assigned to this
 " sequence. <C-Delete> should delete the wordt in front (Linux). In windows
