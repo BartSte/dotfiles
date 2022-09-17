@@ -17,7 +17,7 @@ noremap g_ L
 noremap <C-s> :w<CR>
 noremap <leader>o J
 
-nnoremap <C-;> <C-i>
+nnoremap <C-q> <C-i>
 nnoremap <S-Tab> <<
 nnoremap <Tab> >>
 vnoremap <S-Tab> <gv
