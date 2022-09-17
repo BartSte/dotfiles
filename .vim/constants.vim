@@ -28,7 +28,9 @@ let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-pydocstring',
                              \ 'coc-sh', 'coc-html', 'coc-vimlsp', 
                              \ 'coc-powershell', 'coc-snippets', 'coc-clangd']
 
-let g:EasyMotion_keys = ',./bcmnpqtvzxyowureigh;asldkfj'
+let g:EasyMotion_keys = ',./BCMNPQTVZXYOWUREIGH;ASLDKFJ'
+let g:EasyMotion_off_screen_search = 0
+let g:EasyMotion_use_upper = 1
 
 let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-s']
 
