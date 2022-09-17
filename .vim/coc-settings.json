@@ -1,9 +1,9 @@
 {
     "clangd.enabled": true,
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/14.0.3/clangd_14.0.3/bin/clangd",
     "clangd.checkUpdates": true,
     "clangd.inlayHints.enable": true,
     "clangd.showDBChangedNotification": true,
-
     "diagnostic.enableMessage": "always",
     "diagnostic.errorSign": "!!",
     "diagnostic.hintSign": "??",
@@ -15,41 +15,33 @@
         "highlight": "GruvboxFg1",
         "borderhighlight": "GruvboxAquaUnderline"
     },
-
     "coc.preferences.useQuickfixForLocations": true,
-
     "dialog.floatHighlight": "GruvboxFg1",
     "dialog.floatBorderHighlight": "GruvboxAquaUnderline",
-
     "hover.floatConfig": {
         "border": true,
         "rounded": true,
         "highlight": "GruvboxFg1",
         "borderhighlight": "GruvboxAquaUnderline"
     },
-
     "pydocstring.formatter": "google",
-
     "pyright.disableProgressNotifications": true,
     "pyright.inlayHints.enable": false,
-
     "python.analysis.diagnosticMode": "openFilesOnly",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Path": "flake8",
-    "python.linting.flake8Args": [ "--max-line-length 80" ],
-
+    "python.linting.flake8Args": [
+        "--max-line-length 80"
+    ],
     "powershell.integratedConsole.showOnStartup": false,
     "powershell.integratedConsole.focusConsoleOnExecute": false,
     "powershell.integratedConsole.executeInCurrentScope": false,
     "powershell.debugging.createTemporaryIntegratedConsole": false,
-
     "notification.disabledProgressSources": [
         "*"
     ],
-
     "snippets.userSnippetsDirectory": "$HOME/.vim",
-
     "suggest.formatItems": [
         "abbr"
     ],
@@ -60,7 +52,6 @@
         "highlight": "GruvboxFg1",
         "borderhighlight": "GruvboxAquaUnderline"
     },
-
     "signature.preferShownAbove": true,
     "signature.enable": false,
     "signature.floatConfig": {
@@ -68,6 +59,5 @@
         "rounded": true,
         "highlight": "GruvboxFg1",
         "borderhighlight": "GruvboxAquaUnderline"
-    },
-    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/14.0.3/clangd_14.0.3/bin/clangd"
+    }
 }
