@@ -9,8 +9,8 @@ inoremap <C-s> <NOP>
 
 "Override default mappings
 noremap H ^
-noremap J :keepjumps normal! }<cr>
-noremap K :keepjumps normal! {<cr>
+noremap <silent>J :keepjumps normal! }<cr>
+noremap <silent>K :keepjumps normal! {<cr>
 noremap L g_
 noremap ^ H
 noremap g_ L

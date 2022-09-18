@@ -4,6 +4,7 @@
     "clangd.checkUpdates": true,
     "clangd.inlayHints.enable": true,
     "clangd.showDBChangedNotification": true,
+
     "diagnostic.enableMessage": "always",
     "diagnostic.errorSign": "!!",
     "diagnostic.hintSign": "??",
