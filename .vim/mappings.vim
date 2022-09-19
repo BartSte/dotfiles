@@ -9,34 +9,25 @@ inoremap <C-s> <NOP>
 
 "Override default mappings
 noremap <C-s> :w<CR>
-nnoremap <C-q> <C-i>
-
 noremap <silent><C-j> :keepjumps normal! }<cr>
 noremap <silent><C-k> :keepjumps normal! {<cr>
-
-nnoremap <S-Tab> <<
-nnoremap <Tab> >>
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
-
 nnoremap Y y$
 vnoremap p pgvy
 
 "Navigation
 map <Leader> <Plug>(easymotion-prefix)
-
 map <leader>a <Plug>(easymotion-jumptoanywhere)
 map <leader>s <Plug>(easymotion-bd-f)
 map <leader>u <Plug>(easymotion-k)
 map <leader>d <Plug>(easymotion-j)
 map <leader>l <Plug>(easymotion-bd-jk)
 map <leader><leader>w <Plug>(easymotion-bd-w)
-
 nmap <leader>s <Plug>(easymotion-overwin-f)
 nmap <leader>l <Plug>(easymotion-overwin-line)
 nmap <leader><leader>w <Plug>(easymotion-overwin-w)
 
-map gD :wincmd v<bar>wincmd l<CR>gd
 noremap gl :TestVisit<CR>
 nnoremap <C-w>h <C-w>H 
 nnoremap <C-w>j <C-w>J  
@@ -64,7 +55,7 @@ noremap <a-R> :b vimspector.output:server<CR>
 noremap <a-P> :VimspectorBreakpoints<CR>
 
 "File navigation
-noremap <a-e> :NERDTreeFocus<CR>
+noremap <a-e> :NERDTreeToggle<CR>
 noremap <a-n> :NERDTreeFind<CR>
 noremap mt mT
 noremap ma mA
@@ -137,15 +128,14 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
 
 map <leader>r <Plug>(coc-rename)
 map gd <Plug>(coc-definition)
+map gD :wincmd v<bar>wincmd l<CR>gd
 map gi <Plug>(coc-implementation)
 map gr <Plug>(coc-references)
 map gy <Plug>(coc-type-definition)
 nmap <silent><leader>ca <Plug>(coc-codeaction-line)
 nmap <silent><leader>cq <Plug>(coc-fix-current)
 nmap <leader>cd <Plug>(coc-action-toggleDiagnosticsBuffer)
-
 nmap <silent> <a-c> :CocDiagnostics<CR>
-
 xmap <silent><leader>f  <Plug>(coc-format-selected)
 xmap <silent><leader>ca <Plug>(coc-codeaction-selected)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
@@ -154,10 +144,7 @@ xnoremap <C-l> <Plug>(coc-convert-snippet)
 noremap <silent> <leader>cw :setlocal fo=""<CR>:setlocal wrap! wrap?<CR>
 
 " In powershell, <C-h> sends `Îz'. As a workaround, F13 is assigned to this
-" sequence. <C-Delete> should delete the wordt in front (Linux). In windows
-" <C-Delete> sends only Î, so it cannot be mapped. Therefore I choose <C-d> for
-" this in stead of <C-Delete>.
+" sequence.
 execute "set <F13>=\xce\x7a"
 inoremap <F13> <C-W>
 nnoremap <F13> <C-w>h
-inoremap <a-d> <C-o>dE
