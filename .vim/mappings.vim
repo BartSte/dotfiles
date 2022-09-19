@@ -1,4 +1,4 @@
-source ~/.vim/alt.vim
+source ~/.vim/alt.vim 
 
 "Insert mode mappings
 inoremap <C-h> <C-W>
@@ -8,25 +8,16 @@ inoremap <C-f> <Esc>
 inoremap <C-s> <NOP>
 
 "Override default mappings
-noremap H ^
-noremap <silent>J :keepjumps normal! }<cr>
-noremap <silent>K :keepjumps normal! {<cr>
-noremap L g_
-noremap ^ H
-noremap g_ L
 noremap <C-s> :w<CR>
-noremap <leader>o J
-
 nnoremap <C-q> <C-i>
+
+noremap <silent><C-j> :keepjumps normal! }<cr>
+noremap <silent><C-k> :keepjumps normal! {<cr>
+
 nnoremap <S-Tab> <<
 nnoremap <Tab> >>
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
-
-onoremap H ^
-onoremap L g_
-onoremap ^ H
-onoremap g_ L
 
 nnoremap Y y$
 vnoremap p pgvy
@@ -36,6 +27,8 @@ map <Leader> <Plug>(easymotion-prefix)
 
 map <leader>a <Plug>(easymotion-jumptoanywhere)
 map <leader>s <Plug>(easymotion-bd-f)
+map <leader>u <Plug>(easymotion-k)
+map <leader>d <Plug>(easymotion-j)
 map <leader>l <Plug>(easymotion-bd-jk)
 map <leader><leader>w <Plug>(easymotion-bd-w)
 
@@ -49,13 +42,13 @@ nnoremap <C-w>h <C-w>H
 nnoremap <C-w>j <C-w>J  
 nnoremap <C-w>k <C-w>K 
 nnoremap <C-w>l <C-w>L 
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <a-h> <C-w>h
+nnoremap <a-j> <C-w>j
+nnoremap <a-k> <C-w>k
+nnoremap <a-l> <C-w>l
 
 "Buffer navigation
-map <silent><a-b> <Plug>Kwbd
+map ZB <Plug>Kwbd
 noremap <C-b> :Buffers<CR>
 noremap <C-n> :bnext<CR>
 noremap <C-p> :bprevious<CR>
@@ -72,8 +65,7 @@ noremap <a-P> :VimspectorBreakpoints<CR>
 
 "File navigation
 noremap <a-e> :NERDTreeFocus<CR>
-noremap <a-h> :NERDTreeToggle<CR>
-noremap <a-j> :NERDTreeFind<CR>
+noremap <a-n> :NERDTreeFind<CR>
 noremap mt mT
 noremap ma mA
 noremap ms mS
@@ -98,15 +90,13 @@ noremap <a-x> :GV<CR>:syntax on<CR>
 
 "Testing
 noremap <a-t> :only<bar>TestNearest -strategy=dispatch -v<bar>wincmd L<CR>
-noremap <a-l> :only<bar>TestLast -strategy=dispatch -v<bar>wincmd L<CR>
+noremap <a-s> :only<bar>TestLast -strategy=dispatch -v<bar>wincmd L<CR>
 noremap <a-f> :only<bar>TestFile -strategy=dispatch -v<bar>wincmd L<CR>
-noremap <a-s> :only<bar>TestSuite -strategy=dispatch -v<bar>wincmd L<CR>
 
 "Testing & debugging
 noremap <a-T> :TestNearest -strategy=unittest<CR>
-noremap <a-L> :TestLast -strategy=unittest<CR>
+noremap <a-S> :TestLast -strategy=unittest<CR>
 noremap <a-F> :TestFile -strategy=unittest<CR>
-noremap <a-S> :TestSuite -strategy=unittest<CR>
 
 "Formatting and refactoring
 noremap <leader>cc vip:sort<CR>
@@ -155,7 +145,6 @@ nmap <silent><leader>cq <Plug>(coc-fix-current)
 nmap <leader>cd <Plug>(coc-action-toggleDiagnosticsBuffer)
 
 nmap <silent> <a-c> :CocDiagnostics<CR>
-nnoremap <silent> <a-k> :call ShowDocumentation()<CR>
 
 xmap <silent><leader>f  <Plug>(coc-format-selected)
 xmap <silent><leader>ca <Plug>(coc-codeaction-selected)
