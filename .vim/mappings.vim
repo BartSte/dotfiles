@@ -9,17 +9,24 @@ inoremap <C-BS> <C-W>
 inoremap <C-Del> <C-o>dE
 inoremap <C-f> <Esc>
 inoremap <C-s> <NOP>
+inoremap <S-Tab> <BS>
 
 "Override default mappings
 noremap <C-s> :w<CR>
 noremap <silent><C-n> :keepjumps normal! }<cr>
 noremap <silent><C-e> :keepjumps normal! {<cr>
-noremap <Tab> >>
-noremap <S-Tab> <<
+onoremap <C-n> }
+onoremap <C-e> {
+vnoremap <C-n> }
+vnoremap <C-e> {
+" noremap <Tab> >>
+" noremap <S-Tab> <<
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 nnoremap Y y$
 vnoremap p pgvy
+noremap h ge
+noremap H gE
 
 map <Leader> <Plug>(easymotion-prefix)
 map <leader>a <Plug>(easymotion-jumptoanywhere)
@@ -27,6 +34,9 @@ map <leader>s <Plug>(easymotion-bd-f)
 map <leader>u <Plug>(easymotion-k)
 map <leader>d <Plug>(easymotion-j)
 map <leader>l <Plug>(easymotion-bd-jk)
+map <leader>h <Plug>(easymotion-ge)
+map <leader>H <Plug>(easymotion-gE)
+
 map <leader><leader>w <Plug>(easymotion-bd-w)
 nmap <leader>s <Plug>(easymotion-overwin-f)
 nmap <leader>l <Plug>(easymotion-overwin-line)
