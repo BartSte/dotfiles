@@ -1,3 +1,6 @@
+"alt mappings are for moving out of the editor -> alt==appear
+"leader mappings are for text editing.
+"control mappings are kept at the default where possible, e.g., fzf's <C-t>
 source ~/.vim/alt.vim 
 
 "Insert mode 
@@ -9,20 +12,14 @@ inoremap <C-s> <NOP>
 
 "Override default mappings
 noremap <C-s> :w<CR>
+noremap <silent><C-n> :keepjumps normal! }<cr>
+noremap <silent><C-e> :keepjumps normal! {<cr>
+noremap <Tab> >>
+noremap <S-Tab> <<
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 nnoremap Y y$
 vnoremap p pgvy
-
-"Navigation
-nnoremap <C-w>h <C-w>H 
-nnoremap <C-w>j <C-w>J  
-nnoremap <C-w>k <C-w>K 
-nnoremap <C-w>l <C-w>L 
-nnoremap <a-h> <C-w>h
-nnoremap <a-j> <C-w>j
-nnoremap <a-k> <C-w>k
-nnoremap <a-l> <C-w>l
 
 map <Leader> <Plug>(easymotion-prefix)
 map <leader>a <Plug>(easymotion-jumptoanywhere)
@@ -35,16 +32,21 @@ nmap <leader>s <Plug>(easymotion-overwin-f)
 nmap <leader>l <Plug>(easymotion-overwin-line)
 nmap <leader><leader>w <Plug>(easymotion-overwin-w)
 
-noremap <silent><C-j> :keepjumps normal! }<cr>
-noremap <silent><C-k> :keepjumps normal! {<cr>
-vnoremap <silent><C-j> }
-vnoremap <silent><C-k> {
+noremap gl :TestVisit<CR>
+nnoremap <C-w>h <C-w>H 
+nnoremap <C-w>j <C-w>J  
+nnoremap <C-w>k <C-w>K 
+nnoremap <C-w>l <C-w>L 
+nnoremap <a-h> <C-w>h
+nnoremap <a-n> <C-w>j
+nnoremap <a-e> <C-w>k
+nnoremap <a-l> <C-w>l
 
 "Buffer navigation
 map ZB <Plug>Kwbd
 noremap <C-b> :Buffers<CR>
-noremap <C-n> :bnext<CR>
-noremap <C-p> :bprevious<CR>
+noremap <a-,> :bprevious<CR>
+noremap <a-.> :bnext<CR>
 
 "Vimspector
 noremap <F7> :VimspectorReset<CR>
@@ -57,8 +59,8 @@ noremap <a-R> :b vimspector.output:server<CR>
 noremap <a-P> :VimspectorBreakpoints<CR>
 
 "File navigation
-noremap <a-e> :NERDTreeToggle<CR>
-noremap <a-n> :NERDTreeFind<CR>
+noremap <a-x> :NERDTreeToggle<CR>
+noremap <a-X> :NERDTreeFind<CR>
 noremap mt mT
 noremap ma mA
 noremap ms mS
@@ -79,7 +81,7 @@ nnoremap <leader><leader>/ :set hlsearch! hlsearch?<CR>
 "Git
 noremap <a-g> :G<space>
 noremap <a-G> :vertical G<CR>
-noremap <a-x> :GV<CR>:syntax on<CR>
+noremap <a-z> :GV<CR>:syntax on<CR>
 
 "Testing & debugging
 noremap gl :TestVisit<CR>
