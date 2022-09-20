@@ -1,6 +1,6 @@
 source ~/.vim/alt.vim 
 
-"Insert mode mappings
+"Insert mode 
 inoremap <C-h> <C-W>
 inoremap <C-BS> <C-W>
 inoremap <C-Del> <C-o>dE
@@ -9,14 +9,21 @@ inoremap <C-s> <NOP>
 
 "Override default mappings
 noremap <C-s> :w<CR>
-noremap <silent><C-j> :keepjumps normal! }<cr>
-noremap <silent><C-k> :keepjumps normal! {<cr>
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 nnoremap Y y$
 vnoremap p pgvy
 
 "Navigation
+nnoremap <C-w>h <C-w>H 
+nnoremap <C-w>j <C-w>J  
+nnoremap <C-w>k <C-w>K 
+nnoremap <C-w>l <C-w>L 
+nnoremap <a-h> <C-w>h
+nnoremap <a-j> <C-w>j
+nnoremap <a-k> <C-w>k
+nnoremap <a-l> <C-w>l
+
 map <Leader> <Plug>(easymotion-prefix)
 map <leader>a <Plug>(easymotion-jumptoanywhere)
 map <leader>s <Plug>(easymotion-bd-f)
@@ -28,15 +35,10 @@ nmap <leader>s <Plug>(easymotion-overwin-f)
 nmap <leader>l <Plug>(easymotion-overwin-line)
 nmap <leader><leader>w <Plug>(easymotion-overwin-w)
 
-noremap gl :TestVisit<CR>
-nnoremap <C-w>h <C-w>H 
-nnoremap <C-w>j <C-w>J  
-nnoremap <C-w>k <C-w>K 
-nnoremap <C-w>l <C-w>L 
-nnoremap <a-h> <C-w>h
-nnoremap <a-j> <C-w>j
-nnoremap <a-k> <C-w>k
-nnoremap <a-l> <C-w>l
+noremap <silent><C-j> :keepjumps normal! }<cr>
+noremap <silent><C-k> :keepjumps normal! {<cr>
+vnoremap <silent><C-j> }
+vnoremap <silent><C-k> {
 
 "Buffer navigation
 map ZB <Plug>Kwbd
@@ -79,23 +81,23 @@ noremap <a-g> :G<space>
 noremap <a-G> :vertical G<CR>
 noremap <a-x> :GV<CR>:syntax on<CR>
 
-"Testing
+"Testing & debugging
+noremap gl :TestVisit<CR>
 noremap <a-t> :only<bar>TestNearest -strategy=dispatch -v<bar>wincmd L<CR>
 noremap <a-s> :only<bar>TestLast -strategy=dispatch -v<bar>wincmd L<CR>
 noremap <a-f> :only<bar>TestFile -strategy=dispatch -v<bar>wincmd L<CR>
-
-"Testing & debugging
 noremap <a-T> :TestNearest -strategy=unittest<CR>
 noremap <a-S> :TestLast -strategy=unittest<CR>
 noremap <a-F> :TestFile -strategy=unittest<CR>
 
 "Formatting and refactoring
 noremap <leader>cc vip:sort<CR>
-vnoremap <leader>cc :sort<CR>
 noremap <leader>cl vip:!sort_variable_length<CR>
-vnoremap <leader>cl :!sort_variable_length<CR>
 noremap <leader><BS> :Format<CR>
 noremap <leader>i :OR<CR>
+
+vnoremap <leader>cc :sort<CR>
+vnoremap <leader>cl :!sort_variable_length<CR>
 
 "Tab shortcuts
 noremap <leader><leader>tn :tabnew<CR>
@@ -129,9 +131,10 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
 map <leader>r <Plug>(coc-rename)
 map gd <Plug>(coc-definition)
 map gD :wincmd v<bar>wincmd l<CR>gd
-map gi <Plug>(coc-implementation)
+" map gi <Plug>(coc-implementation)
 map gr <Plug>(coc-references)
 map gy <Plug>(coc-type-definition)
+
 nmap <silent><leader>ca <Plug>(coc-codeaction-line)
 nmap <silent><leader>cq <Plug>(coc-fix-current)
 nmap <leader>cd <Plug>(coc-action-toggleDiagnosticsBuffer)
