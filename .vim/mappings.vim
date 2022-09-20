@@ -9,8 +9,10 @@ inoremap <C-s> <NOP>
 
 "Override default mappings
 noremap <C-s> :w<CR>
-noremap <silent><C-j> :keepjumps normal! }<cr>
-noremap <silent><C-k> :keepjumps normal! {<cr>
+noremap <silent><C-n> :keepjumps normal! }<cr>
+noremap <silent><C-e> :keepjumps normal! {<cr>
+noremap <Tab> >>
+noremap <S-Tab> <<
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 nnoremap Y y$
@@ -34,15 +36,15 @@ nnoremap <C-w>j <C-w>J
 nnoremap <C-w>k <C-w>K 
 nnoremap <C-w>l <C-w>L 
 nnoremap <a-h> <C-w>h
-nnoremap <a-j> <C-w>j
-nnoremap <a-k> <C-w>k
+nnoremap <a-n> <C-w>j
+nnoremap <a-e> <C-w>k
 nnoremap <a-l> <C-w>l
 
 "Buffer navigation
 map ZB <Plug>Kwbd
 noremap <C-b> :Buffers<CR>
-noremap <C-n> :bnext<CR>
-noremap <C-p> :bprevious<CR>
+noremap <a-,> :bprevious<CR>
+noremap <a-.> :bnext<CR>
 
 "Vimspector
 noremap <F7> :VimspectorReset<CR>
@@ -55,8 +57,8 @@ noremap <a-R> :b vimspector.output:server<CR>
 noremap <a-P> :VimspectorBreakpoints<CR>
 
 "File navigation
-noremap <a-e> :NERDTreeToggle<CR>
-noremap <a-n> :NERDTreeFind<CR>
+noremap <a-x> :NERDTreeToggle<CR>
+noremap <a-X> :NERDTreeFind<CR>
 noremap mt mT
 noremap ma mA
 noremap ms mS
@@ -77,7 +79,7 @@ nnoremap <leader><leader>/ :set hlsearch! hlsearch?<CR>
 "Git
 noremap <a-g> :G<space>
 noremap <a-G> :vertical G<CR>
-noremap <a-x> :GV<CR>:syntax on<CR>
+noremap <a-z> :GV<CR>:syntax on<CR>
 
 "Testing
 noremap <a-t> :only<bar>TestNearest -strategy=dispatch -v<bar>wincmd L<CR>
@@ -129,7 +131,7 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
 map <leader>r <Plug>(coc-rename)
 map gd <Plug>(coc-definition)
 map gD :wincmd v<bar>wincmd l<CR>gd
-map gi <Plug>(coc-implementation)
+" map gi <Plug>(coc-implementation)
 map gr <Plug>(coc-references)
 map gy <Plug>(coc-type-definition)
 nmap <silent><leader>ca <Plug>(coc-codeaction-line)
