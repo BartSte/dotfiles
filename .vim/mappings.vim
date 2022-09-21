@@ -3,6 +3,11 @@
 "control mappings are kept at the default where possible, e.g., fzf's <C-t>
 source ~/.vim/alt.vim 
 
+if has('linux')
+    vnoremap "*d :silent! !xclip -selection clipboard<CR>
+    vnoremap "*y :silent! w !xclip -selection clipboard<CR>
+endif
+
 "Insert mode 
 inoremap <C-h> <C-W>
 inoremap <C-BS> <C-W>
@@ -136,7 +141,7 @@ nnoremap } :cn<CR>
 
 "Coc
 inoremap <C-l> <Plug>(coc-snippets-expand)
-inoremap <silent> <C-p> <C-r>=CocActionAsync('showSignatureHelp')<CR>
+inoremap <silent><C-p> <C-r>=CocActionAsync('showSignatureHelp')<CR>
 inoremap <silent><expr> <c-@> coc#refresh()
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm() 
                                 \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -144,7 +149,6 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
 map <leader>r <Plug>(coc-rename)
 map gd <Plug>(coc-definition)
 map gD :wincmd v<bar>wincmd l<CR>gd
-" map gi <Plug>(coc-implementation)
 map gr <Plug>(coc-references)
 map gy <Plug>(coc-type-definition)
 
