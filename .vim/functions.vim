@@ -1,3 +1,12 @@
+" Vertical split help by default
+augroup vertical_help
+    autocmd!
+    autocmd FileType help
+                \ setlocal bufhidden=unload |
+                \ wincmd L |
+                \ vertical resize 79
+augroup END
+
 " Coc
 command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')

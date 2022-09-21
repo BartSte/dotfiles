@@ -7,4 +7,3 @@ source ~/.vim/colors.vim
 source ~/.vim/bclose.vim
 source ~/.vim/vimspector_ui.vim
 source ~/.vim/mappings.vim
-set fo=""

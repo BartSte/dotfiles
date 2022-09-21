@@ -1,20 +1,20 @@
+" Miscelaneous
+set belloff=all
+set diffopt+=vertical,iblank,closeoff
+set history=500
+set modifiable
+set nocompatible
+set notimeout
+set shortmess=cflmnWI
+
 " Recommended by Coc
 set hidden
 set nobackup
 set noswapfile
 set nowritebackup
 set encoding=utf-8
-set shortmess+=c
-set updatetime=1000
+set updatetime=500
 set signcolumn=number
-
-" Miscelaneous
-set notimeout
-set modifiable
-set nocompatible
-set belloff=all
-set history=500
-set diffopt+=vertical
 
 " Tabbing
 set expandtab
@@ -53,5 +53,6 @@ set smartcase
 set ignorecase
 
 " Formatting
+set fo=""
 set nowrap
 set textwidth=80
