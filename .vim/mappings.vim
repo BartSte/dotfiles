@@ -28,8 +28,6 @@ onoremap <C-n> }
 onoremap <C-e> {
 vnoremap <C-n> }
 vnoremap <C-e> {
-" noremap <Tab> >>
-" noremap <S-Tab> <<
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 nnoremap Y y$
@@ -156,6 +154,7 @@ map gD :wincmd v<bar>wincmd l<CR>gd
 map gr <Plug>(coc-references)
 map gy <Plug>(coc-type-definition)
 
+nmap <silent><a-k> :call ShowDocumentation()<CR>
 nmap <silent><leader>ca <Plug>(coc-codeaction-line)
 nmap <silent><leader>cq <Plug>(coc-fix-current)
 nmap <leader>cd <Plug>(coc-action-toggleDiagnosticsBuffer)
