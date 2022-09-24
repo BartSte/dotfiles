@@ -34,9 +34,7 @@ set scrolloff=999
 set laststatus=2
 set foldmethod=indent
 set colorcolumn=80
-if &term != "win32"
-    set cursorline
-endif
+set cursorline
 
 " Command line
 set showcmd

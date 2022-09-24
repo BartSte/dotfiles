@@ -1,69 +1,75 @@
 "alt mappings are for moving out of the editor -> alt==appear
 "leader mappings are for text editing.
 "control mappings are kept at the default where possible, e.g., fzf's <C-t>
-source ~/.vim/alt.vim 
-
-"Clipboard for linux
-if has('linux')
-    nnoremap "*p :silent! r !xclip -selection clipboard -o<CR>
-    nnoremap "*yy V:silent! w !xclip -selection clipboard<CR>    
-    nnoremap "*dd V:silent! !xclip -selection clipboard<CR>
-    vnoremap "*d :silent! !xclip -selection clipboard<CR>
-    vnoremap "*y :silent! w !xclip -selection clipboard<CR>
-endif
 
 "Insert mode 
-inoremap <C-h> <C-W>
 inoremap <C-BS> <C-W>
 inoremap <C-Del> <C-o>dE
 inoremap <C-f> <Esc>
+inoremap <C-h> <C-W>
 inoremap <C-s> <NOP>
 inoremap <S-Tab> <BS>
 
 "Override default mappings
+nnoremap Y y$
 noremap <C-s> :w<CR>
-noremap <silent><C-n> :keepjumps normal! }<cr>
 noremap <silent><C-e> :keepjumps normal! {<cr>
-onoremap <C-n> }
+noremap <silent><C-n> :keepjumps normal! }<cr>
+noremap H gE
+noremap h ge
 onoremap <C-e> {
-vnoremap <C-n> }
+onoremap <C-n> }
 vnoremap <C-e> {
+vnoremap <C-n> }
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
-nnoremap Y y$
 vnoremap p pgvy
-noremap h ge
-noremap H gE
 
+"Easymotion
 map <Leader> <Plug>(easymotion-prefix)
+map <leader><leader>w <Plug>(easymotion-bd-w)
+map <leader>H <Plug>(easymotion-gE)
 map <leader>a <Plug>(easymotion-jumptoanywhere)
+map <leader>d <Plug>(easymotion-j)
+map <leader>h <Plug>(easymotion-ge)
+map <leader>l <Plug>(easymotion-bd-jk)
 map <leader>s <Plug>(easymotion-bd-f)
 map <leader>u <Plug>(easymotion-k)
-map <leader>d <Plug>(easymotion-j)
-map <leader>l <Plug>(easymotion-bd-jk)
-map <leader>h <Plug>(easymotion-ge)
-map <leader>H <Plug>(easymotion-gE)
-
-map <leader><leader>w <Plug>(easymotion-bd-w)
-nmap <leader>s <Plug>(easymotion-overwin-f)
-nmap <leader>l <Plug>(easymotion-overwin-line)
 nmap <leader><leader>w <Plug>(easymotion-overwin-w)
+nmap <leader>l <Plug>(easymotion-overwin-line)
+nmap <leader>s <Plug>(easymotion-overwin-f)
 
-noremap gl :TestVisit<CR>
+" Window navigation
 nnoremap <C-w>h <C-w>H 
-nnoremap <C-w>j <C-w>J  
-nnoremap <C-w>k <C-w>K 
+nnoremap <C-w>n <C-w>J  
+nnoremap <C-w>e <C-w>K 
 nnoremap <C-w>l <C-w>L 
-nnoremap <a-h> <C-w>h
-nnoremap <a-n> <C-w>j
 nnoremap <a-e> <C-w>k
+nnoremap <a-h> <C-w>h
 nnoremap <a-l> <C-w>l
+nnoremap <a-n> <C-w>j
 
 "Buffer navigation
-map ZB <Plug>Kwbd
+nmap gD :wincmd v<bar>wincmd l<CR>gd
+nmap gd <Plug>(coc-definition)
+nmap gr <Plug>(coc-references)
+nmap gy <Plug>(coc-type-definition)
+nmap ZB <Plug>Kwbd
+noremap 'a 'A'"
+noremap 'd 'D'"
+noremap 'f 'F'"
+noremap 's 'S'"
+noremap 't 'T'"
 noremap <C-b> :Buffers<CR>
 noremap <a-,> :bprevious<CR>
 noremap <a-.> :bnext<CR>
+noremap <a-X> :NERDTreeFind<CR>
+noremap <a-x> :NERDTreeToggle<CR>
+noremap ma mA
+noremap md mD
+noremap mf mF
+noremap ms mS
+noremap mt mT
 
 "Vimspector
 noremap <F7> :VimspectorReset<CR>
@@ -74,20 +80,6 @@ noremap <a-V> :b vimspector.Variables<CR>
 noremap <a-W> :b vimspector.Watches<CR>
 noremap <a-R> :b vimspector.output:server<CR>
 noremap <a-P> :VimspectorBreakpoints<CR>
-
-"File navigation
-noremap <a-x> :NERDTreeToggle<CR>
-noremap <a-X> :NERDTreeFind<CR>
-noremap mt mT
-noremap ma mA
-noremap ms mS
-noremap md mD
-noremap mf mF
-noremap 't 'T'"
-noremap 'a 'A'"
-noremap 's 'S'"
-noremap 'd 'D'"
-noremap 'f 'F'"
 
 "Search
 noremap <C-t> :Files<CR>
@@ -110,20 +102,9 @@ noremap <a-T> :TestNearest -strategy=unittest<CR>
 noremap <a-S> :TestLast -strategy=unittest<CR>
 noremap <a-F> :TestFile -strategy=unittest<CR>
 
-"Formatting and refactoring
-noremap <leader>cc vip:sort<CR>
-noremap <leader>cl vip:!sort_variable_length<CR>
-noremap <leader><BS> :Format<CR>
-noremap <leader>i :OR<CR>
-
-vnoremap <leader>cc :sort<CR>
-vnoremap <leader>cl :!sort_variable_length<CR>
-
-"Tab shortcuts
-noremap <leader><leader>tn :tabnew<CR>
+"Tabs
 noremap <leader><leader>tc :tabclose<CR>
 noremap <leader><leader>to :tabonly<CR>
-noremap <leader><leader>tn :tabnew<CR>
 noremap <leader><leader>tn :tabnew<CR>
 
 "Config file edit and load
@@ -141,33 +122,26 @@ noremap <leader>% :so %<CR>
 nnoremap { :cp<CR>
 nnoremap } :cn<CR>
 
-"Coc
+"Formatting and refactoring
 inoremap <C-l> <Plug>(coc-snippets-expand)
 inoremap <silent><C-p> <C-r>=CocActionAsync('showSignatureHelp')<CR>
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <silent><expr> <c-@> coc#refresh()
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm() 
-                                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-map <leader>r <Plug>(coc-rename)
-map gd <Plug>(coc-definition)
-map gD :wincmd v<bar>wincmd l<CR>gd
-map gr <Plug>(coc-references)
-map gy <Plug>(coc-type-definition)
-
+nmap <leader>r <Plug>(coc-rename)
+nmap <leader>cd <Plug>(coc-action-toggleDiagnosticsBuffer)
+nmap <silent> <a-c> :CocDiagnostics<CR>
 nmap <silent><a-k> :call ShowDocumentation()<CR>
 nmap <silent><leader>ca <Plug>(coc-codeaction-line)
 nmap <silent><leader>cq <Plug>(coc-fix-current)
-nmap <leader>cd <Plug>(coc-action-toggleDiagnosticsBuffer)
-nmap <silent> <a-c> :CocDiagnostics<CR>
-xmap <silent><leader>f  <Plug>(coc-format-selected)
+noremap <silent><leader><BS> :Format<CR>
+noremap <silent><leader>cc vip:sort<CR>
+noremap <silent><leader>cl vip:!sort_variable_length<CR>
+noremap <silent><leader>i :OR<CR>
+noremap <silent><leader>p :setlocal wrap! wrap?<CR>
+
+vnoremap <silent><leader>cc :sort<CR>
+vnoremap <silent><leader>cl :!sort_variable_length<CR>
 xmap <silent><leader>ca <Plug>(coc-codeaction-selected)
+xmap <silent><leader>f  <Plug>(coc-format-selected)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
-
-" Toggle line wrap
-noremap <silent> <leader>cw :setlocal fo=""<CR>:setlocal wrap! wrap?<CR>
-
-" In powershell, <C-h> sends `Îz'. As a workaround, F13 is assigned to this
-" sequence.
-execute "set <F13>=\xce\x7a"
-inoremap <F13> <C-W>
-nnoremap <F13> <C-w>h

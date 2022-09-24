@@ -1,9 +1,12 @@
 source ~/.vim/plugins.vim
 source ~/.vim/functions.vim
-source ~/.vim/settings.vim
 source ~/.vim/constants.vim
 source ~/.vim/markdown.vim
 source ~/.vim/colors.vim
 source ~/.vim/bclose.vim
 source ~/.vim/vimspector_ui.vim
+source ~/.vim/alt.vim 
 source ~/.vim/mappings.vim
+source ~/.vim/settings.vim
+source ~/.vim/linux.vim
+source ~/.vim/windows.vim
