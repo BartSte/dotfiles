@@ -1,6 +1,6 @@
 {
     "clangd.enabled": true,
-    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.0/clangd_15.0.0/bin/clangd",
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.1/clangd_15.0.1/bin/clangd",
     "clangd.checkUpdates": true,
     "clangd.inlayHints.enable": true,
     "clangd.showDBChangedNotification": true,

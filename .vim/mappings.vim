@@ -1,4 +1,4 @@
-"alt mappings are for moving out of the editor -> alt==appear
+"alt mappings a re for moving out of the editor -> alt==appear
 "leader mappings are for text editing.
 "control mappings are kept at the default where possible, e.g., fzf's <C-t>
 
@@ -24,6 +24,10 @@ vnoremap <C-n> }
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 vnoremap p pgvy
+nnoremap <C-d> 10j
+nnoremap <C-u> 10k
+nnoremap [6~ <C-d>
+nnoremap [5~ <C-u>
 
 "Easymotion
 map <Leader> <Plug>(easymotion-prefix)
