@@ -5,7 +5,7 @@
 "Insert mode 
 inoremap <C-BS> <C-W>
 inoremap <C-Del> <C-o>dE
-inoremap <C-f> <Esc>
+inoremap <C-t> <Esc>
 inoremap <C-h> <C-W>
 inoremap <C-s> <NOP>
 inoremap <S-Tab> <BS>
@@ -44,12 +44,12 @@ nmap <leader>l <Plug>(easymotion-overwin-line)
 nmap <leader>s <Plug>(easymotion-overwin-f)
 
 " Window navigation
-nnoremap <C-w>h <C-w>H 
+nnoremap <C-w>m <C-w>H 
 nnoremap <C-w>n <C-w>J  
 nnoremap <C-w>e <C-w>K 
 nnoremap <C-w>l <C-w>L 
 nnoremap <a-e> <C-w>k
-nnoremap <a-h> <C-w>h
+nnoremap <a-m> <C-w>h
 nnoremap <a-l> <C-w>l
 nnoremap <a-n> <C-w>j
 
@@ -64,7 +64,7 @@ noremap 'd 'D'"
 noremap 'f 'F'"
 noremap 's 'S'"
 noremap 't 'T'"
-noremap <C-b> :Buffers<CR>
+noremap <a-b> :Buffers<CR>
 noremap <a-,> :bprevious<CR>
 noremap <a-.> :bnext<CR>
 noremap <a-X> :NERDTreeFind<CR>
@@ -86,8 +86,8 @@ noremap <a-R> :b vimspector.output:server<CR>
 noremap <a-P> :VimspectorBreakpoints<CR>
 
 "Search
-noremap <C-t> :Files<CR>
-noremap <C-g> :Ag<space>
+noremap <a-o> :Files<CR>
+noremap <a-a> :Ag<space>
 nnoremap <leader>/ *#:set hlsearch<CR>
 nnoremap <leader><leader>/ :set hlsearch! hlsearch?<CR>
 
