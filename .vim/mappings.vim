@@ -13,14 +13,8 @@ inoremap <S-Tab> <BS>
 "Override default mappings
 nnoremap Y y$
 noremap <C-s> :w<CR>
-noremap <silent><C-e> :keepjumps normal! {<cr>
-noremap <silent><C-n> :keepjumps normal! }<cr>
 noremap H gE
 noremap h ge
-onoremap <C-e> {
-onoremap <C-n> }
-vnoremap <C-e> {
-vnoremap <C-n> }
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 vnoremap p pgvy
@@ -28,6 +22,9 @@ nnoremap <C-d> 10j
 nnoremap <C-u> 10k
 nnoremap [6~ <C-d>
 nnoremap [5~ <C-u>
+nnoremap <PageDown> <C-d>
+nnoremap <PageUp> <C-u>
+
 
 "Easymotion
 map <Leader> <Plug>(easymotion-prefix)
@@ -86,7 +83,7 @@ noremap <a-R> :b vimspector.output:server<CR>
 noremap <a-P> :VimspectorBreakpoints<CR>
 
 "Search
-noremap <C-t> :Files<CR>
+noremap <a-o> :Files<CR>
 noremap <C-g> :Ag<space>
 nnoremap <leader>/ *#:set hlsearch<CR>
 nnoremap <leader><leader>/ :set hlsearch! hlsearch?<CR>
