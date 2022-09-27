@@ -13,8 +13,6 @@ inoremap <S-Tab> <BS>
 "Override default mappings
 nnoremap Y y$
 noremap <C-s> :w<CR>
-noremap H gE
-noremap h ge
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 vnoremap p pgvy
@@ -25,14 +23,11 @@ nnoremap [5~ <C-u>
 nnoremap <PageDown> <C-d>
 nnoremap <PageUp> <C-u>
 
-
 "Easymotion
 map <Leader> <Plug>(easymotion-prefix)
 map <leader><leader>w <Plug>(easymotion-bd-w)
-map <leader>H <Plug>(easymotion-gE)
 map <leader>a <Plug>(easymotion-jumptoanywhere)
 map <leader>d <Plug>(easymotion-j)
-map <leader>h <Plug>(easymotion-ge)
 map <leader>l <Plug>(easymotion-bd-jk)
 map <leader>s <Plug>(easymotion-bd-f)
 map <leader>u <Plug>(easymotion-k)
@@ -66,11 +61,10 @@ noremap <a-,> :bprevious<CR>
 noremap <a-.> :bnext<CR>
 noremap <a-X> :NERDTreeFind<CR>
 noremap <a-x> :NERDTreeToggle<CR>
+noremap mt mT
 noremap ma mA
 noremap md mD
-noremap mf mF
 noremap ms mS
-noremap mt mT
 
 "Vimspector
 noremap <F7> :VimspectorReset<CR>
@@ -89,8 +83,8 @@ nnoremap <leader>/ *#:set hlsearch<CR>
 nnoremap <leader><leader>/ :set hlsearch! hlsearch?<CR>
 
 "Git
-noremap <a-g> :G<space>
-noremap <a-G> :vertical G<CR>'"
+noremap <C-g> :G<space>
+noremap <a-g> :vertical G<CR>'"
 noremap <a-z> :GV<CR>:syntax on<CR>
 noremap <a-d> :silent! normal gf<CR>:wincmd o<bar>Gvdiffsplit<CR>
 
@@ -118,10 +112,6 @@ noremap <leader>vo :e ~/.vim/colors.vim<CR>
 noremap <leader>vv :e ~/.vimrc<CR>
 noremap <leader>vg :e ~/.gvimrc<CR>
 noremap <leader>% :so %<CR>
-
-"Quickfix
-nnoremap { :cp<CR>
-nnoremap } :cn<CR>
 
 "Formatting and refactoring
 inoremap <C-l> <Plug>(coc-snippets-expand)
