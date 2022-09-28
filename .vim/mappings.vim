@@ -46,25 +46,24 @@ nnoremap <a-l> <C-w>l
 nnoremap <a-n> <C-w>j
 
 "Buffer navigation
+nmap ZB <Plug>Kwbd
 nmap gD :wincmd v<bar>wincmd l<CR>gd
 nmap gd <Plug>(coc-definition)
 nmap gr <Plug>(coc-references)
 nmap gy <Plug>(coc-type-definition)
-nmap ZB <Plug>Kwbd
 noremap 'a 'A'"
 noremap 'd 'D'"
-noremap 'f 'F'"
 noremap 's 'S'"
 noremap 't 'T'"
-noremap <a-b> :Buffers<CR>
 noremap <a-,> :bprevious<CR>
 noremap <a-.> :bnext<CR>
 noremap <a-X> :NERDTreeFind<CR>
+noremap <a-b> :Buffers<CR>
 noremap <a-x> :NERDTreeToggle<CR>
-noremap mt mT
 noremap ma mA
 noremap md mD
 noremap ms mS
+noremap mt mT
 
 "Vimspector
 noremap <F7> :VimspectorReset<CR>
