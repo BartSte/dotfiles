@@ -54,7 +54,7 @@ let g:gruvbox_invert_signs=0
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_guisp_fallback='fg'
 
-let g:highlightedyank_highlight_duration = 200
+let g:highlightedyank_highlight_duration = 50
 
 let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0
