@@ -79,7 +79,7 @@ noremap <a-P> :VimspectorBreakpoints<CR>
 
 "Search
 noremap <a-o> :Files<CR>
-noremap <a-a> :Ag<space>
+noremap <C-f> :Ag<space>
 nnoremap <leader>/ *#:set hlsearch<CR>
 nnoremap <leader><leader>/ :set hlsearch! hlsearch?<CR>
 
@@ -135,5 +135,5 @@ noremap <silent><leader>p :setlocal wrap! wrap?<CR>
 vnoremap <silent><leader>cc :sort<CR>
 vnoremap <silent><leader>cl :!sort_variable_length<CR>
 xmap <silent><leader>ca <Plug>(coc-codeaction-selected)
-xmap <silent><leader>f  <Plug>(coc-format-selected)
+xmap <silent><leader><BS> <Plug>(coc-format-selected)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
