@@ -84,8 +84,8 @@ nnoremap <leader>/ *#:set hlsearch<CR>
 nnoremap <leader><leader>/ :set hlsearch! hlsearch?<CR>
 
 "Git
-noremap <C-g> :G<space>
-noremap <a-g> :vertical G<CR>'"
+noremap <a-g> :G<space>
+noremap <a-G> :vertical G<CR>'"
 noremap <a-z> :GV<CR>:syntax on<CR>
 noremap <a-d> :silent! normal gf<CR>:wincmd o<bar>Gvdiffsplit<CR>
 
