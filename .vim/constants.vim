@@ -66,4 +66,5 @@ let g:test#custom_strategies = {'unittest': function('MyUnitTestStrategy')}
 
 let g:vimspector_base_dir = expand('$HOME/.vim/vimspector')
 let g:vimspector_enable_mappings = 'HUMAN'
-let g:vimspector_install_gadgets = ["debugpy","vscode-cpptools"]
+let g:vimspector_install_gadgets = ["debugpy","vscode-cpptools", "debugpy-python2"]
+
