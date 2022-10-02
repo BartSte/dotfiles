@@ -9,7 +9,6 @@ Plug 'machakann/vim-highlightedyank'
 " Search, linting, and autocomplete
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Navigation
 Plug 'easymotion/vim-easymotion'
@@ -30,5 +29,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'puremourning/vimspector'
 Plug 'tpope/vim-dispatch'
 Plug 'vim-test/vim-test'
+
+" Nvim only
+if !has('nvim')
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
+
 call plug#end()
 

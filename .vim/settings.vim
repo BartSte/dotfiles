@@ -43,7 +43,7 @@ set noshowmode
 set pumheight=10
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 set completeopt=menu
-set wildoptions=pum,fuzzy
+
 
 " Searching
 set incsearch
