@@ -79,7 +79,7 @@ noremap <a-P> :VimspectorBreakpoints<CR>
 
 "Search
 noremap <a-o> :Files<CR>
-noremap <C-f> :Ag<space>
+noremap <C-a> :Ag<space>
 nnoremap <leader>/ *#:set hlsearch<CR>
 nnoremap <leader><leader>/ :set hlsearch! hlsearch?<CR>
 
