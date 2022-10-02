@@ -1,8 +1,8 @@
 " Miscelaneous
 set belloff=all
 set diffopt+=vertical,iblank,closeoff
-set history=500
-set modifiable
+set history=1000
+set tabpagemax=50
 set nocompatible
 set notimeout
 set shortmess=cflmnWI
@@ -17,10 +17,11 @@ set updatetime=500
 set signcolumn=number
 
 " Tabbing
-set expandtab
 set autoindent
 set backspace=indent,eol,start
+set expandtab
 set shiftwidth=4
+set smarttab
 set softtabstop=4
 
 " Editor features
@@ -31,10 +32,10 @@ set relativenumber
 set mouse=a
 set foldlevel=20
 set scrolloff=999
+set sidescrolloff=5
 set laststatus=2
 set foldmethod=indent
 set colorcolumn=80
-set cursorline
 
 " Command line
 set showcmd
@@ -44,13 +45,11 @@ set pumheight=10
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 set completeopt=menu
 
-
 " Searching
 set incsearch
 set smartcase
 set ignorecase
 
 " Formatting
-set fo=""
 set nowrap
 set textwidth=80

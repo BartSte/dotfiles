@@ -30,7 +30,7 @@ Plug 'puremourning/vimspector'
 Plug 'tpope/vim-dispatch'
 Plug 'vim-test/vim-test'
 
-" Nvim only
+" Vim only
 if !has('nvim')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
