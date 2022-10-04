@@ -23,7 +23,9 @@ function! s:CustomiseUI()
     b vimspector.Variables
 endfunction
 
-augroup MyVimspectorUICustomistaion
-  autocmd!
-  autocmd User VimspectorUICreated call s:CustomiseUI()
-augroup END
+if !has('nvim')
+    augroup MyVimspectorUICustomistaion
+      autocmd!
+      autocmd User VimspectorUICreated call s:CustomiseUI()
+    augroup END
+endif

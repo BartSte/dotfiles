@@ -7,4 +7,9 @@ if &term == "win32"
 
     " Cursorline does not work well in powershell
     set nocursorline
+
+endif
+
+if has('win32')
+    let g:python3_host_prog = 'C:/Python310/python.exe'
 endif
