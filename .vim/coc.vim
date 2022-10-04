@@ -27,4 +27,3 @@ xmap <silent><leader>ca <Plug>(coc-codeaction-selected)
 xmap <silent><leader><BS> <Plug>(coc-format-selected)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
 
-set wildoptions=pum,fuzzy

@@ -7,7 +7,7 @@ source ~/.vim/bclose.vim
 source ~/.vim/vimspector_ui.vim
 source ~/.vim/mappings.vim
 source ~/.vim/settings.vim
+source ~/.vim/coc.vim
 source ~/.vim/linux.vim
 source ~/.vim/windows.vim
 source ~/.vim/vim.vim
-source ~/.vim/nvim.vim
