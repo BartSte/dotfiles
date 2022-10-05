@@ -22,7 +22,7 @@ let g:auto_save = 1
 let g:auto_save_silent = 1
 let g:auto_save_events = ["InsertLeave", "CursorHold"]
 
-let g:coc_config_home = expand('$HOME/.vim')
+let g:coc_config_home = expand('$HOME/dotfiles/vim')
 let g:coc_snippet_next = '<tab>'
 let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-pydocstring', 
                              \ 'coc-sh', 'coc-html', 'coc-vimlsp', 
@@ -64,7 +64,7 @@ let g:rainbow_active = 1
 let test#python#runner = 'pyunit'
 let g:test#custom_strategies = {'unittest': function('MyUnitTestStrategy')}
 
-let g:vimspector_base_dir = expand('$HOME/.vim/vimspector')
+let g:vimspector_base_dir = expand('$HOME/dotfiles/vim/vimspector')
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_install_gadgets = ["debugpy","vscode-cpptools", "debugpy-python2"]
 

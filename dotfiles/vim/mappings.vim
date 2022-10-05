@@ -104,14 +104,16 @@ noremap <leader><leader>to :tabonly<CR>
 noremap <leader><leader>tn :tabnew<CR>
 
 "Config file edit and load
-noremap <leader>vc :e ~/.vim/constants.vim<CR>
-noremap <leader>vf :e ~/.vim/functions.vim<CR>
-noremap <leader>vm :e ~/.vim/mappings.vim<CR>
-noremap <leader>vp :e ~/.vim/plugins.vim<CR>
-noremap <leader>vs :e ~/.vim/settings.vim<CR>
-noremap <leader>vo :e ~/.vim/colors.vim<CR>
+noremap <leader>vc :e ~/dotfiles/vim/constants.vim<CR>
+noremap <leader>vf :e ~/dotfiles/vim/functions.vim<CR>
+noremap <leader>vm :e ~/dotfiles/vim/mappings.vim<CR>
+noremap <leader>vp :e ~/dotfiles/vim/plugins.vim<CR>
+noremap <leader>vs :e ~/dotfiles/vim/settings.vim<CR>
+noremap <leader>vo :e ~/dotfiles/vim/colors.vim<CR>
+noremap <leader>vi :e ~/dotfiles/vim/init.vim<CR>
+noremap <leader>vg :e ~/dotfiles/vim/ginit.vim<CR>
 noremap <leader>vv :e ~/.vimrc<CR>
-noremap <leader>vg :e ~/.gvimrc<CR>
+noremap <leader>vx :e ~/.gvimrc<CR>
 noremap <leader>% :so %<CR>
 
 "Formatting and refactoring

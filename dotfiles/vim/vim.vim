@@ -1,4 +1,4 @@
 if !has('nvim')
-    source ~/.vim/alt.vim 
+    source ~/dotfiles/vim/alt.vim 
     set wildoptions=pum,fuzzy
 endif
