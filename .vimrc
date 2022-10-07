@@ -4,7 +4,6 @@ source ~/dotfiles/vim/constants.vim
 source ~/dotfiles/vim/markdown.vim
 source ~/dotfiles/vim/colors.vim
 source ~/dotfiles/vim/bclose.vim
-source ~/dotfiles/vim/vimspector_ui.vim
 source ~/dotfiles/vim/mappings.vim
 source ~/dotfiles/vim/settings.vim
 source ~/dotfiles/vim/coc.vim

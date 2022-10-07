@@ -2,7 +2,7 @@ guiset_quiet gui none
 set theme dark
 set searchengine google
 set hintnames sort
-set hintchars nteslr;akiwourqpghz/x.c,vmfyb
+set hintchars nteslr;akiwouqpghz/x.c,vmfybj
 set hintfiltermode simple
 set allowautofocus false
 set modeindicatorshowkeys true
