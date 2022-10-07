@@ -12,8 +12,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Navigation
-" Plug 'easymotion/vim-easymotion'
-Plug 'phaazon/hop.nvim'
+Plug 'easymotion/vim-easymotion'
+" Plug 'phaazon/hop.nvim'
 Plug 'preservim/nerdtree'
 
 " Editing

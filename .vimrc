@@ -9,4 +9,3 @@ source ~/dotfiles/vim/settings.vim
 source ~/dotfiles/vim/coc.vim
 source ~/dotfiles/vim/linux.vim
 source ~/dotfiles/vim/windows.vim
-source ~/dotfiles/vim/vim.vim
