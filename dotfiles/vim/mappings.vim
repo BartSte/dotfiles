@@ -81,7 +81,6 @@ noremap <a-P> :VimspectorBreakpoints<CR>
 noremap <a-o> :Files<CR>
 noremap <a-a> :Ag<space>
 nnoremap <leader>/ *#:set hlsearch<CR>
-nnoremap <leader><leader>/ :set hlsearch! hlsearch?<CR>
 
 "Git
 noremap <a-g> :G<space>
@@ -91,9 +90,9 @@ noremap <a-d> :silent! normal gf<CR>:wincmd o<bar>Gvdiffsplit<CR>
 
 "Testing & debugging
 noremap gl :TestVisit<CR>
-noremap <a-t> :only<bar>TestNearest -strategy=dispatch -v<bar>wincmd L<CR>
-noremap <a-s> :only<bar>TestLast -strategy=dispatch -v<bar>wincmd L<CR>
-noremap <a-f> :only<bar>TestFile -strategy=dispatch -v<bar>wincmd L<CR>
+noremap <a-t> :only<bar>TestNearest -strategy=dispatch -v<bar>wincmd L<CR><CR>
+noremap <a-s> :only<bar>TestLast -strategy=dispatch -v<bar>wincmd L<CR><CR>
+noremap <a-f> :only<bar>TestFile -strategy=dispatch -v<bar>wincmd L<CR><CR>
 noremap <a-T> :TestNearest -strategy=unittest<CR>
 noremap <a-S> :TestLast -strategy=unittest<CR>
 noremap <a-F> :TestFile -strategy=unittest<CR>
