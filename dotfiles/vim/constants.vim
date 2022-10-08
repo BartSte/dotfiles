@@ -26,7 +26,8 @@ let g:coc_config_home = expand('$HOME/dotfiles/vim')
 let g:coc_snippet_next = '<tab>'
 let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-pydocstring', 
                              \ 'coc-sh', 'coc-html', 'coc-vimlsp', 
-                             \ 'coc-powershell', 'coc-snippets', 'coc-clangd']
+                             \ 'coc-powershell', 'coc-snippets', 'coc-clangd',
+                             \ 'coc-lua']
 
 let g:EasyMotion_keys = ',./BCMKPQTVZXYOWURIGH;ASLDEFN'
 let g:EasyMotion_off_screen_search = 0

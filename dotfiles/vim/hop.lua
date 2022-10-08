@@ -1,3 +1,8 @@
+local hop = require('hop')
+local hint = require('hop.hint')
+local jump_target = require('hop.jump_target')
+
+
 require'hop'.setup {
     keys = '/bcmkpqtvzxyowurigh;asldefn',
     jump_on_sole_occurrence = true,
@@ -5,14 +10,37 @@ require'hop'.setup {
     multi_windows = false,
 }
 
-vim.api.nvim_set_keymap('', '<leader>f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>t', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, hint_offset = -1 })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, hint_offset = 1 })<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>d', "<cmd>lua require'hop'.hint_lines({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR})<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>u', "<cmd>lua require'hop'.hint_lines({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR})<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>w', "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR})<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>e', "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, hint_position = require'hop.hint'.HintPosition.END})<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>b', "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR})<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>ge', "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, hint_position = require'hop.hint'.HintPosition.END})<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader>t', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, hint_offset = -1 })<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader>T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, hint_offset = 1 })<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader>d', "<cmd>lua require'hop'.hint_lines({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR})<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader>u', "<cmd>lua require'hop'.hint_lines({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR})<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader>w', "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR})<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader>e', "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, hint_position = require'hop.hint'.HintPosition.END})<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader>b', "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR})<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader>ge', "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, hint_position = require'hop.hint'.HintPosition.END})<cr>", {})
 
+vim.keymap.set('n', '<leader>f',
+function ()
+    local hints = {direction = require('hop.hint').HintDirection.AFTER_CURSOR}
+    require('hop').hint_char1(hints)
+end)
+
+vim.keymap.set('n', '<leader>F',
+function ()
+    local hints = {direction = require('hop.hint').HintDirection.BEFORE_CURSOR}
+    require('hop').hint_char1(hints)
+end)
+
+vim.keymap.set('n', '<leader>w',
+function ()
+    local hints = {direction = require('hop.hint').HintDirection.AFTER_CURSOR}
+    require('hop').hint_words(hints)
+end)
+
+vim.keymap.set('n', '<leader>W',
+function ()
+    local opts = {direction = hint.HintDirection.AFTER_CURSOR}
+    local generator = jump_target.jump_targets_by_scanning_lines
+    local hints = generator(jump_target.regex_by_searching('.'))
+    hop.hint_with(hints, opts)
+end)
