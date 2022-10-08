@@ -19,28 +19,32 @@ vim.api.nvim_set_keymap('n', '<leader>e', "<cmd>lua require'hop'.hint_words({ di
 vim.api.nvim_set_keymap('n', '<leader>b', "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR})<cr>", {})
 vim.api.nvim_set_keymap('n', '<leader>ge', "<cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, hint_position = require'hop.hint'.HintPosition.END})<cr>", {})
 
+
 vim.keymap.set('n', '<leader>f',
 function ()
-    local hints = {direction = require('hop.hint').HintDirection.AFTER_CURSOR}
-    require('hop').hint_char1(hints)
+    local opts = {direction = hint.HintDirection.AFTER_CURSOR}
+    hop.hint_char1(opts)
 end)
 
 vim.keymap.set('n', '<leader>F',
 function ()
-    local hints = {direction = require('hop.hint').HintDirection.BEFORE_CURSOR}
-    require('hop').hint_char1(hints)
+    local opts = {direction = hint.HintDirection.BEFORE_CURSOR}
+    hop.hint_char1(opts)
 end)
 
 vim.keymap.set('n', '<leader>w',
 function ()
-    local hints = {direction = require('hop.hint').HintDirection.AFTER_CURSOR}
-    require('hop').hint_words(hints)
+    local opts = {direction = hint.HintDirection.AFTER_CURSOR}
+    hop.hint_words(opts)
 end)
 
 vim.keymap.set('n', '<leader>W',
 function ()
-    local opts = {direction = hint.HintDirection.AFTER_CURSOR}
+    local opts = hop.opts
+    local regex = "[ |\t][^ \t]"
     local generator = jump_target.jump_targets_by_scanning_lines
-    local hints = generator(jump_target.regex_by_searching('.'))
+    local hints = generator(jump_target.regex_by_searching(regex))
+
+    opts.direction = hint.HintDirection.AFTER_CURSOR
     hop.hint_with(hints, opts)
 end)
