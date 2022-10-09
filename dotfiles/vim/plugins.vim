@@ -31,5 +31,4 @@ Plug 'tpope/vim-fugitive'
 Plug 'puremourning/vimspector'
 Plug 'tpope/vim-dispatch'
 Plug 'vim-test/vim-test'
-
 call plug#end()
