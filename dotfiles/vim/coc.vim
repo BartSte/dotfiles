@@ -13,6 +13,7 @@ inoremap <C-l> <Plug>(coc-snippets-expand)
 inoremap <silent><C-p> <C-r>=CocActionAsync('showSignatureHelp')<CR>
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <silent><expr> <c-@> coc#refresh()
+inoremap <silent><expr> <c-space> coc#refresh()
 
 nmap <leader>r <Plug>(coc-rename)
 nmap <leader>cd <Plug>(coc-action-toggleDiagnosticsBuffer)

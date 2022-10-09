@@ -13,12 +13,18 @@
     "diagnostic.floatConfig": {
         "border": true,
         "rounded": true,
+        "focusable": true,
+        "shadow": false,
+        "winblend": 1,
         "highlight": "GruvboxFg1",
         "borderhighlight": "GruvboxAquaUnderline"
     },
     "coc.preferences.useQuickfixForLocations": true,
     "dialog.floatHighlight": "GruvboxFg1",
     "dialog.floatBorderHighlight": "GruvboxAquaUnderline",
+
+    "lua.installPreReleases": true,
+
     "hover.floatConfig": {
         "border": true,
         "rounded": true,
