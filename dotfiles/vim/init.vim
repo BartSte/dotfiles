@@ -3,3 +3,4 @@ let &packpath = &runtimepath
 source ~/.vimrc
 luafile ~/dotfiles/vim/hop.lua
 luafile ~/dotfiles/vim/nvim-tree.lua
+luafile ~/dotfiles/vim/gruvbox.lua

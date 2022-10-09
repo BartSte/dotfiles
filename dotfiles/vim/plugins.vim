@@ -1,6 +1,6 @@
 call plug#begin()
 " Looks
-Plug 'gruvbox-community/gruvbox'
+Plug 'ellisonleao/gruvbox.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-python/python-syntax'
 Plug 'frazrepo/vim-rainbow'
@@ -13,7 +13,6 @@ Plug 'junegunn/fzf.vim'
 
 " Navigation
 Plug 'phaazon/hop.nvim'
-" Plug 'preservim/nerdtree'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-tree/nvim-tree.lua'
 
@@ -34,4 +33,3 @@ Plug 'tpope/vim-dispatch'
 Plug 'vim-test/vim-test'
 
 call plug#end()
-
