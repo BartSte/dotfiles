@@ -1,9 +1,6 @@
 let $FZF_DEFAULT_COMMAND = expand('fd --hidden --no-ignore-vcs --ignore-file $HOME/.ignore -t f')
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 100% --reverse --border'
 
-let NERDTreeMapMenu='a'
-let NERDTreeShowHidden=1
-
 let mapleader = " "
 
 let g:airline_experimental = 1

@@ -45,9 +45,9 @@ noremap 's 'S'"
 noremap 't 'T'"
 noremap <silent><C-n> :bnext<CR>
 noremap <silent><C-p> :bprevious<CR>
-noremap <silent><a-X> :NERDTreeFind<CR>
+noremap <silent><a-X> :NvimTreeFindFile<CR>
 noremap <silent><a-b> :Buffers<CR>
-noremap <silent><a-x> :NERDTreeToggle<CR>
+noremap <silent><a-x> :NvimTreeToggle<CR>
 noremap <silent><a-,> :cp<CR>
 noremap <silent><a-.> :cn<CR>
 noremap ma mA

@@ -13,7 +13,9 @@ Plug 'junegunn/fzf.vim'
 
 " Navigation
 Plug 'phaazon/hop.nvim'
-Plug 'preservim/nerdtree'
+" Plug 'preservim/nerdtree'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-tree/nvim-tree.lua'
 
 " Editing
 Plug '907th/vim-auto-save'

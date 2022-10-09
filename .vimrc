@@ -2,10 +2,10 @@ source ~/dotfiles/vim/plugins.vim
 source ~/dotfiles/vim/functions.vim
 source ~/dotfiles/vim/constants.vim
 source ~/dotfiles/vim/markdown.vim
-source ~/dotfiles/vim/colors.vim
 source ~/dotfiles/vim/bclose.vim
 source ~/dotfiles/vim/mappings.vim
 source ~/dotfiles/vim/settings.vim
 source ~/dotfiles/vim/coc.vim
 source ~/dotfiles/vim/linux.vim
 source ~/dotfiles/vim/windows.vim
+source ~/dotfiles/vim/colors.vim
