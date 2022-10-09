@@ -23,18 +23,6 @@ nnoremap [5~ <C-u>
 nnoremap <PageDown> <C-d>
 nnoremap <PageUp> <C-u>
 
-"Easymotion
-map <Leader> <Plug>(easymotion-prefix)
-map <leader><leader>w <Plug>(easymotion-bd-w)
-map <leader>a <Plug>(easymotion-jumptoanywhere)
-map <leader>d <Plug>(easymotion-j)
-map <leader>l <Plug>(easymotion-bd-jk)
-map <leader>s <Plug>(easymotion-bd-f)
-map <leader>u <Plug>(easymotion-k)
-nmap <leader><leader>w <Plug>(easymotion-overwin-w)
-nmap <leader>l <Plug>(easymotion-overwin-line)
-nmap <leader>s <Plug>(easymotion-overwin-f)
-
 " Window navigation
 nnoremap <C-w>m <C-w>H 
 nnoremap <C-w>n <C-w>J  
