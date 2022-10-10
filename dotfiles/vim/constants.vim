@@ -3,31 +3,11 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 1
 
 let mapleader = " "
 
-let g:airline_experimental = 1
-let g:airline#extensions#whitespace#enabled = 0
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-let g:airline_symbols_ascii = 1
-let g:airline_symbols.colnr = ' Co:'
-let g:airline_symbols.linenr = ' Ln:'
-let g:airline_symbols.maxlinenr = ''
-
 let g:auto_save = 1
 let g:auto_save_silent = 1
 let g:auto_save_events = ["InsertLeave", "CursorHold"]
 
-let g:coc_config_home = expand('$HOME/dotfiles/vim')
-let g:coc_snippet_next = '<tab>'
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-pydocstring', 
-                             \ 'coc-sh', 'coc-html', 'coc-vimlsp', 
-                             \ 'coc-powershell', 'coc-snippets', 'coc-clangd',
-                             \ 'coc-lua']
-
 let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-s']
-
 let g:fzf_colors =
     \ {'fg':     ['fg', 'GruvboxFg0'],
     \ 'bg':      ['bg', 'NONE'],

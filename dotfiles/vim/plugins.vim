@@ -1,19 +1,19 @@
-call plug#begin()
 " Looks
+call plug#begin()
 Plug 'ellisonleao/gruvbox.nvim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-python/python-syntax'
 Plug 'frazrepo/vim-rainbow'
 Plug 'machakann/vim-highlightedyank'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'vim-python/python-syntax'
 
-" Search, linting, and autocomplete
+" Lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 
 " Navigation
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'phaazon/hop.nvim'
-Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-tree/nvim-tree.lua'
 
 " Editing

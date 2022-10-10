@@ -28,3 +28,9 @@ xmap <silent><leader>ca <Plug>(coc-codeaction-selected)
 xmap <silent><leader><BS> <Plug>(coc-format-selected)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
 
+let g:coc_config_home = expand('$HOME/dotfiles/vim')
+let g:coc_snippet_next = '<tab>'
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-pydocstring', 
+                             \ 'coc-sh', 'coc-html', 'coc-vimlsp', 
+                             \ 'coc-powershell', 'coc-snippets', 'coc-clangd',
+                             \ 'coc-lua']
