@@ -53,3 +53,4 @@ set ignorecase
 " Formatting
 set nowrap
 set textwidth=80
+set formatoptions-=tc
