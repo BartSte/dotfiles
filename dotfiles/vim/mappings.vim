@@ -22,9 +22,11 @@ nnoremap [6~ <C-d>
 nnoremap [5~ <C-u>
 nnoremap <PageDown> <C-d>
 nnoremap <PageUp> <C-u>
-
 cnoremap <expr> <up> pumvisible() ? "<C-p>" : "\<up>"
 cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
+
+" Terminal mode
+tnoremap <C-t> <C-\><C-n>
 
 " Window navigation
 nnoremap <C-w>m <C-w>H 
