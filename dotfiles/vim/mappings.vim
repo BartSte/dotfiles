@@ -23,6 +23,9 @@ nnoremap [5~ <C-u>
 nnoremap <PageDown> <C-d>
 nnoremap <PageUp> <C-u>
 
+" Terminal mode
+tnoremap <C-t> <C-\><C-n>
+
 " Window navigation
 nnoremap <C-w>m <C-w>H 
 nnoremap <C-w>n <C-w>J  
