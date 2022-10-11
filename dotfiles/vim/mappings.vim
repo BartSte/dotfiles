@@ -23,6 +23,9 @@ nnoremap [5~ <C-u>
 nnoremap <PageDown> <C-d>
 nnoremap <PageUp> <C-u>
 
+cnoremap <expr> <up> pumvisible() ? "<C-p>" : "\<up>"
+cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
+
 " Window navigation
 nnoremap <C-w>m <C-w>H 
 nnoremap <C-w>n <C-w>J  
@@ -78,9 +81,9 @@ noremap <a-d> :silent! normal gf<CR>:wincmd o<bar>Gvdiffsplit<CR>
 
 "Testing & debugging
 noremap gl :TestVisit<CR>
-noremap <a-t> :only<bar>TestNearest -strategy=dispatch -v<bar>wincmd L<CR><CR>
-noremap <a-s> :only<bar>TestLast -strategy=dispatch -v<bar>wincmd L<CR><CR>
-noremap <a-f> :only<bar>TestFile -strategy=dispatch -v<bar>wincmd L<CR><CR>
+noremap <a-t> :only<bar>TestNearest -strategy=neovim -v<bar>wincmd L<CR><CR>
+noremap <a-s> :only<bar>TestLast -strategy=neovim -v<bar>wincmd L<CR><CR>
+noremap <a-f> :only<bar>TestFile -strategy=neovim -v<bar>wincmd L<CR><CR>
 noremap <a-T> :TestNearest -strategy=unittest<CR>
 noremap <a-S> :TestLast -strategy=unittest<CR>
 noremap <a-F> :TestFile -strategy=unittest<CR>
