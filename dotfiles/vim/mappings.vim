@@ -27,6 +27,8 @@ cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
 
 " Terminal mode
 tnoremap <C-t> <C-\><C-n>
+map <a-q> <cmd>wincmd v<bar>term<CR>mQ
+map <a-Q> <cmd>only<bar>wincmd v<bar>term<CR>mQ
 
 " Window navigation
 nnoremap <C-w>m <C-w>H 
@@ -48,6 +50,7 @@ noremap 'a 'A'"
 noremap 'd 'D'"
 noremap 's 'S'"
 noremap 't 'T'"
+noremap 'q 'Q'"
 noremap <silent><C-n> :bnext<CR>
 noremap <silent><C-p> :bprevious<CR>
 noremap <silent><a-X> :NvimTreeFindFile<CR>
