@@ -8,20 +8,6 @@ let g:auto_save_silent = 1
 let g:auto_save_events = ["InsertLeave", "CursorHold"]
 
 let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-s']
-let g:fzf_colors =
-    \ {'fg':     ['fg', 'GruvboxFg0'],
-    \ 'bg':      ['bg', 'NONE'],
-    \ 'hl':      ['fg', 'Comment'],
-    \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-    \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-    \ 'hl+':     ['fg', 'Statement'],
-    \ 'info':    ['fg', 'PreProc'],
-    \ 'border':  ['fg', 'GruvboxAquaUnderline'],
-    \ 'prompt':  ['fg', 'Conditional'],
-    \ 'pointer': ['fg', 'Exception'],
-    \ 'marker':  ['fg', 'Keyword'],
-    \ 'spinner': ['fg', 'Label'],
-    \ 'header':  ['fg', 'Comment']}
 
 let g:highlightedyank_highlight_duration = 50
 
