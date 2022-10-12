@@ -37,6 +37,7 @@ set sidescrolloff=5
 set laststatus=2
 set foldmethod=indent
 set colorcolumn=80
+set cursorline
 
 " Command line
 set showcmd

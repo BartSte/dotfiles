@@ -12,4 +12,4 @@ luafile ~/dotfiles/vim/treesitter.lua
 set formatoptions-=tc
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-source ~/dotfiles/vim/colors.vim
+hi Normal guibg=NONE ctermbg=NONE
