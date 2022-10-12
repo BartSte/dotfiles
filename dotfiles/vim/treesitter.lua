@@ -1,3 +1,5 @@
+require 'nvim-treesitter.install'.compilers = { "cl", "gcc", "clang" }
+
 require'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"
     ensure_installed = {"bash", "vim", "lua", "cpp", "python"},

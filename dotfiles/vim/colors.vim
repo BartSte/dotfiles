@@ -1,3 +1,5 @@
+syntax off "Use treesitter instead
+
 if has('termguicolors')
     set termguicolors
     set background=dark

@@ -5,7 +5,8 @@ set history=1000
 set tabpagemax=50
 set nocompatible
 set notimeout
-set shortmess=cflmnWI
+" set shortmess=cflmnWI
+set shortmess=at
 
 " Recommended by Coc
 set hidden
