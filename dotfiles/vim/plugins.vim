@@ -1,5 +1,5 @@
-" Looks
 call plug#begin()
+" Looks
 Plug 'ellisonleao/gruvbox.nvim'
 Plug 'frazrepo/vim-rainbow'
 Plug 'machakann/vim-highlightedyank'
@@ -9,6 +9,7 @@ Plug 'vim-python/python-syntax'
 
 " Lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Navigation
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

@@ -2,7 +2,7 @@
     "clangd.enabled": true,
     "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.1/clangd_15.0.1/bin/clangd",
     "clangd.checkUpdates": true,
-    "clangd.inlayHints.enable": true,
+    "clangd.inlayHints.enable": false,
     "clangd.showDBChangedNotification": true,
 
     "diagnostic.enableMessage": "always",
