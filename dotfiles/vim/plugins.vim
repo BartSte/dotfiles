@@ -1,6 +1,7 @@
 call plug#begin()
 " Looks
-Plug 'ellisonleao/gruvbox.nvim'
+" Plug 'ellisonleao/gruvbox.nvim'
+Plug 'sainnhe/gruvbox-material'
 Plug 'frazrepo/vim-rainbow'
 Plug 'machakann/vim-highlightedyank'
 Plug 'nvim-lualine/lualine.nvim'

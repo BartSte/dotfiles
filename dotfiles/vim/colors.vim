@@ -1,15 +1,22 @@
 if has('termguicolors')
     set termguicolors
     set background=dark
-    colorscheme gruvbox
+
+    let g:gruvbox_material_visual='grey background'
+    let g:gruvbox_material_background='medium'
+    let g:gruvbox_material_foreground='material'
+    let g:gruvbox_material_enable_bold=1
+    let g:gruvbox_material_ui_contrast='low'
+    let g:gruvbox_material_enable_italic=1
+    let g:gruvbox_material_statusline_style='original'
+    let g:gruvbox_material_transparent_background=0
+    let g:gruvbox_material_diagnostic_text_highlight=1
+    let g:gruvbox_material_diagnostic_line_highlight=0
+    let g:gruvbox_material_menu_selection_background='grey'
+
+    colorscheme gruvbox-material
 endif
 
 let &t_SI = "\e[6 q"
 let &t_SR = "\e[4 q"
 let &t_EI = "\e[2 q"
-
-" if &term == "alacritty"
-"     " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"     " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-"     hi Normal guibg=NONE ctermbg=NONE
-" endif

@@ -5,11 +5,9 @@ source ~/.vimrc
 
 luafile ~/dotfiles/vim/hop.lua
 luafile ~/dotfiles/vim/nvim-tree.lua
-luafile ~/dotfiles/vim/gruvbox.lua
 luafile ~/dotfiles/vim/lualine.lua
 luafile ~/dotfiles/vim/treesitter.lua
 
 set formatoptions-=tc
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-hi Normal guibg=NONE ctermbg=NONE
