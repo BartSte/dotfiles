@@ -8,13 +8,10 @@ inoremap <C-Del> <C-o>dE
 inoremap <C-t> <Esc>
 inoremap <C-h> <C-W>
 inoremap <C-s> <NOP>
-inoremap <S-Tab> <BS>
 
 "Override default mappings
 nnoremap Y y$
 noremap <C-s> :w<CR>
-vnoremap <S-Tab> <gv
-vnoremap <Tab> >gv
 vnoremap p pgvy
 nnoremap <C-d> 10j
 nnoremap <C-u> 10k
