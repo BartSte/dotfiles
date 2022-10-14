@@ -2,7 +2,7 @@ if has('termguicolors')
     set termguicolors
     set background=dark
 
-    let g:gruvbox_material_visual='grey background'
+    let g:gruvbox_material_visual='green background'
     let g:gruvbox_material_background='medium'
     let g:gruvbox_material_foreground='material'
     let g:gruvbox_material_enable_bold=1

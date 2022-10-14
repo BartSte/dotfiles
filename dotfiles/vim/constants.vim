@@ -9,7 +9,7 @@ let g:auto_save_events = ["InsertLeave", "CursorHold"]
 
 let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-s']
 
-let g:highlightedyank_highlight_duration = 50
+let g:highlightedyank_highlight_duration = 150
 
 let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0

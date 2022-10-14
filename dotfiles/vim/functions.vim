@@ -4,7 +4,7 @@ augroup vertical_help
     autocmd FileType help
                 \ setlocal bufhidden=unload |
                 \ wincmd L |
-                \ vertical resize 79
+                \ vertical resize 85
 augroup END
 
 " FZF
