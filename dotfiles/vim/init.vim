@@ -11,3 +11,4 @@ luafile ~/dotfiles/vim/treesitter.lua
 set formatoptions-=tc
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+

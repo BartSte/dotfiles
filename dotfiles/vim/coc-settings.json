@@ -13,23 +13,20 @@
     "diagnostic.floatConfig": {
         "border": true,
         "rounded": true,
-        "focusable": true,
-        "shadow": false,
-        "winblend": 1,
-        "highlight": "GruvboxFg1",
-        "borderhighlight": "GruvboxAquaUnderline"
+        "highlight": "Normal",
+        "borderhighlight": "Normal"
     },
     "coc.preferences.useQuickfixForLocations": true,
-    "dialog.floatHighlight": "GruvboxFg1",
-    "dialog.floatBorderHighlight": "GruvboxAquaUnderline",
+    "dialog.floatHighlight": "Normal",
+    "dialog.floatBorderHighlight": "Normal",
 
     "lua.installPreReleases": true,
 
     "hover.floatConfig": {
         "border": true,
         "rounded": true,
-        "highlight": "GruvboxFg1",
-        "borderhighlight": "GruvboxAquaUnderline"
+        "highlight": "Normal",
+        "borderhighlight": "Normal"
     },
     "pydocstring.formatter": "google",
     "pyright.disableProgressNotifications": true,
@@ -56,15 +53,16 @@
     "suggest.floatConfig": {
         "border": true,
         "rounded": true,
-        "highlight": "GruvboxFg1",
-        "borderhighlight": "GruvboxAquaUnderline"
+        "highlight": "Normal",
+        "borderhighlight": "Normal",
+        "winblend": 5
     },
     "signature.preferShownAbove": true,
-    "signature.enable": false,
+    "signature.enable": true,
     "signature.floatConfig": {
         "border": true,
         "rounded": true,
-        "highlight": "GruvboxFg1",
-        "borderhighlight": "GruvboxAquaUnderline"
+        "highlight": "Normal",
+        "borderhighlight": "Normal"
     }
 }

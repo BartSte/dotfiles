@@ -15,6 +15,7 @@ if has('termguicolors')
     let g:gruvbox_material_menu_selection_background='grey'
 
     colorscheme gruvbox-material
+    highlight PmenuSel guifg=#67afaf guibg=NONE
 endif
 
 let &t_SI = "\e[6 q"
