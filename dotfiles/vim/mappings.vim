@@ -11,11 +11,14 @@ inoremap <C-t> <Esc>
 inoremap <C-s> <C-o>:w<CR>
 
 "Override default mappings
-nnoremap h <Down>
-nnoremap l <Up>
+onoremap <CR> j
+onoremap <BS> k
+nnoremap <CR> j
+nnoremap <BS> k
 nnoremap Y y$
 noremap <C-s> :w<CR>
 vnoremap p pgvy
+nnoremap <leader>j J
 " nnoremap <C-d> 10j
 " nnoremap <C-u> 10k
 " nnoremap [6~ <C-d>
@@ -93,16 +96,17 @@ noremap <leader><leader>to :tabonly<CR>
 noremap <leader><leader>tn :tabnew<CR>
 
 "Config file edit and load
-noremap <leader>vc :e ~/dotfiles/vim/constants.vim<CR>
-noremap <leader>vf :e ~/dotfiles/vim/functions.vim<CR>
-noremap <leader>vm :e ~/dotfiles/vim/mappings.vim<CR>
-noremap <leader>vp :e ~/dotfiles/vim/plugins.vim<CR>
-noremap <leader>vs :e ~/dotfiles/vim/settings.vim<CR>
-noremap <leader>vo :e ~/dotfiles/vim/colors.vim<CR>
-noremap <leader>vi :e ~/dotfiles/vim/init.vim<CR>
-noremap <leader>vg :e ~/dotfiles/vim/ginit.vim<CR>
-noremap <leader>vv :e ~/.vimrc<CR>
-noremap <leader>vx :e ~/.gvimrc<CR>
+" noremap <leader>vc :e ~/dotfiles/vim/constants.vim<CR>
+" noremap <leader>vf :e ~/dotfiles/vim/functions.vim<CR>
+" noremap <leader>vm :e ~/dotfiles/vim/mappings.vim<CR>
+" noremap <leader>vp :e ~/dotfiles/vim/plugins.vim<CR>
+" noremap <leader>vs :e ~/dotfiles/vim/settings.vim<CR>
+" noremap <leader>vo :e ~/dotfiles/vim/colors.vim<CR>
+" noremap <leader>vi :e ~/dotfiles/vim/init.vim<CR>
+" noremap <leader>vg :e ~/dotfiles/vim/ginit.vim<CR>
+" noremap <leader>vv :e ~/.vimrc<CR>
+" noremap <leader>vx :e ~/.gvimrc<CR>
+noremap <a-v> <cmd>Files ~/dotfiles/vim<CR>
 noremap <leader>% :so %<CR>
 
 "Formatting and refactoring
