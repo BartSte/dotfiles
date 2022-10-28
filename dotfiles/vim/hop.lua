@@ -28,12 +28,12 @@ local function  hop_F()
     hop.hint_char1(opts)
 end
 
-local function  hop_d()
+local function  hop_line_below()
     local opts = {direction = hint.HintDirection.AFTER_CURSOR}
     hop.hint_lines(opts)
 end
 
-local function  hop_u()
+local function  hop_line_up()
     local opts = {direction = hint.HintDirection.BEFORE_CURSOR}
     hop.hint_lines(opts)
 end
@@ -103,7 +103,7 @@ local function  hop_gE()
 end
 
 hop.setup({
-     keys = 'rlaodhgmfiwypuq;cx/jbvtnse',
+     keys = 'rlaodhgmfiwypuq;cx/jbvsetn',
      jump_on_sole_occurrence = true,
      uppercase_labels = true,
      multi_windows = false
@@ -113,8 +113,6 @@ vim.keymap.set('', '<leader>t', hop_t)
 vim.keymap.set('', '<leader>T', hop_T)
 vim.keymap.set('', '<leader>f', hop_f)
 vim.keymap.set('', '<leader>F', hop_F)
-vim.keymap.set('', '<leader>d', hop_d)
-vim.keymap.set('', '<leader>u', hop_u)
 vim.keymap.set('', '<leader>w', hop_w)
 vim.keymap.set('', '<leader>W', hop_W)
 vim.keymap.set('', '<leader>b', hop_b)

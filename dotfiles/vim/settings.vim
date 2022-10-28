@@ -14,7 +14,7 @@ set noswapfile
 set nowritebackup
 set encoding=utf-8
 set updatetime=500
-set signcolumn=number
+set signcolumn=no
 
 " Tabbing
 set autoindent
@@ -27,8 +27,8 @@ set softtabstop=4
 " Editor features
 filetype on
 set number
-set nostartofline
 set relativenumber
+set nostartofline
 set mouse=a
 set foldlevel=20
 set scrolloff=999

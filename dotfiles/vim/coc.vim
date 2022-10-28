@@ -28,6 +28,14 @@ xmap <silent><leader>ca <Plug>(coc-codeaction-selected)
 xmap <silent><leader><BS> <Plug>(coc-format-selected)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
 
+cnoremap <expr> <up> pumvisible() ? "<C-p>" : "\<up>"
+cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
+
+nmap gD :wincmd v<bar>wincmd l<CR>gd
+nmap gd <Plug>(coc-definition)
+nmap gr <Plug>(coc-references)
+nmap gy <Plug>(coc-type-definition)
+
 let g:coc_config_home = expand('$HOME/dotfiles/vim')
 let g:coc_snippet_next = '<tab>'
 let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-pydocstring', 

@@ -11,12 +11,14 @@ tree.setup()
 tree.setup({
   sort_by = "case_sensitive",
   view = {
-    adaptive_size = true,
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
-      },
-    },
+        adaptive_size = true,
+        mappings = {
+            list = {
+                { key = "u", action = "dir_up" },
+            },
+        },
+        relativenumber = true,
+        signcolumn = 'no',
   },
   renderer = {
     group_empty = true,

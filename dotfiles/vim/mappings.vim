@@ -4,23 +4,24 @@
 
 "Insert mode 
 inoremap <C-BS> <C-W>
+inoremap <C-h> <C-W>
+
 inoremap <C-Del> <C-o>dE
 inoremap <C-t> <Esc>
-inoremap <C-h> <C-W>
-inoremap <C-s> <NOP>
+inoremap <C-s> <C-o>:w<CR>
 
 "Override default mappings
+nnoremap h <Down>
+nnoremap l <Up>
 nnoremap Y y$
 noremap <C-s> :w<CR>
 vnoremap p pgvy
-nnoremap <C-d> 10j
-nnoremap <C-u> 10k
-nnoremap [6~ <C-d>
-nnoremap [5~ <C-u>
-nnoremap <PageDown> <C-d>
-nnoremap <PageUp> <C-u>
-cnoremap <expr> <up> pumvisible() ? "<C-p>" : "\<up>"
-cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
+" nnoremap <C-d> 10j
+" nnoremap <C-u> 10k
+" nnoremap [6~ <C-d>
+" nnoremap [5~ <C-u>
+" nnoremap <PageDown> <C-d>
+" nnoremap <PageUp> <C-u>
 
 " Terminal mode
 tnoremap <C-t> <C-\><C-n>
@@ -31,18 +32,14 @@ map <a-Q> <cmd>only<bar>wincmd v<bar>term<CR>mQ
 nnoremap <C-w>m <C-w>H 
 nnoremap <C-w>n <C-w>J  
 nnoremap <C-w>e <C-w>K 
-nnoremap <C-w>l <C-w>L 
+nnoremap <C-w>i <C-w>L 
 nnoremap <a-e> <C-w>k
 nnoremap <a-m> <C-w>h
-nnoremap <a-l> <C-w>l
+nnoremap <a-i> <C-w>l
 nnoremap <a-n> <C-w>j
 
-"Buffer navigation
+"buffer navigation
 nmap ZB <Plug>Kwbd
-nmap gD :wincmd v<bar>wincmd l<CR>gd
-nmap gd <Plug>(coc-definition)
-nmap gr <Plug>(coc-references)
-nmap gy <Plug>(coc-type-definition)
 noremap 'a 'A'"
 noremap 'd 'D'"
 noremap 's 'S'"
