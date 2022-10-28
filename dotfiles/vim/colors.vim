@@ -16,6 +16,7 @@ if has('termguicolors')
 
     colorscheme gruvbox-material
     highlight PmenuSel guifg=#67afaf guibg=NONE
+    highlight LineNr guifg=grey
 endif
 
 let &t_SI = "\e[6 q"

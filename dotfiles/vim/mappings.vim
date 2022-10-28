@@ -15,16 +15,13 @@ onoremap <CR> j
 onoremap <BS> k
 nnoremap <CR> j
 nnoremap <BS> k
+vnoremap <CR> j
+vnoremap <BS> k
+
 nnoremap Y y$
 noremap <C-s> :w<CR>
 vnoremap p pgvy
 nnoremap <leader>j J
-" nnoremap <C-d> 10j
-" nnoremap <C-u> 10k
-" nnoremap [6~ <C-d>
-" nnoremap [5~ <C-u>
-" nnoremap <PageDown> <C-d>
-" nnoremap <PageUp> <C-u>
 
 " Terminal mode
 tnoremap <C-t> <C-\><C-n>
@@ -42,7 +39,8 @@ nnoremap <a-i> <C-w>l
 nnoremap <a-n> <C-w>j
 
 "buffer navigation
-nmap ZB <Plug>Kwbd
+
+nnoremap ZB <cmd>Bdelete<CR>
 noremap 'a 'A'"
 noremap 'd 'D'"
 noremap 's 'S'"

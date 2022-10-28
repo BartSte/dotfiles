@@ -16,6 +16,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'phaazon/hop.nvim'
 Plug 'nvim-tree/nvim-tree.lua'
+Plug 'moll/vim-bbye'
 
 " Editing
 Plug '907th/vim-auto-save'

@@ -22,7 +22,7 @@ nnoremap <silent><c-k> K
 nmap <silent><a-k> :call ShowDocumentation()<CR>
 nmap <silent><leader>ca <Plug>(coc-codeaction-line)
 nmap <silent><leader>cq <Plug>(coc-fix-current)
-noremap <silent><leader><BS> :Format<CR>
+noremap <silent><leader>f :Format<CR>
 noremap <silent><leader>i :OR<CR>
 
 xmap <silent><leader>ca <Plug>(coc-codeaction-selected)

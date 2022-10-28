@@ -78,14 +78,14 @@ hop.setup({
      multi_windows = false
 })
 
-vim.keymap.set('n', 'S', hop_char1)
+vim.keymap.set('', 'S', hop_char1)
 
-vim.keymap.set('n', 'j', hop_b, { noremap = true })
-vim.keymap.set('n', 'J', hop_B, { noremap = true })
-vim.keymap.set('n', 'l', hop_ge, { noremap = true })
-vim.keymap.set('n', 'L', hop_gE, { noremap = true })
+vim.keymap.set('', 'j', hop_b, { noremap = true })
+vim.keymap.set('', 'J', hop_B, { noremap = true })
+vim.keymap.set('', 'l', hop_ge, { noremap = true })
+vim.keymap.set('', 'L', hop_gE, { noremap = true })
 
-vim.keymap.set('n', 'k', hop_w, { noremap = true })
-vim.keymap.set('n', 'K', hop_W, { noremap = true })
-vim.keymap.set('n', 'h', hop_e, { noremap = true })
-vim.keymap.set('n', 'H', hop_E, { noremap = true })
+vim.keymap.set('', 'k', hop_w, { noremap = true })
+vim.keymap.set('', 'K', hop_W, { noremap = true })
+vim.keymap.set('', 'h', hop_e, { noremap = true })
+vim.keymap.set('', 'H', hop_E, { noremap = true })
