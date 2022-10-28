@@ -1,4 +1,5 @@
-source ~/dotfiles/vim/plugins.vim
+luafile ~/dotfiles/vim/plugins.lua
+
 source ~/dotfiles/vim/functions.vim
 source ~/dotfiles/vim/constants.vim
 source ~/dotfiles/vim/mappings.vim
