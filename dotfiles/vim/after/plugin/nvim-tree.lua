@@ -1,3 +1,4 @@
+-- local func = require('functions')
 local tree = require('nvim-tree')
 
 -- disable netrw at the very start of your init.lua (strongly advised)
