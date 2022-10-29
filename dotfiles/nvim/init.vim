@@ -1,6 +1,6 @@
 lua require('plugins')
 
-cd ~/dotfiles/vim/vim
+cd ~/dotfiles/nvim/vim
 so functions.vim
 so mappings.vim
 so settings.vim
