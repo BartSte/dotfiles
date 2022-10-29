@@ -39,8 +39,6 @@ nnoremap <a-i> <C-w>l
 nnoremap <a-n> <C-w>j
 
 "buffer navigation
-
-nnoremap ZB <cmd>Bdelete<CR>
 noremap 'a 'A'"
 noremap 'd 'D'"
 noremap 's 'S'"
@@ -48,9 +46,6 @@ noremap 't 'T'"
 noremap 'q 'Q'"
 noremap <silent><C-n> :bnext<CR>
 noremap <silent><C-p> :bprevious<CR>
-noremap <silent><a-X> :NvimTreeFindFile<CR>
-noremap <silent><a-b> :Buffers<CR>
-noremap <silent><a-x> :NvimTreeToggle<CR>
 noremap <silent><a-,> :cp<CR>
 noremap <silent><a-.> :cn<CR>
 noremap ma mA
@@ -58,19 +53,8 @@ noremap md mD
 noremap ms mS
 noremap mt mT
 
-"Vimspector
-noremap <F7> :VimspectorReset<CR>
-noremap <a-C> :b vimspector.Console<CR>
-noremap <a-E> :b vimspector.Output:stderr<CR>
-noremap <a-A> :b vimspector.StackTrace<CR>
-noremap <a-V> :b vimspector.Variables<CR>
-noremap <a-W> :b vimspector.Watches<CR>
-noremap <a-R> :b vimspector.output:server<CR>
-noremap <a-P> :VimspectorBreakpoints<CR>
 
 "Search
-noremap <a-o> :Files<CR>
-noremap <a-a> :Ag<space>
 nnoremap <leader>/ *#:set hlsearch<CR>
 
 "Git
@@ -108,9 +92,10 @@ noremap <a-v> <cmd>Files ~/dotfiles/vim<CR>
 noremap <leader>% :so %<CR>
 
 "Formatting and refactoring
-noremap <silent><leader>p :setlocal wrap! wrap?<CR>
+noremap <silent><leader>w :setlocal wrap! wrap?<CR>
 noremap <silent><leader>cc vip:sort<CR>
 noremap <silent><leader>cl vip:!sort_variable_length<CR>
 vnoremap <silent><leader>cc :sort<CR>
 vnoremap <silent><leader>cl :!sort_variable_length<CR>
 
+nnoremap <leader>R gd[{V%::s/<C-R>///gc<left><left><left>

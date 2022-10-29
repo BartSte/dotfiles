@@ -21,6 +21,7 @@
     "dialog.floatBorderHighlight": "Normal",
 
     "lua.installPreReleases": true,
+    "Lua.diagnostics.globals": ["vim"],
 
     "hover.floatConfig": {
         "border": true,

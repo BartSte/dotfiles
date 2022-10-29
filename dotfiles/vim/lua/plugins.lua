@@ -1,20 +1,18 @@
 local packer = require('packer')
 
-local markdown_hook = function()
+local function markdown_hook()
     vim.fn["mkdp#util#install"]()
 end
 
-local plugins = function(use)
+local function plugins(use)
     --Packer manages itself
     use 'wbthomason/packer.nvim'
 
     --Looks
     use 'sainnhe/gruvbox-material'
-    use 'frazrepo/vim-rainbow'
     use 'machakann/vim-highlightedyank'
     use 'nvim-lualine/lualine.nvim'
     use 'nvim-tree/nvim-web-devicons'
-    use 'vim-python/python-syntax'
 
     --Lsp
     use {'neoclide/coc.nvim', branch = 'release'}

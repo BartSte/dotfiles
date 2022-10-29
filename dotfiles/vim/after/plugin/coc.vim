@@ -32,10 +32,10 @@ xnoremap <C-l> <Plug>(coc-convert-snippet)
 cnoremap <expr> <up> pumvisible() ? "<C-p>" : "\<up>"
 cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
 
-nmap gD :wincmd v<bar>wincmd l<CR>gd
-nmap gd <Plug>(coc-definition)
-nmap gr <Plug>(coc-references)
-nmap gy <Plug>(coc-type-definition)
+nnoremap gD :wincmd v<bar>wincmd l<CR>gd
+nnoremap gd <Plug>(coc-definition)
+nnoremap gr <Plug>(coc-references)
+nnoremap gy <Plug>(coc-type-definition)
 
 let g:coc_config_home = expand('$HOME/dotfiles/vim')
 let g:coc_snippet_next = '<tab>'
