@@ -26,17 +26,19 @@ set softtabstop=4
 
 " Editor features
 filetype on
-set number
-set relativenumber
-set nostartofline
-set mouse=a
-set foldlevel=20
-set scrolloff=999
-set sidescrolloff=5
-set laststatus=2
-set foldmethod=indent
 set colorcolumn=80
 set cursorline
+set foldexpr=nvim_treesitter#foldexpr()
+set foldlevel=20
+set foldmethod=expr
+set foldmethod=indent
+set laststatus=2
+set mouse=a
+set nostartofline
+set number
+set relativenumber
+set scrolloff=999
+set sidescrolloff=5
 
 " Command line
 set showcmd

@@ -9,9 +9,5 @@ source ~/dotfiles/vim/vim/linux.vim
 source ~/dotfiles/vim/vim/windows.vim
 source ~/dotfiles/vim/vim/colors.vim
 
-set formatoptions-=tc
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-
 noremap <silent><a-X> :NvimTreeFindFile<CR>
 noremap <silent><a-x> :NvimTreeToggle<CR>
