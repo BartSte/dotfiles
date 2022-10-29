@@ -12,3 +12,4 @@ command! -bang -nargs=* Ag
 noremap <a-o> <cmd>Files<CR>
 noremap <a-a> <cmd>Ag<space>
 noremap <a-b> <cmd>Buffers<CR>
+noremap <a-v> <cmd>Files ~/dotfiles/nvim<CR>
