@@ -1,13 +1,10 @@
+local keymapper = require('keymapper')
 local tree = require('nvim-tree')
 
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
--- empty setup using defaults
-tree.setup()
-
--- OR setup with some options
 tree.setup({
   sort_by = "case_sensitive",
   view = {
@@ -16,7 +13,8 @@ tree.setup({
             list = {
                 { key = "u", action = "dir_up" },
                 { key = "<BS>", action = ""},
-                { key = "<CR>", action = ""}
+                { key = "<CR>", action = ""},
+                { key = "x", action = "close_node"},
             },
         },
         relativenumber = true,
@@ -30,5 +28,5 @@ tree.setup({
   },
 })
 
-vim.cmd("noremap <silent><a-X> :NvimTreeFindFile<CR>")
-vim.cmd("noremap <silent><a-x> :NvimTreeToggle<CR>")
+keymapper.noremap('<a-X>', '<cmd>NvimTreeFindFile<CR>')
+keymapper.noremap('<a-x>', '<cmd>NvimTreeToggle<CR>')
