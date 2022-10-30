@@ -15,6 +15,8 @@ tree.setup({
         mappings = {
             list = {
                 { key = "u", action = "dir_up" },
+                { key = "<BS>", action = ""},
+                { key = "<CR>", action = ""}
             },
         },
         relativenumber = true,
