@@ -1,5 +1,4 @@
 let mapleader = " "
-let g:highlightedyank_highlight_duration = 150
 
 " Miscelaneous
 set belloff=all

@@ -10,7 +10,6 @@ local function plugins(use)
 
     --Looks
     use 'sainnhe/gruvbox-material'
-    use 'machakann/vim-highlightedyank'
     use 'nvim-lualine/lualine.nvim'
     use 'nvim-tree/nvim-web-devicons'
 
