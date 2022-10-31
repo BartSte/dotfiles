@@ -21,8 +21,6 @@
     "dialog.floatBorderHighlight": "Normal",
 
     "lua.installPreReleases": true,
-    "Lua.diagnostics.globals": ["vim"],
-
     "hover.floatConfig": {
         "border": true,
         "rounded": true,
@@ -46,7 +44,7 @@
     "notification.disabledProgressSources": [
         "*"
     ],
-    "snippets.userSnippetsDirectory": "$HOME/.vim",
+    "snippets.userSnippetsDirectory": "$HOME/dotfiles/nvim",
     "suggest.formatItems": [
         "abbr"
     ],
