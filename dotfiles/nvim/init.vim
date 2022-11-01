@@ -7,5 +7,4 @@ so settings.vim
 so linux.vim
 so windows.vim
 so colors.vim
-so coc.vim
 cd -
