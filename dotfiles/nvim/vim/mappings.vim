@@ -10,6 +10,7 @@ inoremap <C-t> <Esc>
 inoremap <C-s> <C-o><cmd>w<CR>
 
 "Override default mappings
+nnoremap <silent><c-k> K
 onoremap <CR> j
 onoremap <BS> k
 nnoremap <CR> j
@@ -25,6 +26,10 @@ nnoremap <leader>j J
 tnoremap <C-t> <C-\><C-n>
 map <a-q> <cmd>wincmd v<bar>term<CR>mQ
 map <a-Q> <cmd>only<bar>wincmd v<bar>term<CR>mQ
+
+" Cmd mode
+cnoremap <expr> <up> pumvisible() ? "<C-p>" : "\<up>"
+cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
 
 " Window navigation
 nnoremap <C-w>m <C-w>H 
@@ -55,9 +60,9 @@ noremap mt mT
 nnoremap <leader>/ *#<cmd>set hlsearch<CR>
 
 "Tabs
-noremap <leader><leader>tc <cmd>tabclose<CR>
-noremap <leader><leader>to <cmd>tabonly<CR>
-noremap <leader><leader>tn <cmd>tabnew<CR>
+noremap <leader>tc <cmd>tabclose<CR>
+noremap <leader>to <cmd>tabonly<CR>
+noremap <leader>tn <cmd>tabnew<CR>
 
 "Formatting and refactoring
 noremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>

@@ -14,7 +14,6 @@ local function plugins(use)
     use 'nvim-tree/nvim-web-devicons'
 
     --Lsp
-    -- use {'neoclide/coc.nvim', branch = 'release'}
     use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
@@ -24,6 +23,9 @@ local function plugins(use)
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use {"danymat/neogen",
+        config = function() require('neogen').setup {} end,
+        requires = "nvim-treesitter/nvim-treesitter", }
 
     -- Navigation
     use {'junegunn/fzf', run = ":call fzf#install()" }

@@ -18,7 +18,6 @@ inoremap <silent><expr> <c-space> coc#refresh()
 nmap <leader>r <Plug>(coc-rename)
 nmap <leader>cd <Plug>(coc-action-toggleDiagnosticsBuffer)
 nmap <silent> <a-c> :CocDiagnostics<CR>
-nnoremap <silent><c-k> K
 nmap <silent><a-k> :call ShowDocumentation()<CR>
 nmap <silent><leader>ca <Plug>(coc-codeaction-line)
 nmap <silent><leader>cq <Plug>(coc-fix-current)
@@ -28,9 +27,6 @@ noremap <silent><leader>i :OR<CR>
 xmap <silent><leader>ca <Plug>(coc-codeaction-selected)
 xmap <silent><leader><BS> <Plug>(coc-format-selected)
 xnoremap <C-l> <Plug>(coc-convert-snippet)
-
-cnoremap <expr> <up> pumvisible() ? "<C-p>" : "\<up>"
-cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
 
 nnoremap gD :wincmd v<bar>wincmd l<CR>gd
 nnoremap gd <Plug>(coc-definition)

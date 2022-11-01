@@ -10,6 +10,6 @@ command! -bang -nargs=* Ag
             \ call fzf#vim#ag(<q-args>, "--hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\\.ignore", fzf#vim#with_preview(), <bang>0)
 
 noremap <a-o> <cmd>Files<CR>
-noremap <a-a> <cmd>Ag<space>
+noremap <a-a> :Ag<space>
 noremap <a-b> <cmd>Buffers<CR>
 noremap <a-v> <cmd>Files ~/dotfiles/nvim<CR>
