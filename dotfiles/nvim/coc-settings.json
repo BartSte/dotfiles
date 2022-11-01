@@ -12,6 +12,7 @@
     "lua.installPreReleases": true,
     "pydocstring.formatter": "google",
     "pyright.disableProgressNotifications": true,
+    "pyright.inlayHints.enable": false,
     "python.analysis.diagnosticMode": "openFilesOnly",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,

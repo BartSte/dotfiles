@@ -37,7 +37,12 @@ nnoremap gd <Plug>(coc-definition)
 nnoremap gr <Plug>(coc-references)
 nnoremap gy <Plug>(coc-type-definition)
 
-let g:coc_config_home = expand('$HOME\dotfiles\nvim')
+if has('win32')
+    let g:coc_config_home = expand('$HOME\dotfiles\nvim')
+else
+    let g:coc_config_home = expand('$HOME/dotfiles/nvim')
+endif
+
 let g:coc_snippet_next = '<tab>'
 let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-pydocstring', 
                              \ 'coc-sh', 'coc-html', 'coc-vimlsp', 

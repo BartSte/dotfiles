@@ -59,9 +59,6 @@ noremap <leader><leader>tc <cmd>tabclose<CR>
 noremap <leader><leader>to <cmd>tabonly<CR>
 noremap <leader><leader>tn <cmd>tabnew<CR>
 
-"Config file edit and load
-noremap <leader>% <cmd>so %<CR>
-
 "Formatting and refactoring
 noremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>
 noremap <silent><leader>cc vip<cmd>sort<CR>
