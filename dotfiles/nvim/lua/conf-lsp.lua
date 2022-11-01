@@ -1,4 +1,7 @@
+local cmp = require('cmp')
+local luasnip = require('luasnip')
 local lspconfig = require('lspconfig')
+local select_opts = {behavior = cmp.SelectBehavior.Select}
 local lsp_defaults = lspconfig.util.default_config
 
 lsp_defaults.capabilities = vim.tbl_deep_extend(
@@ -12,20 +15,15 @@ lspconfig.sumneko_lua.setup({
     flags = {
         debounce_text_changes = 150,
     },
-})
-
-
-lspconfig.pyright.setup({
-    python = {
-        analysis = {
-            autoSearchPaths = true,
-            diagnosticMode = "workspace",
-            useLibraryCodeForTypes = true
-        }
+    Lua = {
+        diagnostics = {
+            globals = { "vim" },
+        },
     },
-    single_file_support = true
 })
 
+
+lspconfig.pyright.setup({})
 
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
@@ -35,7 +33,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set(mode, lhs, rhs, opts)
     end
 
-    bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+    bufmap('n', '<a-k>', '<cmd>lua vim.lsp.buf.hover()<cr>')
     bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
     bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
     bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
@@ -48,15 +46,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
     bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
     bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+
   end
 })
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
-vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
-local cmp = require('cmp')
-local luasnip = require('luasnip')
-local select_opts = {behavior = cmp.SelectBehavior.Select}
+vim.opt.completeopt = {'menu', 'menuone'}
 
 cmp.setup({
   snippet = {
@@ -80,7 +76,7 @@ cmp.setup({
         nvim_lsp = 'λ',
         luasnip = '⋗',
         buffer = 'Ω',
-        path = '🖫',
+        path = '🖫'
       }
 
       item.menu = menu_icon[entry.source.name]

@@ -63,5 +63,7 @@ noremap <leader><leader>tn <cmd>tabnew<CR>
 noremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>
 noremap <silent><leader>cc vip<cmd>sort<CR>
 noremap <silent><leader>cl vip<cmd>!sort_variable_length<CR>
-vnoremap <silent><leader>cc <cmd>sort<CR>
-vnoremap <silent><leader>cl <cmd>!sort_variable_length<CR>
+xnoremap <silent><leader>cc <cmd>'<,'>sort<CR>
+xnoremap <silent><leader>cl <cmd>'<,'>!sort_variable_length<CR>
+vnoremap <silent><leader>cc <cmd>'<,'>sort<CR>
+vnoremap <silent><leader>cl <cmd>'<,'>!sort_variable_length<CR>
