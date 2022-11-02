@@ -8,7 +8,7 @@ local function hop_char1()
 end
 
 local function bugfix()
-    vim.cmd('.g/^$/normal w')
+    vim.cmd('.g/^$/normal )')
     vim.cmd('normal ')
 end
 
