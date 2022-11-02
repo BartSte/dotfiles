@@ -65,6 +65,7 @@ noremap <leader>to <cmd>tabonly<CR>
 noremap <leader>tn <cmd>tabnew<CR>
 
 "Formatting and refactoring
+nnoremap <silent><leader>f mxgggqG`x
 noremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>
 noremap <silent><leader>cc vip<cmd>sort<CR>
 noremap <silent><leader>cl vip<cmd>!sort_variable_length<CR>

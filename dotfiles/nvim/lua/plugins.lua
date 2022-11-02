@@ -22,13 +22,13 @@ local function plugins(use)
     use 'hrsh7th/nvim-cmp'
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use {"danymat/neogen",
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use { "danymat/neogen",
         config = function() require('neogen').setup {} end,
         requires = "nvim-treesitter/nvim-treesitter", }
 
     -- Navigation
-    use {'junegunn/fzf', run = ":call fzf#install()" }
+    use { 'junegunn/fzf', run = ":call fzf#install()" }
     use 'junegunn/fzf.vim'
     use 'phaazon/hop.nvim'
     use 'nvim-tree/nvim-tree.lua'
@@ -38,7 +38,7 @@ local function plugins(use)
     use '907th/vim-auto-save'
     use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
-    use {"iamcco/markdown-preview.nvim", run = markdown_hook}
+    use { "iamcco/markdown-preview.nvim", run = markdown_hook }
     use 'chrisbra/csv.vim'
 
     -- Source control
@@ -47,7 +47,7 @@ local function plugins(use)
 
     -- Testing and debugging
     use 'puremourning/vimspector'
-    use {'tpope/vim-dispatch', opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
+    use { 'tpope/vim-dispatch', opt = true, cmd = { 'Dispatch', 'Make', 'Focus', 'Start' } }
     use 'vim-test/vim-test'
 end
 

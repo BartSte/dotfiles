@@ -7,8 +7,8 @@ local function hop_char1()
     hop.hint_char1(opts)
 end
 
-local function  hop_w()
-    local opts = {direction = hint.HintDirection.AFTER_CURSOR}
+local function hop_w()
+    local opts = { direction = hint.HintDirection.AFTER_CURSOR }
     hop.hint_words(opts)
 end
 
@@ -22,7 +22,7 @@ local function hop_W()
 end
 
 local function hop_b()
-    local opts = {direction = hint.HintDirection.BEFORE_CURSOR}
+    local opts = { direction = hint.HintDirection.BEFORE_CURSOR }
     hop.hint_words(opts)
 end
 
@@ -53,7 +53,7 @@ local function hop_E()
     hop.hint_with(hints, hop.opts)
 end
 
-local function  hop_ge()
+local function hop_ge()
     local opts = {
         direction = hint.HintDirection.BEFORE_CURSOR,
         hint_position = hint.HintPosition.END
@@ -61,7 +61,7 @@ local function  hop_ge()
     hop.hint_words(opts)
 end
 
-local function  hop_gE()
+local function hop_gE()
     local regex = "[^ \t]\\($\\|[ \t]\\)"
     local generator = jump_target.jump_targets_by_scanning_lines
     local hints = generator(jump_target.regex_by_searching(regex))
@@ -72,10 +72,10 @@ local function  hop_gE()
 end
 
 hop.setup({
-     keys = 'rlaodhgmfiwypuq;cx/jbvsetn',
-     jump_on_sole_occurrence = true,
-     uppercase_labels = true,
-     multi_windows = false
+    keys = 'rlaodhgmfiwypuq;cx/jbvsetn',
+    jump_on_sole_occurrence = true,
+    uppercase_labels = true,
+    multi_windows = false
 })
 
 vim.keymap.set('', 'S', hop_char1)

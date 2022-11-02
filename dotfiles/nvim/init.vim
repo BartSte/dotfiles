@@ -18,7 +18,10 @@ so conf-vimspector.vim
 cd -
 
 lua require('conf-hop')
-lua require('conf-lsp')
 lua require('conf-lualine')
 lua require('conf-nvim-tree')
 lua require('conf-treesitter')
+lua require('conf-lsp-init')
+lua require('conf-lsp-servers')
+lua require('conf-lsp-mappings')
+lua require('conf-cmp')

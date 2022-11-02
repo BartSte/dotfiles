@@ -1,7 +1,7 @@
 require 'nvim-treesitter.install'.compilers = { "cl", "gcc", "clang" }
 
-require'nvim-treesitter.configs'.setup {
-    ensure_installed = {"markdown", "bash", "vim", "lua", "cpp", "python"},
+require 'nvim-treesitter.configs'.setup {
+    ensure_installed = { "markdown", "bash", "vim", "lua", "cpp", "python" },
     sync_install = false,
     auto_install = true,
     ignore_install = {},
