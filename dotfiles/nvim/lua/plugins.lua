@@ -30,7 +30,7 @@ local function plugins(use)
     -- Navigation
     use { 'junegunn/fzf', run = ":call fzf#install()" }
     use 'junegunn/fzf.vim'
-    use 'phaazon/hop.nvim'
+    use {'phaazon/hop.nvim', branch = 'v2'}
     use 'nvim-tree/nvim-tree.lua'
     use 'moll/vim-bbye'
 

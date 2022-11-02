@@ -6,7 +6,7 @@ if has('termguicolors')
     let g:gruvbox_material_background='medium'
     let g:gruvbox_material_foreground='material'
     let g:gruvbox_material_enable_bold=1
-    let g:gruvbox_material_ui_contrast='low'
+    let g:gruvbox_material_ui_contrast='medium'
     let g:gruvbox_material_enable_italic=1
     let g:gruvbox_material_statusline_style='original'
     let g:gruvbox_material_transparent_background=0
@@ -15,7 +15,7 @@ if has('termguicolors')
     let g:gruvbox_material_menu_selection_background='grey'
 
     colorscheme gruvbox-material
-    highlight PmenuSel guifg=#67afaf guibg=NONE
+    highlight PmenuSel guifg=#67afaf guibg=Normal
     highlight LineNr guifg=grey
 endif
 

@@ -7,8 +7,14 @@ local function hop_char1()
     hop.hint_char1(opts)
 end
 
+local function bugfix()
+    vim.cmd('.g/^$/normal w')
+    vim.cmd('normal ')
+end
+
 local function hop_w()
     local opts = { direction = hint.HintDirection.AFTER_CURSOR }
+    bugfix()
     hop.hint_words(opts)
 end
 
@@ -18,11 +24,13 @@ local function hop_W()
     local hints = generator(jump_target.regex_by_searching(regex))
 
     hop.opts.direction = hint.HintDirection.AFTER_CURSOR
+    bugfix()
     hop.hint_with(hints, hop.opts)
 end
 
 local function hop_b()
     local opts = { direction = hint.HintDirection.BEFORE_CURSOR }
+    bugfix()
     hop.hint_words(opts)
 end
 
@@ -32,6 +40,7 @@ local function hop_B()
     local hints = generator(jump_target.regex_by_searching(regex))
 
     hop.opts.direction = hint.HintDirection.BEFORE_CURSOR
+    bugfix()
     hop.hint_with(hints, hop.opts)
 end
 
@@ -40,6 +49,7 @@ local function hop_e()
         direction = hint.HintDirection.AFTER_CURSOR,
         hint_position = hint.HintPosition.END
     }
+    bugfix()
     hop.hint_words(opts)
 end
 
@@ -50,6 +60,7 @@ local function hop_E()
 
     hop.opts.direction = hint.HintDirection.AFTER_CURSOR
     hop.hint_position = hint.HintPosition.END
+    bugfix()
     hop.hint_with(hints, hop.opts)
 end
 
@@ -58,6 +69,7 @@ local function hop_ge()
         direction = hint.HintDirection.BEFORE_CURSOR,
         hint_position = hint.HintPosition.END
     }
+    bugfix()
     hop.hint_words(opts)
 end
 
@@ -68,6 +80,7 @@ local function hop_gE()
 
     hop.opts.direction = hint.HintDirection.BEFORE_CURSOR
     hop.hint_position = hint.HintPosition.END
+    bugfix()
     hop.hint_with(hints, hop.opts)
 end
 
