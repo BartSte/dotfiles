@@ -15,7 +15,13 @@ if has('termguicolors')
     let g:gruvbox_material_menu_selection_background='grey'
 
     colorscheme gruvbox-material
+    highlight Pmenu guibg=Normal
     highlight PmenuSel guifg=#67afaf guibg=Normal
+    highlight WarningFloat guibg=#282828
+    highlight ErrorFloat guibg=#282828
+    highlight HintFloat guibg=#282828
+    highlight InfoFloat guibg=#282828
+    highlight FloatBorder guibg=Normal    
     highlight LineNr guifg=grey
 endif
 
