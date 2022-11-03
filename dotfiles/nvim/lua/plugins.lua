@@ -14,7 +14,9 @@ local function plugins(use)
     use 'nvim-tree/nvim-web-devicons'
 
     --Lsp
-    use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
+    use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
+    use 'neovim/nvim-lspconfig'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
@@ -23,14 +25,12 @@ local function plugins(use)
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use { "danymat/neogen",
-        config = function() require('neogen').setup {} end,
-        requires = "nvim-treesitter/nvim-treesitter", }
+    use "danymat/neogen"
 
     -- Navigation
     use { 'junegunn/fzf', run = ":call fzf#install()" }
     use 'junegunn/fzf.vim'
-    use {'phaazon/hop.nvim', branch = 'v2'}
+    use { 'phaazon/hop.nvim', branch = 'v2' }
     use 'nvim-tree/nvim-tree.lua'
     use 'moll/vim-bbye'
 
@@ -40,6 +40,7 @@ local function plugins(use)
     use 'tpope/vim-surround'
     use { "iamcco/markdown-preview.nvim", run = markdown_hook }
     use 'chrisbra/csv.vim'
+    use "windwp/nvim-autopairs"
 
     -- Source control
     use 'junegunn/gv.vim'
