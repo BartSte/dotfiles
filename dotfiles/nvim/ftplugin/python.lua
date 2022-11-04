@@ -1,7 +1,7 @@
 local executable = vim.fn['executable']
 
 if executable('autopep8') == 1 then
-    vim.bo.formatprg = 'autopep8 -'
+    vim.bo.formatprg = 'autopep8 --aggressive --experimental --global-config ~/dotfiles/.pydocstyle -'
 else
     local opts = { buffer = true }
     local message = '<cmd>echo "No autopep8 installed"<CR>'

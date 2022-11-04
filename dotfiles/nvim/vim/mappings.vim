@@ -57,7 +57,8 @@ noremap ms mS
 noremap mt mT
 
 "Search
-nnoremap <leader>/ *#<cmd>set hlsearch<CR>
+nnoremap <leader>/ *#<cmd>setlocal hlsearch<CR>
+nnoremap <leader><leader>/ <cmd>set hlsearch! hlsearch?<CR>
 
 "Tabs
 noremap <leader>tc <cmd>tabclose<CR>
@@ -66,10 +67,8 @@ noremap <leader>tn <cmd>tabnew<CR>
 
 "Formatting and refactoring
 nnoremap <silent><leader>f mxgggqG`x
-noremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>
-noremap <silent><leader>cc vip<cmd>sort<CR>
-noremap <silent><leader>cl vip<cmd>!sort_variable_length<CR>
-xnoremap <silent><leader>cc <cmd>'<,'>sort<CR>
-xnoremap <silent><leader>cl <cmd>'<,'>!sort_variable_length<CR>
-vnoremap <silent><leader>cc <cmd>'<,'>sort<CR>
-vnoremap <silent><leader>cl <cmd>'<,'>!sort_variable_length<CR>
+nnoremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>
+nnoremap <silent><leader>cc vip<cmd>sort<CR>
+nnoremap <silent><leader>cl vip<cmd>!sort_variable_length<CR>
+vnoremap <silent><leader>cc :sort<CR>
+vnoremap <silent><leader>cl :!sort_variable_length<CR>

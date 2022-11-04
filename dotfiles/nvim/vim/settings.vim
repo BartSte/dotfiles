@@ -45,6 +45,7 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 " Searching
 set smartcase
 set ignorecase
+set nohlsearch
 
 " Formatting
 set nowrap
