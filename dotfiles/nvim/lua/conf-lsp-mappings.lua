@@ -11,11 +11,12 @@ local function mappings()
     bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
     bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
     bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
-    bufmap('n', '<C-q>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+    bufmap('n', '<leader>s', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+    bufmap('i', '<C-p>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
     bufmap('n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<cr>')
     bufmap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     bufmap('x', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-    bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+    bufmap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<cr>')
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {

@@ -25,8 +25,7 @@ if has('termguicolors')
     hi Pmenu guibg=Normal
     hi PmenuSel guifg=#67afaf guibg=Normal
     hi WarningFloat guibg=bg
-    hi Search guibg=DarkMagenta guifg=White
-    hi IncSearch guibg=DarkGreen guifg=White
+    hi Search guibg=#d8a657 
 endif
 
 let &t_SI = "\e[6 q"

@@ -27,10 +27,6 @@ tnoremap <C-t> <C-\><C-n>
 map <a-q> <cmd>wincmd v<bar>term<CR>mQ
 map <a-Q> <cmd>only<bar>wincmd v<bar>term<CR>mQ
 
-" Cmd mode
-cnoremap <expr> <up> pumvisible() ? "<C-p>" : "\<up>"
-cnoremap <expr> <down> pumvisible() ? "<C-n>" : "\<down>"
-
 " Window navigation
 nnoremap <C-w>m <C-w>H 
 nnoremap <C-w>n <C-w>J  

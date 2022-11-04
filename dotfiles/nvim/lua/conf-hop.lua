@@ -2,14 +2,14 @@ local hop = require('hop')
 local hint = require('hop.hint')
 local jump_target = require('hop.jump_target')
 
-local function hop_char1()
-    local opts = {}
-    hop.hint_char1(opts)
-end
-
 local function bugfix()
     vim.cmd('.g/^$/normal )')
-    vim.cmd('normal ')
+end
+
+local function hop_char1()
+    local opts = {}
+    bugfix()
+    hop.hint_char1(opts)
 end
 
 local function hop_w()
