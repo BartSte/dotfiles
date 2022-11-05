@@ -20,8 +20,9 @@ end
 
 mapper.nnoremap('<a-H>', ui.toggle_quick_menu)
 mapper.nnoremap('<leader>h', mark.add_file)
-mapper.nnoremap("'t", nav_file(1))
-mapper.nnoremap("'s", nav_file(2))
-mapper.nnoremap("'r", nav_file(3))
-mapper.nnoremap("'a", nav_file(4))
-
+mapper.nnoremap("g1", nav_file(1))
+mapper.nnoremap("g2", nav_file(2))
+mapper.nnoremap("g3", nav_file(3))
+mapper.nnoremap("g4", nav_file(4))
+mapper.nnoremap("g5", nav_file(5))
+mapper.nnoremap("g6", nav_file(6))
