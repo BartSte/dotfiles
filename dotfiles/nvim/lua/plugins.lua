@@ -35,7 +35,6 @@ local function plugins(use)
     use 'nvim-tree/nvim-tree.lua'
     use 'moll/vim-bbye'
     use 'nvim-lua/plenary.nvim'
-    use 'ThePrimeagen/harpoon'
 
     -- Editing
     use '907th/vim-auto-save'

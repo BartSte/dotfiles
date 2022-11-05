@@ -1,12 +1,8 @@
 let mapleader = " "
 
 " Miscelaneous
-set belloff=all
 set diffopt+=vertical,iblank,closeoff
-set history=1000
-set tabpagemax=50
 set notimeout
-set shortmess=at
 set noswapfile
 set nowritebackup
 set updatetime=500
@@ -24,13 +20,9 @@ set softtabstop=4
 filetype on
 set colorcolumn=80
 set cursorline
-set laststatus=2
-set mouse=a
-set nostartofline
 set number
 set relativenumber
 set scrolloff=999
-set sidescrolloff=5
 
 " Folding
 set foldexpr=nvim_treesitter#foldexpr()
@@ -39,8 +31,8 @@ set foldmethod=expr
 
 " Command line
 set showcmd
-set pumheight=10
-set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+set nowildmenu
+set wildmenu
 
 " Searching
 set smartcase
