@@ -1,23 +1,8 @@
 local cmp = require('cmp')
+local func = require('helpers-cmp')
 local compare = require('cmp.config.compare')
-local luasnip = require('luasnip')
 local select_opts = { behavior = cmp.SelectBehavior.Select }
 require('luasnip.loaders.from_vscode').lazy_load()
-
-local function snippet_expand(args)
-    luasnip.lsp_expand(args.body)
-end
-
-local function formatter(entry, item)
-    local menu_icon = {
-        nvim_lsp = 'λ',
-        luasnip = '⋗',
-        buffer = 'Ω',
-        path = '/',
-    }
-    item.menu = menu_icon[entry.source.name]
-    return item
-end
 
 vim.opt.completeopt = { 'menu', 'menuone' }
 
@@ -36,7 +21,7 @@ local conf_sorting = {
 }
 
 local conf_snippet = {
-    expand = snippet_expand
+    expand = func.snippet_expand
 }
 
 local conf_sources = {
@@ -53,14 +38,16 @@ local conf_window = {
 
 local conf_formatting = {
     fields = { 'menu', 'abbr', 'kind' },
-    format = formatter,
+    format = func.formatter,
 }
 
 local conf_mappings = {
     ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item(select_opts), { 'i', 'c' }),
     ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item(select_opts), { 'i', 'c' }),
-    ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true }), {'i', 'c'}),
-    ['<C-q>'] = cmp.mapping(cmp.mapping.abort(), {'i', 'c'})
+    ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true }), { 'i', 'c' }),
+    ['<C-q>'] = cmp.mapping(cmp.mapping.abort(), { 'i', 'c' }),
+    ['<Tab>'] = cmp.mapping(func.tab_complete, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(func.shift_tab_complete, { 'i', 's' })
 }
 
 cmp.setup({
@@ -71,7 +58,6 @@ cmp.setup({
     formatting = conf_formatting,
     mapping = conf_mappings
 })
-
 
 cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline(),

@@ -14,18 +14,19 @@ local function plugins(use)
     use 'nvim-tree/nvim-web-devicons'
 
     --Lsp
-    use "williamboman/mason.nvim"
+    use "danymat/neogen"
+    use "folke/neodev.nvim"
     use "williamboman/mason-lspconfig.nvim"
-    use 'neovim/nvim-lspconfig'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/nvim-cmp'
+    use "williamboman/mason.nvim"
     use 'L3MON4D3/LuaSnip'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-cmdline'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/nvim-cmp'
+    use 'neovim/nvim-lspconfig'
     use 'saadparwaiz1/cmp_luasnip'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use "danymat/neogen"
 
     -- Navigation
     use { 'junegunn/fzf', run = ":call fzf#install()" }
@@ -33,6 +34,8 @@ local function plugins(use)
     use { 'phaazon/hop.nvim', branch = 'v2' }
     use 'nvim-tree/nvim-tree.lua'
     use 'moll/vim-bbye'
+    use 'nvim-lua/plenary.nvim'
+    use 'ThePrimeagen/harpoon'
 
     -- Editing
     use '907th/vim-auto-save'

@@ -1,7 +1,7 @@
 lua require('plugins')
 
 cd ~/dotfiles/nvim/vim
-so functions.vim
+so aucmds.vim
 so settings.vim
 so mappings.vim
 so linux.vim
@@ -22,9 +22,11 @@ lua require('conf-lualine')
 lua require('conf-nvim-tree')
 lua require('conf-treesitter')
 lua require('conf-mason')
+lua require('conf-neodev')
 lua require('conf-lsp-init')
 lua require('conf-lsp-servers')
 lua require('conf-lsp-mappings')
 lua require('conf-cmp')
 lua require('conf-autopairs')
 lua require('conf-neogen')
+lua require('conf-harpoon')

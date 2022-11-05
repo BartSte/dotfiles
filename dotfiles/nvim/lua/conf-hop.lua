@@ -1,88 +1,5 @@
 local hop = require('hop')
-local hint = require('hop.hint')
-local jump_target = require('hop.jump_target')
-
-local function bugfix()
-    vim.cmd('.g/^$/normal )')
-end
-
-local function hop_char1()
-    local opts = {}
-    bugfix()
-    hop.hint_char1(opts)
-end
-
-local function hop_w()
-    local opts = { direction = hint.HintDirection.AFTER_CURSOR }
-    bugfix()
-    hop.hint_words(opts)
-end
-
-local function hop_W()
-    local regex = "[^ \t]\\+"
-    local generator = jump_target.jump_targets_by_scanning_lines
-    local hints = generator(jump_target.regex_by_searching(regex))
-
-    hop.opts.direction = hint.HintDirection.AFTER_CURSOR
-    bugfix()
-    hop.hint_with(hints, hop.opts)
-end
-
-local function hop_b()
-    local opts = { direction = hint.HintDirection.BEFORE_CURSOR }
-    bugfix()
-    hop.hint_words(opts)
-end
-
-local function hop_B()
-    local regex = "[^ \t]\\+"
-    local generator = jump_target.jump_targets_by_scanning_lines
-    local hints = generator(jump_target.regex_by_searching(regex))
-
-    hop.opts.direction = hint.HintDirection.BEFORE_CURSOR
-    bugfix()
-    hop.hint_with(hints, hop.opts)
-end
-
-local function hop_e()
-    local opts = {
-        direction = hint.HintDirection.AFTER_CURSOR,
-        hint_position = hint.HintPosition.END
-    }
-    bugfix()
-    hop.hint_words(opts)
-end
-
-local function hop_E()
-    local regex = "[^ \t]\\($\\|[ \t]\\)"
-    local generator = jump_target.jump_targets_by_scanning_lines
-    local hints = generator(jump_target.regex_by_searching(regex))
-
-    hop.opts.direction = hint.HintDirection.AFTER_CURSOR
-    hop.hint_position = hint.HintPosition.END
-    bugfix()
-    hop.hint_with(hints, hop.opts)
-end
-
-local function hop_ge()
-    local opts = {
-        direction = hint.HintDirection.BEFORE_CURSOR,
-        hint_position = hint.HintPosition.END
-    }
-    bugfix()
-    hop.hint_words(opts)
-end
-
-local function hop_gE()
-    local regex = "[^ \t]\\($\\|[ \t]\\)"
-    local generator = jump_target.jump_targets_by_scanning_lines
-    local hints = generator(jump_target.regex_by_searching(regex))
-
-    hop.opts.direction = hint.HintDirection.BEFORE_CURSOR
-    hop.hint_position = hint.HintPosition.END
-    bugfix()
-    hop.hint_with(hints, hop.opts)
-end
+local func = require('helpers-hop')
 
 hop.setup({
     keys = 'rlaodhgmfiwypuq;cx/jbvsetn',
@@ -91,14 +8,14 @@ hop.setup({
     multi_windows = false
 })
 
-vim.keymap.set('', 'S', hop_char1)
+vim.keymap.set('', 'S', func.hop_char1)
 
-vim.keymap.set('', 'j', hop_b, { noremap = true })
-vim.keymap.set('', 'J', hop_B, { noremap = true })
-vim.keymap.set('', 'l', hop_ge, { noremap = true })
-vim.keymap.set('', 'L', hop_gE, { noremap = true })
+vim.keymap.set('', 'j', func.hop_b, { noremap = true })
+vim.keymap.set('', 'J', func.hop_B, { noremap = true })
+vim.keymap.set('', 'l', func.hop_ge, { noremap = true })
+vim.keymap.set('', 'L', func.hop_gE, { noremap = true })
 
-vim.keymap.set('', 'k', hop_w, { noremap = true })
-vim.keymap.set('', 'K', hop_W, { noremap = true })
-vim.keymap.set('', 'h', hop_e, { noremap = true })
-vim.keymap.set('', 'H', hop_E, { noremap = true })
+vim.keymap.set('', 'k', func.hop_w, { noremap = true })
+vim.keymap.set('', 'K', func.hop_W, { noremap = true })
+vim.keymap.set('', 'h', func.hop_e, { noremap = true })
+vim.keymap.set('', 'H', func.hop_E, { noremap = true })

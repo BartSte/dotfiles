@@ -3,11 +3,15 @@
 "control mappings are kept at the default where possible, e.g., fzf's <C-t>
 
 "Insert mode 
-inoremap <C-BS> <C-W>
-inoremap <C-h> <C-W>
+inoremap <C-BS> <C-w>
+inoremap <C-h> <C-w>
 inoremap <C-Del> <C-o>dE
 inoremap <C-t> <Esc>
 inoremap <C-s> <C-o><cmd>w<CR>
+
+" Command mode
+cnoremap <C-BS> <C-w>
+cnoremap <C-h> <C-w>
 
 "Override default mappings
 nnoremap <silent><c-k> K
@@ -38,19 +42,10 @@ nnoremap <a-i> <C-w>l
 nnoremap <a-n> <C-w>j
 
 "buffer navigation
-noremap 'a 'A'"
-noremap 'd 'D'"
-noremap 's 'S'"
-noremap 't 'T'"
-noremap 'q 'Q'"
 noremap <silent><C-n> <cmd>bnext<CR>
 noremap <silent><C-p> <cmd>bprevious<CR>
 noremap <silent><a-,> <cmd>cp<CR>
 noremap <silent><a-.> <cmd>cn<CR>
-noremap ma mA
-noremap md mD
-noremap ms mS
-noremap mt mT
 
 "Search
 nnoremap <leader>/ *#<cmd>setlocal hlsearch<CR>
