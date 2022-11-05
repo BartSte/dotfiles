@@ -1,34 +1,15 @@
 {
+    "inlayHint.enable": false,
+
     "clangd.enabled": true,
     "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.1/clangd_15.0.1/bin/clangd",
     "clangd.checkUpdates": true,
-    "clangd.inlayHints.enable": false,
     "clangd.showDBChangedNotification": true,
 
-    "diagnostic.enableMessage": "always",
-    "diagnostic.errorSign": "!!",
-    "diagnostic.hintSign": "??",
     "diagnostic.level": "hint",
     "diagnostic.messageTarget": "float",
-    "diagnostic.floatConfig": {
-        "border": true,
-        "rounded": true,
-        "highlight": "Normal",
-        "borderhighlight": "Normal"
-    },
-    "coc.preferences.useQuickfixForLocations": true,
-    "dialog.floatHighlight": "Normal",
-    "dialog.floatBorderHighlight": "Normal",
 
     "lua.installPreReleases": true,
-    "Lua.diagnostics.globals": ["vim"],
-
-    "hover.floatConfig": {
-        "border": true,
-        "rounded": true,
-        "highlight": "Normal",
-        "borderhighlight": "Normal"
-    },
     "pydocstring.formatter": "google",
     "pyright.disableProgressNotifications": true,
     "pyright.inlayHints.enable": false,
@@ -43,27 +24,6 @@
     "powershell.integratedConsole.focusConsoleOnExecute": false,
     "powershell.integratedConsole.executeInCurrentScope": false,
     "powershell.debugging.createTemporaryIntegratedConsole": false,
-    "notification.disabledProgressSources": [
-        "*"
-    ],
-    "snippets.userSnippetsDirectory": "$HOME/.vim",
-    "suggest.formatItems": [
-        "abbr"
-    ],
-    "suggest.noselect": true,
-    "suggest.floatConfig": {
-        "border": true,
-        "rounded": true,
-        "highlight": "Normal",
-        "borderhighlight": "Normal",
-        "winblend": 5
-    },
-    "signature.preferShownAbove": true,
-    "signature.enable": true,
-    "signature.floatConfig": {
-        "border": true,
-        "rounded": true,
-        "highlight": "Normal",
-        "borderhighlight": "Normal"
-    }
+    "snippets.userSnippetsDirectory": "$HOME/dotfiles/nvim",
+    "signature.enable": true
 }

@@ -1,7 +1,7 @@
 local M = {}
 
 local function bind(op, outer_opts)
-    outer_opts = outer_opts or {noremap = true}
+    outer_opts = outer_opts or { noremap = true }
 
     local function keymap_set(lhs, rhs, opts)
         opts = vim.tbl_extend("force", outer_opts, opts or {})
@@ -11,11 +11,12 @@ local function bind(op, outer_opts)
     return keymap_set
 end
 
-M.nmap = bind("n", {noremap = false})
+M.nmap = bind("n", { noremap = false })
 M.noremap = bind("")
 M.nnoremap = bind("n")
 M.vnoremap = bind("v")
 M.xnoremap = bind("x")
 M.inoremap = bind("i")
+M.cnoremap = bind("c")
 
 return M
