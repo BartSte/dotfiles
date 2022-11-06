@@ -4,10 +4,10 @@ local mapper = require('keymapper')
 -- example, marks. If not found, the global shada file of neovim is used.
 vim.go.shadafile = vim.fn.findfile('nvim.shada', '.;')
 
--- Append 'T with '" ensures that the cursor moves to the last position in the
--- file
-mapper.nnoremap("'T", "'T'\"")
-mapper.nnoremap("'S", "'S'\"")
-mapper.nnoremap("'R", "'R'\"")
-mapper.nnoremap("'A", "'A'\"")
-mapper.nnoremap("<a-m>", "<cmd>Marks<CR>")
+-- -- Append 'T with '" ensures that the cursor moves to the last position in the
+-- -- file
+-- mapper.nnoremap("'T", "'T'\"")
+-- mapper.nnoremap("'S", "'S'\"")
+-- mapper.nnoremap("'R", "'R'\"")
+-- mapper.nnoremap("'A", "'A'\"")
+-- mapper.nnoremap("<a-M>", "<cmd>Marks<CR>")
