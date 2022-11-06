@@ -10,7 +10,7 @@ local function ensure_installed(formatters)
     end
 end
 
-local servers = { "sumneko_lua", "pyright", "vimls", "bashls"}
+local servers = { "sumneko_lua", "pyright", "vimls", "bashls", "jsonls", "clangd" }
 local formatters = { 'autopep8' }
 
 mason.setup()
