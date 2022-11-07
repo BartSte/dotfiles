@@ -5,6 +5,7 @@ lspconfig.vimls.setup({})
 lspconfig.bashls.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.clangd.setup({})
+lspconfig.cssls.setup({})
 
 lspconfig.sumneko_lua.setup({
     single_file_support = true,
