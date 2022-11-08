@@ -14,17 +14,17 @@ cnoremap <C-BS> <C-w>
 cnoremap <C-h> <C-w>
 
 "Override default mappings
-nnoremap <silent><c-k> K
-onoremap <CR> j
-onoremap <BS> k
-nnoremap <CR> j
 nnoremap <BS> k
-vnoremap <CR> j
-vnoremap <BS> k
+nnoremap <CR> j
+nnoremap <leader>j J
+nnoremap <silent><c-k> K
 nnoremap Y y$
 noremap <C-s> <cmd>w<CR>
+onoremap <BS> k
+onoremap <CR> j
+vnoremap <BS> k
+vnoremap <CR> j
 vnoremap p pgvy
-nnoremap <leader>j J
 
 " Terminal mode
 tnoremap <C-t> <C-\><C-n>
@@ -32,35 +32,35 @@ map <a-q> <cmd>wincmd v<bar>term<CR>mQ
 map <a-Q> <cmd>only<bar>wincmd v<bar>term<CR>mQ
 
 " Window navigation
-nnoremap <C-w>m <C-w>H 
-nnoremap <C-w>n <C-w>J  
-nnoremap <C-w>e <C-w>K 
-nnoremap <C-w>i <C-w>L 
 nnoremap <a-e> <C-w>k
 nnoremap <a-m> <C-w>h
 nnoremap <a-i> <C-w>l
 nnoremap <a-n> <C-w>j
+nnoremap <C-w>m <C-w>H 
+nnoremap <C-w>e <C-w>K 
+nnoremap <C-w>i <C-w>L 
+nnoremap <C-w>n <C-w>J  
 
 "buffer navigation
-noremap <silent><C-n> <cmd>bnext<CR>
-noremap <silent><C-p> <cmd>bprevious<CR>
 noremap <silent><a-,> <cmd>cp<CR>
 noremap <silent><a-.> <cmd>cn<CR>
+noremap <silent><C-n> <cmd>bnext<CR>
+noremap <silent><C-p> <cmd>bprevious<CR>
 
 "Search
 nnoremap <leader>/ *#<cmd>setlocal hlsearch<CR>
 nnoremap <leader><leader>/ <cmd>set hlsearch! hlsearch?<CR>
 
 "Tabs
-noremap <leader>tc <cmd>tabclose<CR>
-noremap <leader>to <cmd>tabonly<CR>
 noremap <leader>tn <cmd>tabnew<CR>
+noremap <leader>to <cmd>tabonly<CR>
+noremap <leader>tc <cmd>tabclose<CR>
 
 "Formatting and refactoring
 nnoremap <leader>% <cmd>source<CR>
 nnoremap <silent><leader>f mxgggqG`x
-nnoremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>
-nnoremap <silent><leader>cc vip<cmd>sort<CR>
-nnoremap <silent><leader>cl vip<cmd>!sort_variable_length<CR>
 vnoremap <silent><leader>cc :sort<CR>
-vnoremap <silent><leader>cl :!sort_variable_length<CR>
+nnoremap <silent><leader>cc vip:sort<CR>
+nnoremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>
+vnoremap <silent><leader>cl :!sort_variable_length.py<CR>
+nnoremap <silent><leader>cl vip:!sort_variable_length.py<CR>
