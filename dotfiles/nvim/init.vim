@@ -1,5 +1,6 @@
 lua require('plugins')
 
+
 cd ~/dotfiles/nvim/vim
 so autocmds.vim
 so settings.vim
@@ -29,5 +30,6 @@ lua require('conf-lsp-mappings')
 lua require('conf-cmp')
 lua require('conf-autopairs')
 lua require('conf-neogen')
+lua require('conf-luasnip')
 lua require('local-shada')
 lua require('global-marks')
