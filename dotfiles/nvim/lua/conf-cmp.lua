@@ -2,7 +2,6 @@ local cmp = require('cmp')
 local func = require('helpers-cmp')
 local compare = require('cmp.config.compare')
 local select_opts = { behavior = cmp.SelectBehavior.Select }
-require('luasnip.loaders.from_vscode').lazy_load()
 
 vim.opt.completeopt = { 'menu', 'menuone' }
 
