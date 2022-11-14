@@ -27,6 +27,7 @@ local function plugins(use)
     use 'neovim/nvim-lspconfig'
     use 'saadparwaiz1/cmp_luasnip'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use "rafamadriz/friendly-snippets"
 
     -- Navigation
     use { 'junegunn/fzf', run = ":call fzf#install()" }
