@@ -9,4 +9,11 @@ lspconfig.clangd.setup({})
 lspconfig.sumneko_lua.setup({
     single_file_support = true,
     flags = { debounce_text_changes = 150 },
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
 })

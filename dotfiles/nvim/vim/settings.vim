@@ -6,7 +6,6 @@ set notimeout
 set noswapfile
 set nowritebackup
 set updatetime=500
-set signcolumn=no
 
 " Tabbing
 set autoindent
@@ -23,6 +22,7 @@ set cursorline
 set number
 set relativenumber
 set scrolloff=999
+set signcolumn=number
 
 " Folding
 set foldexpr=nvim_treesitter#foldexpr()

@@ -1,9 +1,9 @@
-local keymapper = require('keymapper')
-local tree = require('nvim-tree')
-
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
+
+local keymapper = require('keymapper')
+local tree = require('nvim-tree')
 
 local my_mappings = {
     { key = "u", action = "dir_up" },
@@ -17,8 +17,7 @@ tree.setup({
     view = {
         adaptive_size = true,
         mappings = { list = my_mappings, },
-        relativenumber = true,
-        signcolumn = 'no',
+        relativenumber = true
     },
     renderer = { group_empty = true, },
     filters = { dotfiles = false, },
