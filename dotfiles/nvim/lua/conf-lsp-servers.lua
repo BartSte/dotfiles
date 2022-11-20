@@ -4,8 +4,8 @@ lspconfig.pyright.setup({})
 lspconfig.vimls.setup({})
 lspconfig.bashls.setup({})
 lspconfig.jsonls.setup({})
-lspconfig.clangd.setup({})
 lspconfig.cssls.setup({})
+-- lspconfig.clangd.setup({})
 
 lspconfig.arduino_language_server.setup {
     cmd = {
@@ -14,7 +14,8 @@ lspconfig.arduino_language_server.setup {
         "-fqbn", "keyboardio:avr:keyboardio_atreus",
         "-cli", "arduino-cli",
         "-clangd", "clangd"
-    }
+    },
+    filetypes = { "arduino", "cpp" }
 }
 
 lspconfig.sumneko_lua.setup({
