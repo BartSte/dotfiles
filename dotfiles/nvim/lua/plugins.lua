@@ -9,7 +9,8 @@ local function plugins(use)
     use 'wbthomason/packer.nvim'
 
     --Looks
-    use 'sainnhe/gruvbox-material'
+    use {'luisiacc/gruvbox-baby', branch = 'main'}
+    -- use 'sainnhe/gruvbox-material'
     use 'nvim-lualine/lualine.nvim'
     use 'nvim-tree/nvim-web-devicons'
 
