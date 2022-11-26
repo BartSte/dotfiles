@@ -9,5 +9,6 @@ set modeindicatorshowkeys true
 
 bind ZZ tabclose
 bind M back
+bind I forward
 bind d <Nop>
 bind D <Nop>
