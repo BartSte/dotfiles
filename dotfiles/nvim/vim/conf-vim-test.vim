@@ -8,9 +8,13 @@ let g:test#custom_strategies = {'unittest': function('MyUnitTestStrategy')}
 let g:test#neovim#start_normal = 1 
 
 noremap gl :TestVisit<CR>
-noremap <a-t> :only<bar>TestNearest -strategy=neovim -v<bar>wincmd L<CR><CR>
-noremap <a-l> :only<bar>TestLast -strategy=dispatch -v<bar>wincmd L<CR><CR>
-noremap <a-f> :only<bar>TestFile -strategy=dispatch -v<bar>wincmd L<CR><CR>
+
+" Long harpoon strategy ensures that 1 terminal is reused and that het windows
+" are arranged properly.
+noremap <a-t> :only<bar>TestNearest -strategy=harpoon<CR>gi<cmd>wincmd v<CR><cmd>wincmd l<bar>TestVisit<CR>
+noremap <a-l> :only<bar>TestLast -strategy=harpoon<CR>gi<cmd>wincmd v<CR><cmd>wincmd l<bar>TestVisit<CR>
+noremap <a-f> :only<bar>TestFile -strategy=harpoon<CR>gi<cmd>wincmd v<CR><cmd>wincmd l<bar>TestVisit<CR>
+
 noremap <a-T> :TestNearest -strategy=unittest<CR>
 noremap <a-L> :TestLast -strategy=unittest<CR>
 noremap <a-F> :TestFile -strategy=unittest<CR>

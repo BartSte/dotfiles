@@ -28,9 +28,9 @@ set smarttab
 set softtabstop=4
 
 " Folding
-set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=20
 set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
 " Command line
 set showcmd

@@ -55,6 +55,7 @@ local function plugins(use)
     use 'puremourning/vimspector'
     use { 'tpope/vim-dispatch', opt = true, cmd = { 'Dispatch', 'Make', 'Focus', 'Start' } }
     use 'vim-test/vim-test'
+    use 'ThePrimeagen/harpoon'
 end
 
 return packer.startup(plugins)
