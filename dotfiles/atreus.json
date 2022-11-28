@@ -334,48 +334,64 @@
       {"code": 30, "label": {"base": "1", "shifted": "!"}},
       {"code": 31, "label": {"base": "2", "shifted": "@"}},
       {"code": 32, "label": {"base": "3", "shifted": "#"}},
-      {"code": 88, "label": {"base": "Enter"}, "location": "numpad"},
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
       {
         "code": 2084,
         "label": {"hint": null, "base": "&"},
         "categories": ["with-modifiers", "shift"],
         "baseCode": 36
       },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
       {"code": 46, "label": {"base": "=", "shifted": "+"}},
       {"code": 39, "label": {"base": "0", "shifted": ")"}},
-      {"code": 54, "label": {"base": ",", "shifted": "<"}},
-      {"code": 99, "label": {"base": "."}, "location": "numpad"},
-      {"code": 88, "label": {"base": "Enter"}, "location": "numpad"}
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      }
     ],
     [
       {
@@ -585,10 +601,9 @@
         "baseCode": 45
       },
       {
-        "code": 2083,
-        "label": {"hint": null, "base": "^"},
-        "categories": ["with-modifiers", "shift"],
-        "baseCode": 35
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
       },
       {
         "code": 65535,
@@ -752,10 +767,9 @@
         "categories": ["blanks"]
       },
       {
-        "code": 18658,
-        "legacyCode": 19682,
-        "label": {"base": "Mute"},
-        "categories": ["consumer"]
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
       },
       {
         "code": 53602,
@@ -871,7 +885,7 @@
         "label": {"base": {"full": "Blocked", "1u": "Blkd"}},
         "categories": ["blanks"]
       },
-      {"code": 71, "label": {"base": {"full": "Scroll Lock", "1u": "ScLk"}}},
+      {"code": 70, "label": {"base": {"full": "Print Screen", "1u": "PrSc"}}},
       {"code": 64, "label": {"base": "F7"}},
       {"code": 65, "label": {"base": "F8"}},
       {"code": 66, "label": {"base": "F9"}},
@@ -915,7 +929,7 @@
         "label": {"base": {"full": "Blocked", "1u": "Blkd"}},
         "categories": ["blanks"]
       },
-      {"code": 73, "label": {"base": {"full": "Insert", "1u": "Ins"}}},
+      {"code": 71, "label": {"base": {"full": "Scroll Lock", "1u": "ScLk"}}},
       {"code": 61, "label": {"base": "F4"}},
       {"code": 62, "label": {"base": "F5"}},
       {"code": 63, "label": {"base": "F6"}},
@@ -955,7 +969,7 @@
         "label": {"base": {"full": "Transparent", "1u": " "}},
         "categories": ["blanks"]
       },
-      {"code": 72, "label": {"base": "Pause"}},
+      {"code": 73, "label": {"base": {"full": "Insert", "1u": "Ins"}}},
       {"code": 58, "label": {"base": "F1"}},
       {"code": 59, "label": {"base": "F2"}},
       {"code": 60, "label": {"base": "F3"}},
@@ -1214,10 +1228,9 @@
         "categories": ["blanks"]
       },
       {
-        "code": 573,
-        "label": {"hint": {"full": "Alt+", "1u": "A+"}, "base": "F4"},
-        "categories": ["with-modifiers", "alt"],
-        "baseCode": 61
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
       },
       {"code": 40, "label": {"base": "Enter"}},
       {

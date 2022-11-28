@@ -1,23 +1,8 @@
 local cmp = require('cmp')
 local func = require('helpers-cmp')
-local compare = require('cmp.config.compare')
 local select_opts = { behavior = cmp.SelectBehavior.Select }
 
 vim.opt.completeopt = { 'menu', 'menuone' }
-
-local conf_sorting = {
-    comparators = {
-        compare.recently_used,
-        compare.locality,
-        compare.offset,
-        compare.exact,
-        compare.score,
-        compare.kind,
-        compare.sort_text,
-        compare.length,
-        compare.order,
-    },
-}
 
 local conf_snippet = {
     expand = func.snippet_expand
@@ -28,6 +13,15 @@ local conf_sources = {
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'luasnip' },
+    {
+        name = 'spell',
+        option = {
+            keep_all_entries = false,
+            enable_in_context = function()
+                return true
+            end
+        }
+    }
 }
 
 local conf_window = {

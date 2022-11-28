@@ -9,6 +9,21 @@ if has('termguicolors')
     let g:gruvbox_baby_variable_style='NONE'
 
     colorscheme gruvbox-baby
+    hi! link ColorColumn CursorLine
+
+"     let bg='#282828'
+"     hi ErrorFloat guibg=bg
+"     hi FloatBorder guibg=Normal    
+"     hi HighlightedyankRegion guibg=DarkGreen
+"     hi HintFloat guibg=bg
+"     hi InfoFloat guibg=bg
+"     hi LineNr guifg=grey
+"     hi NormalFloat guibg=Normal
+"     hi Pmenu guibg=Normal
+"     hi PmenuSel guifg=#67afaf guibg=Normal
+"     hi WarningFloat guibg=bg
+"     hi Search guibg=#d8a657
+
 endif
 
 let &t_SI = "\e[6 q"

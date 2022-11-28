@@ -14,9 +14,9 @@ cnoremap <C-BS> <C-w>
 cnoremap <C-h> <C-w>
 
 "Override default mappings
+noremap <leader>j J
 nnoremap <BS> k
 nnoremap <CR> j
-nnoremap <leader>j J
 nnoremap <silent><c-k> K
 nnoremap Y y$
 noremap <C-s> <cmd>w<CR>

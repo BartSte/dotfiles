@@ -1,28 +1,31 @@
+filetype on
 let mapleader = " "
-
-" Miscelaneous
 set diffopt+=vertical,iblank,closeoff
-set notimeout
+set scrolloff=999
+set nowrap
+set textwidth=80
+
+" Backup
 set noswapfile
 set nowritebackup
+
+" Updates
+set notimeout
 set updatetime=500
 
-" Tabbing
-set autoindent
-set backspace=indent,eol,start
-set expandtab
-set shiftwidth=4
-set smarttab
-set softtabstop=4
-
-" Editor features
-filetype on
+" Looks
+set signcolumn=number
 set colorcolumn=80
 set cursorline
 set number
 set relativenumber
-set scrolloff=999
-set signcolumn=number
+
+" Tabbing
+set autoindent
+set expandtab
+set shiftwidth=4
+set smarttab
+set softtabstop=4
 
 " Folding
 set foldexpr=nvim_treesitter#foldexpr()
@@ -31,14 +34,11 @@ set foldmethod=expr
 
 " Command line
 set showcmd
+set cedit=
 set nowildmenu
-set wildmenu
 
 " Searching
 set smartcase
 set ignorecase
 set nohlsearch
 
-" Formatting
-set nowrap
-set textwidth=80
