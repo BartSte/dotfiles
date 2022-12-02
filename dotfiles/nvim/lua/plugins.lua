@@ -38,6 +38,7 @@ local function plugins(use)
     use 'nvim-tree/nvim-tree.lua'
     use 'moll/vim-bbye'
     use 'nvim-lua/plenary.nvim'
+    use 'BartSte/vim-center-cursor'
 
     -- Editing
     use '907th/vim-auto-save'

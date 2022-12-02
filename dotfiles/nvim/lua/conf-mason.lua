@@ -10,7 +10,8 @@ local function ensure_installed(formatters)
     end
 end
 
-local servers = { "sumneko_lua", "pyright", "vimls", "bashls", "jsonls", "clangd", "cssls", "arduino_language_server" }
+local servers = { "sumneko_lua", "pyright", "vimls", "bashls", "jsonls", "clangd", "cssls", "arduino_language_server",
+    "powershell_es", "marksman" }
 local formatters = { 'autopep8' }
 
 mason.setup()

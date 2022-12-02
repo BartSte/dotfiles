@@ -6,8 +6,10 @@ lspconfig.bashls.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.cssls.setup({})
 lspconfig.cmake.setup({})
--- lspconfig.clangd.setup({})
+lspconfig.powershell_es.setup({})
+lspconfig.marksman.setup({})
 
+-- lspconfig.clangd.setup({})
 lspconfig.arduino_language_server.setup {
     cmd = {
         "arduino-language-server",

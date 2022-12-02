@@ -5,6 +5,9 @@ set scrolloff=999
 set nowrap
 set textwidth=80
 
+" Completion
+set pumheight=10
+
 " Backup
 set noswapfile
 set nowritebackup
