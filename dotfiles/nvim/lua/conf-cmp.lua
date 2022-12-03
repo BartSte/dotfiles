@@ -44,7 +44,7 @@ local conf_mappings = {
             if cmp.visible() then
                 cmp.confirm({ select = true })
                 -- TODO Tab is accept cmp, CR is accept cmp + execute (same as Tab + CR)
-                -- vim.api.nvim_feedkeys("<CR>", 'c', true)
+                -- vim.api.nvim_feedkeys("\<CR>", )
             else
                 fallback()
             end
