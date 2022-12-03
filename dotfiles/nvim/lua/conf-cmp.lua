@@ -1,5 +1,6 @@
 local cmp = require('cmp')
 local func = require('helpers-cmp')
+local mapper = require('keymapper')
 local select_opts = { behavior = cmp.SelectBehavior.Select }
 
 vim.opt.completeopt = { 'menu', 'menuone' }
@@ -37,10 +38,21 @@ local conf_formatting = {
 local conf_mappings = {
     ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item(select_opts), { 'i', 'c' }),
     ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item(select_opts), { 'i', 'c' }),
-    ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true }), { 'i', 'c' }),
+    ['<CR>'] = cmp.mapping({
+        i = cmp.mapping.confirm({ select = true }),
+        c = function(fallback)
+            if cmp.visible() then
+                cmp.confirm({ select = true })
+                -- TODO Tab is accept cmp, CR is accept cmp + execute (same as Tab + CR)
+                -- vim.api.nvim_feedkeys("<CR>", 'c', true)
+            else
+                fallback()
+            end
+        end
+    }),
     ['<C-q>'] = cmp.mapping(cmp.mapping.abort(), { 'i', 'c' }),
-    ['<Tab>'] = cmp.mapping(func.tab_complete, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(func.shift_tab_complete, { 'i', 's' })
+    ['<Tab>'] = cmp.mapping(func.tab_complete, { 'i', 's', 'c' }),
+    ['<S-Tab>'] = cmp.mapping(func.shift_tab_complete, { 'i', 's', 'c' })
 }
 
 cmp.setup({
@@ -53,9 +65,9 @@ cmp.setup({
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
     sources = { { name = 'buffer' } }
 })
+
 
 cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
