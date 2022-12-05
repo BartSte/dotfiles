@@ -50,6 +50,7 @@ local function plugins(use)
 
     -- Source control
     -- use 'junegunn/gv.vim'
+    use 'rbong/vim-flog'
     use 'tpope/vim-fugitive'
 
     -- Testing and debugging
