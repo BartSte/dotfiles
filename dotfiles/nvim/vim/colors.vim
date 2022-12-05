@@ -10,11 +10,11 @@ if has('termguicolors')
 
     colorscheme gruvbox-baby
     hi! link ColorColumn CursorLine
+    hi HighlightedyankRegion guibg=DarkGreen
 
 "     let bg='#282828'
 "     hi ErrorFloat guibg=bg
 "     hi FloatBorder guibg=Normal    
-"     hi HighlightedyankRegion guibg=DarkGreen
 "     hi HintFloat guibg=bg
 "     hi InfoFloat guibg=bg
 "     hi LineNr guifg=grey
