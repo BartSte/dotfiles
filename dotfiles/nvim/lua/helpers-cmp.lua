@@ -1,6 +1,6 @@
 local cmp = require('cmp')
 local luasnip = require('luasnip')
-local select_opts = { behavior = cmp.SelectBehavior.Select }
+local carriage_return = vim.api.nvim_replace_termcodes('<CR>', true, true, true)
 
 M = {}
 
@@ -34,6 +34,15 @@ end
 M.shift_tab_complete = function(fallback)
     if cmp.visible() then
         cmp.confirm()
+    else
+        fallback()
+    end
+end
+
+M.return_cmd = function(fallback)
+    if cmp.visible() then
+        cmp.confirm({ select = false })
+        vim.api.nvim_feedkeys(carriage_return, 'm', false)
     else
         fallback()
     end
