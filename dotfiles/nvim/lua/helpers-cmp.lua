@@ -1,5 +1,6 @@
 local cmp = require('cmp')
 local luasnip = require('luasnip')
+local select_opts = { behavior = cmp.SelectBehavior.Select }
 local carriage_return = vim.api.nvim_replace_termcodes('<CR>', true, true, true)
 
 M = {}
@@ -19,11 +20,11 @@ M.formatter = function(entry, item)
     return item
 end
 
-M.tab_complete = function(fallback)
+M.tab_cmp = function(fallback)
     local col = vim.fn.col('.') - 1
 
     if cmp.visible() then
-        cmp.confirm({ select = true })
+        cmp.select_next_item(select_opts)
     elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
         fallback()
     else
@@ -31,18 +32,9 @@ M.tab_complete = function(fallback)
     end
 end
 
-M.shift_tab_complete = function(fallback)
+M.shift_tab_cmp = function(fallback)
     if cmp.visible() then
-        cmp.confirm()
-    else
-        fallback()
-    end
-end
-
-M.return_cmd = function(fallback)
-    if cmp.visible() then
-        cmp.confirm({ select = false })
-        vim.api.nvim_feedkeys(carriage_return, 'm', false)
+        cmp.select_prev_item(select_opts)
     else
         fallback()
     end

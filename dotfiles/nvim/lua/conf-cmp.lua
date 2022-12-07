@@ -2,11 +2,13 @@ local cmp = require('cmp')
 local func = require('helpers-cmp')
 local select_opts = { behavior = cmp.SelectBehavior.Select }
 
-
 vim.opt.completeopt = { 'menu', 'menuone' }
 
-local conf_snippet = {
-    expand = func.snippet_expand
+local conf_snippet = { expand = func.snippet_expand }
+
+local spell_options = {
+    keep_all_entries = false,
+    enable_in_context = function() return true end
 }
 
 local conf_sources = {
@@ -14,15 +16,7 @@ local conf_sources = {
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'luasnip' },
-    {
-        name = 'spell',
-        option = {
-            keep_all_entries = false,
-            enable_in_context = function()
-                return true
-            end
-        }
-    }
+    { name = 'spell', option = spell_options }
 }
 
 local conf_window = {
@@ -36,12 +30,15 @@ local conf_formatting = {
 }
 
 local conf_mappings = {
+    ['<C-q>'] = cmp.mapping(cmp.mapping.abort(), { 'i', 'c' }),
+
+    ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = false })),
+    ['<M-CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true })),
+
     ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item(select_opts), { 'i', 'c' }),
     ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item(select_opts), { 'i', 'c' }),
-    ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true }),{'i', 'c'}),
-    ['<C-q>'] = cmp.mapping(cmp.mapping.abort(), { 'i', 'c' }),
-    ['<Tab>'] = cmp.mapping(func.tab_complete, { 'i', 's', 'c' }),
-    ['<S-Tab>'] = cmp.mapping(func.shift_tab_complete, { 'i', 's', 'c' })
+    ['<Tab>'] = cmp.mapping(func.tab_cmp, { 'i', 's', 'c' }),
+    ['<S-Tab>'] = cmp.mapping(func.shift_tab_cmp, { 'i', 's', 'c' })
 }
 
 cmp.setup({

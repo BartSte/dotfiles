@@ -3,7 +3,6 @@ lua require('plugins')
 cd ~/dotfiles/nvim/vim
 so settings.vim
 so mappings.vim
-so linux.vim
 so windows.vim
 so colors.vim
 
