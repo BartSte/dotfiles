@@ -33,10 +33,24 @@ M.tab_cmp = function(fallback)
 end
 
 M.shift_tab_cmp = function(fallback)
+    local col = vim.fn.col('.') - 1
+
     if cmp.visible() then
         cmp.select_prev_item(select_opts)
-    else
+    elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
         fallback()
+    else
+        cmp.complete()
+    end
+end
+
+M.toggle_cmp = function ()
+    if cmp.visible() then
+        cmp.close()
+        -- TODO, when closing the auto complete pops u agaen when a char it
+        -- typed.
+    else
+        cmp.complete()
     end
 end
 

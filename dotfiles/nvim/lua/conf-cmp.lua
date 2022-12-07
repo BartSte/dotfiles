@@ -31,14 +31,12 @@ local conf_formatting = {
 
 local conf_mappings = {
     ['<C-q>'] = cmp.mapping(cmp.mapping.abort(), { 'i', 'c' }),
-
-    ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = false })),
-    ['<M-CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true })),
-
+    ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true }), { 'i', 'c' }),
     ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item(select_opts), { 'i', 'c' }),
     ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item(select_opts), { 'i', 'c' }),
     ['<Tab>'] = cmp.mapping(func.tab_cmp, { 'i', 's', 'c' }),
-    ['<S-Tab>'] = cmp.mapping(func.shift_tab_cmp, { 'i', 's', 'c' })
+    ['<S-Tab>'] = cmp.mapping(func.shift_tab_cmp, { 'i', 's', 'c' }),
+    ['<M-CR>'] = cmp.mapping(func.toggle_cmp, {'i', 'c'})
 }
 
 cmp.setup({
@@ -50,11 +48,13 @@ cmp.setup({
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
+    completion = { autocomplete = false },
     sources = { { name = 'buffer' } }
 })
 
 
 cmp.setup.cmdline(':', {
+    completion = { autocomplete = false },
     sources = cmp.config.sources({
         { name = 'path' }
     }, {
