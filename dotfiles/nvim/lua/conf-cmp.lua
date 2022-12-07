@@ -1,6 +1,6 @@
 local cmp = require('cmp')
 local func = require('helpers-cmp')
-local select_opts = { behavior = cmp.SelectBehavior.Select }
+local keymapper = require('keymapper')
 
 vim.opt.completeopt = { 'menu', 'menuone' }
 
@@ -30,14 +30,19 @@ local conf_formatting = {
 }
 
 local conf_mappings = {
-    ['<C-q>'] = cmp.mapping(cmp.mapping.abort(), { 'i', 'c' }),
-    ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true }), { 'i', 'c' }),
-    ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item(select_opts), { 'i', 'c' }),
-    ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item(select_opts), { 'i', 'c' }),
-    ['<Tab>'] = cmp.mapping(func.tab_cmp, { 'i', 's', 'c' }),
-    ['<S-Tab>'] = cmp.mapping(func.shift_tab_cmp, { 'i', 's', 'c' }),
-    ['<M-CR>'] = cmp.mapping(func.toggle_cmp, {'i', 'c'})
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-u>'] = cmp.mapping.scroll_docs(4),
+
+    ['<Up>'] = cmp.mapping({ i = func.up_cmp_i, c = func.up_cmp_cs }),
+    ['<S-Tab>'] = cmp.mapping({ i = func.up_cmp_i, c = func.up_cmp_cs }),
+    ['<Tab>'] = cmp.mapping({ i = func.down_cmp_i, c = func.down_cmp_cs }),
+    ['<Down>'] = cmp.mapping({ i = func.down_cmp_i, c = func.down_cmp_cs }),
+
+    ['<C-Space>'] = cmp.mapping(func.toggle_cmp, { 'i', 'c' }),
+    ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true }), { 'i', 'c' })
 }
+-- fallback for <CR> when menu is visible
+keymapper.noremap('<M-CR>', '<CR>')
 
 cmp.setup({
     snippet = conf_snippet,
@@ -48,13 +53,10 @@ cmp.setup({
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
-    completion = { autocomplete = false },
     sources = { { name = 'buffer' } }
 })
 
-
 cmp.setup.cmdline(':', {
-    completion = { autocomplete = false },
     sources = cmp.config.sources({
         { name = 'path' }
     }, {
