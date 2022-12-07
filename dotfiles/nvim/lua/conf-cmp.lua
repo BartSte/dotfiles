@@ -1,6 +1,5 @@
 local cmp = require('cmp')
 local func = require('helpers-cmp')
-local keymapper = require('keymapper')
 
 vim.opt.completeopt = { 'menu', 'menuone' }
 
@@ -39,10 +38,8 @@ local conf_mappings = {
     ['<Down>'] = cmp.mapping({ i = func.down_cmp_i, c = func.down_cmp_cs }),
 
     ['<C-Space>'] = cmp.mapping(func.toggle_cmp, { 'i', 'c' }),
-    ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true }), { 'i', 'c' })
+    ['<M-CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true }), { 'i', 'c' })
 }
--- fallback for <CR> when menu is visible
-keymapper.noremap('<M-CR>', '<CR>')
 
 cmp.setup({
     snippet = conf_snippet,
