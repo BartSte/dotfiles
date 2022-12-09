@@ -7,6 +7,7 @@ set textwidth=80
 
 " Completion
 set pumheight=10
+set pumwidth=15
 
 " Backup
 set noswapfile

@@ -10,10 +10,12 @@ end
 
 M.formatter = function(entry, item)
     local menu_icon = {
-        nvim_lsp = 'λ',
-        luasnip = '⋗',
-        buffer = 'Ω',
-        path = '/',
+        buffer = 'buf',
+        cmdline = 'cmd',
+        cmdline_history = 'his',
+        luasnip = 'sni',
+        nvim_lsp = 'lsp',
+        path = 'path',
     }
     item.menu = menu_icon[entry.source.name]
     return item
