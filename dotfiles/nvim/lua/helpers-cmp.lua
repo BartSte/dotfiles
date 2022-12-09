@@ -19,7 +19,7 @@ M.formatter = function(entry, item)
     return item
 end
 
-M.up_cmp_i = function(fallback)
+M.prev_item_or_fallback = function(fallback)
     if cmp.visible() then
         cmp.select_prev_item(behavior_insert)
     else
@@ -27,27 +27,11 @@ M.up_cmp_i = function(fallback)
     end
 end
 
-M.up_cmp_cs = function(_)
-    if cmp.visible() then
-        cmp.select_prev_item(behavior_insert)
-    else
-        cmp.complete()
-    end
-end
-
-M.down_cmp_i = function(fallback)
+M.next_item_or_fallback = function(fallback)
     if cmp.visible() then
         cmp.select_next_item(behavior_insert)
     else
         fallback()
-    end
-end
-
-M.down_cmp_cs = function(_)
-    if cmp.visible() then
-        cmp.select_next_item(behavior_insert)
-    else
-        cmp.complete()
     end
 end
 

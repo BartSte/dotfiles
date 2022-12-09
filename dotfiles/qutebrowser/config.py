@@ -20,7 +20,7 @@ c.colors.webpage.darkmode.grayscale.images = 0.35
 
 ## This is here so configs done via the GUI are still loaded.
 ## Remove it to not load settings done via the GUI.
-config.load_autoconfig(False)
+config.load_autoconfig(True)
 
 ## Aliases for commands. The keys of the given dictionary are the
 ## aliases, while the values are the commands they map to.
@@ -1259,14 +1259,14 @@ c.editor.remove_file = True
 ## font setting, it's replaced with the fonts listed here. If set to an
 ## empty value, a system-specific monospace default is used.
 ## Type: List of Font, or Font
-# c.fonts.default_family = []
+c.fonts.default_family = ['JetBrains Mono']
 
 ## Default font size to use. Whenever "default_size" is used in a font
 ## setting, it's replaced with the size listed here. Valid values are
 ## either a float value with a "pt" suffix, or an integer value with a
 ## "px" suffix.
 ## Type: String
-c.fonts.default_size = '14pt'
+c.fonts.default_size = '12pt'
 
 ## Font used for the downloadbar.
 ## Type: Font
@@ -1278,7 +1278,7 @@ c.fonts.hints = 'JetBrains Mono Extra Bold'
 
 ## Font used in the keyhint widget.
 ## Type: Font
-# c.fonts.keyhint = 'default_size default_family'
+c.fonts.keyhint = '14pt JetBrains Mono Extra Bold'
 
 ## Font used for error messages.
 ## Type: Font
@@ -1369,7 +1369,7 @@ c.fonts.hints = 'JetBrains Mono Extra Bold'
 
 ## Characters used for hint strings.
 ## Type: UniqueCharString
-c.hints.chars = 'arstgmneiozxcdvkh,./qwfpbjluy;'
+c.hints.chars = 'arstgmneiozxcdvkhqwfpbjluy'
 
 ## Dictionary file to be used by the word hints.
 ## Type: File
@@ -1388,7 +1388,7 @@ c.hints.chars = 'arstgmneiozxcdvkh,./qwfpbjluy;'
 
 ## Leave hint mode when starting a new page load.
 ## Type: Bool
-# c.hints.leave_on_load = False
+c.hints.leave_on_load = True
 
 ## Minimum number of characters used for hint strings.
 ## Type: Int
@@ -1421,7 +1421,7 @@ c.hints.chars = 'arstgmneiozxcdvkh,./qwfpbjluy;'
 ## Scatter hint key chains (like Vimium) or not (like dwb). Ignored for
 ## number hints.
 ## Type: Bool
-# c.hints.scatter = True
+c.hints.scatter = False
 
 ## CSS selectors used to determine which elements on a page should have
 ## hints.
@@ -1532,7 +1532,7 @@ c.hints.uppercase = True
 ## Time (in milliseconds) from pressing a key to seeing the keyhint
 ## dialog.
 ## Type: Int
-# c.keyhint.delay = 500
+c.keyhint.delay = 0
 
 ## Rounding radius (in pixels) for the edges of the keyhint dialog.
 ## Type: Int
@@ -1709,7 +1709,7 @@ c.hints.uppercase = True
 ##   - never: Never show the scrollbar.
 ##   - when-searching: Show the scrollbar when searching for text in the webpage. With the QtWebKit backend, this is equal to `never`.
 ##   - overlay: Show an overlay scrollbar. On macOS, this is unavailable and equal to `when-searching`; with the QtWebKit backend, this is equal to `never`. Enabling/disabling overlay scrollbars requires a restart.
-# c.scrolling.bar = 'overlay'
+c.scrolling.bar = 'never'
 
 ## Enable smooth scrolling for web pages. Note smooth scrolling does not
 ## work with the `:scroll-px` command.
@@ -1791,7 +1791,7 @@ c.hints.uppercase = True
 ##   - tr-TR: Turkish (Turkey)
 ##   - uk-UA: Ukrainian (Ukraine)
 ##   - vi-VN: Vietnamese (Viet Nam)
-# c.spellcheck.languages = []
+c.spellcheck.languages = ['en-US', 'nl-NL']
 
 ## Padding (in pixels) for the statusbar.
 ## Type: Padding
@@ -2095,7 +2095,7 @@ c.url.start_pages = ['about:blank']
 ## Hide the window decoration.  This setting requires a restart on
 ## Wayland.
 ## Type: Bool
-c.window.hide_decoration = True
+c.window.hide_decoration = False
 
 ## Format to use for the window title. The same placeholders like for
 ## `tabs.title.format` are defined.

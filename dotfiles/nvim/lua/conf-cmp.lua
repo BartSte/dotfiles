@@ -32,13 +32,13 @@ local conf_mappings = {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-u>'] = cmp.mapping.scroll_docs(4),
 
-    ['<Up>'] = cmp.mapping({ i = func.up_cmp_i, c = func.up_cmp_cs }),
-    ['<S-Tab>'] = cmp.mapping({ i = func.up_cmp_i, c = func.up_cmp_cs }),
-    ['<Tab>'] = cmp.mapping({ i = func.down_cmp_i, c = func.down_cmp_cs }),
-    ['<Down>'] = cmp.mapping({ i = func.down_cmp_i, c = func.down_cmp_cs }),
+    ['<Up>'] = cmp.mapping(func.prev_item_or_fallback, {'i', 'c'}),
+    ['<S-Tab>'] = cmp.mapping(func.prev_item_or_fallback, {'i', 'c'}),
+    ['<Tab>'] = cmp.mapping(func.next_item_or_fallback, {'i', 'c'}),
+    ['<Down>'] = cmp.mapping(func.next_item_or_fallback, {'i', 'c'}),
 
-    ['<C-Space>'] = cmp.mapping(func.toggle_cmp, { 'i', 'c' }),
-    ['<M-CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true }), { 'i', 'c' })
+    ['<C-Space>'] = cmp.mapping(func.toggle_cmp),
+    ['<M-CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true }))
 }
 
 cmp.setup({
