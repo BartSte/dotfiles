@@ -2,6 +2,12 @@
 "leader mappings are for text editing.
 "control mappings are kept at the default where possible, e.g., fzf's <C-t>
 
+" Powershell does not detect <C-Space>. As a solution, Alacritty sends <F24> 
+" when ctrl+space is pressed. By binding <C-Space> and <F24>, the issue is
+" solved.
+imap <F24> <C-Space>
+cmap <F24> <C-Space>
+
 "Insert mode 
 inoremap <C-BS> <C-w>
 inoremap <C-h> <C-w>
