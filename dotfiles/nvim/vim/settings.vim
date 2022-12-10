@@ -6,6 +6,7 @@ set nowrap
 set textwidth=80
 
 " Completion
+set completeopt
 set pumheight=10
 set pumwidth=15
 

@@ -34,10 +34,10 @@ local conf_mappings = {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-u>'] = cmp.mapping.scroll_docs(4),
 
-    ['<Up>'] = cmp.mapping(func.prev_item_or_fallback, { 'i', 'c' }),
-    ['<S-Tab>'] = cmp.mapping(func.prev_item_or_fallback, { 'i', 'c' }),
-    ['<Tab>'] = cmp.mapping(func.next_item_or_fallback, { 'i', 'c' }),
-    ['<Down>'] = cmp.mapping(func.next_item_or_fallback, { 'i', 'c' }),
+    ['<Up>'] = cmp.mapping({i = func.prev_item_or_fallback, c = func.prev_item}),
+    ['<S-Tab>'] = cmp.mapping({i = func.next_item_or_fallback, c = func.next_item}),
+    ['<Tab>'] = cmp.mapping({i = func.prev_item_or_fallback, c = func.prev_item}),
+    ['<Down>'] = cmp.mapping({i = func.next_item_or_fallback, c = func.next_item}),
 
     ['<C-Space>'] = cmp.mapping(func.toggle_cmp),
     ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = false })),
@@ -66,4 +66,5 @@ cmp.setup.cmdline(':', {
     }),
 })
 
-vim.cmd("cnoremap <M-h> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'cmdline_history' } } } })<CR>")
+vim.cmd("cnoremap <M-h> <cmd>lua require('cmp').complete({ config = { sources = { { name = 'cmdline_history' } } } })<CR>")
+vim.cmd("nmap <M-h> :<M-h>")

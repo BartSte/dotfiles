@@ -37,6 +37,18 @@ M.next_item_or_fallback = function(fallback)
     end
 end
 
+M.next_item = function(fallback)
+    if cmp.visible() then
+        cmp.select_next_item(behavior_insert)
+    end
+end
+
+M.prev_item = function(fallback)
+    if cmp.visible() then
+        cmp.select_prev_item(behavior_insert)
+    end
+end
+
 M.toggle_cmp = function()
     if cmp.visible() then
         cmp.abort()
