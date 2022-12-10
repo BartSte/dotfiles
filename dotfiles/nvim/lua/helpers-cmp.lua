@@ -8,14 +8,14 @@ M.snippet_expand = function(args)
     luasnip.lsp_expand(args.body)
 end
 
-M.formatter = function(entry, item)
+M.formatter_before = function(entry, item)
     local menu_icon = {
-        buffer = 'buf',
-        cmdline = 'cmd',
-        cmdline_history = 'his',
-        luasnip = 'sni',
-        nvim_lsp = 'lsp',
-        path = 'path',
+        path = 'PATH',
+        buffer = 'BUF',
+        cmdline = 'CMD',
+        luasnip = 'SNIP',
+        nvim_lsp = 'LSP',
+        cmdline_history = 'HIS',
     }
     item.menu = menu_icon[entry.source.name]
     return item

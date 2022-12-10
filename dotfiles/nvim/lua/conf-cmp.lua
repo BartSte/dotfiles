@@ -1,21 +1,16 @@
 local cmp = require('cmp')
 local func = require('helpers-cmp')
+local lspkind = require('lspkind')
 
-vim.opt.completeopt = { 'menu', 'menuone' }
+vim.opt.completeopt = { 'menu' }
 
 local conf_snippet = { expand = func.snippet_expand }
 
-local spell_options = {
-    keep_all_entries = false,
-    enable_in_context = function() return true end
-}
-
 local conf_sources = {
     { name = 'path' },
-    { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'luasnip' },
-    { name = 'spell', option = spell_options }
+    { name = 'nvim_lsp' },
 }
 
 local conf_window = {
@@ -23,9 +18,16 @@ local conf_window = {
     documentation = cmp.config.window.bordered()
 }
 
+local formatter = lspkind.cmp_format({
+    mode = 'symbol_text',
+    maxwidth = 50,
+    ellipsis_char = '...',
+    before = func.formatter_before
+})
+
 local conf_formatting = {
     fields = { 'abbr', 'kind', 'menu' },
-    format = func.formatter,
+    format = formatter,
 }
 
 local conf_mappings = {
@@ -38,7 +40,9 @@ local conf_mappings = {
     ['<Down>'] = cmp.mapping(func.next_item_or_fallback, { 'i', 'c' }),
 
     ['<C-Space>'] = cmp.mapping(func.toggle_cmp),
-    ['<M-CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true }))
+    ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ select = false })),
+    ['<M-CR>'] = cmp.mapping(cmp.mapping.confirm({ select = true })),
+
 }
 
 cmp.setup({
@@ -53,16 +57,13 @@ cmp.setup.cmdline({ '/', '?' }, {
     sources = { { name = 'buffer' } }
 })
 
-local conf_formatting_cmd = {
-    fields = { 'abbr', 'kind', 'menu' },
-    format = func.formatter
-}
-
 cmp.setup.cmdline(':', {
-    formatting = conf_formatting_cmd,
+    formatting = conf_formatting,
     sources = cmp.config.sources({
         { name = 'cmdline' },
-        { name = 'cmdline_history' },
         { name = 'path' },
-    })
+        { name = 'cmdline_history' },
+    }),
 })
+
+vim.cmd("cnoremap <M-h> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'cmdline_history' } } } })<CR>")
