@@ -25,7 +25,7 @@ local formatting = {
 }
 
 local confirm_select = function(value)
-    cmp.mapping.confirm({ select = value })
+    return cmp.mapping.confirm({ select = value })
 end
 
 -- To enable history scrolling on the command line, cmp is disabled when 

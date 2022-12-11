@@ -34,10 +34,14 @@ local function plugins(use)
     use 'hrsh7th/nvim-cmp'
     use 'saadparwaiz1/cmp_luasnip'
 
+    -- Checkout the config below for a dictionary
+    -- https://github.com/uga-rosa/cmp-dictionary/wiki/Examples-of-usage
+    -- use 'uga-rosa/cmp-dictionary'
+
     -- Navigation
     use 'BartSte/vim-center-cursor'
-    use 'junegunn/fzf.vim'
     use { 'junegunn/fzf', run = ":call fzf#install()" }
+    use 'junegunn/fzf.vim'
     use 'moll/vim-bbye'
     use 'nvim-lua/plenary.nvim'
     use 'nvim-tree/nvim-tree.lua'
