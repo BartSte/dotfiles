@@ -2,6 +2,7 @@ local cmp = require('cmp')
 local func = require('helpers-cmp')
 local mapper = require("keymapper")
 local lspkind = require('lspkind')
+local cmp_dictionary = require("cmp_dictionary")
 
 local menu_icons = {
     path = 'PATH',
@@ -9,6 +10,7 @@ local menu_icons = {
     cmdline = 'CMD',
     luasnip = 'SNIP',
     nvim_lsp = 'LSP',
+    dictionary = 'DICT',
     cmdline_history = 'HIS',
 }
 
@@ -28,8 +30,8 @@ local confirm_select = function(value)
     return cmp.mapping.confirm({ select = value })
 end
 
--- To enable history scrolling on the command line, cmp is disabled when 
--- <Down> or <Up> is pressed. cmp is restored when tab/stab or space are pressed. 
+-- To enable history scrolling on the command line, cmp is disabled when
+-- <Down> or <Up> is pressed. cmp is restored when tab/stab or space are pressed.
 local up = { i = func.prev_item_insert, c = func.prev_item_cmd }
 local tab = { i = func.next_item_insert, c = func.next_item_or_enable_cmd }
 local down = { i = func.next_item_insert, c = func.next_item_cmd }
@@ -60,10 +62,11 @@ local window = {
 local snippet = { expand = func.snippet_expand }
 
 local sources_i = {
-    { name = 'path' },
-    { name = 'buffer' },
-    { name = 'luasnip' },
     { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+    { name = 'buffer' },
+    { name = 'path' },
+    { name = 'dictionary', keyword_length = 2 },
 }
 
 local sources_c = {
@@ -79,7 +82,7 @@ cmp.setup({
     window = window,
     formatting = formatting,
     mapping = mappings,
-    sources = sources_i
+    sources = sources_i,
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
@@ -90,7 +93,16 @@ cmp.setup.cmdline(':', {
     sources = sources_c
 })
 
--- To enable history scrolling on the command line, cmp is 
+cmp_dictionary.setup({
+    dic = {
+        spelllang = {
+            en = "~/.local/share/nvim/dict/en.dict",
+            nl = "~/.local/share/nvim/dict/nl.dict",
+        },
+    },
+})
+
+-- To enable history scrolling on the command line, cmp is
 -- disabled when with <Down> or <Up> is pressed. Therefore the state of cmp is
 -- restored when leaving the command line.
 vim.api.nvim_create_autocmd('CmdlineLeave', {

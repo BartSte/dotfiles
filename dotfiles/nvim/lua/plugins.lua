@@ -36,7 +36,7 @@ local function plugins(use)
 
     -- Checkout the config below for a dictionary
     -- https://github.com/uga-rosa/cmp-dictionary/wiki/Examples-of-usage
-    -- use 'uga-rosa/cmp-dictionary'
+    use 'uga-rosa/cmp-dictionary'
 
     -- Navigation
     use 'BartSte/vim-center-cursor'
