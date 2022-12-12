@@ -62,17 +62,16 @@ local window = {
 local snippet = { expand = func.snippet_expand }
 
 local sources_i = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-    { name = 'buffer' },
-    { name = 'path' },
-    { name = 'dictionary', keyword_length = 2 },
+    { name = 'path', priority = 2, keyword_length = 1 },
+    { name = 'buffer', priority = 4, keyword_length = 3 },
+    { name = 'luasnip', priority = 3, keyword_length = 1 },
+    { name = 'nvim_lsp', priority = 5, keyword_length = 1 },
 }
 
 local sources_c = {
-    { name = 'cmdline' },
-    { name = 'path' },
-    { name = 'cmdline_history' },
+    { name = 'path', priority = 1, keyword_length = 1 },
+    { name = 'cmdline', priority = 3, keyword_length = 1 },
+    { name = 'cmdline_history', priority = 2, keyword_length = 3 },
 }
 
 local sources_s = { { name = 'buffer' } }
