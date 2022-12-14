@@ -21,14 +21,21 @@ lspconfig.arduino_language_server.setup {
     filetypes = { "arduino", "cpp" }
 }
 
-lspconfig.sumneko_lua.setup({
-    single_file_support = true,
-    flags = { debounce_text_changes = 150 },
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-})
+lspconfig.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        globals = {'vim'},
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}

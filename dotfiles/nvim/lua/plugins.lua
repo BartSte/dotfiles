@@ -33,9 +33,6 @@ local function plugins(use)
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/nvim-cmp'
     use 'saadparwaiz1/cmp_luasnip'
-
-    -- Checkout the config below for a dictionary
-    -- https://github.com/uga-rosa/cmp-dictionary/wiki/Examples-of-usage
     use 'uga-rosa/cmp-dictionary'
 
     -- Navigation
@@ -55,15 +52,19 @@ local function plugins(use)
     use "windwp/nvim-autopairs"
 
     -- Source control
-    -- use 'junegunn/gv.vim'
     use 'rbong/vim-flog'
     use 'tpope/vim-fugitive'
 
     -- Testing and debugging
     use 'puremourning/vimspector'
-    -- use { 'tpope/vim-dispatch', opt = true, cmd = { 'Dispatch', 'Make', 'Focus', 'Start' } }
     use 'vim-test/vim-test'
     use 'ThePrimeagen/harpoon'
+
+    -- Org
+    use 'nvim-orgmode/orgmode'
+    use 'akinsho/org-bullets.nvim'
+    use 'dhruvasagar/vim-table-mode'
+    use 'lukas-reineke/headlines.nvim'
 end
 
 return packer.startup(plugins)
