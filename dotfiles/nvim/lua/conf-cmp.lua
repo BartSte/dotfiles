@@ -2,7 +2,6 @@ local cmp = require('cmp')
 local func = require('helpers-cmp')
 local mapper = require("keymapper")
 local lspkind = require('lspkind')
-local cmp_dictionary = require("cmp_dictionary")
 
 local menu_icons = {
     path = 'PATH',
@@ -92,14 +91,7 @@ cmp.setup.cmdline(':', {
     sources = sources_c
 })
 
-cmp_dictionary.setup({
-    dic = {
-        spelllang = {
-            en = "~/.local/share/nvim/dict/en.dict",
-            nl = "~/.local/share/nvim/dict/nl.dict",
-        },
-    },
-})
+
 
 -- To enable history scrolling on the command line, cmp is
 -- disabled when with <Down> or <Up> is pressed. Therefore the state of cmp is

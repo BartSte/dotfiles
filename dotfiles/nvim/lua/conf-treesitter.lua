@@ -12,13 +12,13 @@ end
 local my_highlight = {
     enable = true,
     disable = disable_highlight,
-    additional_vim_regex_highlighting = false,
+    additional_vim_regex_highlighting = {'org'}
 }
 
 require 'nvim-treesitter.configs'.setup {
 ensure_installed = {
         "markdown", "bash", "vim", "lua", "cpp", "python", "json", "help",
-        "cpp", "toml", "latex", "make"
+        "cpp", "toml", "latex", "make", "org"
     },
     sync_install = false,
     auto_install = true,
