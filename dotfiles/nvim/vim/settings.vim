@@ -46,3 +46,5 @@ set smartcase
 set ignorecase
 set nohlsearch
 
+" Spell
+set spelllang=en,nl
