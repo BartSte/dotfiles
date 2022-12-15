@@ -47,5 +47,4 @@ set ignorecase
 set nohlsearch
 
 " Spell
-set nospell
 set spelllang=en,nl
