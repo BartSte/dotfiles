@@ -65,6 +65,12 @@ local function plugins(use)
     use 'akinsho/org-bullets.nvim'
     use 'dhruvasagar/vim-table-mode'
     use 'lukas-reineke/headlines.nvim'
+
+    -- External
+    use {
+        'glacambre/firenvim',
+        run = function() vim.fn['firenvim#install'](0) end
+    }
 end
 
 return packer.startup(plugins)
