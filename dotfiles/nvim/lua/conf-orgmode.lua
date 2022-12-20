@@ -15,14 +15,15 @@ local function get_home()
 end
 
 local dropbox_home = os_path.path_join(get_home(), 'Dropbox')
-local dropbox_notes = os_path.path_join(dropbox_home, 'Notes', '*')
-local dropbox_recepten = os_path.path_join(dropbox_home, 'Recepten', '*')
+-- local dropbox_notes = os_path.path_join(dropbox_home, 'Notes', '*')
+-- local dropbox_recepten = os_path.path_join(dropbox_home, 'Recepten', '*')
 local dropbox_main = os_path.path_join(dropbox_home, 'Notes', 'Main.org')
 
 orgmode.setup_ts_grammar()
 
 orgmode.setup({
     org_default_notes_file = dropbox_main,
+    org_blank_before_new_entry = { heading = false, plain_list_item = false }
 })
 
 bullets.setup({})

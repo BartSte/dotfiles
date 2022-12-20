@@ -33,7 +33,6 @@ local function plugins(use)
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/nvim-cmp'
     use 'saadparwaiz1/cmp_luasnip'
-    use 'uga-rosa/cmp-dictionary'
 
     -- Navigation
     use 'BartSte/vim-center-cursor'
