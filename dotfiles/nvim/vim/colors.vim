@@ -11,6 +11,10 @@ if has('termguicolors')
     colorscheme gruvbox-baby
     hi! link ColorColumn CursorLine
     hi HighlightedyankRegion guibg=DarkGreen
+    hi Folded guifg=#999999
+    hi LineNr guifg=#999999
+    hi CursorLineNr guifg=#FFFFFF
+
 endif
 
 let &t_SI = "\e[6 q"

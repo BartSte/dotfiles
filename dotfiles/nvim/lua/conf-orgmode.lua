@@ -23,7 +23,8 @@ orgmode.setup_ts_grammar()
 
 orgmode.setup({
     org_default_notes_file = dropbox_main,
-    org_blank_before_new_entry = { heading = false, plain_list_item = false }
+    org_blank_before_new_entry = { heading = false, plain_list_item = false },
+    org_todo_keywords = {'TODO', 'WAITING', 'BACKLOG', '|', 'DONE'}
 })
 
 bullets.setup({})
