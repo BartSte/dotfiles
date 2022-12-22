@@ -15,6 +15,7 @@ local function plugins(use)
     use 'nvim-tree/nvim-web-devicons'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'luisiacc/gruvbox-baby', branch = 'main' }
+    use 'BartSte/vim-icalendar'
 
     --Lsp
     use "folke/neodev.nvim"
