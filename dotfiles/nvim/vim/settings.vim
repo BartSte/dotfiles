@@ -1,7 +1,7 @@
 filetype on
 let mapleader = " "
 set diffopt+=vertical,iblank,closeoff
-set scrolloff=999
+" set scrolloff=999
 set nowrap
 set textwidth=80
 
