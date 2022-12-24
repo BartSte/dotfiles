@@ -61,6 +61,7 @@ local window = {
 local snippet = { expand = func.snippet_expand }
 
 local sources_i = {
+    { name = 'orgmode', priority = 1, keyword_length = 1 },
     { name = 'path', priority = 2, keyword_length = 1 },
     { name = 'buffer', priority = 4, keyword_length = 3 },
     { name = 'luasnip', priority = 3, keyword_length = 1 },
