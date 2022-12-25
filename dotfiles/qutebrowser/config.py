@@ -1791,7 +1791,7 @@ c.scrolling.bar = 'never'
 ##   - tr-TR: Turkish (Turkey)
 ##   - uk-UA: Ukrainian (Ukraine)
 ##   - vi-VN: Vietnamese (Viet Nam)
-c.spellcheck.languages = ['en-US', 'nl-NL']
+c.spellcheck.languages = []
 
 ## Padding (in pixels) for the statusbar.
 ## Type: Padding
