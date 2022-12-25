@@ -35,9 +35,9 @@ let g:mkdp_open_ip = ''
 " invalid: `/path/with\\ space/xxx`
 " default: ''
 if has('linux')
-    let g:mkdp_browser = '/mnt/c/Program Files/Mozilla Firefox/firefox.exe'
+    let g:mkdp_browser = 'qutebrowser'
 else
-    let g:mkdp_browser = 'C:/Program Files/Mozilla Firefox/firefox.exe'
+    let g:mkdp_browser = 'C:\Program Files\qutebrowser\qutebrowser.exe'
 endif
 
 " set to 1, echo preview page url in command line when open preview page

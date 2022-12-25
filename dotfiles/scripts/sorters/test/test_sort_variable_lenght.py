@@ -16,4 +16,4 @@ class TestSortVariableLength(TestCase):
         stdout = check_output(command, shell=True)
         self.assertEqual(self.EXPECTED, stdout)
 
-
+ 

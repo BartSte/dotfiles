@@ -4,7 +4,7 @@
       {"code": 20, "label": {"base": "q", "shifted": "Q"}},
       {"code": 26, "label": {"base": "w", "shifted": "W"}},
       {"code": 9, "label": {"base": "f", "shifted": "F"}},
-      {"code": 13, "label": {"base": "j", "shifted": "J"}},
+      {"code": 19, "label": {"base": "p", "shifted": "P"}},
       {"code": 5, "label": {"base": "b", "shifted": "B"}},
       {
         "code": 0,
@@ -16,16 +16,16 @@
         "label": {"base": {"full": "Blocked", "1u": "Blkd"}},
         "categories": ["blanks"]
       },
-      {"code": 28, "label": {"base": "y", "shifted": "Y"}},
+      {"code": 13, "label": {"base": "j", "shifted": "J"}},
+      {"code": 15, "label": {"base": "l", "shifted": "L"}},
       {"code": 24, "label": {"base": "u", "shifted": "U"}},
-      {"code": 12, "label": {"base": "i", "shifted": "I"}},
-      {"code": 18, "label": {"base": "o", "shifted": "O"}},
-      {"code": 19, "label": {"base": "p", "shifted": "P"}},
+      {"code": 28, "label": {"base": "y", "shifted": "Y"}},
+      {"code": 51, "label": {"base": ";", "shifted": ":"}},
       {
         "code": 49941,
         "baseCode": 4,
-        "label": {"hint": "Windows/", "base": "a"},
-        "modifier": "Windows",
+        "label": {"hint": "Super/", "base": "a"},
+        "modifier": "Super",
         "rangeStart": 49169,
         "categories": ["modifier", "dualuse", "gui"]
       },
@@ -82,18 +82,18 @@
         "categories": ["modifier", "dualuse", "shift"]
       },
       {
-        "code": 49696,
-        "baseCode": 15,
-        "label": {"hint": "Alt/", "base": "l"},
+        "code": 49693,
+        "baseCode": 12,
+        "label": {"hint": "Alt/", "base": "i"},
         "modifier": "Alt",
         "rangeStart": 49169,
         "categories": ["modifier", "dualuse", "alt"]
       },
       {
-        "code": 49988,
-        "baseCode": 51,
-        "label": {"hint": "Windows/", "base": ";"},
-        "modifier": "Windows",
+        "code": 49955,
+        "baseCode": 18,
+        "label": {"hint": "Super/", "base": "o"},
+        "modifier": "Super",
         "rangeStart": 49169,
         "categories": ["modifier", "dualuse", "gui"]
       },
@@ -110,20 +110,20 @@
       {"code": 55, "label": {"base": ".", "shifted": ">"}},
       {"code": 56, "label": {"base": "/", "shifted": "?"}},
       {
-        "code": 18544,
-        "legacyCode": 23664,
-        "label": {
-          "hint": {"full": "Brightness", "1u": "Brght."},
-          "base": {"full": "Down", "1u": "🔅"}
-        },
-        "categories": ["consumer"]
-      },
-      {
         "code": 18543,
         "legacyCode": 23663,
         "label": {
           "hint": {"full": "Brightness", "1u": "Brght."},
           "base": {"full": "Up", "1u": "🔆"}
+        },
+        "categories": ["consumer"]
+      },
+      {
+        "code": 18544,
+        "legacyCode": 23664,
+        "label": {
+          "hint": {"full": "Brightness", "1u": "Brght."},
+          "base": {"full": "Down", "1u": "🔅"}
         },
         "categories": ["consumer"]
       },
@@ -155,7 +155,7 @@
       {
         "code": 6223,
         "label": {
-          "hint": {"full": "Shift+Windows+", "1u": "S+W+"},
+          "hint": {"full": "Shift+Super+", "1u": "S+Su+"},
           "base": {"full": "Right Arrow", "1u": "→"}
         },
         "categories": ["with-modifiers", "shift", "gui"],
@@ -248,7 +248,7 @@
       {"code": 87, "label": {"base": "+"}, "location": "numpad"},
       {
         "code": 227,
-        "label": {"base": {"full": "Windows", "1u": "Win", "short": "W"}},
+        "label": {"base": {"full": "Super", "1u": "Sup.", "short": "Su"}},
         "location": "left",
         "categories": ["modifier"]
       },
@@ -334,48 +334,64 @@
       {"code": 30, "label": {"base": "1", "shifted": "!"}},
       {"code": 31, "label": {"base": "2", "shifted": "@"}},
       {"code": 32, "label": {"base": "3", "shifted": "#"}},
-      {"code": 88, "label": {"base": "Enter"}, "location": "numpad"},
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
       {
         "code": 2084,
         "label": {"hint": null, "base": "&"},
         "categories": ["with-modifiers", "shift"],
         "baseCode": 36
       },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
       {"code": 46, "label": {"base": "=", "shifted": "+"}},
       {"code": 39, "label": {"base": "0", "shifted": ")"}},
-      {"code": 54, "label": {"base": ",", "shifted": "<"}},
-      {"code": 99, "label": {"base": "."}, "location": "numpad"},
-      {"code": 88, "label": {"base": "Enter"}, "location": "numpad"}
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      }
     ],
     [
       {
@@ -493,7 +509,7 @@
       },
       {
         "code": 231,
-        "label": {"base": {"full": "Windows", "1u": "Win", "short": "W"}},
+        "label": {"base": {"full": "Super", "1u": "Sup.", "short": "Su"}},
         "location": "right",
         "categories": ["modifier"]
       },
@@ -585,10 +601,9 @@
         "baseCode": 45
       },
       {
-        "code": 2083,
-        "label": {"hint": null, "base": "^"},
-        "categories": ["with-modifiers", "shift"],
-        "baseCode": 35
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
       },
       {
         "code": 65535,
@@ -669,7 +684,7 @@
       },
       {
         "code": 227,
-        "label": {"base": {"full": "Windows", "1u": "Win", "short": "W"}},
+        "label": {"base": {"full": "Super", "1u": "Sup.", "short": "Su"}},
         "location": "left",
         "categories": ["modifier"]
       },
@@ -752,10 +767,9 @@
         "categories": ["blanks"]
       },
       {
-        "code": 18658,
-        "legacyCode": 19682,
-        "label": {"base": "Mute"},
-        "categories": ["consumer"]
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
       },
       {
         "code": 53602,
@@ -871,14 +885,14 @@
         "label": {"base": {"full": "Blocked", "1u": "Blkd"}},
         "categories": ["blanks"]
       },
-      {"code": 71, "label": {"base": {"full": "Scroll Lock", "1u": "ScLk"}}},
+      {"code": 70, "label": {"base": {"full": "Print Screen", "1u": "PrSc"}}},
       {"code": 64, "label": {"base": "F7"}},
       {"code": 65, "label": {"base": "F8"}},
       {"code": 66, "label": {"base": "F9"}},
       {"code": 67, "label": {"base": "F10"}},
       {
         "code": 227,
-        "label": {"base": {"full": "Windows", "1u": "Win", "short": "W"}},
+        "label": {"base": {"full": "Super", "1u": "Sup.", "short": "Su"}},
         "location": "left",
         "categories": ["modifier"]
       },
@@ -915,7 +929,7 @@
         "label": {"base": {"full": "Blocked", "1u": "Blkd"}},
         "categories": ["blanks"]
       },
-      {"code": 73, "label": {"base": {"full": "Insert", "1u": "Ins"}}},
+      {"code": 71, "label": {"base": {"full": "Scroll Lock", "1u": "ScLk"}}},
       {"code": 61, "label": {"base": "F4"}},
       {"code": 62, "label": {"base": "F5"}},
       {"code": 63, "label": {"base": "F6"}},
@@ -955,7 +969,7 @@
         "label": {"base": {"full": "Transparent", "1u": " "}},
         "categories": ["blanks"]
       },
-      {"code": 72, "label": {"base": "Pause"}},
+      {"code": 73, "label": {"base": {"full": "Insert", "1u": "Ins"}}},
       {"code": 58, "label": {"base": "F1"}},
       {"code": 59, "label": {"base": "F2"}},
       {"code": 60, "label": {"base": "F3"}},
@@ -1025,75 +1039,75 @@
         "categories": ["blanks"]
       },
       {
-        "code": 53599,
-        "label": {"hint": {"full": "Dynamic Macro", "1u": "DM"}, "base": "#3"},
-        "rangeStart": 53596,
-        "categories": ["dynmacros"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
-        "code": 65535,
-        "label": {"base": {"full": "Transparent", "1u": " "}},
-        "categories": ["blanks"]
-      },
-      {
         "code": 53598,
         "label": {"hint": {"full": "Dynamic Macro", "1u": "DM"}, "base": "#2"},
         "rangeStart": 53596,
         "categories": ["dynmacros"]
       },
       {
-        "code": 53600,
-        "label": {"hint": {"full": "Dynamic Macro", "1u": "DM"}, "base": "#4"},
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
+      },
+      {
+        "code": 53599,
+        "label": {"hint": {"full": "Dynamic Macro", "1u": "DM"}, "base": "#3"},
+        "rangeStart": 53596,
+        "categories": ["dynmacros"]
+      },
+      {
+        "code": 53597,
+        "label": {"hint": {"full": "Dynamic Macro", "1u": "DM"}, "base": "#1"},
         "rangeStart": 53596,
         "categories": ["dynmacros"]
       },
@@ -1137,7 +1151,7 @@
       },
       {
         "code": 231,
-        "label": {"base": {"full": "Windows", "1u": "Win", "short": "W"}},
+        "label": {"base": {"full": "Super", "1u": "Sup.", "short": "Su"}},
         "location": "right",
         "categories": ["modifier"]
       },
@@ -1153,8 +1167,8 @@
         "categories": ["dynmacros"]
       },
       {
-        "code": 53597,
-        "label": {"hint": {"full": "Dynamic Macro", "1u": "DM"}, "base": "#1"},
+        "code": 53600,
+        "label": {"hint": {"full": "Dynamic Macro", "1u": "DM"}, "base": "#4"},
         "rangeStart": 53596,
         "categories": ["dynmacros"]
       },
@@ -1214,10 +1228,9 @@
         "categories": ["blanks"]
       },
       {
-        "code": 573,
-        "label": {"hint": {"full": "Alt+", "1u": "A+"}, "base": "F4"},
-        "categories": ["with-modifiers", "alt"],
-        "baseCode": 61
+        "code": 65535,
+        "label": {"base": {"full": "Transparent", "1u": " "}},
+        "categories": ["blanks"]
       },
       {"code": 40, "label": {"base": "Enter"}},
       {

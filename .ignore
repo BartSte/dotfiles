@@ -1,22 +1,27 @@
 *.git/
 *.swp*
+*cache*/
 *tmp*/
 *venv*/
-*cache*/
+.arduino*/
 .cargo/
 .conan
 .dotfiles*/
 .fonts/
 .git/
 .history/
+.local/
 .mozilla/
 .npm/
 .python_history/
 .venv/
 .vscode/
 Reporting Data/
+Temp/
 Trash/
 __pycache__/
+chrysalis/
+gadgets/
 go/
 message_cache/
 node_modules/
@@ -25,6 +30,3 @@ project_data/
 venv/
 visual/
 yay/
-gadgets/
-chrysalis/
-Temp/

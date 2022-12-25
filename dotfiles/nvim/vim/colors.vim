@@ -1,24 +1,23 @@
 if has('termguicolors')
     set termguicolors
-    set background=dark
 
-    let g:gruvbox_material_visual='green background'
-    let g:gruvbox_material_background='medium'
-    let g:gruvbox_material_foreground='material'
-    let g:gruvbox_material_enable_bold=1
-    let g:gruvbox_material_ui_contrast='low'
-    let g:gruvbox_material_enable_italic=1
-    let g:gruvbox_material_statusline_style='original'
-    let g:gruvbox_material_transparent_background=0
-    let g:gruvbox_material_diagnostic_text_highlight=1
-    let g:gruvbox_material_diagnostic_line_highlight=0
-    let g:gruvbox_material_menu_selection_background='grey'
+    let g:gruvbox_baby_background_color='medium'
+    let g:gruvbox_baby_comment_style='italic'
+    let g:gruvbox_baby_function_style='bold'
+    let g:gruvbox_baby_keyword_style='italic'
+    let g:gruvbox_baby_string_style='nocombine'
+    let g:gruvbox_baby_variable_style='NONE'
 
-    colorscheme gruvbox-material
-    highlight PmenuSel guifg=#67afaf guibg=NONE
-    highlight LineNr guifg=grey
+    colorscheme gruvbox-baby
+    hi! link ColorColumn CursorLine
+    hi HighlightedyankRegion guibg=DarkGreen
+    hi Folded guifg=#999999
+    hi LineNr guifg=#999999
+    hi CursorLineNr guifg=#FFFFFF
+
 endif
 
 let &t_SI = "\e[6 q"
 let &t_SR = "\e[4 q"
 let &t_EI = "\e[2 q"
+
