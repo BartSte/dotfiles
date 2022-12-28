@@ -42,7 +42,8 @@ local function plugins(use)
     use 'moll/vim-bbye'
     use 'nvim-lua/plenary.nvim'
     use 'nvim-tree/nvim-tree.lua'
-    use { 'phaazon/hop.nvim', branch = 'v2' }
+    use {'aznhe21/hop.nvim', branch = 'fix-some-bugs'}
+    -- use 'phaazon/hop.nvim' -- was unstable
 
     -- Editing
     use '907th/vim-auto-save'

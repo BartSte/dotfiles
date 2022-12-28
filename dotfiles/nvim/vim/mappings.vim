@@ -65,6 +65,7 @@ noremap <leader>to <cmd>tabonly<CR>
 noremap <leader>tc <cmd>tabclose<CR>
 
 "Formatting and refactoring
+nnoremap <leader>s <cmd>setlocal spell! spell?<CR>
 nnoremap <leader>% <cmd>source<CR>
 nnoremap <silent><leader>f mxgggqG`x
 vnoremap <silent><leader>cc :sort<CR>
