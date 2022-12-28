@@ -23,8 +23,10 @@ orgmode.setup_ts_grammar()
 
 orgmode.setup({
     org_default_notes_file = dropbox_main,
-    org_blank_before_new_entry = { heading = false, plain_list_item = false },
-    org_todo_keywords = {'TODO', 'WAITING', 'BACKLOG', '|', 'DONE'}
+    org_agenda_files = { '~/Dropbox/Agenda/*' },
+    org_blank_before_new_entry = { heading = true, plain_list_item = true },
+    org_todo_keywords = { 'TODO', 'WAITING', 'MEETING', '|', 'DONE' },
+    emacs_config = { executable_path = 'emacs', config_path = '$HOME/.emacs.d/init.el' }
 })
 
 bullets.setup({})
