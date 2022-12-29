@@ -25,7 +25,9 @@ orgmode.setup({
     org_default_notes_file = dropbox_main,
     org_agenda_files = { '~/Dropbox/Agenda/*' },
     org_todo_keywords = { 'TODO', 'WAITING', 'MEETING', '|', 'DONE' },
-    emacs_config = { executable_path = 'emacs', config_path = '$HOME/.doom.d/init.el' }
+    emacs_config = { executable_path = 'emacs', config_path = '$HOME/.doom.d/init.el' },
+    org_blank_before_new_entry = {heading = true, plain_list_item = false},
+    org_hide_emphasis_markers = true
 })
 
 bullets.setup({})
