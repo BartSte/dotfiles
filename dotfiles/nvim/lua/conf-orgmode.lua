@@ -16,14 +16,14 @@ end
 
 local dropbox_home = os_path.path_join(get_home(), 'Dropbox')
 local dropbox_notes = os_path.path_join(dropbox_home, 'org')
--- local dropbox_recepten = os_path.path_join(dropbox_home, 'Recepten', '*')
+local dropbox_agenda = os_path.path_join(dropbox_home, 'Agenda/*')
 local dropbox_main = os_path.path_join(dropbox_home, 'Notes', 'Main.org')
 
 orgmode.setup_ts_grammar()
 
 orgmode.setup({
     org_default_notes_file = dropbox_main,
-    org_agenda_files = { '~/Dropbox/Agenda/*' },
+    org_agenda_files = dropbox_agenda,
     org_todo_keywords = { 'TODO', 'WAITING', 'MEETING', '|', 'DONE' },
     emacs_config = { executable_path = 'emacs', config_path = '$HOME/.doom.d/init.el' },
     org_blank_before_new_entry = {heading = true, plain_list_item = false},
