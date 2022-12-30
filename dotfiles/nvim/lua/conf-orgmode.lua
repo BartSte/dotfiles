@@ -24,7 +24,7 @@ orgmode.setup_ts_grammar()
 orgmode.setup({
     org_default_notes_file = dropbox_main,
     org_agenda_files = dropbox_agenda,
-    org_todo_keywords = { 'TODO', 'WAITING', 'MEETING', '|', 'DONE' },
+    org_todo_keywords = { 'TODO', 'WAITING', 'MEETING', '|', 'DONE', 'CANCEL' },
     emacs_config = { executable_path = 'emacs', config_path = '$HOME/.doom.d/init.el' },
     org_blank_before_new_entry = {heading = true, plain_list_item = false},
     org_hide_emphasis_markers = true
