@@ -36,7 +36,6 @@ local function plugins(use)
     use 'saadparwaiz1/cmp_luasnip'
 
     -- Navigation
-    use 'BartSte/vim-center-cursor'
     use { 'junegunn/fzf', run = ":call fzf#install()" }
     use 'junegunn/fzf.vim'
     use 'moll/vim-bbye'

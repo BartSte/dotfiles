@@ -5,6 +5,7 @@ so settings.vim
 so mappings.vim
 so windows.vim
 so colors.vim
+so keep-centered.vim
 
 so conf-auto_save.vim
 so conf-fugitive.vim
@@ -28,7 +29,6 @@ lua require('conf-cmp')
 lua require('conf-autopairs')
 lua require('conf-neogen')
 lua require('conf-luasnip')
-lua require('conf-vim-center-cursor')
 lua require('conf-orgmode')
 lua require('local-shada')
 lua require('global-marks')
