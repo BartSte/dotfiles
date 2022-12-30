@@ -17,7 +17,7 @@ end
 local dropbox_home = os_path.path_join(get_home(), 'Dropbox')
 local dropbox_notes = os_path.path_join(dropbox_home, 'org')
 local dropbox_agenda = os_path.path_join(dropbox_home, 'Agenda/*')
-local dropbox_main = os_path.path_join(dropbox_home, 'Notes', 'Main.org')
+local dropbox_main = os_path.path_join(dropbox_home, 'org', 'main.org')
 
 orgmode.setup_ts_grammar()
 
