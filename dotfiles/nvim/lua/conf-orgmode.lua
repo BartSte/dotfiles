@@ -1,7 +1,8 @@
-local orgmode = require('orgmode')
-local bullets = require('org-bullets')
-local os_path = require('os_path')
 local mapper = require('keymapper')
+local orgmode = require('orgmode')
+local os_path = require('os_path')
+local bullets = require('org-bullets')
+local vdir_export = require('vdir-exporter').export
 
 --- For org + wsl, windows $USERPROFILE is used as home and is captured by the
 --environment variable $WH (Windows Home).
@@ -13,6 +14,12 @@ local function get_home()
         return os.getenv('HOME')
     end
 end
+
+local custom_exports = {
+    v = {
+        label = 'Export to vdir (Khal)',
+        action = vdir_export}
+}
 
 local dropbox_home = os_path.path_join(get_home(), 'Dropbox')
 local dropbox_notes = os_path.path_join(dropbox_home, 'org')
@@ -27,7 +34,8 @@ orgmode.setup({
     org_todo_keywords = { 'TODO', 'WAITING', 'MEETING', '|', 'DONE', 'CANCEL' },
     emacs_config = { executable_path = 'emacs', config_path = '$HOME/.doom.d/init.el' },
     org_blank_before_new_entry = {heading = true, plain_list_item = false},
-    org_hide_emphasis_markers = true
+    org_hide_emphasis_markers = true,
+    org_custom_exports = custom_exports
 })
 
 bullets.setup({})

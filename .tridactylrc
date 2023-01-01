@@ -7,4 +7,4 @@ set hintfiltermode simple
 set allowautofocus false
 set modeindicatorshowkeys true
 
-bind O tabopen
+bind O fillcmdline tabopen
