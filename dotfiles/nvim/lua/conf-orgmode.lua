@@ -17,7 +17,7 @@ end
 
 local custom_exports = {
     v = {
-        label = 'Export to vdir (Khal)',
+        label = 'Export to vdir (khal)',
         action = vdir_export}
 }
 
