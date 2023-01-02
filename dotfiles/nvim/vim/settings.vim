@@ -22,7 +22,6 @@ set colorcolumn=80
 set cursorline
 set number
 set relativenumber
-set conceallevel=3
 
 " Tabbing
 set autoindent

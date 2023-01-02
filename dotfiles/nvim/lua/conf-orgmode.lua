@@ -18,7 +18,8 @@ end
 local custom_exports = {
     v = {
         label = 'Export to vdir (khal)',
-        action = vdir_export}
+        action = vdir_export
+    }
 }
 
 local dropbox_home = os_path.path_join(get_home(), 'Dropbox')
@@ -33,12 +34,17 @@ orgmode.setup({
     org_agenda_files = dropbox_agenda,
     org_todo_keywords = { 'TODO', 'WAITING', 'MEETING', '|', 'DONE', 'CANCEL' },
     emacs_config = { executable_path = 'emacs', config_path = '$HOME/.doom.d/init.el' },
-    org_blank_before_new_entry = {heading = true, plain_list_item = false},
+    org_blank_before_new_entry = { heading = true, plain_list_item = false },
     org_hide_emphasis_markers = true,
-    org_custom_exports = custom_exports
+    org_custom_exports = custom_exports,
+    win_split_mode = 'vertical'
 })
 
-bullets.setup({})
-
-
+bullets.setup({
+    checkboxes = {
+        done = { "✓", "OrgDone" },
+        todo = { "˟", "OrgTODO" },
+    }
+})
+vim.opt_global.conceallevel = 3
 mapper.nnoremap('<a-r>', ':Files ' .. dropbox_notes .. '<CR>')
