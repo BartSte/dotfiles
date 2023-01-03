@@ -2,7 +2,7 @@ local mapper = require('keymapper')
 local orgmode = require('orgmode')
 local os_path = require('os_path')
 local bullets = require('org-bullets')
-local vdir_export = require('vdir-exporter').export
+local khal_export = require('khal-export').export
 
 --- For org + wsl, windows $USERPROFILE is used as home and is captured by the
 --environment variable $WH (Windows Home).
@@ -17,14 +17,14 @@ end
 
 local custom_exports = {
     v = {
-        label = 'Export to vdir (khal)',
-        action = vdir_export
+        label = 'Export to khal',
+        action = khal_export
     }
 }
 
 local dropbox_home = os_path.path_join(get_home(), 'Dropbox')
-local dropbox_notes = os_path.path_join(dropbox_home, 'org')
-local dropbox_agenda = os_path.path_join(dropbox_home, 'Agenda/*')
+local dropbox_org = os_path.path_join(dropbox_home, 'org')
+local dropbox_agenda = os_path.path_join(dropbox_home, 'org', 'outlook.org')
 local dropbox_main = os_path.path_join(dropbox_home, 'org', 'main.org')
 
 orgmode.setup_ts_grammar()
@@ -46,5 +46,4 @@ bullets.setup({
         todo = { "˟", "OrgTODO" },
     }
 })
-vim.opt_global.conceallevel = 3
-mapper.nnoremap('<a-r>', ':Files ' .. dropbox_notes .. '<CR>')
+mapper.nnoremap('<a-r>', ':Files ' .. dropbox_org .. '<CR>')
