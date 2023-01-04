@@ -22,9 +22,9 @@ local function plugins(use)
     use "rafamadriz/friendly-snippets"
     use 'neovim/nvim-lspconfig'
     use 'onsails/lspkind.nvim'
+    use 'jose-elias-alvarez/null-ls.nvim'
 
     --Linting
-    use 'mfussenegger/nvim-lint'
 
     -- Completion
     use "danymat/neogen"
