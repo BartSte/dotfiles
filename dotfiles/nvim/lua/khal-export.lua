@@ -24,8 +24,6 @@
 
 local M = {}
 
-
-
 M.success = function(output)
     print('Success!')
     vim.api.nvim_echo({ { table.concat(output, '\n') } }, true, {})
@@ -36,23 +34,30 @@ M.error = function(err)
     vim.api.nvim_echo({ { table.concat(err, '\n'), 'ErrorMsg' } }, true, {})
 end
 
+M.get_fold_under_cursor = function()
+    vim.api.nvim_feedkeys('yir', 'm', false)
+    -- use org function to "yank-inner-subtree (yir)". Yank this to a register
+    -- and return it.
+    return print(vim.cmd('echo @"'))
+end
+
 M.export = function(exporter)
+    local org_agenda_item = M.get_fold_under_cursor(0)
+    -- local calendar = ""
+    -- local location = ""
+    -- local recurrance = ""
+    -- local until_ = ""
+    -- local alarms = ""
 
-    vim.api.nvim_buf_get_lines(0, 0, 0, true)
-    local calendar = ""
-    local location = ""
-    local recurrance = ""
-    local until_ = ""
-    local alarms = ""
-
-    local command = {
-        "khal", "new",
-        "--calendar", calendar,
-        "--location", location,
-        "--repeat", recurrance,
-        "--until", until_,
-        "--alarms", alarms
-    }
+    -- local command = {
+    --     "khal", "new",
+    --     "--calendar", calendar,
+    --     "--location", location,
+    --     "--repeat", recurrance,
+    --     "--until", until_,
+    --     "--alarms", alarms
+    -- }
+    print(org_agenda_item)
     return exporter(command, '', M.success, M.error)
 end
 
