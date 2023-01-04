@@ -24,7 +24,7 @@
 
 local M = {}
 
-M.command = { "khal", "new", "--calendar", "", "--location", "", "--repeat", "", "--until", "", "--alarms", "" }
+
 
 M.success = function(output)
     print('Success!')
@@ -37,10 +37,23 @@ M.error = function(err)
 end
 
 M.export = function(exporter)
-    local current_file = vim.api.nvim_buf_get_name(0)
 
-    local target = vim.fn.fnamemodify(current_file, ':p:r') .. '.ics'
-    return exporter(M.command, target, M.success, M.error)
+    vim.api.nvim_buf_get_lines(0, 0, 0, true)
+    local calendar = ""
+    local location = ""
+    local recurrance = ""
+    local until_ = ""
+    local alarms = ""
+
+    local command = {
+        "khal", "new",
+        "--calendar", calendar,
+        "--location", location,
+        "--repeat", recurrance,
+        "--until", until_,
+        "--alarms", alarms
+    }
+    return exporter(command, '', M.success, M.error)
 end
 
 return M
