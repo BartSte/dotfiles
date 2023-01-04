@@ -12,30 +12,23 @@ M.error = function(err)
     vim.api.nvim_echo({ { table.concat(err, '\n'), 'ErrorMsg' } }, true, {})
 end
 
-local function get_fold_range_under_cursor()
-    --TODO refactor
+local function get_fold_range_at_cursor(node_type)
     local node = Files.get_node_at_cursor()
-    if not node then
-        return 0, 0
-    end
-    while node and node:type() ~= 'section' do
+    while node and node:type() ~= node_type do
         node = node:parent()
-    end
-    if not node then
-        return 0, 0
     end
     local startfold, _, endfold, _ = node:range()
     return startfold, endfold
 end
 
-M.get_fold_under_cursor = function()
-    local foldstart, foldend = get_fold_range_under_cursor() 
+local function get_fold_under_cursor()
+    local foldstart, foldend = get_fold_range_at_cursor('section')
     local lines = vim.api.nvim_buf_get_lines(0, foldstart, foldend, true)
     return table.concat(lines, '\n')
 end
 
 M.export = function(exporter)
-    local org_agenda_item = M.get_fold_under_cursor(0)
+    local org_agenda_item = get_fold_under_cursor(0)
     -- local calendar = ""
     -- local location = ""
     -- local recurrance = ""
@@ -50,9 +43,8 @@ M.export = function(exporter)
     --     "--until", until_,
     --     "--alarms", alarms
     -- }
-    local command = {"echo", "Test"}
     print(org_agenda_item)
-    return exporter(command, '', M.success, M.error)
+    return exporter('', '', M.success, M.error)
 end
 
 return M
