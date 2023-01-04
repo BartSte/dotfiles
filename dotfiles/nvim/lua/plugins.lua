@@ -23,6 +23,9 @@ local function plugins(use)
     use 'neovim/nvim-lspconfig'
     use 'onsails/lspkind.nvim'
 
+    --Linting
+    use 'mfussenegger/nvim-lint'
+
     -- Completion
     use "danymat/neogen"
     use 'L3MON4D3/LuaSnip'
