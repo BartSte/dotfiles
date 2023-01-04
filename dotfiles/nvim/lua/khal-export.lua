@@ -1,3 +1,62 @@
+local Files = require('orgmode.parser.files')
+
+local M = {}
+
+M.success = function(output)
+    print('Success!')
+    vim.api.nvim_echo({ { table.concat(output, '\n') } }, true, {})
+end
+
+M.error = function(err)
+    print('Error!')
+    vim.api.nvim_echo({ { table.concat(err, '\n'), 'ErrorMsg' } }, true, {})
+end
+
+local function get_fold_range_under_cursor()
+    --TODO refactor
+    local node = Files.get_node_at_cursor()
+    if not node then
+        return 0, 0
+    end
+    while node and node:type() ~= 'section' do
+        node = node:parent()
+    end
+    if not node then
+        return 0, 0
+    end
+    local startfold, _, endfold, _ = node:range()
+    return startfold, endfold
+end
+
+M.get_fold_under_cursor = function()
+    local foldstart, foldend = get_fold_range_under_cursor() 
+    local lines = vim.api.nvim_buf_get_lines(0, foldstart, foldend, true)
+    return table.concat(lines, '\n')
+end
+
+M.export = function(exporter)
+    local org_agenda_item = M.get_fold_under_cursor(0)
+    -- local calendar = ""
+    -- local location = ""
+    -- local recurrance = ""
+    -- local until_ = ""
+    -- local alarms = ""
+
+    -- local command = {
+    --     "khal", "new",
+    --     "--calendar", calendar,
+    --     "--location", location,
+    --     "--repeat", recurrance,
+    --     "--until", until_,
+    --     "--alarms", alarms
+    -- }
+    local command = {"echo", "Test"}
+    print(org_agenda_item)
+    return exporter(command, '', M.success, M.error)
+end
+
+return M
+--
 --Usage: khal new [OPTIONS] [START [END | DELTA] [TIMEZONE] [SUMMARY] [::
 --                DESCRIPTION]]
 
@@ -21,44 +80,3 @@
 --                         separated
 --  --url TEXT             URI for the event.
 --  --help                 Show this message and exit.
-
-local M = {}
-
-M.success = function(output)
-    print('Success!')
-    vim.api.nvim_echo({ { table.concat(output, '\n') } }, true, {})
-end
-
-M.error = function(err)
-    print('Error!')
-    vim.api.nvim_echo({ { table.concat(err, '\n'), 'ErrorMsg' } }, true, {})
-end
-
-M.get_fold_under_cursor = function()
-    vim.api.nvim_feedkeys('yir', 'm', false)
-    -- use org function to "yank-inner-subtree (yir)". Yank this to a register
-    -- and return it.
-    return print(vim.cmd('echo @"'))
-end
-
-M.export = function(exporter)
-    local org_agenda_item = M.get_fold_under_cursor(0)
-    -- local calendar = ""
-    -- local location = ""
-    -- local recurrance = ""
-    -- local until_ = ""
-    -- local alarms = ""
-
-    -- local command = {
-    --     "khal", "new",
-    --     "--calendar", calendar,
-    --     "--location", location,
-    --     "--repeat", recurrance,
-    --     "--until", until_,
-    --     "--alarms", alarms
-    -- }
-    print(org_agenda_item)
-    return exporter(command, '', M.success, M.error)
-end
-
-return M
