@@ -12,7 +12,7 @@ end
 
 local servers = { "sumneko_lua", "pyright", "vimls", "bashls", "jsonls", "clangd", "cssls", "arduino_language_server",
     "marksman" }
-local formatters = { 'autopep8', 'flake8', 'autoflake'}
+local formatters = { 'autopep8', 'ruff'}
 
 mason.setup()
 lsp.setup({ ensure_installed = servers })

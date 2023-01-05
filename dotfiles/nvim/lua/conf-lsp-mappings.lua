@@ -17,6 +17,7 @@ local function mappings()
     bufmap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     bufmap('x', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     bufmap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<cr>')
+    bufmap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<cr>')
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
