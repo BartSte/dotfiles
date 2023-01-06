@@ -10,6 +10,8 @@ local function get_home()
     local wsl_home = os.getenv('WH')
     if (wsl_home) then
         return wsl_home
+    elseif vim.fn.has('win32') then
+        return os.getenv('USERPROFILE')
     else
         return os.getenv('HOME')
     end
