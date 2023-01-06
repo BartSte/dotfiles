@@ -1,10 +1,9 @@
-local null = require("null-ls")
+local null_ls = require("null-ls")
 
-null.setup({
+null_ls.setup({
     sources = {
-        null.builtins.diagnostics.ruff,
-        null.builtins.formatting.autopep8,
-        null.builtins.formatting.ruff,
-    }
+        null_ls.builtins.formatting.autopep8,
+        null_ls.builtins.formatting.ruff,
+        null_ls.builtins.diagnostics.ruff,
+    },
 })
-
