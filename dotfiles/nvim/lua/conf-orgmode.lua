@@ -32,7 +32,7 @@ orgmode.setup_ts_grammar()
 orgmode.setup({
     org_default_notes_file = dropbox_main,
     org_agenda_files = dropbox_agenda,
-    org_todo_keywords = { 'TODO', 'WAIT', 'MEET', 'JIRA', 'NEXT', 'HOLD', '|', 'DONE', 'CANCEL' },
+    org_todo_keywords = { 'TODO', 'WAIT', 'MEET', 'NEXT', 'HOLD', '|', 'JIRA', 'DONE', 'CANCEL' },
     org_blank_before_new_entry = { heading = true, plain_list_item = false },
     org_hide_emphasis_markers = true,
     org_custom_exports = custom_exports,
