@@ -35,7 +35,7 @@ let g:mkdp_open_ip = ''
 " invalid: `/path/with\\ space/xxx`
 " default: ''
 if has('linux')
-    let g:mkdp_browser = 'qutebrowser'
+    let g:mkdp_browser = "firefox"
 else
     let g:mkdp_browser = 'C:\Program Files\qutebrowser\qutebrowser.exe'
 endif
