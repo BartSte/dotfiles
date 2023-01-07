@@ -9,7 +9,7 @@ lsp_defaults.capabilities = vim.tbl_deep_extend(
 )
 
 vim.diagnostic.config({
-    virtual_text = true,
+    virtual_text = false,
     signs = false,
     update_in_insert = false,
     underline = true,
