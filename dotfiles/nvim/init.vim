@@ -16,6 +16,7 @@ so conf-vim-test.vim
 so conf-vimspector.vim
 cd -
 
+lua require('linux')
 lua require('conf-hop')
 lua require('conf-lualine')
 lua require('conf-nvim-tree')
