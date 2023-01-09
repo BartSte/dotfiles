@@ -1,7 +1,7 @@
 if has('termguicolors')
     set termguicolors
 
-    let g:gruvbox_baby_background_color='medium'
+    let g:gruvbox_baby_background_color='dark'
     let g:gruvbox_baby_comment_style='italic'
     let g:gruvbox_baby_function_style='bold'
     let g:gruvbox_baby_keyword_style='italic'
