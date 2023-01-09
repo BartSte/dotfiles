@@ -14,6 +14,7 @@ so conf-markdown.vim
 so conf-vim-bbye.vim
 so conf-vim-test.vim
 so conf-vimspector.vim
+so config-table.vim
 cd -
 
 lua require('linux')
@@ -32,6 +33,7 @@ lua require('conf-autopairs')
 lua require('conf-neogen')
 lua require('conf-luasnip')
 lua require('conf-orgmode')
+lua require('config-venn')
 lua require('local-shada')
 lua require('global-marks')
 lua require('autocmds')

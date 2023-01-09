@@ -21,9 +21,6 @@ tree.setup({
         adaptive_size = true,
         mappings = { list = my_mappings, },
         relativenumber = true,
-                full_name = false,
-
-        highlight_opened_files = "icon",
     },
     renderer = { group_empty = true, },
     filters = { dotfiles = false, },

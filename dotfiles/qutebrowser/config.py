@@ -1700,7 +1700,7 @@ c.keyhint.delay = 0
 ## loss* on some pages (as Service Worker data isn't persisted) and will
 ## negatively impact start-up time.
 ## Type: Bool
-# c.qt.workarounds.remove_service_workers = False
+c.qt.workarounds.remove_service_workers = True
 
 ## When/how to show the scrollbar.
 ## Type: String

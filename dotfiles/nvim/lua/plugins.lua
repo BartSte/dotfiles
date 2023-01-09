@@ -15,7 +15,6 @@ local function plugins(use)
     use 'nvim-tree/nvim-web-devicons'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'luisiacc/gruvbox-baby', branch = 'main' }
-    use 'BartSte/vim-icalendar'
 
     --Lsp
     use "folke/neodev.nvim"
@@ -51,8 +50,8 @@ local function plugins(use)
     use '907th/vim-auto-save'
     use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
-    use { "iamcco/markdown-preview.nvim", run = markdown_hook }
     use "windwp/nvim-autopairs"
+    use "jbyuki/venn.nvim"
 
     -- Source control
     use 'rbong/vim-flog'
@@ -67,6 +66,9 @@ local function plugins(use)
     use 'nvim-orgmode/orgmode'
     use 'akinsho/org-bullets.nvim'
     use 'dhruvasagar/vim-table-mode'
+
+    -- Markdown
+    use { "iamcco/markdown-preview.nvim", run = markdown_hook }
 
 end
 

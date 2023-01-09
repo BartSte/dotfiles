@@ -14,6 +14,7 @@ if has('termguicolors')
     hi Folded guifg=#999999
     hi LineNr guifg=#999999
     hi CursorLineNr guifg=#FFFFFF
+    hi IncSearch guibg=DarkGreen
 
 endif
 
