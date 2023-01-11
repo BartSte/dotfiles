@@ -7,8 +7,9 @@ end
 local function plugins(use)
     --Package managers
     use 'wbthomason/packer.nvim'
-    use "williamboman/mason-lspconfig.nvim"
     use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
+    use "jay-babu/mason-null-ls.nvim"
 
     --Looks
     use 'nvim-lualine/lualine.nvim'
