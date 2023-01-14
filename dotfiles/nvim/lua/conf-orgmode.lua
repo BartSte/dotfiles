@@ -22,11 +22,16 @@ orgmode.setup_ts_grammar()
 orgmode.setup({
     org_default_notes_file = dropbox_main,
     org_agenda_files = {dropbox_main, dropbox_agenda, dropbox_personal},
-    org_todo_keywords = { 'TODO', 'WAIT', 'MEET', 'NEXT', 'HOLD', '|', 'JIRA', 'DONE', 'CANCEL' },
     org_blank_before_new_entry = { heading = true, plain_list_item = false },
     org_hide_emphasis_markers = true,
     org_custom_exports = custom_exports,
     win_split_mode = 'vertical',
+    org_todo_keywords = { 'TODO', 'WAIT', 'MEET', 'NEXT', '|', 'JIRA', 'DONE', 'CANCEL' },
+    org_todo_keyword_faces = {
+        WAIT = ':foreground orange :weight bold',
+        NEXT = ':foreground yellow :weight bold',
+        CANCEL = ':foreground magenta :weight bold'
+      }
 })
 
 bullets.setup({})
