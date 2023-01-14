@@ -26,7 +26,7 @@ orgmode.setup({
     org_blank_before_new_entry = { heading = true, plain_list_item = false },
     org_hide_emphasis_markers = true,
     org_custom_exports = custom_exports,
-    win_split_mode = 'vertical'
+    win_split_mode = 'vertical',
 })
 
 bullets.setup({})
