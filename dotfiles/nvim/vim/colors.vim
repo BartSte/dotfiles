@@ -15,6 +15,9 @@ if has('termguicolors')
     hi LineNr guifg=#999999
     hi CursorLineNr guifg=#FFFFFF
     hi IncSearch guibg=DarkGreen
+    hi Tabline guibg=NONE guifg=DarkGray
+    hi! link TablineSel Normal
+    hi! link TablineFill Normal
 
 endif
 

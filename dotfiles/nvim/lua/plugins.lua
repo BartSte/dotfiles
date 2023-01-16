@@ -16,6 +16,7 @@ local function plugins(use)
     use 'nvim-tree/nvim-web-devicons'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'luisiacc/gruvbox-baby', branch = 'main' }
+    use { 'alvarosevilla95/luatab.nvim', requires='kyazdani42/nvim-web-devicons' }
 
     --Lsp
     use "folke/neodev.nvim"
@@ -23,8 +24,6 @@ local function plugins(use)
     use 'neovim/nvim-lspconfig'
     use 'onsails/lspkind.nvim'
     use 'jose-elias-alvarez/null-ls.nvim'
-
-    --Linting
 
     -- Completion
     use "danymat/neogen"
