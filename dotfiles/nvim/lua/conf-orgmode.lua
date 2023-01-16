@@ -26,7 +26,7 @@ orgmode.setup({
     org_hide_emphasis_markers = true,
     org_custom_exports = custom_exports,
     win_split_mode = 'vertical',
-    org_todo_keywords = { 'TODO', 'WAIT', 'MEET', 'NEXT', '|', 'JIRA', 'DONE', 'CANCEL' },
+    org_todo_keywords = { 'TODO', 'NEXT', 'WAIT', 'MEET', '|', 'JIRA', 'DONE', 'CANCEL' },
     org_todo_keyword_faces = {
         WAIT = ':foreground orange :weight bold',
         NEXT = ':foreground yellow :weight bold',
