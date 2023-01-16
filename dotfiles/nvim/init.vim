@@ -12,7 +12,7 @@ so conf-fugitive.vim
 so conf-fzf.vim
 so conf-markdown.vim
 so conf-vim-bbye.vim
-so conf-vim-test.vim
+so config-vim-test.vim
 so conf-vimspector.vim
 so config-table.vim
 cd -
