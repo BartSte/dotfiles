@@ -16,7 +16,7 @@ local function plugins(use)
     use 'nvim-tree/nvim-web-devicons'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'luisiacc/gruvbox-baby', branch = 'main' }
-    use { 'alvarosevilla95/luatab.nvim', requires='kyazdani42/nvim-web-devicons' }
+    use { 'alvarosevilla95/luatab.nvim', requires = 'kyazdani42/nvim-web-devicons' }
 
     --Lsp
     use "folke/neodev.nvim"
@@ -43,7 +43,7 @@ local function plugins(use)
     use 'moll/vim-bbye'
     use 'nvim-lua/plenary.nvim'
     use 'nvim-tree/nvim-tree.lua'
-    use {'aznhe21/hop.nvim', branch = 'fix-some-bugs'}
+    use { 'aznhe21/hop.nvim', branch = 'fix-some-bugs' }
     -- use 'phaazon/hop.nvim' -- was unstable
 
     -- Editing
@@ -52,6 +52,15 @@ local function plugins(use)
     use 'tpope/vim-surround'
     use "windwp/nvim-autopairs"
     use "jbyuki/venn.nvim"
+
+     -- AI
+    use({ "jackMort/ChatGPT.nvim",
+        requires = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim"
+        }
+    })
 
     -- Source control
     use 'rbong/vim-flog'

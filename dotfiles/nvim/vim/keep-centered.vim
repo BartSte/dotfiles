@@ -1,13 +1,13 @@
 augroup KeepCentered
   autocmd!
   autocmd CursorMoved * normal! zz
-  autocmd TextChangedI * call InsertRecenter()
+  " autocmd TextChangedI * call InsertRecenter()
 augroup END
 
 function InsertRecenter() abort
   let at_end = getcursorcharpos()[2] > len(getline('.'))
-  normal! zz
-
+  normal! zzl
+            
   " Fix position of cursor at end of line
   if at_end
     let cursor_pos = getcursorcharpos()
