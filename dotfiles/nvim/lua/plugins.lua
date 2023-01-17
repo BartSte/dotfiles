@@ -53,15 +53,6 @@ local function plugins(use)
     use "windwp/nvim-autopairs"
     use "jbyuki/venn.nvim"
 
-     -- AI
-    use({ "jackMort/ChatGPT.nvim",
-        requires = {
-            "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim"
-        }
-    })
-
     -- Source control
     use 'rbong/vim-flog'
     use 'tpope/vim-fugitive'
