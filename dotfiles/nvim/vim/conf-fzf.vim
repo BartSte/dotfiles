@@ -12,6 +12,15 @@ command! -bang -nargs=? -complete=dir Files
 command! -bang -nargs=* Ag 
             \ call fzf#vim#ag(<q-args>, "--hidden --skip-vcs-ignores --path-to-ignore " . $HOME . "\\.ignore", fzf#vim#with_preview(), <bang>0)
 
+" command! -bang -nargs=* Ag
+"   \ call fzf#vim#grep(
+"   \   'ag --column --numbers --noheading --color --smart-case '.shellescape(<q-args>), 1,
+"   \   fzf#vim#with_preview(), <bang>0)
+
+if has('win32')
+    let g:fzf_preview_bash = 'C:\WINDOWS\system32\bash.exe'
+endif
+
 noremap <a-o> <cmd>Files<CR>
 noremap <a-a> :Ag<space>
 noremap <a-b> <cmd>Buffers<CR>

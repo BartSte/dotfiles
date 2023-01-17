@@ -37,6 +37,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 
 " Command line
 set showcmd
+set cmdheight=1
 set cedit=\<C-t>
 set nowildmenu
 
