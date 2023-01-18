@@ -9,15 +9,21 @@ if has('termguicolors')
     let g:gruvbox_baby_variable_style='NONE'
 
     colorscheme gruvbox-baby
-    hi! link ColorColumn CursorLine
-    hi HighlightedyankRegion guibg=DarkGreen
-    hi Folded guifg=#999999
-    hi LineNr guifg=#999999
+
     hi CursorLineNr guifg=#FFFFFF
+    hi Folded guifg=#999999
+    hi HighlightedyankRegion guibg=DarkGreen
     hi IncSearch guibg=DarkGreen
-    hi Tabline guibg=NONE guifg=DarkGray
-    hi! link TablineSel Normal
+    hi LineNr guifg=#999999
+    hi! link ColorColumn CursorLine
+
+    hi Tabline guibg=NONE 
     hi! link TablineFill Normal
+    hi! link TablineSel Normal
+
+    hi HopNextKey guibg=NONE
+    hi HopNextKey1 guibg=NONE
+    hi HopNextKey2 guibg=NONE
 
 endif
 
