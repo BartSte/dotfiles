@@ -54,6 +54,7 @@ noremap <silent><a-,> <cmd>cp<CR>
 noremap <silent><a-.> <cmd>cn<CR>
 noremap <silent><C-n> <cmd>bnext<CR>
 noremap <silent><C-p> <cmd>bprevious<CR>
+noremap gF <cmd>wincmd v<bar>wincmd l<CR>gf
 
 "Search
 nnoremap <leader>/ *#<cmd>setlocal hlsearch<CR>

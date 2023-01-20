@@ -9,17 +9,17 @@ lspconfig.cmake.setup({})
 lspconfig.powershell_es.setup({})
 lspconfig.marksman.setup({})
 
--- lspconfig.clangd.setup({})
-lspconfig.arduino_language_server.setup {
-    cmd = {
-        "arduino-language-server",
-        "-cli-config", "~/.arduino15/arduino-cli.yaml",
-        "-fqbn", "keyboardio:avr:keyboardio_atreus",
-        "-cli", "arduino-cli",
-        "-clangd", "clangd"
-    },
-    filetypes = { "arduino", "cpp" }
-}
+lspconfig.clangd.setup({})
+-- lspconfig.arduino_language_server.setup {
+--     cmd = {
+--         "arduino-language-server",
+--         "-cli-config", "~/.arduino15/arduino-cli.yaml",
+--         "-fqbn", "keyboardio:avr:keyboardio_atreus",
+--         "-cli", "arduino-cli",
+--         "-clangd", "clangd"
+--     },
+--     filetypes = { "arduino", "cpp" }
+-- }
 
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")

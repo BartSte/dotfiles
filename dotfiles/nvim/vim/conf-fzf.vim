@@ -3,7 +3,6 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 1
 
 let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-s']
 
-
 command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(
         \ <q-args>, 
@@ -12,7 +11,8 @@ command! -bang -nargs=? -complete=dir Files
 
 command! -bang -nargs=* Ag
         \ call fzf#vim#grep(
-        \ expand('ag --nogroup --column --color --hidden --skip-vcs-ignores --path-to-ignore $HOME/.ignore ').shellescape(<q-args>), 
+        \ expand('ag --nogroup --column --color --hidden --skip-vcs-ignores 
+        \ --path-to-ignore $HOME/.ignore ').shellescape(<q-args>), 
         \ 1, fzf#vim#with_preview(), <bang>0)
 
 noremap <a-o> <cmd>Files<CR>
