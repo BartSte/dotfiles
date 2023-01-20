@@ -12,8 +12,7 @@ command! -bang -nargs=? -complete=dir Files
 
 command! -bang -nargs=* Ag
         \ call fzf#vim#grep(
-        \ expand('ag --nogroup --column --color --hidden --skip-vcs-ignores 
-        \ --path-to-ignore $HOME/.ignore '.shellescape(<q-args>)), 
+        \ expand('ag --nogroup --column --color --hidden --skip-vcs-ignores --path-to-ignore $HOME/.ignore ').shellescape(<q-args>), 
         \ 1, fzf#vim#with_preview(), <bang>0)
 
 noremap <a-o> <cmd>Files<CR>

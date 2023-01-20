@@ -2,7 +2,7 @@ filetype on
 let mapleader = " "
 set diffopt+=vertical,iblank,closeoff
 set nowrap
-set textwidth=80
+set textwidth=79
 
 " Completion
 set pumheight=10
