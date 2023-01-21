@@ -1,30 +1,32 @@
 if has('termguicolors')
     set termguicolors
 
-    let g:gruvbox_baby_background_color='dark'
-    let g:gruvbox_baby_comment_style='italic'
-    let g:gruvbox_baby_function_style='bold'
-    let g:gruvbox_baby_keyword_style='italic'
+    let g:gruvbox_transparant_mode=0
     let g:gruvbox_baby_string_style='nocombine'
+    let g:gruvbox_baby_comment_style='italic'
+    let g:gruvbox_baby_keyword_style='italic'
+    let g:gruvbox_baby_function_style='bold'
     let g:gruvbox_baby_variable_style='NONE'
+    let g:gruvbox_baby_background_color='dark'
+    let g:gruvbox_baby_use_original_palette=0
 
     colorscheme gruvbox-baby
 
-    hi CursorLineNr guifg=#FFFFFF
-    hi Folded guifg=#999999
-    hi HighlightedyankRegion guibg=DarkGreen
-    hi IncSearch guibg=DarkGreen
-    hi LineNr guifg=#999999
     hi! link ColorColumn CursorLine
+    hi! link Folded Normal
+    hi LineNr guifg=DarkGray
+    hi IncSearch guibg=DarkGreen
+    hi CursorLineNr gui=bold guifg=fg
+    hi HighlightedyankRegion gui=bold guifg=fg guibg=DarkGreen
 
-    hi Tabline guibg=NONE 
-    hi! link TablineFill Normal
-    hi! link TablineSel Normal
+    hi Tabline gui=bold guibg=bg
+    hi TablineSel gui=bold guibg=bg 
 
-    hi HopNextKey guibg=NONE
-    hi HopNextKey1 guibg=NONE
-    hi HopNextKey2 guibg=NONE
+    hi HopNextKey guibg=bg
+    hi HopNextKey1 guibg=bg
+    hi HopNextKey2 guibg=bg
 
+    hi SpellBad gui=undercurl 
 endif
 
 let &t_SI = "\e[6 q"

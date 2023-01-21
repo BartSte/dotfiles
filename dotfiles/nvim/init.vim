@@ -6,6 +6,7 @@ so mappings.vim
 so windows.vim
 so colors.vim
 so keep-centered.vim
+so fold.vim
 
 so conf-auto_save.vim
 so conf-fugitive.vim
