@@ -15,7 +15,8 @@ if has('termguicolors')
     hi! link ColorColumn CursorLine
     hi! link Folded Normal
     hi LineNr guifg=DarkGray
-    hi IncSearch guibg=DarkGreen
+    hi Search guifg=fg guibg=DarkGreen
+    hi IncSearch gui=bold guifg=fg guibg=DarkMagenta
     hi CursorLineNr gui=bold guifg=fg
     hi HighlightedyankRegion gui=bold guifg=fg guibg=DarkGreen
 
@@ -26,7 +27,7 @@ if has('termguicolors')
     hi HopNextKey1 guibg=bg
     hi HopNextKey2 guibg=bg
 
-    hi SpellBad gui=undercurl 
+    hi SpellBad gui=undercurl guisp=Red guifg=Normal
 endif
 
 let &t_SI = "\e[6 q"
