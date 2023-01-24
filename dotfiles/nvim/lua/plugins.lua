@@ -54,8 +54,8 @@ local function plugins(use)
     use "jbyuki/venn.nvim"
 
     -- Source control
-    use 'rbong/vim-flog'
     use 'tpope/vim-fugitive'
+    use 'rbong/vim-flog'
 
     -- Testing and debugging
     use 'puremourning/vimspector'
