@@ -69,6 +69,8 @@ local function plugins(use)
 
     -- Markdown
     use { "iamcco/markdown-preview.nvim", run = markdown_hook }
+    -- use { "godlygeek/tabular" }
+    -- use { "preservim/vim-markdown" }
 
 end
 
