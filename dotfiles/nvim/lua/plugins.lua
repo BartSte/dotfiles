@@ -11,12 +11,16 @@ local function plugins(use)
     use "williamboman/mason-lspconfig.nvim"
     use "jay-babu/mason-null-ls.nvim"
 
+    --Treesitter
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use 'nvim-treesitter/playground'
+
     --Looks
     use 'nvim-lualine/lualine.nvim'
     use 'nvim-tree/nvim-web-devicons'
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'luisiacc/gruvbox-baby', branch = 'main' }
-    use { 'alvarosevilla95/luatab.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+    use { 'alvarosevilla95/luatab.nvim',
+        requires = 'kyazdani42/nvim-web-devicons' }
 
     --Lsp
     use "folke/neodev.nvim"
@@ -69,8 +73,6 @@ local function plugins(use)
 
     -- Markdown
     use { "iamcco/markdown-preview.nvim", run = markdown_hook }
-    -- use { "godlygeek/tabular" }
-    -- use { "preservim/vim-markdown" }
 
 end
 

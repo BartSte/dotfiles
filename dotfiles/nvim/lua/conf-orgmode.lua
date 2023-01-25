@@ -19,7 +19,7 @@ local custom_exports = {
 
 local mappings = {
     org = {
-        org_toggle_checkbox = '<S-F12>'
+        org_toggle_checkbox = { '<F24>', '<S-F12>' }
     }
 }
 
@@ -28,7 +28,7 @@ orgmode.setup_ts_grammar()
 orgmode.setup({
     mappings = mappings,
     org_default_notes_file = dropbox_main,
-    org_agenda_files = {dropbox_main, dropbox_agenda, dropbox_personal},
+    org_agenda_files = { dropbox_main, dropbox_agenda, dropbox_personal },
     org_blank_before_new_entry = { heading = true, plain_list_item = false },
     org_hide_emphasis_markers = true,
     org_custom_exports = custom_exports,
@@ -38,7 +38,7 @@ orgmode.setup({
         WAIT = ':foreground orange :weight bold',
         NEXT = ':foreground yellow :weight bold',
         CANCEL = ':foreground magenta :weight bold'
-      }
+    }
 })
 
 bullets.setup({})

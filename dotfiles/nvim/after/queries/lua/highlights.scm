@@ -1,6 +1,6 @@
 ; extends
 
-(("comment_start"    @comment) (#set! conceal ""))
+(("comment_start" @comment) (#set! conceal ""))
 
 ; ; Keywords
 ; (("return"   @keyword) (#set! conceal ""))
