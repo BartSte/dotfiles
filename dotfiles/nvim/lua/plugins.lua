@@ -29,7 +29,7 @@ local function plugins(use)
     use 'onsails/lspkind.nvim'
     use 'jose-elias-alvarez/null-ls.nvim'
 
-    -- Completion
+    --Completion
     use "danymat/neogen"
     use 'L3MON4D3/LuaSnip'
     use 'dmitmel/cmp-cmdline-history'
@@ -41,7 +41,7 @@ local function plugins(use)
     use 'hrsh7th/nvim-cmp'
     use 'saadparwaiz1/cmp_luasnip'
 
-    -- Navigation
+    --Navigation
     use { 'junegunn/fzf', run = ":call fzf#install()" }
     use 'junegunn/fzf.vim'
     use 'moll/vim-bbye'
@@ -50,28 +50,28 @@ local function plugins(use)
     use { 'aznhe21/hop.nvim', branch = 'fix-some-bugs' }
     -- use 'phaazon/hop.nvim' -- was unstable
 
-    -- Editing
+    --Editing
     use '907th/vim-auto-save'
     use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
     use "windwp/nvim-autopairs"
     use "jbyuki/venn.nvim"
 
-    -- Source control
+    --Source control
     use 'tpope/vim-fugitive'
     use 'rbong/vim-flog'
 
-    -- Testing and debugging
+    --Testing and debugging
     use 'puremourning/vimspector'
     use 'vim-test/vim-test'
     use 'ThePrimeagen/harpoon'
 
-    -- Org
+    --Org
     use 'nvim-orgmode/orgmode'
     use 'akinsho/org-bullets.nvim'
     use 'dhruvasagar/vim-table-mode'
 
-    -- Markdown
+    --Markdown
     use { "iamcco/markdown-preview.nvim", run = markdown_hook }
 
 end

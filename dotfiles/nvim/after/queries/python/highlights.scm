@@ -12,9 +12,13 @@
  (#eq? @constant "math\.pi")
  (set! conceal "π"))
 
-((subscript (identifier) @type) 
+(((identifier) @type) 
     (#eq? @type "Union") 
-    (set! conceal "u"))
+    (set! conceal "U"))
+
+(((identifier) @type) 
+    (#eq? @type "Callable") 
+    (set! conceal ""))
 
 ; (((string) @conceal)
 ;     (#match? @conceal "") 

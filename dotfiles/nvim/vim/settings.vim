@@ -1,4 +1,6 @@
 filetype on
+syntax off
+
 let mapleader = " "
 set diffopt+=vertical,iblank,closeoff
 set nowrap
