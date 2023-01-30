@@ -41,6 +41,12 @@ orgmode.setup({
     }
 })
 
-bullets.setup({})
+bullets.setup({
+    symbols = {
+        checkboxes = {
+            todo = { " ", "OrgTODO" },
+        }
+    },
+})
 
 mapper.nnoremap('<a-r>', ':Files ' .. dropbox_org .. '<CR>')
