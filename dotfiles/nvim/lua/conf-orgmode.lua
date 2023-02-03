@@ -11,8 +11,8 @@ local dropbox_agenda = os_path.path_join(dropbox_org, 'outlook.org')
 local dropbox_personal = os_path.path_join(dropbox_org, 'personal.org')
 
 local custom_exports = {
-    v = {
-        label = 'Export to khal',
+    k = {
+        label = 'Export new item to khal',
         action = khal_export
     }
 }
