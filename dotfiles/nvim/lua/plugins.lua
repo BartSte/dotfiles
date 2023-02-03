@@ -73,6 +73,9 @@ local function plugins(use)
     --Markdown
     use { "iamcco/markdown-preview.nvim", run = markdown_hook }
 
+    --Drawing
+    use 'willchao612/vim-diagon'
+
 end
 
 return packer.startup(plugins)
