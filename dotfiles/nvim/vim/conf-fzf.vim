@@ -20,3 +20,4 @@ noremap <a-a> :Ag<space>
 noremap <a-b> <cmd>Buffers<CR>
 noremap <a-v> <cmd>Files ~/dotfiles/nvim<CR>
 noremap <a-M> <cmd>Marks<CR>
+noremap <a-h> <cmd>Helptags<CR>
