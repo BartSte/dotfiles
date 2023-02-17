@@ -29,7 +29,7 @@ end
 
 M.export = function(exporter)
     local org_agenda_item = get_fold_under_cursor(0)
-    local cmd = "echo \"" .. org_agenda_item .. "\" | org2khal new outlook_local"
+    local cmd = "echo \"" .. org_agenda_item .. "\" | khalorg new outlook_local"
     return exporter(cmd, '', M.success, M.error)
 end
 

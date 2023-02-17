@@ -59,6 +59,7 @@ local function plugins(use)
 
     --Source control
     use 'tpope/vim-fugitive'
+    use 'rbong/vim-flog'
 
     --Testing and debugging
     use 'puremourning/vimspector'
