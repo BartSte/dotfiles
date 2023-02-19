@@ -1453,22 +1453,22 @@ c.hints.uppercase = True
 
 ## Enter insert mode if an editable element is clicked.
 ## Type: Bool
-# c.input.insert_mode.auto_enter = True
+c.input.insert_mode.auto_enter = True
 
 ## Leave insert mode if a non-editable element is clicked.
 ## Type: Bool
-# c.input.insert_mode.auto_leave = True
+c.input.insert_mode.auto_leave = True
 
 ## Automatically enter insert mode if an editable element is focused
 ## after loading the page.
 ## Type: Bool
-# c.input.insert_mode.auto_load = False
+c.input.insert_mode.auto_load = False
 
 ## Leave insert mode when starting a new page load. Patterns may be
 ## unreliable on this setting, and they may match the url you are
 ## navigating to, or the URL you are navigating from.
 ## Type: Bool
-# c.input.insert_mode.leave_on_load = True
+c.input.insert_mode.leave_on_load = True
 
 ## Switch to insert mode when clicking flash and other plugins.
 ## Type: Bool
@@ -1476,7 +1476,7 @@ c.hints.uppercase = True
 
 ## Include hyperlinks in the keyboard focus chain when tabbing.
 ## Type: Bool
-# c.input.links_included_in_focus_chain = True
+c.input.links_included_in_focus_chain = True
 
 ## Interpret number prefixes as counts for bindings. This enables for vi-
 ## like bindings that can be prefixed with a number to indicate a count.
@@ -1700,7 +1700,7 @@ c.keyhint.delay = 0
 ## loss* on some pages (as Service Worker data isn't persisted) and will
 ## negatively impact start-up time.
 ## Type: Bool
-# c.qt.workarounds.remove_service_workers = False
+c.qt.workarounds.remove_service_workers = True
 
 ## When/how to show the scrollbar.
 ## Type: String

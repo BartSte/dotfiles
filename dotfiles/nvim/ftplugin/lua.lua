@@ -6,4 +6,4 @@ end
 local opts = { buffer = true }
 
 vim.keymap.set('n', '<space>f', format, opts)
-
+vim.opt_local.conceallevel = 2

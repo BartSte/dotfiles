@@ -1,9 +1,9 @@
 filetype on
+
 let mapleader = " "
 set diffopt+=vertical,iblank,closeoff
-" set scrolloff=999
 set nowrap
-set textwidth=80
+set textwidth=79
 
 " Completion
 set pumheight=10
@@ -38,6 +38,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 
 " Command line
 set showcmd
+set cmdheight=1
 set cedit=\<C-t>
 set nowildmenu
 
@@ -47,4 +48,5 @@ set ignorecase
 set nohlsearch
 
 " Spell
+set nospell
 set spelllang=en,nl

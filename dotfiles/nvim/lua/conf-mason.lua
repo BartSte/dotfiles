@@ -1,19 +1,11 @@
 local mason = require('mason')
 local lsp = require("mason-lspconfig")
-local registry = require('mason-registry')
+local null = require('mason-null-ls')
 
-local function ensure_installed(formatters)
-    for _, x in pairs(formatters) do
-        if not registry.is_installed(x) then
-            vim.cmd(string.format('MasonInstall %s', x))
-        end
-    end
-end
-
-local servers = { "sumneko_lua", "pyright", "vimls", "bashls", "jsonls", "clangd", "cssls", "arduino_language_server",
-    "marksman" }
-local formatters = { 'autopep8' }
+local servers = {"pyright", "vimls", "bashls", "jsonls"
+    , "clangd", "cssls", "arduino_language_server", "marksman" }
+local formatters_and_linters = { 'autopep8', 'ruff' }
 
 mason.setup()
 lsp.setup({ ensure_installed = servers })
-ensure_installed(formatters)
+null.setup({ ensure_installed = formatters_and_linters })

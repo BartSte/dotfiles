@@ -54,6 +54,7 @@ noremap <silent><a-,> <cmd>cp<CR>
 noremap <silent><a-.> <cmd>cn<CR>
 noremap <silent><C-n> <cmd>bnext<CR>
 noremap <silent><C-p> <cmd>bprevious<CR>
+noremap gF <cmd>wincmd v<bar>wincmd l<CR>gf
 
 "Search
 nnoremap <leader>/ *#<cmd>setlocal hlsearch<CR>
@@ -65,6 +66,7 @@ noremap <leader>to <cmd>tabonly<CR>
 noremap <leader>tc <cmd>tabclose<CR>
 
 "Formatting and refactoring
+nnoremap <leader>s <cmd>setlocal spell! spell?<CR>
 nnoremap <leader>% <cmd>source<CR>
 nnoremap <silent><leader>f mxgggqG`x
 vnoremap <silent><leader>cc :sort<CR>
@@ -72,3 +74,7 @@ nnoremap <silent><leader>cc vip:sort<CR>
 nnoremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>
 vnoremap <silent><leader>cl :!sort_variable_length.py<CR>
 nnoremap <silent><leader>cl vip:!sort_variable_length.py<CR>
+
+"Append <leader> to gq to run default vim formatter when lsp overrides gq.
+nnoremap <leader>gqq :.!fmt --width=79<CR>
+vnoremap <leader>gq :!fmt --width=79<CR>

@@ -6,6 +6,7 @@ local lspkind = require('lspkind')
 local menu_icons = {
     path = 'PATH',
     buffer = 'BUF',
+    orgmode = 'ORG',
     cmdline = 'CMD',
     luasnip = 'SNIP',
     nvim_lsp = 'LSP',
@@ -63,7 +64,7 @@ local snippet = { expand = func.snippet_expand }
 local sources_i = {
     { name = 'orgmode', priority = 1, keyword_length = 1 },
     { name = 'path', priority = 2, keyword_length = 1 },
-    { name = 'buffer', priority = 4, keyword_length = 3 },
+    { name = 'buffer', priority = 4, keyword_length = 1 },
     { name = 'luasnip', priority = 3, keyword_length = 1 },
     { name = 'nvim_lsp', priority = 5, keyword_length = 1 },
 }
@@ -71,7 +72,7 @@ local sources_i = {
 local sources_c = {
     { name = 'path', priority = 1, keyword_length = 1 },
     { name = 'cmdline', priority = 3, keyword_length = 1 },
-    { name = 'cmdline_history', priority = 2, keyword_length = 3 },
+    { name = 'cmdline_history', priority = 2, keyword_length = 1 },
 }
 
 local sources_s = { { name = 'buffer' } }
@@ -92,8 +93,6 @@ cmp.setup.cmdline(':', {
     sources = sources_c
 })
 
-
-
 -- To enable history scrolling on the command line, cmp is
 -- disabled when with <Down> or <Up> is pressed. Therefore the state of cmp is
 -- restored when leaving the command line.
@@ -103,8 +102,3 @@ vim.api.nvim_create_autocmd('CmdlineLeave', {
 })
 
 vim.opt.completeopt = { 'menu' }
-
---cmp is toggled globally by setting func.cmp_enabled with `func.toggle_cmp`.
---Directly changing cmp.setup -> enabled was omitted because that maker
---implementing history scrolling on the command line more difficult.
-mapper.noremap('<M-Space>', '<cmd>lua require("helpers-cmp").toggle_cmp()<CR>')

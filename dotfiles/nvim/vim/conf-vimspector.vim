@@ -15,7 +15,7 @@ augroup VimspectorUI
   autocmd User VimspectorUICreated call s:CustomiseUI()
 augroup END
 
-noremap <F7> <Plug>VimspectorReset
+noremap <F7> :VimspectorReset<CR>
 noremap <silent><a-C> :b vimspector.Console<bar>set ft=cpp<CR>
 noremap <silent><a-E> :b vimspector.Output:stderr<bar>set ft=cpp<CR>
 noremap <silent><a-A> :b vimspector.StackTrace<bar>set ft=cpp<CR>

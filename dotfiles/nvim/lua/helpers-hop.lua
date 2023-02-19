@@ -10,13 +10,11 @@ end
 
 M.hop_char1 = function()
     local opts = {}
-    bugfix()
     hop.hint_char1(opts)
 end
 
 M.hop_w = function()
     local opts = { direction = hint.HintDirection.AFTER_CURSOR }
-    bugfix()
     hop.hint_words(opts)
 end
 
@@ -26,13 +24,11 @@ M.hop_W = function()
     local hints = generator(jump_target.regex_by_searching(regex))
 
     hop.opts.direction = hint.HintDirection.AFTER_CURSOR
-    bugfix()
     hop.hint_with(hints, hop.opts)
 end
 
 M.hop_b = function()
     local opts = { direction = hint.HintDirection.BEFORE_CURSOR }
-    bugfix()
     hop.hint_words(opts)
 end
 
@@ -42,7 +38,6 @@ M.hop_B = function()
     local hints = generator(jump_target.regex_by_searching(regex))
 
     hop.opts.direction = hint.HintDirection.BEFORE_CURSOR
-    bugfix()
     hop.hint_with(hints, hop.opts)
 end
 
@@ -51,7 +46,6 @@ M.hop_e = function()
         direction = hint.HintDirection.AFTER_CURSOR,
         hint_position = hint.HintPosition.END
     }
-    bugfix()
     hop.hint_words(opts)
 end
 
@@ -62,7 +56,6 @@ M.hop_E = function()
 
     hop.opts.direction = hint.HintDirection.AFTER_CURSOR
     hop.hint_position = hint.HintPosition.END
-    bugfix()
     hop.hint_with(hints, hop.opts)
 end
 
@@ -71,7 +64,6 @@ M.hop_ge = function()
         direction = hint.HintDirection.BEFORE_CURSOR,
         hint_position = hint.HintPosition.END
     }
-    bugfix()
     hop.hint_words(opts)
 end
 
@@ -82,7 +74,6 @@ M.hop_gE = function()
 
     hop.opts.direction = hint.HintDirection.BEFORE_CURSOR
     hop.hint_position = hint.HintPosition.END
-    bugfix()
     hop.hint_with(hints, hop.opts)
 end
 

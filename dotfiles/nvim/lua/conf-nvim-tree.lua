@@ -13,11 +13,14 @@ local my_mappings = {
 }
 
 tree.setup({
-    sort_by = "case_sensitive",
+    sort_by = "name",
+    disable_netrw = true,
+      hijack_cursor = true,
+      sync_root_with_cwd = true,
     view = {
         adaptive_size = true,
         mappings = { list = my_mappings, },
-        relativenumber = true
+        relativenumber = true,
     },
     renderer = { group_empty = true, },
     filters = { dotfiles = false, },

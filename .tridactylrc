@@ -6,3 +6,5 @@ set hintchars nteslrakiwouqpghzxcvmfybj
 set hintfiltermode simple
 set allowautofocus false
 set modeindicatorshowkeys true
+
+bind O fillcmdline tabopen

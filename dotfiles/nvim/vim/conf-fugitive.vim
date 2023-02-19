@@ -1,3 +1,5 @@
+let g:flog_default_opts = {'max_count': 2000 }
+
 noremap <a-g> :G<space>
 noremap <a-G> :vertical G<CR>'"
 noremap <a-z> :Flog<CR>

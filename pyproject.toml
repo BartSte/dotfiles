@@ -1,0 +1,45 @@
+[tool.autopep8]
+aggressive = 3
+experimental = true
+max_line_length = 80
+
+[tool.ruff]
+line-length = 80
+
+select = [
+    "F",  # pyflakes
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "I",  # isort
+    "N",  # PEP8 naming
+    "D",  # pydocstyle
+]
+
+ignore = ["D203", "D212"]
+
+# "UP", # pyupgrade
+# "C",  # flake8-comprehensions
+# "B",  # flake8-bugbear
+# "YTT", # flake8-2020
+# "ANN", # flake8-annotations
+# "S", # flake8-bandit
+# "BLE", # flake8-blind-except
+# "FBT", # flake8-boolean-trap
+# "B", # flake8-bugbear
+# "A", # flake8-comprehensions
+# "EM", #flake8-errmsg ()
+# "ISC",#flake8-implicit-str-concat (ISC)
+# "T20",#flake8-print (T20)
+# "PT", #flake8-pytest-style (PT)
+# "Q",  #flake8-quotes (Q)
+# "RET",#flake8-return (RET)
+# "SIM",#flake8-simplify (SIM)
+# "TID",#flake8-tidy-imports (TID)
+# "ARG",#flake8-unused-arguments (ARG)
+# "DTZ",#flake8-datetimez (DTZ)
+# "ERA",#eradicate (ERA)
+# "PD", #pandas-vet (PD)
+# "PGH",#pygrep-hooks (PGH)
+# "PIE",#flake8-pie (PIE)
+# "RUFF"#Ruff-specific rules (RUF)
+

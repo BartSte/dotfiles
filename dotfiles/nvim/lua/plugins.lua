@@ -7,23 +7,29 @@ end
 local function plugins(use)
     --Package managers
     use 'wbthomason/packer.nvim'
-    use "williamboman/mason-lspconfig.nvim"
     use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
+    use "jay-babu/mason-null-ls.nvim"
+
+    --Treesitter
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use 'nvim-treesitter/playground'
 
     --Looks
     use 'nvim-lualine/lualine.nvim'
     use 'nvim-tree/nvim-web-devicons'
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'luisiacc/gruvbox-baby', branch = 'main' }
-    use 'BartSte/vim-icalendar'
+    use { 'alvarosevilla95/luatab.nvim',
+        requires = 'kyazdani42/nvim-web-devicons' }
 
     --Lsp
     use "folke/neodev.nvim"
     use "rafamadriz/friendly-snippets"
     use 'neovim/nvim-lspconfig'
     use 'onsails/lspkind.nvim'
+    use 'jose-elias-alvarez/null-ls.nvim'
 
-    -- Completion
+    --Completion
     use "danymat/neogen"
     use 'L3MON4D3/LuaSnip'
     use 'dmitmel/cmp-cmdline-history'
@@ -35,42 +41,42 @@ local function plugins(use)
     use 'hrsh7th/nvim-cmp'
     use 'saadparwaiz1/cmp_luasnip'
 
-    -- Navigation
-    use 'BartSte/vim-center-cursor'
+    --Navigation
     use { 'junegunn/fzf', run = ":call fzf#install()" }
     use 'junegunn/fzf.vim'
     use 'moll/vim-bbye'
     use 'nvim-lua/plenary.nvim'
     use 'nvim-tree/nvim-tree.lua'
-    use { 'phaazon/hop.nvim', branch = 'v2' }
+    use { 'aznhe21/hop.nvim', branch = 'fix-some-bugs' }
+    -- use 'phaazon/hop.nvim' -- was unstable
 
-    -- Editing
+    --Editing
     use '907th/vim-auto-save'
     use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
-    use { "iamcco/markdown-preview.nvim", run = markdown_hook }
     use "windwp/nvim-autopairs"
+    use "jbyuki/venn.nvim"
 
-    -- Source control
-    use 'rbong/vim-flog'
+    --Source control
     use 'tpope/vim-fugitive'
+    use 'rbong/vim-flog'
 
-    -- Testing and debugging
+    --Testing and debugging
     use 'puremourning/vimspector'
     use 'vim-test/vim-test'
     use 'ThePrimeagen/harpoon'
 
-    -- Org
+    --Org
     use 'nvim-orgmode/orgmode'
     use 'akinsho/org-bullets.nvim'
     use 'dhruvasagar/vim-table-mode'
-    use 'lukas-reineke/headlines.nvim'
 
-    -- External
-    use {
-        'glacambre/firenvim',
-        run = function() vim.fn['firenvim#install'](0) end
-    }
+    --Markdown
+    use { "iamcco/markdown-preview.nvim", run = markdown_hook }
+
+    --Drawing
+    use 'willchao612/vim-diagon'
+
 end
 
 return packer.startup(plugins)
