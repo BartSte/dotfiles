@@ -1,6 +1,6 @@
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded = 1
-vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwPlugin = 0
 
 local keymapper = require('keymapper')
 local tree = require('nvim-tree')

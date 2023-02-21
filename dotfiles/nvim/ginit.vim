@@ -1,1 +1,1 @@
-GuiFont! JetBrains\ Mono:h10
+GuiFont! JetBrains\ Mono:h11
