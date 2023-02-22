@@ -1,7 +1,7 @@
 let $FZF_DEFAULT_COMMAND = expand('fd --hidden --no-ignore-vcs --ignore-file $HOME/.ignore -t f')
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 100% --reverse --border'
 
-let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-s']
+let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-p']
 
 command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(
