@@ -137,6 +137,9 @@
             "type": "prompt"
         }
     ],
+    "secondary_prompt": {
+        "template": " <#69FF94>\u279C</> "
+    },
     "final_space": true,
     "version": 2
 }
