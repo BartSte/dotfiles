@@ -8,9 +8,6 @@
                     "background": "#29315A",
                     "foreground": "#ffffff",
                     "leading_diamond": "\ue0b6",
-                    "properties": {
-                        "style": "mixed"
-                    },
                     "style": "diamond",
                     "template": "{{ if .WSL }}WSL at{{ end }} {{.Icon}} ",
                     "trailing_diamond": "\ue0b4 ",
@@ -21,7 +18,7 @@
                     "foreground": "#3EC669",
                     "leading_diamond": "\ue0b6",
                     "properties": {
-                        "style": "mixed"
+                        "style": "folder"
                     },
                     "style": "diamond",
                     "template": "\ue5ff {{ .Path }}",
@@ -39,7 +36,6 @@
                     ],
                     "leading_diamond": "\ue0b6",
                     "properties": {
-                        "style": "mixed",
                         "branch_max_length": 25,
                         "fetch_stash_count": true,
                         "fetch_status": true,
@@ -80,7 +76,6 @@
                     "style": "diamond",
                     "trailing_diamond": "\ue0b4 ",
                     "properties": {
-                        "style": "mixed",
                         "display_mode": "files",
                         "fetch_virtual_env": true
                     },
