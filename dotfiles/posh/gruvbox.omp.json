@@ -76,8 +76,7 @@
                     "style": "diamond",
                     "trailing_diamond": "\ue0b4 ",
                     "properties": {
-                        "display_mode": "files",
-                        "fetch_virtual_env": true
+                        "display_mode": "environment"
                     },
                     "template": " \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
                     "type": "python"
@@ -138,7 +137,6 @@
             "type": "prompt"
         }
     ],
-    "console_title_template": "{{ .Folder }}",
     "final_space": true,
     "version": 2
 }
