@@ -65,6 +65,9 @@ local function plugins(use)
     use 'puremourning/vimspector'
     use 'vim-test/vim-test'
     use 'ThePrimeagen/harpoon'
+    -- use 'mfussenegger/nvim-dap'
+    -- use 'mfussenegger/nvim-dap-python'
+    -- use 'rcarriga/cmp-dap'
 
     --Org
     use 'nvim-orgmode/orgmode'
