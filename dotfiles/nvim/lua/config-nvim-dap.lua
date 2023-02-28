@@ -5,9 +5,6 @@ local keymapper = require('keymapper')
 
 dap_python.setup()
 dap_python.test_runner = 'unittest'
-require('dap-python').resolve_python = function()
-    return '/home/barts/code/khal-orgmode/.venv/bin/python'
-end
 
 vim.keymap.set('n', '<F4>', function() dap.run_last() end)
 vim.keymap.set('n', '<F5>', function() dap.continue() end)

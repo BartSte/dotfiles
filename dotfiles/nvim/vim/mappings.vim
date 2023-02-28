@@ -22,6 +22,7 @@ cnoremap <C-BS> <C-w>
 cnoremap <C-h> <C-w>
 
 "Override default mappings
+noremap <C-t> <Esc>
 noremap <leader>j J
 nnoremap <BS> k
 nnoremap <CR> j
