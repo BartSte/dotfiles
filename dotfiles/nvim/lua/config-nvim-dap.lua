@@ -5,6 +5,9 @@ local keymapper = require('keymapper')
 
 dap_python.setup()
 dap_python.test_runner = 'unittest'
+require('dap-python').resolve_python = function()
+    return '/home/barts/code/khal-orgmode/.venv/bin/python'
+end
 
 vim.keymap.set('n', '<F4>', function() dap.run_last() end)
 vim.keymap.set('n', '<F5>', function() dap.continue() end)
@@ -18,14 +21,12 @@ vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function() widgets.hover() end)
 vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function() widgets.preview() end)
 vim.keymap.set('n', '<Leader>df', function() widgets.centered_float(widgets.frames) end)
 vim.keymap.set('n', '<Leader>ds', function() widgets.centered_float(widgets.scopes) end)
---
--- vim.keymap.set('n', '<Leader>lp', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+vim.keymap.set('n', '<Leader>dp', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
 
-keymapper.nnoremap('<a-C>', ':lua dap_python.test_class()<CR>')
-keymapper.nnoremap('<a-T>', ':lua dap_python.test_method()<CR>')
-keymapper.vnoremap('<a-T>', ':lua dap_python.test_selection()<CR>')
+keymapper.nnoremap('<a-C>', ':lua require("dap-python").test_class()<CR>')
+keymapper.nnoremap('<a-T>', ':lua require("dap-python").test_method()<CR>')
+keymapper.vnoremap('<a-T>', ':lua require("dap-python").test_selection()<CR>')
 
 dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 
-vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
-
+vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })

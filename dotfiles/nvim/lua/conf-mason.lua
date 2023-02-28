@@ -7,7 +7,7 @@ local servers = { "pyright", "vimls", "bashls", "jsonls", "clangd", "cssls", "ar
 local formatters_and_linters = { 'autopep8', 'ruff' }
 
 mason.setup()
-mason_dap.setup({ ensure_installed = { "python" }, automatic_installation = true, automatic_setup = true })
+mason_dap.setup({ ensure_installed = { "python" }, automatic_setup = true})
 mason_dap.setup_handlers({})
 
 lsp.setup({ ensure_installed = servers })
