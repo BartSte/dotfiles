@@ -65,10 +65,10 @@ local function plugins(use)
     use 'vim-test/vim-test'
     use 'ThePrimeagen/harpoon'
     use 'puremourning/vimspector'
-    -- use 'mfussenegger/nvim-dap'
-    -- use 'mfussenegger/nvim-dap-python'
+    use 'mfussenegger/nvim-dap'
+    use 'mfussenegger/nvim-dap-python'
     -- use 'jay-babu/mason-nvim-dap.nvim'
-    -- use 'rcarriga/cmp-dap'
+    use 'rcarriga/cmp-dap'
 
     --Org
     use 'nvim-orgmode/orgmode'
