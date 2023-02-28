@@ -62,12 +62,12 @@ local function plugins(use)
     use 'rbong/vim-flog'
 
     --Testing and debugging
-    use 'puremourning/vimspector'
     use 'vim-test/vim-test'
     use 'ThePrimeagen/harpoon'
-    -- use 'mfussenegger/nvim-dap'
-    -- use 'mfussenegger/nvim-dap-python'
-    -- use 'rcarriga/cmp-dap'
+    use 'mfussenegger/nvim-dap'
+    use 'mfussenegger/nvim-dap-python'
+    use 'jay-babu/mason-nvim-dap.nvim'
+    use 'rcarriga/cmp-dap'
 
     --Org
     use 'nvim-orgmode/orgmode'
