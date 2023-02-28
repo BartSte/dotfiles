@@ -3,7 +3,7 @@ local dap_python = require('dap-python')
 local widgets = require('dap.ui.widgets')
 local keymapper = require('keymapper')
 
-dap_python.setup()
+dap_python.setup('python')
 dap_python.test_runner = 'unittest'
 
 vim.keymap.set('n', '<F4>', function() dap.run_last() end)

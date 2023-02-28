@@ -14,7 +14,6 @@ so conf-fzf.vim
 so conf-markdown.vim
 so conf-vim-bbye.vim
 so config-vim-test.vim
-" so conf-vimspector.vim
 so config-table.vim
 cd -
 
@@ -23,20 +22,18 @@ lua require('conf-hop')
 lua require('conf-lualine')
 lua require('conf-nvim-tree')
 lua require('conf-treesitter')
-lua require('config-nvim-dap')
-lua require('conf-mason')
 lua require('conf-neodev')
 lua require('conf-lsp-init')
 lua require('conf-lsp-servers')
 lua require('conf-lsp-mappings')
 lua require('config-null-ls')
 lua require('conf-cmp')
+lua require('config-nvim-dap')
+lua require('conf-mason')
 lua require('conf-autopairs')
 lua require('conf-neogen')
 lua require('conf-luasnip')
 lua require('conf-orgmode')
-lua require('config-venn')
-lua require('config-luatab')
 lua require('local-shada')
 lua require('global-marks')
 lua require('autocmds')
