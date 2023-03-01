@@ -37,8 +37,6 @@ vnoremap p pgvy
 
 " Terminal mode
 tnoremap <C-t> <C-\><C-n>
-map <a-q> <cmd>wincmd v<bar>term<CR>mQ
-map <a-Q> <cmd>only<bar>wincmd v<bar>term<CR>mQ
 
 " Window navigation
 nnoremap <a-e> <C-w>k
