@@ -1,10 +1,14 @@
 local dap = require('dap')
+local os_path = require('os_path')
 local widgets = require('dap.ui.widgets')
 local keymapper = require('keymapper')
 local dap_python = require('dap-python')
 local virtual_text = require("nvim-dap-virtual-text")
 
-dap_python.setup('python')
+dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
+
+local debugpy_path = os_path.path_join(vim.fn.stdpath('data'), 'mason', 'packages', 'debugpy', 'venv', 'bin', 'python')
+dap_python.setup(debugpy_path)
 dap_python.test_runner = 'unittest'
 
 vim.keymap.set('n', '<F4>', function() dap.run_last() end)
@@ -25,7 +29,6 @@ keymapper.nnoremap('<a-C>', ':lua require("dap-python").test_class()<CR>')
 keymapper.nnoremap('<a-T>', ':lua require("dap-python").test_method()<CR>')
 keymapper.vnoremap('<a-T>', ':lua require("dap-python").test_selection()<CR>')
 
-dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 
 vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
 

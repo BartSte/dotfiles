@@ -1,12 +1,13 @@
-local mason = require('mason')
+local dap = require('mason-nvim-dap')
 local lsp = require("mason-lspconfig")
 local null = require('mason-null-ls')
-local mason_dap = require('mason-nvim-dap')
+local mason = require('mason')
 
 local servers = { "pyright", "vimls", "bashls", "jsonls", "clangd", "cssls", "arduino_language_server", "marksman" }
+local debuggers = { "python" }
 local formatters_and_linters = { 'autopep8', 'ruff' }
 
 mason.setup()
-mason_dap.setup({ automatic_installation = true })
+dap.setup({ ensure_installed = debuggers })
 lsp.setup({ ensure_installed = servers })
 null.setup({ ensure_installed = formatters_and_linters })
