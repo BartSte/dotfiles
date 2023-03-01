@@ -1,6 +1,10 @@
 local keymapper = require('keymapper')
 
-vim.g.floaterm_title = os.getenv('SHELL') .. " @ " .. os.getenv('PWD') .. ": $1/$2"
+if vim.fn.has('win32') == 0 then
+    vim.g.floaterm_title = os.getenv('SHELL') .. " @ " .. os.getenv('PWD') .. ": $1/$2"
+else
+    vim.g.floaterm_title = "Powershell: $1/$2"
+end
 vim.g.floaterm_wintype = 'float'
 vim.g.floaterm_width = 0.8
 vim.g.floaterm_height = 0.8
