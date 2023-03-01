@@ -7,8 +7,15 @@ local virtual_text = require("nvim-dap-virtual-text")
 
 dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 
-local debugpy_path = os_path.path_join(vim.fn.stdpath('data'), 'mason', 'packages', 'debugpy', 'venv', 'bin', 'python')
-dap_python.setup(debugpy_path)
+local function get_debugpy()
+    if vim.fn.has("win") == 1 then
+        return os_path.path_join(vim.fn.stdpath('data'), 'mason', 'packages', 'debugpy', 'venv', 'Scripts', 'python')
+    else
+        return os_path.path_join(vim.fn.stdpath('data'), 'mason', 'packages', 'debugpy', 'venv', 'bin', 'python')
+    end
+end
+
+dap_python.setup(get_debugpy())
 dap_python.test_runner = 'unittest'
 
 local centered_float_frames = function() widgets.centered_float(widgets.frames) end
