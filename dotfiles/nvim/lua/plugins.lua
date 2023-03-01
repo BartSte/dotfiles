@@ -63,7 +63,8 @@ local function plugins(use)
 
     --Testing
     use 'vim-test/vim-test'
-    use 'ThePrimeagen/harpoon'
+    use 'voldikss/vim-floaterm'
+    -- use 'ThePrimeagen/harpoon'
 
     --Debugging
     use 'mfussenegger/nvim-dap'

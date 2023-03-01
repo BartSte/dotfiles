@@ -1,7 +1,14 @@
+function! FloatermStrategy(cmd)
+    execute 'FloatermToggle '
+    execute 'FloatermSend ' . a:cmd
+    stopinsert
+endfunction
+
+let g:test#custom_strategies = {'myfloaterm': function('FloatermStrategy')}
+let g:test#strategy = 'myfloaterm'
 let test#python#runner = 'pyunit'
-" let g:test#neovim#start_normal = 1 
 
 noremap gl :TestVisit<CR>
-noremap <a-t> :only<bar>TestNearest -strategy=harpoon<bar>wincmd v<CR><cmd>wincmd l<bar>TestVisit<CR>
-noremap <a-l> :only<bar>TestLast -strategy=harpoon<bar>wincmd v<CR><cmd>wincmd l<bar>TestVisit<CR>
-noremap <a-f> :only<bar>TestFile -strategy=harpoon<bar>wincmd v<CR><cmd>wincmd l<bar>TestVisit<CR>
+noremap <a-t> :TestNearest<CR>
+noremap <a-l> :TestLast<CR>
+noremap <a-f> :TestFile<CR>
