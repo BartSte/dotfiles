@@ -11,19 +11,20 @@ local debugpy_path = os_path.path_join(vim.fn.stdpath('data'), 'mason', 'package
 dap_python.setup(debugpy_path)
 dap_python.test_runner = 'unittest'
 
-vim.keymap.set('n', '<F4>', function() dap.run_last() end)
-vim.keymap.set('n', '<F5>', function() dap.continue() end)
-vim.keymap.set('n', '<F9>', function() dap.toggle_breakpoint() end)
-vim.keymap.set('n', '<F10>', function() dap.step_over() end)
-vim.keymap.set('n', '<F11>', function() dap.step_into() end)
-vim.keymap.set('n', '<F12>', function() dap.step_out() end)
+local centered_float_frames = function() widgets.centered_float(widgets.frames) end
+local centered_float_scopes = function() widgets.centered_float(widgets.scopes) end
 
-vim.keymap.set('n', '<a-R>', function() dap.repl.open() end)
-vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function() widgets.hover() end)
-vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function() widgets.preview() end)
-vim.keymap.set('n', '<Leader>df', function() widgets.centered_float(widgets.frames) end)
-vim.keymap.set('n', '<Leader>ds', function() widgets.centered_float(widgets.scopes) end)
-vim.keymap.set('n', '<Leader>dl', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+vim.keymap.set('n', '<F4>',  dap.run_last)
+vim.keymap.set('n', '<F5>',  dap.continue)
+vim.keymap.set('n', '<F9>',  dap.toggle_breakpoint)
+vim.keymap.set('n', '<F10>', dap.step_over)
+vim.keymap.set('n', '<F11>', dap.step_into)
+vim.keymap.set('n', '<F12>', dap.step_out)
+vim.keymap.set('n', '<a-R>', dap.repl.open)
+vim.keymap.set({ 'n', 'v' }, '<Leader>dh', widgets.hover)
+vim.keymap.set({ 'n', 'v' }, '<Leader>dp', widgets.preview)
+vim.keymap.set('n', '<Leader>df', centered_float_frames)
+vim.keymap.set('n', '<Leader>ds', centered_float_scopes)
 
 keymapper.nnoremap('<a-C>', ':lua require("dap-python").test_class()<CR>')
 keymapper.nnoremap('<a-T>', ':lua require("dap-python").test_method()<CR>')
