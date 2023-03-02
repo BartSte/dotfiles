@@ -5,7 +5,7 @@ local keymapper = require('keymapper')
 local dap_python = require('dap-python')
 local virtual_text = require("nvim-dap-virtual-text")
 
-dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
+dap.defaults.fallback.terminal_win_cmd = '80vsplit new'
 
 local function get_debugpy()
     local base = os_path.path_join(vim.fn.stdpath('data'), 'mason', 'packages', 'debugpy', 'venv')
@@ -20,12 +20,25 @@ end
 dap_python.setup(get_debugpy())
 dap_python.test_runner = 'unittest'
 
+local test_runners = dap_python.test_runners
+
+local function prune_nil(items)
+  return vim.tbl_filter(function(x) return x end, items)
+end
+
+test_runners.unittest = function(classname, methodname, opts)
+    local path = vim.fn.expand('%:.:r:gs?\\(/\\|\\\\\\)?.?')
+    local test_path = table.concat(prune_nil({ path, classname, methodname }), '.')
+    local args = { '-v', test_path }
+    return 'unittest', args
+end
+
 local centered_float_frames = function() widgets.centered_float(widgets.frames) end
 local centered_float_scopes = function() widgets.centered_float(widgets.scopes) end
 
-vim.keymap.set('n', '<F4>',  dap.run_last)
-vim.keymap.set('n', '<F5>',  dap.continue)
-vim.keymap.set('n', '<F9>',  dap.toggle_breakpoint)
+vim.keymap.set('n', '<F4>', dap.run_last)
+vim.keymap.set('n', '<F5>', dap.continue)
+vim.keymap.set('n', '<F9>', dap.toggle_breakpoint)
 vim.keymap.set('n', '<F10>', dap.step_over)
 vim.keymap.set('n', '<F11>', dap.step_into)
 vim.keymap.set('n', '<F12>', dap.step_out)
