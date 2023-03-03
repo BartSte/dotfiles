@@ -21,10 +21,8 @@ lspconfig.clangd.setup({})
 --     filetypes = { "arduino", "cpp" }
 -- }
 
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
-
+--For some reason the runtime files are not detected on windows. This does not
+--matter much as I use Linux for luas scripting.
 lspconfig.lua_ls.setup {
   settings = {
     Lua = {
