@@ -10,29 +10,18 @@ dap.defaults.fallback.terminal_win_cmd = '80vsplit new'
 local function get_debugpy()
     local base = os_path.path_join(vim.fn.stdpath('data'), 'mason', 'packages', 'debugpy', 'venv')
     if vim.fn.has("win32") == 1 then
-        -- return os_path.path_join(os.getenv('VIRTUAL_ENV'), 'Scripts', 'python')
-        return os_path.path_join(base, 'Scripts', 'python')
+        --for windows, use debugpy for the global python installation to avoid cmd.exe popups
+        return vim.g.python3_host_prog
+        -- return os_path.path_join(base, 'Scripts', 'python')
     else
         return os_path.path_join(base, 'bin', 'python')
     end
 end
 
 dap_python.setup(get_debugpy())
-dap_python.test_runner = 'unittest'
+dap_python.test_runner = 'pytest'
 
 local test_runners = dap_python.test_runners
-
-local function prune_nil(items)
-  return vim.tbl_filter(function(x) return x end, items)
-end
-
-test_runners.unittest = function(classname, methodname, opts)
-    local path = vim.fn.expand('%:.:r:gs?\\(/\\|\\\\\\)?.?')
-    local test_path = table.concat(prune_nil({ path, classname, methodname }), '.')
-    local args = { '-v', test_path }
-    return 'unittest', args
-end
-
 local centered_float_frames = function() widgets.centered_float(widgets.frames) end
 local centered_float_scopes = function() widgets.centered_float(widgets.scopes) end
 
