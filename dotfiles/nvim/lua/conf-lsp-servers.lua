@@ -6,7 +6,7 @@ lspconfig.bashls.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.cssls.setup({})
 lspconfig.cmake.setup({})
-lspconfig.powershell_es.setup({})
+-- lspconfig.powershell_es.setup({})
 lspconfig.marksman.setup({})
 
 lspconfig.clangd.setup({})
