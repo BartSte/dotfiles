@@ -6,7 +6,7 @@ endfunction
 
 let g:test#custom_strategies = {'myfloaterm': function('FloatermStrategy')}
 let g:test#strategy = 'myfloaterm'
-let test#python#runner = 'pyunit'
+let test#python#runner = 'pytest'
 
 noremap gl :TestVisit<CR>
 noremap <a-t> :TestNearest<CR>
