@@ -3,7 +3,7 @@ local lsp = require("mason-lspconfig")
 local null = require('mason-null-ls')
 local mason = require('mason')
 
-local servers = { "pyright", "vimls", "bashls", "jsonls", "clangd", "cssls", "arduino_language_server", "marksman" }
+local servers = { "pyright", "vimls", "bashls", "jsonls", "clangd", "cssls", "arduino_language_server"}
 local debuggers = { "python" }
 local formatters_and_linters = { 'autopep8', 'ruff' }
 
