@@ -2,7 +2,7 @@ local lspconfig = require('lspconfig')
 
 lspconfig.pyright.setup({})
 lspconfig.vimls.setup({})
-lspconfig.bashls.setup({})
+lspconfig.bashls.setup({filetypes = {"sh", "bash", "zsh"}})
 lspconfig.jsonls.setup({})
 lspconfig.cssls.setup({})
 lspconfig.cmake.setup({})
