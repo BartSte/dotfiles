@@ -40,6 +40,7 @@ vim.keymap.set('n', '<Leader>ds', centered_float_scopes)
 keymapper.nnoremap('<a-C>', ':lua require("dap-python").test_class()<CR>')
 keymapper.nnoremap('<a-T>', ':lua require("dap-python").test_method()<CR>')
 keymapper.vnoremap('<a-T>', ':lua require("dap-python").test_selection()<CR>')
+keymapper.nnoremap('<F7>', ':DapTerminate<CR>')
 
 
 vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
