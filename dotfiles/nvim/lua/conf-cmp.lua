@@ -46,7 +46,7 @@ local mappings = {
     ['<CR>'] = cmp.mapping(enter),
     ['<Tab>'] = cmp.mapping(tab),
     ['<C-u>'] = cmp.mapping.scroll_docs(4),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs( -4),
     ['<Down>'] = cmp.mapping(down),
     ['<M-CR>'] = cmp.mapping(menter),
     ['<S-Tab>'] = cmp.mapping(stab),
@@ -62,16 +62,16 @@ local window = {
 local snippet = { expand = func.snippet_expand }
 
 local sources_i = {
-    { name = 'orgmode', priority = 1, keyword_length = 1 },
-    { name = 'path', priority = 2, keyword_length = 1 },
-    { name = 'buffer', priority = 4, keyword_length = 1 },
-    { name = 'luasnip', priority = 3, keyword_length = 1 },
+    { name = 'orgmode',  priority = 1, keyword_length = 1 },
+    { name = 'path',     priority = 2, keyword_length = 1 },
+    { name = 'buffer',   priority = 4, keyword_length = 1 },
+    { name = 'luasnip',  priority = 3, keyword_length = 1 },
     { name = 'nvim_lsp', priority = 5, keyword_length = 1 },
 }
 
 local sources_c = {
-    { name = 'path', priority = 1, keyword_length = 1 },
-    { name = 'cmdline', priority = 3, keyword_length = 1 },
+    { name = 'path',            priority = 1, keyword_length = 1 },
+    { name = 'cmdline',         priority = 3, keyword_length = 1 },
     { name = 'cmdline_history', priority = 2, keyword_length = 1 },
 }
 
@@ -83,6 +83,16 @@ cmp.setup({
     formatting = formatting,
     mapping = mappings,
     sources = sources_i,
+    enabled = function()
+        return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+            or require("cmp_dap").is_dap_buffer()
+    end
+})
+
+cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+    sources = {
+        { name = "dap" },
+    },
 })
 
 cmp.setup.cmdline({ '/', '?' }, {

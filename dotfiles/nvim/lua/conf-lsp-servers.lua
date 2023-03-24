@@ -2,11 +2,11 @@ local lspconfig = require('lspconfig')
 
 lspconfig.pyright.setup({})
 lspconfig.vimls.setup({})
-lspconfig.bashls.setup({})
+lspconfig.bashls.setup({filetypes = {"sh", "bash", "zsh"}})
 lspconfig.jsonls.setup({})
 lspconfig.cssls.setup({})
 lspconfig.cmake.setup({})
-lspconfig.powershell_es.setup({})
+-- lspconfig.powershell_es.setup({})
 lspconfig.marksman.setup({})
 
 lspconfig.clangd.setup({})
@@ -21,10 +21,8 @@ lspconfig.clangd.setup({})
 --     filetypes = { "arduino", "cpp" }
 -- }
 
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
+--For some reason the runtime files are not detected on windows. This does not
+--matter much as I use Linux for luas scripting.
 lspconfig.lua_ls.setup {
   settings = {
     Lua = {

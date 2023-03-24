@@ -4,15 +4,20 @@
 *tmp*/
 *venv*/
 .arduino*/
+.cargo
 .cargo/
 .conan
+.doom.d
 .dotfiles*/
+.dropbox*
+.emacs*
 .fonts/
 .git/
 .history/
 .mozilla/
 .npm/
 .python_history/
+.rustup
 .venv/
 .vscode/
 Reporting Data/
@@ -29,3 +34,6 @@ project_data/
 venv/
 visual/
 yay/
+AppData
+Fleet Cleaner
+OneDrive*

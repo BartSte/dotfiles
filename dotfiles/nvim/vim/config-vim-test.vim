@@ -1,26 +1,14 @@
-function! MyUnitTestStrategy(cmd)
-    let testName = split(a:cmd)[-1]
-    call vimspector#LaunchWithSettings( #{ configuration: 'unittest', TestName: testName } )
+function! FloatermStrategy(cmd)
+    execute 'FloatermToggle '
+    execute 'FloatermSend ' . a:cmd
+    stopinsert
 endfunction
 
-let test#python#runner = 'pyunit'
-let g:test#custom_strategies = {'unittest': function('MyUnitTestStrategy')}
-let g:test#neovim#start_normal = 1 
+let g:test#custom_strategies = {'myfloaterm': function('FloatermStrategy')}
+let g:test#strategy = 'myfloaterm'
+let test#python#runner = 'pytest'
 
 noremap gl :TestVisit<CR>
-
-" Long harpoon strategy ensures that 1 terminal is reused and that het windows
-" are arranged properly.
-if has('win32')
-    noremap <a-t> :only<bar>TestNearest -strategy=harpoon<CR>gi<cmd>wincmd v<CR><cmd>wincmd l<bar>TestVisit<CR>
-    noremap <a-l> :only<bar>TestLast -strategy=harpoon<CR>gi<cmd>wincmd v<CR><cmd>wincmd l<bar>TestVisit<CR>
-    noremap <a-f> :only<bar>TestFile -strategy=harpoon<CR>gi<cmd>wincmd v<CR><cmd>wincmd l<bar>TestVisit<CR>
-else
-    noremap <a-t> :only<bar>TestNearest -strategy=harpoon<CR>gi<cmd>wincmd v<CR><cmd>wincmd l<bar>TestVisit<CR>
-    noremap <a-l> :only<bar>TestLast -strategy=harpoon<CR>gi<cmd>wincmd v<CR><cmd>wincmd l<bar>TestVisit<CR>
-    noremap <a-f> :only<bar>TestFile -strategy=harpoon<CR>gi<cmd>wincmd v<CR><cmd>wincmd l<bar>TestVisit<CR>
-endif
-
-noremap <a-T> :TestNearest -strategy=unittest<CR>
-noremap <a-L> :TestLast -strategy=unittest<CR>
-noremap <a-F> :TestFile -strategy=unittest<CR>
+noremap <a-t> :TestNearest<CR>
+noremap <a-l> :TestLast<CR>
+noremap <a-f> :TestFile<CR>

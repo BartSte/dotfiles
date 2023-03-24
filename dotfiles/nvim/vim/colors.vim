@@ -27,6 +27,8 @@ if has('termguicolors')
     hi HopNextKey1 guibg=bg
     hi HopNextKey2 guibg=bg
 
+    hi FloatermBorder guibg=bg
+
     hi SpellBad gui=undercurl guisp=Red guifg=Normal
 endif
 

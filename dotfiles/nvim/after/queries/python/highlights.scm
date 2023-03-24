@@ -12,6 +12,14 @@
  (#eq? @constant "math\.pi")
  (set! conceal "π"))
 
+(((attribute) @constant)
+ (#eq? @constant "numpy\.pi")
+ (set! conceal "π"))
+
+(((attribute) @constant)
+ (#eq? @constant "np\.pi")
+ (set! conceal "π"))
+
 (((identifier) @type) 
     (#eq? @type "Union") 
     (set! conceal "U"))
