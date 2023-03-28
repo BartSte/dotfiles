@@ -1,3 +1,10 @@
+function! g:ExecInCmd(command)
+  let tmp=&shell
+  set shell=bash
+  execute a:command
+  let &shell=tmp
+endfunction
+
 if has('win32')
     " let g:python3_host_prog = stdpath('data') . '\mason\packages\debugpy\venv\Scripts\python.exe'
     let g:python3_host_prog = $LOCALAPPDATA . '\Programs\Python\Python311\python.exe'
@@ -6,6 +13,7 @@ if has('win32')
     let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
     let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
     set shellquote= shellxquote=
+
 endif
 
 if !empty($WH)
@@ -22,3 +30,4 @@ if !empty($WH)
                 \   'cache_enabled': 0,
                 \ }
 endif
+

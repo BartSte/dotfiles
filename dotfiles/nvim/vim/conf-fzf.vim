@@ -15,9 +15,19 @@ command! -bang -nargs=* Ag
         \ --path-to-ignore $HOME/.ignore ').shellescape(<q-args>), 
         \ 1, fzf#vim#with_preview(), <bang>0)
 
-noremap <a-o> <cmd>Files<CR>
-noremap <a-a> :Ag<space>
-noremap <a-b> <cmd>Buffers<CR>
-noremap <a-v> <cmd>Files ~/dotfiles/nvim<CR>
-noremap <a-M> <cmd>Marks<CR>
-noremap <a-h> <cmd>Helptags<CR>
+if has('win32')
+    " Workaround for: https://github.com/junegunn/fzf.vim/issues/883
+    noremap <a-o> <cmd>call ExecInCmd('Files')<CR>
+    noremap <a-a> :Ag<space>
+    noremap <a-b> <cmd>call ExecInCmd('Buffers')<CR>
+    noremap <a-v> <cmd>call ExecInCmd('Files ~/dotfiles/nvim')<CR>
+    noremap <a-M> <cmd>call ExecInCmd('Marks')<CR>
+    noremap <a-h> <cmd>call ExecInCmd('Helptags')<CR>
+else
+    noremap <a-o> <cmd>Files<CR>
+    noremap <a-a> :Ag<space>
+    noremap <a-b> <cmd>Buffers<CR>
+    noremap <a-v> <cmd>Files ~/dotfiles/nvim<CR>
+    noremap <a-M> <cmd>Marks<CR>
+    noremap <a-h> <cmd>Helptags<CR>
+endif
