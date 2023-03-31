@@ -10,6 +10,7 @@ vim.g.floaterm_width = 0.95
 vim.g.floaterm_height = 0.95
 vim.g.floaterm_position = 'center'
 vim.g.floaterm_autoclose = 2
-vim.g.floaterm_autoinsert = false
+vim.g.floaterm_autoinsert = true
 
 keymapper.nnoremap('<a-q>', ':FloatermToggle<CR>')
+keymapper.tnoremap('<a-q>', '<C-\\><C-n>:FloatermToggle<CR>')
