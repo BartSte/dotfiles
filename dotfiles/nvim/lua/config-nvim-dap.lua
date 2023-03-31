@@ -8,12 +8,11 @@ local virtual_text = require("nvim-dap-virtual-text")
 dap.defaults.fallback.terminal_win_cmd = '80vsplit new'
 
 local function get_debugpy()
-    local base = os_path.path_join(vim.fn.stdpath('data'), 'mason', 'packages', 'debugpy', 'venv')
     if vim.fn.has("win32") == 1 then
         --for windows, use debugpy for the global python installation to avoid cmd.exe popups
         return vim.g.python3_host_prog
-        -- return os_path.path_join(base, 'Scripts', 'python')
     else
+        local base = os_path.path_join(vim.fn.stdpath('data'), 'mason', 'packages', 'debugpy', 'venv')
         return os_path.path_join(base, 'bin', 'python')
     end
 end
