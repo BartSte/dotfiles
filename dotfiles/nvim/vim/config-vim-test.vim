@@ -1,6 +1,13 @@
 function! FloatermStrategy(cmd)
+
+    if has('win32') && $VIRTUAL_ENV!=""
+        let venv = expand('$VIRTUAL_ENV') . '\Scripts\'
+    else
+        let venv = '' "Linux sets venv automatically
+    endif
+
     execute 'FloatermToggle vimtest'
-    execute 'FloatermSend --name=vimtest ' . a:cmd
+    execute 'FloatermSend --name=vimtest ' . venv . a:cmd
     stopinsert
 endfunction
 
