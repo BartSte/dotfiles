@@ -37,3 +37,6 @@ yay/
 AppData
 Fleet Cleaner
 OneDrive*
+pyinstaller
+dist
+*egg-info*

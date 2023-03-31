@@ -1,6 +1,6 @@
 function! FloatermStrategy(cmd)
-    execute 'FloatermToggle '
-    execute 'FloatermSend ' . a:cmd
+    execute 'FloatermToggle vimtest'
+    execute 'FloatermSend --name=vimtest ' . a:cmd
     stopinsert
 endfunction
 
