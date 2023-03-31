@@ -19,6 +19,7 @@ end
 
 dap_python.setup(get_debugpy())
 dap_python.test_runner = 'pytest'
+require('dap.ext.vscode').load_launchjs()
 
 local centered_float_frames = function() widgets.centered_float(widgets.frames) end
 local centered_float_scopes = function() widgets.centered_float(widgets.scopes) end
