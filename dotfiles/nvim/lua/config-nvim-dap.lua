@@ -4,19 +4,11 @@ local vscode = require('dap.ext.vscode')
 local helpers = require('helpers-dap')
 local widgets = require('dap.ui.widgets')
 local keymapper = require('keymapper')
-local dap_python = require('dap-python')
 
 dap.defaults.fallback.terminal_win_cmd = '100vsplit new'
 
-dap_python.setup(helpers.get_debugpy())
-dap_python.test_runner = 'pytest'
-dap_python.DebugpyConfig = {
-    redirectOutput = true
-}
-
 local my_launch = path.path_join(path.get_home(), 'dotfiles/launch.json')
-dap.configurations.python = {}
-vscode.load_launchjs()
+vscode.load_launchjs('.vscode/launch.json')
 vscode.load_launchjs(my_launch)
 
 vim.keymap.set('n', '<F4>', dap.run_last)
