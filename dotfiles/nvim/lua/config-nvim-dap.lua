@@ -18,10 +18,9 @@ local function get_debugpy()
 end
 
 dap_python.setup(get_debugpy())
-dap_python.test_runner = 'pytest'
+dap_python.test_runner = 'unittest'
 require('dap.ext.vscode').load_launchjs()
 
-local test_runners = dap_python.test_runners
 local centered_float_frames = function() widgets.centered_float(widgets.frames) end
 local centered_float_scopes = function() widgets.centered_float(widgets.scopes) end
 

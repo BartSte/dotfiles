@@ -64,11 +64,11 @@ local function plugins(use)
     --Testing
     use 'vim-test/vim-test'
     use 'voldikss/vim-floaterm'
-    -- use 'ThePrimeagen/harpoon'
 
     --Debugging
     use 'mfussenegger/nvim-dap'
-    use 'mfussenegger/nvim-dap-python'
+    -- use 'mfussenegger/nvim-dap-python'
+    use {'BartSte/nvim-dap-python', branch = 'bug/issue-90-unittest-not-working-on-windows'}
     use 'jay-babu/mason-nvim-dap.nvim'
     use 'rcarriga/cmp-dap'
     use 'theHamsta/nvim-dap-virtual-text'
