@@ -4,7 +4,7 @@ local os_path = require('os_path')
 local bullets = require('org-bullets')
 local khal_export = require('khal-export').export
 
-local dropbox_home = os_path.path_join(os_path.get_home(), 'Dropbox')
+local dropbox_home = os_path.path_join(os_path.get_dropbox_home(), 'Dropbox')
 local dropbox_org = os_path.path_join(dropbox_home, 'org')
 local dropbox_main = os_path.path_join(dropbox_org, 'main.org')
 local dropbox_agenda = os_path.path_join(dropbox_org, 'outlook.org')

@@ -6,7 +6,7 @@ local function enable_cmp(value)
     cmp.setup({ enabled = value })
 end
 
-M = {}
+local M = {}
 
 --A variable to hold the state of cmp is created to make history scrolling in
 --the command line easier to implement.
