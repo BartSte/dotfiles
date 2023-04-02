@@ -21,14 +21,20 @@ inoremap <C-s> <C-o><cmd>w<CR>
 cnoremap <C-BS> <C-w>
 cnoremap <C-h> <C-w>
 
+"Shortcut to clipboard
+nnoremap + "+
+nnoremap ++ <nop>
+vnoremap + "+
+vnoremap ++ <nop>
+
 "Override default mappings
-noremap <C-t> <Esc>
-noremap <leader>j J
 nnoremap <BS> k
 nnoremap <CR> j
 nnoremap <silent><c-k> K
 nnoremap Y y$
 noremap <C-s> <cmd>w<CR>
+noremap <C-t> <Esc>
+noremap <leader>j J
 onoremap <BS> k
 onoremap <CR> j
 vnoremap <BS> k

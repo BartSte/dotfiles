@@ -5,6 +5,9 @@ local function markdown_hook()
 end
 
 local function plugins(use)
+    --Helpers
+    use 'nvim-lua/plenary.nvim'
+
     --Package managers
     use 'wbthomason/packer.nvim'
     use "williamboman/mason.nvim"
@@ -13,7 +16,6 @@ local function plugins(use)
 
     --Treesitter
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use 'nvim-treesitter/playground'
 
     --Looks
     use 'nvim-lualine/lualine.nvim'
@@ -33,19 +35,18 @@ local function plugins(use)
     use "danymat/neogen"
     use 'L3MON4D3/LuaSnip'
     use 'dmitmel/cmp-cmdline-history'
-    use 'f3fora/cmp-spell'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/nvim-cmp'
     use 'saadparwaiz1/cmp_luasnip'
+    use 'rcarriga/cmp-dap'
 
     --Navigation
-    use { 'junegunn/fzf', run = ":call fzf#install()" }
+    use 'junegunn/fzf'
     use 'junegunn/fzf.vim'
     use 'moll/vim-bbye'
-    use 'nvim-lua/plenary.nvim'
     use 'nvim-tree/nvim-tree.lua'
     use { 'aznhe21/hop.nvim', branch = 'fix-some-bugs' }
     -- use 'phaazon/hop.nvim' -- was unstable
@@ -55,7 +56,6 @@ local function plugins(use)
     use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
     use "windwp/nvim-autopairs"
-    use "jbyuki/venn.nvim"
 
     --Source control
     use 'tpope/vim-fugitive'
@@ -67,10 +67,8 @@ local function plugins(use)
 
     --Debugging
     use 'mfussenegger/nvim-dap'
-    -- use 'mfussenegger/nvim-dap-python'
-    use {'BartSte/nvim-dap-python', branch = 'bug/issue-90-unittest-not-working-on-windows'}
+    use 'mfussenegger/nvim-dap-python'
     use 'jay-babu/mason-nvim-dap.nvim'
-    use 'rcarriga/cmp-dap'
     use 'theHamsta/nvim-dap-virtual-text'
 
     --Org
@@ -83,7 +81,6 @@ local function plugins(use)
 
     --Drawing
     use 'willchao612/vim-diagon'
-
 end
 
 return packer.startup(plugins)
