@@ -24,32 +24,6 @@ function! g:ExecInCmd(command)
     let &shellcmdflag = tmp_shellcmdflag
 endfunction
 
-function! g:ExecInBash(command)
-    " Workaround for: https://github.com/junegunn/fzf.vim/issues/883
-    let tmp=&shell
-    let tmp_shellpipe = &shellpipe
-    let tmp_shellquote = &shellquote
-    let tmp_shellredir = &shellredir
-    let tmp_shellxquote = &shellxquote
-    let tmp_shellcmdflag = &shellcmdflag
-
-    set shellquote = "\"" 
-    let &shellpipe = "| tee"
-    set shellxquote = ""
-    let &shellredir = ">"
-    let &shellcmdflag = "-c"
-
-    set shell=bash
-    execute a:command
-
-    let &shell=tmp
-    let &shellpipe = tmp_shellpipe
-    let &shellredir = tmp_shellredir
-    let &shellquote = tmp_shellquote
-    let &shellxquote = tmp_shellxquote
-    let &shellcmdflag = tmp_shellcmdflag
-endfunction
-
 if has('win32')
     let g:python3_host_prog = $LOCALAPPDATA . '\Programs\Python\Python311\python.exe'
     let &shell = 'pwsh'
