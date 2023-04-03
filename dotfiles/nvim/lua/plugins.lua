@@ -55,7 +55,8 @@ local function plugins(use)
     use '907th/vim-auto-save'
     use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
-    use "windwp/nvim-autopairs"
+    use 'tpope/vim-obsession'
+    use 'windwp/nvim-autopairs'
 
     --Source control
     use 'tpope/vim-fugitive'
