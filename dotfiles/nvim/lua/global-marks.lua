@@ -8,29 +8,36 @@
 --
 ---@param symbol string
 local function jump_with(symbol)
-    print("Waiting for mark...")
-
+    print('Waiting for mark...')
     local mark = vim.fn.nr2char(vim.fn.getchar())
     local command = symbol .. mark
 
     if mark == string.upper(mark) then
         command = command .. symbol .. '"'
     end
-
-    print(command)
     vim.api.nvim_feedkeys(command, 'n', false)
+end
+
+local function _jump_with(args)
+    pcall(function() jump_with(args) end)
 end
 
 --- returns a function handle for `jump_with` where symbol is: '
 ---@return function
 local function last_position()
-    return function() jump_with("'") end
+    return function() 
+        _jump_with("'") 
+        print('\n')
+    end
 end
 
 --- returns a function handle for `jump_with` where symbol is: `
 ---@return function
 local function last_col_position()
-    return function() jump_with('`') end
+    return function() 
+        _jump_with('`')
+        print('\n')
+    end
 end
 
 vim.keymap.set('n', "'", last_position(), { expr = true, noremap = false })
