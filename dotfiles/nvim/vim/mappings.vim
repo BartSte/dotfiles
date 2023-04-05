@@ -32,6 +32,7 @@ nnoremap <BS> k
 nnoremap <CR> j
 nnoremap <silent><c-k> K
 nnoremap Y y$
+nnoremap ZA :wqa<CR>
 noremap <C-s> <cmd>w<CR>
 noremap <C-t> <Esc>
 noremap <leader>j J
