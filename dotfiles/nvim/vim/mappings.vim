@@ -7,8 +7,10 @@
 " solved.
 imap <F24> <C-Space>
 cmap <F24> <C-Space>
+nmap <F24> <C-Space>
 imap <S-F12> <C-Space>
 cmap <S-F12> <C-Space>
+nmap <S-F12> <C-Space>
 
 "Insert mode 
 inoremap <C-BS> <C-w>

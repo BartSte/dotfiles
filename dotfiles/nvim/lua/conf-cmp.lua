@@ -54,6 +54,8 @@ local mappings = {
     ['<C-Space>'] = cmp.mapping(cspace),
 }
 
+mapper.nnoremap('<C-Space>', "ea<cmd>lua require('helpers-cmp').toggle_visibility()<CR>")
+
 local window = {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered()
