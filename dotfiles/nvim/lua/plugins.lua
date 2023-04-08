@@ -16,6 +16,7 @@ local function plugins(use)
 
     --Treesitter
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use 'nvim-treesitter/nvim-treesitter-context'
 
     --Looks
     use 'nvim-lualine/lualine.nvim'
