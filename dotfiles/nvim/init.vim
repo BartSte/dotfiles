@@ -8,35 +8,36 @@ so colors.vim
 so keep-centered.vim
 so fold.vim
 
-so conf-auto_save.vim
-so conf-fugitive.vim
-so conf-fzf.vim
-so conf-markdown.vim
-so conf-vim-bbye.vim
+so config-auto_save.vim
+so config-fugitive.vim
+so config-fzf.vim
+so config-markdown.vim
+so config-vim-bbye.vim
 so config-vim-test.vim
 so config-table.vim
 cd -
 
 lua require('linux')
-lua require('conf-hop')
-lua require('conf-lualine')
-lua require('conf-nvim-tree')
-lua require('conf-treesitter')
-lua require('conf-neodev')
-lua require('conf-lsp-init')
-lua require('conf-lsp-servers')
-lua require('conf-lsp-mappings')
+
+lua require('config-hop')
+lua require('config-lualine')
+lua require('config-nvim-tree')
+lua require('config-treesitter')
+lua require('config-neodev')
+lua require('config-lsp-init')
+lua require('config-lsp-servers')
+lua require('config-lsp-mappings')
 lua require('config-null-ls')
-lua require('conf-cmp')
+lua require('config-cmp')
 lua require('config-nvim-dap')
-lua require('config-nvim-dap-python')
 lua require('config-nvim-dap-virtual-text')
-lua require('conf-mason')
-lua require('conf-autopairs')
-lua require('conf-neogen')
-lua require('conf-luasnip')
-lua require('conf-orgmode')
-lua require('conf-floatterm')
+lua require('config-mason')
+lua require('config-autopairs')
+lua require('config-neogen')
+lua require('config-luasnip')
+lua require('config-orgmode')
+lua require('config-floatterm')
+
 lua require('local-shada')
 lua require('global-marks')
 lua require('autocmds')

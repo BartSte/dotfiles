@@ -1,3 +1,4 @@
+from os.path import dirname, join
 from subprocess import check_output
 from sys import executable
 from unittest import TestCase
@@ -9,8 +10,8 @@ class TestSortVariableLength(TestCase):
 
     def test(self) -> None:
         """TODO."""
-        test_lines = './test/test_lines.txt'
-        program = './sort_variable_length.py'
+        test_lines = join(dirname(__file__), 'test_lines.txt')
+        program = join(dirname(dirname(__file__)), 'sort_variable_length.py')
         command = f'bat {test_lines} | {executable} {program}'
         stdout = check_output(command, shell=True)
         self.assertEqual(self.EXPECTED, stdout)

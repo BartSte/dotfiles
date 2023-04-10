@@ -16,10 +16,6 @@ font:
     family: JetBrainsMono Nerd Font
     style: Bold Italic
 
-# colors:
-#   primary:
-#     background: '#282828'
-
 scrolling:
   history: 10000
   multiplier: 3
