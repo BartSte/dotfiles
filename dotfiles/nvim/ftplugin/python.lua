@@ -6,7 +6,7 @@ vim.opt_local.textwidth = 80
 
 local opts = {
     config = {
-        justMyCode = false,
+        justMyCode = true,
         subProcess = false,
     }
 }
