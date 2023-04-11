@@ -7,7 +7,8 @@ local widgets = require('dap.ui.widgets')
 local keymapper = require('keymapper')
 local my_launch = path.path_join(path.get_home(), 'dotfiles/launch.json')
 
-dap.defaults.fallback.terminal_win_cmd = '100vsplit new'
+dap.defaults.fallback.terminal_win_cmd = '80vsplit new'
+dap.defaults.fallback.focus_terminal = false
 
 vscode.load_launchjs('.vscode/launch.json')
 vscode.load_launchjs(my_launch)

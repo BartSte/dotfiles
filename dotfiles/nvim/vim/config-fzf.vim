@@ -9,12 +9,6 @@ command! -bang -nargs=? -complete=dir Files
         \ fzf#vim#with_preview(), 
         \ <bang>0)
 
-command! -bang -nargs=* Ag
-        \ call fzf#vim#grep(
-        \ expand('ag --nogroup --column --color --hidden --skip-vcs-ignores 
-        \ --path-to-ignore $HOME/.ignore ').shellescape(<q-args>), 
-        \ 1, fzf#vim#with_preview(), <bang>0)
-
 if has('win32')
     " Workaround for: https://github.com/junegunn/fzf.vim/issues/883
     noremap <a-o> <cmd>call ExecInCmd('Files')<CR>

@@ -3,7 +3,6 @@ filetype on
 let mapleader = " "
 set diffopt+=vertical,iblank,closeoff
 set nowrap
-set textwidth=0
 
 " Completion
 set pumheight=10
@@ -19,7 +18,6 @@ set updatetime=500
 
 " Looks
 set signcolumn=number
-set colorcolumn=0
 set cursorline
 set number
 set relativenumber

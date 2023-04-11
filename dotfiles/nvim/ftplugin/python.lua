@@ -2,7 +2,7 @@ local dappy = require('dap-python')
 
 vim.opt_local.conceallevel = 2
 vim.opt_local.colorcolumn = '79'
-vim.opt_local.textwidth = 80
+vim.opt_local.textwidth = 79
 
 local opts = {
     config = {
