@@ -14,6 +14,8 @@ if has('termguicolors')
 
     hi! link ColorColumn CursorLine
     hi! link Folded Normal
+    hi! link TreesitterContextBottom CursorLine
+
     hi LineNr guifg=DarkGray
     hi Search guifg=fg guibg=DarkGreen
     hi IncSearch gui=bold guifg=fg guibg=DarkMagenta
@@ -30,6 +32,7 @@ if has('termguicolors')
     hi FloatermBorder guibg=bg
 
     hi SpellBad gui=undercurl guisp=Red guifg=Normal
+
 endif
 
 let &t_SI = "\e[6 q"

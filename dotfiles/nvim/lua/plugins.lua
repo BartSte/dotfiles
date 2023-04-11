@@ -45,8 +45,7 @@ local function plugins(use)
     use 'rcarriga/cmp-dap'
 
     --Navigation
-    use 'junegunn/fzf'
-    use 'junegunn/fzf.vim'
+    use { 'junegunn/fzf.vim', requires = { 'junegunn/fzf', run = ':call fzf#install()' } }
     use 'moll/vim-bbye'
     use 'nvim-tree/nvim-tree.lua'
     use { 'aznhe21/hop.nvim', branch = 'fix-some-bugs' }
