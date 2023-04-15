@@ -27,7 +27,7 @@ local function get_fold_under_cursor()
     return table.concat(lines, '\n')
 end
 
-M.export = function(exporter)
+M.list = function(exporter)
     local org_agenda_item = get_fold_under_cursor(0)
     local cmd = "echo \"" .. org_agenda_item .. "\" | khalorg new outlook_local"
     return exporter(cmd, '', M.success, M.error)

@@ -2,7 +2,7 @@ local mapper = require('keymapper')
 local orgmode = require('orgmode')
 local os_path = require('os_path')
 local bullets = require('org-bullets')
-local khal_export = require('khal-export').export
+local khalorg_list = require('khalorg').list
 
 local dropbox_home = os_path.path_join(os_path.get_dropbox_home(), 'Dropbox')
 local dropbox_org = os_path.path_join(dropbox_home, 'org')
@@ -13,7 +13,7 @@ local dropbox_personal = os_path.path_join(dropbox_org, 'personal.org')
 local custom_exports = {
     k = {
         label = 'Export new item to khal',
-        action = khal_export
+        action = khalorg_list
     }
 }
 
