@@ -74,6 +74,7 @@ local function plugins(use)
 
     --Org
     use 'nvim-orgmode/orgmode'
+    use 'BartSte/nvim-khalorg'
     use 'akinsho/org-bullets.nvim'
     use 'dhruvasagar/vim-table-mode'
 
