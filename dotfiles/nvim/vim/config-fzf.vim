@@ -4,7 +4,7 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 1
 let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-p']
 
 function! SelectEmail()
-  let emails = systemlist('emails')
+  let emails = systemlist("khard --skip-unparsable email --parsable --remove-first-line | sed 's/[ \t].*$//'")
   let email = fzf#run({
       \ 'source': emails,
       \ 'sink': 'normal! i',
