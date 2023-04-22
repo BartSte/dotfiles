@@ -3,6 +3,16 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 1
 
 let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-p']
 
+function! SelectEmail()
+  let emails = systemlist('emails')
+  let email = fzf#run({
+      \ 'source': emails,
+      \ 'sink': 'normal! i',
+      \ 'window': {'width': 0.9, 'height': 0.6},
+      \ 'header': 'Select an email address:',
+      \ })
+endfunction
+
 command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(
         \ <q-args>, 
