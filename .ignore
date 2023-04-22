@@ -40,3 +40,6 @@ OneDrive*
 pyinstaller
 dist
 *egg-info*
+SWSetup
+Windows
+Strawberry
