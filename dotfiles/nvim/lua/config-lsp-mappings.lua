@@ -25,3 +25,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = mappings
 })
 
+local virtual_text = true
+function toggle_virtual_text()
+  virtual_text = not virtual_text
+  vim.diagnostic.config({virtual_text = virtual_text})
+end
+
+vim.api.nvim_set_keymap('n', '<leader>v', '<cmd>lua toggle_virtual_text()<CR>', {noremap = true})

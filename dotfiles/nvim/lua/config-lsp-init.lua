@@ -9,7 +9,7 @@ lsp_defaults.capabilities = vim.tbl_deep_extend(
 )
 
 vim.diagnostic.config({
-    virtual_text = false,
+    virtual_text = true,
     signs = false,
     update_in_insert = false,
     underline = true,
@@ -31,3 +31,6 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
   vim.lsp.handlers.signature_help,
   {border = 'rounded'}
 )
+
+
+

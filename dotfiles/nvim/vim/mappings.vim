@@ -5,6 +5,16 @@
 " Powershell does not detect <C-Space>. As a solution, Alacritty sends <F24> 
 " when ctrl+space is pressed. By binding <C-Space> and <F24>, the issue is
 " solved.
+
+function! ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen
+    else
+        cclose
+    endif
+endfunction
+
+
 imap <F24> <C-Space>
 cmap <F24> <C-Space>
 nmap <F24> <C-Space>
@@ -43,6 +53,7 @@ onoremap <CR> j
 vnoremap <BS> k
 vnoremap <CR> j
 vnoremap p pgvy
+nnoremap <silent> Q :call ToggleQuickFix()<cr>
 
 " Terminal mode
 tnoremap <C-t> <C-\><C-n>

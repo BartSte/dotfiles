@@ -52,7 +52,6 @@ require 'nvim-treesitter.configs'.setup {
     --     module_path = "nvim-treesitter-playground.query_linter",
     --     use_virtual_text = true
     -- },
-
 }
 
 require'treesitter-context'.setup{

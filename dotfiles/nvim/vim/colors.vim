@@ -12,14 +12,11 @@ if has('termguicolors')
 
     colorscheme gruvbox-baby
 
-    hi! link ColorColumn CursorLine
     hi! link Folded Normal
-    hi! link TreesitterContextBottom CursorLine
-
-    hi LineNr guifg=DarkGray
+    hi LineNr guifg=LightGray
     hi Search guifg=fg guibg=DarkGreen
     hi IncSearch gui=bold guifg=fg guibg=DarkMagenta
-    hi CursorLineNr gui=bold guifg=fg
+    hi CursorLineNr gui=bold guifg=LightGreen
     hi HighlightedyankRegion gui=bold guifg=fg guibg=DarkMagenta
 
     hi Tabline gui=bold guibg=bg
@@ -32,6 +29,11 @@ if has('termguicolors')
     hi FloatermBorder guibg=bg
 
     hi SpellBad gui=undercurl guisp=Red guifg=Normal
+
+    hi ColorColumn guibg=#32302f
+    hi TreesitterContext gui=bold guibg=#31302f
+    hi TreesitterContextBottom gui=bold guibg=#31302f
+    hi TreesitterContextLineNumber gui=bold guifg=LightGreen guibg=#31302f
 
 endif
 
