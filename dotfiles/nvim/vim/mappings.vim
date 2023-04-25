@@ -97,3 +97,4 @@ nnoremap <silent><leader>cl vip:!sort_variable_length.py<CR>
 "Append <leader> to gq to run default vim formatter when lsp overrides gq.
 nnoremap <leader>gqq :.!fmt --width=79<CR>
 vnoremap <leader>gq :!fmt --width=79<CR>
+
