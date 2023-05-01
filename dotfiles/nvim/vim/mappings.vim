@@ -93,8 +93,3 @@ nnoremap <silent><leader>cc vip:sort<CR>
 nnoremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>
 vnoremap <silent><leader>cl :!sort_variable_length.py<CR>
 nnoremap <silent><leader>cl vip:!sort_variable_length.py<CR>
-
-"Append <leader> to gq to run default vim formatter when lsp overrides gq.
-nnoremap <leader>gqq :.!fmt --width=79<CR>
-vnoremap <leader>gq :!fmt --width=79<CR>
-
