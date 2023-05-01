@@ -1,3 +1,4 @@
+--TODO replace global with local functions
 function set_virtual_text_off()
     vim.diagnostic.config({ virtual_text = false })
 end
@@ -38,11 +39,10 @@ local function mappings()
     bufmap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     bufmap('x', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     bufmap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<cr>')
-    bufmap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<cr>')
-
     bufmap('n', '<leader>vo', '<cmd>lua set_virtual_text_off()<CR>')
     bufmap('n', '<leader>ve', '<cmd>lua set_virtual_text_error()<CR>')
     bufmap('n', '<leader>va', '<cmd>lua set_virtual_text_all()<CR>')
+    bufmap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({timeout_ms = 5000, async = false})<cr>')
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
