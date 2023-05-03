@@ -2,7 +2,7 @@ local mapper = require('keymapper')
 local orgmode = require('orgmode')
 local os_path = require('os_path')
 local bullets = require('org-bullets')
-local khalorg_list = require('khalorg').list
+local khalorg = require('khalorg')
 
 local dropbox_home = os_path.path_join(os_path.get_dropbox_home(), 'Dropbox')
 local dropbox_org = os_path.path_join(dropbox_home, 'org')
@@ -10,10 +10,18 @@ local dropbox_main = os_path.path_join(dropbox_org, 'main.org')
 local dropbox_agenda = os_path.path_join(dropbox_org, 'outlook.org')
 local dropbox_personal = os_path.path_join(dropbox_org, 'personal.org')
 
+khalorg.setup({
+    calendar = 'outlook_local'
+})
+
 local custom_exports = {
-    k = {
-        label = 'Export new item to khal',
-        action = khalorg_list
+    n = {
+        label = 'Add a new item to khal',
+        action = khalorg.new
+    },
+    e = {
+        label = 'Edit a khal item',
+        action = khalorg.edit
     }
 }
 
