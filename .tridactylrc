@@ -1,4 +1,3 @@
-guiset_quiet gui none
 set theme dark
 set searchengine google
 set hintnames sort
