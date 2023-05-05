@@ -5,13 +5,13 @@ augroup KeepCentered
 augroup END
 
 function NormalCenter() abort
-    if (&ft!='floaterm')
+    if (&ft!='floaterm' || &ft!='dap-repl')
         normal! zz
     endif
 endfunction
 
 function InsertRecenter() abort
-    if (&ft=='floaterm')
+    if (&ft=='floaterm' || &ft=='dap-repl')
         return
     endif
 
