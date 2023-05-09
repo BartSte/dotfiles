@@ -20,10 +20,7 @@ local function plugins(use)
 
     --Looks
     use 'nvim-lualine/lualine.nvim'
-    use 'nvim-tree/nvim-web-devicons'
     use { 'luisiacc/gruvbox-baby', branch = 'main' }
-    use { 'alvarosevilla95/luatab.nvim',
-        requires = 'kyazdani42/nvim-web-devicons' }
 
     --Lsp
     use "folke/neodev.nvim"

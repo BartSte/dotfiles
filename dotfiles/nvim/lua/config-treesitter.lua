@@ -18,7 +18,7 @@ local my_highlight = {
 require 'nvim-treesitter.configs'.setup {
     ensure_installed = {
         "markdown", "markdown_inline", "bash", "vim", "lua", "cpp", "python",
-        "json", "help", "cpp", "toml", "latex", "make", "org", "gitcommit"
+        "json", "cpp", "toml", "latex", "make", "org", "gitcommit"
     },
     sync_install = false,
     auto_install = true,

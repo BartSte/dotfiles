@@ -21,7 +21,6 @@ lua require('linux')
 
 lua require('config-hop')
 lua require('config-lualine')
-lua require('config-luatab')
 lua require('config-nvim-tree')
 lua require('config-treesitter')
 lua require('config-neodev')

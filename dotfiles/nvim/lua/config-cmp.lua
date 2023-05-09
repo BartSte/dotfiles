@@ -15,7 +15,7 @@ local menu_icons = {
 }
 
 local format_lspkind = lspkind.cmp_format({
-    mode = 'symbol_text',
+    mode = 'text',
     maxwidth = 50,
     ellipsis_char = '...',
     before = func.formatter_before(menu_icons)

@@ -1,13 +1,26 @@
 function! FloatermStrategy(cmd)
 
     if has('win32') && $VIRTUAL_ENV!=""
-        let venv = expand('$VIRTUAL_ENV') . '\Scripts\'
+        " Used when running from windows
+        let command = expand('$VIRTUAL_ENV') . '\Scripts\' . a:cmd
+
     else
-        let venv = '' "Linux sets venv automatically
+        let directory = fnamemodify(getcwd(), ':t')
+        let python_exe_cmd = substitute(a:cmd, '^\python\+\s', 'python.exe ', '')
+        let venv = expand('$WH/venvs/') . directory 
+
+        if isdirectory(venv)
+            " Used when running from WSL and a venv for windows exists.
+            let command = venv . '/Scripts/' . python_exe_cmd
+        else
+            " Used when running from WSL without windows venv, or Linux
+            let command = a:cmd 
+        endif
+
     endif
 
     execute 'FloatermToggle vimtest'
-    execute 'FloatermSend --name=vimtest ' . venv . a:cmd
+    execute 'FloatermSend --name=vimtest ' . command
     stopinsert
 endfunction
 
