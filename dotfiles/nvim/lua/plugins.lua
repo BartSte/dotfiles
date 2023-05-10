@@ -26,7 +26,6 @@ local function plugins(use)
     use "folke/neodev.nvim"
     use "rafamadriz/friendly-snippets"
     use 'neovim/nvim-lspconfig'
-    use 'onsails/lspkind.nvim'
     use 'jose-elias-alvarez/null-ls.nvim'
 
     --Completion

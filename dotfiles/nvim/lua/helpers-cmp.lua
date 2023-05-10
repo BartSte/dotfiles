@@ -29,7 +29,7 @@ M.restore_cmp = function()
 end
 
 --- Restore cmp state and apply fallback.
----@param fallback 
+---@param fallback
 M.restore_with_fallback = function(fallback)
     M.restore_cmp()
     fallback()
@@ -82,7 +82,7 @@ M.next_item_cmd = function(fallback)
 end
 
 --- See next_item_cmd
----@param fallback 
+---@param fallback
 --See documentation of nvim-cmp
 M.prev_item_cmd = function(fallback)
     if cmp.visible() then
@@ -112,6 +112,19 @@ M.prev_item_or_enable_cmd = function()
         M.restore_cmp()
         cmp.complete()
     end
+end
+
+M.confirm_select = function(value)
+    return cmp.mapping.confirm({ select = value })
+end
+
+M.cmp_enabled = function()
+    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+end
+
+M.format = function(entry, vim_item)
+    vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
+    return vim_item
 end
 
 return M

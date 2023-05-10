@@ -1,34 +1,6 @@
 local cmp = require('cmp')
 local func = require('helpers-cmp')
 local mapper = require("keymapper")
-local lspkind = require('lspkind')
-
-local menu_icons = {
-    path = 'PATH',
-    buffer = 'BUF',
-    orgmode = 'ORG',
-    cmdline = 'CMD',
-    luasnip = 'SNIP',
-    nvim_lsp = 'LSP',
-    dictionary = 'DICT',
-    cmdline_history = 'HIS',
-}
-
-local format_lspkind = lspkind.cmp_format({
-    mode = 'text',
-    maxwidth = 50,
-    ellipsis_char = '...',
-    before = func.formatter_before(menu_icons)
-})
-
-local formatting = {
-    fields = { 'abbr', 'kind', 'menu' },
-    format = format_lspkind,
-}
-
-local confirm_select = function(value)
-    return cmp.mapping.confirm({ select = value })
-end
 
 -- To enable history scrolling on the command line, cmp is disabled when
 -- <Down> or <Up> is pressed. cmp is restored when tab/stab or space are pressed.
@@ -37,24 +9,22 @@ local tab = { i = func.next_item_insert, c = func.next_item_or_enable_cmd }
 local down = { i = func.next_item_insert, c = func.next_item_cmd }
 local stab = { i = func.prev_item_insert, c = func.prev_item_or_enable_cmd }
 local space = { c = func.restore_with_fallback }
-local enter = { i = confirm_select(false), c = confirm_select(false) }
+local enter = { i = func.confirm_select(false), c = func.confirm_select(false) }
 local cspace = { i = func.toggle_visibility, c = func.toggle_visibility }
-local menter = { i = confirm_select(true), c = confirm_select(true) }
+local menter = { i = func.confirm_select(true), c = func.confirm_select(true) }
 
 local mappings = {
     ['<Up>'] = cmp.mapping(up),
     ['<CR>'] = cmp.mapping(enter),
     ['<Tab>'] = cmp.mapping(tab),
     ['<C-u>'] = cmp.mapping.scroll_docs(4),
-    ['<C-d>'] = cmp.mapping.scroll_docs( -4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<Down>'] = cmp.mapping(down),
     ['<M-CR>'] = cmp.mapping(menter),
     ['<S-Tab>'] = cmp.mapping(stab),
     ['<Space>'] = cmp.mapping(space),
     ['<C-Space>'] = cmp.mapping(cspace),
 }
-
-mapper.nnoremap('<C-Space>', "a<cmd>lua require('helpers-cmp').toggle_visibility()<CR>")
 
 local window = {
     completion = cmp.config.window.bordered(),
@@ -63,17 +33,22 @@ local window = {
 
 local snippet = { expand = func.snippet_expand }
 
+local formatting = {
+    fields = { 'abbr', 'kind', 'menu' },
+    format = func.format
+}
+
 local sources_i = {
-    { name = 'orgmode',  priority = 1, keyword_length = 1 },
-    { name = 'path',     priority = 2, keyword_length = 1 },
-    { name = 'buffer',   priority = 4, keyword_length = 1 },
-    { name = 'luasnip',  priority = 3, keyword_length = 1 },
+    { name = 'orgmode', priority = 1, keyword_length = 1 },
+    { name = 'path', priority = 2, keyword_length = 1 },
+    { name = 'buffer', priority = 4, keyword_length = 1 },
+    { name = 'luasnip', priority = 3, keyword_length = 1 },
     { name = 'nvim_lsp', priority = 5, keyword_length = 1 },
 }
 
 local sources_c = {
-    { name = 'path',            priority = 1, keyword_length = 1 },
-    { name = 'cmdline',         priority = 3, keyword_length = 1 },
+    { name = 'path', priority = 1, keyword_length = 1 },
+    { name = 'cmdline', priority = 3, keyword_length = 1 },
     { name = 'cmdline_history', priority = 2, keyword_length = 1 },
 }
 
@@ -85,10 +60,7 @@ cmp.setup({
     formatting = formatting,
     mapping = mappings,
     sources = sources_i,
-    enabled = function()
-        return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
-            or require("cmp_dap").is_dap_buffer()
-    end
+    enabled = func.cmp_enabled
 })
 
 cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
@@ -114,3 +86,4 @@ vim.api.nvim_create_autocmd('CmdlineLeave', {
 })
 
 vim.opt.completeopt = { 'menu' }
+mapper.nnoremap('<C-Space>', "a<cmd>lua require('helpers-cmp').toggle_visibility()<CR>")
