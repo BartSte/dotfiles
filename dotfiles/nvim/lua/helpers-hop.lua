@@ -4,12 +4,8 @@ local jump_target = require('hop.jump_target')
 
 M = {}
 
-local function bugfix()
-    vim.cmd('.g/^$/normal )')
-end
-
 M.hop_char1 = function()
-    local opts = {}
+    local opts = { direction = { nil } }
     hop.hint_char1(opts)
 end
 
