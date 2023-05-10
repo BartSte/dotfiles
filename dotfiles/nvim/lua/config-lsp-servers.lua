@@ -7,7 +7,6 @@ lspconfig.jsonls.setup({})
 lspconfig.cssls.setup({})
 lspconfig.cmake.setup({})
 lspconfig.marksman.setup({})
-
 lspconfig.clangd.setup({})
 -- lspconfig.arduino_language_server.setup {
 --     cmd = {
