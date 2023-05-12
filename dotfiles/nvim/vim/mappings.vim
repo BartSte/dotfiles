@@ -54,7 +54,6 @@ vnoremap <BS> k
 vnoremap <CR> j
 vnoremap p pgvy
 nnoremap <silent> Q :call ToggleQuickFix()<cr>
-vnoremap <leader>gq Jgqq
 
 " Terminal mode
 tnoremap <C-t> <C-\><C-n>
