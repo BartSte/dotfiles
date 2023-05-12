@@ -3,7 +3,7 @@
 function! TSlimeStrategy(cmd) abort
     let venv = GetVenv()
     let command = GetCommand(venv, a:cmd)
-    call Send_to_Tmux(PrettyCommand(command . "\n"))
+    call Send_to_Tmux(command . "\n")
 endfunction
 "
 " When running WSL and a venv is present in g:wsl_win_venvs, it will take
@@ -33,19 +33,7 @@ function! GetCommand(venv, cmd)
     endif
 endfunction
 
-" Check source code os vim-test for the original implementation. Support for
-" windows can also be added if necessary, as was done in the original
-" implementation.
-function! PrettyCommand(cmd) abort
-  let cmds = []
-  let separator = '; '
-
-  " call add(l:cmds, 'clear') # clears screen
-  call add(l:cmds, 'echo -e '.shellescape(a:cmd))
-  call add(l:cmds, a:cmd)
-
-  return join(l:cmds, l:separator)
-endfunction
+command! -nargs=* TmuxReset call <SNR>58_Tmux_Vars()
 
 let g:test#strategy = 'mytslime'
 let g:wsl_win_venvs = expand('$WH/venvs/')
