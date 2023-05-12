@@ -1,4 +1,5 @@
 local dappy = require('dap-python')
+local keymapper = require('keymapper')
 
 vim.opt_local.conceallevel = 2
 vim.opt_local.colorcolumn = '79'
@@ -10,6 +11,9 @@ local opts = {
         subProcess = false,
     }
 }
+keymapper.nnoremap('<leader>b', 'obreakpoint()<Esc>')
+keymapper.nnoremap('<leader>B', 'Obreakpoint()<Esc>')
 vim.keymap.set('n', '<a-C>', function() dappy.test_class(opts) end)
 vim.keymap.set('n', '<a-T>', function() dappy.test_method(opts) end)
 vim.keymap.set('n', '<a-S>', function() dappy.test_selection(opts) end)
+

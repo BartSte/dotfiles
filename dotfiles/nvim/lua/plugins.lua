@@ -60,7 +60,7 @@ local function plugins(use)
 
     --Testing
     use 'vim-test/vim-test'
-    use 'voldikss/vim-floaterm'
+    use 'jgdavey/tslime.vim'
 
     --Debugging
     use 'mfussenegger/nvim-dap'

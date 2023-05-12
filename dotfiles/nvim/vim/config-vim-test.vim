@@ -1,3 +1,11 @@
+" Test strategy that can run tests for Linux projects and Windows projects
+" that are edited from WSL.
+function! TSlimeStrategy(cmd) abort
+    let venv = GetVenv()
+    let command = GetCommand(venv, a:cmd)
+    call Send_to_Tmux(PrettyCommand(command . "\n"))
+endfunction
+"
 " When running WSL and a venv is present in g:wsl_win_venvs, it will take
 " presedence over $VIRTUAL_ENV.
 function! GetVenv()
@@ -25,20 +33,26 @@ function! GetCommand(venv, cmd)
     endif
 endfunction
 
-" Test strategy that can run tests for Linux projects and Windows projects
-" that are edited from WSL.
-function! FloatermStrategy(cmd)
-    let venv = GetVenv()
-    let command = GetCommand(venv, a:cmd)
-    execute 'FloatermToggle vimtest'
-    execute 'FloatermSend --name=vimtest ' . command
-    stopinsert
+" Check source code os vim-test for the original implementation. Support for
+" windows can also be added if necessary, as was done in the original
+" implementation.
+function! PrettyCommand(cmd) abort
+  let cmds = []
+  let separator = '; '
+
+  " call add(l:cmds, 'clear') # clears screen
+  call add(l:cmds, 'echo -e '.shellescape(a:cmd))
+  call add(l:cmds, a:cmd)
+
+  return join(l:cmds, l:separator)
 endfunction
 
-let g:test#strategy = 'myfloaterm'
+let g:test#strategy = 'mytslime'
 let g:wsl_win_venvs = expand('$WH/venvs/')
+let g:preserve_screen = 1
 let test#python#runner = 'pytest'
-let g:test#custom_strategies = {'myfloaterm': function('FloatermStrategy')}
+let g:test#custom_strategies = {'mytslime': function('TSlimeStrategy')}
+let g:tslime_always_current_session = 1
 
 noremap gl :TestVisit<CR>
 noremap <a-t> :TestNearest<CR>
