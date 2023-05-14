@@ -106,7 +106,7 @@ tree.setup({
     hijack_cursor = true,
     sync_root_with_cwd = true,
     view = {
-        width = { max = 30, padding = 0 },
+        width = { max = 50, padding = 0 },
         mappings = { list = my_mappings, },
         relativenumber = true,
         signcolumn = "no"

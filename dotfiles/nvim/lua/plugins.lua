@@ -44,6 +44,7 @@ local function plugins(use)
     use { 'junegunn/fzf.vim', requires = { 'junegunn/fzf', run = ':call fzf#install()' } }
     use 'moll/vim-bbye'
     use 'nvim-tree/nvim-tree.lua'
+    use 'nvim-tree/nvim-web-devicons'
     use { 'aznhe21/hop.nvim', branch = 'fix-some-bugs' }
     -- use 'phaazon/hop.nvim' -- was unstable
 

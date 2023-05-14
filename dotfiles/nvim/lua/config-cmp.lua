@@ -2,6 +2,7 @@ local cmp = require('cmp')
 local func = require('helpers-cmp')
 local mapper = require("keymapper")
 
+
 -- To enable history scrolling on the command line, cmp is disabled when
 -- <Down> or <Up> is pressed. cmp is restored when tab/stab or space are pressed.
 local up = { i = func.prev_item_insert, c = func.prev_item_cmd }
@@ -33,9 +34,22 @@ local window = {
 
 local snippet = { expand = func.snippet_expand }
 
+local menu_items = {
+    path = 'PATH',
+    buffer = 'BUF',
+    orgmode = 'ORG',
+    cmdline = 'CMD',
+    luasnip = 'SNIP',
+    nvim_lsp = 'LSP',
+    cmdline_history = 'HIS',
+}
+
 local formatting = {
     fields = { 'abbr', 'kind', 'menu' },
-    format = func.format
+    format = func.format({
+        length = 50,
+        menu = menu_items
+    }),
 }
 
 local sources_i = {

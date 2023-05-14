@@ -122,9 +122,12 @@ M.cmp_enabled = function()
     return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
 end
 
-M.format = function(entry, vim_item)
-    vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
-    return vim_item
+M.format = function(opts)
+    return function (entry, vim_item)
+        vim_item.abbr = string.sub(vim_item.abbr, 1, opts.length)
+        vim_item.menu = opts.menu[entry.source.name]
+        return vim_item
+    end
 end
 
 return M
