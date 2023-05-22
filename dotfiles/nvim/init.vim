@@ -36,6 +36,7 @@ lua require('config-autopairs')
 lua require('config-neogen')
 lua require('config-luasnip')
 lua require('config-orgmode')
+lua require('config-noice')
 
 lua require('local-shada')
 lua require('global-marks')

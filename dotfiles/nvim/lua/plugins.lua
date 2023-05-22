@@ -21,6 +21,7 @@ local function plugins(use)
     --Looks
     use 'nvim-lualine/lualine.nvim'
     use { 'luisiacc/gruvbox-baby', branch = 'main' }
+    use { "folke/noice.nvim", requires = { "MunifTanjim/nui.nvim"} }
 
     --Lsp
     use "folke/neodev.nvim"
