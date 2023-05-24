@@ -6,4 +6,4 @@ vim.opt_local.colorcolumn = '79'
 vim.opt_local.shiftwidth = 2
 vim.opt_local.softtabstop = 2
 
-keymapper.nnoremap('<leader>oie', '<cmd>call SelectEmail()<CR>')
+keymapper.nnoremap('<leader>oie', '<cmd>Email<CR>')

@@ -3,32 +3,26 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 1
 
 let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-p']
 
-function! SelectEmail()
-  let emails = systemlist("khard --skip-unparsable email --parsable --remove-first-line | sed 's/[ \t].*$//'")
-  let email = fzf#run(fzf#wrap({
-      \ 'source': emails,
-      \ 'sink': 'normal! i',
-      \ 'window': {'width': 0.9, 'height': 0.6},
-      \ 'header': 'Select an email address:',
-      \ }))
-endfunction
+command! Email call fzf#run(fzf#wrap({
+            \ 'source': "khard --skip-unparsable email --parsable --remove-first-line | sed 's/[ \t].*$//'",
+            \ 'sink': 'normal! i',
+            \ 'window': {'width': 0.9, 'height': 0.6},
+            \ 'header': 'Select an email address:',
+            \ }))
 
-function! FZFDirs()
-  let emails = systemlist("eval $FZF_ALT_C_COMMAND")
-  let email = fzf#run(fzf#wrap({
-      \ 'source': emails,
-      \ 'sink': 'NvimTreeClose | NvimTreeOpen',
-      \ 'window': {'width': 0.9, 'height': 0.6},
-      \ 'header': 'Select a directory',
-      \ 'options': ['--preview', 'exa --icons -T -L 1 -a {} | head -200']
-      \ }))
-endfunction
+command! Dirs call fzf#run(fzf#wrap({
+            \ 'source': "eval $FZF_ALT_C_COMMAND",
+            \ 'sink': 'NvimTreeClose | NvimTreeOpen',
+            \ 'window': {'width': 0.9, 'height': 0.6},
+            \ 'header': 'Select a directory',
+            \ 'options': ['--preview', 'exa --icons -T -L 1 -a {} | head -200']
+            \ }))
 
 command! -bang -nargs=? -complete=dir Files
-        \ call fzf#vim#files(
-        \ <q-args>, 
-        \ fzf#vim#with_preview(), 
-        \ <bang>0)
+            \ call fzf#vim#files(
+            \ <q-args>, 
+            \ fzf#vim#with_preview(), 
+            \ <bang>0)
 
 nnoremap <a-a> :Ag<space>
 inoremap <a-a> <Esc>:Ag<space>
@@ -40,12 +34,12 @@ if has('win32')
     noremap <a-v> <cmd>call ExecInCmd('Files ~/dotfiles/nvim')<CR>
     noremap <a-M> <cmd>call ExecInCmd('Marks')<CR>
     noremap <a-h> <cmd>call ExecInCmd('Helptags')<CR>
-    noremap <a-c> <cmd>call ExecInCmd('call FZFDirs()')<CR>
+    noremap <a-c> <cmd>call ExecInCmd('Dirs')<CR>
 else
     noremap <a-o> <cmd>Files<CR>
     noremap <a-b> <cmd>Buffers<CR>
     noremap <a-v> <cmd>Files ~/dotfiles/nvim<CR>
     noremap <a-M> <cmd>Marks<CR>
     noremap <a-h> <cmd>Helptags<CR>
-    noremap <a-c> <cmd>call FZFDirs()<CR>
+    noremap <a-c> <cmd>Dirs<CR>
 endif
