@@ -13,6 +13,16 @@ function! SelectEmail()
       \ })
 endfunction
 
+function! FZFDirs()
+  let emails = systemlist("eval $FZF_ALT_C_COMMAND")
+  let email = fzf#run({
+      \ 'source': emails,
+      \ 'sink': 'NvimTreeClose | NvimTreeOpen',
+      \ 'window': {'width': 0.9, 'height': 0.6},
+      \ 'header': 'Select a directory',
+      \ })
+endfunction
+
 command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(
         \ <q-args>, 
@@ -29,10 +39,12 @@ if has('win32')
     noremap <a-v> <cmd>call ExecInCmd('Files ~/dotfiles/nvim')<CR>
     noremap <a-M> <cmd>call ExecInCmd('Marks')<CR>
     noremap <a-h> <cmd>call ExecInCmd('Helptags')<CR>
+    noremap <a-c> <cmd>call ExecInCmd('call FZFDirs()')<CR>
 else
     noremap <a-o> <cmd>Files<CR>
     noremap <a-b> <cmd>Buffers<CR>
     noremap <a-v> <cmd>Files ~/dotfiles/nvim<CR>
     noremap <a-M> <cmd>Marks<CR>
     noremap <a-h> <cmd>Helptags<CR>
+    noremap <a-c> <cmd>call FZFDirs()<CR>
 endif

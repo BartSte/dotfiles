@@ -104,7 +104,7 @@ tree.setup({
     on_attach = on_attach,
     disable_netrw = true,
     hijack_cursor = true,
-    sync_root_with_cwd = true,
+    sync_root_with_cwd = false,
     view = {
         width = { max = 50, padding = 0 },
         mappings = { list = my_mappings, },
@@ -124,4 +124,5 @@ tree.setup({
 })
 
 keymapper.noremap('<a-X>', '<cmd>NvimTreeFindFile<CR>')
-keymapper.noremap('<a-x>', '<cmd>NvimTreeToggle<CR>')
+keymapper.noremap('<a-x>', '<cmd>NvimTreeToggle .<CR>')
+keymapper.noremap('<a-X>', '<cmd>NvimTreeClose | NvimTreeOpen .<CR>')

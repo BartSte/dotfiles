@@ -20,8 +20,12 @@ local custom_exports = {
         action = khalorg.new
     },
     e = {
-        label = 'Edit a khal item',
-        action = khalorg.edit
+        label = 'Edit properties of a khal item',
+        action = khalorg.edit_props
+    },
+    E = {
+        label = 'Edit khal item',
+        action = khalorg.edit_all
     }
 }
 
