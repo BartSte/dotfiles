@@ -5,22 +5,23 @@ let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-p']
 
 function! SelectEmail()
   let emails = systemlist("khard --skip-unparsable email --parsable --remove-first-line | sed 's/[ \t].*$//'")
-  let email = fzf#run({
+  let email = fzf#run(fzf#wrap({
       \ 'source': emails,
       \ 'sink': 'normal! i',
       \ 'window': {'width': 0.9, 'height': 0.6},
       \ 'header': 'Select an email address:',
-      \ })
+      \ }))
 endfunction
 
 function! FZFDirs()
   let emails = systemlist("eval $FZF_ALT_C_COMMAND")
-  let email = fzf#run({
+  let email = fzf#run(fzf#wrap({
       \ 'source': emails,
       \ 'sink': 'NvimTreeClose | NvimTreeOpen',
       \ 'window': {'width': 0.9, 'height': 0.6},
       \ 'header': 'Select a directory',
-      \ })
+      \ 'options': ['--preview', 'exa --icons -T -L 1 -a {} | head -200']
+      \ }))
 endfunction
 
 command! -bang -nargs=? -complete=dir Files
