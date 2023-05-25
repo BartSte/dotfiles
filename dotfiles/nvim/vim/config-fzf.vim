@@ -3,20 +3,39 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 1
 
 let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-p']
 
-command! Email call fzf#run(fzf#wrap({
-            \ 'source': "khard --skip-unparsable email --parsable --remove-first-line | sed 's/[ \t].*$//'",
-            \ 'sink': 'normal! i',
-            \ 'window': {'width': 0.9, 'height': 0.6},
-            \ 'header': 'Select an email address:',
-            \ }))
+function! s:GetEmail()
+    call fzf#run(fzf#wrap({
+                \ 'source': "khard --skip-unparsable email --parsable --remove-first-line | sed 's/[ \t].*$//'",
+                \ 'sink': 'normal! i',
+                \ 'window': {'width': 0.9, 'height': 0.6},
+                \ 'header': 'Select an email address:',
+                \ }))
+endfunction
 
-command! Dirs call fzf#run(fzf#wrap({
-            \ 'source': "eval $FZF_ALT_C_COMMAND",
-            \ 'sink': 'NvimTreeClose | NvimTreeOpen',
-            \ 'window': {'width': 0.9, 'height': 0.6},
-            \ 'header': 'Select a directory',
-            \ 'options': ['--preview', 'exa --icons -T -L 1 -a {} | head -200']
-            \ }))
+function! s:Dirs()
+    call fzf#run(fzf#wrap({
+                \ 'source': "eval $FZF_ALT_C_COMMAND",
+                \ 'sink': 'NvimTreeClose | NvimTreeOpen',
+                \ 'window': {'width': 0.9, 'height': 0.6},
+                \ 'header': 'Select a directory',
+                \ 'options': ['--preview', 'exa --icons -T -L 1 -a {} | head -200', '--bind', 'ctrl-p:toggle-preview', '--preview-window', 'hidden']
+                \ }))
+endfunction
+
+" TODO
+" function! s:Registers()
+"     let reg = split(execute('reg'), "\n")
+"     let reg = map(reg, 'substitute(v:val, "^\\s*\\S\\s*", "", "")')
+"     let reg = join(reg, "\n")
+"     let choice = fzf#run(fzf#wrap({'source': split(reg, "\n"), 'sink': 'echo'}))
+"     if choice != ''
+"         execute 'normal! "' . choice . 'p'
+"     endif
+" endfunction
+
+command! Email call s:GetEmail()
+command! Dirs call s:Dirs()
+command! Registers call s:Registers()
 
 command! -bang -nargs=? -complete=dir Files
             \ call fzf#vim#files(
