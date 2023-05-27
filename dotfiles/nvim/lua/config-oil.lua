@@ -5,12 +5,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 oil.setup({
-    columns = {
-        "icon",
-        -- "mtime",
-        -- "permissions",
-        -- "size",
-    },
+    columns = { "icon" },
     -- Buffer-local options to use for oil buffers
     buf_options = {
         buflisted = false,
@@ -19,23 +14,18 @@ oil.setup({
     -- Window-local options to use for oil buffers
     win_options = {
         wrap = false,
-        signcolumn = "no",
-        cursorcolumn = false,
-        foldcolumn = "0",
-        spell = false,
         list = false,
+        spell = false,
+        foldcolumn = "0",
+        signcolumn = "no",
         conceallevel = 3,
+        cursorcolumn = false,
         concealcursor = "n",
     },
-    -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`
     default_file_explorer = true,
-    -- Restore window options to previous values when leaving an oil buffer
     restore_win_options = true,
-    -- Skip the confirmation popup for simple operations
     skip_confirm_for_simple_edits = false,
-    -- Deleted files will be removed with the trash_command (below).
-    delete_to_trash = false,
-    -- Change this to customize the command used when deleting to trash
+    delete_to_trash = true,
     trash_command = "trash-put",
     -- Selecting a new/moved/renamed file or directory will prompt you to save changes first
     prompt_save_on_select_new_entry = true,
@@ -55,12 +45,10 @@ oil.setup({
         ["<leader>.d"] = "actions.open_cmdline_dir",
         ["<leader>v"] = "actions.select_vsplit",
         ["<leader>s>"] = "actions.select_split",
-
         ["<C-t>"] = "actions.select_tab",
         ["<C-p>"] = "actions.preview",
         ["<C-c>"] = "actions.close",
         ["<C-l>"] = "actions.refresh",
-
         ["~"] = "actions.open_cwd",
         ["`"] = "actions.cd",
         ["_"] = "actions.tcd",

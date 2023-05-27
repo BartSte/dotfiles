@@ -1,5 +1,3 @@
-local packer = require('packer')
-
 local function markdown_hook()
     vim.fn["mkdp#util#install"]()
 end
@@ -21,6 +19,7 @@ local function plugins(use)
     --Looks
     use 'nvim-lualine/lualine.nvim'
     use { 'luisiacc/gruvbox-baby', branch = 'main' }
+    use { "folke/noice.nvim", requires = { "MunifTanjim/nui.nvim"} }
 
     --Lsp
     use "folke/neodev.nvim"
@@ -84,3 +83,4 @@ local function plugins(use)
 end
 
 return packer.startup(plugins)
+
