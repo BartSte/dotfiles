@@ -22,21 +22,8 @@ function! s:Dirs()
                 \ }))
 endfunction
 
-" TODO
-" function! s:Registers()
-"     let reg = split(execute('reg'), "\n")
-"     let reg = map(reg, 'substitute(v:val, "^\\s*\\S\\s*", "", "")')
-"     let reg = join(reg, "\n")
-"     let choice = fzf#run(fzf#wrap({'source': split(reg, "\n"), 'sink': 'echo'}))
-"     if choice != ''
-"         execute 'normal! "' . choice . 'p'
-"     endif
-" endfunction
-
 command! Email call s:GetEmail()
 command! Dirs call s:Dirs()
-command! Registers call s:Registers()
-
 command! -bang -nargs=? -complete=dir Files
             \ call fzf#vim#files(
             \ <q-args>, 
@@ -62,3 +49,4 @@ else
     noremap <a-h> <cmd>Helptags<CR>
     noremap <a-c> <cmd>Dirs<CR>
 endif
+

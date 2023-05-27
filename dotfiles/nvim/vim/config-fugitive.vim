@@ -4,5 +4,5 @@ noremap <a-g> :G<space>
 noremap <a-G> :vertical G<CR>'"
 noremap <a-z> :GV<CR>
 noremap <a-d> :silent! normal gf<CR>:wincmd o<bar>Gvdiffsplit<CR>
-nnoremap <leader>m <cmd>diffget //2<CR>
-nnoremap <leader>i <cmd>diffget //3<CR>
+nnoremap <buffer><leader>m <cmd>diffget //2<CR>
+nnoremap <buffer><leader>i <cmd>diffget //3<CR>

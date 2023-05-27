@@ -15,6 +15,7 @@ so config-markdown.vim
 so config-vim-bbye.vim
 so config-vim-test.vim
 so config-table.vim
+so config-peekaboo.vim
 cd -
 
 lua require('linux')

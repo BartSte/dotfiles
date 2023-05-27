@@ -33,8 +33,6 @@ function! GetCommand(venv, cmd)
     endif
 endfunction
 
-command! -nargs=* TmuxReset call <SNR>59_Tmux_Vars()
-
 let g:test#strategy = 'mytslime'
 let g:wsl_win_venvs = expand('$WH/venvs/')
 let g:preserve_screen = 1

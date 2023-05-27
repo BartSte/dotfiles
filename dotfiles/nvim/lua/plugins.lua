@@ -43,6 +43,7 @@ local function plugins(use)
 
     --Navigation
     use { 'junegunn/fzf.vim', requires = { 'junegunn/fzf', run = ':call fzf#install()' } }
+    use {'junegunn/vim-peekaboo'}
     use 'moll/vim-bbye'
     use 'nvim-tree/nvim-tree.lua'
     use 'nvim-tree/nvim-web-devicons'
@@ -55,6 +56,7 @@ local function plugins(use)
     use 'tpope/vim-surround'
     use 'tpope/vim-obsession'
     use 'windwp/nvim-autopairs'
+    use 'tpope/vim-scriptease'
 
     --Source control
     use 'tpope/vim-fugitive'

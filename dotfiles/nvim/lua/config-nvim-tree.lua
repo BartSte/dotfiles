@@ -125,4 +125,3 @@ tree.setup({
 
 keymapper.noremap('<a-X>', '<cmd>NvimTreeFindFile<CR>')
 keymapper.noremap('<a-x>', '<cmd>NvimTreeToggle .<CR>')
-keymapper.noremap('<a-X>', '<cmd>NvimTreeClose | NvimTreeOpen .<CR>')
