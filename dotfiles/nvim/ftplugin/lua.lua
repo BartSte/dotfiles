@@ -5,4 +5,5 @@ end
 
 local opts = { buffer = true }
 
+vim.b.textwidth = 79
 vim.keymap.set('n', '<space>f', format, opts)

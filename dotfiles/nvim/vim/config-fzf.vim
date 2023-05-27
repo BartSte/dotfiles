@@ -15,7 +15,7 @@ endfunction
 function! s:Dirs()
     call fzf#run(fzf#wrap({
                 \ 'source': "eval $FZF_ALT_C_COMMAND",
-                \ 'sink': 'NvimTreeClose | NvimTreeOpen',
+                \ 'sink': 'edit',
                 \ 'window': {'width': 0.9, 'height': 0.6},
                 \ 'header': 'Select a directory',
                 \ 'options': ['--preview', 'exa --icons -T -L 1 -a {} | head -200', '--bind', 'ctrl-p:toggle-preview', '--preview-window', 'hidden']
