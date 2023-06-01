@@ -117,5 +117,5 @@ oil.setup({
     },
 })
 
-keymapper.noremap('<a-x>', function() oil.open('~') end)
+keymapper.noremap('<a-x>', function() oil.open(vim.fn.getcwd()) end)
 keymapper.noremap('<a-X>', oil.open)

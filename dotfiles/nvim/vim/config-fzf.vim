@@ -16,9 +16,9 @@ function! s:Dirs()
     call fzf#run(fzf#wrap({
                 \ 'source': "eval $FZF_ALT_C_COMMAND",
                 \ 'sink': 'edit',
-                \ 'window': {'width': 0.9, 'height': 0.6},
+                \ 'window': {'width': 0.9, 'height': 0.9},
                 \ 'header': 'Select a directory',
-                \ 'options': ['--preview', 'exa --icons -T -L 1 -a {} | head -200', '--bind', 'ctrl-p:toggle-preview', '--preview-window', 'hidden']
+                \ 'options': ['--preview', 'exa --icons --git-ignore -T -L 2 -a {} | head -200', '--bind', 'ctrl-p:toggle-preview']
                 \ }))
 endfunction
 

@@ -14,7 +14,6 @@ function! ToggleQuickFix()
     endif
 endfunction
 
-
 imap <F24> <C-Space>
 cmap <F24> <C-Space>
 nmap <F24> <C-Space>
