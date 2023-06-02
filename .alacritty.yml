@@ -32,5 +32,5 @@ key_bindings:
   - { key: Tab,       mods: Control,                    chars: "\e[1;5I" }
   - { key: Tab,       mods: Control|Shift,              chars: "\e[1;6I" }
   - { key: Delete,    mods: Control,                    chars: "\e[3;5~" }
-  - { key: Space,     mods: Control,                    chars: "\e[24;2~"} # send <F24> so powershell detects it
+  - { key: Space,     mods: Control,                    chars: "\e[24;2~"} # send <F24> so vim can detect it.
   - { key: Back,      mods: Control,                    chars: "\x08"}
