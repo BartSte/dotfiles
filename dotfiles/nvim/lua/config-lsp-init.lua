@@ -8,8 +8,6 @@ lsp_defaults.capabilities = vim.tbl_deep_extend(
     cmp_nvim_lsp.default_capabilities()
 )
 
-
-
 vim.diagnostic.config({
     virtual_text = false,
     signs = false,

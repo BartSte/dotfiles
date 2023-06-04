@@ -1,13 +1,12 @@
---TODO replace global with local functions
-function set_virtual_text_off()
+local function set_virtual_text_off()
     vim.diagnostic.config({ virtual_text = false })
 end
 
-function set_virtual_text_error()
+local function set_virtual_text_error()
     vim.diagnostic.config({ virtual_text = { severity = vim.diagnostic.severity.ERROR } })
 end
 
-function set_virtual_text_all()
+local function set_virtual_text_all()
     vim.diagnostic.config({
         virtual_text = {
             severity = {
@@ -39,9 +38,9 @@ local function mappings()
     bufmap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     bufmap('x', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     bufmap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<cr>')
-    bufmap('n', '<leader>vo', '<cmd>lua set_virtual_text_off()<CR>')
-    bufmap('n', '<leader>ve', '<cmd>lua set_virtual_text_error()<CR>')
-    bufmap('n', '<leader>va', '<cmd>lua set_virtual_text_all()<CR>')
+    bufmap('n', '<leader>vo', set_virtual_text_off)
+    bufmap('n', '<leader>ve', set_virtual_text_error)
+    bufmap('n', '<leader>va', set_virtual_text_all)
     bufmap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({timeout_ms = 5000, async = false})<cr>')
 end
 
