@@ -26,6 +26,10 @@ local custom_exports = {
     E = {
         label = 'Edit khal item',
         action = khalorg.edit_all
+    },
+    d = {
+        label = 'Delete khal item',
+        action = khalorg.delete
     }
 }
 
