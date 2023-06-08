@@ -18,7 +18,7 @@ function! s:Dirs()
                 \ 'sink': 'edit',
                 \ 'window': {'width': 0.9, 'height': 0.9},
                 \ 'header': 'Select a directory',
-                \ 'options': ['--preview', 'exa --icons --git-ignore -T -L 2 -a {} | head -200', '--bind', 'ctrl-p:toggle-preview']
+                \ 'options': ['--preview', 'exa --icons --git-ignore -T -L 1 -a {} | head -200', '--bind', 'ctrl-p:toggle-preview']
                 \ }))
 endfunction
 

@@ -28,7 +28,7 @@ local function plugins(use)
     use 'neovim/nvim-lspconfig'
     use 'jose-elias-alvarez/null-ls.nvim'
 
-    --Completion
+     --Completion
     use "danymat/neogen"
     use 'L3MON4D3/LuaSnip'
     use 'dmitmel/cmp-cmdline-history'
@@ -45,8 +45,7 @@ local function plugins(use)
     use {'junegunn/vim-peekaboo'}
     use 'moll/vim-bbye'
     use 'stevearc/oil.nvim'
-    use { 'aznhe21/hop.nvim', branch = 'fix-some-bugs' }
-    -- use 'phaazon/hop.nvim' -- was unstable
+    use 'BartSte/hop.nvim'
 
     --Editing
     use '907th/vim-auto-save'
