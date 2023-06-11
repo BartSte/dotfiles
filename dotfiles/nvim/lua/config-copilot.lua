@@ -33,6 +33,12 @@ copilot.setup({
     filetypes = {
         lua = true,
         python = true,
+        zsh = true,
+        bash = true,
+        sh = true,
+        cpp = true,
+        vim = true,
+        mail = true,
         ["*"] = false,
     },
     copilot_node_command = 'node',     -- Node.js version must be > 16.x
