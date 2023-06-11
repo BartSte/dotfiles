@@ -28,7 +28,7 @@ local function plugins(use)
     use 'neovim/nvim-lspconfig'
     use 'jose-elias-alvarez/null-ls.nvim'
 
-     --Completion
+    --Completion
     use "danymat/neogen"
     use 'L3MON4D3/LuaSnip'
     use 'dmitmel/cmp-cmdline-history'
@@ -39,10 +39,18 @@ local function plugins(use)
     use 'hrsh7th/nvim-cmp'
     use 'saadparwaiz1/cmp_luasnip'
     use 'rcarriga/cmp-dap'
+    use {
+        'zbirenbaum/copilot.lua',
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("config-copilot")
+        end,
+    }
 
     --Navigation
     use { 'junegunn/fzf.vim', requires = { 'junegunn/fzf', run = ':call fzf#install()' } }
-    use {'junegunn/vim-peekaboo'}
+    use { 'junegunn/vim-peekaboo' }
     use 'moll/vim-bbye'
     use 'stevearc/oil.nvim'
     use 'BartSte/hop.nvim'

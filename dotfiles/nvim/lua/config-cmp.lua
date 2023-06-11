@@ -38,6 +38,7 @@ local menu_items = {
     path = 'PATH',
     buffer = 'BUF',
     orgmode = 'ORG',
+    copilot = 'COP',
     cmdline = 'CMD',
     luasnip = 'SNIP',
     nvim_lsp = 'LSP',
@@ -53,20 +54,36 @@ local formatting = {
 }
 
 local sources_i = {
-    { name = 'orgmode', priority = 1, keyword_length = 1 },
-    { name = 'path', priority = 2, keyword_length = 1 },
-    { name = 'buffer', priority = 4, keyword_length = 1 },
-    { name = 'luasnip', priority = 3, keyword_length = 1 },
-    { name = 'nvim_lsp', priority = 5, keyword_length = 1 },
+    { name = 'orgmode',  group_index = 2 },
+    { name = 'nvim_lsp', group_index = 2 },
+    { name = 'path',     group_index = 2 },
+    { name = 'buffer',   group_index = 2 },
+    { name = 'luasnip',  group_index = 2 },
 }
 
 local sources_c = {
-    { name = 'path', priority = 1, keyword_length = 1 },
-    { name = 'cmdline', priority = 3, keyword_length = 1 },
-    { name = 'cmdline_history', priority = 2, keyword_length = 1 },
+    { name = 'path',            group_index = 2 },
+    { name = 'cmdline',         group_index = 2 },
+    { name = 'cmdline_history', group_index = 2 },
 }
 
 local sources_s = { { name = 'buffer' } }
+
+local sorting = {
+    priority_weight = 2,
+    comparators = {
+        cmp.config.compare.offset,
+        -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+        cmp.config.compare.exact,
+        cmp.config.compare.score,
+        cmp.config.compare.recently_used,
+        cmp.config.compare.locality,
+        cmp.config.compare.kind,
+        cmp.config.compare.sort_text,
+        cmp.config.compare.length,
+        cmp.config.compare.order,
+    }
+}
 
 cmp.setup({
     snippet = snippet,
@@ -74,7 +91,8 @@ cmp.setup({
     formatting = formatting,
     mapping = mappings,
     sources = sources_i,
-    enabled = func.cmp_enabled
+    enabled = func.cmp_enabled,
+    sorting = sorting
 })
 
 cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {

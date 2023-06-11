@@ -2,7 +2,7 @@ local hop = require('hop')
 local hint = require('hop.hint')
 local jump_target = require('hop.jump_target')
 
-M = {}
+local M = {}
 
 M.hop_char1 = function()
     local opts = { direction = { nil } }
