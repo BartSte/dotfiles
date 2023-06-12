@@ -36,6 +36,9 @@ copilot.setup({
         cpp = true,
         vim = true,
         mail = true,
+        markdown = true,
+        toml = true,
+        json = true,
         ["*"] = false,
     },
     copilot_node_command = 'node', -- Node.js version must be > 16.x
