@@ -10,28 +10,28 @@ local dropbox_main = os_path.path_join(dropbox_org, 'main.org')
 local dropbox_agenda = os_path.path_join(dropbox_org, 'outlook.org')
 local dropbox_personal = os_path.path_join(dropbox_org, 'personal.org')
 
-khalorg.setup({
-    calendar = 'outlook_local'
-})
+-- khalorg.setup({
+--     calendar = 'outlook_local'
+-- })
 
-local custom_exports = {
-    n = {
-        label = 'Add a new item to khal',
-        action = khalorg.new
-    },
-    e = {
-        label = 'Edit properties of a khal item',
-        action = khalorg.edit_props
-    },
-    E = {
-        label = 'Edit khal item',
-        action = khalorg.edit_all
-    },
-    d = {
-        label = 'Delete khal item',
-        action = khalorg.delete
-    }
-}
+-- local custom_exports = {
+--     n = {
+--         label = 'Add a new item to khal',
+--         action = khalorg.new
+--     },
+--     e = {
+--         label = 'Edit properties of a khal item',
+--         action = khalorg.edit_props
+--     },
+--     E = {
+--         label = 'Edit khal item',
+--         action = khalorg.edit_all
+--     },
+--     d = {
+--         label = 'Delete khal item',
+--         action = khalorg.delete
+--     }
+-- }
 
 local mappings = {
     org = {
@@ -47,7 +47,7 @@ orgmode.setup({
     org_agenda_files = { dropbox_main, dropbox_agenda, dropbox_personal },
     org_blank_before_new_entry = { heading = true, plain_list_item = false },
     org_hide_emphasis_markers = true,
-    org_custom_exports = custom_exports,
+    -- org_custom_exports = custom_exports,
     win_split_mode = 'vertical',
     org_todo_keywords = { 'TODO', 'MEET', 'NEXT', 'WAIT', '|', 'JIRA', 'DONE', 'CANCEL' },
     org_todo_keyword_faces = {
