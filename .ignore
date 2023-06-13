@@ -1,6 +1,7 @@
 *.git/
 *.swp*
 *cache*/
+*egg-info*
 *tmp*/
 *venv*/
 .arduino*/
@@ -20,26 +21,26 @@
 .rustup
 .venv/
 .vscode/
+AppData
+Fleet Cleaner
+OneDrive*
 Reporting Data/
+SWSetup
+Strawberry
 Temp/
 Trash/
+Windows
 __pycache__/
 chrysalis/
+dist
 gadgets/
 go/
 message_cache/
 node_modules/
 plugged/
 project_data/
+pyinstaller
+stubs
 venv/
 visual/
 yay/
-AppData
-Fleet Cleaner
-OneDrive*
-pyinstaller
-dist
-*egg-info*
-SWSetup
-Windows
-Strawberry

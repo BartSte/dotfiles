@@ -15,22 +15,10 @@ khalorg.setup({
 })
 
 local custom_exports = {
-    n = {
-        label = 'Add a new item to khal',
-        action = khalorg.new
-    },
-    e = {
-        label = 'Edit properties of a khal item',
-        action = khalorg.edit_props
-    },
-    E = {
-        label = 'Edit khal item',
-        action = khalorg.edit_all
-    },
-    d = {
-        label = 'Delete khal item',
-        action = khalorg.delete
-    }
+    n = { label = 'Add a new khal item', action = khalorg.new },
+    d = { label = 'Delete a khal item', action = khalorg.delete },
+    e = { label = 'Edit properties of a khal item', action = khalorg.edit },
+    E = { label = 'Edit properties & dates of a khal item', action = khalorg.edit_all }
 }
 
 local mappings = {

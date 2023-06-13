@@ -35,6 +35,8 @@ if has('termguicolors')
     hi TreesitterContextBottom gui=bold guibg=#31302f
     hi TreesitterContextLineNumber gui=bold guifg=LightGreen guibg=#31302f
 
+    hi CopilotSuggestion gui=italic guifg=gray80
+
 endif
 
 let &t_SI = "\e[6 q"
