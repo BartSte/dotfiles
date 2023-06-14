@@ -1,9 +1,10 @@
-lua require('plugins')
-
 cd ~/dotfiles/nvim/vim
 so settings.vim
 so mappings.vim
 so windows.vim
+
+lua require('plugins')
+
 so colors.vim
 so keep-centered.vim
 so fold.vim
@@ -19,7 +20,6 @@ so config-peekaboo.vim
 cd -
 
 lua require('linux')
-
 lua require('config-hop')
 lua require('config-lualine')
 lua require('config-treesitter')
