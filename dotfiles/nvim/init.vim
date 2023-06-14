@@ -34,7 +34,6 @@ lua require('config-nvim-dap-virtual-text')
 lua require('config-mason')
 lua require('config-autopairs')
 lua require('config-neogen')
-lua require('config-luasnip')
 lua require('config-orgmode')
 lua require('config-oil')
 

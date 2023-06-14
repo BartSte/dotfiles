@@ -24,20 +24,17 @@ local function plugins(use)
 
     --Lsp
     use "folke/neodev.nvim"
-    use "rafamadriz/friendly-snippets"
     use 'neovim/nvim-lspconfig'
     use 'jose-elias-alvarez/null-ls.nvim'
 
     --Completion
     use "danymat/neogen"
-    use 'L3MON4D3/LuaSnip'
     use 'dmitmel/cmp-cmdline-history'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/nvim-cmp'
-    use 'saadparwaiz1/cmp_luasnip'
     use 'rcarriga/cmp-dap'
     use {
         'zbirenbaum/copilot.lua',
@@ -60,8 +57,8 @@ local function plugins(use)
     use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
     use 'tpope/vim-obsession'
-    use 'windwp/nvim-autopairs'
     use 'tpope/vim-scriptease'
+    use 'windwp/nvim-autopairs'
 
     --Source control
     use 'tpope/vim-fugitive'

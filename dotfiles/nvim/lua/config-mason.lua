@@ -3,11 +3,9 @@ local lsp = require("mason-lspconfig")
 local null = require('mason-null-ls')
 local mason = require('mason')
 
-local servers = { "pyright", "vimls", "bashls", "jsonls", "clangd", "cssls", "arduino_language_server"}
-local debuggers = { "python" }
-local formatters_and_linters = { 'autopep8', 'ruff' }
-
 mason.setup()
-dap.setup({ ensure_installed = debuggers })
-lsp.setup({ ensure_installed = servers })
-null.setup({ ensure_installed = formatters_and_linters })
+
+-- Toggle to true if you want to install the plugins that are initialized within the config.
+dap.setup({automatic_installation = false})
+lsp.setup({automatic_installation = false})
+null.setup({automatic_installation = false})

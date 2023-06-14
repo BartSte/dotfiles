@@ -1,5 +1,4 @@
 local cmp = require('cmp')
-local luasnip = require('luasnip')
 local behavior_insert = { behavior = cmp.SelectBehavior.Insert }
 
 local function enable_cmp(value)
@@ -11,10 +10,6 @@ local M = {}
 --A variable to hold the state of cmp is created to make history scrolling in
 --the command line easier to implement.
 M.cmp_enabled = true
-
-M.snippet_expand = function(args)
-    luasnip.lsp_expand(args.body)
-end
 
 M.toggle_visibility = function()
     if cmp.visible() then

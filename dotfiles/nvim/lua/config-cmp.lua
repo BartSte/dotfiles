@@ -33,15 +33,12 @@ local window = {
     documentation = cmp.config.window.bordered()
 }
 
-local snippet = { expand = func.snippet_expand }
-
 local menu_items = {
     path = 'PATH',
     buffer = 'BUF',
     orgmode = 'ORG',
     copilot = 'COP',
     cmdline = 'CMD',
-    luasnip = 'SNIP',
     nvim_lsp = 'LSP',
     cmdline_history = 'HIS',
 }
@@ -59,7 +56,6 @@ local sources_i = {
     { name = 'nvim_lsp', group_index = 2 },
     { name = 'path',     group_index = 2 },
     { name = 'buffer',   group_index = 2 },
-    { name = 'luasnip',  group_index = 2 },
 }
 
 local sources_c = {
@@ -87,7 +83,6 @@ local sorting = {
 }
 
 cmp.setup({
-    snippet = snippet,
     window = window,
     formatting = formatting,
     mapping = mappings,
