@@ -1,7 +1,6 @@
 local mapper = require('keymapper')
 local orgmode = require('orgmode')
 local os_path = require('os_path')
-local bullets = require('org-bullets')
 local khalorg = require('khalorg')
 
 local dropbox_home = os_path.path_join(os_path.get_dropbox_home(), 'Dropbox')
@@ -43,14 +42,6 @@ orgmode.setup({
         NEXT = ':foreground yellow :weight bold',
         CANCEL = ':foreground magenta :weight bold'
     }
-})
-
-bullets.setup({
-    symbols = {
-        checkboxes = {
-            todo = { " ", "OrgTODO" },
-        }
-    },
 })
 
 mapper.nnoremap('<a-r>', ':Files ' .. dropbox_org .. '<CR>')
