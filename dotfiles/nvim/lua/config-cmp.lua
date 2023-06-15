@@ -15,6 +15,12 @@ local enter = { i = func.confirm_select(false), c = func.confirm_select(false) }
 local cspace = { i = func.toggle_visibility, c = func.toggle_visibility }
 local menter = { i = func.confirm_select(true), c = func.confirm_select(true) }
 
+local snippet = {
+    expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+    end
+}
+
 local mappings = {
     ['<Up>'] = cmp.mapping(up),
     ['<CR>'] = cmp.mapping(enter),
@@ -83,6 +89,7 @@ local sorting = {
 }
 
 cmp.setup({
+    snippet = snippet,
     window = window,
     formatting = formatting,
     mapping = mappings,

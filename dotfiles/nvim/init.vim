@@ -12,7 +12,6 @@ so fold.vim
 so config-auto_save.vim
 so config-fugitive.vim
 so config-fzf.vim
-so config-markdown.vim
 so config-vim-bbye.vim
 so config-vim-test.vim
 so config-table.vim
@@ -22,8 +21,6 @@ cd -
 lua require('linux')
 lua require('config-hop')
 lua require('config-lualine')
-lua require('config-treesitter')
-lua require('config-neodev')
 lua require('config-lsp-init')
 lua require('config-lsp-servers')
 lua require('config-lsp-mappings')

@@ -16,19 +16,30 @@ local plugins = {
     'nvim-lua/plenary.nvim',
 
     --Package managers
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "jay-babu/mason-null-ls.nvim",
+    { "williamboman/mason.nvim",           build = ":MasonUpdate" },
+    { "williamboman/mason-lspconfig.nvim", dependencies = { "williamboman/mason.nvim" } },
+    { "jay-babu/mason-null-ls.nvim",       dependencies = { "williamboman/mason.nvim" } },
 
     --Looks
-    { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
-    'nvim-treesitter/nvim-treesitter',
-    'nvim-treesitter/nvim-treesitter-context',
+    {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        config = function() require("config-treesitter") end
+    },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+        config = function() require('config-treesitter-context') end
+    },
     'nvim-lualine/lualine.nvim',
     { 'luisiacc/gruvbox-baby', branch = 'main' },
 
     --Lsp
-    "folke/neodev.nvim",
+    {
+        "folke/neodev.nvim",
+        ft = "lua",
+        config = function() require("config-neodev") end
+    },
     'neovim/nvim-lspconfig',
     'jose-elias-alvarez/null-ls.nvim',
 
@@ -41,6 +52,8 @@ local plugins = {
     'hrsh7th/cmp-path',
     'hrsh7th/nvim-cmp',
     'rcarriga/cmp-dap',
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
     {
         'zbirenbaum/copilot.lua',
         cmd = "Copilot",
@@ -79,12 +92,17 @@ local plugins = {
     'theHamsta/nvim-dap-virtual-text',
 
     --Org
-    'nvim-orgmode/orgmode',
-    'BartSte/nvim-khalorg',
+    { 'nvim-orgmode/orgmode', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+    { 'BartSte/nvim-khalorg', dependencies = { 'nvim-orgmode/orgmode' } },
     'dhruvasagar/vim-table-mode',
 
     --Markdown
-    { "iamcco/markdown-preview.nvim", build = function() vim.fn["mkdp#util#install"]() end }
+    {
+        "iamcco/markdown-preview.nvim",
+        ft = 'markdown',
+        build = function() vim.fn["mkdp#util#install"]() end,
+        config = function() vim.cmd("so ~/dotfiles/nvim/vim/config-markdown.vim") end
+    }
 }
 
 local opts = {}
