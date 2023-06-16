@@ -1,5 +1,5 @@
 local hop = require('hop')
-local func = require('helpers-hop')
+local func = require('helpers.hop')
 
 hop.setup({
     keys = 'rlaodhgmfiwypuq;cx/jbvsetn',

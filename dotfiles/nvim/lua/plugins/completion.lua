@@ -14,7 +14,7 @@ return {
         cmd = "Copilot",
         event = "InsertEnter",
         config = function()
-            require("config-copilot")
+            require("config.copilot")
         end,
     },
 }

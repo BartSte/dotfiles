@@ -1,4 +1,3 @@
-
 require('config.treesitter')
 require('config.treesitter-context')
 
@@ -12,7 +11,6 @@ require('config.lualine')
 require('config.mason')
 require('config.neogen')
 require('config.null-ls')
-require('config.nvim-dap-virtual-text')
-require('config.nvim-dap')
 require('config.oil')
 require('config.orgmode')
+require('config.autocmds')

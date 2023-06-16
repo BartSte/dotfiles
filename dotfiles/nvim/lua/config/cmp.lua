@@ -1,5 +1,5 @@
 local cmp = require('cmp')
-local func = require('helpers-cmp')
+local func = require('helpers.cmp')
 local mapper = require("keymapper")
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
@@ -127,4 +127,4 @@ cmp.event:on(
 )
 
 vim.opt.completeopt = { 'menu' }
-mapper.nnoremap('<C-Space>', "a<cmd>lua require('helpers-cmp').toggle_visibility()<CR>")
+mapper.nnoremap('<C-Space>', "a<cmd>lua require('helpers.cmp').toggle_visibility()<CR>")

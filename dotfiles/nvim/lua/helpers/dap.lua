@@ -1,4 +1,4 @@
-local os_path = require('os_path')
+local os_path = require('helpers.os_path')
 local widgets = require('dap.ui.widgets')
 
 local M = {}

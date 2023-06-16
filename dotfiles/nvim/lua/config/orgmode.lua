@@ -1,6 +1,6 @@
 local mapper = require('keymapper')
 local orgmode = require('orgmode')
-local os_path = require('os_path')
+local os_path = require('helpers.os_path')
 local khalorg = require('khalorg')
 
 local dropbox_home = os_path.path_join(os_path.get_dropbox_home(), 'Dropbox')
