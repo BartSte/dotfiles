@@ -1,9 +1,10 @@
 return {
     {
         'nvim-treesitter/nvim-treesitter',
+        lazy = false,
         run = ':TSUpdate',
         config = function()
-            require('config.treesitter-init')
+            require('config.treesitter')
         end,
     },
     {
@@ -11,8 +12,5 @@ return {
         config = function()
             require('config.treesitter-context')
         end,
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-        }
     }
 }

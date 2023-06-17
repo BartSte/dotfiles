@@ -3,6 +3,12 @@ return {
     'tpope/vim-commentary',
     'tpope/vim-surround',
     'tpope/vim-obsession',
-    'windwp/nvim-autopairs',
     'junegunn/vim-peekaboo',
+    {
+        'windwp/nvim-autopairs',
+        event = 'InsertEnter',
+        config = function()
+            require('nvim-autopairs').setup()
+        end
+    }
 }
