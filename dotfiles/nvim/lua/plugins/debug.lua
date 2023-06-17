@@ -17,6 +17,7 @@ return {
     {
         'mfussenegger/nvim-dap-python',
         lazy = true,
+        keys = { '<F5>', '<cmd>DapContinue<CR>' },
         config = function() require('config.dap') end,
         dependencies = {
             'mfussenegger/nvim-dap',
