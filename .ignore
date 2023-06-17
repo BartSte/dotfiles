@@ -21,6 +21,7 @@
 .rustup
 .venv/
 .vscode/
+archive/
 AppData
 Fleet Cleaner
 OneDrive*

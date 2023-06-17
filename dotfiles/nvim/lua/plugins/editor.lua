@@ -3,6 +3,6 @@ return {
     'tpope/vim-commentary',
     'tpope/vim-surround',
     'tpope/vim-obsession',
-    'tpope/vim-scriptease',
     'windwp/nvim-autopairs',
+    'junegunn/vim-peekaboo',
 }
