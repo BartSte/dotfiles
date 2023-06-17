@@ -19,8 +19,6 @@ lspconfig.clangd.setup({})
 --     filetypes = { "arduino", "cpp" }
 -- }
 
---For some reason the runtime files are not detected on windows. This does not
---matter much as I use Linux for luas scripting.
 lspconfig.lua_ls.setup {
     settings = {
         Lua = {
