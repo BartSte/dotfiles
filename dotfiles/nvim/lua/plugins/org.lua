@@ -1,21 +1,15 @@
 return {
-    {
-        'nvim-orgmode/orgmode',
-        config = function()
-            require('config.orgmode')
-        end,
-        ft = { 'org' },
-        keys = {
-            { "<a-r>" },
-            { "<space>oa", "<Cmd>lua require('orgmode').action('agenda.prompt')<CR>" }
-        }
+    'nvim-orgmode/orgmode',
+    config = function()
+        require('config.orgmode')
+    end,
+    ft = { 'org' },
+    keys = {
+        { "<a-r>" },
+        { "<space>oa", "<Cmd>lua require('orgmode').action('agenda.prompt')<CR>" }
     },
-    {
+    dependencies = {
         'BartSte/nvim-khalorg',
-        lazy = true,
-        dependencies = {
-            'nvim-orgmode/orgmode'
-        },
-    },
-    'dhruvasagar/vim-table-mode',
+        'dhruvasagar/vim-table-mode',
+    }
 }

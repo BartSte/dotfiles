@@ -1,5 +1,3 @@
 return {
-    {
-        "iamcco/markdown-preview.nvim",
-    }
+    "iamcco/markdown-preview.nvim",
 }

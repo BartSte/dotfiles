@@ -1,6 +1,6 @@
 local cmp = require('cmp')
 local func = require('helpers.cmp')
-local mapper = require("helpers.keymapper") 
+local mapper = require("helpers.keymapper")
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 
@@ -88,6 +88,8 @@ local sorting = {
     }
 }
 
+require('luasnip.loaders.from_vscode').lazy_load()
+
 cmp.setup({
     snippet = snippet,
     window = window,
@@ -122,8 +124,8 @@ vim.api.nvim_create_autocmd('CmdlineLeave', {
 
 -- If you want insert `(` after select function or method item
 cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
 )
 
 vim.opt.completeopt = { 'menu' }
