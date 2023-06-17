@@ -1,5 +1,5 @@
 local chatgpt = require("chatgpt")
-local keymapper = require("keymapper")
+local keymapper = require("helpers.keymapper") 
 
 chatgpt.setup({
     welcome_message = "", -- set to "" if you don't like the fancy godot robot

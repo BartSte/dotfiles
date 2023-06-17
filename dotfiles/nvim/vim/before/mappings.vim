@@ -1,59 +1,8 @@
-filetype on
-
-let mapleader = " "
-set diffopt+=vertical,iblank,closeoff
-set nowrap
-
-" Completion
-set pumheight=10
-set pumwidth=15
-
-" Backup
-set noswapfile
-set nowritebackup
-
-" Updates
-set notimeout
-set updatetime=500
-
-" Looks
-set signcolumn=number
-set cursorline
-set number
-set relativenumber
-
-" Tabbing
-set autoindent
-set expandtab
-set shiftwidth=4
-set smarttab
-set softtabstop=4
-
-" Folding
-set foldlevel=20
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-
-" Command line
-set showcmd
-set cmdheight=1
-set cedit=\<C-t>
-set nowildmenu
-
-" Searching
-set smartcase
-set ignorecase
-set nohlsearch
-
-" Spell
-set nospell
-set spelllang=en,nl
-
 "alt mappings a re for moving out of the editor -> alt==appear
 "leader mappings are for text editing.
 "control mappings are kept at the default where possible, e.g., fzf's <C-t>
 
-" Powershell does not detect <C-Space>. As a solution, Alacritty sends <F24> 
+" Powershell does not detect <C-Space>. As a solution, Alacritty sends <F24>
 " when ctrl+space is pressed. By binding <C-Space> and <F24>, the issue is
 " solved.
 
@@ -72,7 +21,7 @@ imap <S-F12> <C-Space>
 cmap <S-F12> <C-Space>
 nmap <S-F12> <C-Space>
 
-"Insert mode 
+"Insert mode
 inoremap <C-BS> <C-w>
 inoremap <C-h> <C-w>
 inoremap <C-Del> <C-o>dE
@@ -113,10 +62,10 @@ nnoremap <a-e> <C-w>k
 nnoremap <a-m> <C-w>h
 nnoremap <a-i> <C-w>l
 nnoremap <a-n> <C-w>j
-nnoremap <C-w>m <C-w>H 
-nnoremap <C-w>e <C-w>K 
-nnoremap <C-w>i <C-w>L 
-nnoremap <C-w>n <C-w>J  
+nnoremap <C-w>m <C-w>H
+nnoremap <C-w>e <C-w>K
+nnoremap <C-w>i <C-w>L
+nnoremap <C-w>n <C-w>J
 
 "buffer navigation
 noremap <silent><a-,> <cmd>cp<CR>
@@ -144,3 +93,4 @@ nnoremap <silent><leader>cc vip:sort<CR>
 nnoremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>
 vnoremap <silent><leader>cl :!sort_variable_length.py<CR>
 nnoremap <silent><leader>cl vip:!sort_variable_length.py<CR>
+

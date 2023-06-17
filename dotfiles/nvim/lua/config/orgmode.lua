@@ -1,4 +1,4 @@
-local mapper = require('keymapper')
+local mapper = require('helpers.keymapper')
 local orgmode = require('orgmode')
 local os_path = require('helpers.os_path')
 local khalorg = require('khalorg')

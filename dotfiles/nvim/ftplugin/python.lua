@@ -1,5 +1,5 @@
 local dappy = require('dap-python')
-local keymapper = require('keymapper')
+local keymapper = require('helpers.keymapper') 
 
 vim.opt_local.colorcolumn = '79'
 vim.opt_local.textwidth = 79

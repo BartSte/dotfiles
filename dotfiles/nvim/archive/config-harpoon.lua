@@ -1,5 +1,5 @@
 local harpoon = require('harpoon')
-local keymapper = require('keymapper')
+local keymapper = require('helpers.keymapper') 
 
 harpoon.setup({
     save_on_toggle = false,

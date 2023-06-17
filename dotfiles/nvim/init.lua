@@ -1,8 +1,7 @@
+vim.cmd('runtime! vim/before/*.vim')
+
 require('helpers.lazy').bootstrap()
 require('lazy').setup('plugins', {  change_detection = { enabled = false }})
 require("config")
 
-require('local-shada')
-require('global-marks')
-
-vim.cmd('runtime! vim/*.vim')
+vim.cmd('runtime! vim/after/*')

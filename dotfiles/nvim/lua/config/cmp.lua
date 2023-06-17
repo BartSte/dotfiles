@@ -1,6 +1,6 @@
 local cmp = require('cmp')
 local func = require('helpers.cmp')
-local mapper = require("keymapper")
+local mapper = require("helpers.keymapper") 
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 

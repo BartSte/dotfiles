@@ -1,4 +1,4 @@
-local keymapper = require('keymapper')
+local keymapper = require('helpers.keymapper') 
 
 if vim.fn.has('win32') == 0 then
     vim.g.floaterm_title = os.getenv('SHELL') .. " @ " .. os.getenv('PWD') .. ": $1/$2"

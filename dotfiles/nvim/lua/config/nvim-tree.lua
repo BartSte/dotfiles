@@ -90,7 +90,7 @@ local function on_attach(bufnr)
 end
 
 local tree = require('nvim-tree')
-local keymapper = require('keymapper')
+local keymapper = require('helpers.keymapper') 
 
 local my_mappings = {
     { key = "u", action = "dir_up" },
