@@ -17,10 +17,11 @@ set notimeout
 set updatetime=500
 
 " Looks
-set signcolumn=number
 set cursorline
 set number
 set relativenumber
+set shortmess+=I
+set signcolumn=number
 
 " Tabbing
 set autoindent
