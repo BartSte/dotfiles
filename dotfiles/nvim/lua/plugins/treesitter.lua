@@ -1,11 +1,8 @@
 return {
     {
         'nvim-treesitter/nvim-treesitter',
-        lazy = false,
         run = ':TSUpdate',
-        config = function()
-            require('config.treesitter')
-        end,
+        -- Treesitter is sourced in /plugins/ to ensure it is loaded before other plugins
     },
     {
         'nvim-treesitter/nvim-treesitter-context',
