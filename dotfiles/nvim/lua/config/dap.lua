@@ -1,6 +1,6 @@
 local dap = require('dap')
 local path = require('helpers.os_path')
-local dappy = require('dap-python')
+-- local dappy = require('dap-python')
 local vscode = require('dap.ext.vscode')
 local helpers = require('helpers.dap')
 local widgets = require('dap.ui.widgets')
@@ -13,8 +13,8 @@ dap.defaults.fallback.focus_terminal = false
 vscode.load_launchjs('.vscode/launch.json')
 vscode.load_launchjs(my_launch)
 
-dappy.setup(helpers.get_debugpy())
-dappy.test_runner = 'pytest'
+-- dappy.setup(helpers.get_debugpy())
+-- dappy.test_runner = 'pytest'
 
 vim.keymap.set('n', '<F4>', dap.run_last)
 vim.keymap.set('n', '<F5>', dap.continue)
