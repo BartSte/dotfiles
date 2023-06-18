@@ -2,7 +2,8 @@ return {
     {
         "folke/neodev.nvim",
         ft = 'lua',
-        config = function() require("config.neodev") end
+        config = function() require("config.neodev") end,
+        dependencies = { 'neovim/nvim-lspconfig' }
     },
     {
         'neovim/nvim-lspconfig',
@@ -13,6 +14,9 @@ return {
             require("config.lsp-mappings")
         end,
         dependencies = {
+            'hrsh7th/nvim-cmp',
+            'hrsh7th/cmp-nvim-lsp',
+            "williamboman/mason.nvim",
             {
                 "williamboman/mason-lspconfig.nvim",
                 config = function()

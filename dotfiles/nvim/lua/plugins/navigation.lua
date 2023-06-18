@@ -19,6 +19,7 @@ return {
             { '<a-v>' },
             { '<a-r>' },
             { '<a-c>' },
+            { '<a-h>' },
             { '<a-A>' }
         },
         cmd = { 'Ag' },
@@ -27,15 +28,10 @@ return {
         end,
         dependencies = {
             { 'junegunn/fzf', build = ':call fzf#install()' },
-            'stevearc/oil.nvim',
         }
     },
     {
         'stevearc/oil.nvim',
-        keys = {
-            { '<a-x>' },
-            { '<a-X>' }
-        },
         config = function()
             require('config.oil')
         end

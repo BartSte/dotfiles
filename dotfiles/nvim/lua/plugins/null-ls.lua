@@ -5,6 +5,7 @@ return {
         require('config.null-ls')
     end,
     dependencies = {
+        "williamboman/mason.nvim",
         {
             "jay-babu/mason-null-ls.nvim",
             config = function()

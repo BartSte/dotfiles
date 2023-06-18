@@ -2,16 +2,19 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        event = 'VeryLazy',
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             require('config.treesitter')
         end,
     },
     {
         'nvim-treesitter/nvim-treesitter-context',
-        event = 'VeryLazy',
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             require('config.treesitter-context')
         end,
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter'
+            }
     }
 }
