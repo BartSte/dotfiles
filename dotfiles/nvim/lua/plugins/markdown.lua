@@ -3,5 +3,8 @@ return {
     ft = 'markdown',
     config = function ()
         vim.cmd('runtime vim/markdown.vim')
-    end
+    end,
+    dependencies = {
+        'dhruvasagar/vim-table-mode',
+    }
 }

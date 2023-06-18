@@ -1,11 +1,9 @@
-local lspconfig = require('lspconfig')
-local lsp_defaults = lspconfig.util.default_config
-local cmp_nvim_lsp = require('cmp_nvim_lsp')
+local lsp_defaults = require('lspconfig').util.default_config
 
 lsp_defaults.capabilities = vim.tbl_deep_extend(
     'force',
     lsp_defaults.capabilities,
-    cmp_nvim_lsp.default_capabilities()
+    require('cmp_nvim_lsp').default_capabilities()
 )
 
 vim.diagnostic.config({

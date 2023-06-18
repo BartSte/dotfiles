@@ -16,9 +16,10 @@ Some directories of the neovim configuration could use some explanation:
 - `dotfiles/nvim/lua`: 
     - `helpers`: helper functions that are used in the other lua files.
     - `plugins`: plugins that are loaded by lazy.nvim
-    - `config`: configuration files that are lazy loaded.
-- `dotfiles/nvim/plugin`: plugin configuration files that must be sourced before `after/plugin`.
-- `dotfiles/nvim/after/plugin`: plugin configuration files that are not lazy loaded.
+    - `config`: plugin configuration files.
+- `dotfiles/nvim/vim`: plugin configuration filis in vimscript.
+- `dotfiles/nvim/plugin`: non-plugin configuration files that must be sourced before `after/plugin`.
+- `dotfiles/nvim/after/plugin`: non-plugin configuration files.
 - `dotfiles/nvim/after/ftplugin`: configuration files that are loaded after the filetype is detected.
 
 ## Dotfiles-linux (Arch linux)

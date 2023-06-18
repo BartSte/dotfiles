@@ -1,6 +1,17 @@
 return {
-    'moll/vim-bbye',
-    'BartSte/hop.nvim',
+    {
+        'moll/vim-bbye',
+        keys = {
+            { '<space>q', '<cmd>Bdelete<cr>' }
+        },
+    },
+    {
+        'BartSte/hop.nvim',
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            require('config.hop')
+        end
+    },
     {
         'junegunn/fzf.vim',
         keys = {
@@ -16,11 +27,11 @@ return {
         end,
         dependencies = {
             { 'junegunn/fzf', build = ':call fzf#install()' },
+            'stevearc/oil.nvim',
         }
     },
     {
         'stevearc/oil.nvim',
-        event = 'TermOpen', -- when fzf is triggered
         keys = {
             { '<a-x>' },
             { '<a-X>' }
