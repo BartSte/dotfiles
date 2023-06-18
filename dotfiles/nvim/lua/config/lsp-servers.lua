@@ -5,20 +5,10 @@ lspconfig.vimls.setup({})
 lspconfig.bashls.setup({ filetypes = { "sh", "bash", "zsh" } })
 lspconfig.jsonls.setup({})
 lspconfig.cssls.setup({})
-lspconfig.cmake.setup({})
 lspconfig.marksman.setup({})
+lspconfig.html.setup({})
+lspconfig.cmake.setup({})
 lspconfig.clangd.setup({})
--- lspconfig.arduino_language_server.setup {
---     cmd = {
---         "arduino-language-server",
---         "-cli-config", "~/.arduino15/arduino-cli.yaml",
---         "-fqbn", "keyboardio:avr:keyboardio_atreus",
---         "-cli", "arduino-cli",
---         "-clangd", "clangd"
---     },
---     filetypes = { "arduino", "cpp" }
--- }
-
 lspconfig.lua_ls.setup {
     settings = {
         Lua = {
@@ -42,4 +32,13 @@ lspconfig.lua_ls.setup {
     },
 }
 
-require('lspconfig').html.setup({})
+-- -- lspconfig.arduino_language_server.setup {
+-- --     cmd = {
+-- --         "arduino-language-server",
+-- --         "-cli-config", "~/.arduino15/arduino-cli.yaml",
+-- --         "-fqbn", "keyboardio:avr:keyboardio_atreus",
+-- --         "-cli", "arduino-cli",
+-- --         "-clangd", "clangd"
+-- --     },
+-- --     filetypes = { "arduino", "cpp" }
+-- -- }
