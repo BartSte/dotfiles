@@ -7,7 +7,7 @@ return {
     },
     {
         'BartSte/hop.nvim',
-        event = { "BufReadPost", "BufNewFile" },
+        keys = { { 'j' }, { 'l' }, { 'k' }, { 'h' }, { 'J' }, { 'L' }, { 'K' }, { 'H' } },
         config = function()
             require('config.hop')
         end

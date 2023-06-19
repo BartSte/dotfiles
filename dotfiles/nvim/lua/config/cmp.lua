@@ -1,7 +1,6 @@
 local cmp = require('cmp')
 local func = require('helpers.cmp')
 local mapper = require("helpers.keymapper")
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 
 -- To enable history scrolling on the command line, cmp is disabled when
@@ -121,12 +120,6 @@ vim.api.nvim_create_autocmd('CmdlineLeave', {
     desc = 'Restore nvim-cmp',
     callback = func.restore_cmp
 })
-
--- If you want insert `(` after select function or method item
-cmp.event:on(
-    'confirm_done',
-    cmp_autopairs.on_confirm_done()
-)
 
 vim.opt.completeopt = { 'menu' }
 mapper.nnoremap('<C-Space>', "a<cmd>lua require('helpers.cmp').toggle_visibility()<CR>")

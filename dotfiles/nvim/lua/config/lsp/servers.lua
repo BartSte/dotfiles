@@ -4,11 +4,7 @@ lspconfig.pyright.setup({})
 lspconfig.vimls.setup({})
 lspconfig.bashls.setup({ filetypes = { "sh", "bash", "zsh" } })
 lspconfig.jsonls.setup({})
-lspconfig.cssls.setup({})
 lspconfig.marksman.setup({})
-lspconfig.html.setup({})
-lspconfig.cmake.setup({})
-lspconfig.clangd.setup({})
 lspconfig.lua_ls.setup {
     settings = {
         Lua = {
@@ -32,6 +28,10 @@ lspconfig.lua_ls.setup {
     },
 }
 
+-- lspconfig.cssls.setup({})
+-- lspconfig.html.setup({})
+-- lspconfig.cmake.setup({})
+-- lspconfig.clangd.setup({})
 -- -- lspconfig.arduino_language_server.setup {
 -- --     cmd = {
 -- --         "arduino-language-server",
