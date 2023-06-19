@@ -11,12 +11,11 @@ return {
     },
     {
         'tpope/vim-obsession',
-        event = 'VeryLazy',
-
+        lazy = false,
     },
     {
         '907th/vim-auto-save',
-        event = 'VeryLazy',
+        lazy = false,
         config = function()
             vim.cmd('runtime vim/auto-save.vim')
         end

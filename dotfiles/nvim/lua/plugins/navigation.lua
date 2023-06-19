@@ -7,7 +7,7 @@ return {
     },
     {
         'BartSte/hop.nvim',
-        keys = { { 'j' }, { 'l' }, { 'k' }, { 'h' }, { 'J' }, { 'L' }, { 'K' }, { 'H' } },
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             require('config.hop')
         end
@@ -20,7 +20,7 @@ return {
             { '<a-r>' },
             { '<a-c>' },
             { '<a-h>' },
-            { '<a-A>' }
+            { '<a-a>' }
         },
         cmd = { 'Ag' },
         config = function()

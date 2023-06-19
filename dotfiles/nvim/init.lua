@@ -1,3 +1,4 @@
 -- Checkout the README.md for information how the configuration is organized.
+vim.g.mapleader = ' '
 require('helpers.lazy').bootstrap()
-require('lazy').setup('plugins', { change_detection = { enabled = false } })
+require('lazy').setup('plugins')
