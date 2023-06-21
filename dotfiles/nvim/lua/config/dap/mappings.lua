@@ -1,16 +1,7 @@
 local dap = require('dap')
-local path = require('helpers.os_path')
-local vscode = require('dap.ext.vscode')
 local helpers = require('helpers.dap')
 local widgets = require('dap.ui.widgets')
 local keymapper = require('helpers.keymapper')
-local my_launch = path.path_join(path.get_home(), 'dotfiles/launch.json')
-
-dap.defaults.fallback.terminal_win_cmd = '80vsplit new'
-dap.defaults.fallback.focus_terminal = false
-
-vscode.load_launchjs('.vscode/launch.json')
-vscode.load_launchjs(my_launch)
 
 vim.keymap.set('n', '<F4>', dap.run_last)
 vim.keymap.set('n', '<F5>', dap.continue)
@@ -26,4 +17,3 @@ vim.keymap.set('n', '<Leader>ds', helpers.centered_float_scopes)
 
 keymapper.nnoremap('<F7>', ':DapTerminate<CR>')
 
-vim.fn.sign_define('DapBreakpoint', { text = ' ', texthl = '', linehl = '', numhl = '' })
