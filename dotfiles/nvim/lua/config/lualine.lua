@@ -1,17 +1,22 @@
 local lualine = require('lualine')
+local custom_auto = require('lualine.themes.auto')
+
+custom_auto.inactive.c.fg = '#BBBBBB'
+custom_auto.inactive.c.bg = nil
+custom_auto.inactive.c.gui = 'bold'
 
 lualine.setup({
     options = {
-        icons_enabled = false,
-        theme = 'auto',
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
+        icons_enabled = true,
+        theme = custom_auto,
+        section_separators = { left = '', right = '' },
+        component_separators = { left = '', right = '' },
         disabled_filetypes = {
             statusline = {},
             winbar = {},
         },
         ignore_focus = {},
-        always_divide_middle = true,
+        always_divide_middle = false,
         globalstatus = false,
         refresh = {
             statusline = 1000,
@@ -31,7 +36,7 @@ lualine.setup({
         lualine_a = {},
         lualine_b = {},
         lualine_c = { 'filename' },
-        lualine_x = { 'location' },
+        lualine_x = {},
         lualine_y = {},
         lualine_z = {}
     },
