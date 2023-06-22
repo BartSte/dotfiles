@@ -29,7 +29,6 @@ lspconfig.lua_ls.setup {
     },
 }
 
--- lspconfig.cssls.setup({})
 -- lspconfig.html.setup({})
 -- lspconfig.cmake.setup({})
 -- -- lspconfig.arduino_language_server.setup {
