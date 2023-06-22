@@ -64,8 +64,8 @@ local sources_i = {
 }
 
 local sources_c = {
-    { name = 'path',            group_index = 2, keyword_length = 3 },
-    { name = 'cmdline_history', group_index = 2, keyword_length = 3 },
+    { name = 'path',            group_index = 2 },
+    { name = 'cmdline_history', group_index = 2 },
     {
         name = 'cmdline',
         group_index = 2,

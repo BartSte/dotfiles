@@ -9,6 +9,7 @@ return {
         { "<space>oa", "<Cmd>lua require('orgmode').action('agenda.prompt')<CR>" }
     },
     dependencies = {
+        'junegunn/fzf.vim',
         'BartSte/nvim-khalorg',
         'dhruvasagar/vim-table-mode',
     }

@@ -44,4 +44,4 @@ orgmode.setup({
     }
 })
 
-mapper.nnoremap('<a-r>', ':Files ' .. dropbox_org .. '<CR>')
+mapper.nnoremap('<a-r>', ':MyFiles ' .. dropbox_org .. '<CR>')

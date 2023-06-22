@@ -13,24 +13,6 @@ return {
         end
     },
     {
-        'junegunn/fzf.vim',
-        keys = {
-            { '<a-o>' },
-            { '<a-v>' },
-            { '<a-r>' },
-            { '<a-c>' },
-            { '<a-h>' },
-            { '<a-a>' }
-        },
-        cmd = { 'Ag' },
-        config = function()
-            vim.cmd('runtime vim/fzf.vim')
-        end,
-        dependencies = {
-            { 'junegunn/fzf', build = ':call fzf#install()' },
-        }
-    },
-    {
         'stevearc/oil.nvim',
         config = function()
             require('config.oil')

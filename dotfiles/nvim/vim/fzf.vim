@@ -1,6 +1,7 @@
 let $FZF_DEFAULT_COMMAND = expand('fd --hidden --no-ignore-vcs --ignore-file $HOME/.ignore -t f')
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 100% --reverse --border'
 
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-p']
 
 function! s:GetEmail()
@@ -15,13 +16,8 @@ endfunction
 command! Email call s:GetEmail()
 command! -bang -nargs=? -complete=dir Dirs call fzf#vim#files(<q-args>, {
             \ 'source': "eval $FZF_ALT_C_COMMAND", 
-            \ 'window': {'width': 0.9, 'height': 0.9}, 
             \ 'header': 'Select a directory', 
             \ 'options': $FZF_ALT_C_OPTS}, 
-            \ <bang>0)
-
-command! -bang -nargs=? -complete=dir MyFiles call fzf#vim#files(<q-args>, fzf#vim#with_preview({
-            \ 'window': {'width': 0.9, 'height': 0.9}}), 
             \ <bang>0)
 
 nnoremap <a-a> :Ag<space>
@@ -36,12 +32,13 @@ if has('win32')
     noremap <a-h> <cmd>call ExecInCmd('Helptags')<CR>
     noremap <a-c> <cmd>call ExecInCmd('Dirs')<CR>
 else
-    noremap <a-o> <cmd>MyFiles<CR>
+    noremap <a-o> <cmd>Files<CR>
     noremap <a-b> <cmd>Buffers<CR>
-    noremap <a-v> <cmd>MyFiles ~/dotfiles/nvim<CR>
+    noremap <a-v> <cmd>Files ~/dotfiles/nvim<CR>
     noremap <a-M> <cmd>Marks<CR>
     noremap <a-h> <cmd>Helptags<CR>
     noremap <a-c> <cmd>Dirs<CR>
     noremap <a-V> <cmd>Dirs ~/dotfiles/nvim<CR>
+    noremap <a-B> <cmd>GBranch ~/dotfiles/nvim<CR>
 endif
 
