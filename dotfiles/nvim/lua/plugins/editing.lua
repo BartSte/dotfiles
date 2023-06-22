@@ -1,13 +1,15 @@
 return {
     {
+        'git-time-metric/gtm-vim-plugin',
+        lazy = false,
+    },
+    {
         'tpope/vim-commentary',
-        event = 'VeryLazy',
-
+        lazy = false,
     },
     {
         'tpope/vim-surround',
-        event = 'VeryLazy',
-
+        lazy = false,
     },
     {
         'tpope/vim-obsession',
@@ -16,9 +18,6 @@ return {
     {
         '907th/vim-auto-save',
         lazy = false,
-        config = function()
-            vim.cmd('runtime vim/auto-save.vim')
-        end
     },
     {
         'junegunn/vim-peekaboo',

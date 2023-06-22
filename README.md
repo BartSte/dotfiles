@@ -6,21 +6,27 @@ This readme is relevant for the following dotfiles repositories:
 - BartSte/dotfiles-linux
 - BartSte/doffiles-windows
 
-Please read the following sections to get started with this repository. The examples below are writting in bash and powershell. 
+Please read the following sections to get started with this repository. The
+examples below are writing in bash and powershell. 
 
 ## Dotfiles (cross-platform)
-- No initialization needed. It only contains static dotfiles. Typically, you will not clone this repository by yourself, instead it will be cloned for you by the `dotfiles-linux` or the `dotfiles-windows` repositories, as they depend on it.
+- No initialization needed. It only contains static dotfiles. Typically, you
+will not clone this repository by yourself, instead it will be cloned for you
+by the `dotfiles-linux` or the `dotfiles-windows` repositories, as they depend
+on it.
 
-### Neovim (`dotfiles/nvim`)
-Some directories of the neovim configuration could use some explanation:
+### Neovim (`dotfiles/nvim`) Some directories of the neovim configuration could
+use some explanation:
 - `dotfiles/nvim/lua`: 
     - `helpers`: helper functions that are used in the other lua files.
     - `plugins`: plugins that are loaded by lazy.nvim
     - `config`: plugin configuration files.
-- `dotfiles/nvim/vim`: plugin configuration filis in vimscript.
-- `dotfiles/nvim/plugin`: non-plugin configuration files that must be sourced before `after/plugin`.
+- `dotfiles/nvim/vim`: plugin configuration files in vimscript.
+- `dotfiles/nvim/plugin`: non-plugin configuration files that must be sourced
+before `after/plugin`.
 - `dotfiles/nvim/after/plugin`: non-plugin configuration files.
-- `dotfiles/nvim/after/ftplugin`: configuration files that are loaded after the filetype is detected.
+- `dotfiles/nvim/after/ftplugin`: configuration files that are loaded after the
+filetype is detected.
 
 ## Dotfiles-linux (Arch linux)
 
@@ -29,7 +35,7 @@ Some directories of the neovim configuration could use some explanation:
 ```bash
 wget https://raw.githubusercontent.com/BartSte/dotfiles-linux/master/dotfiles-linux/initialize.sh && bash ./initialize.sh; rm ./initialize.sh 
 ```
-- Complete the environment variables in `~/dotfiles-linux/config.sh`.
+- Complete the environment variables in `~/.dotfiles_config.sh`.
 - Run the script: `~/dotfiles-linux/main.sh`
 - Optionally, if you run on an asus device, you can run `~\doffiles-linux\main_asus.sh`.
 
@@ -43,7 +49,8 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercon
 ```
 - Complete the configuration file in `$HOME/dotfiles-windows/config.ps1`.
 - Run the script: `$HOME/dotfiles-windows/main.ps1`
-- All the subfolders of `$HOME/dotfiles-windows` are runned by calling the `main.ps1` file, e.g., `$HOME/dotfiles-windows/powershell/main.ps1`.
+- All the subfolders of `$HOME/dotfiles-windows` are executed by calling the
+`main.ps1` file, e.g., `$HOME/dotfiles-windows/powershell/main.ps1`.
 
 # Background
 
