@@ -24,6 +24,7 @@
 .vscode/
 archive/
 AppData
+build/
 Fleet Cleaner
 OneDrive*
 Reporting Data/

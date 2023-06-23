@@ -31,6 +31,7 @@ if has('win32')
     noremap <a-M> <cmd>call ExecInCmd('Marks')<CR>
     noremap <a-h> <cmd>call ExecInCmd('Helptags')<CR>
     noremap <a-c> <cmd>call ExecInCmd('Dirs')<CR>
+    noremap <a-B> <cmd>call ExecInCmd('GBranches')<CR>
 else
     noremap <a-o> <cmd>Files<CR>
     noremap <a-b> <cmd>Buffers<CR>
@@ -39,6 +40,6 @@ else
     noremap <a-h> <cmd>Helptags<CR>
     noremap <a-c> <cmd>Dirs<CR>
     noremap <a-V> <cmd>Dirs ~/dotfiles/nvim<CR>
-    noremap <a-B> <cmd>GBranch ~/dotfiles/nvim<CR>
+    noremap <a-B> <cmd>GBranches<CR>
 endif
 

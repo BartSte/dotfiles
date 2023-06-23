@@ -4,20 +4,20 @@ return {
         lazy = false,
     },
     {
-        'tpope/vim-commentary',
-        lazy = false,
-    },
-    {
-        'tpope/vim-surround',
-        lazy = false,
-    },
-    {
         'tpope/vim-obsession',
         lazy = false,
     },
     {
         '907th/vim-auto-save',
         lazy = false,
+    },
+    {
+        'tpope/vim-commentary',
+        event = 'VeryLazy',
+    },
+    {
+        'tpope/vim-surround',
+        event = 'VeryLazy',
     },
     {
         'junegunn/vim-peekaboo',
