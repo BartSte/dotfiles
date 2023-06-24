@@ -8,6 +8,7 @@ return {
         { "<a-r>" },
         { "<space>oa", "<Cmd>lua require('orgmode').action('agenda.prompt')<CR>" }
     },
+    cond = function() return vim.fn.has('linux') == 1 end,
     dependencies = {
         'junegunn/fzf.vim',
         'BartSte/nvim-khalorg',

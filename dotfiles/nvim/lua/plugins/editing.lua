@@ -1,7 +1,9 @@
 return {
     {
         'git-time-metric/gtm-vim-plugin',
-        lazy = false,
+        cond = function()
+            return vim.fn.executable('gtm') == 1
+        end
     },
     {
         'tpope/vim-obsession',
