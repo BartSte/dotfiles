@@ -1,10 +1,12 @@
 return {
     {
-        'christoomey/vim-tmux-navigator',
-        event = 'VeryLazy',
-        config = function()
-            vim.cmd('runtime vim/tmux-navigator.vim')
-        end
+        'BartSte/vim-tmux-navigator',
+        keys = {
+            {'<a-i>'},
+            {'<a-m>'},
+            {'<a-e>'},
+            {'<a-n>'},
+        }
     },
     {
         'moll/vim-bbye',
