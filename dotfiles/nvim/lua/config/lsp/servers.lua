@@ -28,6 +28,12 @@ lspconfig.lua_ls.setup {
         },
     },
 }
+
+if vim.ft.has('win32') then
+    require'lspconfig'.powershell_es.setup{
+      bundle_path = 'c:/w/PowerShellEditorServices',
+    }
+end
 -- lspconfig.html.setup({})
 -- lspconfig.cmake.setup({})
 -- -- lspconfig.arduino_language_server.setup {

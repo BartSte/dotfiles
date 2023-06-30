@@ -7,3 +7,4 @@ set allowautofocus false
 set modeindicatorshowkeys true
 
 bind O fillcmdline tabopen
+bind m bmark
