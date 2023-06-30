@@ -58,6 +58,10 @@ nnoremap <silent> Q :call ToggleQuickFix()<cr>
 tnoremap <C-t> <C-\><C-n>
 
 " Window navigation
+nnoremap <a-m> <C-w>h
+nnoremap <a-e> <C-w>k
+nnoremap <a-i> <C-w>l
+nnoremap <a-n> <C-w>j
 nnoremap <C-w>m <C-w>H
 nnoremap <C-w>e <C-w>K
 nnoremap <C-w>i <C-w>L
