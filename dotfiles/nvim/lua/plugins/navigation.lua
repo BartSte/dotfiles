@@ -1,14 +1,5 @@
 return {
     {
-        'BartSte/vim-tmux-navigator',
-        keys = {
-            {'<a-i>'},
-            {'<a-m>'},
-            {'<a-e>'},
-            {'<a-n>'},
-        }
-    },
-    {
         'moll/vim-bbye',
         keys = {
             { '<space>q', '<cmd>Bdelete<cr>' }
