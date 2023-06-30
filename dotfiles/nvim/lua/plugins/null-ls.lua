@@ -1,6 +1,6 @@
 return {
     'jose-elias-alvarez/null-ls.nvim',
-    ft = { 'python', 'zsh', 'sh', 'bash', 'markdown', 'org' },
+    ft = { 'python', 'zsh', 'sh', 'bash', 'markdown'},
     config = function()
         require('config.null-ls')
     end,
