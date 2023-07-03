@@ -26,7 +26,7 @@ copilot.setup({
         },
     },
     filetypes = {
-        oil = true,
+        oil = false,
         ["*"] = true,
     },
     copilot_node_command = 'node', -- Node.js version must be > 16.x
