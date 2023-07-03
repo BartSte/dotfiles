@@ -4,7 +4,6 @@ lspconfig.pyright.setup({})
 lspconfig.vimls.setup({})
 lspconfig.bashls.setup({ filetypes = { "sh", "bash", "zsh" } })
 lspconfig.jsonls.setup({})
-lspconfig.marksman.setup({})
 lspconfig.clangd.setup({})
 lspconfig.lua_ls.setup {
     settings = {
@@ -29,11 +28,17 @@ lspconfig.lua_ls.setup {
     },
 }
 
--- if vim.ft.has('win32') then
---     require'lspconfig'.powershell_es.setup{
---       bundle_path = 'c:/w/PowerShellEditorServices',
---     }
--- end
+if vim.fn.has('win32') == 1 then
+    lspconfig.powershell_es.setup({})
+    lspconfig.marksman.setup({
+        cmd = {
+            "C:\\Users\\BartSteensma\\AppData\\Local\\nvim-data\\mason\\packages\\marksman\\marksman.exe",
+            "server"
+        }
+    })
+else
+    lspconfig.marksman.setup({})
+end
 
 -- lspconfig.html.setup({})
 -- lspconfig.cmake.setup({})
