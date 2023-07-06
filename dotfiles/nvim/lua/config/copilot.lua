@@ -19,10 +19,10 @@ copilot.setup({
         auto_trigger = true,
         debounce = 75,
         keymap = {
-            accept_line = false,
+            accept_line = "<C-l>",
             next = "<C-n>",
             prev = "<C-p>",
-            toggle_auto_trigger = "<M-Space>"
+            toggle_auto_trigger = false
         },
     },
     filetypes = {
