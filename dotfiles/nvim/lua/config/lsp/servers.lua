@@ -5,6 +5,7 @@ lspconfig.vimls.setup({})
 lspconfig.bashls.setup({ filetypes = { "sh", "bash", "zsh" } })
 lspconfig.jsonls.setup({})
 lspconfig.clangd.setup({})
+lspconfig.cmake.setup{}
 lspconfig.lua_ls.setup {
     settings = {
         Lua = {
@@ -39,16 +40,3 @@ if vim.fn.has('win32') == 1 then
 else
     lspconfig.marksman.setup({})
 end
-
--- lspconfig.html.setup({})
--- lspconfig.cmake.setup({})
--- -- lspconfig.arduino_language_server.setup {
--- --     cmd = {
--- --         "arduino-language-server",
--- --         "-cli-config", "~/.arduino15/arduino-cli.yaml",
--- --         "-fqbn", "keyboardio:avr:keyboardio_atreus",
--- --         "-cli", "arduino-cli",
--- --         "-clangd", "clangd"
--- --     },
--- --     filetypes = { "arduino", "cpp" }
--- -- }

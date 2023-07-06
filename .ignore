@@ -1,10 +1,12 @@
 *.git/
+*autogen
 *.swp*
 *cache*/
 *egg-info*
 *tmp*/
 *venv*/
 .arduino*/
+.cache
 .cargo
 .cargo/
 .conan
@@ -19,12 +21,12 @@
 .mozilla/
 .npm/
 .python_history/
+.qt
 .rustup
 .venv/
 .vscode/
-archive/
 AppData
-build/
+CMakeFiles
 Fleet Cleaner
 OneDrive*
 Reporting Data/
@@ -33,7 +35,9 @@ Strawberry
 Temp/
 Trash/
 Windows
+_*
 __pycache__/
+archive/
 chrysalis/
 dist
 gadgets/
