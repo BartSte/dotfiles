@@ -20,5 +20,11 @@ null_ls.setup({
             extra_args = { "-i", "4", "-ci" },
             filetypes = { "sh", "zsh", "bash" },
         }),
+
+        -- Markdown
+        null_ls.builtins.formatting.prettier.with({
+            filetypes = { "markdown" },
+        }),
+        null_ls.builtins.diagnostics.markdownlint,
     },
 })

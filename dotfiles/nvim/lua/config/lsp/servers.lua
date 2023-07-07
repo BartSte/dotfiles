@@ -33,7 +33,7 @@ if vim.fn.has('win32') == 1 then
     lspconfig.powershell_es.setup({})
     lspconfig.marksman.setup({
         cmd = {
-            "C:\\Users\\BartSteensma\\AppData\\Local\\nvim-data\\mason\\packages\\marksman\\marksman.exe",
+            "$LOCALAPPDATA\\nvim-data\\mason\\packages\\marksman\\marksman.exe",
             "server"
         }
     })
