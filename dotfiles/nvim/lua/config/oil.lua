@@ -37,8 +37,9 @@ oil.setup({
     -- See :help oil-actions for a list of all available actions
     keymaps = {
         ["g?"] = "actions.show_help",
-        ["<leader>m"] = "actions.parent",
-        ["<leader>i"] = "actions.select",
+        ["<leader>q"] = 'actions.close',
+        ["<leader>m"] = 'actions.parent',
+        ["<leader>i"] = 'actions.select',
         ["<leader>h"] = "actions.toggle_hidden",
         ["<leader>y"] = "actions.copy_entry_path",
         ["<leader>.f"] = "actions.open_cmdline",
