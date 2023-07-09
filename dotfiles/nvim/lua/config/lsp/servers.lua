@@ -4,7 +4,13 @@ lspconfig.pyright.setup({})
 lspconfig.vimls.setup({})
 lspconfig.bashls.setup({ filetypes = { "sh", "bash", "zsh" } })
 lspconfig.jsonls.setup({})
-lspconfig.clangd.setup({})
+
+lspconfig.clangd.setup {
+  cmd = {
+    "clangd",
+    "--offset-encoding=utf-16",
+  },
+}
 lspconfig.cmake.setup{}
 lspconfig.lua_ls.setup {
     settings = {
