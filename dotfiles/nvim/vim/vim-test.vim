@@ -37,5 +37,3 @@ let g:wsl_win_venvs = expand('$WH/venvs/')
 let g:preserve_screen = 1
 let test#python#runner = 'pytest'
 let g:test#custom_strategies = {'pytslime': function('TSlimeStrategy')}
-let g:tslime_always_current_session = 1
-

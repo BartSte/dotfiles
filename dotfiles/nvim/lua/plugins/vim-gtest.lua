@@ -1,8 +1,8 @@
 return {
-    'vim-test/vim-test',
-    ft = { 'python' },
+    'BartSte/vim-gtest',
+    ft = { 'cpp', 'c', 'objc', 'objc++' },
     config = function()
-        vim.cmd('runtime vim/vim-test.vim')
+        require('config.vim-gtest').setup()
     end,
     dependencies = {
         'jgdavey/tslime.vim',
