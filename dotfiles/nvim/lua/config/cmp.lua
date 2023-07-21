@@ -69,7 +69,6 @@ local sources_c = {
     {
         name = 'cmdline',
         group_index = 2,
-        keyword_length = 3,
         option = {
             ignore_cmds = { 'Man', '!', '!r', '!read' }
         }

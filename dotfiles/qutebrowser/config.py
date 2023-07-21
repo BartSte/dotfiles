@@ -45,6 +45,7 @@ c.url.default_page = 'about:blank'
 c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}'}
 c.url.start_pages = ['about:blank']
 c.window.hide_decoration = False
+c.content.javascript.can_access_clipboard = True
 config.bind('<Down>', 'move-to-next-line', mode='caret')
 config.bind('<Left>', 'move-to-prev-char', mode='caret')
 config.bind('<Right>', 'move-to-next-char', mode='caret')

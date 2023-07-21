@@ -33,3 +33,4 @@ set softtabstop=4
 set spelllang=en,nl
 set textwidth=79
 set updatetime=500
+set mouse=
