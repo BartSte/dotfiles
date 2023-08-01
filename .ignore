@@ -35,7 +35,6 @@ Strawberry
 Temp/
 Trash/
 Windows
-_*
 __pycache__/
 archive/
 chrysalis/
@@ -51,3 +50,4 @@ stubs
 venv/
 visual/
 yay/
+_deps/
