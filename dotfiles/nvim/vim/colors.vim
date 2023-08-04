@@ -35,7 +35,7 @@ if has('termguicolors')
     hi TreesitterContextBottom gui=bold guibg=#31302f
     hi TreesitterContextLineNumber gui=bold guifg=LightGreen guibg=#31302f
 
-    hi CopilotSuggestion gui=italic guifg=gray80
+    hi CopilotSuggestion gui=italic guifg=gray65
 
 
 endif
