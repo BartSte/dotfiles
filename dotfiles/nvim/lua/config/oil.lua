@@ -5,7 +5,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 oil.setup({
-    columns = { "icon" },
+    columns = {},
     -- Buffer-local options to use for oil buffers
     buf_options = {
         buflisted = false,

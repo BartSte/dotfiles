@@ -11,7 +11,7 @@ local config = {
     subProcess = false,
 }
 
-keymapper.buffer_nnoremap('gl', ':TestVisit -strategy=pytslime<CR>')
+keymapper.buffer_nnoremap('gl', ':TestVisit<CR>')
 keymapper.buffer_nnoremap('<a-f>', ':TestFile -strategy=pytslime<CR>')
 keymapper.buffer_nnoremap('<a-l>', ':TestLast -strategy=pytslime<CR>')
 keymapper.buffer_nnoremap('<a-t>', ':TestNearest -strategy=pytslime<CR>')
