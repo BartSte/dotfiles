@@ -24,6 +24,24 @@ dap.configurations.cpp = {
     stopAtEntry = false,
   },
   {
+    name = "Launch file with args",
+    type = "cppdbg",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    args = function()
+      local args = vim.fn.input('Arguments: ')
+      if args ~= '' then
+        return vim.split(args, ' ', true)
+      else
+        return nil
+      end
+    end,
+    stopAtEntry = false,
+  },
+  {
     name = 'Attach to gdbserver :1234',
     type = 'cppdbg',
     request = 'launch',
