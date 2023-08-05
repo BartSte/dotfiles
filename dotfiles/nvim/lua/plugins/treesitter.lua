@@ -6,6 +6,7 @@ return {
         config = function()
             require('config.treesitter')
         end,
+        build = ':TSUpdate',
     },
     {
         'nvim-treesitter/nvim-treesitter-context',
