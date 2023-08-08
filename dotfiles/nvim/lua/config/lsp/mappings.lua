@@ -27,7 +27,7 @@ local function mappings()
 
     bufmap('n', '<a-k>', '<cmd>lua vim.lsp.buf.hover()<cr>')
     bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
-    bufmap('n', 'gD', '<cmd>wincmd v<bar>lua vim.lsp.buf.definition()<cr>')
+    bufmap('n', 'gD', '<cmd>wincmd v<cr><cmd>lua vim.lsp.buf.definition()<cr>')
     bufmap('n', 'gx', '<cmd>lua vim.lsp.buf.declaration()<cr>')
     bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
     bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
