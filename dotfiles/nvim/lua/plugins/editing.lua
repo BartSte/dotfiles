@@ -1,11 +1,5 @@
 return {
     {
-        'BartSte/nvim-project-marks',
-        config = function()
-            require('projectmarks').setup({})
-        end
-    },
-    {
         'git-time-metric/gtm-vim-plugin',
         cond = function()
             return vim.fn.executable('gtm') == 1

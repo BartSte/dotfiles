@@ -1,5 +1,11 @@
 return {
     {
+        'BartSte/nvim-project-marks',
+        config = function()
+            require('projectmarks').setup({})
+        end
+    },
+    {
         'moll/vim-bbye',
         keys = {
             { '<space>q', '<cmd>Bdelete<cr>' }

@@ -72,7 +72,8 @@ local sources_c = {
         option = {
             ignore_cmds = { 'Man', '!', '!r', '!read' }
         }
-    }
+    },
+    { name = 'buffer', group_index = 2 },
 }
 
 local sources_s = { { name = 'buffer' } }
