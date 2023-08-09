@@ -10,10 +10,10 @@ vim.keymap.set('n', '<F10>', dap.step_over)
 vim.keymap.set('n', '<F11>', dap.step_into)
 vim.keymap.set('n', '<F12>', dap.step_out)
 vim.keymap.set('n', '<a-R>', dap.repl.open)
-vim.keymap.set({ 'n', 'v' }, '<Leader>dh', widgets.hover)
+vim.keymap.set({ 'n', 'v' }, '<Leader>de', widgets.hover)
 vim.keymap.set({ 'n', 'v' }, '<Leader>dp', widgets.preview)
-vim.keymap.set('n', '<Leader>df', helpers.centered_float_frames)
-vim.keymap.set('n', '<Leader>ds', helpers.centered_float_scopes)
+vim.keymap.set('n', '<Leader>ds', helpers.centered_float_frames)
+vim.keymap.set('n', '<Leader>dv', helpers.centered_float_scopes)
 
 keymapper.nnoremap('<F7>', ':DapTerminate<CR>')
 

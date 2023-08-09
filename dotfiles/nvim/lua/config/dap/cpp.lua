@@ -6,31 +6,33 @@ local widgets = require('dap.ui.widgets')
 local keymapper = require('helpers.keymapper')
 local my_launch = path.path_join(path.get_home(), 'dotfiles/launch.json')
 
-dap.adapters.cppdbg = {
-  id = 'cppdbg',
+dap.adapters.lldb = {
   type = 'executable',
-  command = '/home/barts/.local/share/nvim/mason/bin/OpenDebugAD7',
+  command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
+  name = 'lldb'
 }
 
 dap.configurations.cpp = {
   {
-    name = "Launch file",
-    type = "cppdbg",
-    request = "launch",
+    name = 'Launch',
+    type = 'lldb',
+    request = 'launch',
     program = function()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
     cwd = '${workspaceFolder}',
-    stopAtEntry = false,
+    stopOnEntry = false,
+    args = {},
   },
   {
-    name = "Launch file with args",
-    type = "cppdbg",
-    request = "launch",
+    name = 'Launch with args',
+    type = 'lldb',
+    request = 'launch',
     program = function()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
     cwd = '${workspaceFolder}',
+    stopOnEntry = false,
     args = function()
       local args = vim.fn.input('Arguments: ')
       if args ~= '' then
@@ -38,19 +40,6 @@ dap.configurations.cpp = {
       else
         return nil
       end
-    end,
-    stopAtEntry = false,
-  },
-  {
-    name = 'Attach to gdbserver :1234',
-    type = 'cppdbg',
-    request = 'launch',
-    MIMode = 'gdb',
-    miDebuggerServerAddress = 'localhost:1234',
-    miDebuggerPath = '/usr/bin/gdb',
-    cwd = '${workspaceFolder}',
-    program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
   },
 }
