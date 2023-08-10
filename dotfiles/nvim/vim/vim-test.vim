@@ -5,7 +5,7 @@ function! TSlimeStrategy(cmd) abort
     let command = GetCommand(venv, a:cmd)
     call Send_to_Tmux(command . "\n")
 endfunction
-"
+
 " When running WSL and a venv is present in g:wsl_win_venvs, it will take
 " presedence over $VIRTUAL_ENV.
 function! GetVenv()
@@ -33,7 +33,16 @@ function! GetCommand(venv, cmd)
     endif
 endfunction
 
+" Test strategy that can run tests for Linux projects and Windows projects
+" that are edited from WSL.
+function! TSlimeStrategyDebug(cmd) abort
+    let venv = GetVenv()
+    let command = GetCommand(venv, a:cmd)
+    call Send_to_Tmux(command . " --pdb --pdbcls=IPython.terminal.debugger:Pdb\n")
+endfunction
+
+
 let g:wsl_win_venvs = expand('$WH/venvs/')
 let g:preserve_screen = 1
 let test#python#runner = 'pytest'
-let g:test#custom_strategies = {'pytslime': function('TSlimeStrategy')}
+let g:test#custom_strategies = {'pytslime': function('TSlimeStrategy'), 'pytslimedebug': function('TSlimeStrategyDebug')}
