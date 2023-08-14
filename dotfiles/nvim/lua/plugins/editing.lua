@@ -6,12 +6,6 @@ return {
         opts = require('config.todo-comments').config
     },
     {
-        'git-time-metric/gtm-vim-plugin',
-        cond = function()
-            return vim.fn.executable('gtm') == 1
-        end
-    },
-    {
         'tpope/vim-obsession',
         lazy = false,
         config = function()

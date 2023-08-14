@@ -16,7 +16,6 @@
 .emacs*
 .fonts/
 .git/
-.gtm/
 .history/
 .mozilla/
 .npm/

@@ -27,8 +27,8 @@ function! GetCommand(venv, cmd)
         return a:venv . '\Scripts\' . a:cmd    
     elseif a:venv==$VIRTUAL_ENV
         return a:venv . '/bin/' . a:cmd    
-    else
-        let python_exe_cmd = substitute(a:cmd, '^\python\+\s', 'python.exe ', '')
+   else
+        let python_exe_cmd = substitute(a:cmd, '^\python[^ ]\+\s', 'python.exe ', '')
         return a:venv . '/Scripts/' . python_exe_cmd 
     endif
 endfunction
