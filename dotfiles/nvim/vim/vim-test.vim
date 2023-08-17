@@ -42,6 +42,7 @@ function! TSlimeStrategyDebug(cmd) abort
 endfunction
 
 
+" FIX: when copy mode is in the recieving tmux pane, it goes wrong.
 let g:wsl_win_venvs = expand('$WH/venvs/')
 let g:preserve_screen = 1
 let test#python#runner = 'pytest'
