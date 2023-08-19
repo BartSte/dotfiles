@@ -45,7 +45,10 @@ endfunction
 " FIX: when copy mode is in the recieving tmux pane, it goes wrong.
 " TODO: you can do: `let g:tslime={'window': '1', 'pane': '0', 'session': 'navigation'}`
 " to set tslime from the config. Now we can also use this to disable visual
-" mode before sending keys
+" mode before sending keys. 
+" let session = system('tmux list-panes -t "$TMUX_PANE" -F "#S" | head -n1 | sed "s/\n//g"')
+" let g:tmuxsession = system('[[ "$TMUX" ]] && tmux list-sessions | sed "s/:.*$//g"')
+" let g:tslime={'window': '1', 'pane': '0', 'session': tmuxsession}
 let g:wsl_win_venvs = expand('$WH/venvs/')
 let g:preserve_screen = 1
 let test#python#runner = 'pytest'
