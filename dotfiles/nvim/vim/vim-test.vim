@@ -10,7 +10,7 @@ endfunction
 " presedence over $VIRTUAL_ENV.
 function! GetVenv()
     let directory = fnamemodify(getcwd(), ':t')
-    let wsl_win_venv = g:wsl_win_venvs . directory
+    let wsl_win_venv = g:test#wslwinvenvs . directory
     if isdirectory(wsl_win_venv)
         return wsl_win_venv
     else 
@@ -22,15 +22,17 @@ endfunction
 " venv.
 function! GetCommand(venv, cmd)
     if a:venv == ''
-        return a:cmd
+        let result = a:cmd
     elseif has('win32')
-        return a:venv . '\Scripts\' . a:cmd    
+        let result = a:venv . '\Scripts\' . a:cmd    
     elseif a:venv==$VIRTUAL_ENV
-        return a:venv . '/bin/' . a:cmd    
+        let result = a:venv . '/bin/' . a:cmd    
    else
         let python_exe_cmd = substitute(a:cmd, '^\python[^ ]\+\s', 'python.exe ', '')
-        return a:venv . '/Scripts/' . python_exe_cmd 
+        let result = a:venv . '/Scripts/' . python_exe_cmd 
     endif
+
+    return result . ' ' . g:test#pytestargs . ' --log-level=' . g:test#loglevel
 endfunction
 
 function! SafeSendToTmux(cmd) abort
@@ -46,12 +48,20 @@ function! TSlimeStrategyDebug(cmd) abort
     call SafeSendToTmux(command . " --pdb --pdbcls=IPython.terminal.debugger:Pdb\n")
 endfunction
 
-
-let g:wsl_win_venvs = expand('$WH/venvs/')
+" Vimtest
 let g:preserve_screen = 1
 let test#python#runner = 'pytest'
 let g:test#custom_strategies = {'pytslime': function('TSlimeStrategy'), 'pytslimedebug': function('TSlimeStrategyDebug')}
 
+" General
+let g:test#loglevel = 'INFO'
+
+" Python
+let g:test#pytestargs = '-s -rA'
+let g:test#wslwinvenvs = expand('$WH/venvs/')
+
+" Tmux
 " Always use the window calld "1" and pane "0" in the current session.
-let s:session = system('tmux list-panes -t "$TMUX_PANE" -F "#S" | head -n1 | tr -d "\n"')
-let g:tslime={'window': '1', 'pane': '0', 'session': s:session}
+let g:tslime#recievingsession = system('tmux list-panes -t "$TMUX_PANE" -F "#S" | head -n1 | tr -d "\n"')
+let g:tslime={'window': '1', 'pane': '0', 'session': g:tslime#recievingsession}
+
