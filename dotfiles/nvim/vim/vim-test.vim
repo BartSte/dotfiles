@@ -3,7 +3,7 @@
 function! TSlimeStrategy(cmd) abort
     let venv = GetVenv()
     let command = GetCommand(venv, a:cmd)
-    call Send_to_Tmux(command . "\n")
+    call SafeSendToTmux(command . "\n")
 endfunction
 
 " When running WSL and a venv is present in g:wsl_win_venvs, it will take
@@ -33,23 +33,25 @@ function! GetCommand(venv, cmd)
     endif
 endfunction
 
+function! SafeSendToTmux(cmd) abort
+    call Send_to_Tmux("C-c")
+    call Send_to_Tmux(a:cmd)
+endfunction
+
 " Test strategy that can run tests for Linux projects and Windows projects
 " that are edited from WSL.
 function! TSlimeStrategyDebug(cmd) abort
     let venv = GetVenv()
     let command = GetCommand(venv, a:cmd)
-    call Send_to_Tmux(command . " --pdb --pdbcls=IPython.terminal.debugger:Pdb\n")
+    call SafeSendToTmux(command . " --pdb --pdbcls=IPython.terminal.debugger:Pdb\n")
 endfunction
 
 
-" FIX: when copy mode is in the recieving tmux pane, it goes wrong.
-" TODO: you can do: `let g:tslime={'window': '1', 'pane': '0', 'session': 'navigation'}`
-" to set tslime from the config. Now we can also use this to disable visual
-" mode before sending keys. 
-" let session = system('tmux list-panes -t "$TMUX_PANE" -F "#S" | head -n1 | sed "s/\n//g"')
-" let g:tmuxsession = system('[[ "$TMUX" ]] && tmux list-sessions | sed "s/:.*$//g"')
-" let g:tslime={'window': '1', 'pane': '0', 'session': tmuxsession}
 let g:wsl_win_venvs = expand('$WH/venvs/')
 let g:preserve_screen = 1
 let test#python#runner = 'pytest'
 let g:test#custom_strategies = {'pytslime': function('TSlimeStrategy'), 'pytslimedebug': function('TSlimeStrategyDebug')}
+
+" Always use the window calld "1" and pane "0" in the current session.
+let s:session = system('tmux list-panes -t "$TMUX_PANE" -F "#S" | head -n1 | tr -d "\n"')
+let g:tslime={'window': '1', 'pane': '0', 'session': s:session}
