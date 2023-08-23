@@ -12,6 +12,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=20
 set foldmethod=expr
 set ignorecase
+set mouse=
 set nohlsearch
 set nospell
 set noswapfile
@@ -24,7 +25,7 @@ set pumheight=10
 set pumwidth=15
 set relativenumber
 set shiftwidth=4
-set shortmess+=I
+set shortmess=flmnxoOA
 set showcmd
 set signcolumn=number
 set smartcase
@@ -33,4 +34,3 @@ set softtabstop=4
 set spelllang=en,nl
 set textwidth=79
 set updatetime=500
-set mouse=
