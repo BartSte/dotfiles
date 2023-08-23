@@ -31,7 +31,7 @@ local function get_command(venv, cmd)
     local result = ''
 
     if venv == '' then
-        result = 'python3 ' .. cmd
+        result = cmd
     elseif vim.fn.has('win32') == 1 then
         result = venv .. '\\Scripts\\' .. cmd
     elseif venv == vim.env.VIRTUAL_ENV then
