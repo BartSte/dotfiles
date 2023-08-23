@@ -113,10 +113,6 @@ M.confirm_select = function(value)
     return cmp.mapping.confirm({ select = value })
 end
 
-M.cmp_enabled = function()
-    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
-end
-
 M.format = function(opts)
     return function (entry, vim_item)
         vim_item.abbr = string.sub(vim_item.abbr, 1, opts.length)

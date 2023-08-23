@@ -106,12 +106,6 @@ cmp.setup({
     sorting = sorting
 })
 
-cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-    sources = {
-        { name = "dap" },
-    },
-})
-
 cmp.setup.cmdline({ '/', '?' }, {
     sources = sources_s
 })

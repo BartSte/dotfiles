@@ -7,7 +7,7 @@ return {
     dependencies = {
         'jgdavey/tslime.vim',
         config = function()
-            vim.cmd('let g:tslime_always_current_session = 1')
+            vim.cmd('runtime vim/tslime.vim')
         end
     }
 }

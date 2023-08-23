@@ -1,22 +1,13 @@
+local os_path = require('helpers.os_path')
 return {
     'wakatime/vim-wakatime',
     cond = function()
         --through the shell, check if .wakatime.cfg exists.
-
-        local home
-        if vim.fn.has('win32') == 1 then
-            home = os.getenv("USERPROFILE")
-        else
-            home = os.getenv("HOME")
-        end
-
-        local file = io.open(home .. "/.wakatime.cfg", "r")
-
-        if file ~= nil then
+        local file = io.open(os_path.get_home() .. "/.wakatime.cfg", "r")
+        local exists = file ~= nil
+        if exists then
             io.close(file)
-            return true
-        else
-            return false
         end
+        return exists
     end
 }

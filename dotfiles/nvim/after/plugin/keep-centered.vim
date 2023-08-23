@@ -5,18 +5,10 @@ augroup KeepCentered
 augroup END
 
 function NormalCenter() abort
-    if (&ft=='floaterm' || &ft=='dap-repl')
-        return
-    endif
-
     normal! zz
 endfunction
 
 function InsertRecenter() abort
-    if (&ft=='floaterm' || &ft=='dap-repl')
-        return
-    endif
-
     let at_end = getcursorcharpos()[2] > len(getline('.'))
     normal! zz
 
