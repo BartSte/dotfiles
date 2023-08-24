@@ -1,6 +1,6 @@
 return {
-    'junegunn/gv.vim',
-    keys = { { '<a-z>', ':GV<CR>' } },
+    'rbong/vim-flog',
+    keys = { { '<a-z>', ':Flog<CR>' } },
     dependencies = {
         'tpope/vim-fugitive'
     }
