@@ -37,7 +37,7 @@ let g:mkdp_open_ip = ''
 if has('win32') || exists('$WH')
     let g:mkdp_browser = 'C:\Program Files\Qutebrowser\qutebrowser.exe'
 else
-    let g:mkdp_browser = 'qutebrowser'
+    let g:mkdp_browser = 'browser'
 endif
 
 " set to 1, echo preview page url in command line when open preview page
