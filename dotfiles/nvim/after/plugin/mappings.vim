@@ -91,6 +91,6 @@ nnoremap <silent><leader>f mxgggqG`x
 vnoremap <silent><leader>cc :sort<CR>
 nnoremap <silent><leader>cc vip:sort<CR>
 nnoremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>
-vnoremap <silent><leader>cl :!sort_variable_length.py<CR>
-nnoremap <silent><leader>cl vip:!sort_variable_length.py<CR>
+vnoremap <silent><leader>cl :!sort_variable_length<CR>
+nnoremap <silent><leader>cl vip:!sort_variable_length<CR>
 

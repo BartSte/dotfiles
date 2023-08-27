@@ -54,16 +54,21 @@ end
 -- Test strategy that can run tests for Linux projects and Windows projects
 -- that are edited from WSL. `args` is a string of additional arguments to pass
 -- to pytest.
-local function make_strategy(args)
+-- `command` will be runned before the test command. For example, if you want
+-- to clear the screen before running the tests, you can pass `clear;` as
+-- command.
+local function make_strategy(args, command)
     return function(cmd)
+        args = args or ''
+        command = command or ''
         local venv = get_venv()
-        local command = get_command(venv, cmd)
+        command = command .. get_command(venv, cmd)
         send_to_tmux(command .. ' ' .. args .. '\n')
     end
 end
 
-M.vimtest.python.strategy = make_strategy('')
+M.vimtest.python.strategy = make_strategy('', 'tmux clearhist;')
 M.vimtest.python.make_strategy = make_strategy
-M.vimtest.python.strategy_debug = make_strategy('--pdb --pdbcls=IPython.terminal.debugger:Pdb')
+M.vimtest.python.strategy_debug = make_strategy('--pdb --pdbcls=IPython.terminal.debugger:Pdb', 'tmux clearhist;')
 
 return M
