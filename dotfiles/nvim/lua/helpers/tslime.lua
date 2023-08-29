@@ -57,13 +57,13 @@ end
 -- `command` will be runned before the test command. For example, if you want
 -- to clear the screen before running the tests, you can pass `clear;` as
 -- command.
-local function make_strategy(args, command)
+local function make_strategy(args, prefix)
+    args = args or ''
+    prefix = prefix or ''
     return function(cmd)
-        args = args or ''
-        command = command or ''
         local venv = get_venv()
-        command = command .. get_command(venv, cmd)
-        send_to_tmux(command .. ' ' .. args .. '\n')
+        local full_cmd = prefix .. get_command(venv, cmd)
+        send_to_tmux(full_cmd .. ' ' .. args .. '\n')
     end
 end
 
