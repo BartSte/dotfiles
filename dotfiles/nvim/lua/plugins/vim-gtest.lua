@@ -1,5 +1,5 @@
 return {
-    'BartSte/vim-gtest',
+    'alepez/vim-gtest',
     ft = { 'cpp', 'c', 'objc', 'objc++' },
     config = function()
         require('config.vim-gtest').setup()

@@ -25,7 +25,7 @@ set pumheight=10
 set pumwidth=15
 set relativenumber
 set shiftwidth=4
-set shortmess=flmnxoOA
+set shortmess=flmnxoOAI
 set showcmd
 set signcolumn=number
 set smartcase
