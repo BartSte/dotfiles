@@ -67,7 +67,7 @@ local function make_strategy(args, prefix)
     end
 end
 
-M.vimtest.python.strategy = make_strategy('', 'tmux clearhist;')
+M.vimtest.python.strategy = make_strategy('', 'tmux clearhist; clear;')
 M.vimtest.python.make_strategy = make_strategy
 M.vimtest.python.strategy_debug = make_strategy('--pdb --pdbcls=IPython.terminal.debugger:Pdb', 'tmux clearhist;')
 
