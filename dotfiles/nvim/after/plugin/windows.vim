@@ -34,6 +34,7 @@ if has('win32')
 endif
 
 if !empty($WH)
+    " See :h clipboard-wsl
     let g:clipboard = {
                 \   'name': 'WslClipboard',
                 \   'copy': {
