@@ -1,6 +1,8 @@
 *.git/
-*autogen
+.virtualenvs/
+.ipython/
 *.swp*
+*autogen
 *cache*/
 *egg-info*
 *tmp*/
@@ -14,6 +16,7 @@
 .dotfiles*/
 .dropbox*
 .emacs*
+.erg/
 .fonts/
 .git/
 .history/
@@ -35,6 +38,7 @@ Temp/
 Trash/
 Windows
 __pycache__/
+_deps/
 archive/
 chrysalis/
 dist
@@ -49,4 +53,3 @@ stubs
 venv/
 visual/
 yay/
-_deps/
