@@ -53,6 +53,7 @@ vnoremap <BS> k
 vnoremap <CR> j
 vnoremap p pgvy
 nnoremap <silent> Q :call ToggleQuickFix()<cr>
+nnoremap gx :call system('open ' . expand('<cfile>'))<CR>
 
 " Terminal mode
 tnoremap <C-t> <C-\><C-n>
