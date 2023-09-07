@@ -95,3 +95,5 @@ nnoremap <silent><leader>w <cmd>setlocal wrap! wrap?<CR>
 vnoremap <silent><leader>cl :!sort_variable_length<CR>
 nnoremap <silent><leader>cl vip:!sort_variable_length<CR>
 
+"Session
+nnoremap <leader>s :mksession! Session.vim<CR>
