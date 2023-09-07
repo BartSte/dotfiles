@@ -4,5 +4,4 @@ require('helpers.lazy').bootstrap()
 require('lazy').setup('plugins', {
       change_detection = {
         enabled = false,
-        notify = true, -- get a notification when changes are found
 }})

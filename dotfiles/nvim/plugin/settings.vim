@@ -4,6 +4,7 @@ let mapleader = " "
 set autoindent
 set cedit=\<C-t>
 set cmdheight=1
+set conceallevel=0
 set colorcolumn=79
 set cursorline
 set diffopt+=vertical,iblank,closeoff
@@ -33,4 +34,4 @@ set smarttab
 set softtabstop=4
 set spelllang=en,nl
 set textwidth=79
-set updatetime=500
+set updatetime=750
