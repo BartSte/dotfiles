@@ -1,13 +1,13 @@
 local mapper = require('helpers.keymapper')
 local orgmode = require('orgmode')
-local os_path = require('helpers.os_path')
+local path = require('helpers.path')
 local khalorg = require('khalorg')
 
-local dropbox_home = os_path.path_join(os_path.get_dropbox_home(), 'Dropbox')
-local dropbox_org = os_path.path_join(dropbox_home, 'org')
-local dropbox_main = os_path.path_join(dropbox_org, 'main.org')
-local dropbox_agenda = os_path.path_join(dropbox_org, 'outlook.org')
-local dropbox_personal = os_path.path_join(dropbox_org, 'personal.org')
+local dropbox_home = path.join(path.get_dropbox_home(), 'Dropbox')
+local dropbox_org = path.join(dropbox_home, 'org')
+local dropbox_main = path.join(dropbox_org, 'main.org')
+local dropbox_agenda = path.join(dropbox_org, 'outlook.org')
+local dropbox_personal = path.join(dropbox_org, 'personal.org')
 
 khalorg.setup({
     calendar = 'outlook_local'

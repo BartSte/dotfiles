@@ -27,7 +27,7 @@ end
 ---Joins arbitrary number of paths together.
 ---@param ... string The paths to join.
 ---@return string
-M.path_join = function(...)
+M.join = function(...)
     local args = { ... }
     if #args == 0 then
         return ""
