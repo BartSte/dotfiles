@@ -1,8 +1,8 @@
 local oil = require('oil')
 local keymapper = require('helpers.keymapper')
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 oil.setup({
     columns = {},

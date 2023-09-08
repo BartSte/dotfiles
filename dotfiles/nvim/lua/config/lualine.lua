@@ -20,8 +20,6 @@ lualine.setup({
         globalstatus = false,
         refresh = {
             statusline = 1000,
-            tabline = 1000,
-            winbar = 1000,
         }
     },
     sections = {
@@ -43,5 +41,9 @@ lualine.setup({
     tabline = {},
     winbar = {},
     inactive_winbar = {},
-    extensions = { 'fugitive', 'nvim-tree', 'fzf', 'quickfix' }
+    extensions = { 'fugitive', 'fzf', 'quickfix' }
+})
+
+lualine.hide({
+    place = {'tabline', 'winbar'},
 })

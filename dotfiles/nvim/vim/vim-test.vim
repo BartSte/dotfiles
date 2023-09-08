@@ -12,4 +12,3 @@ endfunction
 let g:preserve_screen = 1
 let test#python#runner = 'pytest'
 let g:test#custom_strategies = {'pytslime': function("TSlimeStrategy"), 'pytslimedebug': function('TSlimeStrategyDebug')}
-
