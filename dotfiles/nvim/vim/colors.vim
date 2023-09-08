@@ -37,7 +37,7 @@ if has('termguicolors')
 
     hi CopilotSuggestion gui=italic guifg=gray65
 
-    hi MatchParen gui=bold guifg=fg guibg=magenta
+    hi MatchParen gui=bold guifg=fg guibg=DarkMagenta
 endif
 
 let &t_SI = "\e[6 q"
