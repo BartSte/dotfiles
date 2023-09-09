@@ -1,11 +1,14 @@
 " See helpers.tslime for more information.
 function! TSlimeStrategy(cmd) abort
-    call v:lua.require('helpers.tslime').vimtest.python.strategy(a:cmd)
+    " call v:lua.require('helpers.tslime').vimtest.pytest.strategy(a:cmd)
+    call v:lua.require('helpers.tslime').setup().vimtest.pytest.strategy(a:cmd)
 endfunction
 
 " See helpers.tslime for more information.
 function! TSlimeStrategyDebug(cmd) abort
-    call v:lua.require('helpers.tslime').vimtest.python.strategy_debug(a:cmd)
+    " FIX: do not call setup every time?
+    " FIX: cannot set opts in setup
+    call v:lua.require('helpers.tslime').setup().vimtest.pytest.strategy_debug(a:cmd)
 endfunction
 
 " Vimtest
