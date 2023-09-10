@@ -67,7 +67,11 @@ M.make_strategy = function(opts)
         cmd = replace(cmd, "^python[^ ]+", get_py())
         cmd = opts.prefix .. ' ' .. cmd .. ' ' .. args
 
-        tslime.send_to_tmux(cmd .. '\n')
+        if vim.fn.has('win32') == 1 then
+            vim.cmd('vnew | terminal ' .. cmd)
+        else
+           tslime.send_to_tmux(cmd .. '\n')
+        end
     end
 end
 
