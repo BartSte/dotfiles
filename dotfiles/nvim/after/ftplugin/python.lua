@@ -8,10 +8,10 @@ keymapper.buffer_nnoremap('<leader>B', 'Obreakpoint()<Esc>')
 
 keymapper.buffer_nnoremap('gl', ':TestVisit<CR>')
 
-keymapper.buffer_nnoremap('<a-f>', ':TestFile -strategy=pytslime<CR>')
-keymapper.buffer_nnoremap('<a-l>', ':TestLast -strategy=pytslime<CR>')
-keymapper.buffer_nnoremap('<a-t>', ':TestNearest -strategy=pytslime<CR>')
+keymapper.buffer_nnoremap('<a-f>', ':TestFile -strategy=pytesttmux<CR>')
+keymapper.buffer_nnoremap('<a-l>', ':TestLast -strategy=pytesttmux<CR>')
+keymapper.buffer_nnoremap('<a-t>', ':TestNearest -strategy=pytesttmux<CR>')
 
-keymapper.buffer_nnoremap('<a-F>', ':TestFile -strategy=pytslimedebug<CR>')
-keymapper.buffer_nnoremap('<a-L>', ':TestLast -strategy=pytslimedebug<CR>')
-keymapper.buffer_nnoremap('<a-T>', ':TestNearest -strategy=pytslimedebug<CR>')
+keymapper.buffer_nnoremap('<a-F>', ':TestFile -strategy=pytesttmuxdebug<CR>')
+keymapper.buffer_nnoremap('<a-L>', ':TestLast -strategy=pytesttmuxdebug<CR>')
+keymapper.buffer_nnoremap('<a-T>', ':TestNearest -strategy=pytesttmuxdebug<CR>')

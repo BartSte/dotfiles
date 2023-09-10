@@ -1,4 +1,4 @@
-local send = require('helpers.tslime.send')
+local tslime = require('helpers.tslime')
 
 local M = {}
 
@@ -8,6 +8,17 @@ local function get_venv(wsl_win_venvs)
     local directory = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
     local wsl_win_venv = wsl_win_venvs .. directory
     if vim.fn.isdirectory(wsl_win_venv) == 1 then
+        return wsl_win_venv
+    elseif vim.env.VIRTUAL_ENV ~= nil then
+        return vim.env.VIRTUAL_ENV
+    else
+        return ''
+    end
+end
+
+local function get_venv_dev()
+    local wsl_win_venv = vim.fn.system('wpy -p')
+    if wsl_win_venv ~= '' then
         return wsl_win_venv
     elseif vim.env.VIRTUAL_ENV ~= nil then
         return vim.env.VIRTUAL_ENV
@@ -32,8 +43,8 @@ local function get_command(venv, cmd)
 end
 
 local default_opts = {
+    prefix = 'tmux clearhist; clear;',
     args = '-s -rA',
-    prefix = '',
     loglevel = 'INFO',
     wslwinvenvs = '',
 }
@@ -50,7 +61,7 @@ M.make_strategy = function(opts)
         local venv = get_venv(opts.wslwinvenvs)
         local full_cmd = opts.prefix .. get_command(venv, cmd)
         local args = opts.args .. ' --log-level=' .. opts.loglevel
-        send.to_tmux(full_cmd .. ' ' .. args .. '\n')
+        tslime.send_to_tmux(full_cmd .. ' ' .. args .. '\n')
     end
 end
 
