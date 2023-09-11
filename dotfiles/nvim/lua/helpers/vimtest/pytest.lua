@@ -46,7 +46,6 @@ local default_opts = {
     prefix = 'tmux clearhist; clear;',
     args = '-s -rA',
     loglevel = 'INFO',
-    wslwinvenvs = '',
 }
 
 -- Test strategy that can run tests for Linux projects and Windows projects
