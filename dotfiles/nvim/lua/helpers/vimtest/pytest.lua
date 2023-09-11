@@ -12,14 +12,13 @@ local function wsl_win_py()
     end
 end
 
--- Returns the path to the python executable in the Windows venv.
-local function win_py()
-    return vim.env.VIRTUAL_ENV .. '\\Scripts\\python.exe'
-end
-
 -- Returns the path to the python executable in the Linux venv.
 local function linux_py()
-    return vim.env.VIRTUAL_ENV .. '/bin/python'
+    if vim.env.VIRTUAL_ENV == nil then
+        return 'python3'
+    else
+        return vim.env.VIRTUAL_ENV .. '/bin/python'
+    end
 end
 
 -- When running WSL and a venv is returned by `wpy -p`, use that venv. If not,
@@ -28,10 +27,6 @@ local function get_py()
     local wsl_win_venv = wsl_win_py()
     if wsl_win_venv ~= '' then
         return wsl_win_venv
-    elseif vim.env.VIRTUAL_ENV == nil then
-        return ''
-    elseif vim.fn.has('win32') == 1 then
-        return win_py()
     else
         return linux_py()
     end
@@ -62,15 +57,16 @@ local default_opts = {
 M.make_strategy = function(opts)
     opts = vim.tbl_deep_extend('force', default_opts, opts or {})
     return function(cmd)
-        local args = opts.args .. ' --log-level=' .. opts.loglevel
-
-        cmd = replace(cmd, "^python[^ ]+", get_py())
-        cmd = opts.prefix .. ' ' .. cmd .. ' ' .. args
-
         if vim.fn.has('win32') == 1 then
-            vim.cmd('vnew | terminal ' .. cmd)
+            vim.notify('Pytest not supported on Windows. Use WSL instead.',
+                vim.log.levels.WARN)
         else
-           tslime.send_to_tmux(cmd .. '\n')
+            local args = opts.args .. ' --log-level=' .. opts.loglevel
+
+            cmd = replace(cmd, "^python[^ ]+", get_py())
+            cmd = opts.prefix .. ' ' .. cmd .. ' ' .. args
+
+            tslime.send_to_tmux(cmd .. '\n')
         end
     end
 end
