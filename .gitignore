@@ -1,1 +1,9 @@
-/home/barts/dotfiles-linux/home/.gitignore
+*.swp
+*.pyc
+.luarc.json
+dotfiles.git
+dotfiles-linux.git
+dotfiles-secret.git
+dotfiles-windows.git
+__pycache__
+nvim.shada
