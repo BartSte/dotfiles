@@ -34,5 +34,5 @@ copilot.setup({
 })
 keymapper.inoremap("<Right>", function() execute_if_suggestion_visible(suggestion.accept, "<Right>") end)
 keymapper.inoremap("<Left>", function() execute_if_suggestion_visible(suggestion.dismiss, "<Left>") end)
-keymapper.inoremap("<C-w>", function() execute_if_suggestion_visible(suggestion.accept_word, "") end)
+keymapper.inoremap("<C-Right>", function() execute_if_suggestion_visible(suggestion.accept_word, "<C-Right>") end)
 keymapper.noremap("<leader>co", ":Copilot enable<CR>")
