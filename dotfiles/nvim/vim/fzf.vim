@@ -3,6 +3,7 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all --height 1
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-p']
+let g:re_todo = 'TODO:|FIX:|FIXME:|NOTE:|HACK:'
 
 function! s:GetEmail()
     call fzf#run(fzf#wrap({
@@ -22,6 +23,8 @@ command! -bang -nargs=? -complete=dir Dirs call fzf#vim#files(<q-args>, {
 
 nnoremap <a-a> :Ag<space>
 inoremap <a-a> <Esc>:Ag<space>
+nnoremap <a-A> :execute(':Ag ' . g:re_todo)<CR>
+inoremap <a-A> <Esc>:execute(':Ag ' . g:re_todo)<CR>
 
 if has('win32')
     " Workaround for: https://github.com/junegunn/fzf.vim/issues/883

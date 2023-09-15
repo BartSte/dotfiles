@@ -19,7 +19,7 @@ copilot.setup({
         auto_trigger = true,
         debounce = 75,
         keymap = {
-            accept_line = "<C-l>",
+            accept_line = "<S-Right>",
             next = "<C-n>",
             prev = "<C-p>",
             toggle_auto_trigger = false
