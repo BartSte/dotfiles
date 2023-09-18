@@ -1,11 +1,22 @@
-"alt mappings a re for moving out of the editor -> alt==appear
-"leader mappings are for text editing.
-"control mappings are kept at the default where possible, e.g., fzf's <C-t>
+" Override defaults
+inoremap <C-t> <Esc>
+noremap <C-t> <Esc>
+vnoremap p pgvy
+nnoremap Y y$
+nnoremap ZA :wqa<CR>
 
-" Powershell does not detect <C-Space>. As a solution, Alacritty sends <F24>
-" when ctrl+space is pressed. By binding <C-Space> and <F24>, the issue is
-" solved.
+" Make J and K available for hop.nvim
+noremap <leader>j J
+nnoremap <silent><c-k> K
 
+" Insert/command mode delete
+inoremap <C-BS> <C-w>
+inoremap <C-Del> <C-o>dE
+inoremap <C-h> <C-w>
+cnoremap <C-BS> <C-w>
+cnoremap <C-h> <C-w>
+
+" Quickfix
 function! ToggleQuickFix()
     if empty(filter(getwininfo(), 'v:val.quickfix'))
         copen
@@ -13,47 +24,24 @@ function! ToggleQuickFix()
         cclose
     endif
 endfunction
+nnoremap <silent> Q :call ToggleQuickFix()<cr>
 
-imap <F24> <C-Space>
-cmap <F24> <C-Space>
-nmap <F24> <C-Space>
-imap <S-F12> <C-Space>
-cmap <S-F12> <C-Space>
-nmap <S-F12> <C-Space>
+" Open links
+nnoremap gx :call system('open ' . expand('<cfile>'))<CR>
 
-"Insert mode
-inoremap <C-BS> <C-w>
-inoremap <C-h> <C-w>
-inoremap <C-Del> <C-o>dE
-inoremap <C-t> <Esc>
-inoremap <C-s> <C-o><cmd>w<CR>
-
-" Command mode
-cnoremap <C-BS> <C-w>
-cnoremap <C-h> <C-w>
-
-"Shortcut to clipboard
-nnoremap + "+
-nnoremap ++ <nop>
-vnoremap + "+
-vnoremap ++ <nop>
-
-"Override default mappings
-nnoremap <silent><c-k> K
-nnoremap Y y$
-nnoremap ZA :wqa<CR>
-noremap <C-s> <cmd>w<CR>
-noremap <C-t> <Esc>
-noremap <leader>j J
+" Use <BS> and <CR> for up and down
 nnoremap <BS> k
 nnoremap <CR> j
 onoremap <BS> k
 onoremap <CR> j
 vnoremap <BS> k
 vnoremap <CR> j
-vnoremap p pgvy
-nnoremap <silent> Q :call ToggleQuickFix()<cr>
-nnoremap gx :call system('open ' . expand('<cfile>'))<CR>
+
+"Shortcut to clipboard
+nnoremap + "+
+nnoremap ++ <nop>
+vnoremap + "+
+vnoremap ++ <nop>
 
 " Terminal mode
 tnoremap <C-t> <C-\><C-n>
@@ -96,4 +84,16 @@ vnoremap <silent><leader>cl :!sort_variable_length<CR>
 nnoremap <silent><leader>cl vip:!sort_variable_length<CR>
 
 "Save
+inoremap <C-s> <cmd>w<CR>
 nnoremap <leader>s :mksession! Session.vim<CR>
+noremap <C-s> <cmd>w<CR>
+
+" The terminal does not detect <C-Space>. As a solution, Alacritty sends <F24>
+" when ctrl+space is pressed. By binding <C-Space> to <F24> (or <S-F12>), the
+" issue is solved.
+imap <F24> <C-Space>
+cmap <F24> <C-Space>
+nmap <F24> <C-Space>
+imap <S-F12> <C-Space>
+cmap <S-F12> <C-Space>
+nmap <S-F12> <C-Space>
