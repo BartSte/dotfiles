@@ -42,6 +42,7 @@ nnoremap + "+
 nnoremap ++ <nop>
 vnoremap + "+
 vnoremap ++ <nop>
+nnoremap "" :reg<CR>
 
 " Terminal mode
 tnoremap <C-t> <C-\><C-n>
