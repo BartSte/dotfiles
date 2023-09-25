@@ -17,7 +17,6 @@ return {
         vim.cmd('runtime vim/fzf.vim')
     end,
     dependencies = {
-        { 'stsewd/fzf-checkout.vim' },
         { 'junegunn/fzf',           build = ':call fzf#install()' },
     }
 }
