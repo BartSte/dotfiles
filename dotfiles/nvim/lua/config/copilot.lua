@@ -1,6 +1,6 @@
 local copilot = require("copilot")
 local suggestion = require("copilot.suggestion")
-local keymapper = require("helpers.keymapper") 
+local keymapper = require("helpers.keymapper")
 
 -- Execetut `callback` if the copilot suggestion is visible.
 local function execute_if_suggestion_visible(callback, key)
@@ -34,5 +34,5 @@ copilot.setup({
 })
 keymapper.inoremap("<Right>", function() execute_if_suggestion_visible(suggestion.accept, "<Right>") end)
 keymapper.inoremap("<Left>", function() execute_if_suggestion_visible(suggestion.dismiss, "<Left>") end)
-keymapper.inoremap("<C-Right>", function() execute_if_suggestion_visible(suggestion.accept_word, "<C-Right>") end)
+keymapper.inoremap("<C-Right>", function() execute_if_suggestion_visible(suggestion.accept_word, "") end)
 keymapper.noremap("<leader>co", ":Copilot enable<CR>")
