@@ -148,4 +148,5 @@ This repos are inspired on the following projects:
 # TODO
 - [ ] rbw command cannot be found when running `main`.
 - [ ] When logging in after signout, an error is thrown and the user is logged
-  out.
+  out. It is because of missing dependencies in the .zshrc file. Make sure
+that the the .zhsrc file only sources deps that exit
