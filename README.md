@@ -144,3 +144,8 @@ This repos are inspired on the following projects:
 - [polybar-bluetooth](https://github.com/msaitz/polybar-bluetooth)
 - [mutt-oauth2](https://github.com/muttmua/mutt/blob/master/contrib/mutt_oauth2.py)
 - [tmux-sessionizer](https://github.com/ThePrimeagen/.dotfiles/)
+
+# TODO
+- [ ] rbw command cannot be found when running `main`.
+- [ ] When logging in after signout, an error is thrown and the user is logged
+  out.
