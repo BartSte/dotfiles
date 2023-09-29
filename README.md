@@ -38,7 +38,7 @@ use some explanation:
 - To initialize the repository run the following line in a bash shell:
 
 ```bash
-curl -O https://raw.githubusercontent.com/BartSte/dotfiles-linux/master/dotfiles-linux/initialize.sh && bash ./initialize.sh; rm ./initialize.sh
+curl -O https://raw.githubusercontent.com/BartSte/dotfiles-linux/master/dotfiles-linux/initialize && bash ./initialize; rm ./initialize
 ```
 
 - Complete the environment variables in `~/.dotfiles_config.sh`.
