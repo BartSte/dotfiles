@@ -31,6 +31,36 @@ use some explanation:
 - `dotfiles/nvim/after/ftplugin`: configuration files that are loaded after the
   filetype is detected.
 
+### Authenticat davmail
+
+To be able to use khal/khard/khalorg/vdirsyncer, you need to authenticate
+davmail. This can be done by doing the following:
+
+- In shell 1, run:
+
+```bash
+davmail ~/.config/davmail/davmail.properties
+```
+
+- In shell 2, run:
+
+```bash
+vdirsyncer discover
+vdirsyncer sync
+```
+
+- Head back to shell 1 and follow the instructions. If you are prompted with a
+  message that states that "interactive" mode is not supported, you can change
+  the davmail.properties setting `davmail.mode=O365Interactive` to
+  `davmail.mode=O365Manual`.
+
+- After this, you can run the following commands to ensure all is synced:
+
+```bash
+mycalsync
+mymailsync
+```
+
 ## Dotfiles-linux (Arch linux)
 
 ### Installation
@@ -146,7 +176,8 @@ This repos are inspired on the following projects:
 - [tmux-sessionizer](https://github.com/ThePrimeagen/.dotfiles/)
 
 # TODO
+
 - [ ] rbw command cannot be found when running `main`.
 - [ ] When logging in after signout, an error is thrown and the user is logged
-  out. It is because of missing dependencies in the .zshrc file. Make sure
-that the the .zhsrc file only sources deps that exit
+      out. It is because of missing dependencies in the .zshrc file. Make sure
+      that the the .zhsrc file only sources deps that exit
