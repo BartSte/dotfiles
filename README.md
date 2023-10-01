@@ -31,7 +31,44 @@ use some explanation:
 - `dotfiles/nvim/after/ftplugin`: configuration files that are loaded after the
   filetype is detected.
 
-### Authenticat davmail
+## Dotfiles-linux (Arch linux)
+
+### Installation
+
+- To initialize the repository run the following line in a bash shell:
+
+```bash
+curl -O https://raw.githubusercontent.com/BartSte/dotfiles-linux/master/dotfiles-linux/initialize && bash ./initialize; rm ./initialize
+```
+
+- Complete the environment variables in `~/.dotfiles_config.sh`.
+- Run the script: `~/dotfiles-linux/main`
+- Afterwards, authenticate for:
+  - Dropbox
+  - Davmail
+
+### Authenticate dropbox
+
+After installing dropbox, you need to authenticate it with your account. At the
+moment of writing, the only way was to do this through a tray icon. Waybar did
+not work from me so I did the following:
+
+- Run xwayland
+- Intall the program `trayer`
+- Run trayer.
+- Run dropbox.
+- Dropbox will apear in the tray icon.
+- Press `sign in` and follow the instructions.
+
+After dropbox is working, re-run the following scripts as they rely on files
+(containing personal data) that are synced by dropbox:
+
+```bash
+dotfiles-linux/qutebrowser/main
+dotfiles-linux/wakatime/main
+```
+
+### Authenticate davmail
 
 To be able to use khal/khard/khalorg/vdirsyncer, you need to authenticate
 davmail. This can be done by doing the following:
@@ -61,20 +98,6 @@ mycalsync
 mymailsync
 ```
 
-## Dotfiles-linux (Arch linux)
-
-### Installation
-
-- To initialize the repository run the following line in a bash shell:
-
-```bash
-curl -O https://raw.githubusercontent.com/BartSte/dotfiles-linux/master/dotfiles-linux/initialize && bash ./initialize; rm ./initialize
-```
-
-- Complete the environment variables in `~/.dotfiles_config.sh`.
-- Run the script: `~/dotfiles-linux/main.sh`
-- Optionally, if you run on an asus device, you can run `~\doffiles-linux\main_asus.sh`.
-
 ## Dotfiles-windows (Windows 10 & 11)
 
 - To initialize the repository copy the following line into powershell:
@@ -93,11 +116,14 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercon
 
 # Background
 
+The following sections explain how the 3 repositories work together.
+
 ## Bare repository
 
 The text below was inspired on the following article of [atlassian](https://www.atlassian.com/git/tutorials/dotfiles). This article will also explain the difference between a normal repository and a bare repository.
 
-Clone the project (dotfiles, dotfiles-linux, or dotfiles-windows) into a bare repository. I will call the bare repository: `dotfiles.git`:
+Clone the project (dotfiles, dotfiles-linux, or dotfiles-windows) into a bare
+repository. I will call the bare repository: `dotfiles.git`:
 
 ```powershell
 git clone --bare <git-repo-url> $HOME/dotfiles.git
@@ -115,7 +141,8 @@ Or to your $PSHome/profile.ps1:
 ${function:base} = { git.exe --git-dir=$HOME\dotfiles.git\ --work-tree=$HOME @args }
 ```
 
-where `base` can be replaced by a name you prefer, while the folder `dotfiles.git` is the directory holding the bare repository.
+where `base` can be replaced by a name you prefer, while the folder
+`dotfiles.git` is the directory holding the bare repository.
 
 Checkout the actual content from the bare repository to your $HOME:
 
@@ -133,7 +160,9 @@ Please move or remove them before you can switch branches.
 Aborting
 ```
 
-This is because your `$HOME` folder might already have some stock configuration files which would be overwritten by git. The solution is simple: back up the files if you care about them, remove them if you don't care, and try again.
+This is because your `$HOME` folder might already have some stock configuration
+files which would be overwritten by git. The solution is simple: back up the
+files if you care about them, remove them if you don't care, and try again.
 
 Set the flag showUntrackedFiles to no on this specific (local) repository:
 
@@ -141,7 +170,8 @@ Set the flag showUntrackedFiles to no on this specific (local) repository:
 base config --local status.showUntrackedFiles no
 ```
 
-You're done, from now on you can now type `base` commands to add and update your dotfiles:
+You're done, from now on you can now type `base` commands to add and update
+your dotfiles:
 
 ```base
 base status
@@ -152,7 +182,16 @@ base push
 
 ## Multiple layers
 
-Using a bare repository allows you to working on multiple repositories in the same folder. For dotfiles this is typically the `$HOME` folder. As such, the repositories `dotfiles` `dotfiles-linux`, and `dotfiles-windows` should all be created in a bare repository in the `$HOME` folder. I call them `<repo-name>.git`. Here, the repository `dotfiles.git` can be interpreted as the base layer, containing dotfiles that are cross-platform. On top of that, a linux layer can be added, i.e., the `dotfiles-linux.git` bare repository. As an example, the following code adds a file `.foo` to the `dotfiles` repository (using the alias `base`), and a file `.bar` to the `dotfiles-linux` repostory (using the alias `lin`):
+Using a bare repository allows you to working on multiple repositories in the
+same folder. For dotfiles this is typically the `$HOME` folder. As such, the
+repositories `dotfiles` `dotfiles-linux`, and `dotfiles-windows` should all be
+created in a bare repository in the `$HOME` folder. I call them
+`<repo-name>.git`. Here, the repository `dotfiles.git` can be interpreted as
+the base layer, containing dotfiles that are cross-platform. On top of that, a
+linux layer can be added, i.e., the `dotfiles-linux.git` bare repository. As an
+example, the following code adds a file `.foo` to the `dotfiles` repository
+(using the alias `base`), and a file `.bar` to the `dotfiles-linux` repostory
+(using the alias `lin`):
 
 ```bash
 base add .foo
@@ -163,7 +202,8 @@ base push
 lin push
 ```
 
-You will always need the base layer `dotfiles`. On top of that you can add an OS specific repostory: `dotfiles-linux` or `dotfiles-windows`.
+You will always need the base layer `dotfiles`. On top of that you can add an
+OS specific repostory: `dotfiles-linux` or `dotfiles-windows`.
 
 # References
 
@@ -174,10 +214,3 @@ This repos are inspired on the following projects:
 - [polybar-bluetooth](https://github.com/msaitz/polybar-bluetooth)
 - [mutt-oauth2](https://github.com/muttmua/mutt/blob/master/contrib/mutt_oauth2.py)
 - [tmux-sessionizer](https://github.com/ThePrimeagen/.dotfiles/)
-
-# TODO
-
-- [ ] rbw command cannot be found when running `main`.
-- [ ] When logging in after signout, an error is thrown and the user is logged
-      out. It is because of missing dependencies in the .zshrc file. Make sure
-      that the the .zhsrc file only sources deps that exit
