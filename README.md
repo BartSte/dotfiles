@@ -98,6 +98,14 @@ mycalsync
 mymailsync
 ```
 
+### Crypt: get-rbw-base64-keys
+
+The function `get-rbw-base64-keys` will convert the output of \`base crypt
+export-key\` to a base64 string. This sting can be stored in the password
+manager. In the \`main\` script this key is decoced and piped to \`base crypt
+unlock\`. The `get-rbw-base64-keys` is only needed when you want to update the
+keys in `rbw` and does not have to run when you are initializing your dotfiles.
+
 ## Dotfiles-windows (Windows 10 & 11)
 
 - To initialize the repository copy the following line into powershell:
