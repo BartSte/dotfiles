@@ -1,1 +1,2 @@
-testfile filter=git-crypt diff=git-crypt
+dotfiles/qutebrowser/urls filter=git-crypt diff=git-crypt
+dotfiles/qutebrowser/quickmarks filter=git-crypt diff=git-crypt
