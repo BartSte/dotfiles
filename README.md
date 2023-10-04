@@ -16,9 +16,9 @@ examples below are writing in bash and powershell.
   by the `dotfiles-linux` or the `dotfiles-windows` repositories, as they depend
   on it.
 
-### Neovim (`dotfiles/nvim`) Some directories of the neovim configuration could
+### Neovim (`dotfiles/nvim`)
 
-use some explanation:
+Some directories of the neovim configuration could use some explanation:
 
 - `dotfiles/nvim/lua`:
   - `helpers`: helper functions that are used in the other lua files.
@@ -98,7 +98,14 @@ mycalsync
 mymailsync
 ```
 
-### Crypt: get-rbw-base64-keys
+### Git crypt
+
+The `dotfiles` repository contains some files that are encrypted using
+`git-crypt`. To be able to read the encrypted files, the
+`dotfiles-linux\crypt\main` script is used is executed when running het main
+file.
+
+#### get-rbw-base64-keys
 
 The function `get-rbw-base64-keys` will convert the output of \`base crypt
 export-key\` to a base64 string. This sting can be stored in the password
@@ -121,6 +128,17 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercon
 - Run the script: `$HOME/dotfiles-windows/main.ps1`
 - All the subfolders of `$HOME/dotfiles-windows` are executed by calling the
   `main.ps1` file, e.g., `$HOME/dotfiles-windows/powershell/main.ps1`.
+
+### Git crypt
+
+The `dotfiles` repository contains some files that are encrypted using
+`git-crypt`. However, using git crypt on windows is not straightforward yet. To
+be able to read the encrypted files, we use WSL to unlock the `dotfiles`
+repository, by using the following script:
+[dotfiles-linux/crypt/main](https://github.com/BartSte/dotfiles-linux/blob/master/dotfiles-linux/crypt/main_windows).
+Here, it is assumed that, in WSL, the environment variable `WH` is set to the
+windows home directory of the user. When using the `dotfiles-linux` repository,
+this variable is already set when the `.zshrc` file is sourced.
 
 # Background
 
