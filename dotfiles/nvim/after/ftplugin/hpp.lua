@@ -1,1 +1,1 @@
-require('helpers.ft-cpp')
+require('helpers.ft-cpp').setup()
