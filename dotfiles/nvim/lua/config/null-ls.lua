@@ -17,6 +17,7 @@ null_ls.setup({
             extra_args = { "-i", "4", "-ci" },
             filetypes = { "sh", "zsh", "bash" },
         }),
+        null_ls.builtins.diagnostics.shellcheck,
 
         -- Markdown
         null_ls.builtins.formatting.prettier.with({
