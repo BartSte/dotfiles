@@ -200,7 +200,9 @@ used. The config files are located in `~/dotfiles-linux/isync`.
 For my personal email account, I use an app password for authentication. For
 my work email account, I use davmail for authentication. I chose davmail
 because `mbsync` does not support XOAUTH2 authentication by default, so using
-davmail was easier.
+davmail was easier. However, it would be interesting to enable XOAUTH2 for
+`mbsync` as the davmail solution is pretty slow. Maybe using XOAUTH2 is
+faster?
 
 #### Sending
 
