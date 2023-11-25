@@ -205,7 +205,8 @@ my work email account, I use davmail for authentication. I chose davmail
 because `mbsync` does not support XOAUTH2 authentication by default, so using
 davmail was easier. However, it would be interesting to enable XOAUTH2 for
 `mbsync` as the davmail solution is pretty slow. Maybe using XOAUTH2 is
-faster?
+faster? Checkout this part of the Arch wiki for more information:
+https://wiki.archlinux.org/title/isync#Using_XOAUTH2
 
 #### Sending
 
