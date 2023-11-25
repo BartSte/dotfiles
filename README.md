@@ -221,7 +221,9 @@ command.
 
 `davmail`, `mbsync` and `notmuch` are combined into 1 command: `mailsync`.
 This makes updating the emails easier. By running `mymailsync`, the correct
-davmail config is selected for you aswell.
+davmail config is selected for you aswell. Note that no davmail is needed when
+using an app password, so it is only activated when a davmail config is
+presented as an argument.
 
 ### Khalorg & Khard
 
