@@ -132,6 +132,9 @@ password manager, at the field `MuttPassword`, which is supplied to the
 
 ##### Davmail
 
+David is a gateway that can be used to connect to exchange servers. It can be
+used to connect to the exchange server using, among others, IMAP.
+
 For my work email account, I use davmail to connect to the exchange server. I
 use davmail instead of XOAUTH2 because XOAUTH2 is not supported by default by
 `mbsync` (see the [Synchronization](#synchronization) section). Furthermore,
