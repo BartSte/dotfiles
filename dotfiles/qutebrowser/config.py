@@ -24,10 +24,10 @@ c.editor.command = [
     '"normal {line}G{column0}l"']
 c.editor.encoding = 'utf-8'
 c.editor.remove_file = True
-c.fonts.default_family = ['JetBrains Mono']
+c.fonts.default_family = ['JetBrainsMono']
 c.fonts.default_size = '12pt'
-c.fonts.hints = 'JetBrains Mono Extra Bold'
-c.fonts.keyhint = '14pt JetBrains Mono Extra Bold'
+c.fonts.hints = 'JetBrainsMono Bold'
+c.fonts.keyhint = '14pt JetBrainsMono Bold'
 c.hints.chars = 'arstgmneiozxcdvkhwfpbjluy'
 c.hints.leave_on_load = True
 c.hints.scatter = False
