@@ -9,14 +9,14 @@ This readme is relevant for the following dotfiles repositories:
 Please read the following sections to get started with this repository. The
 examples below are writing in bash and powershell.
 
-### Dotfiles (cross-platform)
+## Dotfiles (cross-platform)
 
 - No initialization needed. It only contains static dotfiles. Typically, you
   will not clone this repository by yourself, instead it will be cloned for you
   by the `dotfiles-linux` or the `dotfiles-windows` repositories, as they depend
   on it.
 
-#### Neovim (`dotfiles/nvim`)
+### Neovim (`dotfiles/nvim`)
 
 Some directories of the neovim configuration could use some explanation:
 
@@ -31,9 +31,9 @@ Some directories of the neovim configuration could use some explanation:
 - `dotfiles/nvim/after/ftplugin`: configuration files that are loaded after the
   filetype is detected.
 
-### Dotfiles-linux (Arch linux)
+## Dotfiles-linux (Arch linux)
 
-#### Installation
+### Installation
 
 - To initialize the repository run the following line in a bash shell:
 
@@ -47,7 +47,7 @@ curl -O https://raw.githubusercontent.com/BartSte/dotfiles-linux/master/dotfiles
   - Dropbox
   - Davmail
 
-#### Authenticate dropbox
+### Authenticate dropbox
 
 After installing dropbox, you need to authenticate it with your account. At the
 moment of writing, the only way was to do this through a tray icon. Waybar did
@@ -68,46 +68,14 @@ dotfiles-linux/qutebrowser/main
 dotfiles-linux/wakatime/main
 ```
 
-#### Authenticate davmail
-
-_TODO: describe my calendar/contact setup using khalorg and khard._
-
-To be able to use khal/khard/khalorg/vdirsyncer, you need to authenticate
-davmail. This can be done by doing the following:
-
-- In shell 1, run:
-
-```bash
-davmail ~/.config/davmail/davmail.properties
-```
-
-- In shell 2, run:
-
-```bash
-vdirsyncer discover
-vdirsyncer sync
-```
-
-- Head back to shell 1 and follow the instructions. If you are prompted with a
-  message that states that "interactive" mode is not supported, you can change
-  the davmail.properties setting `davmail.mode=O365Interactive` to
-  `davmail.mode=O365Manual`.
-
-- After this, you can run the following commands to ensure all is synced:
-
-```bash
-mycalsync
-mymailsync
-```
-
-#### Git crypt
+### Git crypt
 
 The `dotfiles` repository contains some files that are encrypted using
 `git-crypt`. To be able to read the encrypted files, the
 `dotfiles-linux\crypt\main` script is used is executed when running het main
 file.
 
-##### get-rbw-base64-keys
+#### get-rbw-base64-keys
 
 The function `get-rbw-base64-keys` will convert the output of \`base crypt
 export-key\` to a base64 string. This sting can be stored in the password
@@ -115,36 +83,7 @@ manager. In the \`main\` script this key is decoced and piped to \`base crypt
 unlock\`. The `get-rbw-base64-keys` is only needed when you want to update the
 keys in `rbw` and does not have to run when you are initializing your dotfiles.
 
-### Dotfiles-windows (Windows 10 & 11)
-
-- To initialize the repository copy the following line into powershell:
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force;
-[bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "S-1-5-32-544");
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
-iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/BartSte/dotfiles-windows/master/dotfiles-windows/initialize.ps1'))
-```
-
-- Complete the configuration file in `$HOME/dotfiles-windows/config.ps1`.
-- Run the script: `$HOME/dotfiles-windows/main.ps1`
-- All the subfolders of `$HOME/dotfiles-windows` are executed by calling the
-  `main.ps1` file, e.g., `$HOME/dotfiles-windows/powershell/main.ps1`.
-
-#### Git crypt
-
-The `dotfiles` repository contains some files that are encrypted using
-`git-crypt`. However, using git crypt on windows is not straightforward yet.
-However, there are some files, that are now encrypted, we need to access
-somehow. As a solution we symlink to the files from the `dotfiles` repository
-from the WLS account, instead of the windows account. For example, we symlink
-the `urls` from `qutebrowser` from WSL to the windows AppData folder. This way,
-we can still use the `dotfiles` repository, but we do not have to use git crypt
-on windows. To facilitate linking, an environment variable `LH` is created which
-hold the windows path to the WSL home directory. This variable is set when you
-enter a powershell session.
-
-#### Mutt
+### Mutt
 
 I have two email accounts: personal and work. On all my devices, I only use one
 of the two accounts. I have 1 muttrc file for both accounts. The differences in
@@ -176,14 +115,14 @@ The next sections explain the following:
 - Search: how to search through emails using `notmuch`.
 - Mailsync: 1 command to sync and index all emails.
 
-##### Authentication
+#### Authentication
 
 Authentication can be done in two ways: using an app password (generated by
 the email provider) or using oauth2. The app password is the easiest way but
 is not supported by all email providers anymore. The oauth2 method is more
 complicated but is supported by most email providers.
 
-###### App password
+##### App password
 
 For my personal email account, I use an app password. This password can be
 generated by the email provider. Once it is obtained, it is added to the
@@ -191,10 +130,47 @@ password manager, at the field `MuttPassword`, which is supplied to the
 `imap_pass` and `smtp_pass` fields in the `.muttrc` file. Furthermore, the
 `MuttImapAuth` and `MuttSmtpAuth` fields are set to `login`.
 
-###### Oauth2
+##### Davmail
 
-For my work email account, I use oauth2 as the app password is not supported
-anymore. The following steps are needed to get oauth2 working:
+For my work email account, I use davmail to connect to the exchange server. I
+use davmail instead of XOAUTH2 because XOAUTH2 is not supported by default by
+`mbsync` (see the [Synchronization](#synchronization) section). Furthermore,
+davmail was also needed for khalorg and khard, so I had to set it up anyway.
+initializing davmail can be done as follows:
+
+- The davmail configuration is located in the `dotfiles-linux/davmail` file. By
+  running the `main` script in this folder, the davmail configuration is copied
+  to the `~/.config/davmail` folder. Copying is needed because the davmail
+  stores tokens in the config file so we do not want to put this on git.
+
+- Next, run the following commands to start davmail:
+
+  ```bash
+  davmail ~/.config/davmail/davmail.properties
+  ```
+
+- Open another shell and run the following command:
+
+  ```bash
+  mbsync -a
+  ```
+
+- Head back to shell 1 and follow the instructions. If you are prompted with a
+  message that states that "interactive" mode is not supported, you can change
+  the davmail.properties setting `davmail.mode=O365Interactive` to
+  `davmail.mode=O365Manual`.
+
+- Once this step is succeeded, `mbsync` will start doing its work. The refresh
+  token is stored in the `~/.config/davmail/davmail.properties` file. If this
+  file is removed, the authentication process has to be repeated.
+
+##### Oauth2
+
+For my work email account, I use oauth2 for sending emails because the app
+password is not supported anymore, and I did not setup a davmail implementation
+for this yet.
+
+The following steps are needed to get oauth2 working:
 
 - Checkout the `dotfiles-linux/mutt/mutt_oauth2.py` script. This script is used
   to initialize and refresh the oauth2 token.
@@ -221,6 +197,11 @@ have two config files for `mbsync`: `personal` and `work`. Based on the value
 of the environment variable `MicrosoftAccount`, the correct config file is
 used. The config files are located in `~/dotfiles-linux/isync`.
 
+For my personal email account, I use an app password for authentication. For
+my work email account, I use davmail for authentication. I chose davmail
+because `mbsync` does not support XOAUTH2 authentication by default, so using
+davmail was easier.
+
 #### Sending
 
 For sending emails, I use the built-in SMTP functionality of neomutt. The smtp
@@ -238,11 +219,47 @@ command.
 
 #### Mailsync
 
-The `mbsync` and `notmuch` commands can be combined into 1 command: `mailsync`.
-This makes updating the emails easier.
+`davmail`, `mbsync` and `notmuch` are combined into 1 command: `mailsync`.
+This makes updating the emails easier. By running `mymailsync`, the correct
+davmail config is selected for you aswell.
 
-_TODO: why does mailsync rely on davmail? It can be removed right? I use the
-oauth2 script for this... right?_
+### Khalorg & Khard
+
+_TODO: describe my calendar/contact setup using khalorg and khard. Setting up
+davmail is also explained in the Mutt section_
+
+#### Calsync
+
+_TODO: describe how the calsync script works_
+
+### Dotfiles-windows (Windows 10 & 11)
+
+- To initialize the repository copy the following line into powershell:
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force;
+[bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "S-1-5-32-544");
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/BartSte/dotfiles-windows/master/dotfiles-windows/initialize.ps1'))
+```
+
+- Complete the configuration file in `$HOME/dotfiles-windows/config.ps1`.
+- Run the script: `$HOME/dotfiles-windows/main.ps1`
+- All the subfolders of `$HOME/dotfiles-windows` are executed by calling the
+  `main.ps1` file, e.g., `$HOME/dotfiles-windows/powershell/main.ps1`.
+
+#### Git crypt
+
+The `dotfiles` repository contains some files that are encrypted using
+`git-crypt`. However, using git crypt on windows is not straightforward yet.
+However, there are some files, that are now encrypted, we need to access
+somehow. As a solution we symlink to the files from the `dotfiles` repository
+from the WLS account, instead of the windows account. For example, we symlink
+the `urls` from `qutebrowser` from WSL to the windows AppData folder. This way,
+we can still use the `dotfiles` repository, but we do not have to use git crypt
+on windows. To facilitate linking, an environment variable `LH` is created which
+hold the windows path to the WSL home directory. This variable is set when you
+enter a powershell session.
 
 ## Background
 
