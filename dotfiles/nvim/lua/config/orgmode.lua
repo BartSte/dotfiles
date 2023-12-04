@@ -5,9 +5,10 @@ local khalorg = require('khalorg')
 
 local dropbox_home = path.join(path.get_dropbox_home(), 'Dropbox')
 local dropbox_org = path.join(dropbox_home, 'org')
-local dropbox_main = path.join(dropbox_org, 'main.org')
-local dropbox_agenda = path.join(dropbox_org, 'outlook.org')
-local dropbox_personal = path.join(dropbox_org, 'personal.org')
+local main = path.join(dropbox_org, 'main.org')
+local agenda = path.join(dropbox_org, 'outlook.org')
+local personal = path.join(dropbox_org, 'personal.org')
+local gedachten = path.join(dropbox_org, 'gedachten.org')
 
 khalorg.setup({
     calendar = 'outlook_local'
@@ -26,22 +27,36 @@ local mappings = {
     }
 }
 
+local templates = {
+    t = {
+        description = 'Todo',
+        template = '* TODO %?\n  %U\n  %a',
+        target = main
+    },
+    g = {
+        description = 'Gedachte',
+        template = '* %?\n%U\n\n** Gebeurtenis\n\n** Gevoel\n\n** Gedachte \n\n** Kerngedachte \n\n** Helpende gedachte\n\n',
+        target = gedachten
+    },
+}
+
 orgmode.setup_ts_grammar()
 
 orgmode.setup({
     mappings = mappings,
-    org_default_notes_file = dropbox_main,
-    org_agenda_files = { dropbox_main, dropbox_agenda, dropbox_personal },
+    org_default_notes_file = main,
+    org_agenda_files = { main, agenda, personal, gedachten },
     org_blank_before_new_entry = { heading = true, plain_list_item = false },
     org_hide_emphasis_markers = true,
     org_custom_exports = custom_exports,
     win_split_mode = 'vertical',
     org_todo_keywords = { 'TODO', 'MEET', 'NEXT', 'WAIT', '|', 'DONE', 'CANCEL' },
+    org_capture_templates = templates,
     org_todo_keyword_faces = {
         WAIT = ':foreground orange :weight bold',
         NEXT = ':foreground yellow :weight bold',
         CANCEL = ':foreground magenta :weight bold'
-    }
+    },
 })
 
 mapper.nnoremap('<a-r>', ':Files ' .. dropbox_org .. '<CR>')
