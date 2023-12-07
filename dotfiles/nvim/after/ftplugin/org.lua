@@ -1,3 +1,4 @@
+local keymapper = require('helpers.keymapper')
 vim.opt_local.spell = true
 vim.opt_local.shiftwidth = 2
 vim.opt_local.softtabstop = 2
@@ -5,4 +6,6 @@ vim.opt_local.textwidth = 100
 vim.opt_local.colorcolumn = ''
 vim.opt_local.conceallevel = 2
 
-require('helpers.keymapper').nnoremap('<leader>oie', '<cmd>Email<CR>')
+
+keymapper.nnoremap('<leader>oie', '<cmd>Email<CR>')
+keymapper.nnoremap('ZZ', '<cmd>lua require("orgmode").action("capture.refile")<CR>')
