@@ -2,7 +2,7 @@ local hop = require('hop')
 local func = require('helpers.hop')
 
 hop.setup({
-    keys = 'rlaodhgmfiwypuq;cx/jbvsetn',
+    keys = 'rlaodhgmfiwypu;cx/jbvsetn',
     jump_on_sole_occurrence = true,
     uppercase_labels = true,
     multi_windows = false
