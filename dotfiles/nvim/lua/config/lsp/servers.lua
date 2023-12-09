@@ -1,6 +1,17 @@
 local lspconfig = require('lspconfig')
 
-lspconfig.pyright.setup({})
+lspconfig.pyright.setup({
+    settings = {
+        python = {
+            analysis = {
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = "workspace",
+                typeCheckingMode = "standard",
+            },
+        },
+    },
+})
 lspconfig.vimls.setup({})
 lspconfig.bashls.setup({ filetypes = { "sh", "bash", "zsh" } })
 lspconfig.jsonls.setup({})
