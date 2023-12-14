@@ -46,14 +46,14 @@ key = "Tab"
 mods = "Control|Shift"
 
 [[keyboard.bindings]]
-chars = "\u001B[3;5~"
-key = "Delete"
-mods = "Control"
-
-[[keyboard.bindings]]
 chars = "\u001B[23;2~"
 key = "V"
 mods = "Control|Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[3;5~"
+key = "Delete"
+mods = "Control"
 
 [[keyboard.bindings]]
 chars = "\u001B[24;2~"
