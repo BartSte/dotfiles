@@ -9,7 +9,6 @@ mods = "Alt"
 [[keyboard.bindings]]
 action = "ToggleFullscreen"
 key = "F11"
-mods = "Alt"
 
 [[keyboard.bindings]]
 action = "ScrollPageUp"
@@ -47,7 +46,7 @@ mods = "Control|Shift"
 
 [[keyboard.bindings]]
 chars = "\u001B[23;2~"
-key = "V"
+key = "Space"
 mods = "Control|Alt"
 
 [[keyboard.bindings]]
