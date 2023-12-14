@@ -1,0 +1,70 @@
+import = ["~/dotfiles-linux/alacritty/alacritty.toml", "~/dotfiles-windows/alacritty/alacritty.toml"]
+live_config_reload = true
+
+[[keyboard.bindings]]
+action = "ReceiveChar"
+key = "Return"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "PageUp"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "PageDown"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToTop"
+key = "Home"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "End"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;5I"
+key = "Tab"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;6I"
+key = "Tab"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[3;5~"
+key = "Delete"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[23;2~"
+key = "V"
+mods = "Control|Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[24;2~"
+key = "Space"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\b"
+key = "Back"
+mods = "Control"
+
+[scrolling]
+history = 10000
+multiplier = 3
