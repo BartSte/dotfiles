@@ -18,6 +18,7 @@ if has('termguicolors')
     hi IncSearch gui=bold guifg=fg guibg=DarkMagenta
     hi CursorLineNr gui=bold guifg=LightGreen
     hi HighlightedyankRegion gui=bold guifg=fg guibg=DarkMagenta
+    hi WinSeparator guifg=gray28
 
     hi Tabline gui=bold guibg=bg
     hi TablineSel gui=bold guibg=bg 
