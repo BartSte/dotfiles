@@ -25,7 +25,6 @@ c.editor.command = [
     '"normal {line}G{column0}l"']
 c.editor.encoding = 'utf-8'
 c.editor.remove_file = True
-c.fonts.default_family = ['JetBrainsMono NF']
 c.fonts.default_size = '11pt'
 c.fonts.hints = '14pt JetBrainsMono NF'
 c.fonts.keyhint = '14pt JetBrainsMono NF'

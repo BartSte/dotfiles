@@ -26,7 +26,6 @@ oil.setup({
     restore_win_options = true,
     skip_confirm_for_simple_edits = false,
     delete_to_trash = vim.fn.has("win32") == 0,
-    trash_command = "trash-put",
     -- Selecting a new/moved/renamed file or directory will prompt you to save changes first
     prompt_save_on_select_new_entry = true,
     -- Keymaps in oil buffer. Can be any value that `vim.keymap.set` accepts OR a table of keymap
