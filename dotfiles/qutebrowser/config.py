@@ -40,7 +40,6 @@ c.input.links_included_in_focus_chain = True
 c.keyhint.delay = 0
 c.qt.workarounds.remove_service_workers = True
 c.scrolling.bar = 'never'
-c.spellcheck.languages = []
 c.url.default_page = 'about:blank'
 c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}'}
 c.url.start_pages = ['about:blank']
