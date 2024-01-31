@@ -89,6 +89,9 @@ inoremap <C-s> <cmd>w<CR>
 nnoremap <leader>s :mksession! Session.vim<CR>
 noremap <C-s> <cmd>w<CR>
 
+"Shell commands
+noremap <leader>zx :!chmod +x %<CR>
+
 " The terminal does not detect <C-Space>. As a solution, Alacritty sends <F24>
 " when ctrl+space is pressed. By binding <C-Space> to <F24> (or <S-F12>), the
 " issue is solved.
