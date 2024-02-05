@@ -4,7 +4,7 @@ local keymapper = require('helpers.keymapper')
 -- - When hitting F5, lldb is launched in tmux window 1
 -- - When hitting F9, a breakpoint is send to lldb while it is running
 
-M = {}
+local M = {}
 
 M.setup = function()
     vim.opt_local.shiftwidth = 2

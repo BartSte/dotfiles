@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 M.bootstrap = function()
     local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
