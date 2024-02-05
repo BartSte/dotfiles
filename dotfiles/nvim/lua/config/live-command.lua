@@ -11,9 +11,20 @@ local commands = {
     Cdo = { cmd = "cdo" },
 }
 
+local defaults = {
+    enable_highlighting = true,
+    inline_highlighting = true,
+    hl_groups = {
+        insertion = "DiffAdd",
+        deletion = "DiffDelete",
+        change = "DiffChange",
+    },
+}
+
 M.setup = function()
     require("live-command").setup({
         commands = commands,
+        defaults = defaults,
     })
 end
 
