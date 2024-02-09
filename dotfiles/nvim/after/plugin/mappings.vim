@@ -56,6 +56,8 @@ nnoremap <C-w>m <C-w>H
 nnoremap <C-w>e <C-w>K
 nnoremap <C-w>i <C-w>L
 nnoremap <C-w>n <C-w>J
+nnoremap <C-w>z :wincmd o<bar>vert new<bar>vert resize 80<CR><C-w>l
+nnoremap <C-w>a :wincmd o<bar>wincmd v<CR>
 
 "buffer navigation
 noremap <silent><a-,> <cmd>cp<CR>
