@@ -274,6 +274,16 @@ will also be synced when het `mycalsync` script is called. You can check if
 khard list
 ```
 
+#### Setting up OpenVino + GPU
+
+I had some issue making OpenVino detect my GPU (Intel UHD Graphics 620). The
+following solved the issue:
+
+```bash
+sudo pacman -S level-zero-headers level-zero-loader intel-graphics-compiler
+yay -S ocl-icd intel-opencl
+```
+
 ### Dotfiles-windows (Windows 10 & 11)
 
 - To initialize the repository copy the following line into powershell:
