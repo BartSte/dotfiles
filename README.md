@@ -294,6 +294,15 @@ pinentry for other apps in the future I guess. One hacky way could be:
 - Check who is calling: if it is rbw or mail, echo the password (in the format
   pinentry expects). Otherwise, call the real pinentry program.
 
+- Note, when possible, it is easier to do:
+
+```bash
+rbg get field | gpg --pinentry-mode loopback --batch --passphrase-fd 0 -d ./foo.txt.gpg
+```
+
+This will read the password from stdin, instead of using pinentry. This cannot
+be done when you have no access to the command that is calling gpg.
+
 ### Dotfiles-windows (Windows 10 & 11)
 
 - To initialize the repository copy the following line into powershell:
