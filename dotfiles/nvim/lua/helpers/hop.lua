@@ -35,34 +35,40 @@ M.hop_ge = function()
     hop.hint_words(opts)
 end
 
+local function hint_regex(regex, opts)
+    opts = setmetatable(opts or {}, { __index = hop.opts })
+    local hints = jump_regex.regex_by_case_searching(regex, false, opts)
+    hop.hint_with_regex(hints, opts)
+end
+
 M.hop_W = function()
     local regex = "[^ \t]\\+"
-    hop.opts.direction = hint.HintDirection.AFTER_CURSOR
-    local hints = jump_regex.regex_by_case_searching(regex, false, hop.opts)
-    hop.hint_with_regex(hints, hop.opts)
+    local opts = { direction = hint.HintDirection.AFTER_CURSOR }
+    hint_regex(regex, opts)
 end
 
 M.hop_B = function()
     local regex = "[^ \t]\\+"
-    hop.opts.direction = hint.HintDirection.BEFORE_CURSOR
-    local hints = jump_regex.regex_by_case_searching(regex, false, hop.opts)
-    hop.hint_with_regex(hints, hop.opts)
+    local opts = { direction = hint.HintDirection.BEFORE_CURSOR }
+    hint_regex(regex, opts)
 end
 
 M.hop_E = function()
     local regex = "[^ \t]\\($\\|[ \t]\\)"
-    hop.opts.direction = hint.HintDirection.AFTER_CURSOR
-    hop.hint_position = hint.HintPosition.END
-    local hints = jump_regex.regex_by_case_searching(regex, false, hop.opts)
-    hop.hint_with_regex(hints, hop.opts)
+    local opts = {
+        direction = hint.HintDirection.AFTER_CURSOR,
+        hint_position = hint.HintPosition.END
+    }
+    hint_regex(regex, opts)
 end
 
 M.hop_gE = function()
     local regex = "[^ \t]\\($\\|[ \t]\\)"
-    hop.opts.direction = hint.HintDirection.BEFORE_CURSOR
-    hop.hint_position = hint.HintPosition.END
-    local hints = jump_regex.regex_by_case_searching(regex, false, hop.opts)
-    hop.hint_with_regex(hints, hop.opts)
+    local opts = {
+        direction = hint.HintDirection.BEFORE_CURSOR,
+        hint_position = hint.HintPosition.END
+    }
+    hint_regex(regex, opts)
 end
 
 return M
