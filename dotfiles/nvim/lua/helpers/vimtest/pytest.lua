@@ -2,10 +2,10 @@ local tslime = require('helpers.tslime')
 
 local M = {}
 
--- Returns the output of `wpy -p` if it exists, otherwise returns ''.
+-- Returns the output of `wpy -wpy-path` if it exists, otherwise returns ''.
 local function wsl_win_py()
     if vim.fn.executable('wpy') == 1 then
-        local stdout = vim.fn.system('wpy -p')
+        local stdout = vim.fn.system('wpy --wpy-path')
         return string.gsub(stdout, '\n$', '') -- Remove trailing newline
     else
         return ''
