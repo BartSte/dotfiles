@@ -47,49 +47,49 @@ M.hop_ge = function()
     hop.hint_words(opts)
 end
 
-local function hint_regex(regex, opts)
+local function hint_regex(pattern, opts)
     opts = checks.override_opts(opts)
-    local hints = jump_regex.regex_by_case_searching(regex, false, opts)
-    hop.hint_with_regex(hints, opts)
+    local regex = jump_regex.regex_by_case_searching(pattern, false, opts)
+    hop.hint_with_regex(regex, opts)
 end
 
 M.hop_W = function()
-    local regex = "[^ \t]\\+"
+    local pattern = "[^ \t]\\+"
     local opts = { direction = hint.HintDirection.AFTER_CURSOR }
-    hint_regex(regex, opts)
+    hint_regex(pattern, opts)
 end
 
 M.hop_Wo = function()
-    local regex = "[^ \t]\\+"
+    local pattern = "[^ \t]\\+"
     local opts = {
         direction = hint.HintDirection.AFTER_CURSOR,
         hint_offset = -1
     }
-    hint_regex(regex, opts)
+    hint_regex(pattern, opts)
 end
 
 M.hop_B = function()
-    local regex = "[^ \t]\\+"
+    local pattern = "[^ \t]\\+"
     local opts = { direction = hint.HintDirection.BEFORE_CURSOR }
-    hint_regex(regex, opts)
+    hint_regex(pattern, opts)
 end
 
 M.hop_E = function()
-    local regex = "[^ \t]\\($\\|[ \t]\\)\\@="
+    local pattern = "[^ \t]\\($\\|[ \t]\\)\\@="
     local opts = {
         direction = hint.HintDirection.AFTER_CURSOR,
         hint_position = hint.HintPosition.END
     }
-    hint_regex(regex, opts)
+    hint_regex(pattern, opts)
 end
 
 M.hop_gE = function()
-    local regex = "[^ \t]\\($\\|[ \t]\\)\\@="
+    local pattern = "[^ \t]\\($\\|[ \t]\\)\\@="
     local opts = {
         direction = hint.HintDirection.BEFORE_CURSOR,
         hint_position = hint.HintPosition.END
     }
-    hint_regex(regex, opts)
+    hint_regex(pattern, opts)
 end
 
 return M
