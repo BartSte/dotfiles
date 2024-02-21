@@ -1,8 +1,10 @@
 local hop = require('hop')
 local hint = require('hop.hint')
+local checks = require('helpers.hop_check')
 local jump_regex = require('hop.jump_regex')
 
 local M = {}
+
 
 M.hop_char1 = function()
     local opts = { direction = { nil } }
@@ -46,7 +48,7 @@ M.hop_ge = function()
 end
 
 local function hint_regex(regex, opts)
-    opts = setmetatable(opts or {}, { __index = hop.opts })
+    opts = checks.override_opts(opts)
     local hints = jump_regex.regex_by_case_searching(regex, false, opts)
     hop.hint_with_regex(hints, opts)
 end
