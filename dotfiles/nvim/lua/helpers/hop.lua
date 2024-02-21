@@ -10,7 +10,17 @@ M.hop_char1 = function()
 end
 
 M.hop_w = function()
-    local opts = { direction = hint.HintDirection.AFTER_CURSOR }
+    local opts = {
+        direction = hint.HintDirection.AFTER_CURSOR
+    }
+    hop.hint_words(opts)
+end
+
+M.hop_wo = function()
+    local opts = {
+        direction = hint.HintDirection.AFTER_CURSOR,
+        hint_offset = -1
+    }
     hop.hint_words(opts)
 end
 
@@ -47,9 +57,18 @@ M.hop_W = function()
     hint_regex(regex, opts)
 end
 
+M.hop_Wo = function()
+    local regex = "[^ \t]\\+"
+    local opts = {
+        direction = hint.HintDirection.AFTER_CURSOR,
+        hint_offset = -1
+    }
+    hint_regex(regex, opts)
+end
+
 M.hop_B = function()
     local regex = "[^ \t]\\+"
-    local opts = { directio = hint.HintDirection.BEFORE_CURSOR }
+    local opts = { direction = hint.HintDirection.BEFORE_CURSOR }
     hint_regex(regex, opts)
 end
 
