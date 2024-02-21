@@ -1,30 +1,44 @@
 local hop = require('hop')
 local func = require('helpers.hop')
 
-hop.setup({
+local M = {}
+
+local opts = {
     keys = 'rlaodhgmfiwypu;cx/jbvsetn',
     jump_on_sole_occurrence = true,
     uppercase_labels = true,
     multi_windows = false
-})
+}
 
-local o = { "o" }
-local nx = { "n", "x" }
-local nxo = { "n", "x", "o" }
-vim.keymap.set(nxo, 'S', func.hop_char1)
+local function set_mappings()
+    local o = { "o" }
+    local nx = { "n", "x" }
+    local nxo = { "n", "x", "o" }
+    local nmap = { noremap = true }
 
-vim.keymap.set(nxo, 'j', func.hop_b, { noremap = true })
-vim.keymap.set(nxo, 'J', func.hop_B, { noremap = true })
-vim.keymap.set(nx, 'l', func.hop_ge, { noremap = true })
-vim.keymap.set(nx, 'L', func.hop_gE, { noremap = true })
+    vim.keymap.set(nxo, 'S', func.hop_char1)
 
-vim.keymap.set(nx, 'k', func.hop_w, { noremap = true })
-vim.keymap.set(nx, 'K', func.hop_W, { noremap = true })
-vim.keymap.set(nxo, 'h', func.hop_e, { noremap = true })
-vim.keymap.set(nxo, 'H', func.hop_E, { noremap = true })
+    vim.keymap.set(nxo, 'j', func.hop_b, nmap)
+    vim.keymap.set(nxo, 'J', func.hop_B, nmap)
 
--- hop_w and hop_W their offset needs to be adjusted when used
--- with operator pending mode. Could well be that some others have the same
--- issue.
-vim.keymap.set(o, 'k', func.hop_wo, { noremap = true })
-vim.keymap.set(o, 'K', func.hop_Wo, { noremap = true })
+    vim.keymap.set(nxo, 'l', func.hop_ge, nmap)
+    vim.keymap.set(nxo, 'L', func.hop_gE, nmap)
+
+    -- hop_w and hop_W their offset needs to be adjusted when used
+    -- with operator pending mode. Could well be that some others have the same
+    -- issue.
+    vim.keymap.set(nx, 'k', func.hop_w, nmap)
+    vim.keymap.set(o, 'k', func.hop_wo, nmap)
+    vim.keymap.set(nx, 'K', func.hop_W, nmap)
+    vim.keymap.set(o, 'K', func.hop_Wo, nmap)
+
+    vim.keymap.set(nxo, 'h', func.hop_e, nmap)
+    vim.keymap.set(nxo, 'H', func.hop_E, nmap)
+end
+
+function M.setup()
+    hop.setup(opts)
+    set_mappings()
+end
+
+return M

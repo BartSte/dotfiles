@@ -73,7 +73,7 @@ M.hop_B = function()
 end
 
 M.hop_E = function()
-    local regex = "[^ \t]\\($\\|[ \t]\\)"
+    local regex = "[^ \t]\\($\\|[ \t]\\)\\@="
     local opts = {
         direction = hint.HintDirection.AFTER_CURSOR,
         hint_position = hint.HintPosition.END
@@ -82,7 +82,7 @@ M.hop_E = function()
 end
 
 M.hop_gE = function()
-    local regex = "[^ \t]\\($\\|[ \t]\\)"
+    local regex = "[^ \t]\\($\\|[ \t]\\)\\@="
     local opts = {
         direction = hint.HintDirection.BEFORE_CURSOR,
         hint_position = hint.HintPosition.END
