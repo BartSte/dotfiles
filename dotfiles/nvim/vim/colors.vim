@@ -14,8 +14,8 @@ if has('termguicolors')
 
     hi! link Folded Normal
     hi LineNr guifg=LightGray
-    hi Search guifg=fg guibg=DarkGreen
-    hi IncSearch gui=bold guifg=fg guibg=DarkMagenta
+    " hi Search guifg=fg guibg=DarkGreen
+    " hi IncSearch gui=bold guifg=fg guibg=DarkMagenta
     hi CursorLineNr gui=bold guifg=LightGreen
     hi HighlightedyankRegion gui=bold guifg=fg guibg=DarkMagenta
     hi WinSeparator guifg=gray28

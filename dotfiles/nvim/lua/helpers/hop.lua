@@ -49,7 +49,7 @@ end
 
 M.hop_B = function()
     local regex = "[^ \t]\\+"
-    local opts = { direction = hint.HintDirection.BEFORE_CURSOR }
+    local opts = { directio = hint.HintDirection.BEFORE_CURSOR }
     hint_regex(regex, opts)
 end
 
