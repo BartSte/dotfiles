@@ -18,9 +18,10 @@ local function set_mappings()
 
     vim.keymap.set(nxo, 'S', func.hop_char1)
 
+    vim.keymap.set(nxo, 'h', func.hop_e, nmap)
+    vim.keymap.set(nxo, 'H', func.hop_E, nmap)
     vim.keymap.set(nxo, 'j', func.hop_b, nmap)
     vim.keymap.set(nxo, 'J', func.hop_B, nmap)
-
     vim.keymap.set(nxo, 'l', func.hop_ge, nmap)
     vim.keymap.set(nxo, 'L', func.hop_gE, nmap)
 
@@ -32,8 +33,6 @@ local function set_mappings()
     vim.keymap.set(nx, 'K', func.hop_W, nmap)
     vim.keymap.set(o, 'K', func.hop_Wo, nmap)
 
-    vim.keymap.set(nxo, 'h', func.hop_e, nmap)
-    vim.keymap.set(nxo, 'H', func.hop_E, nmap)
 end
 
 function M.setup()
