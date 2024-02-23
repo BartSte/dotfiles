@@ -13,8 +13,6 @@ set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=20
 set foldmethod=expr
 set ignorecase
-set mouse=
-set nohlsearch
 set nospell
 set noswapfile
 set notimeout

@@ -69,7 +69,6 @@ nnoremap <leader>; :e<CR>
 
 "Search
 nnoremap <leader>/ *#<cmd>setlocal hlsearch<CR>
-nnoremap <leader><leader>/ <cmd>set hlsearch! hlsearch?<CR>
 
 "Tabs
 noremap <leader>tn <cmd>tabnew<CR>
