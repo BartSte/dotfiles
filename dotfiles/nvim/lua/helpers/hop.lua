@@ -75,19 +75,19 @@ M.hop_B = function()
 end
 
 M.hop_E = function()
-    local pattern = "[^ \t]\\($\\|[ \t]\\)\\@="
+    local pattern = "[^ \t]\\($\\|\\([ \t]\\)\\)\\@="
     local opts = {
         direction = hint.HintDirection.AFTER_CURSOR,
-        hint_position = hint.HintPosition.END
+        hint_position = hint.HintPosition.END,
     }
     hint_regex(pattern, opts)
 end
 
 M.hop_gE = function()
-    local pattern = "[^ \t]\\($\\|[ \t]\\)\\@="
+    local pattern = "[^ \t]\\($\\|\\([ \t]\\)\\)\\@="
     local opts = {
         direction = hint.HintDirection.BEFORE_CURSOR,
-        hint_position = hint.HintPosition.END
+        hint_position = hint.HintPosition.END,
     }
     hint_regex(pattern, opts)
 end
