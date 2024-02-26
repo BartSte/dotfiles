@@ -1,5 +1,6 @@
 local lspconfig = require('lspconfig')
 
+-- Python
 lspconfig.pyright.setup({
     settings = {
         python = {
@@ -13,10 +14,16 @@ lspconfig.pyright.setup({
         },
     },
 })
-lspconfig.vimls.setup({})
-lspconfig.bashls.setup({ filetypes = { "sh", "bash", "zsh" } })
-lspconfig.jsonls.setup({})
+lspconfig.ruff_lsp.setup {
+    init_options = {
+        settings = {
+            -- Any extra CLI arguments for `ruff` go here.
+            args = {},
+        }
+    }
+}
 
+-- C++
 lspconfig.clangd.setup {
     cmd = {
         "clangd",
@@ -28,6 +35,9 @@ lspconfig.clangd.setup {
     },
 }
 lspconfig.cmake.setup {}
+
+--Vim
+lspconfig.vimls.setup({})
 lspconfig.lua_ls.setup {
     settings = {
         Lua = {
@@ -52,6 +62,13 @@ lspconfig.lua_ls.setup {
     },
 }
 
+-- Shell
+lspconfig.bashls.setup({ filetypes = { "sh", "bash", "zsh" } })
+
+-- Misc
+lspconfig.jsonls.setup({})
+
+-- Windows
 if vim.fn.has('win32') == 1 then
     lspconfig.powershell_es.setup({})
     lspconfig.marksman.setup({
