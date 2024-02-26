@@ -2,8 +2,8 @@ require 'nvim-treesitter.install'.compilers = { "cl", "gcc", "clang" }
 
 local my_highlight = {
     enable = true,
-    disable = { 'org', 'orgagenda' },
-    additional_vim_regex_highlighting = { 'org', 'orgagenda' }
+    -- disable = { 'org', 'orgagenda' },
+    -- additional_vim_regex_highlighting = { 'org', 'orgagenda' }
 }
 
 require 'nvim-treesitter.configs'.setup {

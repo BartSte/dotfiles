@@ -3,7 +3,6 @@ local null_ls = require("null-ls")
 null_ls.setup({
     sources = {
         -- C++
-        null_ls.builtins.diagnostics.cpplint,
         null_ls.builtins.formatting.cmake_format,
         null_ls.builtins.diagnostics.cmake_lint,
 
@@ -12,7 +11,6 @@ null_ls.setup({
             extra_args = { "-i", "4", "-ci" },
             filetypes = { "sh", "zsh", "bash" },
         }),
-        null_ls.builtins.diagnostics.shellcheck,
 
         -- Markdown
         null_ls.builtins.formatting.prettier.with({
