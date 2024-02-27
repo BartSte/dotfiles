@@ -22,5 +22,5 @@ vim.opt_local.formatprg = 'autopep8 -'
 -- map leader + f to format the entire file. This can be done using gggqG, but
 -- we need to make sure the cursor is returned to the original position. This
 -- can be done by jumping two times back in the jump list.
-keymapper.buffer_nnoremap('<leader>f', 'gggqG')
+keymapper.buffer_nnoremap('<leader><leader>f', "mxgggqG'x")
 
