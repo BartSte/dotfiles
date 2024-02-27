@@ -2,6 +2,7 @@
 vim.g.mapleader = ' '
 require('helpers.lazy').bootstrap()
 require('lazy').setup('plugins', {
-      change_detection = {
+    change_detection = {
         enabled = false,
-}})
+    }
+})
