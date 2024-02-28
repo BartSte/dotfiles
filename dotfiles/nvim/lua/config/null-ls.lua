@@ -1,25 +1,38 @@
 local null_ls = require("null-ls")
 
-null_ls.setup({
-    sources = {
-        -- Python
-        -- null_ls.builtins.formatting.autopep8,
-        null_ls.builtins.diagnostics.pylint,
+local M = {}
 
-        -- C++
-        null_ls.builtins.formatting.cmake_format,
-        null_ls.builtins.diagnostics.cmake_lint,
+M.sources = {
+    -- Python
+    null_ls.builtins.diagnostics.pylint,
 
-        -- Bash/zsh
-        null_ls.builtins.formatting.shfmt.with({
-            extra_args = { "-i", "4", "-ci" },
-            filetypes = { "sh", "zsh", "bash" },
-        }),
+    -- C++
+    null_ls.builtins.formatting.cmake_format,
+    null_ls.builtins.diagnostics.cmake_lint,
 
-        -- Markdown
-        null_ls.builtins.formatting.prettier.with({
-            filetypes = { "markdown" },
-        }),
-        null_ls.builtins.diagnostics.markdownlint,
-    },
-})
+    -- Bash/zsh
+    null_ls.builtins.formatting.shfmt.with({
+        extra_args = { "-i", "4", "-ci" },
+        filetypes = { "sh", "zsh", "bash" },
+    }),
+
+    -- Markdown
+    null_ls.builtins.formatting.prettier.with({
+        filetypes = { "markdown" },
+    }),
+    null_ls.builtins.diagnostics.markdownlint,
+}
+
+M.sources_extra = {
+    require("none-ls.formatting.autopep8")
+}
+
+M.setup = function()
+    null_ls.setup({ sources = M.sources })
+end
+
+M.setup_extra = function()
+    null_ls.setup({ sources = M.sources_extra })
+end
+
+return M
