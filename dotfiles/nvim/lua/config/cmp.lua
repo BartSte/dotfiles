@@ -94,8 +94,6 @@ local sorting = {
     }
 }
 
-require('luasnip.loaders.from_vscode').lazy_load()
-
 cmp.setup({
     snippet = snippet,
     window = window,
