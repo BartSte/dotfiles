@@ -8,7 +8,6 @@ lspconfig.pyright.setup({
                 autoSearchPaths = true,
                 useLibraryCodeForTypes = true,
                 diagnosticMode = "workspace",
-                -- diagnosticMode = "openFilesOnly",
                 typeCheckingMode = "standard",
             },
         },

@@ -13,7 +13,10 @@ M.setup = function()
             null_ls.builtins.diagnostics.cmake_lint,
 
             -- Bash/zsh
-            null_ls.builtins.diagnostics.zsh,
+            null_ls.builtins.formatting.shfmt.with({
+                filetypes = { "sh", "bash", "zsh" },
+                args = { "-i", "4" },
+            }),
 
             -- Markdown
             null_ls.builtins.formatting.prettier.with({
