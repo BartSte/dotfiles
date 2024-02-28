@@ -8,14 +8,11 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     config = require("config.null-ls").setup,
     dependencies = {
+        "nvimtools/none-ls-extras.nvim",
         "williamboman/mason.nvim",
         {
             "jay-babu/mason-null-ls.nvim",
             config = setup_mason
-        },
-        {
-            "nvimtools/none-ls-extras.nvim",
-            config = require("config.null-ls").setup_extra
         },
     }
 }

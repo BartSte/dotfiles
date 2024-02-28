@@ -5,6 +5,7 @@ M.setup = function()
     null_ls.setup({
         sources = {
             -- Python
+            require("none-ls.formatting.autopep8"),
             null_ls.builtins.diagnostics.pylint,
 
             -- C++
@@ -12,10 +13,7 @@ M.setup = function()
             null_ls.builtins.diagnostics.cmake_lint,
 
             -- Bash/zsh
-            null_ls.builtins.formatting.shfmt.with({
-                extra_args = { "-i", "4", "-ci" },
-                filetypes = { "sh", "zsh", "bash" },
-            }),
+            null_ls.builtins.diagnostics.zsh,
 
             -- Markdown
             null_ls.builtins.formatting.prettier.with({
@@ -23,12 +21,6 @@ M.setup = function()
             }),
             null_ls.builtins.diagnostics.markdownlint,
         }
-    })
-end
-
-M.setup_extra = function()
-    require("null-ls").setup({
-        sources = require("none-ls.formatting.autopep8")
     })
 end
 
