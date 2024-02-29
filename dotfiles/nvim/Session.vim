@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/code/khalorg
+cd ~/code/navigation
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,12 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +68 pyproject.toml
-badd +1 src/khalorg/commands.py
-badd +26 ~/dotfiles/nvim/lua/config/lsp/servers.lua
+badd +20 src/navigation/gui/tools/marker_maker.py
+badd +1 ~/dotfiles/nvim/lua/config/null-ls.lua
 argglobal
 %argdel
-edit pyproject.toml
+edit ~/dotfiles/nvim/lua/config/null-ls.lua
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -35,10 +34,10 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 120 + 120) / 240)
-exe 'vert 2resize ' . ((&columns * 119 + 120) / 240)
+exe 'vert 1resize ' . ((&columns * 182 + 182) / 365)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 365)
 argglobal
-balt ~/dotfiles/nvim/lua/config/lsp/servers.lua
+balt src/navigation/gui/tools/marker_maker.py
 setlocal fdm=expr
 setlocal fde=nvim_treesitter#foldexpr()
 setlocal fmr={{{,}}}
@@ -47,39 +46,38 @@ setlocal fdl=20
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 68 - ((27 * winheight(0) + 27) / 55)
+let s:l = 8 - ((7 * winheight(0) + 46) / 93)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 68
+keepjumps 8
 normal! 0
+wincmd w
+argglobal
+if bufexists(fnamemodify("src/navigation/gui/tools/marker_maker.py", ":p")) | buffer src/navigation/gui/tools/marker_maker.py | else | edit src/navigation/gui/tools/marker_maker.py | endif
+if &buftype ==# 'terminal'
+  silent file src/navigation/gui/tools/marker_maker.py
+endif
+balt ~/dotfiles/nvim/lua/config/null-ls.lua
+setlocal fdm=expr
+setlocal fde=nvim_treesitter#foldexpr()
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=20
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 20 - ((19 * winheight(0) + 46) / 93)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 20
+normal! 09|
 lcd ~/dotfiles/nvim
 wincmd w
-argglobal
-if bufexists(fnamemodify("~/code/khalorg/src/khalorg/commands.py", ":p")) | buffer ~/code/khalorg/src/khalorg/commands.py | else | edit ~/code/khalorg/src/khalorg/commands.py | endif
-if &buftype ==# 'terminal'
-  silent file ~/code/khalorg/src/khalorg/commands.py
-endif
-balt ~/code/khalorg/pyproject.toml
-setlocal fdm=expr
-setlocal fde=nvim_treesitter#foldexpr()
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=20
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-14
-normal! zo
-let s:l = 24 - ((23 * winheight(0) + 27) / 55)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 24
-normal! 0
-wincmd w
-exe 'vert 1resize ' . ((&columns * 120 + 120) / 240)
-exe 'vert 2resize ' . ((&columns * 119 + 120) / 240)
+2wincmd w
+exe 'vert 1resize ' . ((&columns * 182 + 182) / 365)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 365)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -95,6 +93,7 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
+nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :
