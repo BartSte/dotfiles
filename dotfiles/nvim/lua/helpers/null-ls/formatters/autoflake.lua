@@ -13,7 +13,14 @@ return h.make_builtin({
     filetypes = { "python" },
     generator_opts = {
         command = "autoflake",
-        args = { "--stdin-display-name", "$FILENAME", "-" },
+        args = {
+            "--remove-all-unused-imports",
+            "--ignore-init-module-imports",
+            "--remove-unused-variables",
+            "--expand-star-imports",
+            "--stdin-display-name",
+            "$FILENAME",
+            "-" },
         to_stdin = true,
     },
     factory = h.formatter_factory,
