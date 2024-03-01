@@ -7,7 +7,7 @@ lspconfig.pyright.setup({
             analysis = {
                 autoSearchPaths = true,
                 useLibraryCodeForTypes = true,
-                diagnosticMode = "workspace",
+                diagnosticMode = "openFilesOnly",
                 typeCheckingMode = "standard",
             },
         },

@@ -15,7 +15,6 @@ return h.make_builtin({
     generator_opts = {
         command = "autopep8",
         args = h.range_formatting_args_factory({
-            "-j", "0",
             "-",
         }, "--line-range", nil, { use_rows = true }),
         to_stdin = true,
