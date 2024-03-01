@@ -1,6 +1,12 @@
 return {
-    "nvimtools/none-ls.nvim",
-    ft = { "python", "zsh", "sh", "bash", "markdown", "c", "cpp", "h", "hpp", "cmake" },
-    event = { "BufReadPost", "BufNewFile" },
-    config = require("config.null-ls").setup
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+        "williamboman/mason.nvim",
+        "nvimtools/none-ls.nvim",
+    },
+    config = function()
+        require("config.null-ls").setup()
+        require("config.mason-null-ls").setup()
+    end
 }
