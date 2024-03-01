@@ -11,7 +11,7 @@ local opts = {
         "prettier",
         "markdownlint",
     },
-    -- automatic_installation = true
+    -- automatic_installation = true # TODO not working yet... for me
 }
 
 M.setup = function()
