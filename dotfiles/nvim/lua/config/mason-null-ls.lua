@@ -1,7 +1,16 @@
 local M = {}
 
 local opts = {
-    automatic_installation = true
+    ensure_installed = {
+        "autoflake",
+        "autopep8",
+        "isort",
+        "pylint",
+        "cmakelang",
+        "shfmt",
+        "prettier",
+        "markdownlint",
+    },
 }
 
 M.setup = function()
