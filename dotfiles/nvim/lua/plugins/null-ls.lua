@@ -1,9 +1,9 @@
 return {
-    "jay-babu/mason-null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "williamboman/mason.nvim",
-        "nvimtools/none-ls.nvim",
+        "jay-babu/mason-null-ls.nvim",
     },
     config = function()
         -- For mason-null-ls to work, mason and null-ls must be setup first. In

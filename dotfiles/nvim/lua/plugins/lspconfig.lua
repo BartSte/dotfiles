@@ -1,9 +1,9 @@
 return {
-    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "williamboman/mason.nvim",
-        "neovim/nvim-lspconfig",
+        "williamboman/mason-lspconfig.nvim",
         'hrsh7th/nvim-cmp',
         'hrsh7th/cmp-nvim-lsp',
     },
@@ -15,4 +15,3 @@ return {
         require("config.lsp") -- TODO: add setup function
     end
 }
-
