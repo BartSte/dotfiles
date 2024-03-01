@@ -6,8 +6,10 @@ return {
         "nvimtools/none-ls.nvim",
     },
     config = function()
+        -- For mason-null-ls to work, mason and null-ls must be setup first. In
+        -- contrast to mason-lspconfig, which has antoher order.
         require("config.mason").setup()
-        require("config.mason-null-ls").setup()
         require("config.null-ls").setup()
+        require("config.mason-null-ls").setup()
     end
 }
