@@ -1,16 +1,7 @@
 local M = {}
 
 local opts = {
-    ensure_installed = {
-        "pyright",
-        "clangd",
-        "cmake",
-        "vimls",
-        "lua_ls",
-        "bashls",
-        "jsonls",
-        "marksman"
-    }
+    automatic_installation = true
 }
 
 M.setup = function()

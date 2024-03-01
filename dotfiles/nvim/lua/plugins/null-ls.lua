@@ -6,7 +6,8 @@ return {
         "nvimtools/none-ls.nvim",
     },
     config = function()
-        require("config.null-ls").setup()
+        require("config.mason").setup()
         require("config.mason-null-ls").setup()
+        require("config.null-ls").setup()
     end
 }

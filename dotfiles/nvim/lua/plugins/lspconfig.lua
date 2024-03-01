@@ -8,8 +8,9 @@ return {
         'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
-        require("config.lsp")
+        require("config.mason").setup()
         require("config.mason-lspconfig").setup()
+        require("config.lsp") -- TODO: add setup function
     end
 }
 
