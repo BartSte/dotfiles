@@ -1,5 +1,11 @@
 #!/usr/sbin/python3
+from argparse import ArgumentParser
 from sys import stdin
+
+_DESCRIPTION = """
+Sort variable definitions based on the number of characters before the `='. If no `=' is found,
+the line length is used. The text to be sorted is read from stdin and the sorted text is written to
+stdout. No further arguments are required."""
 
 
 def sort_variable_length(lines: str) -> str:
@@ -40,6 +46,9 @@ def find_equal_sign(obj: str) -> int:
 
 
 if __name__ == "__main__":
-    lines = stdin.read()
-    stdout = sort_variable_length(lines)
-    print(stdout)
+    parser = ArgumentParser(
+        prog="sort_variable_length",
+        description=_DESCRIPTION,
+    )
+    parser.parse_args()
+    print(sort_variable_length(stdin.read()))
