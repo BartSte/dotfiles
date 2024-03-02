@@ -10,6 +10,6 @@ return {
         -- contrast to mason-lspconfig, which has antoher order.
         require("config.mason").setup()
         require("config.null-ls").setup()
-        require("config.mason-null-ls").setup()
+        require("mason-null-ls").setup({ automatic_installation = true })
     end
 }

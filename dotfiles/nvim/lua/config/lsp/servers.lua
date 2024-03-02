@@ -1,7 +1,6 @@
-local lspconfig = require('lspconfig')
+M = {}
 
--- Python
-lspconfig.pyright.setup({
+local pyright = {
     settings = {
         python = {
             analysis = {
@@ -12,10 +11,9 @@ lspconfig.pyright.setup({
             },
         },
     },
-})
+}
 
--- C++
-lspconfig.clangd.setup {
+local clangd = {
     cmd = {
         "clangd",
         "--offset-encoding=utf-16",
@@ -25,15 +23,13 @@ lspconfig.clangd.setup {
         "--pch-storage=memory",
     },
 }
-lspconfig.cmake.setup {}
 
---Vim
-lspconfig.vimls.setup({})
-lspconfig.lua_ls.setup {
+local lua_ls = {
     settings = {
         Lua = {
             runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                -- Tell the language server which version of Lua you're
+                -- using (most likely LuaJIT in the case of Neovim)
                 version = 'LuaJIT',
             },
             diagnostics = {
@@ -45,7 +41,8 @@ lspconfig.lua_ls.setup {
                 library = vim.api.nvim_get_runtime_file("", true),
                 checkThirdParty = false,
             },
-            -- Do not send telemetry data containing a randomized but unique identifier
+            -- Do not send telemetry data containing a randomized but
+            -- unique identifier
             telemetry = {
                 enable = false,
             },
@@ -53,21 +50,36 @@ lspconfig.lua_ls.setup {
     },
 }
 
--- Shell
-lspconfig.bashls.setup({ filetypes = { "sh", "bash", "zsh" } })
+local bashls = { filetypes = { "sh", "bash", "zsh" } }
 
--- Misc
-lspconfig.jsonls.setup({})
+local marksman_win = {
+    cmd = {
+        "$LOCALAPPDATA\\nvim-data\\mason\\packages\\marksman\\marksman.exe",
+        "server"
+    }
+}
 
--- Windows
-if vim.fn.has('win32') == 1 then
-    lspconfig.powershell_es.setup({})
-    lspconfig.marksman.setup({
-        cmd = {
-            "$LOCALAPPDATA\\nvim-data\\mason\\packages\\marksman\\marksman.exe",
-            "server"
-        }
-    })
-else
-    lspconfig.marksman.setup({})
+local function get_marksman_opts()
+    if vim.fn.has('win32') == 1 then
+        return marksman_win
+    else
+        return {}
+    end
 end
+
+M.setup = function()
+    local lsp = require('lspconfig')
+    lsp.pyright.setup(pyright)
+    lsp.clangd.setup(clangd)
+    lsp.cmake.setup({})
+    lsp.vimls.setup({})
+    lsp.lua_ls.setup(lua_ls)
+    lsp.bashls.setup(bashls)
+    lsp.jsonls.setup({})
+    lsp.marksman.setup(get_marksman_opts())
+    if vim.fn.has('win32') == 1 then
+        lsp.powershell_es.setup({})
+    end
+end
+
+return M
