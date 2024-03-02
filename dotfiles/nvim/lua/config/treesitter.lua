@@ -2,7 +2,7 @@ require 'nvim-treesitter.install'.compilers = { "cl", "gcc", "clang" }
 require 'nvim-treesitter.configs'.setup {
     ensure_installed = {
         "markdown", "markdown_inline", "bash", "vim", "lua", "cpp", "python",
-        "json", "cpp", "toml", "latex", "make", "gitcommit"
+        "json", "cpp", "toml", "latex", "make", "gitcommit", "org",
     },
     sync_install = false,
     auto_install = true,
