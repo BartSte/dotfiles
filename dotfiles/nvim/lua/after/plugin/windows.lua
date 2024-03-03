@@ -1,5 +1,3 @@
-local M = {}
-
 -- Vimscript
 -- function! g:ExecInCmd(command)
 --     " Workaround for: https://github.com/junegunn/fzf.vim/issues/883
@@ -10,7 +8,7 @@ local M = {}
 --     let tmp_shellxquote = &shellxquote
 --     let tmp_shellcmdflag = &shellcmdflag
 --
---     set shellquote = 
+--     set shellquote =
 --     let &shellpipe = '>%s 2>&1'
 --     set shellxquote = "\""
 --     let &shellredir = '>%s 2>&1'
@@ -52,58 +50,57 @@ local function exec_in_cmd(command)
     vim.o.shellcmdflag = tmp_shellcmdflag
 end
 
-M.setup = function()
-    vim.g.exec_in_cmd = exec_in_cmd
+vim.g.exec_in_cmd = exec_in_cmd
 
-    -- Vimscript
-    -- if has('win32')
-    --     let g:python3_host_prog = $LOCALAPPDATA . '\Programs\Python\Python311\python.exe'
-    --     let &shell = 'pwsh'
-    --     let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
-    --     let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-    --     let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-    --     set shellquote= shellxquote=
-    -- endif
-    if vim.fn.has('win32') == 1 then
-        vim.o.shell = 'pwsh'
-        vim.o.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
-        vim.o.shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-        vim.o.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-        vim.o.shellquote = ''
-        vim.o.shellxquote = ''
-    end
-
-
-    -- Vimscript
-    -- if !empty($WH)
-    --     " See :h clipboard-wsl
-    --     let g:clipboard = {
-    --                 \   'name': 'WslClipboard',
-    --                 \   'copy': {
-    --                 \      '+': 'clip.exe',
-    --                 \      '*': 'clip.exe',
-    --                 \    },
-    --                 \   'paste': {
-    --                 \      '+': 'pwsh.exe -NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    --                 \      '*': 'pwsh.exe -NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    --                 \   },
-    --                 \   'cache_enabled': 0,
-    --                 \ }
-    -- endif
-    if os.getenv('WH') then
-        vim.g.clipboard = {
-            name = 'WslClipboard',
-            copy = {
-                ['+'] = 'clip.exe',
-                ['*'] = 'clip.exe',
-            },
-            paste = {
-                ['+'] = 'pwsh.exe -NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-                ['*'] = 'pwsh.exe -NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-            },
-            cache_enabled = 0,
-        }
-    end
+-- Vimscript
+-- if has('win32')
+--     let g:python3_host_prog = $LOCALAPPDATA . '\Programs\Python\Python311\python.exe'
+--     let &shell = 'pwsh'
+--     let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
+--     let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+--     let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+--     set shellquote= shellxquote=
+-- endif
+if vim.fn.has('win32') == 1 then
+    vim.o.shell = 'pwsh'
+    vim.o.shellcmdflag =
+    '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
+    vim.o.shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+    vim.o.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+    vim.o.shellquote = ''
+    vim.o.shellxquote = ''
 end
 
-return M
+
+-- Vimscript
+-- if !empty($WH)
+--     " See :h clipboard-wsl
+--     let g:clipboard = {
+--                 \   'name': 'WslClipboard',
+--                 \   'copy': {
+--                 \      '+': 'clip.exe',
+--                 \      '*': 'clip.exe',
+--                 \    },
+--                 \   'paste': {
+--                 \      '+': 'pwsh.exe -NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+--                 \      '*': 'pwsh.exe -NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+--                 \   },
+--                 \   'cache_enabled': 0,
+--                 \ }
+-- endif
+if os.getenv('WH') then
+    vim.g.clipboard = {
+        name = 'WslClipboard',
+        copy = {
+            ['+'] = 'clip.exe',
+            ['*'] = 'clip.exe',
+        },
+        paste = {
+            ['+'] =
+            'pwsh.exe -NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            ['*'] =
+            'pwsh.exe -NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        },
+        cache_enabled = 0,
+    }
+end
