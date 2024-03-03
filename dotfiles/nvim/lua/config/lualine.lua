@@ -41,7 +41,7 @@ lualine.setup({
     tabline = {},
     winbar = {},
     inactive_winbar = {},
-    extensions = { 'fugitive', 'fzf', 'quickfix' }
+            extensions = { 'fugitive', 'fzf', 'quickfix' }
 })
 
 lualine.hide({

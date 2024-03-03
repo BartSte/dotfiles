@@ -1,4 +1,5 @@
 local map = require("helpers.keymapper")
+
 -- Override defaults
 map.inoremap("<C-t>", "<Esc>")
 map.noremap("<C-t>", "<Esc>")
@@ -16,17 +17,6 @@ map.inoremap("<C-Del>", "<C-o>dE")
 map.inoremap("<C-h>", "<C-w>")
 map.cnoremap("<C-BS>", "<C-w>")
 map.cnoremap("<C-h>", "<C-w>")
-
--- Quickfix
-local function toggle_quickfix()
-    local wininfo = vim.fn.filter(vim.fn.getwininfo(), "v:val.quickfix")
-    if vim.tbl_isempty(wininfo) then
-        vim.cmd("copen")
-    else
-        vim.cmd("cclose")
-    end
-end
-map.nnoremap("<silent> Q", toggle_quickfix)
 
 -- Open links
 map.nnoremap("gx", ":call system('open ' . expand('<cfile>'))<CR>")
@@ -60,6 +50,11 @@ map.nnoremap("<C-w>i", "<C-w>L")
 map.nnoremap("<C-w>n", "<C-w>J")
 map.nnoremap("<C-w>z", ":wincmd o<bar>vert new<bar>vert resize 80<CR><C-w>l")
 map.nnoremap("<C-w>a", ":wincmd o<bar>wincmd v<CR>")
+
+-- Quickfix
+map.nnoremap("Q", require("helpers.wininfo").toggle_quickfix)
+map.nnoremap("<a-.>", ":cnext<CR>")
+map.nnoremap("<a-,>", ":cprev<CR>")
 
 --buffer navigation
 map.noremap("<silent><a-,>", "<cmd>cp<CR>")
