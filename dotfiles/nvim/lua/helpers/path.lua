@@ -21,7 +21,6 @@ M.split = function(inputString, sep)
     end)
 
     return fields
-
 end
 
 ---Joins arbitrary number of paths together.
@@ -46,7 +45,7 @@ M.join = function(...)
     return table.concat(all_parts, M.path_separator)
 end
 
-M.get_home = function ()
+M.get_home = function()
     if vim.fn.has('win32') == 1 then
         return os.getenv('USERPROFILE')
     else
@@ -65,6 +64,29 @@ M.get_dropbox_home = function()
     else
         return os.getenv('HOME')
     end
+end
+
+--- Return the require paths for all files in a directory. The second argument
+--is optional.
+---@param directory string directory to search for files.
+---@param exclude Optional A pattern to exclude files.
+---@return table string A table of the require paths.
+M.glob = function(directory, exclude)
+    exclude = exclude or "/init$"
+
+    local path = require("helpers.path")
+    local include = path.join(directory, "*.lua")
+
+    local results = {}
+    local files = vim.fn.glob(include, false, true)
+    for _, file in ipairs(files) do
+        local result = file:match('lua/(.*)%.lua')
+        if not result:match(exclude) then
+            results[#results + 1] = result
+        end
+    end
+
+    return results
 end
 
 return M

@@ -1,3 +1,3 @@
 vim.opt_local.bufhidden = 'unload'
 vim.cmd('wincmd L')
-vim.cmd('vertical resize 100')
+vim.cmd('vertical resize 120')
