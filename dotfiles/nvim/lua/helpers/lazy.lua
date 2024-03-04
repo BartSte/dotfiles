@@ -1,7 +1,9 @@
+local path = require("helpers.path")
+
 local M = {}
 
 M.bootstrap = function()
-    local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+    local lazypath = path.join(vim.fn.stdpath("data"), "lazy", "lazy.nvim")
     if not vim.loop.fs_stat(lazypath) then
         vim.fn.system({
             "git",
