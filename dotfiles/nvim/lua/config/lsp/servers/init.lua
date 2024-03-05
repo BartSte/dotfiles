@@ -80,6 +80,7 @@ M.setup = function()
     if vim.fn.has('win32') == 1 then
         lsp.powershell_es.setup({})
     end
+    require("helpers.project").load()
 end
 
 return M

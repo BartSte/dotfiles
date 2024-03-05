@@ -2,14 +2,7 @@ local M = {}
 
 M.setup = function()
     local null_ls = require("null-ls")
-    local formatters = require("helpers.null-ls.formatters")
-
     local sources = {
-        -- Python
-        formatters.autoflake,
-        formatters.autopep8,
-        formatters.isort,
-        null_ls.builtins.diagnostics.pylint,
         -- C++
         null_ls.builtins.formatting.cmake_format,
         null_ls.builtins.diagnostics.cmake_lint,
@@ -24,7 +17,9 @@ M.setup = function()
         }),
         null_ls.builtins.diagnostics.markdownlint,
     }
+    local sources_project = require("helpers.project").load()
 
+    sources = vim.tbl_extend("force", sources, sources_project)
     null_ls.setup({ sources = sources })
 end
 
