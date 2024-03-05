@@ -1,5 +1,3 @@
-local M = {}
-
 local pyright = {
     settings = {
         python = {
@@ -67,20 +65,16 @@ local function get_marksman_opts()
     end
 end
 
-M.setup = function()
-    local lsp = require('lspconfig')
-    lsp.pyright.setup(pyright)
-    lsp.clangd.setup(clangd)
-    lsp.cmake.setup({})
-    lsp.vimls.setup({})
-    lsp.lua_ls.setup(lua_ls)
-    lsp.bashls.setup(bashls)
-    lsp.jsonls.setup({})
-    lsp.marksman.setup(get_marksman_opts())
-    if vim.fn.has('win32') == 1 then
-        lsp.powershell_es.setup({})
-    end
-    require("helpers.projectrc").load()
+local lsp = require('lspconfig')
+lsp.pyright.setup(pyright)
+lsp.clangd.setup(clangd)
+lsp.cmake.setup({})
+lsp.vimls.setup({})
+lsp.lua_ls.setup(lua_ls)
+lsp.bashls.setup(bashls)
+lsp.jsonls.setup({})
+lsp.marksman.setup(get_marksman_opts())
+if vim.fn.has('win32') == 1 then
+    lsp.powershell_es.setup({})
 end
-
-return M
+require("helpers.projectrc").load()

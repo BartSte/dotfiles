@@ -1,5 +1,3 @@
-local M = {}
-
 -- This will transform ":5Reg a" into ":norm 5@a"
 local function reg_args(opts)
     return (opts.count == -1 and "" or opts.count) .. "@" .. opts.args
@@ -21,11 +19,7 @@ local defaults = {
     },
 }
 
-M.setup = function()
-    require("live-command").setup({
-        commands = commands,
-        defaults = defaults,
-    })
-end
-
-return M
+require("live-command").setup({
+    commands = commands,
+    defaults = defaults,
+})

@@ -1,8 +1,6 @@
 local hop = require('hop')
 local func = require('helpers.hop')
 
-local M = {}
-
 local opts = {
     keys = 'rlaodhgmfiwypu;cx/jbvsetn',
     jump_on_sole_occurrence = true,
@@ -35,9 +33,5 @@ local function set_mappings()
 
 end
 
-function M.setup()
-    hop.setup(opts)
-    set_mappings()
-end
-
-return M
+hop.setup(opts)
+set_mappings()

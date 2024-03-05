@@ -29,6 +29,7 @@ end
 -- The level argument is optional and is used as the level of the debug.getinfo
 -- function. The default value is 3, and should be increades when you want to
 -- load the module from one level higher in the call stack.
+--
 ---@param default string default module to load if the project module is not
 --found.
 ---@param level number optional level to use for the debug.getinfo function. To

@@ -1,5 +1,3 @@
-local M = {}
-
 local function set_virtual_text_off()
     vim.diagnostic.config({ virtual_text = false })
 end
@@ -46,11 +44,7 @@ local function mappings()
     bufmap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({timeout_ms = 5000, async = false})<cr>')
 end
 
-M.setup = function()
-    vim.api.nvim_create_autocmd('LspAttach', {
-        desc = 'LSP actions',
-        callback = mappings
-    })
-end
-
-return M
+vim.api.nvim_create_autocmd('LspAttach', {
+    desc = 'LSP actions',
+    callback = mappings
+})

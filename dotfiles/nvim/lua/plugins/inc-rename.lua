@@ -1,4 +1,6 @@
 return {
     "smjonas/inc-rename.nvim",
-    config = require("config.inc-rename").setup,
+    config = function()
+        require("config.inc-rename")
+    end
 }
