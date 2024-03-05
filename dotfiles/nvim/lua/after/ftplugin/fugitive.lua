@@ -1,4 +1,2 @@
-local map = require("helpers.keymapper")
-
-map.nnoremap("<buffer><CR>", "j")
-map.nnoremap("<buffer><BS>", "k")
+vim.cmd("nnoremap <buffer><CR> j")
+vim.cmd("nnoremap <buffer><BS> k")

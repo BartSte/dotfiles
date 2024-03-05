@@ -77,7 +77,7 @@ map.nnoremap("<leader>cs", "<cmd>setlocal spell! spell?<CR>")
 map.nnoremap("<leader>%", "<cmd>source<CR>")
 map.vnoremap("<silent><leader>cc", ":sort<CR>")
 map.nnoremap("<silent><leader>cc", "vip:sort<CR>")
-map.nnoremap("<silent><leader>w", "<cmd>setlocal wrap! wrap?<CR>")
+map.nnoremap("<leader>w", "<cmd>setlocal wrap! wrap?<CR>")
 
 --Save
 map.inoremap("<C-s>", "<cmd>w<CR>")
@@ -90,9 +90,11 @@ vim.cmd("noremap <leader>cx :!chmod +x %<CR>")
 -- The terminal does not detect <C-Space>. As a solution, Alacritty sends <F24>
 -- when ctrl+space is pressed. By binding <C-Space> to <F24> (or <S-F12>), the
 -- issue is solved.
-map.imap("<F24>", "<C-Space>")
-map.cmap("<F24>", "<C-Space>")
-map.nmap("<F24>", "<C-Space>")
-map.imap("<S-F12>", "<C-Space>")
-map.cmap("<S-F12>", "<C-Space>")
-map.nmap("<S-F12>", "<C-Space>")
+vim.cmd("map <F24> <C-Space>")
+vim.cmd("map <S-F12> <C-Space>")
+vim.cmd("imap <F24> <C-Space>")
+vim.cmd("cmap <F24> <C-Space>")
+vim.cmd("nmap <F24> <C-Space>")
+vim.cmd("imap <S-F12> <C-Space>")
+vim.cmd("cmap <S-F12> <C-Space>")
+vim.cmd("nmap <S-F12> <C-Space>")
