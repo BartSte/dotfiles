@@ -4,7 +4,7 @@ local vscode = require('dap.ext.vscode')
 local helpers = require('helpers.dap')
 local widgets = require('dap.ui.widgets')
 local keymapper = require('helpers.keymapper')
-local my_launch = path.path_join(path.get_home(), 'dotfiles/launch.json')
+local my_launch = path.path_join(path.home(), 'dotfiles/launch.json')
 
 dap.adapters.lldb = {
   type = 'executable',

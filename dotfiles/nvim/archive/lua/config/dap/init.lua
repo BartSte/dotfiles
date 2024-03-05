@@ -1,7 +1,7 @@
 local dap = require('dap')
 local path = require('helpers.os_path')
 local vscode = require('dap.ext.vscode')
-local my_launch = path.path_join(path.get_home(), 'dotfiles/launch.json')
+local my_launch = path.path_join(path.home(), 'dotfiles/launch.json')
 
 dap.defaults.fallback.terminal_win_cmd = '80vsplit new'
 dap.defaults.fallback.focus_terminal = false

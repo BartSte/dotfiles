@@ -45,7 +45,7 @@ M.join = function(...)
     return table.concat(all_parts, M.path_separator)
 end
 
-M.get_home = function()
+M.home = function()
     if vim.fn.has('win32') == 1 then
         return os.getenv('USERPROFILE')
     else
@@ -55,7 +55,7 @@ end
 
 --- For org + wsl, windows $USERPROFILE is used as home and is captured by the
 --environment variable $WH (Windows Home).
-M.get_dropbox_home = function()
+M.dropbox_home = function()
     local wsl_home = os.getenv('WH')
     if (wsl_home) then
         return wsl_home
@@ -97,7 +97,7 @@ end
 M.dir = function(level)
     level = level or 2
     -- debug needs to be called here explicitly in order to keep the same
-    -- default call stack level as the other functions of 2.
+    -- default call stack level as the other functions of 1.
     local file = debug.getinfo(level, "S").source:sub(2)
     return file:match("(.*/)") or file:match("(.*/)")
 end

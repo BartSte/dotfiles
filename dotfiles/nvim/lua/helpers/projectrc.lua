@@ -23,10 +23,9 @@ local function append_name(module, default)
     default = default or "default"
     local name = M.name()
     if name == "" then
-        return module .. "." .. default
-    else
-        return module .. "." .. name
+        name = default
     end
+    return module .. "." .. name
 end
 
 --- Try to require the module. If the module is not found, return the `default`
@@ -49,6 +48,9 @@ end
 --caller of this function is used, not the module of this function.
 ---@return any any whatever the required module returns
 M.load = function()
+    -- TODO: when the PROJECTRC does not extst, the default should be loaded.
+    -- Currently, the default is only loaded when the PROJECTRC is an empty
+    -- string.
     local caller_module = path.module(3)
     local required_module = append_name(caller_module)
     return save_require(required_module)
