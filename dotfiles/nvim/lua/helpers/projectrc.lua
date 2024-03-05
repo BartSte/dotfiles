@@ -42,7 +42,6 @@ M.load = function(default, level)
     local options = { M.name(), default }
     for _, file in ipairs(options) do
         local module = path.module_join(parent_module, file)
-        print(module)
         local ok, result = pcall(require, module)
         if ok then
             return result
