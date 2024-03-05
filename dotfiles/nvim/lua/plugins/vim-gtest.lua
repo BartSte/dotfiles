@@ -2,7 +2,7 @@ return {
     'alepez/vim-gtest',
     ft = { 'cpp', 'c', 'objc', 'objc++' },
     config = function()
-        require('config.vim-gtest').setup()
+        require('config.vim-gtest')
     end,
     dependencies = {
         'jgdavey/tslime.vim',
