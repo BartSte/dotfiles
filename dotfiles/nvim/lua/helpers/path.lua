@@ -89,22 +89,27 @@ M.glob_modules = function(directory, exclude)
     return modules
 end
 
-M.script_path = function()
-    return debug.getinfo(2, "S").source:sub(2)
+M.file = function(level)
+    level = level or 2
+    return debug.getinfo(level, "S").source:sub(2)
 end
 
-M.script_dir = function()
-    -- debug needs to be called here explicitly, otherwise it will not work.
-    local path_script = debug.getinfo(2, "S").source:sub(2)
-    return path_script:match("(.*/)") or path_script:match("(.*/)")
+M.dir = function(level)
+    level = level or 2
+    -- debug needs to be called here explicitly in order to keep the same
+    -- default call stack level as the other functions of 2.
+    local file = debug.getinfo(level, "S").source:sub(2)
+    return file:match("(.*/)") or file:match("(.*/)")
 end
 
-M.script_module = function()
-    -- debug needs to be called here explicitly, otherwise it will not work.
-    local path_script = debug.getinfo(2, "S").source:sub(2)
-    local dir = path_script:match("(.*/)") or path_script:match("(.*/)")
-    local module = dir:gsub(".*/lua/", ""):gsub("/", "."):sub(1, -2)
-    return module
+M.module = function(level)
+    level = level or 2
+    -- debug needs to be called here explicitly in order to keep the same
+    -- default call stack level as the other functions of 2.
+    local file = debug.getinfo(level, "S").source:sub(2)
+    local dir = file:match("(.*/)") or file:match("(.*/)")
+    local relative_dir = dir:gsub(".*/lua/", "")
+    return relative_dir:gsub("/", "."):sub(1, -2)
 end
 
 return M
