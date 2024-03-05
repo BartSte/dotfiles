@@ -1,3 +1,5 @@
+local path = require("helpers.path")
+
 local M = {}
 
 --- Get the name of the current project. This name can be retrieved from the

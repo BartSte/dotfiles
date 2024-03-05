@@ -89,4 +89,22 @@ M.glob_modules = function(directory, exclude)
     return modules
 end
 
+M.script_path = function()
+    return debug.getinfo(2, "S").source:sub(2)
+end
+
+M.script_dir = function()
+    -- debug needs to be called here explicitly, otherwise it will not work.
+    local path_script = debug.getinfo(2, "S").source:sub(2)
+    return path_script:match("(.*/)") or path_script:match("(.*/)")
+end
+
+M.script_module = function()
+    -- debug needs to be called here explicitly, otherwise it will not work.
+    local path_script = debug.getinfo(2, "S").source:sub(2)
+    local dir = path_script:match("(.*/)") or path_script:match("(.*/)")
+    local module = dir:gsub(".*/lua/", ""):gsub("/", "."):sub(1, -2)
+    return module
+end
+
 return M
