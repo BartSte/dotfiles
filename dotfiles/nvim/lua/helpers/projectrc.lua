@@ -14,46 +14,41 @@ M.name = function()
     end
 end
 
---- Append the name of the current project to a module name. If the name of the
---- current project is an empty string, append the default name to the module
---- name.
----@param module string name of the module
----@vararg string default name of the module
-local function append_name(module, default)
+-- Require the lua file in the same directory as the script that calls this
+-- function. The name of the file is determined by the value of the PROJECTRC
+-- environment variable. If the file is not found, the default file name is used
+-- that can be set by the `default` argument (default is "default").
+--
+-- For example:
+-- - the script that calls this function is located at `/xyz/init.lua`
+-- - the PROJECTRC environment variable is set to "foo"
+-- Now, the file `/xyz/foo.lua` will be loaded. If the file is not found, the
+-- file `/xyz/default.lua` will be loaded. If this one is not found, an empty
+-- table is returned.
+--
+-- The level argument is optional and is used as the level of the debug.getinfo
+-- function. The default value is 3, and should be increades when you want to
+-- load the module from one level higher in the call stack.
+---@param default string default module to load if the project module is not
+--found.
+---@param level number optional level to use for the debug.getinfo function. To
+--return the path to the caller of the function, use 3 which is the default.
+---@return any any whatever the required module returns
+M.load = function(default, level)
     default = default or "default"
-    local name = M.name()
-    if name == "" then
-        name = default
-    end
-    return module .. "." .. name
-end
+    level = level or 3
 
---- Try to require the module. If the module is not found, return the `default`
---parameter. If the default parameter is not set, return an empty table.
----@param module string name of the module
----@param default any default value to return if the module is not found.
----@return any any whatever the required module returns
-local function save_require(module, default)
-    default = default or {}
-    local ok, result = pcall(require, module)
-    if ok then
-        return result
-    else
-        return default
+    local parent_module = path.module(3)
+    local options = { M.name(), default }
+    for _, file in ipairs(options) do
+        local module = path.module_join(parent_module, file)
+        print(module)
+        local ok, result = pcall(require, module)
+        if ok then
+            return result
+        end
     end
-end
-
---- Load the module holding project specific configuration. Note that the
---path.module function is called with level 3, meaning that the module of the
---caller of this function is used, not the module of this function.
----@return any any whatever the required module returns
-M.load = function()
-    -- TODO: when the PROJECTRC does not extst, the default should be loaded.
-    -- Currently, the default is only loaded when the PROJECTRC is an empty
-    -- string.
-    local caller_module = path.module(3)
-    local required_module = append_name(caller_module)
-    return save_require(required_module)
+    return {}
 end
 
 

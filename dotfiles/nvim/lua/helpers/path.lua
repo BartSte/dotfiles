@@ -102,14 +102,37 @@ M.dir = function(level)
     return file:match("(.*/)") or file:match("(.*/)")
 end
 
+--- Return the module name for a directory. The existance of the module is not
+--checked, only its potential name.
+---@param dir string directory to convert to a module name.
+---@return string module
+M.dir_to_module = function(dir)
+    local relative_dir = dir:gsub(".*/lua/", "")
+    return relative_dir:gsub("/", "."):sub(1, -2)
+end
+
+--- Return require path for the module of the caller of this function.
+---@param level integer optional level to use for the debug.getinfo function. To
+--return the path of the caller of this function, use 2.
+---@return 
 M.module = function(level)
     level = level or 2
     -- debug needs to be called here explicitly in order to keep the same
     -- default call stack level as the other functions of 2.
     local file = debug.getinfo(level, "S").source:sub(2)
     local dir = file:match("(.*/)") or file:match("(.*/)")
-    local relative_dir = dir:gsub(".*/lua/", "")
-    return relative_dir:gsub("/", "."):sub(1, -2)
+    return M.dir_to_module(dir)
+end
+
+--- Similar to `join`, but now for module names, which are separated by a dot.
+---@param module string The module name. For example `helpers`.
+---@vararg string The parts of the module name to join. For example `path` and
+--join
+---@return string module The joined module name. For example
+--`helpers.path.join`.
+M.module_join = function(module, ...)
+    local parts = { ... }
+    return module .. "." .. table.concat(parts, ".")
 end
 
 return M
