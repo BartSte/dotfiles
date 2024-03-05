@@ -38,7 +38,7 @@ M.load = function(default, level)
     default = default or "default"
     level = level or 3
 
-    local parent_module = path.module(3)
+    local parent_module = path.module(level)
     local options = { M.name(), default }
     for _, file in ipairs(options) do
         local module = path.module_join(parent_module, file)
