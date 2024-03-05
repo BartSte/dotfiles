@@ -29,6 +29,21 @@ local function append_name(module, default)
     end
 end
 
+--- Try to require the module. If the module is not found, return the `default`
+--parameter. If the default parameter is not set, return an empty table.
+---@param module string name of the module
+---@param default any default value to return if the module is not found.
+---@return any any whatever the required module returns
+local function save_require(module, default)
+    default = default or {}
+    local ok, result = pcall(require, module)
+    if ok then
+        return result
+    else
+        return default
+    end
+end
+
 --- Load the module holding project specific configuration. Note that the
 --path.module function is called with level 3, meaning that the module of the
 --caller of this function is used, not the module of this function.
@@ -36,7 +51,7 @@ end
 M.load = function()
     local caller_module = path.module(3)
     local required_module = append_name(caller_module)
-    return require(required_module)
+    return save_require(required_module)
 end
 
 
