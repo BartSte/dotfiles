@@ -31,8 +31,6 @@ local mappings = {
     ['<S-Tab>'] = cmp.mapping(stab),
     ['<Space>'] = cmp.mapping(space),
     ['<C-Space>'] = cmp.mapping(cspace),
-    ['<F24'] = cmp.mapping(cspace),
-    ['<S-F12>'] = cmp.mapping(cspace)
 }
 
 local window = {

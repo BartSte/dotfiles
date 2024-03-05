@@ -9,7 +9,7 @@ map.nnoremap("ZA", ":wqa<CR>")
 
 -- Make J and K available for hop.nvim
 map.noremap("<leader>j", "J")
-map.nnoremap("<silent><c-k>", "K")
+map.nnoremap("<c-k>", "K")
 
 -- Insert/command mode delete
 map.inoremap("<C-BS>", "<C-w>")
@@ -57,10 +57,10 @@ map.nnoremap("<a-.>", ":cnext<CR>")
 map.nnoremap("<a-,>", ":cprev<CR>")
 
 --buffer navigation
-map.noremap("<silent><a-,>", "<cmd>cp<CR>")
-map.noremap("<silent><a-.>", "<cmd>cn<CR>")
-map.noremap("<silent><C-n>", "<cmd>bnext<CR>")
-map.noremap("<silent><C-p>", "<cmd>bprevious<CR>")
+map.noremap("<a-,>", "<cmd>cp<CR>")
+map.noremap("<a-.>", "<cmd>cn<CR>")
+map.noremap("<C-n>", "<cmd>bnext<CR>")
+map.noremap("<C-p>", "<cmd>bprevious<CR>")
 map.noremap("gF", "<cmd>wincmd v<bar>wincmd l<CR>gf")
 map.nnoremap("<leader>;", ":e<CR>")
 

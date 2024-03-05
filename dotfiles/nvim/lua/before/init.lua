@@ -1,13 +1,11 @@
-
 local M = {}
 
 
---- Adds the lua/before directory to the rtp.
-M.set_rtp = function()
-    local path = require("helpers.path")
+--- Prepend the lua/before directory to the rtp.
+M.prepend_rtp = function()
+    local join = require("helpers.path").join
     local dir_config = vim.fn.stdpath('config')
-    local before = path.join(dir_config, "lua", "before")
-    vim.opt.rtp:prepend(before)
+    vim.opt.rtp:prepend(join(dir_config, "lua", "before"))
 end
 
 return M

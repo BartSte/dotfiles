@@ -71,22 +71,22 @@ end
 ---@param directory string directory to search for files.
 ---@param exclude string A pattern to exclude files.
 ---@return table string A table of the require paths.
-M.glob = function(directory, exclude)
-    exclude = exclude or nil
-
+M.glob_modules = function(directory, exclude)
+    exclude = exclude or "/init$"
     local path = require("helpers.path")
     local include = path.join(directory, "*.lua")
 
-    local results = {}
+    local modules = {}
     local files = vim.fn.glob(include, false, true)
     for _, file in ipairs(files) do
-        local result = file:match('lua/(.*)%.lua')
-        if exclude == nil or not result:match(exclude) then
-            results[#results + 1] = result
+        local lua_file = file:match('lua/(.*)%.lua')
+        if not lua_file:match(exclude) then
+            local module = lua_file:gsub(path.path_separator, ".")
+            modules[#modules + 1] = module
         end
     end
 
-    return results
+    return modules
 end
 
 return M
