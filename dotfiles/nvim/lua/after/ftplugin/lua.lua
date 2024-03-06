@@ -5,4 +5,5 @@ local function format()
     vim.lsp.buf.format({ async = true })
 end
 
+vim.opt_local.textwidth = 80
 map.buffer_nnoremap("<space>f", format)

@@ -13,3 +13,5 @@ keymapper.buffer_nnoremap('<a-t>', ':TestNearest -strategy=pytesttmux<CR>')
 keymapper.buffer_nnoremap('<a-F>', ':TestFile -strategy=pytesttmuxdebug<CR>')
 keymapper.buffer_nnoremap('<a-L>', ':TestLast -strategy=pytesttmuxdebug<CR>')
 keymapper.buffer_nnoremap('<a-T>', ':TestNearest -strategy=pytesttmuxdebug<CR>')
+
+require("helpers.projectrc").require().setup()
