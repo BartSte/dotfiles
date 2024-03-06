@@ -2,6 +2,10 @@ local path = require("helpers.path")
 
 local M = {}
 
+M.opts = {
+    default = M.opts.default
+}
+
 --- Get the name of the current project. This name can be retrieved from the
 --- environment variable PROJECTRC. If the environment variable is not set,
 --return an empty string.
@@ -45,7 +49,7 @@ end
 --- Require the lua a lua file from the `parent` directory. The name of the file
 --- is determined by the value of the PROJECTRC environment variable. If the
 --- file is not found, the default file name is used that can be set by the
---- `default` argument (default is "default").
+--- `default` argument (default is M.opts.default).
 ---
 --- For example:
 --- - the parent directory is `/xyz/`
@@ -56,17 +60,17 @@ end
 ---
 ---@param parent string optional parent directory of the module to require.
 ---@param default Optional | string | nil default file name to require. If not set,
---- the default file name is "default". If the default file name is set to `nil`,
+--- the default file name is M.opts.default. If the default file name is set to `nil`,
 --- the default file is not loaded.
 ---@return any any The required module or an empty table.
 M.require = function(parent, default)
-    default = default or "default"
+    default = default or M.opts.default
     local files = vim.tbl_filter(filter_nill, { M.name(), default })
     return try_require(parent, files)
 end
 
 M.require_default = function(parent)
-    return M.try_require(parent, "default", {})
+    return M.try_require(parent, M.opts.default, {})
 end
 
 --- TODO: use a function as a default instead of a string
@@ -102,7 +106,7 @@ M.require_no_default = function(no_default, parent, default)
     if vim.tbl_contains(no_default, M.name()) then
         default = nil
     else
-        default = default or "default"
+        default = default or M.opts.default
     end
     return M.require(parent, default)
 end
