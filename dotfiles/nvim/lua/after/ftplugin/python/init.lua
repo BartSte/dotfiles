@@ -14,4 +14,4 @@ keymapper.buffer_nnoremap('<a-F>', ':TestFile -strategy=pytesttmuxdebug<CR>')
 keymapper.buffer_nnoremap('<a-L>', ':TestLast -strategy=pytesttmuxdebug<CR>')
 keymapper.buffer_nnoremap('<a-T>', ':TestNearest -strategy=pytesttmuxdebug<CR>')
 
-require("helpers.projectrc").require().setup()
+require("helpers.projectrc").require("after.ftplugin.python").setup()
