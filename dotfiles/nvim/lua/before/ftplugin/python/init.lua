@@ -1,1 +1,1 @@
-require("helpers.projectrc").load().setup()
+require("helpers.projectrc").require().setup()

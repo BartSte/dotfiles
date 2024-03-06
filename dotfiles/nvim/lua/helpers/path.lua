@@ -94,6 +94,12 @@ M.file = function(level)
     return debug.getinfo(level, "S").source:sub(2)
 end
 
+--- Return the directory of the script that calls this function. The level
+--- argument is optional and is set to 2 by default, i.e., the path of the script
+--- that calls this function. If you use this function in another function, you
+--- need to increase the level by 1.
+---@param level integer optional level to use for the debug.getinfo function.
+---@return string dir The directory of the script.
 M.dir = function(level)
     level = level or 2
     -- debug needs to be called here explicitly in order to keep the same
@@ -102,8 +108,9 @@ M.dir = function(level)
     return file:match("(.*/)") or file:match("(.*/)")
 end
 
---- Return the module name for a directory. The existance of the module is not
---checked, only its potential name.
+--- Return the module name for a directory. The directory is converted to a
+--- module name by removing the all untill the last `lua/` and replacing the
+--- remaining `/` with `.`. The last `/` is removed.
 ---@param dir string directory to convert to a module name.
 ---@return string module
 M.dir_to_module = function(dir)
@@ -111,10 +118,13 @@ M.dir_to_module = function(dir)
     return relative_dir:gsub("/", "."):sub(1, -2)
 end
 
---- Return require path for the module of the caller of this function.
+--- Return the module name of the script that calls this function. The level
+--- argument is optional and is set to 2 by default, i.e., the path of the script
+--- that calls this function. If you use this function in another function, you
+--- need to increase the level by 1.
 ---@param level integer optional level to use for the debug.getinfo function. To
 --return the path of the caller of this function, use 2.
----@return 
+---@return
 M.module = function(level)
     level = level or 2
     -- debug needs to be called here explicitly in order to keep the same

@@ -17,7 +17,7 @@ M.setup = function()
         }),
         null_ls.builtins.diagnostics.markdownlint,
     }
-    local sources_project = require("helpers.projectrc").load()
+    local sources_project = require("helpers.projectrc").require("config.null-ls")
 
     sources = vim.tbl_extend("force", sources, sources_project)
     null_ls.setup({ sources = sources })

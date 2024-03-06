@@ -77,4 +77,4 @@ lsp.marksman.setup(get_marksman_opts())
 if vim.fn.has('win32') == 1 then
     lsp.powershell_es.setup({})
 end
-require("helpers.projectrc").load()
+require("helpers.projectrc").require("config.lsp.servers")
