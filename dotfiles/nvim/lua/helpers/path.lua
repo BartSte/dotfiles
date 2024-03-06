@@ -53,19 +53,6 @@ M.home = function()
     end
 end
 
---- For org + wsl, windows $USERPROFILE is used as home and is captured by the
---environment variable $WH (Windows Home).
-M.dropbox_home = function()
-    local wsl_home = os.getenv('WH')
-    if (wsl_home) then
-        return wsl_home
-    elseif vim.fn.has('win32') == 1 then
-        return os.getenv('USERPROFILE')
-    else
-        return os.getenv('HOME')
-    end
-end
-
 --- Return the require paths for all files in a directory. The second argument
 --is optional.
 ---@param directory string directory to search for files.

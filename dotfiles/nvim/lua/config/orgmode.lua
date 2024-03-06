@@ -3,7 +3,7 @@ local orgmode = require('orgmode')
 local path = require('helpers.path')
 local khalorg = require('khalorg')
 
-local dropbox_home = path.join(path.dropbox_home(), 'dropbox')
+local dropbox_home = path.join(path.home(), 'dropbox')
 local dropbox_org = path.join(dropbox_home, 'org')
 local main = path.join(dropbox_org, 'main.org')
 local agenda = path.join(dropbox_org, 'outlook.org')
