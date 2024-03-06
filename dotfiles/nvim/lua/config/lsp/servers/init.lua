@@ -77,4 +77,6 @@ lsp.marksman.setup(get_marksman_opts())
 if vim.fn.has('win32') == 1 then
     lsp.powershell_es.setup({})
 end
-require("helpers.projectrc").require("config.lsp.servers")
+
+local no_default = { "navigation" }
+require("helpers.projectrc").require_no_default(no_default, "config.lsp.servers")
