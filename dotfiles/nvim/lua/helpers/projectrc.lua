@@ -64,4 +64,8 @@ M.require = function(parent, default, level)
     return {}
 end
 
+-- TODO: find a solution that only loads the default file if the session name is 
+-- not a certain value. For example, I do not want to load the lsp default when
+-- the session name is "navigation".
+
 return M
