@@ -65,6 +65,24 @@ M.require = function(parent, default)
     return try_require(parent, files)
 end
 
+M.require_default = function(parent)
+    return M.try_require(parent, "default", {})
+end
+
+--- TODO: use a function as a default instead of a string
+---@param parent string The require path of the parent module.
+---@param default function | Optional The result of this function is returned if
+--- the module cannot be required. If not set, the `require_default` function is
+--- used.
+M.require_ = function(parent, default)
+    default = default or M.require_default
+    local ok, result = pcall(require, path.module_join(parent, M.name()))
+    if ok then
+        return result
+    else
+        return default(parent)
+    end
+end
 
 --- Run the `require` function but do not load the default file if the file is
 --- listed in the `no_default` table. The `no_default` table is a list of file
