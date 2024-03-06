@@ -3,7 +3,7 @@ local path = require("helpers.path")
 local M = {}
 
 M.opts = {
-    default = M.opts.default
+    default = "default",
 }
 
 --- Get the name of the current project. This name can be retrieved from the
