@@ -1,5 +1,6 @@
 from pdb import DefaultConfig
 
+
 class Config(DefaultConfig):
     prompt = '(Pdb++) '
     highlight = True
