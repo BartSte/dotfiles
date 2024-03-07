@@ -78,5 +78,10 @@ if vim.fn.has('win32') == 1 then
     lsp.powershell_es.setup({})
 end
 
-local no_default = { "navigation" }
-require("helpers.projectrc").require_no_default(no_default, "config.lsp.servers")
+local function callback(parent)
+    if parent ~= "navigation" then
+        require("helpers.projectrc").require_default(parent)
+    end
+end
+
+require("helpers.projectrc").require("config.lsp.servers", callback)
