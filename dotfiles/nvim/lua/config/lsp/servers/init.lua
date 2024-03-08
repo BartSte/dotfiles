@@ -79,8 +79,9 @@ if vim.fn.has('win32') == 1 then
 end
 
 local function callback(parent)
-    if parent ~= "navigation" then
-        require("helpers.projectrc").require_default(parent)
+    local prc = require("helpers.projectrc")
+    if prc.name() ~= "winpyproject" then
+        return prc.require_default(parent)
     end
 end
 
