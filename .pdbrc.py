@@ -2,8 +2,8 @@ from pdb import DefaultConfig
 
 
 class Config(DefaultConfig):
-    prompt = '(Pdb++) '
+    prompt = "(Pdb++) "
     highlight = True
-    pygments_style = 'gruvbox'
+    pygments_style = "gruvbox"
     use_pygments = True
     sticky_by_default = True
