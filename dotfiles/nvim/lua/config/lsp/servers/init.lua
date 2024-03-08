@@ -78,11 +78,11 @@ if vim.fn.has('win32') == 1 then
     lsp.powershell_es.setup({})
 end
 
-local function callback(parent)
+local function callback(...)
     local prc = require("helpers.projectrc")
     if prc.name() ~= "winpyproject" then
-        return prc.require_default(parent)
+        return prc.defaults.callback(...)
     end
 end
-
-require("helpers.projectrc").require("config.lsp.servers", callback)
+local opts = { callback = callback }
+require("helpers.projectrc").require("config.lsp.servers", opts)

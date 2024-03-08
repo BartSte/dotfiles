@@ -48,7 +48,7 @@ map.nnoremap("<C-w>m", "<C-w>H")
 map.nnoremap("<C-w>e", "<C-w>K")
 map.nnoremap("<C-w>i", "<C-w>L")
 map.nnoremap("<C-w>n", "<C-w>J")
-map.nnoremap("<C-w>z", ":wincmd o<bar>vert new<bar>vert resize 80<CR><C-w>l")
+map.nnoremap("<C-w>z", ":wincmd o<bar>vert new<bar>vert resize 70<CR><C-w>l")
 map.nnoremap("<C-w>a", ":wincmd o<bar>wincmd v<CR>")
 
 -- Quickfix
