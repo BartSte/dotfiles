@@ -4,6 +4,7 @@
 --     priority = 100,
 --     config = function()
 --         require("config.gruvbox-baby")
+--         vim.cmd("runtime vim/config/gruvbox-baby.vim")
 --     end
 -- }
 
