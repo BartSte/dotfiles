@@ -6,6 +6,6 @@ return {
         { '<a-d>', ':silent! normal gf<CR>:wincmd o<bar>Gvdiffsplit<CR>' }
     },
     config = function()
-        vim.cmd('runtime vim/fugitive.vim')
+        vim.cmd('runtime vim/config/fugitive.vim')
     end
 }

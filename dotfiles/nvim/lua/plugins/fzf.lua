@@ -14,7 +14,7 @@ return {
     },
     cmd = { 'Ag' },
     config = function()
-        vim.cmd('runtime vim/fzf.vim')
+        vim.cmd('runtime vim/config/fzf.vim')
     end,
     dependencies = {
         { 'junegunn/fzf',           build = ':call fzf#install()' },

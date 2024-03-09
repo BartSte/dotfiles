@@ -3,12 +3,13 @@ local M = {}
 M.setup = function()
     local join = require("helpers.path").join
     local dir_config = vim.fn.stdpath('config')
-    local after = join(dir_config, "lua", "after")
+    local lua_after = join(dir_config, "lua", "after")
+    local vim_after = join(dir_config, "vim", "after")
     local opts = {
         change_detection = { enabled = false, },
         performance = {
             rtp = {
-                paths = { after },
+                paths = { lua_after, vim_after },
                 disabled_plugins = {
                     "gzip",
                     "netrwPlugin",

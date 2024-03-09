@@ -7,7 +7,7 @@ return {
     dependencies = {
         'jgdavey/tslime.vim',
         config = function()
-            vim.cmd('runtime vim/tslime.vim')
+            vim.cmd('runtime vim/config/tslime.vim')
         end
     }
 }

@@ -3,6 +3,6 @@ return {
     ft = { 'markdown', 'org' },
     cmd = { 'TableModeToggle', 'TableModeEnable' },
     config = function()
-        vim.cmd('runtime vim/table.vim')
+        vim.cmd('runtime vim/config/table.vim')
     end
 }
