@@ -1,17 +1,13 @@
 if has('termguicolors')
     set termguicolors
-
     hi clear
-
     colorscheme gruvbox
     
+    hi CopilotSuggestion guifg=gray65 gui=italic 
     hi Folded guifg=gray65 guibg=bg
-    hi Search gui=bold guibg=gray28
-
-    hi HopNextKey guifg=Yellow gui=bold
-    hi HopNextKey1 guifg=Yellow gui=bold
-    hi HopNextKey2 guifg=Orange gui=bold
-
-    hi CopilotSuggestion gui=italic guifg=gray65
+    hi HighlightedyankRegion cterm=reverse gui=reverse guifg=#fe8019 guibg=#1d2021
+    hi LineNr guifg=LightGray
+    hi Search guibg=gray23 gui=bold 
+    hi WinSeparator guifg=gray28
 endif
 
