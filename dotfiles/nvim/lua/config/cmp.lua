@@ -33,7 +33,12 @@ local mappings = {
     ['<C-Space>'] = cmp.mapping(cspace),
 }
 
+vim.api.nvim_set_hl(0, "CmpItemSel", { bg = "#FF0000" })
+
 local window = {
+    -- Here the style of the completion window is set to the one defined in the
+    -- cmp.config.window.bordered() function. You can also remove this and set
+    -- the style youself.
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered()
 }

@@ -1,6 +1,7 @@
 if has('termguicolors')
     set termguicolors
     hi clear
+    set background=dark
     colorscheme gruvbox
     
     hi CopilotSuggestion guifg=gray65 gui=italic 
