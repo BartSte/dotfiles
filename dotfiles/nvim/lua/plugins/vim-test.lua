@@ -2,12 +2,12 @@ return {
     'vim-test/vim-test',
     ft = { 'python' },
     config = function()
-        vim.cmd('runtime vim/vim-test.vim')
+        vim.cmd('runtime vim/config/vim-test.vim')
     end,
     dependencies = {
         'jgdavey/tslime.vim',
         config = function()
-            vim.cmd('runtime vim/tslime.vim')
+            vim.cmd('runtime vim/config/tslime.vim')
         end
     }
 }

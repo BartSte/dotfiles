@@ -1,3 +1,24 @@
+local function set_underline_off()
+    vim.diagnostic.config({ underline = false })
+end
+
+local function set_underline_error()
+    vim.diagnostic.config({ underline = { severity = vim.diagnostic.severity.ERROR } })
+end
+
+local function set_underline_all()
+    vim.diagnostic.config({
+        underline = {
+            severity = {
+                vim.diagnostic.severity.HINT,
+                vim.diagnostic.severity.INFO,
+                vim.diagnostic.severity.WARN,
+                vim.diagnostic.severity.ERROR
+            }
+        }
+    })
+end
+
 local function set_virtual_text_off()
     vim.diagnostic.config({ virtual_text = false })
 end
@@ -38,6 +59,9 @@ local function mappings()
     bufmap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     bufmap('x', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     bufmap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<cr>')
+    bufmap('n', '<leader>uo', set_underline_off)
+    bufmap('n', '<leader>ue', set_underline_error)
+    bufmap('n', '<leader>ua', set_underline_all)
     bufmap('n', '<leader>vo', set_virtual_text_off)
     bufmap('n', '<leader>ve', set_virtual_text_error)
     bufmap('n', '<leader>va', set_virtual_text_all)

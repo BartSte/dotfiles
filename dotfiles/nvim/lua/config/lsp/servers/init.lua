@@ -79,10 +79,10 @@ if vim.fn.has('win32') == 1 then
 end
 
 local function callback(...)
-    local prc = require("helpers.projectrc")
-    if prc.name() ~= "winpyproject" then
+    local prc = require("projectrc")
+    if prc.get_name() ~= "winpyproject" then
         return prc.defaults.callback(...)
     end
 end
 local opts = { callback = callback }
-require("helpers.projectrc").require("config.lsp.servers", opts)
+require("projectrc").require("config.lsp.servers", opts)

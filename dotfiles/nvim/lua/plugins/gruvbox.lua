@@ -1,8 +1,8 @@
 return {
-    'luisiacc/gruvbox-baby',
-    branch = 'main',
-    priority = 100,
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
+    lazy = false,
     config = function()
-        vim.cmd('runtime vim/colors.vim')
+        require("config.gruvbox")
     end
 }

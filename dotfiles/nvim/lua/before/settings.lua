@@ -35,3 +35,11 @@ vim.opt.updatetime = 750
 vim.opt.wildmenu = false
 vim.opt.wrap = false
 vim.opt.writebackup = false
+
+if vim.fn.has("termguicolors") then
+    vim.opt.termguicolors = true
+end
+
+vim.cmd("let &t_SI = \"\\e[6 q\"")
+vim.cmd("let &t_SR = \"\\e[4 q\"")
+vim.cmd("let &t_EI = \"\\e[2 q\"")
