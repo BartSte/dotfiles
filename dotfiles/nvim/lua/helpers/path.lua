@@ -59,14 +59,15 @@ end
 ---@param exclude string A pattern to exclude files.
 ---@return table string A table of the require paths.
 M.glob_modules = function(directory, exclude)
-    exclude = exclude or "/init$"
+    local default = M.path_separator .. "init$"
+    exclude = exclude or default
     local path = require("helpers.path")
     local include = path.join(directory, "*.lua")
 
     local modules = {}
     local files = vim.fn.glob(include, false, true)
     for _, file in ipairs(files) do
-        local lua_file = file:match('lua/(.*)%.lua')
+	local lua_file = file:match('lua' .. M.path_separator .. '(.*)%.lua')
         if not lua_file:match(exclude) then
             local module = lua_file:gsub(path.path_separator, ".")
             modules[#modules + 1] = module
@@ -82,8 +83,8 @@ end
 ---@param dir string directory to convert to a module name.
 ---@return string module
 M.dir_to_module = function(dir)
-    local relative_dir = dir:gsub(".*/lua/", "")
-    return relative_dir:gsub("/", "."):sub(1, -2)
+    local relative_dir = dir:gsub(".*" .. M.path_separator .. "lua" .. M.path_separator, "")
+    return relative_dir:gsub(M.path_separator, "."):sub(1, -2)
 end
 
 --- Similar to `join`, but now for module names, which are separated by a dot.
