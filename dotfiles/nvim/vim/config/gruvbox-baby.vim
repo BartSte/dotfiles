@@ -1,18 +1,15 @@
-if has('termguicolors')
+if has("termguicolors")
+
     set termguicolors
     hi clear
     set background=dark
     colorscheme gruvbox-baby
-    
-    hi CopilotSuggestion guifg=gray65 gui=italic 
-    hi Folded guifg=gray65 guibg=bg
-    hi HighlightedyankRegion cterm=reverse gui=reverse guifg=#fe8019 guibg=#1d2021
-    hi LineNr guifg=LightGray
+
+    hi ColorColumn guibg=#32302f
     hi Search guibg=gray35 gui=bold 
     hi WinSeparator guifg=gray28
-
-    " Gruvbox-baby adjustments
-    hi ColorColumn guibg=#32302f
+    hi CopilotSuggestion guifg=gray65 gui=italic 
+    hi HighlightedyankRegion cterm=reverse gui=reverse guifg=#fe8019 guibg=#1d2021
     hi CursorLineNr gui=NONE guifg=#fe8019 guibg=#32302f
     hi FloatermBorder guibg=bg
     hi HopNextKey guibg=Normal
@@ -26,5 +23,5 @@ if has('termguicolors')
     hi TreesitterContext guibg=#31302f
     hi TreesitterContextBottom gui=bold guibg=#31302f
     hi TreesitterContextLineNumber guifg=#fe8019 guibg=#32302f
-endif
 
+endif
