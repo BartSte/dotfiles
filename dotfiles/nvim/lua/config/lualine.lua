@@ -1,4 +1,4 @@
-local lualine = require('lualine')
+local lualine = require("lualine")
 local custom_auto = require('lualine.themes.auto')
 
 custom_auto.inactive.c.fg = '#BBBBBB'
@@ -41,9 +41,9 @@ lualine.setup({
     tabline = {},
     winbar = {},
     inactive_winbar = {},
-            extensions = { 'fugitive', 'fzf', 'quickfix' }
+    extensions = { 'fugitive', 'fzf', 'quickfix' }
 })
 
 lualine.hide({
-    place = {'tabline', 'winbar'},
+    place = { 'tabline', 'winbar' },
 })
