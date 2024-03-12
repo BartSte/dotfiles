@@ -24,8 +24,7 @@ function! s:setgruvbox()
         hi TreesitterContext guibg=#31302f
         hi TreesitterContextBottom gui=bold guibg=#31302f
         hi TreesitterContextLineNumber guifg=#fe8019 guibg=#32302f
-        hi WinSeparator guifg=gray22 guibg=bg
-        hi WinSeparator guifg=gray28
+        hi WinSeparator guifg=gray23 guibg=bg
 
     endif
 endfunction
