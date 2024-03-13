@@ -28,13 +28,13 @@ inoremap <a-A> <Esc>:execute(':Ag ' . g:re_todo)<CR>
 
 if has('win32')
     " Workaround for: https://github.com/junegunn/fzf.vim/issues/883
-    noremap <a-o> <cmd>call ExecInCmd('Files')<CR>
-    noremap <a-b> <cmd>call ExecInCmd('Buffers')<CR>
-    noremap <a-v> <cmd>call ExecInCmd('Files ~/dotfiles/nvim')<CR>
-    noremap <a-M> <cmd>call ExecInCmd('Marks')<CR>
-    noremap <a-h> <cmd>call ExecInCmd('Files ~')<CR>
-    noremap <a-H> <cmd>call ExecInCmd('Helptags')<CR>
-    noremap <a-c> <cmd>call ExecInCmd('Dirs')<CR>
+    noremap <a-o> <cmd>call exec_in_cmd('Files')<CR>
+    noremap <a-b> <cmd>call exec_in_cmd('Buffers')<CR>
+    noremap <a-v> <cmd>call exec_in_cmd('Files ~/dotfiles/nvim')<CR>
+    noremap <a-M> <cmd>call exec_in_cmd('Marks')<CR>
+    noremap <a-h> <cmd>call exec_in_cmd('Files ~')<CR>
+    noremap <a-H> <cmd>call exec_in_cmd('Helptags')<CR>
+    noremap <a-c> <cmd>call exec_in_cmd('Dirs')<CR>
 else
     noremap <a-o> <cmd>Files<CR>
     noremap <a-b> <cmd>Buffers<CR>
