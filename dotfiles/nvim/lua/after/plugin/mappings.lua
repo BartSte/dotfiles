@@ -71,7 +71,7 @@ noremap("gF", "<cmd>wincmd v<bar>wincmd l<CR>gf")
 nnoremap("<leader>;", ":e<CR>")
 
 --Search
-nnoremap("<leader>/", "*#<cmd>setlocal hlsearch<CR>")
+nnoremap("<leader>/", require("helpers.mappings").highlight_word)
 
 --Tabs
 noremap("<leader>tn", "<cmd>tabnew<CR>")
