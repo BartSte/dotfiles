@@ -15,7 +15,9 @@ M.setup = function()
         null_ls.builtins.formatting.prettier.with({
             filetypes = { "markdown" },
         }),
-        null_ls.builtins.diagnostics.markdownlint,
+        null_ls.builtins.diagnostics.markdownlint.with({
+            args = { "--stdin", "--disable", "MD013" },
+        })
     }
     local opts = { fallback_value = {} }
     local sources_project = require("projectrc").require("config.null-ls", opts)
