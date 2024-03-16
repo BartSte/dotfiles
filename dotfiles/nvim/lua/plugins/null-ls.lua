@@ -12,7 +12,7 @@ return {
         require("config.null-ls").setup()
         require("mason-null-ls").setup({
             -- Custom formatters so they are not picked up by mason-null-ls
-            ensure_installed = { "autopep8", "autoflake", "isort" },
+            ensure_installed = { "autopep8", "autoflake", "isort", "shellcheck" },
             automatic_installation = { exclude = { "pylint" } },
         })
     end

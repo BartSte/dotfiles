@@ -48,6 +48,7 @@ local lua_ls = {
     },
 }
 
+-- When installed, bashls uses `shellcheck` to provide diagnostics!
 local bashls = { filetypes = { "sh", "bash", "zsh" } }
 
 local marksman_win = {
