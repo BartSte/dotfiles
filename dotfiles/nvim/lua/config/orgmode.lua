@@ -9,6 +9,7 @@ local main = path.join(dropbox_org, 'main.org')
 local agenda = path.join(dropbox_org, 'outlook.org')
 local personal = path.join(dropbox_org, 'personal.org')
 local gedachten = path.join(dropbox_org, 'gedachten.org')
+local outlook = path.join(dropbox_org, 'outlook.org')
 
 khalorg.setup({
     calendar = 'outlook_local'
@@ -38,6 +39,11 @@ local templates = {
         template = '* %?\n%U\n\n** Gebeurtenis\n\n** Gevoel\n\n** Gedachte \n\n** Kerngedachte \n\n** Helpende gedachte\n\n',
         target = gedachten
     },
+    e = {
+        description = 'Event',
+        template = '*\n\n:PROPERTIES:\n:ATTENDEES: \n:LOCATION: \n:ORGANIZER: \n:RRULE: \n:STATUS: \n:UID: \n:URL: \n:UNTIL: \n:END:\n',
+        target = outlook
+    }
 }
 
 orgmode.setup_ts_grammar()
