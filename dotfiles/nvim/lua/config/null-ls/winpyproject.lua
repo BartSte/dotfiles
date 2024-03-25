@@ -5,5 +5,5 @@ return {
     formatters.autoflake,
     formatters.autopep8,
     formatters.isort,
-    null_ls.builtins.diagnostics.pylint,
+    -- null_ls.builtins.diagnostics.pylint,
 }
