@@ -2,7 +2,12 @@ local M = {}
 
 M.setup = function()
     local null_ls = require("null-ls")
+    local formatters = require("helpers.null-ls.formatters")
+
     local sources = {
+        -- Python
+        formatters.autoflake,
+        formatters.isort,
         -- C++
         null_ls.builtins.formatting.cmake_format,
         null_ls.builtins.diagnostics.cmake_lint,
