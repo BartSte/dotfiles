@@ -1,4 +1,5 @@
 vim.cmd("filetype on")
+vim.cmd("syntax on")
 
 vim.g.mapleader = " "
 vim.opt.autoindent = true
