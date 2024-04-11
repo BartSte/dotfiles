@@ -25,8 +25,7 @@ M.setup = function()
     }
     local opts = { fallback_value = {} }
     local sources_project = require("projectrc").require("config.null-ls", opts)
-
-    sources = vim.tbl_extend("force", sources, sources_project)
+    vim.list_extend(sources, sources_project)
     null_ls.setup({ sources = sources })
 end
 
