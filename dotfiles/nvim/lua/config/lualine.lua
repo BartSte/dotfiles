@@ -7,7 +7,7 @@ custom_auto.inactive.c.gui = 'bold'
 
 lualine.setup({
     options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = custom_auto,
         section_separators = { left = '', right = '' },
         component_separators = { left = '', right = '' },
@@ -38,12 +38,5 @@ lualine.setup({
         lualine_y = {},
         lualine_z = {}
     },
-    tabline = {},
-    winbar = {},
-    inactive_winbar = {},
-    extensions = { 'fugitive', 'fzf', 'quickfix' }
-})
-
-lualine.hide({
-    place = { 'tabline', 'winbar' },
+    extensions = { 'fugitive', 'fzf', 'quickfix', "lazy", "mason", "oil" }
 })

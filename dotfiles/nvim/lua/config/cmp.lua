@@ -53,11 +53,40 @@ local menu_items = {
     cmdline_history = 'HIS',
 }
 
+local cmp_kinds = {
+    Class = '  ',
+    Color = '  ',
+    Constant = '  ',
+    Constructor = '  ',
+    Enum = '  ',
+    EnumMember = '  ',
+    Event = '  ',
+    Field = '  ',
+    File = '  ',
+    Folder = '  ',
+    Function = '  ',
+    Interface = '  ',
+    Keyword = '  ',
+    Method = '  ',
+    Module = '  ',
+    Operator = '  ',
+    Property = '  ',
+    Reference = '  ',
+    Snippet = '  ',
+    Struct = '  ',
+    Text = '  ',
+    TypeParameter = '  ',
+    Unit = '  ',
+    Value = '  ',
+    Variable = '  ',
+}
+
 local formatting = {
     fields = { 'abbr', 'kind', 'menu' },
     format = func.format({
         length = 50,
-        menu = menu_items
+        menu = menu_items,
+        kinds = cmp_kinds
     }),
 }
 

@@ -114,9 +114,10 @@ M.confirm_select = function(value)
 end
 
 M.format = function(opts)
-    return function (entry, vim_item)
+    return function(entry, vim_item)
         vim_item.abbr = string.sub(vim_item.abbr, 1, opts.length)
         vim_item.menu = opts.menu[entry.source.name]
+        vim_item.kind = (opts.kinds[vim_item.kind] or '') .. vim_item.kind
         return vim_item
     end
 end
