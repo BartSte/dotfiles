@@ -1,6 +1,5 @@
 function! s:setgruvbox()
     if has("termguicolors")
-
         set termguicolors
         hi clear
         set background=dark
@@ -9,7 +8,7 @@ function! s:setgruvbox()
         hi ColorColumn guibg=#32302f
         hi CopilotSuggestion guifg=gray65 gui=italic 
         hi CursorLineNr gui=NONE guifg=#fe8019 guibg=#32302f
-        hi FloatermBorder guibg=bg
+        hi FloatBorder guibg=NONE guifg=gray65
         hi Folded guifg=gray65 guibg=bg
         hi HighlightedyankRegion cterm=reverse gui=reverse guifg=#fe8019 guibg=#1d2021
         hi HopNextKey guibg=Normal
@@ -25,7 +24,6 @@ function! s:setgruvbox()
         hi TreesitterContextBottom gui=bold guibg=#31302f
         hi TreesitterContextLineNumber guifg=#fe8019 guibg=#32302f
         hi WinSeparator guifg=gray23 guibg=bg
-
     endif
 endfunction
 
