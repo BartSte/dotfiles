@@ -5,13 +5,12 @@ local join = require("helpers.path").join
 local M = {}
 
 local function files_home()
-    fzf.files({ cwd = os.getenv("HOME") })
+    fzf.files({ cwd = os.getenv("HOME")})
 end
 
--- list directories in current working directory and all subdirectories. Call 
--- :e <directory> to open the selected directory in a new buffer.
--- local function directories()
--- end
+local function dirs()
+    fzf.files({ cmd = "fd --hidden --no-ignore-vcs --ignore-file $HOME/.ignore -t d" })
+end
 
 local function files_nvim_config()
     fzf.files({ cwd = join(os.getenv("HOME"), "dotfiles", "nvim") })
@@ -53,9 +52,10 @@ M.setup = function()
     map.nnoremap("<a-h>", files_home)
     map.nnoremap("<a-v>", files_nvim_config)
     map.nnoremap("<a-H>", fzf.help_tags)
-    map.nnoremap("<a-a>", fzf.grep())
-    map.nnoremap("<a-A>", fzf.live_grep())
+    map.nnoremap("<a-a>", fzf.grep)
+    map.nnoremap("<a-A>", fzf.live_grep)
     map.nnoremap("<a-B>", fzf.git_branches)
+    map.nnoremap("<a-c>", dirs)
 end
 
 return M
