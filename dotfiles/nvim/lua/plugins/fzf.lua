@@ -17,6 +17,15 @@ return {
         vim.cmd('runtime vim/config/fzf.vim')
     end,
     dependencies = {
-        { 'junegunn/fzf',           build = ':call fzf#install()' },
+        { 'junegunn/fzf', build = ':call fzf#install()' },
     }
 }
+
+-- return {
+--   "ibhagwan/fzf-lua",
+--   dependencies = { "nvim-tree/nvim-web-devicons" },
+--   config = function()
+--     -- calling `setup` is optional for customization
+--     require("config.fzf").setup()
+--   end
+-- }
