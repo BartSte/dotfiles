@@ -3,5 +3,6 @@ return {
     event = 'VeryLazy',
     config = function()
         require('config.lualine')
-    end
+    end,
+    dependencies = { "nvim-tree/nvim-web-devicons" }
 }
