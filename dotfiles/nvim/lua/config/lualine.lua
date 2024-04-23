@@ -5,9 +5,14 @@ custom_auto.inactive.c.fg = '#BBBBBB'
 custom_auto.inactive.c.bg = nil
 custom_auto.inactive.c.gui = 'bold'
 
+local function use_icons()
+    local platform = require("helpers.platform")
+    return platform.is_linux() and not platform.is_wsl()
+end
+
 lualine.setup({
     options = {
-        icons_enabled = true,
+        icons_enabled = use_icons(),
         theme = custom_auto,
         section_separators = { left = '', right = '' },
         component_separators = { left = '', right = '' },
