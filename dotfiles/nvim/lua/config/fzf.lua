@@ -7,12 +7,21 @@ local function files_home()
     fzf.files({ cwd = os.getenv("HOME") })
 end
 
+local function files_org()
+    local fd_cmd = "fd --color=never --type f --hidden --follow --exclude .git"
+    local grep_cmd = "grep -v ^.*\\.org_archive$"
+    fzf.files({
+        cwd = join(os.getenv("HOME"), "dropbox", "org"),
+        cmd = fd_cmd .. " | " .. grep_cmd
+    })
+end
+
 local function dirs()
     fzf.files({
         prompt    = "Dirs❯ ",
         fd_opts   = "--type directory",
         previewer = false,
-        preview   = "exa --icons --color=always -T -L 1 -a $(sed 's/^....//' <<< {}) | head -200"
+        preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200",
     })
 end
 
@@ -25,7 +34,7 @@ local opts = {
         height  = 0.9,
         width   = 0.9,
         preview = {
-            hidden = "nohidden",
+            hidden = "hidden",
         }
     },
     keymap  = {
@@ -40,6 +49,7 @@ local opts = {
             ["ctrl-u"]     = "half-page-up",
             ["ctrl-a"]     = "beginning-of-line",
             ["ctrl-e"]     = "end-of-line",
+            ["ctrl-p"]     = "toggle-preview",
             ["alt-a"]      = "toggle-all",
             ["shift-down"] = "preview-page-down",
             ["shift-up"]   = "preview-page-up",
@@ -57,3 +67,4 @@ map.nnoremap("<a-a>", fzf.grep)
 map.nnoremap("<a-A>", fzf.live_grep)
 map.nnoremap("<a-B>", fzf.git_branches)
 map.nnoremap("<a-c>", dirs)
+map.nnoremap("<a-r>", files_org)
