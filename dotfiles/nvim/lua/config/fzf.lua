@@ -12,7 +12,7 @@ local function dirs()
         prompt    = "Dirs❯ ",
         fd_opts   = "--type directory",
         previewer = false,
-        preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200"
+        preview   = "exa --icons --color=always -T -L 1 -a $(sed 's/^....//' <<< {}) | head -200"
     })
 end
 
@@ -21,7 +21,6 @@ local function files_nvim_config()
 end
 
 local opts = {
-    "fzf-native",
     winopts = {
         height  = 0.9,
         width   = 0.9,
