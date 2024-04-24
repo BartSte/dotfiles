@@ -8,7 +8,12 @@ local function files_home()
 end
 
 local function dirs()
-    fzf.files({ cmd = "fd --hidden --no-ignore-vcs --ignore-file $HOME/.ignore -t d" })
+    fzf.files({
+        prompt    = "Dirs❯ ",
+        fd_opts   = "--type directory",
+        previewer = false,
+        preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200"
+    })
 end
 
 local function files_nvim_config()
@@ -16,11 +21,12 @@ local function files_nvim_config()
 end
 
 local opts = {
+    "fzf-native",
     winopts = {
         height  = 0.9,
         width   = 0.9,
         preview = {
-            hidden = "hidden",
+            hidden = "nohidden",
         }
     },
     keymap  = {
