@@ -21,6 +21,7 @@ local function dirs()
         prompt    = "Dirs❯ ",
         fd_opts   = "--type directory",
         previewer = false,
+        git_icons = false,
         preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200",
     })
 end
