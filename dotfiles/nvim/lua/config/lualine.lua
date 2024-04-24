@@ -12,7 +12,7 @@ end
 
 lualine.setup({
     options = {
-        icons_enabled = use_icons(),
+        icons_enabled = true,
         theme = custom_auto,
         section_separators = { left = '', right = '' },
         component_separators = { left = '', right = '' },
