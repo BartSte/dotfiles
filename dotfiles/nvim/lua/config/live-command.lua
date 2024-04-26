@@ -6,7 +6,6 @@ end
 local commands = {
     Norm = { cmd = "norm" },
     Reg = { cmd = "norm", args = reg_args, range = "" },
-    Cdo = { cmd = "cdo" },
 }
 
 local defaults = {
