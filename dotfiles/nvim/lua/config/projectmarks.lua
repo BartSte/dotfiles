@@ -4,5 +4,5 @@ local function cwd_name()
 end
 
 require('projectmarks').setup({
-    shadafile = "~/.local/state/nvim/shada/" .. cwd_name() .. ".shada"
+    -- shadafile = "~/.local/state/nvim/shada/" .. cwd_name() .. ".shada",
 })
