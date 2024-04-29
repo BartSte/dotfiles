@@ -1,1 +1,3 @@
-return { "BartSte/nvim-projectrc" }
+return { 
+    "BartSte/nvim-projectrc",
+}
