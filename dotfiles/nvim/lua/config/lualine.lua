@@ -5,11 +5,6 @@ custom_auto.inactive.c.fg = '#BBBBBB'
 custom_auto.inactive.c.bg = nil
 custom_auto.inactive.c.gui = 'bold'
 
-local function use_icons()
-    local platform = require("helpers.platform")
-    return platform.is_linux() and not platform.is_wsl()
-end
-
 lualine.setup({
     options = {
         icons_enabled = true,
@@ -25,6 +20,7 @@ lualine.setup({
         globalstatus = false,
         refresh = {
             statusline = 1000,
+            tabline = 1000,
         }
     },
     sections = {
@@ -43,5 +39,15 @@ lualine.setup({
         lualine_y = {},
         lualine_z = {}
     },
+    tabline = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {}
+    },
     extensions = { 'fugitive', 'fzf', 'quickfix', "lazy", "mason", "oil" }
 })
+
+vim.opt.showtabline = 1

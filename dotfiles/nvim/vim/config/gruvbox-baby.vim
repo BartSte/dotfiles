@@ -19,8 +19,9 @@ function! s:setgruvbox()
         hi LineNr guifg=LightGray guibg=bg
         hi MatchParen gui=bold guifg=#fe8019 guibg=#1d2021
         hi SpellBad gui=undercurl guisp=Red guifg=Normal
-        hi Tabline gui=bold guibg=bg
-        hi TablineSel gui=bold guibg=bg 
+        hi TabLine guibg=bg 
+        hi TabLineSel guibg=bg 
+        hi TabLineFill guibg=bg 
         hi TreesitterContext guibg=#31302f
         hi TreesitterContextBottom gui=bold guibg=#31302f
         hi TreesitterContextLineNumber guifg=#fe8019 guibg=#32302f
