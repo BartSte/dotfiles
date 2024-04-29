@@ -9,7 +9,7 @@ end
 
 local function files_org()
     local fd_cmd = "fd --color=never --type f --hidden --follow --exclude .git"
-    local grep_cmd = "grep -v ^.*\\.org_archive$"
+    local grep_cmd = "grep -v org_archive$"
     fzf.files({
         cwd = join(os.getenv("HOME"), "dropbox", "org"),
         cmd = fd_cmd .. " | " .. grep_cmd
