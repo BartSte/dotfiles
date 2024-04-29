@@ -8,5 +8,5 @@ nnoremap <leader>i <cmd>diffget //3<CR>
 "Simplify the diff navigation by searching for <<, ===, and >>.
 nnoremap <leader>d<CR> /<[<]\+\\|==[=]\+\\|>[>]\+<CR>
 nnoremap <leader>d<BS> ?<[<]\+\\|==[=]\+\\|>[>]\+<CR>
-nnoremap <leader>dd :wincmd o<CR>:G --name-status difftool HEAD..
-nnoremap <leader>dt :wincmd o<CR>:G -y difftool HEAD..
+nnoremap <leader>dd :wincmd o<CR>:G difftool --name-status
+nnoremap <leader>dt :wincmd o<CR>:G difftool -y
