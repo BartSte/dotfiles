@@ -16,8 +16,8 @@ M.setup = function()
             args = { "-i", "4" },
         }),
         -- Markdown
-        null_ls.builtins.formatting.prettier.with({
-            filetypes = { "markdown" },
+        null_ls.builtins.formatting.prettierd.with({
+            extra_filetypes = { "toml" },
         }),
         null_ls.builtins.diagnostics.markdownlint.with({
             args = { "--stdin", "--disable", "MD013" },
