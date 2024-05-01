@@ -35,12 +35,7 @@ end
 --- the current file type is python.
 ---@return string name virtualenv_name
 M.venv = function()
-    local is_python = vim.bo.filetype == "python"
-    if vim.env.VIRTUAL_ENV and is_python then
-        return extract_venv_name(vim.env.VIRTUAL_ENV)
-    else
-        return ""
-    end
+    return extract_venv_name(vim.env.VIRTUAL_ENV)
 end
 
 M.shada = function()

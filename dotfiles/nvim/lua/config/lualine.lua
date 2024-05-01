@@ -37,7 +37,7 @@ local shada = {
 
 local copilot = {
     "copilot",
-     color = { fg = "white", gui = "bold" },
+    color = { fg = "white", gui = "bold" },
 }
 
 lualine.setup({
@@ -48,11 +48,19 @@ lualine.setup({
         globalstatus = true,
     },
     sections = {
+        -- State of the editor
         lualine_a = { "mode" },
-        lualine_b = {},
-        lualine_c = { copilot, "branch", "diff", "diagnostics", venv, shada },
-        lualine_x = { filename, "filetype", fileformat, progress },
-        lualine_y = {},
+        -- Same for all files
+        lualine_b = { copilot, venv, shada },
+
+        -- Changes when switching buffers
+        lualine_c = { "branch", "diff", "diagnostics", },
+        lualine_x = { filename, "filetype", progress },
+
+        -- Same for all files
+        lualine_y = { fileformat },
+
+        -- State of the editor
         lualine_z = { helpers.tabs }
     },
     extensions = { "fugitive", "fzf", "quickfix", "lazy", "mason", "oil" }
