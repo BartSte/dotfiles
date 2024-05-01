@@ -3,6 +3,7 @@ local devicons = require("nvim-web-devicons")
 ---@class LuaLine
 ---@field tabs function()
 ---@field venv function()
+---@field shada function()
 local M = {}
 
 --- Return the current tab number and the total number of tabs.
@@ -40,6 +41,10 @@ M.venv = function()
     else
         return ""
     end
+end
+
+M.shada = function()
+    return string.match(vim.o.shadafile, "/([^/]*)$")
 end
 
 return M

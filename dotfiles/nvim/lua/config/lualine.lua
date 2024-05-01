@@ -15,7 +15,7 @@ local filename = {
     path = 4,
     symbols = {
         modified = "✎ ",
-        readonly = "❌"
+        readonly = "❌",
     }
 }
 
@@ -26,7 +26,18 @@ local fileformat = {
 
 local progress = {
     "progress",
-    fmt = function(name, context) return "↕ " .. name end
+    icon = "↕"
+}
+
+local shada = {
+    helpers.shada,
+    icon = { "✔", color = { fg = "green" } },
+    cond = function() return vim.o.shadafile ~= "" end
+}
+
+local copilot = {
+    "copilot",
+     color = { fg = "white", gui = "bold" },
 }
 
 lualine.setup({
@@ -39,7 +50,7 @@ lualine.setup({
     sections = {
         lualine_a = { "mode" },
         lualine_b = {},
-        lualine_c = { "branch", "diff", "diagnostics", venv, "copilot" },
+        lualine_c = { copilot, "branch", "diff", "diagnostics", venv, shada },
         lualine_x = { filename, "filetype", fileformat, progress },
         lualine_y = {},
         lualine_z = { helpers.tabs }
