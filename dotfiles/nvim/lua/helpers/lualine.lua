@@ -36,8 +36,7 @@ end
 M.venv = function()
     local is_python = vim.bo.filetype == "python"
     if vim.env.VIRTUAL_ENV and is_python then
-        local name = extract_venv_name(vim.env.VIRTUAL_ENV)
-        return devicons.get_icon_by_filetype("python", {}) .. " " .. name
+        return extract_venv_name(vim.env.VIRTUAL_ENV)
     else
         return ""
     end

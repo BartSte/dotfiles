@@ -86,9 +86,9 @@ nnoremap("<silent><leader>cc", "vip:sort<CR>")
 nnoremap("<leader>w", "<cmd>setlocal wrap! wrap?<CR>")
 
 --Save
-inoremap("<C-s>", "<cmd>w<CR>")
+inoremap("<C-s>", "<cmd>silent w<CR>")
 nnoremap("<leader>s", ":mksession! Session.vim<CR>")
-noremap("<C-s>", "<cmd>w<CR>")
+noremap("<C-s>", "<cmd>silent w<CR>")
 
 --Shell commands
 vim.cmd("noremap <leader>cx :!chmod +x %<CR>")

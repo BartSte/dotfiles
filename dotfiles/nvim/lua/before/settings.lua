@@ -36,6 +36,7 @@ vim.opt.updatetime = 750
 vim.opt.wildmenu = false
 vim.opt.wrap = false
 vim.opt.writebackup = false
+vim.opt.showmode = false
 
 if vim.fn.has("termguicolors") then
     vim.opt.termguicolors = true
