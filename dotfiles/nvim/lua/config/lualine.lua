@@ -35,11 +35,6 @@ local shada = {
     cond = function() return vim.o.shadafile ~= "" end
 }
 
-local copilot = {
-    "copilot",
-    color = { fg = "white", gui = "bold" },
-}
-
 lualine.setup({
     options = {
         icons_enabled = true,
@@ -51,7 +46,7 @@ lualine.setup({
         -- State of the editor
         lualine_a = { "mode" },
         -- Same for all files
-        lualine_b = { copilot, venv, shada },
+        lualine_b = { "copilot", venv, shada },
 
         -- Changes when switching buffers
         lualine_c = { "branch", "diff", "diagnostics", },
