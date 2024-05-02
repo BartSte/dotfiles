@@ -4,6 +4,8 @@ local devicons = require("nvim-web-devicons")
 ---@field tabs function()
 ---@field venv function()
 ---@field shada function()
+---@field shada_color function()
+---@field projectrc function()
 local M = {}
 
 --- Return the current tab number and the total number of tabs.
@@ -39,7 +41,19 @@ M.venv = function()
 end
 
 M.shada = function()
-    return string.match(vim.o.shadafile, "/([^/]*)$")
+    if vim.go.shadafile == "" then
+        return "🌍"
+    else
+        return "💾"
+    end
+end
+
+M.shada_color = function()
+    if vim.go.shadafile == "" then
+        return {}
+    else
+        return { fg = "lightgreen" }
+    end
 end
 
 return M
