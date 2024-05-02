@@ -14,8 +14,8 @@ local filename = {
     "filename",
     path = 4,
     symbols = {
-        modified = "✎ ",
-        readonly = "❌",
+        modified = "📝",
+        readonly = "🔒"
     }
 }
 
@@ -29,18 +29,10 @@ local progress = {
     icon = "↕"
 }
 
-local shada = {
-    helpers.shada,
-    color = helpers.shada_color()
-}
-
 local projectrc = {
-    function () return require("projectrc").get_name() end,
+    function() return require("projectrc").get_name() end,
     condition = function() return require("projectrc").get_name() ~= "" end,
-    icon = {
-        "🛠",
-        color = { fg = "lightgreen" }
-    }
+    icon = "🛠",
 }
 
 lualine.setup({
@@ -54,10 +46,10 @@ lualine.setup({
         -- State of the editor
         lualine_a = { "mode" },
         -- Same for all files
-        lualine_b = { "copilot", shada, projectrc, venv },
+        lualine_b = { "copilot", helpers.shada, projectrc, venv },
 
         -- Changes when switching buffers
-        lualine_c = { "branch", "diff", "diagnostics", },
+        lualine_c = { "branch", "diff", "diagnostics" },
         lualine_x = { filename, "filetype", progress },
 
         -- Same for all files
