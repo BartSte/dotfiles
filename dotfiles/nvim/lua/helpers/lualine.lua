@@ -5,7 +5,7 @@ local devicons = require("nvim-web-devicons")
 ---@field venv function()
 ---@field shada function()
 ---@field shada_color function()
----@field projectrc function()
+---@field marks function()
 local M = {}
 
 --- Return the current tab number and the total number of tabs.

@@ -35,7 +35,7 @@ local shada = {
 }
 
 local projectrc = {
-    function () return require("projectrc").get_name() end,
+    function() return require("projectrc").get_name() end,
     condition = function() return require("projectrc").get_name() ~= "" end,
     icon = {
         "🛠",
@@ -57,7 +57,7 @@ lualine.setup({
         lualine_b = { "copilot", shada, projectrc, venv },
 
         -- Changes when switching buffers
-        lualine_c = { "branch", "diff", "diagnostics", },
+        lualine_c = { "branch", "diff", "diagnostics" },
         lualine_x = { filename, "filetype", progress },
 
         -- Same for all files
