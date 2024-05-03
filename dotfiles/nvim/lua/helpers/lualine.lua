@@ -1,4 +1,12 @@
 ---@class LuaLine
+---@field tabs function
+---@field venv function
+---@field shada function
+---@field marks function
+---@field mark_exists function
+---@field find_marks function
+---@field extract_venv_name function
+---@return LuaLine
 local M = {}
 
 --- Return the current tab number and the total number of tabs.
@@ -53,8 +61,13 @@ local function mark_exists(bufnr, mark)
     return row_col[1] + row_col[2] > 0
 end
 
+--- Return a table of marks that exist in the buffer.
+---@param bufnr number The buffer number
+---@return table<string> marks The marks that exist in the buffer
 local function find_marks(bufnr)
     local marks = {}
+    --TODO: only execute the command under certain conditions? To avoid the
+    -- overhead of executing the marks command every time.
     local marks_list = vim.fn.execute("marks")
     local marks_table = vim.split(marks_list, "\n")
     for _, line in ipairs(marks_table) do
