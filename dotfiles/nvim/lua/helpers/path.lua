@@ -98,4 +98,12 @@ M.module_join = function(module, ...)
     return module .. "." .. table.concat(parts, ".")
 end
 
+--- Checks if a file exists.
+---@param filename string The name of the file to be checked.
+---@return boolean result True if the file exists, false otherwise.
+M.exists = function(filename)
+  filename = vim.fn.expand(filename)
+  return vim.fn.filereadable(filename) == 1
+end
+
 return M

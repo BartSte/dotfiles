@@ -35,8 +35,16 @@ local projectrc = {
     icon = "🛠",
 }
 
+local marks = {
+    helpers.marks,
+    icon = "🔖",
+}
+
 lualine.setup({
     options = {
+        refresh = {
+            statusline = 2000,
+        },
         icons_enabled = true,
         section_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" },
@@ -49,7 +57,7 @@ lualine.setup({
         lualine_b = { "copilot", helpers.shada, projectrc, venv },
 
         -- Changes when switching buffers
-        lualine_c = { "branch", "diff", "diagnostics" },
+        lualine_c = { "branch", "diff", "diagnostics", marks },
         lualine_x = { filename, "filetype", progress },
 
         -- Same for all files
