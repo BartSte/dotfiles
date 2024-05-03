@@ -1,6 +1,7 @@
+local map = require("helpers.keymapper")
+local icons = require("nvim-web-devicons")
 local lualine = require("lualine")
 local helpers = require("helpers.lualine")
-local icons = require("nvim-web-devicons")
 
 local venv = {
     helpers.venv,
@@ -39,11 +40,12 @@ local marks = {
     helpers.marks,
     icon = "🔖",
 }
+map.nnoremap("m", "<cmd>lua require('helpers.lualine').marks_need_update()<CR>m")
 
 lualine.setup({
     options = {
         refresh = {
-            statusline = 2000,
+            statusline = 1000,
         },
         icons_enabled = true,
         section_separators = { left = "", right = "" },

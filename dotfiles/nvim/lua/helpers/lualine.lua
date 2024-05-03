@@ -71,7 +71,7 @@ local function find_marks(bufnr)
     local marks_list = vim.fn.execute("marks")
     local marks_table = vim.split(marks_list, "\n")
     for _, line in ipairs(marks_table) do
-        local mark = line:match("^ *([a-zA-Z])")
+        local mark = line:match("^ *([a-zA-Z]) ")
         if mark_exists(bufnr, mark) then
             table.insert(marks, mark)
         end
@@ -79,10 +79,23 @@ local function find_marks(bufnr)
     return marks
 end
 
+local last_buffer = 0
+local last_marks = ""
+local marks_need_update = false
 --- Return the lowercase and uppercase marks of the current buffer.
 ---@return string marks The marks of the current buffer
 M.marks = function()
-    return table.concat(find_marks(0), " ")
+    local current_buffer = vim.fn.bufnr()
+    if current_buffer ~= last_buffer or marks_need_update then
+        marks_need_update = false
+        last_buffer = current_buffer
+        last_marks = table.concat(find_marks(current_buffer), " ")
+    end
+    return last_marks
+end
+
+M.marks_need_update = function()
+    marks_need_update = true
 end
 
 return M
