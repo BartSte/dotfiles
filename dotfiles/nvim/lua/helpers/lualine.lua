@@ -1,11 +1,14 @@
 local devicons = require("nvim-web-devicons")
 
 ---@class LuaLine
+<<<<<<< HEAD
 ---@field tabs function()
 ---@field venv function()
 ---@field shada function()
 ---@field shada_color function()
 ---@field marks function()
+=======
+>>>>>>> 3426ad825a6e9b01cd9ed661730dfdf114606094
 local M = {}
 
 --- Return the current tab number and the total number of tabs.
@@ -48,12 +51,10 @@ M.shada = function()
     end
 end
 
-M.shada_color = function()
-    if vim.go.shadafile == "" then
-        return {}
-    else
-        return { fg = "lightgreen" }
-    end
+--- Return the lowercase and uppercase marks of the current buffer.
+---@return string marks The marks of the current buffer
+M.marks = function()
+    return marks
 end
 
 return M
