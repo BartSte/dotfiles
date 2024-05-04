@@ -49,14 +49,24 @@ M.shada = function()
     end
 end
 
+--- Runs the `marks` with
+---@param args string|nil The arguments to pass to the marks command
+---@return table marks The marks of the current buffer
+local function get_marks(args)
+    args = args or "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    local ok, result = pcall(vim.fn.execute, "marks " .. args)
+    if ok then
+        return vim.split(result, "\n")
+    else
+        return {}
+    end
+end
+
 --- Return true if the mark exists in the buffer. Otherwise, return false.
 ---@param bufnr number The buffer number
----@param mark string|nil The mark to check
+---@param mark string The mark to check
 ---@return boolean
-local function mark_exists(bufnr, mark)
-    if mark == nil then
-        return false
-    end
+local function mark_in_buffer(bufnr, mark)
     local row_col = vim.api.nvim_buf_get_mark(bufnr, mark)
     return row_col[1] + row_col[2] > 0
 end
@@ -66,36 +76,48 @@ end
 ---@return table<string> marks The marks that exist in the buffer
 local function find_marks(bufnr)
     local marks = {}
-    --TODO: only execute the command under certain conditions? To avoid the
-    -- overhead of executing the marks command every time.
-    local marks_list = vim.fn.execute("marks")
-    local marks_table = vim.split(marks_list, "\n")
-    for _, line in ipairs(marks_table) do
+    for _, line in ipairs(get_marks()) do
         local mark = line:match("^ *([a-zA-Z]) ")
-        if mark_exists(bufnr, mark) then
+        if mark ~= nil and mark_in_buffer(bufnr, mark) then
             table.insert(marks, mark)
         end
     end
     return marks
 end
 
-local last_buffer = 0
-local last_marks = ""
-local marks_need_update = false
+local latest_buffer = 0
+local latest_marks = ""
 --- Return the lowercase and uppercase marks of the current buffer.
 ---@return string marks The marks of the current buffer
 M.marks = function()
-    local current_buffer = vim.fn.bufnr()
-    if current_buffer ~= last_buffer or marks_need_update then
-        marks_need_update = false
-        last_buffer = current_buffer
-        last_marks = table.concat(find_marks(current_buffer), " ")
+    local buffer = vim.fn.bufnr()
+    if buffer ~= latest_buffer then
+        latest_buffer = buffer
+        latest_marks = table.concat(find_marks(buffer), " ")
     end
-    return last_marks
+    return latest_marks
 end
 
-M.marks_need_update = function()
-    marks_need_update = true
+--- Add a mark and then triggers an update for the marks function.
+M.add_mark = function()
+    local msg = require("projectmarks").opts.message
+    vim.api.nvim_notify(msg, vim.log.levels.INFO, {})
+    local ok, result = pcall(vim.fn.getchar)
+    vim.api.nvim_notify('', vim.log.levels.INFO, {})
+    vim.api.nvim_command('redraw')
+
+    if ok then
+        vim.cmd("normal! m" .. result)
+    end
+
+    latest_buffer = 0
+end
+
+--- Delete a mark and then triggers an update for the marks function.
+---@param mark string The mark to delete
+M.delete_mark = function(mark)
+    vim.cmd("delmarks " .. mark)
+    latest_buffer = 0
 end
 
 return M

@@ -40,7 +40,10 @@ local marks = {
     helpers.marks,
     icon = "🔖",
 }
-map.nnoremap("m", "<cmd>lua require('helpers.lualine').marks_need_update()<CR>m")
+
+vim.cmd("command! AddMark lua require('helpers.lualine').add_mark()")
+map.silent_noremap("m", ":AddMark<CR>")
+-- TODO: also override the delmark command such that lualine updates accordingly
 
 lualine.setup({
     options = {
