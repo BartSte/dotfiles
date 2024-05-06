@@ -3,5 +3,6 @@ return {
     lazy = false,
     config = function()
         require('config.projectmarks')
-    end
+    end,
+    dir = '$HOME/code/nvim-project-marks'
 }

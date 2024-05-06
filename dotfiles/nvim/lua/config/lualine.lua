@@ -2,6 +2,7 @@ local map = require("helpers.keymapper")
 local icons = require("nvim-web-devicons")
 local lualine = require("lualine")
 local helpers = require("helpers.lualine")
+local projectmarks = require("projectmarks.lualine")
 
 local venv = {
     helpers.venv,
@@ -36,15 +37,6 @@ local projectrc = {
     icon = "🛠",
 }
 
-local marks = {
-    helpers.marks,
-    icon = "🔖",
-}
-
-vim.cmd("command! AddMark lua require('helpers.lualine').add_mark()")
-map.silent_noremap("m", ":AddMark<CR>")
--- TODO: also override the delmark command such that lualine updates accordingly
-
 lualine.setup({
     options = {
         refresh = {
@@ -59,10 +51,10 @@ lualine.setup({
         -- State of the editor
         lualine_a = { "mode" },
         -- Same for all files
-        lualine_b = { "copilot", helpers.shada, projectrc, venv },
+        lualine_b = { "copilot", projectmarks.shada, projectrc, venv },
 
         -- Changes when switching buffers
-        lualine_c = { "branch", "diff", "diagnostics", marks },
+        lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks},
         lualine_x = { filename, "filetype", progress },
 
         -- Same for all files
