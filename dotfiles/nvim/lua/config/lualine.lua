@@ -1,4 +1,3 @@
-local map = require("helpers.keymapper")
 local icons = require("nvim-web-devicons")
 local lualine = require("lualine")
 local helpers = require("helpers.lualine")
@@ -54,7 +53,7 @@ lualine.setup({
         lualine_b = { "copilot", projectmarks.shada, projectrc, venv },
 
         -- Changes when switching buffers
-        lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks},
+        lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks_optimized},
         lualine_x = { filename, "filetype", progress },
 
         -- Same for all files
