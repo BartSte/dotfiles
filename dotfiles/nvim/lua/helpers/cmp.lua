@@ -30,6 +30,8 @@ M.restore_with_fallback = function(fallback)
     fallback()
 end
 
+
+
 M.toggle_cmp = function()
     M.cmp_enabled = not M.cmp_enabled
     M.restore_cmp()
@@ -111,6 +113,23 @@ end
 
 M.confirm_select = function(value)
     return cmp.mapping.confirm({ select = value })
+end
+
+--- For a cmp mapping function called `callback` the original fallback is
+--- replaced with an empty function, next the `new_fallback` is called.
+---@param callback function The cmp mapping function
+---@param new_fallback function The new fallback function
+---@return function mapping_function The new mapping function
+M.change_fallback = function(callback, new_fallback)
+    local empty_fallback = function() end
+    return function(old_fallback)
+        callback(empty_fallback)
+        new_fallback()
+    end
+end
+
+M.send_term_key = function(key)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), 'n', true)
 end
 
 M.format = function(opts)

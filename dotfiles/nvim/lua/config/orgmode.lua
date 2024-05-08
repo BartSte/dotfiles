@@ -46,8 +46,6 @@ local templates = {
     }
 }
 
-orgmode.setup_ts_grammar()
-
 orgmode.setup({
     mappings = mappings,
     org_default_notes_file = main,
