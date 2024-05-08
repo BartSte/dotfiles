@@ -2,15 +2,17 @@ local cmp = require('cmp')
 local func = require('helpers.cmp')
 local mapper = require("helpers.keymapper")
 
-local function space_with_expand()
-    func.send_term_key('<C-]>')
-    func.send_term_key('<Space>')
-end
+--Usdd to expand abbreviations. It works, but it causes fugutive to fail when it
+--tries to populate the command line..
+-- local function space_with_expand()
+--     func.send_term_key('<C-]>')
+--     func.send_term_key('<space>')
+-- end
 
-local restore_with_space = func.change_fallback(
-    func.restore_with_fallback,
-    space_with_expand
-)
+-- local restore_with_space = func.change_fallback(
+--     func.restore_with_fallback,
+--     space_with_expand
+-- )
 
 -- To enable history scrolling on the command line, cmp is disabled when
 -- <Down> or <Up> is pressed. cmp is restored when tab/stab or space are pressed.
@@ -18,7 +20,7 @@ local up = { i = func.prev_item_insert, c = func.prev_item_cmd }
 local tab = { i = func.next_item_insert, c = func.next_item_or_enable_cmd }
 local down = { i = func.next_item_insert, c = func.next_item_cmd }
 local stab = { i = func.prev_item_insert, c = func.prev_item_or_enable_cmd }
-local space = { c = restore_with_space }
+local space = { c = func.restore_with_fallback }
 local enter = { i = func.confirm_select(false), c = func.confirm_select(false) }
 local cspace = { i = func.toggle_visibility, c = func.toggle_visibility }
 local menter = { i = func.confirm_select(true), c = func.confirm_select(true) }

@@ -126,8 +126,9 @@ M.change_fallback = function(callback, new_fallback)
     end
 end
 
-M.send_term_key = function(key)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), 'n', false)
+M.send_term_key = function(code)
+    local key = vim.api.nvim_replace_termcodes(code, true, false, true)
+    vim.api.nvim_feedkeys(key, 'n', false)
 end
 
 M.format = function(opts)
