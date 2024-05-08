@@ -30,8 +30,6 @@ M.restore_with_fallback = function(fallback)
     fallback()
 end
 
-
-
 M.toggle_cmp = function()
     M.cmp_enabled = not M.cmp_enabled
     M.restore_cmp()
@@ -129,7 +127,7 @@ M.change_fallback = function(callback, new_fallback)
 end
 
 M.send_term_key = function(key)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), 'n', true)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), 'n', false)
 end
 
 M.format = function(opts)
