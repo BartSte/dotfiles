@@ -1,6 +1,13 @@
 local cmp = require('cmp')
 local behavior_insert = { behavior = cmp.SelectBehavior.Insert }
 
+local function notify(msg, level)
+    if vim.api.nvim_get_mode().mode ~= 'c' then
+        level = level or vim.log.levels.INFO
+        vim.api.nvim_notify(msg, level, {})
+    end
+end
+
 local function enable_cmp(value)
     cmp.setup({ enabled = value })
 end
@@ -10,6 +17,27 @@ local M = {}
 --A variable to hold the state of cmp is created to make history scrolling in
 --the command line easier to implement.
 M.cmp_enabled = true
+
+--- Enable cmp and show the pum.
+M.enable_complete = function()
+    if not M.cmp_enabled then
+        notify("cmp is enabled")
+    end
+    M.cmp_enabled = true
+    enable_cmp(M.cmp_enabled)
+    cmp.complete()
+end
+
+--- Disable cmp and hide the pum.
+M.disable_abort = function()
+    if M.cmp_enabled then
+        notify("cmp is disabled")
+    end
+    M.cmp_enabled = false
+    enable_cmp(M.cmp_enabled)
+    cmp.abort()
+    notify("cmp is disabled")
+end
 
 M.toggle_visibility = function()
     if cmp.visible() then
@@ -32,11 +60,10 @@ end
 
 M.toggle_cmp = function()
     M.cmp_enabled = not M.cmp_enabled
-    M.restore_cmp()
     if M.cmp_enabled then
-        print('cmp is enabled')
+        M.enable_complete()
     else
-        print('cmp is disabled')
+        M.disable_abort()
     end
 end
 

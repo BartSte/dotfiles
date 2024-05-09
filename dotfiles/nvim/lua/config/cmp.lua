@@ -1,29 +1,17 @@
 local cmp = require('cmp')
 local func = require('helpers.cmp')
-local mapper = require("helpers.keymapper")
-
---Usdd to expand abbreviations. It works, but it causes fugutive to fail when it
---tries to populate the command line..
--- local function space_with_expand()
---     func.send_term_key('<C-]>')
---     func.send_term_key('<space>')
--- end
-
--- local restore_with_space = func.change_fallback(
---     func.restore_with_fallback,
---     space_with_expand
--- )
+local map = require('helpers.keymapper')
 
 -- To enable history scrolling on the command line, cmp is disabled when
 -- <Down> or <Up> is pressed. cmp is restored when tab/stab or space are pressed.
+local tab = { i = func.next_item_insert, c = func.next_item_cmd }
+local stab = { i = func.prev_item_insert, c = func.prev_item_cmd }
 local up = { i = func.prev_item_insert, c = func.prev_item_cmd }
-local tab = { i = func.next_item_insert, c = func.next_item_or_enable_cmd }
 local down = { i = func.next_item_insert, c = func.next_item_cmd }
-local stab = { i = func.prev_item_insert, c = func.prev_item_or_enable_cmd }
-local space = { c = func.restore_with_fallback }
 local enter = { i = func.confirm_select(false), c = func.confirm_select(false) }
-local cspace = { i = func.toggle_visibility, c = func.toggle_visibility }
+local cspace = { i = func.toggle_cmp, c = func.toggle_cmp }
 local menter = { i = func.confirm_select(true), c = func.confirm_select(true) }
+
 
 local snippet = {
     expand = function(args)
@@ -32,19 +20,17 @@ local snippet = {
 }
 
 local mappings = {
+    ['<Tab>'] = cmp.mapping(tab),
+    ['<S-Tab>'] = cmp.mapping(stab),
     ['<Up>'] = cmp.mapping(up),
     ['<CR>'] = cmp.mapping(enter),
-    ['<Tab>'] = cmp.mapping(tab),
     ['<C-u>'] = cmp.mapping.scroll_docs(4),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<Down>'] = cmp.mapping(down),
     ['<M-CR>'] = cmp.mapping(menter),
-    ['<S-Tab>'] = cmp.mapping(stab),
-    ['<Space>'] = cmp.mapping(space),
     ['<C-Space>'] = cmp.mapping(cspace),
 }
-
-vim.api.nvim_set_hl(0, "CmpItemSel", { bg = "#FF0000" })
+map.nnoremap('<C-Space>', "a<cmd>lua require('helpers.cmp').enable_complete()<CR>")
 
 local window = {
     -- Here the style of the completion window is set to the one defined in the
@@ -166,4 +152,3 @@ vim.api.nvim_create_autocmd('CmdlineLeave', {
 })
 
 vim.opt.completeopt = { 'menu' }
-mapper.nnoremap('<C-Space>', "a<cmd>lua require('helpers.cmp').toggle_visibility()<CR>")
