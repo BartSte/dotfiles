@@ -4,5 +4,5 @@ return {
     config = function()
         require('config.projectmarks')
     end,
-    dir = '$HOME/code/nvim-project-marks'
+    branch = "develop"
 }
