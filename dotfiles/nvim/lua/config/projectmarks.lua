@@ -5,4 +5,5 @@ end
 
 require('projectmarks').setup({
     shadafile = "~/.local/state/nvim/shada/" .. cwd_name() .. ".shada",
+    abbreviations = true,
 })

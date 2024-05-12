@@ -53,7 +53,7 @@ lualine.setup({
         lualine_b = { "copilot", projectmarks.shada, projectrc, venv },
 
         -- Changes when switching buffers
-        lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks_optimized},
+        lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks_optimized },
         lualine_x = { filename, "filetype", progress },
 
         -- Same for all files
