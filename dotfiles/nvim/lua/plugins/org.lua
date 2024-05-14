@@ -11,7 +11,6 @@ return {
     },
     cond = function() return vim.fn.has('linux') == 1 end,
     dependencies = {
-        'junegunn/fzf.vim',
         'BartSte/nvim-khalorg',
         'dhruvasagar/vim-table-mode',
     }
