@@ -1,1 +1,1 @@
-require('helpers.ft-cpp').setup()
+require("after.ftplugin.cpp")

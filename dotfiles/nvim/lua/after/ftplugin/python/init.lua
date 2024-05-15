@@ -2,7 +2,6 @@ local keymapper = require("helpers.keymapper")
 
 keymapper.buffer_nnoremap('<leader>b', 'obreakpoint()<Esc>')
 keymapper.buffer_nnoremap('<leader>B', 'Obreakpoint()<Esc>')
-keymapper.buffer_nnoremap('<leader><leader>n', ':setlocal tw=0<CR>A  # noqa<Esc>^<cmd>setlocal tw=79<CR>')
 
 keymapper.buffer_nnoremap('gl', ':TestVisit<CR>')
 
