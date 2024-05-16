@@ -5,7 +5,7 @@ local M = {}
 ---@param client_name string The name of the client to check
 ---@return function callback A function that takes a client and returns a
 ---boolean
-local function is_client_callback(client_name)
+local function make_filter(client_name)
     return function(client)
         return client.name == client_name
     end
@@ -18,8 +18,10 @@ end
 local function format_callback(client_name)
     return function(bufnr)
         vim.lsp.buf.format({
-            filter = is_client_callback(client_name),
-            bufnr = bufnr
+            filter = make_filter(client_name),
+            bufnr = bufnr,
+            timeout_ms = 5000,
+            async = false
         })
     end
 end
@@ -34,14 +36,11 @@ end
 ---and returns a function that formats the buffer and maps it to the mapping
 ---passed in the argument
 M.format_with_client = function(name, mapping)
-    local format = format_callback(name)
     return function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
-            require("helpers.keymapper").buffer_nnoremap(
-                mapping,
-                function() format(bufnr) end
-            )
-        end
+        require("helpers.keymapper").buffer_nnoremap(
+            mapping,
+            format_callback(name)
+        )
     end
 end
 

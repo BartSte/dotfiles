@@ -40,6 +40,14 @@ local function set_virtual_text_all()
     })
 end
 
+local function format()
+    vim.lsp.buf.format({
+        filter = require("projectrc").require("config.lsp.format").filter,
+        timeout_ms = 5000,
+        async = false
+    })
+end
+
 local function mappings()
     local function bufmap(mode, lhs, rhs)
         local opts = { buffer = true }
@@ -65,7 +73,7 @@ local function mappings()
     bufmap('n', '<leader>vo', set_virtual_text_off)
     bufmap('n', '<leader>ve', set_virtual_text_error)
     bufmap('n', '<leader>va', set_virtual_text_all)
-    bufmap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({timeout_ms = 5000, async = false})<cr>')
+    bufmap('n', '<leader>f', format)
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
