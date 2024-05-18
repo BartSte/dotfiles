@@ -2,6 +2,7 @@ local cmp = require('cmp')
 local func = require('helpers.cmp')
 local map = require('helpers.keymapper')
 
+
 -- To enable history scrolling on the command line, cmp is disabled when
 -- <Down> or <Up> is pressed. cmp is restored when tab/stab or space are pressed.
 local tab = { i = func.next_item_insert, c = func.next_item_cmd }
@@ -9,7 +10,7 @@ local stab = { i = func.prev_item_insert, c = func.prev_item_cmd }
 local up = { i = func.prev_item_insert, c = func.prev_item_cmd }
 local down = { i = func.next_item_insert, c = func.next_item_cmd }
 local enter = { i = func.confirm_select(false), c = func.confirm_select(false) }
-local cspace = { i = func.toggle_cmp, c = func.toggle_cmp }
+local cspace = { i = func.toggle_visibility, c = func.toggle_cmp }
 local menter = { i = func.confirm_select(true), c = func.confirm_select(true) }
 
 
