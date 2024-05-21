@@ -94,5 +94,3 @@ orgmode.setup({
         CANCEL = ':foreground magenta :weight bold'
     },
 })
-
-mapper.nnoremap('<a-r>', ':Files ' .. dropbox_org .. '<CR>')
