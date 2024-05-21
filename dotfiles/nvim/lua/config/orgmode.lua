@@ -15,6 +15,38 @@ khalorg.setup({
     calendar = 'outlook_local'
 })
 
+local template_gedachte = [[
+* %?%U
+** Situatie
+
+** Gevoel
+
+*** Hoe sterk is het gevoel?
+
+** Automatische gedachte 
+
+*** Hoe geloofwaardig zijn deze gedachte?
+
+** Uitdagen
+
+*** Stel vragen over de automatische gedachten
+
+*** Wat zijn de antwoorden op deze vragen?
+
+** Alternatieve gedachte
+
+*** Zet altenatieve gedachten tegenover de automatische gedachten
+
+*** Hoe geloofwaardig zijn de alternatieve gedachten?
+
+** Resultaat
+
+*** Hoe geloofwaardig zijn de automatische gedachten nu?
+
+*** Hoe sterk is het gevoel nu?
+
+]]
+
 local custom_exports = {
     n = { label = 'Add a new khal item', action = khalorg.new },
     d = { label = 'Delete a khal item', action = khalorg.delete },
@@ -36,7 +68,7 @@ local templates = {
     },
     g = {
         description = 'Gedachte',
-        template = '* %?\n%U\n\n** Gebeurtenis\n\n** Gevoel\n\n** Gedachte \n\n** Kerngedachte \n\n** Helpende gedachte\n\n',
+        template = template_gedachte,
         target = gedachten
     },
     e = {
