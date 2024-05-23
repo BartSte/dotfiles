@@ -6,6 +6,7 @@ local keymapper = require('helpers.keymapper')
 
 vim.opt_local.shiftwidth = 2
 vim.opt_local.softtabstop = 2
+vim.opt_local.textwidth = 80
 
 keymapper.buffer_nnoremap('gs', '<cmd>ClangdSwitchSourceHeader<cr>')
 keymapper.buffer_nnoremap('gS', '<cmd>wincmd v<cr><cmd>ClangdSwitchSourceHeader<cr>')

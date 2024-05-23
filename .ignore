@@ -1,5 +1,6 @@
 *.git/
 .virtualenvs/
+3rdparty/
 .ipython/
 *.swp*
 *autogen
