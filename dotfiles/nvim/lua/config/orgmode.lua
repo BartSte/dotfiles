@@ -17,33 +17,16 @@ khalorg.setup({
 
 local template_gedachte = [[
 * %?%U
+
 ** Situatie
 
 ** Gevoel
 
-*** Hoe sterk is het gevoel?
-
 ** Automatische gedachte 
-
-*** Hoe geloofwaardig zijn deze gedachte?
 
 ** Uitdagen
 
-*** Stel vragen over de automatische gedachten
-
-*** Wat zijn de antwoorden op deze vragen?
-
 ** Alternatieve gedachte
-
-*** Zet altenatieve gedachten tegenover de automatische gedachten
-
-*** Hoe geloofwaardig zijn de alternatieve gedachten?
-
-** Resultaat
-
-*** Hoe geloofwaardig zijn de automatische gedachten nu?
-
-*** Hoe sterk is het gevoel nu?
 
 ]]
 
