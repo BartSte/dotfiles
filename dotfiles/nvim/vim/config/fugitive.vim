@@ -13,3 +13,5 @@ nnoremap <leader>gd :wincmd o<CR>:G difftool --name-status
 nnoremap <leader>gy :G difftool -y 
 nnoremap <leader>gs :G switch 
 nnoremap <leader>gt :G switch -t origin/
+nnoremap <leader>gf :G fetch<CR>
+nnoremap <leader>gr :G rebase 
