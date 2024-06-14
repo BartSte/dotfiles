@@ -7,7 +7,6 @@ if exists(':GuiFont')
     GuiFont JetBrains Mono:h9
 endif
 
-
 " Disable GUI Tabline
 if exists(':GuiTabline')
     GuiTabline 0

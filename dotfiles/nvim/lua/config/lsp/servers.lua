@@ -5,21 +5,19 @@ local pyright = {
     settings = {
         pyright = {
             disableOrganizeImports = true,
+            disableTaggedHints = false,
         },
         python = {
             analysis = {
-                autoSearchPaths = true,
+                autoImportCompletions = true,
+                autoSearchPaths = false,
                 useLibraryCodeForTypes = true,
-                typeCheckingMode = "basic",
-                diagnosticMode = "openFilesOnly",
-                -- diagnosticMode = "workspace",
+                typeCheckingMode = "standard",
+                diagnosticMode = "workspace",
                 reportMissingTypeStubs = false,
+
+                -- diagnosticMode = "openFilesOnly",
                 -- stubPath = "typings",
-                exclude = {
-                    -- ".venv",
-                    "**/node_modules",
-                    "**/__pycache__",
-                }
             },
         },
     },
