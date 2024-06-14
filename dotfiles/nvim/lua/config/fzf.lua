@@ -1,17 +1,18 @@
 local fzf = require("fzf-lua")
+local path = require("helpers.path")
 local map = require("helpers.keymapper")
 local join = require("helpers.path").join
 
 
 local function files_home()
-    fzf.files({ cwd = os.getenv("HOME") })
+    fzf.files({ cwd = path.home() })
 end
 
 local function files_org()
     local fd_cmd = "fd --color=never --type f --hidden --follow --exclude .git"
     local grep_cmd = "grep -v org_archive$"
     fzf.files({
-        cwd = join(os.getenv("HOME"), "dropbox", "org"),
+        cwd = join(path.home(), "dropbox", "org"),
         cmd = fd_cmd .. " | " .. grep_cmd
     })
 end
@@ -27,7 +28,7 @@ local function dirs()
 end
 
 local function files_nvim_config()
-    fzf.files({ cwd = join(os.getenv("HOME"), "dotfiles", "nvim") })
+    fzf.files({ cwd = join(path.home(), "dotfiles", "nvim") })
 end
 
 local opts = {

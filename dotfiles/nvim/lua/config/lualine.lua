@@ -36,14 +36,32 @@ local projectrc = {
     icon = "🛠",
 }
 
+local function get_section_separator()
+    if vim.fn.has("gui_running") == 1 then
+        -- return triangle separators
+        return { left = "", right = "" }
+    else
+        return { left = "", right = "" }
+    end
+end
+
+local get_component_separator = function()
+    if vim.fn.has("gui_running") == 1 then
+        return { left = "", right = "" }
+    else
+        return { left = "", right = "" }
+    end
+end
+
+
 lualine.setup({
     options = {
         refresh = {
             statusline = 1000,
         },
         icons_enabled = true,
-        section_separators = { left = "", right = "" },
-        component_separators = { left = "", right = "" },
+        section_separators = get_section_separator(),
+        component_separators = get_component_separator(),
         globalstatus = true,
     },
     sections = {
