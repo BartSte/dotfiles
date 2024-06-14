@@ -1,13 +1,25 @@
 local path = require("helpers.path")
 
+-- See: https://github.com/microsoft/pyright/blob/main/docs/settings.md
 local pyright = {
     settings = {
+        pyright = {
+            disableOrganizeImports = true,
+        },
         python = {
             analysis = {
                 autoSearchPaths = true,
                 useLibraryCodeForTypes = true,
+                typeCheckingMode = "basic",
                 diagnosticMode = "openFilesOnly",
-                typeCheckingMode = "standard",
+                -- diagnosticMode = "workspace",
+                reportMissingTypeStubs = false,
+                -- stubPath = "typings",
+                exclude = {
+                    -- ".venv",
+                    "**/node_modules",
+                    "**/__pycache__",
+                }
             },
         },
     },

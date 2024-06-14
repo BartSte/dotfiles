@@ -15,3 +15,4 @@ nnoremap <leader>gs :G switch
 nnoremap <leader>gt :G switch -t origin/
 nnoremap <leader>gf :G fetch<CR>
 nnoremap <leader>gr :G rebase 
+nnoremap <leader>gp :G pull<CR>
