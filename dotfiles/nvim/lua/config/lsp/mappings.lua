@@ -41,6 +41,10 @@ local function set_virtual_text_all()
 end
 
 local function format()
+    if vim.bo.filetype == 'org' then
+        return
+    end
+
     vim.lsp.buf.format({
         filter = require("projectrc").require("config.lsp.format").filter,
         timeout_ms = 5000,
