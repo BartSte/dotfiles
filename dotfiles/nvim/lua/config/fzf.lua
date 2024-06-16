@@ -3,7 +3,8 @@ local path = require("helpers.path")
 local map = require("helpers.keymapper")
 local join = require("helpers.path").join
 
-
+-- TODO: mode all function to helpers such that other modules can use them 
+-- so I can set fzf maps for specific filetypes
 local function files_home()
     fzf.files({ cwd = path.home() })
 end
@@ -29,6 +30,11 @@ end
 
 local function files_nvim_config()
     fzf.files({ cwd = join(path.home(), "dotfiles", "nvim") })
+end
+
+local function get_email()
+    local emails = vim.fn.system("khard --skip-unparsable email --parsable --remove-first-line | sed 's/[ \\t].*$//'")
+    fzf.fzf_exec(vim.split(emails, "\n"))
 end
 
 local opts = {

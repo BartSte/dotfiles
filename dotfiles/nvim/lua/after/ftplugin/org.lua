@@ -7,5 +7,5 @@ vim.opt_local.textwidth = 100
 vim.opt_local.colorcolumn = '100'
 vim.opt_local.conceallevel = 2
 
-keymapper.nnoremap('<leader>oie', '<cmd>Email<CR>')
+keymapper.nnoremap('<leader>oie', require("config.fzf").
 keymapper.nnoremap('<leader>f', ':normal! gg=G<CR><C-o>')
