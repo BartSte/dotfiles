@@ -4,6 +4,17 @@ local path = require("helpers.path")
 
 local M = {}
 
+--- Show all files recursively in the current directory, including hidden files
+--- and gitignored files.
+M.files_all = function()
+    fzf.files({
+        prompt    = "Files❯ ",
+        fd_opts   = "-u -E .git -E __pycache__",
+        previewer = false,
+        git_icons = false,
+    })
+end
+
 M.files_home = function()
     fzf.files({ cwd = path.home() })
 end
