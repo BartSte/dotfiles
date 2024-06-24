@@ -15,6 +15,7 @@ local function toggle_test_file()
         new_path = vim.fn.substitute(rel_path, 'tests[^/]*', 'src/*/', '')
         new_path = vim.fn.substitute(new_path, "/test_", "/", "g")
     end
+    new_path = vim.fn.substitute(new_path, "//", "/", "g")
     vim.cmd('edit ' .. new_path)
 end
 
