@@ -58,9 +58,9 @@ end
 M.open_test_file = function()
     local is_test = vim.fn.match(vim.fn.expand('%:p:~:.'), 'tests/') == 0
     if is_test then
-        error("Already in test file")
+        log("Already in test file")
     elseif not file_tree_is_valid() then
-        error("Invalid file tree")
+        log("Invalid file tree")
     else
         local test_file = get_test_file(vim.fn.expand('%:p:~:.'))
         vim.cmd('edit ' .. test_file)
@@ -70,9 +70,9 @@ end
 M.open_src_file = function()
     local is_src = vim.fn.match(vim.fn.expand('%:p:~:.'), 'src/') == 0
     if is_src then
-        error("Already in src file")
+        log("Already in src file")
     elseif not file_tree_is_valid() then
-        error("Invalid file tree")
+        log("Invalid file tree")
     else
         local src_file = get_src_file(vim.fn.expand('%:p:~:.'))
         vim.cmd('edit ' .. src_file)
