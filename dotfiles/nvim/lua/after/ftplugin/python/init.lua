@@ -6,6 +6,7 @@ map.buffer_nnoremap('<leader>B', 'Obreakpoint()<Esc>')
 
 map.buffer_nnoremap('gl', ':TestVisit<CR>')
 map.buffer_nnoremap('gs', helpers.toggle_test_file)
+map.buffer_nnoremap('<C-w>a', ":wincmd o<bar>wincmd v<bar>wincmd l<CR>:lua require('helpers.python').open_test_file()<CR>")
 
 map.buffer_nnoremap('<a-f>', ':TestFile -strategy=pytesttmux<CR>')
 map.buffer_nnoremap('<a-l>', ':TestLast -strategy=pytesttmux<CR>')
