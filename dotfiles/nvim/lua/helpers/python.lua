@@ -79,4 +79,32 @@ M.open_src_file = function()
     end
 end
 
+--- Split the window and open the corresponding source and test file.
+M.split_window_src_test = function()
+    local src = ""
+    local test = ""
+    local rel_path = vim.fn.expand('%:p:~:.')
+    local is_src = vim.fn.match(rel_path, 'src/') == 0
+    local is_test = vim.fn.match(rel_path, 'tests/') == 0
+
+    if not file_tree_is_valid() then
+        log("Invalid file tree")
+    elseif not is_src and not is_test then
+        log("Not in src or tests directory")
+    elseif is_src then
+        src = rel_path
+        test = get_test_file(rel_path)
+    elseif is_test then
+        src = get_src_file(rel_path)
+        test = rel_path
+    end
+
+    vim.cmd('wincmd o')
+    vim.cmd('vsplit')
+    vim.cmd('wincmd h')
+    vim.cmd('edit ' .. src)
+    vim.cmd('wincmd l')
+    vim.cmd('edit ' .. test)
+end
+
 return M
