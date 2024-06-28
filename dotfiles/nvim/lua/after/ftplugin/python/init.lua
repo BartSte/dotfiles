@@ -6,7 +6,7 @@ map.buffer_nnoremap('<leader>B', 'Obreakpoint()<Esc>')
 
 map.buffer_nnoremap('gl', ':TestVisit<CR>')
 map.buffer_nnoremap('gs', helpers.toggle_test_file)
-map.buffer_nnoremap('<C-w>a', helpers.split_window_src_test)
+map.buffer_nnoremap('gS', helpers.split_window_src_test)
 
 map.buffer_nnoremap('<a-f>', ':TestFile -strategy=pytesttmux<CR>')
 map.buffer_nnoremap('<a-l>', ':TestLast -strategy=pytesttmux<CR>')
