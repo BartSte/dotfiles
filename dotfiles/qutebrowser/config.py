@@ -52,7 +52,16 @@ c.url.start_pages = ["about:blank"]
 c.window.hide_decoration = False
 
 # Per-domain settings
-config.set("colors.webpage.darkmode.enabled", False, "netflix.com")
+dark: list[str] = []
+light: list[str] = ["netflix.com", "play.max.com"]
+
+key: str = "colors.webpage.darkmode.enabled"
+
+for url in dark:
+    config.set(key, True, url)
+
+for url in light:
+    config.set(key, False, url)
 
 # Bindings
 config.bind("<Down>", "move-to-next-line", mode="caret")
