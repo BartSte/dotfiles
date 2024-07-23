@@ -4,6 +4,8 @@ c.aliases = {
     "qa": "quit",
     "wq": "quit --save",
     "wqa": "quit --save",
+    "da": "set colors.webpage.darkmode.enabled true",
+    "li": "set colors.webpage.darkmode.enabled false",
     "dark": "set colors.webpage.darkmode.enabled true",
     "light": "set colors.webpage.darkmode.enabled false",
 }
@@ -52,8 +54,8 @@ c.url.start_pages = ["about:blank"]
 c.window.hide_decoration = False
 
 # Per-domain settings
-dark: list[str] = []
-light: list[str] = ["www.netflix.com", "play.max.com"]
+dark: list[str] = ["www.nos.nl"]
+light: list[str] = ["www.netflix.com", "play.max.com", "mail.google.com"]
 
 key: str = "colors.webpage.darkmode.enabled"
 
