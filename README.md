@@ -47,6 +47,15 @@ curl -O https://raw.githubusercontent.com/BartSte/dotfiles-linux/master/dotfiles
   - Mutt
   - Khal & khalorg
 
+### Bitwarden
+
+I use Bitwarden to store my passwords. The Bitwarden CLI can be used to
+retrieve passwords from the command line. However, Bitwarden CLI has the issue
+that is hangs for a second before it executes the command. Furthermore, a token
+needs to be stored as an environment variable. Therefore, I use `rbw` which is
+the unofficial Bitwarden CLI. The downside is that it is maintained by
+volunteers which have limited time to fix bugs.
+
 ### Mutt
 
 I have two email accounts: personal and work. On all my devices, I only use one
