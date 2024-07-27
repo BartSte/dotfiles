@@ -55,7 +55,12 @@ c.window.hide_decoration = False
 
 # Per-domain settings
 dark: list[str] = ["www.nos.nl"]
-light: list[str] = ["www.netflix.com", "play.max.com", "mail.google.com"]
+light: list[str] = [
+    "www.netflix.com",
+    "play.max.com",
+    "mail.google.com",
+    "outlook.live.com",
+]
 
 key: str = "colors.webpage.darkmode.enabled"
 
