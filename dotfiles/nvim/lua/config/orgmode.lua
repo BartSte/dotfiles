@@ -1,4 +1,3 @@
-local mapper = require('helpers.keymapper')
 local orgmode = require('orgmode')
 local path = require('helpers.path')
 local khalorg = require('khalorg')
@@ -9,6 +8,7 @@ local main = path.join(dropbox_org, 'main.org')
 local agenda = path.join(dropbox_org, 'outlook.org')
 local personal = path.join(dropbox_org, 'personal.org')
 local gedachten = path.join(dropbox_org, 'gedachten.org')
+local komeco = path.join(dropbox_org, 'komeco.org')
 local outlook = path.join(dropbox_org, 'outlook.org')
 
 khalorg.setup({
@@ -22,12 +22,51 @@ local template_gedachte = [[
 
 ** Gevoel
 
-** Automatische gedachte 
+** Automatische gedachte
 
 ** Uitdagen
 
 ** Alternatieve gedachte
 
+]]
+
+local template_komeco = [[
+
+* MEET Notulen %<%Y-%m-%d %H:%M>
+
+  :PROPERTIES:
+  :ATTENDEES:
+  :ORGANIZER:
+  :LOCATION:
+  :END:
+
+** Opening
+
+** Mededelingen
+
+** Notulen
+
+** Actie besluitenlijst
+
+** Bespreking beurstoestand
+
+** Presentaties
+
+** Wijzigingen in de portefeuille
+
+** Rondvraag
+
+** WVTTK
+
+** Sluiting
+
+** Besluitenlijst
+
+    -
+
+** Actiepunten
+
+    - [ ]
 ]]
 
 local custom_exports = {
@@ -54,9 +93,15 @@ local templates = {
         template = template_gedachte,
         target = gedachten
     },
+    k = {
+        description = 'Komeco',
+        template = template_komeco,
+        target = komeco
+    },
     e = {
         description = 'Event',
-        template = '*\n\n:PROPERTIES:\n:ATTENDEES: \n:LOCATION: \n:ORGANIZER: \n:RRULE: \n:STATUS: \n:UID: \n:URL: \n:UNTIL: \n:END:\n',
+        template =
+        '*\n\n:PROPERTIES:\n:ATTENDEES: \n:LOCATION: \n:ORGANIZER: \n:RRULE: \n:STATUS: \n:UID: \n:URL: \n:UNTIL: \n:END:\n',
         target = outlook
     }
 }
