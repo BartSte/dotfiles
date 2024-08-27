@@ -13,10 +13,10 @@ local pyright = {
                 autoSearchPaths = false,
                 useLibraryCodeForTypes = true,
                 typeCheckingMode = "standard",
-                diagnosticMode = "workspace",
+                -- diagnosticMode = "workspace",
                 reportMissingTypeStubs = false,
 
-                -- diagnosticMode = "openFilesOnly",
+                diagnosticMode = "openFilesOnly",
                 -- stubPath = "typings",
             },
         },
