@@ -2,7 +2,7 @@ local copilot = require("copilot")
 local suggestion = require("copilot.suggestion")
 local keymapper = require("helpers.keymapper")
 
--- Execetut `callback` if the copilot suggestion is visible.
+-- Execute `callback` if the copilot suggestion is visible.
 local function execute_if_suggestion_visible(callback, key)
     if suggestion.is_visible() then
         callback()
