@@ -32,11 +32,9 @@ local opts = {
 
 fzf.setup(opts)
 
-map.nnoremap("<a-A>", fzf.live_grep)
 map.nnoremap("<a-H>", fzf.help_tags)
 map.nnoremap("<a-O>", helpers.files_all)
 map.nnoremap("<a-V>", helpers.dirs_nvim_config)
-map.nnoremap("<a-a>", fzf.grep)
 map.nnoremap("<a-b>", fzf.buffers)
 map.nnoremap("<a-c>", helpers.dirs)
 map.nnoremap("<a-h>", helpers.files_home)
@@ -44,3 +42,9 @@ map.nnoremap("<a-o>", fzf.files)
 map.nnoremap("<a-r>", helpers.files_org)
 map.nnoremap("<a-s>", fzf.tabs)
 map.nnoremap("<a-v>", helpers.files_nvim_config)
+
+map.nnoremap("<a-a>", fzf.live_grep)
+map.nnoremap("<a-A>", fzf.live_grep_resume)
+map.nnoremap("<a-w>", fzf.grep_cword)
+map.nnoremap("<a-W>", fzf.grep_cWORD)
+map.vnoremap("<a-w>", fzf.grep_visual)
