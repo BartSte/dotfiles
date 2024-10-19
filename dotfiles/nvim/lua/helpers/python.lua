@@ -4,14 +4,26 @@ local function log(msg)
     vim.api.nvim_notify(msg, vim.log.levels.ERROR, { title = 'Switch test file' })
 end
 
+local function get_test_dir()
+    if vim.fn.isdirectory('tests') == 1 then
+        return 'tests'
+    elseif vim.fn.isdirectory('test') == 1 then
+        return 'test'
+    else
+        return ''
+    end
+end
+
+
 local function file_tree_is_valid()
     local has_src = vim.fn.isdirectory('src') == 1
-    local has_tests = vim.fn.isdirectory('tests') == 1
+    local has_tests = get_test_dir() ~= ''
     return has_src and has_tests
 end
 
 local function get_test_file(src_file)
-    local test_file = vim.fn.substitute(src_file, 'src/[^/]*', 'tests', '')
+    local test_dir = get_test_dir()
+    local test_file = vim.fn.substitute(src_file, 'src/[^/]*', test_dir, '')
     test_file = vim.fn.substitute(test_file, "/", "/test_", "g")
     return vim.fn.substitute(test_file, "//", "/", "g")
 end
