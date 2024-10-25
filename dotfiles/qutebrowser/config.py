@@ -52,6 +52,7 @@ c.url.searchengines = {
 }
 c.url.start_pages = ["about:blank"]
 c.window.hide_decoration = False
+c.content.javascript.enabled = True
 
 # Per-domain settings
 dark: list[str] = ["www.nos.nl"]
