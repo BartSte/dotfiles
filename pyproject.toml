@@ -1,13 +1,8 @@
-[tool.pyright]
-reportMissingImports = true
-reportMissingTypeStubs = false
-
-pythonVersion = "3.11"
-pythonPlatform = "Linux"
-
 [tool.ruff]
 line-length = 80
+target-version = "py312"
 
+[tool.ruff.lint]
 select = [
     "F",  # pyflakes
     "E",  # pycodestyle errors
@@ -16,13 +11,3 @@ select = [
     "N",  # PEP8 naming
     "D",  # pydocstyle
 ]
-
-ignore = ["D212", "D205", "D210", "D203"]
-
-[tool.autopep8]
-max_line_length = 79
-aggressive = 3
-experimental = true
-
-[tool.pytest.ini_options]
-addopts = "-ra"
