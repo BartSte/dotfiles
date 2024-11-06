@@ -6,6 +6,9 @@ live_config_reload = true
 history = 100000
 multiplier = 3
 
+[mouse]
+hide_when_typing = true
+
 [[keyboard.bindings]]
 action = "ReceiveChar"
 key = "Return"
