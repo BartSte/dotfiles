@@ -86,7 +86,7 @@ lsp.lua_ls.setup(lua_ls)
 lsp.bashls.setup(bashls)
 lsp.jsonls.setup({})
 lsp.marksman.setup(get_marksman_opts())
-lsp.ruff_lsp.setup({})
+lsp.ruff.setup({})
 if vim.fn.has('win32') == 1 then
     local appdata = vim.fn.expand('$LOCALAPPDATA')
     local bundle_path = path.join(appdata, 'nvim-data', 'mason', 'packages', 'powershell-editor-services',
