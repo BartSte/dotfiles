@@ -1,8 +1,9 @@
+local sorters = require("helpers.sorters")
+local noremap = require("helpers.keymapper").noremap
 local cnoremap = require("helpers.keymapper").cnoremap
 local inoremap = require("helpers.keymapper").inoremap
 local nnoremap = require("helpers.keymapper").nnoremap
 local onoremap = require("helpers.keymapper").onoremap
-local noremap = require("helpers.keymapper").noremap
 local tnoremap = require("helpers.keymapper").tnoremap
 local vnoremap = require("helpers.keymapper").vnoremap
 
@@ -69,7 +70,6 @@ noremap("<leader>to", "<cmd>tabonly<CR>")
 noremap("<leader>tc", "<cmd>tabclose<CR>")
 
 --Formatting and refactoring
-nnoremap("<leader>cs", "<cmd>setlocal spell! spell?<CR>")
 nnoremap("<leader>%", "<cmd>source<CR>")
 nnoremap("<leader>w", "<cmd>setlocal wrap! wrap?<CR>")
 
@@ -78,8 +78,13 @@ inoremap("<C-s>", "<cmd>silent w<CR>")
 nnoremap("<leader>s", ":mksession! Session.vim<CR>")
 noremap("<C-s>", "<cmd>silent w<CR>")
 
---Shell commands
+--Shell commands are prefixed with <leader>c
 vim.cmd("noremap <leader>cx :!chmod +x %<CR>")
+nnoremap("<leader>cc", sorters.charsort.ofunc)
+vnoremap("<leader>cc", sorters.charsort.vfunc)
+-- TODO: make lensort pass the last key pressed to the lensort function itself
+nnoremap("<leader>c=", sorters.lensort.ofunc)
+vnoremap("<leader>c=", sorters.lensort.vfunc)
 
 -- The terminal does not detect <C-Space>. As a solution, Alacritty sends <F24>
 -- when ctrl+space is pressed. By binding <C-Space> to <F24> (or <S-F12>), the
