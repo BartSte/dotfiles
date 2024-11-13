@@ -13,6 +13,15 @@ local function make_pending_sort(func)
     end
 end
 
+--- Return the last key pressed
+local function last_pressed_key()
+    local key = vim.api.nvim_get_vvar("operator")
+    if key == "" then
+        return nil
+    end
+    return key
+end
+
 M.charsort = {
     func = function() vim.cmd("'[,']sort") end,
     vfunc = function() vim.cmd("'<,'>sort") end,
@@ -20,9 +29,8 @@ M.charsort = {
 }
 
 M.lensort = {
-    arg = "=",
-    func = function(arg) vim.cmd("'[,']!lensort " .. (arg or M.lensort.arg)) end,
-    vfunc = function(arg) vim.cmd("'<,'>!lensort " .. (arg or M.lensort.arg)) end,
+    func = function() vim.cmd("'[,']!lensort =") end,
+    vfunc = function() vim.cmd("'<,'>!lensort =") end,
     ofunc = make_pending_sort("lensort.func"),
 }
 
