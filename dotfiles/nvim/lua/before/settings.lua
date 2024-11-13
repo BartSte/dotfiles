@@ -23,6 +23,7 @@ vim.opt.relativenumber = true
 vim.opt.shiftwidth = 4
 vim.opt.shortmess:append("flmnxoOAI")
 vim.opt.showcmd = true
+vim.opt.showmode = false
 vim.opt.signcolumn = "number"
 vim.opt.smartcase = true
 vim.opt.smarttab = true
@@ -36,7 +37,7 @@ vim.opt.updatetime = 750
 vim.opt.wildmenu = false
 vim.opt.wrap = false
 vim.opt.writebackup = false
-vim.opt.showmode = false
+vim.ui.open = require("helpers.platform").open
 
 if vim.fn.has("termguicolors") then
     vim.opt.termguicolors = true

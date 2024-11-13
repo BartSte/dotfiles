@@ -18,4 +18,4 @@ map.nnoremap("<leader>cc", pending_sort("charsort"))
 map.vnoremap("<leader>cc", require("helpers.opfunc").charsort)
 
 map.nnoremap("<leader>c=", lensort("="))
--- TODO vnoremap
+map.vnoremap("<leader>c=", require("helpers.opfunc").lensort.func)
