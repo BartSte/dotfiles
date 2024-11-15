@@ -6,7 +6,7 @@ local M = {}
 M.filter = function(client)
     -- if file type is python, then do not allow ruff_lsp
     if client.config.filetypes[1] == "python" then
-        return client.name ~= "ruff_lsp"
+        return client.name ~= "ruff"
     end
 end
 

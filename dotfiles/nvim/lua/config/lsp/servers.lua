@@ -5,7 +5,7 @@ local pyright = {
     settings = {
         pyright = {
             disableOrganizeImports = true,
-            disableTaggedHints = false,
+            disableTaggedHints = true,
         },
         python = {
             analysis = {
@@ -15,8 +15,6 @@ local pyright = {
                 typeCheckingMode = "strict",
                 reportMissingTypeStubs = false,
                 diagnosticMode = "openFilesOnly",
-                -- diagnosticMode = "workspace",
-                -- stubPath = "typings",
             },
         },
     },
