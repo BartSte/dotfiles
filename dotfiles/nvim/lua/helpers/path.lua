@@ -67,7 +67,7 @@ M.glob_modules = function(directory, exclude)
     local modules = {}
     local files = vim.fn.glob(include, false, true)
     for _, file in ipairs(files) do
-	local lua_file = file:match('lua' .. M.path_separator .. '(.*)%.lua')
+        local lua_file = file:match('lua' .. M.path_separator .. '(.*)%.lua')
         if not lua_file:match(exclude) then
             local module = lua_file:gsub(path.path_separator, ".")
             modules[#modules + 1] = module
@@ -102,8 +102,15 @@ end
 ---@param filename string The name of the file to be checked.
 ---@return boolean result True if the file exists, false otherwise.
 M.exists = function(filename)
-  filename = vim.fn.expand(filename)
-  return vim.fn.filereadable(filename) == 1
+    filename = vim.fn.expand(filename)
+    return vim.fn.filereadable(filename) == 1
+end
+
+--- Return the name of the directory of the `path`.
+--- @param path string The path to get the directory name from.
+--- @return string The directory name.
+M.dirname = function(path)
+    return path:match("(.*)" .. M.path_separator)
 end
 
 return M
