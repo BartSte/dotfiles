@@ -45,6 +45,8 @@ M.join = function(...)
     return table.concat(all_parts, M.path_separator)
 end
 
+--- Return the home directory of the current user.
+---@return string The home directory.
 M.home = function()
     if vim.fn.has('win32') == 1 then
         return os.getenv('USERPROFILE')
@@ -106,11 +108,19 @@ M.exists = function(filename)
     return vim.fn.filereadable(filename) == 1
 end
 
---- Return the name of the directory of the `path`.
---- @param path string The path to get the directory name from.
---- @return string The directory name.
-M.dirname = function(path)
-    return path:match("(.*)" .. M.path_separator)
+--- Normalize a path.
+--- I hate windows separators...
+--- @param path string The path to normalize.
+--- @return string The normalized path.
+M.norm = function(path)
+    return path:gsub("\\", "/")
+end
+
+--- Return top level directory of a path.
+---@param path string The path to get the top level directory from.
+---@return string The top level directory.
+M.top_dir = function(path)
+    return M.norm(vim.fn.fnamemodify(path, ":p:h")):match("([^/]+)$")
 end
 
 return M

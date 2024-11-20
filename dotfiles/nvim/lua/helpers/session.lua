@@ -1,34 +1,47 @@
 local path = require("helpers.path")
 
-local M = {}
-
---- Make a session name
---- The name is the name of the current directory.
---- @return string The name of the session
-local function make_session_name()
-    local cwd = vim.fn.getcwd()
-    local name = path.dirname(cwd)
-    return name
+--- Make root directory for sessions
+--- @return string The root directory for sessions
+local function find_root_directory()
+    local stdpath = vim.fn.stdpath("data")
+    if type(stdpath) == "table" then
+        error("Multiple data directories found")
+    end
+    return path.join(stdpath, "sessions")
 end
 
-M.directory = path.join(vim.fn.stdpath("data"), "sessions")
+--- Make session name
+--- The currend working directory its top level folder name is used as the
+--- session name
+--- @return string The session name
+local function get_session_path()
+    local name = path.top_dir(vim.fn.getcwd())
+    return path.join(M.directory, name) .. ".vim"
+end
+
+---@module session
+---@class M
+---@field directory string The root directory for sessions
+---@field save fun():nil Save the current session
+---@field load fun():nil Load the session for the current directory
+local M = {}
+
+M.directory = find_root_directory()
 
 M.save = function()
     vim.fn.mkdir(M.directory, "p")
-    local name = make_session_name()
-    local path_session = path.join(M.directory, name) .. ".vim"
-    vim.cmd("mksession! " .. path_session)
-    vim.notify("Session saved: " .. path_session)
+    local session_path = get_session_path()
+    vim.cmd("mksession! " .. session_path)
+    vim.notify("Session saved: " .. session_path)
 end
 
 M.load = function()
-    local name = make_session_name()
-    local path_session = path.join(M.directory, name) .. ".vim"
-    if vim.fn.filereadable(path_session) == 1 then
-        vim.cmd("source " .. path_session)
-        vim.notify("Session loaded: " .. path_session)
+    local session_path = get_session_path()
+    if vim.fn.filereadable(session_path) == 1 then
+        vim.cmd("source " .. session_path)
+        vim.notify("Session loaded: " .. session_path)
     else
-        vim.notify("No session found for " .. name)
+        vim.notify("No session found for " .. session_path)
     end
 end
 
