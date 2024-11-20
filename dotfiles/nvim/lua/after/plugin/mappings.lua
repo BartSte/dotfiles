@@ -1,95 +1,120 @@
 local sorters = require("helpers.sorters")
-local noremap = require("helpers.keymapper").noremap
-local cnoremap = require("helpers.keymapper").cnoremap
-local inoremap = require("helpers.keymapper").inoremap
-local nnoremap = require("helpers.keymapper").nnoremap
-local onoremap = require("helpers.keymapper").onoremap
-local tnoremap = require("helpers.keymapper").tnoremap
-local vnoremap = require("helpers.keymapper").vnoremap
+local m = require("helpers.keymapper")
 
--- Override defaults
-inoremap("<C-t>", "<Esc>")
-nnoremap("Y", "y$")
-nnoremap("ZA", ":wqa<CR>")
-noremap("<C-t>", "<Esc>")
-vnoremap("p", "pgvy")
+--------------------------------------------------------------------------------
+--- Override defaults
+--------------------------------------------------------------------------------
+m.nnoremap("Y", "y$")
+m.nnoremap("ZA", ":wqa<CR>")
+m.vnoremap("p", "pgvy")
+m.nnoremap("Q", require("helpers.wininfo").toggle_quickfix)
+m.noremap("gF", "<cmd>wincmd v<bar>wincmd l<CR>gf")
 
--- Make J and K available for hop.nvim
-nnoremap("<c-k>", "K")
-noremap("<leader>j", "J")
-
--- Insert/command mode delete
-cnoremap("<C-BS>", "<C-w>")
-cnoremap("<C-h>", "<C-w>")
-inoremap("<C-BS>", "<C-w>")
-inoremap("<C-Del>", "<C-o>dE")
-inoremap("<C-h>", "<C-w>")
-
--- Use <BS> and <CR> for up and down
-nnoremap("<BS>", "k")
-onoremap("<BS>", "k")
-vnoremap("<BS>", "k")
+-- Use <BS> for moving up
+m.nnoremap("<BS>", "k")
+m.onoremap("<BS>", "k")
+m.vnoremap("<BS>", "k")
 
 -- Register shortcuts
-nnoremap('+', '"+')
-vnoremap('+', '"+')
-nnoremap("_", '"_')
-vnoremap("_", '"_')
-nnoremap('""', ':reg<CR>')
+m.nnoremap('+', '"+')
+m.vnoremap('+', '"+')
+m.nnoremap("_", '"_')
+m.vnoremap("_", '"_')
+m.nnoremap('""', ':reg<CR>')
 
--- Terminal mode
-tnoremap("<C-t>", "<C-\\><C-n>")
+--------------------------------------------------------------------------------
+-- Control key
+-- The control key should be used for mapping native vim commands. In general,
+-- the control key should be avoided as it is often used by vim or plugins. This
+-- way, it is easier to adopt the defaults.
+--------------------------------------------------------------------------------
+m.tnoremap("<C-t>", "<C-\\><C-n>") -- enter normal mode in terminal
+m.inoremap("<C-t>", "<Esc>")       -- exit insert mode
+m.noremap("<C-t>", "<Esc>")
+m.nnoremap("<c-k>", "K")           -- make K available for hop.nvim
+
+-- save file
+m.inoremap("<C-s>", "<cmd>silent w<CR>")
+m.noremap("<C-s>", "<cmd>silent w<CR>")
+
+-- Insert/command mode delete
+m.cnoremap("<C-BS>", "<C-w>")
+m.cnoremap("<C-h>", "<C-w>")
+m.inoremap("<C-BS>", "<C-w>")
+m.inoremap("<C-Del>", "<C-o>dE")
+m.inoremap("<C-h>", "<C-w>")
+
+--------------------------------------------------------------------------------
+-- Alt commands
+-- For navigation between buffers and windows.
+--------------------------------------------------------------------------------
+--- Quickfix buffer navigation
+m.nnoremap("<a-,>", ":cprev<CR>")
+m.nnoremap("<a-.>", ":cnext<CR>")
 
 -- Window navigation
-nnoremap("<a-m>", "<C-w>h")
-nnoremap("<a-e>", "<C-w>k")
-nnoremap("<a-i>", "<C-w>l")
-nnoremap("<a-n>", "<C-w>j")
-nnoremap("<C-w>m", "<C-w>H")
-nnoremap("<C-w>e", "<C-w>K")
-nnoremap("<C-w>i", "<C-w>L")
-nnoremap("<C-w>n", "<C-w>J")
-nnoremap("<C-w>z", ":wincmd o<bar>vert new<bar>vert resize 70<CR><C-w>l")
-nnoremap("<C-w>a", ":wincmd o<bar>wincmd v<CR>")
+m.nnoremap("<a-m>", "<C-w>h")
+m.nnoremap("<a-e>", "<C-w>k")
+m.nnoremap("<a-i>", "<C-w>l")
+m.nnoremap("<a-n>", "<C-w>j")
 
--- Quickfix
-nnoremap("Q", require("helpers.wininfo").toggle_quickfix)
-nnoremap("<a-.>", ":cnext<CR>")
-nnoremap("<a-,>", ":cprev<CR>")
+-- Fill up the bindings that are now unused due to the alt bindsings.
+m.nnoremap("<C-w>m", "<C-w>H")
+m.nnoremap("<C-w>e", "<C-w>K")
+m.nnoremap("<C-w>i", "<C-w>L")
+m.nnoremap("<C-w>n", "<C-w>J")
+m.nnoremap("<C-w>z", ":wincmd o<bar>vert new<bar>vert resize 70<CR><C-w>l")
+m.nnoremap("<C-w>a", ":wincmd o<bar>wincmd v<CR>")
 
---buffer navigation
-noremap("gF", "<cmd>wincmd v<bar>wincmd l<CR>gf")
-nnoremap("<leader>;", ":e<CR>")
-
---Search
-nnoremap("<leader>/", require("helpers.mappings").highlight_word)
-
+--------------------------------------------------------------------------------
+-- Leader commands
+-- Use the leader key for manipulating the text and appearance of a buffer and
+-- the command line.
+--
+-- Bindings related to a plugin are set in the plugin config.
+--[[
+    | Key | Description           | Plugin   |
+    | c   | shell commands        |          |
+    | f   | format whole document |          |
+    | t   | tabs                  |          |
+    | j   | join                  |          |
+    | ;   | reload                |          |
+    | /   | highlight             |          |
+    | l   | lsp                   |          | TODO
+    | v   | vim commands          |          |
+    | g   | git                   | fugitive |
+    | r   | rename                | lsp      | 
+    | q   | delete buffer         | vim-bbye |
+    | o   | org commands          | orgmode  |
+    | n   | neogen                | neogen   |
+--]]
+--------------------------------------------------------------------------------
 --Tabs
-noremap("<leader>tn", "<cmd>tabnew<CR>")
-noremap("<leader>to", "<cmd>tabonly<CR>")
-noremap("<leader>tc", "<cmd>tabclose<CR>")
+m.noremap("<leader>tn", "<cmd>tabnew<CR>")
+m.noremap("<leader>to", "<cmd>tabonly<CR>")
+m.noremap("<leader>tc", "<cmd>tabclose<CR>")
 
---Formatting and refactoring
-nnoremap("<leader>%", "<cmd>source<CR>")
-nnoremap("<leader>w", "<cmd>setlocal wrap! wrap?<CR>")
+-- Vim commands
+m.noremap("<leader>j", "J") -- make available for hop.nvim
+m.nnoremap("<leader>vw", ":setlocal wrap! wrap?<CR>")
+m.nnoremap("<leader>vs", require("helpers.session").save)
+m.nnoremap("<leader>vl", require("helpers.session").load)
 
---Save
-inoremap("<C-s>", "<cmd>silent w<CR>")
-nnoremap("<leader>ss", require("helpers.session").save)
-nnoremap("<leader>sl", require("helpers.session").load)
-noremap("<C-s>", "<cmd>silent w<CR>")
-
---Shell commands are prefixed with <leader>c
+--Shell commands
 vim.cmd("noremap <leader>cx :!chmod +x %<CR>")
-nnoremap("<leader>cc", sorters.charsort.ofunc)
-vnoremap("<leader>cc", sorters.charsort.vfunc)
--- TODO: make lensort pass the last key pressed to the lensort function itself
-nnoremap("<leader>c=", sorters.lensort.ofunc)
-vnoremap("<leader>c=", sorters.lensort.vfunc)
+m.nnoremap("<leader>cc", sorters.charsort.ofunc)
+m.vnoremap("<leader>cc", sorters.charsort.vfunc)
+m.nnoremap("<leader>c=", sorters.lensort.ofunc)
+m.vnoremap("<leader>c=", sorters.lensort.vfunc)
 
+-- Customs
+m.nnoremap("<leader>/", require("helpers.mappings").highlight_word)
+
+--------------------------------------------------------------------------------
 -- The terminal does not detect <C-Space>. As a solution, Alacritty sends <F24>
 -- when ctrl+space is pressed. By binding <C-Space> to <F24> (or <S-F12>), the
 -- issue is solved.
+--------------------------------------------------------------------------------
 vim.cmd("map <F24> <C-Space>")
 vim.cmd("map <S-F12> <C-Space>")
 vim.cmd("imap <F24> <C-Space>")
