@@ -1,5 +1,12 @@
 local path = require("helpers.path")
 
+---@module session
+---@class M
+---@field directory string The root directory for sessions
+---@field save fun():nil Save the current session
+---@field load fun():nil Load the session for the current directory
+local M = {}
+
 --- Make root directory for sessions
 --- @return string The root directory for sessions
 local function find_root_directory()
@@ -18,13 +25,6 @@ local function get_session_path()
     local name = path.top_dir(vim.fn.getcwd())
     return path.join(M.directory, name) .. ".vim"
 end
-
----@module session
----@class M
----@field directory string The root directory for sessions
----@field save fun():nil Save the current session
----@field load fun():nil Load the session for the current directory
-local M = {}
 
 M.directory = find_root_directory()
 

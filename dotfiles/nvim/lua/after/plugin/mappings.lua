@@ -75,8 +75,8 @@ nnoremap("<leader>w", "<cmd>setlocal wrap! wrap?<CR>")
 
 --Save
 inoremap("<C-s>", "<cmd>silent w<CR>")
-nnoremap("<leader>s", require("helpers.session").save)
-nnoremap("<leader><leader>s", require("helpers.session").load)
+nnoremap("<leader>ss", require("helpers.session").save)
+nnoremap("<leader>sl", require("helpers.session").load)
 noremap("<C-s>", "<cmd>silent w<CR>")
 
 --Shell commands are prefixed with <leader>c
