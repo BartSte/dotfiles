@@ -11,7 +11,6 @@ nnoremap <leader>gu :g push -f
 nnoremap <leader>gu :g push<cr>
 nnoremap <leader>gy :g difftool -y 
 
-
 " Accept left or right changes in the diff.
 nnoremap <leader>gm <cmd>diffget //2<CR>
 nnoremap <leader>gi <cmd>diffget //3<CR>
