@@ -1,7 +1,18 @@
 return {
     "ibhagwan/fzf-lua",
-    keys = { "<a-o>", "<a-b>", "<a-h>", "<a-v>", "<a-H>", "<a-a>", "<a-A>",
-        "<a-B>", "<a-c>", "<a-r>", "<a-t>", "<a-O>" },
+    keys = { "<a-o>",
+        "<a-b>",
+        "<a-h>",
+        "<a-v>",
+        "<a-H>",
+        "<a-a>",
+        "<a-A>",
+        "<a-B>",
+        "<a-c>",
+        "<a-r>",
+        "<a-t>",
+        "<a-O>"
+    },
     config = function()
         require("config.fzf")
     end,
