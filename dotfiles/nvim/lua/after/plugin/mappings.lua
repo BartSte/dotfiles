@@ -2,7 +2,7 @@ local sorters = require("helpers.sorters")
 local m = require("helpers.keymapper")
 
 --------------------------------------------------------------------------------
---- Override defaults
+--- No modifiers
 --------------------------------------------------------------------------------
 m.nnoremap("Y", "y$")
 m.nnoremap("ZA", ":wqa<CR>")
@@ -32,6 +32,7 @@ m.tnoremap("<C-t>", "<C-\\><C-n>") -- enter normal mode in terminal
 m.inoremap("<C-t>", "<Esc>")       -- exit insert mode
 m.noremap("<C-t>", "<Esc>")
 m.nnoremap("<c-k>", "K")           -- make K available for hop.nvim
+m.noremap("<C-j>", "J")            -- make available for hop.nvim
 
 -- save file
 m.inoremap("<C-s>", "<cmd>silent w<CR>")
@@ -78,12 +79,10 @@ m.nnoremap("<C-w>a", ":wincmd o<bar>wincmd v<CR>")
     | f   | format whole document |          |
     | t   | tabs                  |          |
     | j   | join                  |          |
-    | ;   | reload                |          |
     | /   | highlight             |          |
-    | l   | lsp                   |          | TODO
     | v   | vim commands          |          |
+    | l   | lsp                   | lsp      |
     | g   | git                   | fugitive |
-    | r   | rename                | lsp      | 
     | q   | delete buffer         | vim-bbye |
     | o   | org commands          | orgmode  |
     | n   | neogen                | neogen   |
@@ -95,7 +94,6 @@ m.noremap("<leader>to", "<cmd>tabonly<CR>")
 m.noremap("<leader>tc", "<cmd>tabclose<CR>")
 
 -- Vim commands
-m.noremap("<leader>j", "J") -- make available for hop.nvim
 m.nnoremap("<leader>vw", ":setlocal wrap! wrap?<CR>")
 m.nnoremap("<leader>vs", require("helpers.session").save)
 m.nnoremap("<leader>vl", require("helpers.session").load)
