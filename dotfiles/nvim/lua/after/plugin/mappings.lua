@@ -32,11 +32,7 @@ m.tnoremap("<C-t>", "<C-\\><C-n>") -- enter normal mode in terminal
 m.inoremap("<C-t>", "<Esc>")       -- exit insert mode
 m.noremap("<C-t>", "<Esc>")
 m.nnoremap("<c-k>", "K")           -- make K available for hop.nvim
-m.noremap("<C-j>", "J")            -- make available for hop.nvim
-
--- save file
-m.inoremap("<C-s>", "<cmd>silent w<CR>")
-m.noremap("<C-s>", "<cmd>silent w<CR>")
+m.noremap("\\", "J")            -- make available for hop.nvim
 
 -- Insert/command mode delete
 m.cnoremap("<C-BS>", "<C-w>")
