@@ -1,0 +1,78 @@
+""          * :reg<CR>
+&           * :&&<CR>
+'           * <Cmd>lua require'projectmarks.mappings'.last_position()<CR>
++           * "+
++           * "+
+@           * mode() ==# 'V' ? ':normal! @'.getcharstr().'<CR>' : '@'
+Q           * <Lua 156: ~/.config/nvim/lua/helpers/wininfo.lua:9>
+Q           * mode() ==# 'V' ? ':normal! @<C-R>=reg_recorded()<CR><CR>' : 'Q'
+S             <Plug>VSurround
+Y           * y$
+ZA          * :wqa<CR>
+\           * J
+_           * "_
+_           * "_
+`           * <Cmd>lua require'projectmarks.mappings'.last_column_position()<CR>
+
+<C-K>       * K
+<C-L>       * <Cmd>nohlsearch|diffupdate|normal! <C-L><CR>
+<C-N>       * :cnext<CR>
+<C-P>       * :cprev<CR>
+<C-Space>   * a<Cmd>lua require('helpers.cmp').enable_complete()<CR>
+<C-T>       * <Esc>
+<C-W><C-D>    <C-W>d
+<C-W>a      * :wincmd o|wincmd v<CR>
+<C-W>e      * <C-W>K
+<C-W>i      * <C-W>L
+<C-W>m      * <C-W>H
+<C-W>n      * <C-W>J
+<C-W>z      * :wincmd o|vert new|vert resize 70<CR><C-W>l
+<C-k>       vim.lsp.buf.hover
+<C-s>       vim.lsp.buf.signature_help
+
+<M-A>       * <Lua 100: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-B>       * <Lua 101: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-H>       * <Lua 98: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-O>       * <Lua 105: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-U>       * <Lua 108: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-X>       * <Lua 143: ~/.local/share/nvim/lazy/oil.nvim/lua/oil/init.lua:361>
+<M-a>       * <Lua 99: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-b>       * <Lua 95: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-c>       * <Lua 102: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-e>       * <C-W>k
+<M-h>       * <Lua 96: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-i>       * <C-W>l
+<M-m>       * <C-W>h
+<M-n>       * <C-W>j
+<M-o>       * <Lua 106: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-r>       * <Lua 103: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-t>       * <Lua 104: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-u>       * <Lua 107: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-v>       * <Lua 97: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<M-x>       * <Lua 63: ~/.config/nvim/lua/config/oil.lua:115>
+<M-z>       * <Lua 110: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+
+<space>/    * <Lua 208: ~/.config/nvim/lua/helpers/mappings.lua:3>
+<space>c=   * <Lua 203: ~/.config/nvim/lua/helpers/sorters.lua:10>
+<space>c=   * <Lua 207: ~/.config/nvim/lua/helpers/sorters.lua:33>
+<space>cc   * <Lua 165: ~/.config/nvim/lua/helpers/sorters.lua:10>
+<space>cc   * <Lua 166: ~/.config/nvim/lua/helpers/sorters.lua:27>
+<space>cx   * :!chmod +x <C-R>%<CR>
+<space>g    * <Lua 112: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<space>n    * <Lua 73: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<space>oa   * <Lua 129: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<space>oc   * <Lua 128: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<space>q    * <Lua 77: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+<space>tc   * <Cmd>tabclose<CR>
+<space>tn   * <Cmd>tabnew<CR>
+<space>to   * <Cmd>tabonly<CR>
+<space>vl   * <Lua 164: ~/.config/nvim/lua/helpers/session.lua:38>
+<space>vs   * <Lua 162: ~/.config/nvim/lua/helpers/session.lua:31>
+<space>vw   * :setlocal wrap! wrap?<CR>
+<space>f    format
+<space>luo  set_underline_off
+<space>lue  set_underline_error
+<space>lua  set_underline_all
+<space>lvo  set_virtual_text_off
+<space>lve  set_virtual_text_err
+<space>lva  set_virtual_text_all
