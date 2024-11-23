@@ -74,9 +74,8 @@ m.nnoremap("<C-w>a", ":wincmd o<bar>wincmd v<CR>")
     | c   | shell commands        |          |
     | f   | format whole document |          |
     | t   | tabs                  |          |
-    | j   | join                  |          |
-    | /   | highlight             |          |
     | v   | vim commands          |          |
+    | /   | highlight word        |          |
     | l   | lsp                   | lsp      |
     | g   | git                   | fugitive |
     | q   | delete buffer         | vim-bbye |

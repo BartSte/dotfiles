@@ -56,20 +56,18 @@ local function mappings()
 
     bufmap('n', '<space>f', format)
 
-    bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+    bufmap('n', 'gd', vim.lsp.buf.definition)
+    bufmap('n', 'go', vim.lsp.buf.type_definition)
+    bufmap('n', '<C-s>', vim.lsp.buf.signature_help) -- Matches insert mode map
+    bufmap('n', '<C-k>', vim.lsp.buf.hover)          -- Alternative for K
     bufmap('n', 'gD', '<cmd>wincmd v<cr><cmd>lua vim.lsp.buf.definition()<cr>')
-    bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
 
-    bufmap('n', '<space>lh', '<cmd>lua vim.lsp.buf.hover()<cr>')
-    bufmap('n', '<space>ls', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
-    bufmap('n', '<space>ld', '<cmd>lua vim.diagnostic.open_float()<cr>')
     bufmap('n', '<space>luo', set_underline_off)
     bufmap('n', '<space>lue', set_underline_error)
     bufmap('n', '<space>lua', set_underline_all)
     bufmap('n', '<space>lvo', set_virtual_text_off)
     bufmap('n', '<space>lve', set_virtual_text_error)
     bufmap('n', '<space>lva', set_virtual_text_all)
-
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
