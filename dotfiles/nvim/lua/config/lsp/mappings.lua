@@ -55,12 +55,8 @@ local function mappings()
     end
 
     bufmap('n', '<space>f', format)
-
-    bufmap('n', 'gd', vim.lsp.buf.definition)
-    bufmap('n', 'go', vim.lsp.buf.type_definition)
     bufmap('n', '<C-s>', vim.lsp.buf.signature_help) -- Matches insert mode map
     bufmap('n', '<C-k>', vim.lsp.buf.hover)          -- Alternative for K
-    bufmap('n', 'gD', '<cmd>wincmd v<cr><cmd>lua vim.lsp.buf.definition()<cr>')
 
     bufmap('n', '<space>luo', set_underline_off)
     bufmap('n', '<space>lue', set_underline_error)
