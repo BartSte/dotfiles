@@ -78,9 +78,9 @@ m.nnoremap("<C-w>a", ":wincmd o<bar>wincmd v<CR>")
     | /   | highlight word        |          |
     | l   | lsp                   | lsp      |
     | g   | git                   | fugitive |
-    | q   | delete buffer         | vim-bbye |
+    | q   | delete buffer         | bufdelete|
     | o   | org commands          | orgmode  |
-    | n   | neogen                | neogen   |
+    | n   | notifier              | neogen   |
 --]]
 --------------------------------------------------------------------------------
 --Tabs
