@@ -1,55 +1,13 @@
 local m = require("helpers.keymapper")
 local snacks = require("snacks")
 
-local bigfile = {
-    notify = true,            -- show notification when big file detected
-    size = 1.5 * 1024 * 1024, -- 1.5MB
-    -- Enable or disable features when big file detected
-    ---@param ctx {buf: number, ft:string}
-    setup = function(ctx)
-        vim.schedule(function()
-            vim.bo[ctx.buf].syntax = ctx.ft
-        end)
-    end,
-}
-
-local notifier = {
-    timeout = 3000, -- default timeout in ms
-    width = { min = 40, max = 0.4 },
-    height = { min = 1, max = 0.6 },
-    -- editor margin to keep free. tabline and statusline are taken into account automatically
-    margin = { top = 0, right = 1, bottom = 0 },
-    padding = false,            -- add 1 cell of left/right padding to the notification window
-    sort = { "level", "added" }, -- sort by level and time
-    -- minimum log level to display. TRACE is the lowest
-    -- all notifications are stored in history
-    level = vim.log.levels.TRACE,
-    icons = {
-        error = " ",
-        warn = " ",
-        info = " ",
-        debug = " ",
-        trace = " ",
-    },
-    keep = function(notif)
-        return vim.fn.getcmdpos() > 0
-    end,
-    ---@type snacks.notifier.style
-    style = "compact",
-    top_down = true,  -- place notifications from top to bottom
-    date_format = "%R", -- time format for notifications
-    -- format for footer when more lines are available
-    -- `%d` is replaced with the number of lines.
-    -- only works for styles with a border
-    ---@type string|boolean
-    more_format = " ↓ %d lines ",
-    refresh = 50, -- refresh at most every 50ms
-}
-
 snacks.setup {
-    bigfile = bigfile,
+    bigfile = { enable = true },
     quickfile = { exclude = { "latex" } },
-    notifier = notifier,
+    notifier = {
+        timeout = 3000,
+        level = vim.log.levels.TRACE,
+    },
 }
 
 m.nnoremap("<space>qq", Snacks.bufdelete.delete)

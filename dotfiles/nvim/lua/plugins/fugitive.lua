@@ -1,9 +1,9 @@
 return {
-    'tpope/vim-fugitive',
+    "tpope/vim-fugitive",
     keys = {
-        { '<leader>g' }
+        { "<space>g", "<space>G"}
     },
     config = function()
-        vim.cmd('runtime vim/config/fugitive.vim')
+        vim.cmd("runtime vim/config/fugitive.vim")
     end
 }
