@@ -19,7 +19,6 @@ vim.opt.mouse = ""
 vim.opt.number = true
 vim.opt.pumheight = 10
 vim.opt.pumwidth = 15
--- vim.opt.relativenumber = true
 vim.opt.shiftwidth = 4
 vim.opt.shortmess:append("flmnxoOAI")
 vim.opt.showcmd = true
