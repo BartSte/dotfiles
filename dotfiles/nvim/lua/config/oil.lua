@@ -26,7 +26,7 @@ oil.setup({
     },
     default_file_explorer = true,
     restore_win_options = true,
-    skip_confirm_for_simple_edits = false,
+    skip_confirm_for_simple_edits = true,
     delete_to_trash = vim.fn.has("win32") == 0,
     -- Selecting a new/moved/renamed file or directory will prompt you to save changes first
     prompt_save_on_select_new_entry = true,
@@ -37,17 +37,12 @@ oil.setup({
     -- Set to `false` to remove a keymap
     -- See :help oil-actions for a list of all available actions
     keymaps = {
-        ["g?"] = "actions.show_help",
         ["gf"] = "actions.select",
         ["gF"] = { "actions.select", opts = { vertical = true } },
-        ["<M-p>"] = "actions.preview",
-        ["<C-l>"] = "actions.refresh",
+        ["<C-p>"] = "actions.preview",
         ["<M-Up>"] = "actions.parent",
         ["<CR>"] = false,
-        ["gs"] = "actions.change_sort",
-        ["gx"] = "actions.open_external",
-        ["g."] = "actions.toggle_hidden",
-        ["g\\"] = "actions.toggle_trash",
+        ["<C-t>"] = false,
     },
     -- Set to false to disable all of the above keymaps
     use_default_keymaps = true,
