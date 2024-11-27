@@ -2,7 +2,7 @@ local fzf = require("fzf-lua")
 local map = require("helpers.keymapper")
 local helpers = require("helpers.fzf")
 
-local opts = {
+fzf.setup({
     winopts = {
         height  = 0.9,
         width   = 0.9,
@@ -12,7 +12,6 @@ local opts = {
     },
     keymap  = {
         builtin = {
-            ["<F2>"]     = "toggle-fullscreen",
             ["<C-p>"]    = "toggle-preview",
             ["<S-down>"] = "preview-page-down",
             ["<S-up>"]   = "preview-page-up",
@@ -28,20 +27,23 @@ local opts = {
             ["shift-up"]   = "preview-page-up",
         },
     },
-}
+})
 
-fzf.setup(opts)
-
-map.nnoremap("<a-O>", helpers.files_all)
+map.nnoremap("<a-f>", fzf.files)
 map.nnoremap("<a-b>", fzf.buffers)
-map.nnoremap("<a-c>", helpers.dirs)
+map.nnoremap("<a-d>", helpers.dirs)
 map.nnoremap("<a-e>", fzf.help_tags)
 map.nnoremap("<a-h>", helpers.files_home)
-map.nnoremap("<a-o>", fzf.files)
 map.nnoremap("<a-r>", helpers.files_org)
 map.nnoremap("<a-t>", fzf.tabs)
 map.nnoremap("<a-v>", helpers.files_nvim_config)
 
+--The capital version of the keymap is used to search without .ignore.
+map.nnoremap("<a-F>", helpers.files_all)
+map.nnoremap("<a-D>", helpers.dirs_all)
+map.nnoremap("<a-H>", helpers.files_home_all)
+
+-- With grep seach, the capital rule does not apply.
 map.nnoremap("<a-A>", fzf.live_grep_resume)
 map.nnoremap("<a-W>", fzf.grep_cWORD)
 map.nnoremap("<a-a>", fzf.live_grep)

@@ -45,7 +45,6 @@ m.nnoremap("<C-n>", ":cnext<CR>")
 -- Alt commands
 -- For navigation between buffers and windows.
 --------------------------------------------------------------------------------
-
 -- Window navigation
 m.nnoremap("<a-m>", "<C-w>h")
 m.nnoremap("<a-e>", "<C-w>k")
@@ -59,7 +58,6 @@ m.nnoremap("<C-w>i", "<C-w>L")
 m.nnoremap("<C-w>n", "<C-w>J")
 m.nnoremap("<C-w>z", ":wincmd o<bar>vert new<bar>vert resize 70<CR><C-w>l")
 m.nnoremap("<C-w>a", ":wincmd o<bar>wincmd v<CR>")
-
 --------------------------------------------------------------------------------
 -- Leader commands
 -- Use the leader key for manipulating the text and appearance of a buffer and
@@ -70,7 +68,7 @@ m.nnoremap("<C-w>a", ":wincmd o<bar>wincmd v<CR>")
     | Key | Description           | Plugin   |
     | c   | shell commands        |          |
     | f   | format whole document |          |
-    | t   | tabs                  |          |
+    | t   | tabs/tests            |          |
     | v   | vim commands          |          |
     | /   | highlight word        |          |
     | l   | lsp                   | lsp      |

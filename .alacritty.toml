@@ -4,7 +4,6 @@ live_config_reload = true
 
 [scrolling]
 history = 100000
-multiplier = 1
 
 [[keyboard.bindings]]
 action = "ReceiveChar"
@@ -17,7 +16,6 @@ key = "F11"
 
 # Bindings mapped to F13-F24 keys to enable binds that are otherwise not
 # possible in a terminal
-
 [[keyboard.bindings]]
 chars = "\u001B[21;2~"
 key = "Tab"
