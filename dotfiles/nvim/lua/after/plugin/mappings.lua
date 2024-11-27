@@ -29,8 +29,6 @@ m.nnoremap('""', ':reg<CR>')
 -- way, it is easier to adopt the defaults.
 --------------------------------------------------------------------------------
 m.tnoremap("<C-t>", "<C-\\><C-n>") -- enter normal mode in terminal
-m.inoremap("<C-t>", "<Esc>")       -- exit insert mode
-m.noremap("<C-t>", "<Esc>")
 m.nnoremap("<c-k>", "K")           -- make K available for hop.nvim
 m.noremap("\\", "J")            -- make available for hop.nvim
 
