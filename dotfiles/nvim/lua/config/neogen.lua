@@ -6,4 +6,4 @@ require('neogen').setup {
     }
 }
 
-mappers.noremap('<leader>n', '<cmd>Neogen<CR>')
+mappers.silent_noremap('<leader>d', '<cmd>Neogen<CR>')

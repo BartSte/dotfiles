@@ -89,9 +89,10 @@ m.noremap("<leader>to", "<cmd>tabonly<CR>")
 m.noremap("<leader>tc", "<cmd>tabclose<CR>")
 
 -- Vim commands
-m.nnoremap("<leader>vw", ":setlocal wrap! wrap?<CR>")
 m.nnoremap("<leader>vs", require("helpers.session").save)
 m.nnoremap("<leader>vl", require("helpers.session").load)
+m.silent_nnoremap("<leader>vw", ":setlocal wrap! wrap?<CR>")
+m.silent_nnoremap("<leader>vr", ":e<CR>")
 
 --Shell commands
 vim.cmd("noremap <leader>cx :!chmod +x %<CR>")
