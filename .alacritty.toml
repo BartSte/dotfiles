@@ -4,7 +4,7 @@ live_config_reload = true
 
 [scrolling]
 history = 100000
-multiplier = 3
+multiplier = 1
 
 [[keyboard.bindings]]
 action = "ReceiveChar"
@@ -38,16 +38,6 @@ action = "ScrollToBottom"
 key = "End"
 mode = "~Alt"
 mods = "Shift"
-
-[[keyboard.bindings]]
-chars = "\u001B[3;5~"
-key = "Delete"
-mods = "Control"
-
-[[keyboard.bindings]]
-chars = "\b"
-key = "Back"
-mods = "Control"
 
 # Bindings mapped to F13-F24 keys to enable binds that are otherwise not
 # possible in a terminal
