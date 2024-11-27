@@ -10,7 +10,6 @@ m.vnoremap("p", "pgvy")
 m.nnoremap("Q", require("helpers.wininfo").toggle_quickfix)
 m.noremap("gF", "<cmd>wincmd v<bar>wincmd l<CR>gf")
 
-
 -- Use <BS> for moving up
 m.nnoremap("<BS>", "k")
 m.onoremap("<BS>", "k")
@@ -29,9 +28,8 @@ m.nnoremap('""', ':reg<CR>')
 -- the control key should be avoided as it is often used by vim or plugins. This
 -- way, it is easier to adopt the defaults.
 --------------------------------------------------------------------------------
-m.tnoremap("<C-t>", "<C-\\><C-n>") -- enter normal mode in terminal
-m.nnoremap("<c-k>", "K")           -- make K available for hop.nvim
-m.noremap("\\", "J")            -- make available for hop.nvim
+m.nnoremap("<c-k>", "K")
+m.noremap("\\", "J")
 
 -- Insert/command mode delete
 m.cnoremap("<C-BS>", "<C-w>")
@@ -41,8 +39,8 @@ m.inoremap("<C-Del>", "<C-o>dE")
 m.inoremap("<C-h>", "<C-w>")
 
 --- Quickfix buffer navigation
--- m.nnoremap("<C-p>", ":cprev<CR>")
--- m.nnoremap("<C-n>", ":cnext<CR>")
+m.nnoremap("<C-p>", ":cprev<CR>")
+m.nnoremap("<C-n>", ":cnext<CR>")
 --------------------------------------------------------------------------------
 -- Alt commands
 -- For navigation between buffers and windows.

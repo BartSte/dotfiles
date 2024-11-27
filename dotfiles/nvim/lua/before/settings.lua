@@ -3,7 +3,6 @@ vim.cmd("syntax on")
 
 vim.g.mapleader = " "
 vim.opt.autoindent = true
-vim.opt.cedit = "<C-t>"
 vim.opt.cmdheight = 1
 vim.opt.colorcolumn = ""
 vim.opt.colorcolumn = "+1"
