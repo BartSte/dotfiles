@@ -15,40 +15,6 @@ mods = "Alt"
 action = "ToggleFullscreen"
 key = "F11"
 
-[[keyboard.bindings]]
-action = "ScrollPageUp"
-key = "PageUp"
-mode = "~Alt"
-mods = "Shift"
-
-[[keyboard.bindings]]
-action = "ScrollPageDown"
-key = "PageDown"
-mode = "~Alt"
-mods = "Shift"
-
-[[keyboard.bindings]]
-action = "ScrollToTop"
-key = "Home"
-mode = "~Alt"
-mods = "Shift"
-
-[[keyboard.bindings]]
-action = "ScrollToBottom"
-key = "End"
-mode = "~Alt"
-mods = "Shift"
-
-[[keyboard.bindings]]
-chars = "\u001B[3;5~"
-key = "Delete"
-mods = "Control"
-
-[[keyboard.bindings]]
-chars = "\b"
-key = "Back"
-mods = "Control"
-
 # Bindings mapped to F13-F24 keys to enable binds that are otherwise not
 # possible in a terminal
 
@@ -61,11 +27,6 @@ mods = "Control"
 chars = "\u001B[22;2~"
 key = "Tab"
 mods = "Control|Shift"
-
-[[keyboard.bindings]]
-chars = "\u001B[23;2~"
-key = "Space"
-mods = "Control|Alt"
 
 [[keyboard.bindings]]
 chars = "\u001B[24;2~"
