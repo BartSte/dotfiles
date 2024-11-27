@@ -10,6 +10,7 @@ m.vnoremap("p", "pgvy")
 m.nnoremap("Q", require("helpers.wininfo").toggle_quickfix)
 m.noremap("gF", "<cmd>wincmd v<bar>wincmd l<CR>gf")
 
+
 -- Use <BS> for moving up
 m.nnoremap("<BS>", "k")
 m.onoremap("<BS>", "k")
@@ -29,8 +30,6 @@ m.nnoremap('""', ':reg<CR>')
 -- way, it is easier to adopt the defaults.
 --------------------------------------------------------------------------------
 m.tnoremap("<C-t>", "<C-\\><C-n>") -- enter normal mode in terminal
-m.inoremap("<C-t>", "<Esc>")       -- exit insert mode
-m.noremap("<C-t>", "<Esc>")
 m.nnoremap("<c-k>", "K")           -- make K available for hop.nvim
 m.noremap("\\", "J")            -- make available for hop.nvim
 
@@ -42,8 +41,8 @@ m.inoremap("<C-Del>", "<C-o>dE")
 m.inoremap("<C-h>", "<C-w>")
 
 --- Quickfix buffer navigation
-m.nnoremap("<C-p>", ":cprev<CR>")
-m.nnoremap("<C-n>", ":cnext<CR>")
+-- m.nnoremap("<C-p>", ":cprev<CR>")
+-- m.nnoremap("<C-n>", ":cnext<CR>")
 --------------------------------------------------------------------------------
 -- Alt commands
 -- For navigation between buffers and windows.
@@ -89,9 +88,10 @@ m.noremap("<leader>to", "<cmd>tabonly<CR>")
 m.noremap("<leader>tc", "<cmd>tabclose<CR>")
 
 -- Vim commands
-m.nnoremap("<leader>vw", ":setlocal wrap! wrap?<CR>")
 m.nnoremap("<leader>vs", require("helpers.session").save)
 m.nnoremap("<leader>vl", require("helpers.session").load)
+m.silent_nnoremap("<leader>vw", ":setlocal wrap! wrap?<CR>")
+m.silent_nnoremap("<leader>vr", ":e<CR>")
 
 --Shell commands
 vim.cmd("noremap <leader>cx :!chmod +x %<CR>")

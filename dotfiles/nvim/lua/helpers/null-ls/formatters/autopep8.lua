@@ -1,10 +1,10 @@
-local h = require("null-ls.helpers")
+local helpers = require("null-ls.helpers")
 local methods = require("null-ls.methods")
 
 local FORMATTING = methods.internal.FORMATTING
 local RANGE_FORMATTING = methods.internal.RANGE_FORMATTING
 
-return h.make_builtin({
+return helpers.make_builtin({
     name = "autopep8",
     meta = {
         url = "https://github.com/hhatto/autopep8",
@@ -14,10 +14,10 @@ return h.make_builtin({
     filetypes = { "python" },
     generator_opts = {
         command = "autopep8",
-        args = h.range_formatting_args_factory({
+        args = helpers.range_formatting_args_factory({
             "-",
         }, "--line-range", nil, { use_rows = true }),
         to_stdin = true,
     },
-    factory = h.formatter_factory,
+    factory = helpers.formatter_factory,
 })

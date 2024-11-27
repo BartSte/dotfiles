@@ -9,6 +9,7 @@
 _G.dd = function(...) Snacks.debug.inspect(...) end
 _G.bt = function() Snacks.debug.backtrace() end
 vim.print = _G.dd
+
 require("before").require_all()
 require("helpers.lazy").bootstrap()
 require("config.lazy").setup()

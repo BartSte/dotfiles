@@ -10,7 +10,7 @@ c.aliases = {
     "light": "set colors.webpage.darkmode.enabled false",
 }
 c.auto_save.session = False
-c.bindings.key_mappings = {"<Ctrl-c>": "<Escape>", "<Ctrl-t>": "<Escape>"}
+c.bindings.key_mappings = {"<Ctrl-c>": "<Escape>", "<Ctrl-[>": "<Escape>"}
 c.changelog_after_upgrade = "minor"
 c.colors.webpage.preferred_color_scheme = "dark"
 c.colors.webpage.darkmode.enabled = True
