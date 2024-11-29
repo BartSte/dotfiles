@@ -60,21 +60,6 @@ local lua_ls = {
 -- When installed, bashls uses `shellcheck` to provide diagnostics!
 local bashls = { filetypes = { "sh", "bash", "zsh" } }
 
-local marksman_win = {
-    cmd = {
-        "$LOCALAPPDATA\\nvim-data\\mason\\packages\\marksman\\marksman.exe",
-        "server"
-    }
-}
-
-local function get_marksman_opts()
-    if vim.fn.has('win32') == 1 then
-        return marksman_win
-    else
-        return {}
-    end
-end
-
 local lsp = require('lspconfig')
 lsp.pyright.setup(pyright)
 lsp.clangd.setup(clangd)
@@ -83,7 +68,6 @@ lsp.vimls.setup({})
 lsp.lua_ls.setup(lua_ls)
 lsp.bashls.setup(bashls)
 lsp.jsonls.setup({})
-lsp.marksman.setup(get_marksman_opts())
 lsp.ruff.setup({})
 if vim.fn.has('win32') == 1 then
     local appdata = vim.fn.expand('$LOCALAPPDATA')
