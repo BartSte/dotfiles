@@ -67,6 +67,7 @@ lsp.cmake.setup({})
 lsp.vimls.setup({})
 lsp.lua_ls.setup(lua_ls)
 lsp.bashls.setup(bashls)
+lsp.marksman.setup({})
 lsp.jsonls.setup({})
 lsp.ruff.setup({})
 if vim.fn.has('win32') == 1 then
