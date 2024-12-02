@@ -53,7 +53,6 @@ local function mappings()
         local opts = { buffer = true }
         vim.keymap.set(mode, lhs, rhs, opts)
     end
-
     bufmap('n', '<space>f', format)
     bufmap('n', '<C-s>', vim.lsp.buf.signature_help) -- Matches insert mode map
     bufmap('n', '<C-k>', vim.lsp.buf.hover)          -- Alternative for K
