@@ -32,7 +32,7 @@ fzf.setup({
 map.nnoremap("<a-H>", fzf.help_tags)
 map.nnoremap("<a-b>", fzf.buffers)
 map.nnoremap("<a-d>", helpers.dirs)
-map.nnoremap("<a-f>", fzf.files)
+map.nnoremap("<a-o>", fzf.files)
 map.nnoremap("<a-h>", helpers.files_home)
 map.nnoremap("<a-r>", helpers.files_org)
 map.nnoremap("<a-t>", fzf.tabs)
