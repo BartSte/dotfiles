@@ -30,3 +30,9 @@ mods = "Control|Shift"
 chars = "\u001B[24;2~"
 key = "Space"
 mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\b"
+key = "Back"
+mods = "Control"
+
