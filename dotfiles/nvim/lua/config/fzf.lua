@@ -17,7 +17,7 @@ fzf.setup({
             ["<S-up>"]   = "preview-page-up",
         },
         fzf = {
-            ["ctrl-d"]     = "half-page-down",
+            ["ctrl-c"]     = "half-page-down",
             ["ctrl-u"]     = "half-page-up",
             ["ctrl-a"]     = "beginning-of-line",
             ["ctrl-e"]     = "end-of-line",
@@ -31,7 +31,7 @@ fzf.setup({
 
 map.nnoremap("<a-H>", fzf.help_tags)
 map.nnoremap("<a-b>", fzf.buffers)
-map.nnoremap("<a-d>", helpers.dirs)
+map.nnoremap("<a-c>", helpers.dirs)
 map.nnoremap("<a-o>", fzf.files)
 map.nnoremap("<a-h>", helpers.files_home)
 map.nnoremap("<a-r>", helpers.files_org)

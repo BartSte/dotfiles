@@ -14,6 +14,11 @@ mods = "Alt"
 action = "ToggleFullscreen"
 key = "F11"
 
+[[keyboard.bindings]]
+chars = "\b"
+key = "Back"
+mods = "Control"
+
 # Bindings mapped to F13-F24 keys to enable binds that are otherwise not
 # possible in a terminal
 [[keyboard.bindings]]
@@ -29,9 +34,4 @@ mods = "Control|Shift"
 [[keyboard.bindings]]
 chars = "\u001B[24;2~"
 key = "Space"
-mods = "Control"
-
-[[keyboard.bindings]]
-chars = "\b"
-key = "Back"
 mods = "Control"
