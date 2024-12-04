@@ -30,6 +30,10 @@ local progress = {
     icon = "↕"
 }
 
+local location = {
+    "location",
+}
+
 local projectrc = {
     function() return require("projectrc").get_name() end,
     condition = function() return require("projectrc").get_name() ~= "" end,
@@ -38,7 +42,6 @@ local projectrc = {
 
 local function get_section_separator()
     if vim.fn.has("gui_running") == 1 then
-        -- return triangle separators
         return { left = "", right = "" }
     else
         return { left = "", right = "" }
@@ -56,9 +59,6 @@ end
 
 lualine.setup({
     options = {
-        refresh = {
-            statusline = 1000,
-        },
         icons_enabled = true,
         section_separators = get_section_separator(),
         component_separators = get_component_separator(),
@@ -67,15 +67,16 @@ lualine.setup({
     sections = {
         -- State of the editor
         lualine_a = { "mode" },
+
         -- Same for all files
         lualine_b = { "copilot", projectmarks.shada, projectrc, venv },
 
         -- Changes when switching buffers
         lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks_optimized },
-        lualine_x = { filename, "filetype", progress },
+        lualine_x = { filename, "filetype", fileformat },
 
         -- Same for all files
-        lualine_y = { fileformat },
+        lualine_y = { progress, location },
 
         -- State of the editor
         lualine_z = { helpers.tabs }
