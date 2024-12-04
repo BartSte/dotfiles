@@ -29,7 +29,6 @@ fzf.setup({
     },
 })
 
-
 map.nnoremap("<a-c>", helpers.dirs.cwd)
 map.nnoremap("<a-C>", helpers.dirs.home)
 map.nnoremap("<a-V>", helpers.dirs.nvim)
@@ -43,9 +42,8 @@ map.nnoremap("<a-r>", helpers.files.org)
 map.nnoremap("<a-b>", fzf.buffers)
 map.nnoremap("<a-h>", fzf.help_tags)
 map.nnoremap("<a-t>", fzf.tabs)
-
-map.nnoremap("<a-A>", fzf.live_grep_resume)
-map.nnoremap("<a-W>", fzf.grep_cWORD)
 map.nnoremap("<a-a>", fzf.live_grep)
-map.nnoremap("<a-w>", fzf.grep_cword)
 map.vnoremap("<a-a>", fzf.grep_visual)
+map.nnoremap("<a-A>", fzf.live_grep_resume)
+map.nnoremap("<a-w>", fzf.grep_cword)
+map.nnoremap("<a-W>", fzf.grep_cWORD)
