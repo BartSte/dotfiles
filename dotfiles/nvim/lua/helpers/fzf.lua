@@ -2,76 +2,59 @@ local fzf = require("fzf-lua")
 local join = require("helpers.path").join
 local path = require("helpers.path")
 
-local M = {}
+local M = {
+    files = {
+        opts = {}
+    },
+    dirs = {
+        opts = {
+            prompt    = "Dirs❯ ",
+            fd_opts   = "--type directory",
+            previewer = false,
+            git_icons = false,
+            preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200",
+        }
+    }
+}
 
---- Show all files recursively in the current directory, including hidden files
---- and gitignored files.
-M.files_all = function()
-    fzf.files({
-        prompt    = "Files❯ ",
-        fd_opts   = "-u -E .git -E __pycache__",
-        previewer = false,
-        git_icons = false,
-    })
+local function file_cmd(opts)
+    opts = opts or {}
+    opts = vim.tbl_extend("force", M.files.opts, opts)
+    fzf.files(opts)
 end
 
-M.files_home = function()
-    fzf.files({ cwd = path.home() })
+local function dir_cmd(opts)
+    opts = opts or {}
+    opts = vim.tbl_extend("force", M.dirs.opts, opts)
+    fzf.files(opts)
 end
 
-M.files_home_all = function()
-    fzf.files({
-        prompt    = "Files❯ ",
-        cwd       = path.home(),
-        fd_opts   = "-u -E .git -E __pycache__",
-        previewer = false,
-        git_icons = false,
-    })
+
+M.files.cwd = file_cmd
+
+M.files.home = function() file_cmd({ cwd = path.home() }) end
+
+M.files.buffer_dir = function() file_cmd({ cwd = vim.fn.expand("%:p:h") }) end
+
+M.files.nvim = function()
+    file_cmd({ cwd = join(path.home(), "dotfiles", "nvim") })
 end
 
-M.files_org = function()
-    local fd_cmd = "fd --color=never --type f --hidden --follow --exclude .git"
-    local grep_cmd = "grep -v org_archive$"
-    fzf.files({
+M.files.org = function()
+    file_cmd({
         cwd = join(path.home(), "dropbox", "org"),
-        cmd = fd_cmd .. " | " .. grep_cmd
+        cmd = "fd --color=never --type f --hidden --follow --exclude .git | grep -v org_archive$"
     })
 end
 
-M.dirs = function()
-    fzf.files({
-        prompt    = "Dirs❯ ",
-        fd_opts   = "--type directory",
-        previewer = false,
-        git_icons = false,
-        preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200",
-    })
-end
+M.dirs.cwd = dir_cmd
 
-M.dirs_home = function()
-    fzf.files({
-        prompt    = "Dirs❯ ",
-        cwd       = path.home(),
-        fd_opts   = "--type directory",
-        previewer = false,
-        git_icons = false,
-        preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200",
-    })
-end
+M.dirs.home = function() dir_cmd({ cwd = path.home() }) end
 
-M.files_nvim_config = function()
-    fzf.files({ cwd = join(path.home(), "dotfiles", "nvim") })
-end
+M.dirs.buffer_dir = function() dir_cmd({ cwd = vim.fn.expand("%:p:h") }) end
 
-M.dirs_nvim_config = function()
-    fzf.files({
-        prompt    = "Dirs❯ ",
-        cwd       = join(path.home(), "dotfiles", "nvim"),
-        fd_opts   = "--type directory",
-        previewer = false,
-        git_icons = false,
-        preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200",
-    })
+M.dirs.nvim = function()
+    dir_cmd({ cwd = join(path.home(), "dotfiles", "nvim") })
 end
 
 M.get_email = function()

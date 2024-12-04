@@ -30,16 +30,19 @@ fzf.setup({
 })
 
 
-map.nnoremap("<a-c>", helpers.dirs)
-map.nnoremap("<a-C>", helpers.dirs_home)
-map.nnoremap("<a-o>", fzf.files)
-map.nnoremap("<a-O>", helpers.files_home)
+map.nnoremap("<a-c>", helpers.dirs.cwd)
+map.nnoremap("<a-C>", helpers.dirs.home)
+map.nnoremap("<a-V>", helpers.dirs.nvim)
+
+map.nnoremap("<a-o>", helpers.files.cwd)
+map.nnoremap("<a-O>", helpers.files.home)
+map.nnoremap("<a-d>", helpers.files.buffer_dir)
+map.nnoremap("<a-v>", helpers.files.nvim)
+map.nnoremap("<a-r>", helpers.files.org)
 
 map.nnoremap("<a-b>", fzf.buffers)
-map.nnoremap("<a-p>", fzf.help_tags)
-map.nnoremap("<a-r>", helpers.files_org)
+map.nnoremap("<a-h>", fzf.help_tags)
 map.nnoremap("<a-t>", fzf.tabs)
-map.nnoremap("<a-v>", helpers.files_nvim_config)
 
 map.nnoremap("<a-A>", fzf.live_grep_resume)
 map.nnoremap("<a-W>", fzf.grep_cWORD)
