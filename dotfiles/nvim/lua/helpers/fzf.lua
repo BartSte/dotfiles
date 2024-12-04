@@ -48,10 +48,11 @@ M.dirs = function()
     })
 end
 
-M.dirs_all = function()
+M.dirs_home = function()
     fzf.files({
         prompt    = "Dirs❯ ",
-        fd_opts   = "--type directory -u -E .git -E __pycache__",
+        cwd       = path.home(),
+        fd_opts   = "--type directory",
         previewer = false,
         git_icons = false,
         preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200",

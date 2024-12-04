@@ -29,16 +29,18 @@ fzf.setup({
     },
 })
 
-map.nnoremap("<a-H>", fzf.help_tags)
-map.nnoremap("<a-b>", fzf.buffers)
+
 map.nnoremap("<a-c>", helpers.dirs)
+map.nnoremap("<a-C>", helpers.dirs_home)
 map.nnoremap("<a-o>", fzf.files)
-map.nnoremap("<a-h>", helpers.files_home)
+map.nnoremap("<a-O>", helpers.files_home)
+
+map.nnoremap("<a-b>", fzf.buffers)
+map.nnoremap("<a-p>", fzf.help_tags)
 map.nnoremap("<a-r>", helpers.files_org)
 map.nnoremap("<a-t>", fzf.tabs)
 map.nnoremap("<a-v>", helpers.files_nvim_config)
 
--- With grep seach, the capital rule does not apply.
 map.nnoremap("<a-A>", fzf.live_grep_resume)
 map.nnoremap("<a-W>", fzf.grep_cWORD)
 map.nnoremap("<a-a>", fzf.live_grep)

@@ -56,6 +56,9 @@ local function mappings()
     bufmap('n', '<space>f', format)
     bufmap('n', '<C-s>', vim.lsp.buf.signature_help) -- Matches insert mode map
     bufmap('n', '<C-k>', vim.lsp.buf.hover)          -- Alternative for K
+    bufmap('n', 'grr', vim.lsp.buf.references)
+    bufmap('n', 'grn', vim.lsp.buf.rename)
+    bufmap('n', 'gra', vim.lsp.buf.code_action)
 
     bufmap('n', '<space>luo', set_underline_off)
     bufmap('n', '<space>lue', set_underline_error)
