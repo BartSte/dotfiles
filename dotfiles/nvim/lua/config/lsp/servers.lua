@@ -1,23 +1,16 @@
 local path = require("helpers.path")
 
--- See: https://github.com/microsoft/pyright/blob/main/docs/settings.md
-local pyright = {
+local basedpyright = {
     settings = {
-        pyright = {
+        basedpyright = {
             disableOrganizeImports = true,
-            disableTaggedHints = true,
-        },
-        python = {
             analysis = {
-                autoImportCompletions = true,
-                autoSearchPaths = false,
-                useLibraryCodeForTypes = true,
-                typeCheckingMode = "strict",
-                reportMissingTypeStubs = false,
-                diagnosticMode = "openFilesOnly",
-            },
-        },
-    },
+                diagnosticSeverityOverrides = {
+                    reportMissingTypeStubs = "none"
+                }
+            }
+        }
+    }
 }
 
 local clangd = {
@@ -61,7 +54,7 @@ local lua_ls = {
 local bashls = { filetypes = { "sh", "bash", "zsh" } }
 
 local lsp = require('lspconfig')
-lsp.pyright.setup(pyright)
+lsp.basedpyright.setup(basedpyright)
 lsp.clangd.setup(clangd)
 lsp.cmake.setup({})
 lsp.vimls.setup({})
@@ -70,6 +63,7 @@ lsp.bashls.setup(bashls)
 lsp.marksman.setup({})
 lsp.jsonls.setup({})
 lsp.ruff.setup({})
+
 if vim.fn.has('win32') == 1 then
     local appdata = vim.fn.expand('$LOCALAPPDATA')
     local bundle_path = path.join(appdata, 'nvim-data', 'mason', 'packages', 'powershell-editor-services',
