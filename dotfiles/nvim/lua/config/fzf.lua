@@ -29,18 +29,30 @@ fzf.setup({
     },
 })
 
-map.nnoremap("<a-H>", fzf.help_tags)
-map.nnoremap("<a-b>", fzf.buffers)
-map.nnoremap("<a-c>", helpers.dirs)
-map.nnoremap("<a-o>", fzf.files)
-map.nnoremap("<a-h>", helpers.files_home)
-map.nnoremap("<a-r>", helpers.files_org)
-map.nnoremap("<a-t>", fzf.tabs)
-map.nnoremap("<a-v>", helpers.files_nvim_config)
+map.nnoremap("<a-c>", helpers.dirs.cwd)
+map.nnoremap("<a-C>", helpers.dirs.home)
+map.nnoremap("<a-V>", helpers.dirs.nvim)
 
--- With grep seach, the capital rule does not apply.
+map.nnoremap("<a-o>", helpers.files.cwd)
+map.nnoremap("<a-O>", helpers.files.home)
+map.nnoremap("<a-s>", helpers.files.buffer_dir)
+map.nnoremap("<a-v>", helpers.files.nvim)
+map.nnoremap("<a-r>", helpers.files.org)
+
+map.nnoremap("<a-B>", fzf.git_branches)
+map.nnoremap("<a-T>", fzf.git_tags)
+
+map.nnoremap("<a-d>", fzf.lsp_document_diagnostics)
+map.nnoremap("<a-D>", fzf.lsp_workspace_diagnostics)
+
+map.nnoremap("<a-\">", fzf.registers)
+map.nnoremap("<a-s>", fzf.spell_suggest)
 map.nnoremap("<a-A>", fzf.live_grep_resume)
+map.nnoremap("<a-M>", fzf.marks)
 map.nnoremap("<a-W>", fzf.grep_cWORD)
 map.nnoremap("<a-a>", fzf.live_grep)
+map.nnoremap("<a-b>", fzf.buffers)
+map.nnoremap("<a-h>", fzf.help_tags)
+map.nnoremap("<a-t>", fzf.tabs)
 map.nnoremap("<a-w>", fzf.grep_cword)
 map.vnoremap("<a-a>", fzf.grep_visual)
