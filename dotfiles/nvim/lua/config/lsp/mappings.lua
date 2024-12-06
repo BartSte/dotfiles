@@ -41,8 +41,15 @@ local function set_virtual_text_all()
 end
 
 local function format()
+    if require("projectrc").require("config.lsp.filters").code_action() then
+        vim.lsp.buf.code_action({
+            context = { only = { "source.organizeImports" }, diagnostics = {} },
+            apply = true,
+        })
+    end
+
     vim.lsp.buf.format({
-        filter = require("projectrc").require("config.lsp.format").filter,
+        filter = require("projectrc").require("config.lsp.filters").format,
         timeout_ms = 5000,
         async = false
     })
