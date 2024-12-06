@@ -1,6 +1,6 @@
 nnoremap <silent><leader>G :G<CR>:wincmd H<CR>}<Down><Down>
 nnoremap <silent><leader>gd :silent! normal gf<CR>:wincmd o<bar>Gvdiffsplit<CR>
-nnoremap <silent><leader>gD :gvdiffsplit<space>
+nnoremap <leader>gD :Gvdiffsplit<space>
 nnoremap <leader>ge :G merge<space>
 nnoremap <silent><leader>gf :G fetch<cr>
 nnoremap <silent><leader>gp :G pull<cr>

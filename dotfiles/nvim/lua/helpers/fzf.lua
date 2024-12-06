@@ -14,7 +14,8 @@ local M = {
             git_icons = false,
             preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200",
         }
-    }
+    },
+    git = {}
 }
 
 local function file_cmd(opts)
@@ -62,6 +63,25 @@ M.get_email = function()
     local sed_cmd = "sed 's/[ \\t].*$//'"
     local emails = vim.fn.system(khalrd_cmd .. " | " .. sed_cmd)
     fzf.fzf_exec(vim.split(emails, "\n"))
+end
+
+-- Based on fzf.actions.git_branch_add
+M.git.branch_track = function(selected, opts)
+    local branch = opts.last_query or selected[1]
+    branch = string.gsub(branch, "^ *remotes/", "")
+    if type(branch) ~= "string" or #branch == 0 then
+        fzf.utils.warn("Branch name is empty.")
+    else
+        local cmd = fzf.path.git_cwd(opts.cmd_add, opts)
+        table.insert(cmd, branch)
+        local output, rc = fzf.utils.io_systemlist(cmd)
+        if rc ~= 0 then
+            fzf.utils.err("error for cmd: " .. table.concat(cmd, " "))
+            fzf.utils.err(unpack(output))
+        else
+            fzf.utils.info(string.format("Created branch '%s'.", branch))
+        end
+    end
 end
 
 return M

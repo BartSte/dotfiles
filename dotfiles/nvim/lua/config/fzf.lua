@@ -27,6 +27,14 @@ fzf.setup({
             ["shift-up"]   = "preview-page-up",
         },
     },
+    git     = {
+        branches = {
+            actions = {
+                ["ctrl-a"] = { fn = helpers.git.branch_track, field_index = '{}', reload = true },
+            },
+            cmd_add = { "git", "switch", "--track" },
+        },
+    }
 })
 
 map.nnoremap("<a-c>", helpers.dirs.cwd)
@@ -46,7 +54,7 @@ map.nnoremap("<a-d>", fzf.lsp_document_diagnostics)
 map.nnoremap("<a-D>", fzf.lsp_workspace_diagnostics)
 
 map.nnoremap("<a-\">", fzf.registers)
-map.nnoremap("<a-s>", fzf.spell_suggest)
+map.nnoremap("<a-S>", fzf.spell_suggest)
 map.nnoremap("<a-A>", fzf.live_grep_resume)
 map.nnoremap("<a-M>", fzf.marks)
 map.nnoremap("<a-W>", fzf.grep_cWORD)
