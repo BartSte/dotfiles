@@ -1,81 +1,22 @@
-local function set_underline_off()
-    vim.diagnostic.config({ underline = false })
-end
-
-local function set_underline_error()
-    vim.diagnostic.config({ underline = { severity = vim.diagnostic.severity.ERROR } })
-end
-
-local function set_underline_all()
-    vim.diagnostic.config({
-        underline = {
-            severity = {
-                vim.diagnostic.severity.HINT,
-                vim.diagnostic.severity.INFO,
-                vim.diagnostic.severity.WARN,
-                vim.diagnostic.severity.ERROR
-            }
-        }
-    })
-end
-
-local function set_virtual_text_off()
-    vim.diagnostic.config({ virtual_text = false })
-end
-
-local function set_virtual_text_error()
-    vim.diagnostic.config({ virtual_text = { severity = vim.diagnostic.severity.ERROR } })
-end
-
-local function set_virtual_text_all()
-    vim.diagnostic.config({
-        virtual_text = {
-            severity = {
-                vim.diagnostic.severity.HINT,
-                vim.diagnostic.severity.INFO,
-                vim.diagnostic.severity.WARN,
-                vim.diagnostic.severity.ERROR
-            }
-        }
-    })
-end
-
-local function format()
-    if require("projectrc").require("config.lsp.filters").code_action() then
-        vim.lsp.buf.code_action({
-            context = { only = { "source.organizeImports" }, diagnostics = {} },
-            apply = true,
-        })
-    end
-
-    vim.lsp.buf.format({
-        filter = require("projectrc").require("config.lsp.filters").format,
-        timeout_ms = 5000,
-        async = false
-    })
-end
+local m = require("helpers.keymapper")
+local helpers = require("helpers.lsp")
 
 local function mappings()
-    local function bufmap(mode, lhs, rhs)
-        local opts = { buffer = true }
-        vim.keymap.set(mode, lhs, rhs, opts)
-    end
-    bufmap('n', '<space>f', format)
-    bufmap('n', '<C-s>', vim.lsp.buf.signature_help) -- Matches insert mode map
-    bufmap('n', '<C-k>', vim.lsp.buf.hover)          -- Alternative for K
-    bufmap('n', 'grr', vim.lsp.buf.references)
-    bufmap('n', 'grn', vim.lsp.buf.rename)
-    bufmap('n', 'gra', vim.lsp.buf.code_action)
-
-    bufmap('n', '<space>luo', set_underline_off)
-    bufmap('n', '<space>lue', set_underline_error)
-    bufmap('n', '<space>lua', set_underline_all)
-    bufmap('n', '<space>lvo', set_virtual_text_off)
-    bufmap('n', '<space>lve', set_virtual_text_error)
-    bufmap('n', '<space>lva', set_virtual_text_all)
+    m.buffer_nnoremap("<C-k>", vim.lsp.buf.hover)
+    m.buffer_nnoremap("<C-s>", vim.lsp.buf.signature_help)
+    m.buffer_nnoremap("<space>f", helpers.format)
+    m.buffer_nnoremap("<space>lua", helpers.underline.all)
+    m.buffer_nnoremap("<space>lue", helpers.underline.error)
+    m.buffer_nnoremap("<space>luo", helpers.underline.off)
+    m.buffer_nnoremap("<space>lva", helpers.virtual_text.all)
+    m.buffer_nnoremap("<space>lve", helpers.virtual_text.error)
+    m.buffer_nnoremap("<space>lvo", helpers.virtual_text.off)
+    m.buffer_nnoremap("gra", vim.lsp.buf.code_action)
+    m.buffer_nnoremap("grn", vim.lsp.buf.rename)
+    m.buffer_nnoremap("grr", vim.lsp.buf.references)
 end
 
-vim.api.nvim_create_autocmd('LspAttach', {
-    desc = 'LSP actions',
+vim.api.nvim_create_autocmd("LspAttach", {
+    desc = "LSP actions",
     callback = mappings
 })

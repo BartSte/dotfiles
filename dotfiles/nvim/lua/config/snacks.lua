@@ -1,5 +1,4 @@
 local m = require("helpers.keymapper")
-local lsp = require("helpers.lsp")
 local snacks = require("snacks")
 
 local notifier = {
