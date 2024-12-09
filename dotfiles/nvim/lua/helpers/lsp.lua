@@ -1,47 +1,82 @@
+---@class HelpersLsp
+---@field underline Underline
+---@field virtual_text VirtualText
+---@field format function
 local M = {}
 
---- Returns a callback that checks if the client name is the same as the one passed
---- in the argument
----@param client_name string The name of the client to check
----@return function callback A function that takes a client and returns a
----boolean
-local function make_filter(client_name)
-    return function(client)
-        return client.name == client_name
-    end
+---@class Underline
+---@field off function
+---@field error function
+---@field all function
+M.underline = {}
+
+function M.underline.off()
+    vim.diagnostic.config({ underline = false })
 end
 
---- Returns a callback that formats the buffer using the client with the name
---- passed in the argument
----@param client_name string The name of the client to use for formatting
----@return function callback A function that takes a buffer number and formats it
-local function format_callback(client_name)
-    return function(bufnr)
-        vim.lsp.buf.format({
-            filter = make_filter(client_name),
-            bufnr = bufnr,
-            timeout_ms = 5000,
-            async = false
+function M.underline.error()
+    vim.diagnostic.config({
+        underline = { severity = vim.diagnostic.severity.ERROR }
+    })
+end
+
+function M.underline.all()
+    vim.diagnostic.config({
+        underline = {
+            severity = {
+                vim.diagnostic.severity.HINT,
+                vim.diagnostic.severity.INFO,
+                vim.diagnostic.severity.WARN,
+                vim.diagnostic.severity.ERROR
+            }
+        }
+    })
+end
+
+---@class VirtualText
+---@field off function
+---@field error function
+---@field all function
+M.virtual_text = {}
+
+function M.virtual_text.off()
+    vim.diagnostic.config({ virtual_text = false })
+end
+
+function M.virtual_text.error()
+    vim.diagnostic.config({ virtual_text = { severity = vim.diagnostic.severity.ERROR } })
+end
+
+function M.virtual_text.all()
+    vim.diagnostic.config({
+        virtual_text = {
+            severity = {
+                vim.diagnostic.severity.HINT,
+                vim.diagnostic.severity.INFO,
+                vim.diagnostic.severity.WARN,
+                vim.diagnostic.severity.ERROR
+            }
+        }
+    })
+end
+
+---Format the current buffer.
+---This includes organizing imports for some languages as is defined in the
+---`config.lsp.filters.code_action` function.
+---@return nil
+function M.format()
+    if require("projectrc").require("config.lsp.filters").code_action() then
+        vim.lsp.buf.code_action({
+            context = { only = { "source.organizeImports" }, diagnostics = {} },
+            apply = true,
         })
     end
-end
 
---- Returns a callback that creates a formatting function that formats current
---- buffer using the client with the name passed in the argument. Next, this
---- formatter is mapped to `mapping` in normal mode. You cann attach the returned
---- callback to the `on_attach` option of an LSP client.
----@param name string The name of the client to use for formatting
----@param mapping string The mapping to use for formatting
----@return function callback A function that takes a client name and a mapping
----and returns a function that formats the buffer and maps it to the mapping
----passed in the argument
-M.format_with_client = function(name, mapping)
-    return function(client, bufnr)
-        require("helpers.keymapper").buffer_nnoremap(
-            mapping,
-            format_callback(name)
-        )
-    end
+    vim.lsp.buf.format({
+        filter = require("projectrc").require("config.lsp.filters").format,
+        timeout_ms = 5000,
+        async = false
+    })
 end
 
 return M

@@ -9,4 +9,10 @@ M.filter = function(client)
     return not is_ruff
 end
 
+---@param action lsp.CodeAction The code action to be executed
+---@return
+M.code_action = function(action)
+    return false --- isort is used instead of code_action
+end
+
 return M

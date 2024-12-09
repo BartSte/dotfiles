@@ -123,4 +123,15 @@ M.top_dir = function(path)
     return M.norm(vim.fn.fnamemodify(path, ":p:h")):match("([^/]+)$")
 end
 
+--- Return the configuration directory.
+--- Ensures it is always a table.
+---@return table config The configuration directory.
+M.config_dir = function()
+    local dir_configs = vim.fn.stdpath('config')
+    if type(dir_configs) == "string" then
+        dir_configs = { dir_configs }
+    end
+    return dir_configs
+end
+
 return M
