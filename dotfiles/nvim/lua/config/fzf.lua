@@ -54,7 +54,7 @@ map.nnoremap("<a-d>", fzf.lsp_document_diagnostics)
 map.nnoremap("<a-D>", fzf.lsp_workspace_diagnostics)
 
 map.nnoremap('""', fzf.registers)
-map.nnoremap("<a-S>", fzf.spell_suggest)
+map.nnoremap("z=", fzf.spell_suggest)
 map.nnoremap("<a-A>", fzf.live_grep_resume)
 map.nnoremap("<a-M>", fzf.marks)
 map.nnoremap("<a-W>", fzf.grep_cWORD)
