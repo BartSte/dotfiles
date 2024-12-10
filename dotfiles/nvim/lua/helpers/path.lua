@@ -58,7 +58,7 @@ end
 --- Return the require paths for all files in a directory. The second argument
 --is optional.
 ---@param directory string directory to search for files.
----@param exclude string A pattern to exclude files.
+---@param exclude string? A pattern to exclude files.
 ---@return table string A table of the require paths.
 M.glob_modules = function(directory, exclude)
     local default = M.path_separator .. "init$"
@@ -87,6 +87,13 @@ end
 M.dir_to_module = function(dir)
     local relative_dir = dir:gsub(".*" .. M.path_separator .. "lua" .. M.path_separator, "")
     return relative_dir:gsub(M.path_separator, "."):sub(1, -2)
+end
+
+--- Return the file name (the last part) of a module.
+---@param module string The module name. For example `helpers.path.join`.
+---@return string file The file name of the module. For example `join`.
+M.module_to_file = function(module)
+    return module:match("([^%.]+)$")
 end
 
 --- Similar to `join`, but now for module names, which are separated by a dot.
@@ -124,14 +131,26 @@ M.top_dir = function(path)
 end
 
 --- Return the configuration directory.
---- Ensures it is always a table.
----@return table config The configuration directory.
+--- Ensures it is always a string by selecting the first element of the list.
+---@return string config The configuration directory.
 M.config_dir = function()
     local dir_configs = vim.fn.stdpath('config')
     if type(dir_configs) == "string" then
-        dir_configs = { dir_configs }
+        return dir_configs
+    else
+        vim.notify("Multiple configuration directories found.")
+        return dir_configs[1]
     end
-    return dir_configs
+end
+
+M.require_all = function(directory)
+    local modules = M.glob_modules(directory)
+    local result = {}
+    for _, module in ipairs(modules) do
+        local name = M.module_to_file(module)
+        result[name] = require(module)
+    end
+    return result
 end
 
 return M

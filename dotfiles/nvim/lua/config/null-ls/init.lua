@@ -1,9 +1,6 @@
 local null_ls = require("null-ls")
 
 local sources = {
-    -- Python
-    require("helpers.null-ls.formatters").autoflake,
-    require("helpers.null-ls.formatters").isort,
     -- C++
     null_ls.builtins.formatting.cmake_format,
     null_ls.builtins.diagnostics.cmake_lint,

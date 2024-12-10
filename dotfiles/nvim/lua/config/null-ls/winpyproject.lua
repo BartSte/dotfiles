@@ -1,3 +1,7 @@
+local formatters = require("helpers.null-ls.formatters")
+
 return {
-    require("helpers.null-ls.formatters").autopep8,
+    formatters.autoflake,
+    formatters.autopep8,
+    formatters.isort,
 }

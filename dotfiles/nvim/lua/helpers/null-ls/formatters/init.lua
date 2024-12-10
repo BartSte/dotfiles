@@ -1,5 +1,2 @@
-return {
-    autopep8 = require("helpers.null-ls.formatters.autopep8"),
-    autoflake = require("helpers.null-ls.formatters.autoflake"),
-    isort = require("helpers.null-ls.formatters.isort"),
-}
+local path = require("helpers.path")
+return path.require_all(path.join(path.config_dir(), "lua", "helpers", "null-ls", "formatters"))
