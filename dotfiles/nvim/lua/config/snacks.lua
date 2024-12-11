@@ -1,7 +1,6 @@
 local m = require("helpers.keymapper")
 local snacks = require("snacks")
 
-
 snacks.setup {
     bigfile = { enabled = true },
     quickfile = { enabled = true },

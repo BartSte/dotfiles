@@ -1,6 +1,11 @@
 local path = require("helpers.path")
+local lsp = require('lspconfig')
 
-local basedpyright = {
+--Python
+lsp.ruff.setup({
+    on_attach = require("projectrc").require("config.lsp.capabilities").ruff
+})
+lsp.basedpyright.setup({
     settings = {
         basedpyright = {
             disableOrganizeImports = true,
@@ -11,9 +16,11 @@ local basedpyright = {
             }
         }
     }
-}
+})
 
-local clangd = {
+-- C/C++
+lsp.cmake.setup({})
+lsp.clangd.setup({
     cmd = {
         "clangd",
         "--offset-encoding=utf-16",
@@ -22,24 +29,22 @@ local clangd = {
         "--clang-tidy",
         "--pch-storage=memory",
     },
-}
+})
 
-local lua_ls = {}
+--Shell
+lsp.bashls.setup({ filetypes = { "sh", "bash", "zsh" } })
 
--- When installed, bashls uses `shellcheck` to provide diagnostics!
-local bashls = { filetypes = { "sh", "bash", "zsh" } }
-
-local lsp = require('lspconfig')
-lsp.basedpyright.setup(basedpyright)
-lsp.clangd.setup(clangd)
-lsp.cmake.setup({})
+--Nvim
 lsp.vimls.setup({})
-lsp.lua_ls.setup(lua_ls)
-lsp.bashls.setup(bashls)
-lsp.marksman.setup({})
-lsp.jsonls.setup({})
-lsp.ruff.setup({})
+lsp.lua_ls.setup({})
 
+--MD
+lsp.marksman.setup({})
+
+--JS/TS
+lsp.jsonls.setup({})
+
+--Powershell
 if vim.fn.has('win32') == 1 then
     local appdata = vim.fn.expand('$LOCALAPPDATA')
     local bundle_path = path.join(appdata, 'nvim-data', 'mason', 'packages', 'powershell-editor-services',
