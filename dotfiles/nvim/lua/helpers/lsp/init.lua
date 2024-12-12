@@ -1,6 +1,7 @@
 local path = require("helpers.path")
 
 ---@class HelpersLsp
+---@field format Formatting
 ---@field underline Underline
 ---@field virtualtext VirtualText
 ---@field notify Notify

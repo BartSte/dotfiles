@@ -1,6 +1,7 @@
 local lsp_defaults = require('lspconfig').util.default_config
 local helpers = require("helpers.lsp")
 local mappings = require('config.lsp.mappings')
+local servers = require('config.lsp.servers')
 
 lsp_defaults.capabilities = vim.tbl_deep_extend(
     'force',
@@ -14,17 +15,15 @@ vim.diagnostic.config({
     update_in_insert = false,
     underline = true,
     severity_sort = true,
-    float = {
-        border = 'rounded',
-    },
+    float = { border = 'rounded', },
 })
 
-require('config.lsp.servers')
+servers.setup()
 
 vim.api.nvim_create_autocmd("LspAttach", {
     desc = "LSP actions",
     callback = function(args)
-        mappings.set(args)
+        mappings.setup(args)
         helpers.notify.attach(args)
     end,
 })
