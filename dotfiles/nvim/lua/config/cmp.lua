@@ -85,42 +85,25 @@ local formatting = {
 }
 
 local sources_i = {
-    { name = 'orgmode',  group_index = 2 },
-    { name = 'nvim_lsp', group_index = 2 },
-    { name = 'path',     group_index = 2 },
-    { name = 'buffer',   group_index = 2 },
+    { name = 'orgmode' },
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'path' },
 }
 
 local sources_c = {
-    { name = 'path',            group_index = 2 },
-    { name = 'cmdline_history', group_index = 2 },
     {
         name = 'cmdline',
-        group_index = 2,
         option = {
             ignore_cmds = { 'Man', '!', '!r', '!read' }
         }
     },
-    { name = 'buffer', group_index = 2 },
+    { name = 'cmdline_history' },
+    { name = 'path' },
+    { name = 'buffer' },
 }
 
 local sources_s = { { name = 'buffer' } }
-
-local sorting = {
-    priority_weight = 2,
-    comparators = {
-        cmp.config.compare.offset,
-        -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-        cmp.config.compare.exact,
-        cmp.config.compare.score,
-        cmp.config.compare.recently_used,
-        cmp.config.compare.locality,
-        cmp.config.compare.kind,
-        cmp.config.compare.sort_text,
-        cmp.config.compare.length,
-        cmp.config.compare.order,
-    }
-}
 
 cmp.setup({
     snippet = snippet,
@@ -129,7 +112,6 @@ cmp.setup({
     mapping = mappings,
     sources = sources_i,
     enabled = func.cmp_enabled,
-    sorting = sorting
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
