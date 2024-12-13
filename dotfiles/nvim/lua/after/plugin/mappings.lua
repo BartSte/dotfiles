@@ -97,17 +97,3 @@ m.vnoremap("<leader>c=", sorters.lensort.vfunc)
 
 -- Customs
 m.nnoremap("<leader>/", require("helpers.mappings").highlight_word)
-
---------------------------------------------------------------------------------
--- The terminal does not detect <C-Space>. As a solution, Alacritty sends <F24>
--- when ctrl+space is pressed. By binding <C-Space> to <F24> (or <S-F12>), the
--- issue is solved.
---------------------------------------------------------------------------------
-vim.cmd("map <F24> <C-Space>")
-vim.cmd("map <S-F12> <C-Space>")
-vim.cmd("imap <F24> <C-Space>")
-vim.cmd("cmap <F24> <C-Space>")
-vim.cmd("nmap <F24> <C-Space>")
-vim.cmd("imap <S-F12> <C-Space>")
-vim.cmd("cmap <S-F12> <C-Space>")
-vim.cmd("nmap <S-F12> <C-Space>")
