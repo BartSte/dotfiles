@@ -1,6 +1,5 @@
 local cmp = require('cmp')
 local helpers = require('helpers.cmp')
-local map = require('helpers.keymapper')
 
 -- To enable history scrolling on the command line, cmp is disabled when
 -- <Down> or <Up> is pressed. cmp is restored when tab/stab or space are pressed.
