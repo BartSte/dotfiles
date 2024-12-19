@@ -78,7 +78,7 @@ local custom_exports = {
 
 local mappings = {
     org = {
-        org_toggle_checkbox = { '<F24>', '<S-F12>' }
+        org_toggle_checkbox = { '<C-Space>', '<S-F12>' }
     }
 }
 
