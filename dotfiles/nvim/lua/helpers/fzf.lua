@@ -2,21 +2,11 @@ local fzf = require("fzf-lua")
 local join = require("helpers.path").join
 local path = require("helpers.path")
 
-local M = {
-    files = {
-        opts = {}
-    },
-    dirs = {
-        opts = {
-            prompt    = "Dirs❯ ",
-            fd_opts   = "--type directory",
-            previewer = false,
-            git_icons = false,
-            preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200",
-        }
-    },
-    git = {}
-}
+---@class FzfHelpers
+---@field files FzfFiles 
+---@field dirs FzfDir 
+---@field git FzfGit
+local M = {}
 
 local function file_cmd(opts)
     opts = opts or {}
@@ -30,7 +20,15 @@ local function dir_cmd(opts)
     fzf.files(opts)
 end
 
-
+---@class FzfFiles
+---@field opts table
+---@field cwd fun(opts: table): nil
+---@field home fun(): nil
+---@field buffer_dir fun(): nil
+---@field nvim fun(): nil
+---@field org fun(): nil
+M.files = {}
+M.files.opts = {}
 M.files.cwd = file_cmd
 
 M.files.home = function() file_cmd({ cwd = path.home() }) end
@@ -48,6 +46,19 @@ M.files.org = function()
     })
 end
 
+---@class FzfDir
+---@field opts table
+---@field cwd fun(opts: table): nil
+---@field home fun(): nil
+M.dirs = {}
+M.dirs.opts = {
+    prompt    = "Dirs❯ ",
+    fd_opts   = "--type directory",
+    previewer = false,
+    git_icons = false,
+    preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200",
+}
+
 M.dirs.cwd = dir_cmd
 
 M.dirs.home = function() dir_cmd({ cwd = path.home() }) end
@@ -64,6 +75,10 @@ M.get_email = function()
     local emails = vim.fn.system(khalrd_cmd .. " | " .. sed_cmd)
     fzf.fzf_exec(vim.split(emails, "\n"))
 end
+
+---@class FzfGit
+---@field branch_track fun(selected: table, opts: table): nil
+M.git = {}
 
 -- Based on fzf.actions.git_branch_add
 M.git.branch_track = function(selected, opts)

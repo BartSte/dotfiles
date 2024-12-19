@@ -25,6 +25,7 @@ end
 ---@param exclude table<string>|nil A list of names to exclude
 local function extract_venv_name(venv, exclude)
     exclude = exclude or { "venv", ".venv" }
+    venv = string.gsub(venv, "\\", "/")
     local name = string.match(venv, "/([^/]*)$")
     if vim.tbl_contains(exclude, name) then
         local new_venv = string.match(venv, "^(.*)/[^/]*$")

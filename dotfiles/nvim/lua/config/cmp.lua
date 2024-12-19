@@ -1,3 +1,4 @@
+local m = require('helpers.keymapper')
 local cmp = require('cmp')
 local helpers = require('helpers.cmp')
 
@@ -76,9 +77,12 @@ cmp.setup({
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<Down>'] = cmp.mapping(down),
         ['<M-CR>'] = cmp.mapping(menter),
-        ['<C-Space>'] = cmp.mapping(cspace),
+        ['<C-space>'] = cmp.mapping(cspace),
     }
 })
+m.nnoremap("<F24>", "a<cmd>lua require'helpers.cmp'.toggle_visibility()<CR>")
+m.inoremap("<F24>", helpers.toggle_visibility)
+m.cnoremap("<F24>", helpers.toggle_cmp)
 
 cmp.setup.cmdline({ '/', '?' }, {
     sources = { { name = 'buffer' } }
