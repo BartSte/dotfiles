@@ -2,6 +2,9 @@ local fzf = require("fzf-lua")
 local map = require("helpers.keymapper")
 local helpers = require("helpers.fzf")
 
+-- By adding my custom action to this table, they show up in the fzf header.
+fzf.core.ACTION_DEFINITIONS[helpers.git.branch_track] = { "track branch" }
+
 fzf.setup({
     winopts = {
         height  = 0.9,
@@ -33,6 +36,7 @@ fzf.setup({
                 ["ctrl-a"] = { fn = helpers.git.branch_track, field_index = '{}', reload = true },
             },
             cmd_add = { "git", "switch", "--track" },
+            headers = { "actions" }
         },
     }
 })
