@@ -3,7 +3,11 @@ local map = require("helpers.keymapper")
 local helpers = require("helpers.fzf")
 
 -- By adding my custom action to this table, they show up in the fzf header.
-fzf.core.ACTION_DEFINITIONS[helpers.git.branch_track] = { "track branch" }
+fzf.core.ACTION_DEFINITIONS[fzf.actions.git_branch_del] = { "delete" }
+fzf.core.ACTION_DEFINITIONS[fzf.actions.git_branch_add] = { "add" }
+fzf.core.ACTION_DEFINITIONS[helpers.git.branch_track] = { "track" }
+fzf.core.ACTION_DEFINITIONS[helpers.git.branch_rebase] = { "rebase" }
+fzf.core.ACTION_DEFINITIONS[helpers.git.branch_merge] = { "merge" }
 
 fzf.setup({
     winopts = {
@@ -33,9 +37,15 @@ fzf.setup({
     git     = {
         branches = {
             actions = {
-                ["ctrl-a"] = { fn = helpers.git.branch_track, field_index = '{}', reload = true },
+                ["ctrl-a"] = { fn = fzf.actions.git_branch_add, field_index = "{q}", reload = true },
+                ["ctrl-e"] = { fn = helpers.git.branch_merge, reload = true },
+                ["ctrl-r"] = { fn = helpers.git.branch_rebase, reload = true },
+                ["ctrl-s"] = { fn = helpers.git.branch_track, reload = true },
+                ["ctrl-x"] = { fn = fzf.actions.git_branch_del, reload = true },
+                ["enter"]  = fzf.actions.git_switch,
             },
-            cmd_add = { "git", "switch", "--track" },
+            cmd_add = { "git", "branch" },
+            cmd_del = { "git", "branch", "--delete" },
             headers = { "actions" }
         },
     }
