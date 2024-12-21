@@ -51,6 +51,8 @@ map.nnoremap("<a-V>", helpers.dirs.nvim)
 
 map.nnoremap("<a-o>", helpers.files.cwd)
 map.nnoremap("<a-O>", helpers.files.home)
+map.nnoremap("<a-f>", helpers.insert.files.cwd)
+map.nnoremap("<a-F>", helpers.insert.files.home)
 map.nnoremap("<a-s>", helpers.files.buffer_dir)
 map.nnoremap("<a-v>", helpers.files.nvim)
 map.nnoremap("<a-r>", helpers.files.org)

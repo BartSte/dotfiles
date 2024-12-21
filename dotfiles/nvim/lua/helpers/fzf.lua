@@ -5,6 +5,7 @@ local path = require("helpers.path")
 ---@class FzfHelpers
 ---@field files FzfFiles
 ---@field dirs FzfDir
+---@field insert FzfInsert
 ---@field git FzfGit
 local M = {}
 
@@ -75,6 +76,49 @@ M.get_email = function()
     local emails = vim.fn.system(khalrd_cmd .. " | " .. sed_cmd)
     fzf.fzf_exec(vim.split(emails, "\n"))
 end
+
+---@class FzfInsert
+---@field files FzfInsertFiles
+---@field dirs FzfInsertDir
+M.insert = {}
+
+---@class FzfInsertFiles
+---@field cwd fun(): nil
+---@field home fun(): nil
+M.insert.files = {}
+
+--- Remove whitespace, newlines, and icons from the selected text
+local function strip_text(text)
+    return text:gsub("[^\x20-\x7E]", "")
+end
+
+local function insert_string(selected)
+    if selected == nil or #selected == 0 then
+        return
+    elseif type(selected) == "table" then
+        selected = selected[1]
+    end
+    selected = strip_text(selected)
+    vim.api.nvim_put({ selected }, "", true, true)
+end
+
+--- Select a file using fzf and insert it into the current buffer.
+---@param directory string? The desired directory to start the search
+local function insert_file(directory)
+    directory = directory or vim.fn.getcwd()
+    file_cmd({
+        cwd = directory,
+        actions = { ["enter"] = insert_string }
+    })
+end
+
+M.insert.files.cwd = insert_file
+M.insert.files.home = function() insert_file(path.home()) end
+
+---@class FzfInsertDir
+---@field cwd fun(): nil
+---@field home fun(): nil
+M.insert.dirs = {}
 
 ---@class FzfGit
 ---@field branch_track fun(selected: table, opts: table): nil
