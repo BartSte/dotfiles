@@ -120,6 +120,17 @@ M.insert.files.home = function() insert_file(path.home()) end
 ---@field home fun(): nil
 M.insert.dirs = {}
 
+--- Select a directory using fzf and insert it into the current buffer.
+local function insert_dir(directory)
+    directory = directory or vim.fn.getcwd()
+    dir_cmd({
+        actions = { ["enter"] = insert_string }
+    })
+end
+
+M.insert.dirs.cwd = insert_dir
+M.insert.dirs.home = function() insert_dir(path.home()) end
+
 ---@class FzfGit
 ---@field branch_track fun(selected: table, opts: table): nil
 ---@field branch_rebase fun(selected: table, opts: table): nil
