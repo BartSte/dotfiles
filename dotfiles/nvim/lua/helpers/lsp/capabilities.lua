@@ -1,5 +1,8 @@
+local opts = require("helpers.opts")
+
 ---@class CapabilityHelpers
 ---@field has_action fun(client: vim.lsp.Client, action: string): boolean
+---@field buffer BufferCapabilityHelpers
 local M = {}
 
 ---Check if the client has the action
@@ -13,29 +16,78 @@ function M.has_action(client, action)
     return ok and type(actions) == "table" and vim.tbl_contains(actions, action)
 end
 
+---@class BufferCapabilityHelpers
+---@field get_capabilities fun(buf: number): table
+---@field update_capabilities fun(client: vim.lsp.Client, buf: number, capabilities: table): table
+---@field notify fun(buf: number): integer
+M.buffer = {
 
+    --- Get buffer capabilities
+    ---@param buf number The buffer number
+    ---@return table capabilities The buffer capabilities
+    get_capabilities = function(buf)
+        if vim.b[buf].capabilities == nil then
+            vim.b[buf].capabilities = { actions = {} }
+        end
+        return vim.b[buf].capabilities
+    end,
 
--- local has_organize_imports = has_action(client, "source.organizeImports")
--- local organize_imports_is_nil = buf_table.organize_imports == nil
--- if has_organize_imports and organize_imports_is_nil then
---     vim.notify("Organize imports -> " .. client.name)
---     buf_table.organize_imports = function()
---         vim.lsp.buf.code_action({
---             context = { only = { "source.organizeImports" } },
---             apply = true,
---         })
---     end
--- elseif has_organize_imports and not organize_imports_is_nil then            
---     vim.notify("Organize imports is supported by multiple clients", vim.log.levels.ERROR)
--- end
---
--- local has_format = has_action(client, "source.format")
--- local format_is_nil = buf_table.format == nil
--- if has_format and format_is_nil then
---     vim.notify("Formatting -> " .. client.name)
---     buf_table.format = function()
---         vim.lsp.buf.formatting()
---     end
--- elseif has_format and not format_is_nil then
---     error("Format is supported by multiple clients")
--- end
+    --- Update buffer capabilities
+    --- This function will update the `vim.b[buf].capabilities` table with the
+    --- capabilities that the client has. It will only update the capabilities that
+    --- are in the `capabilities` list.
+    ---@param client vim.lsp.Client The client that is attached to the buffer
+    ---@param buf number The buffer number
+    ---@param capabilities table The capabilities to consider
+    ---@return table capabilities The updated buffer capabilities
+    update_capabilities = function(client, buf, capabilities)
+        local buffer_capabilities = M.buffer.get_capabilities(buf)
+        for _, value in ipairs(capabilities) do
+            if client.server_capabilities[value] then
+                dd(client.name .. " -> " .. value .. " -> " .. vim.inspect(client.server_capabilities[value]))
+                buffer_capabilities[value] = opts.list_extend_no_duplicates(
+                    buffer_capabilities[value] or {},
+                    { client.name }
+                )
+            end
+        end
+        vim.b[buf].capabilities = buffer_capabilities
+        return vim.b[buf].capabilities
+    end,
+
+    --- Update the code actions
+    ---@param client vim.lsp.Client The client that is attached to the buffer
+    ---@param buf number The buffer number
+    ---@param actions table The actions to consider
+    ---@return table capabilities The updated buffer capabilities
+    update_actions = function(client, buf, actions)
+        local buffer_capabilities = vim.b[buf].capabilities
+        for _, value in ipairs(actions) do
+            if M.has_action(client, value) then
+                buffer_capabilities.actions[value] = opts.list_extend_no_duplicates(
+                    buffer_capabilities.actions[value] or {},
+                    { client.name }
+                )
+            end
+        end
+        vim.b[buf].capabilities = buffer_capabilities
+        return vim.b[buf].capabilities
+    end,
+
+    --- Notify the buffer capabilities
+    ---@param buf number The buffer number
+    ---@return integer|nil id The notification id
+    notify = function(buf)
+        local buffer_capabilities = M.buffer.get_capabilities(buf)
+        vim.b[buf].msg_id_capabilities = Snacks.notify.info(
+            vim.inspect(buffer_capabilities), {
+                title = "LSP capabilities",
+                id = vim.b[buf].msg_id_capabilities
+            }
+        )
+        return vim.b[buf].msg_id_capabilities
+    end
+
+}
+
+return M

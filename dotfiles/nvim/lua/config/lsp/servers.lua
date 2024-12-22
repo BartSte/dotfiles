@@ -1,5 +1,5 @@
 local lsp = require('lspconfig')
-local capabilities = require('config.lsp.capabilities')
+local capabilities = require("projectrc").require('config.lsp.capabilities')
 
 local M = {}
 
@@ -39,7 +39,15 @@ M.setup = function()
 
     --Nvim
     lsp.vimls.setup({})
-    lsp.lua_ls.setup({})
+    lsp.lua_ls.setup({
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { "vim", "Snacks" },
+                },
+            },
+        },
+    })
 
     --MD
     lsp.marksman.setup({})

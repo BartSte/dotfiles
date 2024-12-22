@@ -38,4 +38,17 @@ M.merge_opts = function(opts, defaults)
     return vim.tbl_extend("force", defaults, opts)
 end
 
+--- Extend a list with new items without duplicates
+---@param list table List to extend
+---@param new table New items to add
+---@return table Extended list
+M.list_extend_no_duplicates = function(list, new)
+    for _, item in ipairs(new) do
+        if not vim.tbl_contains(list, item) then
+            table.insert(list, item)
+        end
+    end
+    return list
+end
+
 return M

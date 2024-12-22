@@ -40,7 +40,6 @@ local function organize_imports()
     })
 end
 
-
 function M.set_mappings()
     m.buffer_nnoremap("<C-k>", vim.lsp.buf.hover)
     m.buffer_nnoremap("<C-s>", vim.lsp.buf.signature_help)
@@ -68,50 +67,9 @@ function M.check_capabilities(args)
         return
     end
 
-    -- TODO: refactor!
-    if not vim.b[args.buf].msg then
-        vim.b[args.buf].msg = ""
-    end
-    if not vim.b[args.buf].msg_id then
-        vim.b[args.buf].msg_id = nil
-    end
-    local buf_capabilities = vim.b[args.buf].capabilities or {}
-    for _, capability in ipairs(M.mapping_capablilties) do
-        if client.server_capabilities[capability] then
-            if not buf_capabilities[capability] then
-                buf_capabilities[capability] = client.name
-                vim.b[args.buf].msg = vim.b[args.buf].msg .. "\n" .. capability .. " -> " .. client.name
-                vim.b[args.buf].msg_id = Snacks.notify.info(
-                    vim.b[args.buf].msg,
-                    {
-                        title = "LSP Capabilities",
-                        id = vim.b[args.buf].msg_id
-                    }
-                )
-            elseif buf_capabilities[capability] ~= client.name then
-                vim.notify("Multiple clients provide " .. capability, vim.log.levels.ERROR)
-            end
-        end
-    end
-    vim.b[args.buf].capabilities = buf_capabilities
-
-    -- local buf_actions = get_buf_actions(args)
-    -- local client_actions = client.server_capabilities.codeActionProvider.codeActionKinds or {}
-    -- ---Do one of the following things for the code actions:
-    -- ---Get the actions that are present in both the buf_actions and the client_actions
-    -- ---If the resulting actions are also present in the mapping_actions, log an error
-    -- ---Finally, extend the buf_actions with the client_actions without duplicates
-    -- local overlap_with_client = vim.tbl_filter(function(action)
-    --     return vim.tbl_contains(client_actions, action)
-    -- end, buf_actions)
-    -- local overlap_with_mapping = vim.tbl_filter(function(action)
-    --     return vim.tbl_contains(M.mapping_actions, action)
-    -- end, overlap_with_client)
-    -- if #overlap_with_mapping > 0 then
-    --     vim.notify("Multiple clients provide " .. table.concat(overlap_with_mapping, ", "), vim.log.levels.ERROR)
-    -- end
-    -- vim.list_extend(buf_actions, client_actions)
-    -- dd(buf_actions)
+    helpers.capabilities.buffer.update_capabilities(client, args.buf, M.mapping_capablilties)
+    helpers.capabilities.buffer.update_actions(client, args.buf, M.mapping_actions)
+    helpers.capabilities.buffer.notify(args.buf)
 end
 
 return M

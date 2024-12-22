@@ -9,6 +9,16 @@ lsp_defaults.capabilities = vim.tbl_deep_extend(
     require('cmp_nvim_lsp').default_capabilities()
 )
 
+vim.api.nvim_create_autocmd("LspAttach", {
+    desc = "LSP actions",
+    callback = function(args)
+        mappings.setup(args)
+        helpers.notify.attach(args)
+    end,
+})
+
+vim.api.nvim_create_autocmd("LspProgress", { callback = helpers.notify.progress })
+
 vim.diagnostic.config({
     virtual_text = false,
     signs = false,
@@ -18,13 +28,7 @@ vim.diagnostic.config({
     float = { border = 'rounded', },
 })
 
+-- TODO: when opening the first buffer, ruff + null-ls are both loaded for
+-- winpyproject. Later, only null-ls is loaded (as expected).
 servers.setup()
 
-vim.api.nvim_create_autocmd("LspAttach", {
-    desc = "LSP actions",
-    callback = function(args)
-        mappings.setup(args)
-        helpers.notify.attach(args)
-    end,
-})
-vim.api.nvim_create_autocmd("LspProgress", { callback = helpers.notify.progress })
