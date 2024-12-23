@@ -9,10 +9,15 @@ M.attached_once = {}
 M.attach = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client == nil then
-        vim.notify("LSP: client not found", vim.log.levels.ERROR)
-    elseif not vim.tbl_contains(M.attached_once, client) then
-        vim.notify("LSP: " .. client.name, vim.log.levels.INFO)
-        table.insert(M.attached_once, client)
+        Snacks.notify.error("LSP: client not found")
+    elseif not vim.tbl_contains(M.attached_once, client.name) then
+        table.insert(M.attached_once, client.name)
+        msg_ids.lsp_attached = Snacks.notify.info(
+            M.attached_once, {
+                title = "LSP Attached",
+                id = msg_ids.lsp_attached,
+            }
+        )
     end
 end
 

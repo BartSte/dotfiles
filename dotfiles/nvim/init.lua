@@ -4,6 +4,7 @@
 -- `lua/before` needs to be prepended to the rtp but this is not straight
 -- forward, as the rtp is reset by lazy for performance reasons. Therefore, the
 -- `lua/before` directory is required through a function.
+msg_ids = {}
 require("helpers.debug").setup()
 require("before").require_all()
 require("helpers.lazy").bootstrap()

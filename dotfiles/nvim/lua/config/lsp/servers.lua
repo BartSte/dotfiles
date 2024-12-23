@@ -43,7 +43,7 @@ M.setup = function()
         settings = {
             Lua = {
                 diagnostics = {
-                    globals = { "vim", "Snacks" },
+                    globals = { "vim", "Snacks", "msg_ids" },
                 },
             },
         },
