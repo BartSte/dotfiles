@@ -9,7 +9,6 @@ local M = {}
 function M.on_lsp_attach()
     m.buffer_nnoremap("<C-k>", vim.lsp.buf.hover)
     m.buffer_nnoremap("<C-s>", vim.lsp.buf.signature_help)
-    m.buffer_nnoremap("<leader>f", vim.lsp.buf.format)
     m.buffer_nnoremap("<space>lua", helpers.underline.all)
     m.buffer_nnoremap("<space>lue", helpers.underline.error)
     m.buffer_nnoremap("<space>luo", helpers.underline.off)
@@ -21,6 +20,9 @@ function M.on_lsp_attach()
     m.buffer_nnoremap("grr", vim.lsp.buf.references)
 end
 
+--- Decorate a function to set up mappings that apply to all LSP servers
+--- @param fn function
+--- @return function
 function M.decorate(fn)
     return function(...)
         M.on_lsp_attach()
