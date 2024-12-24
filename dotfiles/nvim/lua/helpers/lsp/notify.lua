@@ -1,5 +1,3 @@
-local helpers = require("helpers.lsp.servers")
-
 ---@class Notify
 ---@field attach function
 ---@field attach_decorator function
@@ -7,26 +5,37 @@ local helpers = require("helpers.lsp.servers")
 ---@field progress function
 local M = {}
 local attach_msg = {}
+local attached_once = {}
 
---- Notify about which clients are attached
----@param client vim.lsp.Client
+--- Return the list of clients that have been attached to a buffer of a specific
+--- filetype at least once
 ---@param buf integer
-M.attach = function(client, buf)
-    if not helpers.is_attached_once(client, buf) then
-        helpers.update_attached_once(client, buf)
-        M.update_attach_msg(client, buf)
-
-        local ft = vim.bo[buf].filetype
-        msg_ids.lsp_attached[ft] = Snacks.notify.info(
-            M.get_attach_msg(buf), {
-                id = msg_ids.lsp_attached[ft],
-                title = "LSP Attached: " .. vim.bo[buf].filetype,
-            }
-        )
+---@return string[] A list of client names
+local function get_attached_once(buf)
+    local ft = vim.bo[buf].filetype
+    if not attached_once[ft] then
+        attached_once[ft] = {}
     end
+    return attached_once[ft]
 end
 
-M.get_attach_msg = function(buf)
+--- Update the list of clients that have been attached to a buffer of a specific
+--- filetype
+---@param client vim.lsp.Client
+---@param buf integer
+local function update_attached_once(client, buf)
+    table.insert(get_attached_once(buf), client.name)
+end
+
+--- Check if a client has been attached to a buffer of a specific filetype
+---@param client vim.lsp.Client
+---@param buf integer
+---@return boolean
+local function is_attached_once(client, buf)
+    return vim.tbl_contains(get_attached_once(buf), client.name)
+end
+
+local function get_attach_msg(buf)
     local ft = vim.bo[buf].filetype
     if attach_msg[ft] == nil then
         attach_msg[ft] = {}
@@ -35,20 +44,38 @@ M.get_attach_msg = function(buf)
 end
 
 --- Append the formatting capabilities to the attach message
-M.update_attach_msg = function(client, buf)
+local function update_attach_msg(client, buf)
     local msg = client.name
     local has_document_formatting = client.server_capabilities.documentFormattingProvider
     local has_range_formatting = client.server_capabilities.documentRangeFormattingProvider
 
     if has_document_formatting and has_range_formatting then
-        msg = msg .. " (formatter)"
+        msg = msg .. " -> format"
     elseif has_document_formatting then
-        msg = msg .. " (only document format)"
+        msg = msg .. " -> document format"
     elseif has_range_formatting then
-        msg = msg .. " (only range format)"
+        msg = msg .. " -> range format"
     end
 
-    table.insert(M.get_attach_msg(buf), msg)
+    table.insert(get_attach_msg(buf), msg)
+end
+
+--- Notify about which clients are attached
+---@param client vim.lsp.Client
+---@param buf integer
+M.attach = function(client, buf)
+    if not is_attached_once(client, buf) then
+        update_attached_once(client, buf)
+        update_attach_msg(client, buf)
+
+        local ft = vim.bo[buf].filetype
+        msg_ids.lsp_attached[ft] = Snacks.notify.info(
+            get_attach_msg(buf), {
+                id = msg_ids.lsp_attached[ft],
+                title = "LSP Attached: " .. vim.bo[buf].filetype,
+            }
+        )
+    end
 end
 
 --- Decorator for the `on_attach` function
@@ -62,6 +89,7 @@ M.attach_decorator = function(fn)
         end
     end
 end
+
 
 M.progress_per_client = vim.defaulttable()
 ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}

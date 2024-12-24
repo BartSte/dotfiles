@@ -8,7 +8,10 @@
 ---buffer number with the update function.
 local M = {}
 
-local project_specific = require("projectrc").require("config.lsp.capabilities")
+local project_specific = require("projectrc").require(
+    "config.lsp.capabilities",
+    { fallback_value = {} }
+)
 M = vim.tbl_deep_extend("force", M, project_specific)
 
 ---Update the server capabilities for the given client and buffer. If the client

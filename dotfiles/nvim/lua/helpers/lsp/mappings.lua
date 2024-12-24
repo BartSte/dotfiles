@@ -7,9 +7,11 @@ local M = {}
 ---@class FormatterOpts
 ---@field mapping string? The mapping to use (default: "<leader>f")
 ---@field actions string[]? The code action kinds to apply alongside
+---@field client_name string? The name of the client to use
 local defaults = {
     mapping = "<leader>f",
-    actions = {}
+    actions = {},
+    client_name = ""
 }
 
 --- Map a formatter function to a keybinding
