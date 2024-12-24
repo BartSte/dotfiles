@@ -19,5 +19,5 @@ return helpers.make_builtin({
         }, "--line-range", nil, { use_rows = true }),
         to_stdin = true,
     },
-    factory = helpers.formatter_factory,
+    factory = helpers.formatter_factory
 })

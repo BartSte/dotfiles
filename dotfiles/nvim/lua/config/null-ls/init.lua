@@ -1,4 +1,6 @@
 local null_ls = require("null-ls")
+local notify = require("helpers.lsp.notify")
+local mappings = require('config.lsp.mappings')
 
 local sources = {
     -- C++
@@ -20,4 +22,7 @@ local sources = {
 local opts = { fallback_value = {} }
 local sources_project = require("projectrc").require("config.null-ls", opts)
 vim.list_extend(sources, sources_project)
-null_ls.setup({ sources = sources })
+null_ls.setup({
+    sources = sources,
+    on_attach = notify.attach_decorator(mappings.on_lsp_attach)
+})
