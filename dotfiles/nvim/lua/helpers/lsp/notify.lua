@@ -1,23 +1,40 @@
+local helpers = require("helpers.lsp.servers")
+
 ---@class Notify
----@field attached_once table
 ---@field attach function
+---@field attach_decorator function
 ---@field progress_per_client table
 ---@field progress function
 local M = {}
-M.attached_once = {}
+local attached_once = {}
 
-M.attach = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client == nil then
-        Snacks.notify.error("LSP: client not found")
-    elseif not vim.tbl_contains(M.attached_once, client.name) then
-        table.insert(M.attached_once, client.name)
-        msg_ids.lsp_attached = Snacks.notify.info(
-            M.attached_once, {
-                title = "LSP Attached",
-                id = msg_ids.lsp_attached,
+--- Notify about which clients are attached
+---@param client vim.lsp.Client
+---@param buf integer
+M.attach = function(client, buf)
+    if not helpers.is_attached_once(client, buf) then
+        helpers.update_attached_once(client, buf)
+
+        local ft = vim.bo[buf].filetype
+        local attached = helpers.get_attached_once(buf)
+        msg_ids.lsp_attached[ft] = Snacks.notify.info(
+            attached, {
+                id = msg_ids.lsp_attached[ft],
+                title = "LSP Attached: " .. vim.bo[buf].filetype,
             }
         )
+    end
+end
+
+--- Decorator for the `on_attach` function
+---@param fn nil|function(client: vim.lsp.Client, buf: integer): void
+---@return function
+M.attach_decorator = function(fn)
+    return function(client, buf)
+        M.attach(client, buf)
+        if fn then
+            return fn(client, buf)
+        end
     end
 end
 
