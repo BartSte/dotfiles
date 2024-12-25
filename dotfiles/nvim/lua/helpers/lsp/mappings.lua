@@ -5,39 +5,28 @@ local helpers = require("helpers.lsp.capabilities")
 ---@field map_formatter function(client: vim.lsp.Client, buf: integer): function
 local M = {}
 
----@class FormatterOpts
----@field mapping string? The mapping to use (default: "<leader>f")
----@field actions string[]? The code action kinds to apply alongside
----@field client_name string? The name of the client to use
-local defaults = {
-    mapping = "<leader>f",
-    actions = nil,
-}
-
 --- Map a formatter function to a keybinding that is also able to run code
 --- actions alongside the formatter.
----@param client vim.lsp.Client The client to use for the formatter
----@param opts FormatterOpts? The options to use for the formatter
----the vim.lsp.buf.format call.
+---@param client CustomClient The client to use for the formatter
+---@param lhs string The keybinding to map to the formatter
 ---@return function formatter The formatter function
-function M.map_formatter(client, opts)
-    opts = opts or {}
-    opts = vim.tbl_extend("force", defaults, opts)
-    local formatter = M.make_formatter(client, opts.actions)
+function M.map_formatter(client, lhs)
+    local formatter = M.make_formatter(client)
     if formatter then
-        m.buffer_nnoremap(opts.mapping, formatter)
+        m.buffer_nnoremap(lhs or "<space>f", formatter)
     end
 end
 
 --- Create a formatter function that can run code actions alongside the formatter.
----@param client vim.lsp.Client The client to use for the formatter
----@param actions string[]|nil The code action kinds to apply alongside the formatter
+---@param client CustomClient The client to use for the formatter
 ---@return function formatter The formatter function
-function M.make_formatter(client, actions)
+function M.make_formatter(client)
+    -- `format_actions` is a custom capability that is not part of the LSP spec
+    local has_actions = helpers.has_capability(client, "format_actions")
     local has_formater = helpers.has_capability(client, "documentFormattingProvider")
-    if has_formater or actions then
+    if has_formater or has_actions then
         return function()
-            M.run_actions(actions)
+            M.run_actions(client.server_capabilities.format_actions)
             M.format(client)
         end
     end

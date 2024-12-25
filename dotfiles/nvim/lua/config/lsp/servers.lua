@@ -1,15 +1,6 @@
-local mappings = require('helpers.lsp.mappings')
-
+---@class CustomClient : vim.lsp.Client
+---@field format_actions string[]|nil
 return {
-    ruff = {
-        on_attach = function(client, buf)
-            mappings.map_formatter(
-                client,
-                { actions = { "source.organizeImports.ruff" } }
-            )
-        end
-    },
-
     basedpyright = {
         settings = {
             basedpyright = {
@@ -40,12 +31,13 @@ return {
         settings = {
             Lua = {
                 diagnostics = {
-                    globals = { "vim", "Snacks", "msg_ids" },
+                    globals = { "vim", "Snacks" },
                 },
             },
         },
     },
 
+    ruff = {},
     cmake = {},
     vimls = {},
     marksman = {},
