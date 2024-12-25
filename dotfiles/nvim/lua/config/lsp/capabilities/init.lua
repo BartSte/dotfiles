@@ -5,14 +5,7 @@
 ---in this module, no changes are made.
 local M = {}
 
-function M.ruff(client, _)
-    client.server_capabilities.format_actions = { "source.organizeImports.ruff" }
-end
-
-local project_specific = require("projectrc").require(
-    "config.lsp.capabilities",
-    { fallback_value = {} }
-)
+local project_specific = require("projectrc").require("config.lsp.capabilities")
 M = vim.tbl_deep_extend("force", M, project_specific)
 
 ---Update the server capabilities for the given client and buffer. If the client

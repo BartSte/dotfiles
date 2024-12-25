@@ -7,7 +7,7 @@ local M = {}
 
 --- Map a formatter function to a keybinding that is also able to run code
 --- actions alongside the formatter.
----@param client CustomClient The client to use for the formatter
+---@param client vim.lsp.Client The client to use for the formatter
 ---@param lhs string The keybinding to map to the formatter
 ---@return function formatter The formatter function
 function M.map_formatter(client, lhs)
@@ -18,7 +18,7 @@ function M.map_formatter(client, lhs)
 end
 
 --- Create a formatter function that can run code actions alongside the formatter.
----@param client CustomClient The client to use for the formatter
+---@param client vim.lsp.Client The client to use for the formatter
 ---@return function formatter The formatter function
 function M.make_formatter(client)
     -- `format_actions` is a custom capability that is not part of the LSP spec

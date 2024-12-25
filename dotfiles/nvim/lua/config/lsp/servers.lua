@@ -1,5 +1,3 @@
----@class CustomClient : vim.lsp.Client
----@field format_actions string[]|nil
 return {
     basedpyright = {
         settings = {
