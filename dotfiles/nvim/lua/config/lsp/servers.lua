@@ -3,9 +3,10 @@ local mappings = require('helpers.lsp.mappings')
 return {
     ruff = {
         on_attach = function(client, buf)
-            mappings.map_formatter({
-                actions = { "source.organizeImports.ruff" }
-            })
+            mappings.map_formatter(
+                client,
+                { actions = { "source.organizeImports.ruff" } }
+            )
         end
     },
 

@@ -1,6 +1,5 @@
 ---@class Notify
 ---@field attach function
----@field attach_decorator function
 ---@field progress_per_client table
 ---@field progress function
 local M = {}
@@ -77,19 +76,6 @@ M.attach = function(client, buf)
         )
     end
 end
-
---- Decorator for the `on_attach` function
----@param fn nil|function(client: vim.lsp.Client, buf: integer): void
----@return function
-M.attach_decorator = function(fn)
-    return function(client, buf)
-        M.attach(client, buf)
-        if fn then
-            return fn(client, buf)
-        end
-    end
-end
-
 
 M.progress_per_client = vim.defaulttable()
 ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
