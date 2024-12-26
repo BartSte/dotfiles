@@ -4,7 +4,8 @@
 ---@field progress function
 local M = {}
 
----@type table<string, integer[]>
+--- Only the essentials of the client are stored.
+---@type vim.lsp.Client[]|NullLsSource[]
 local attached = {}
 
 ---@type table<string, integer>
@@ -13,37 +14,47 @@ local msg_id = {}
 --- Return the list of clients that have been attached to a buffer of a specific
 --- filetype at least once
 ---@param buf integer
----@return integer[] ids The list of client ids
+---@return vim.lsp.Client[]|NullLsSource[]
 local function get_attached(buf)
     local ft = vim.bo[buf].filetype
     attached[ft] = attached[ft] or {}
     return attached[ft]
 end
 
---- Update the list of clients that have been attached to a buffer of a specific
---- filetype
----@param client vim.lsp.Client
----@param buf integer
-local function update_attached(client, buf)
-    table.insert(get_attached(buf), client.id)
-end
-
---- Check if a client has been attached to a buffer of a specific filetype
----@param client vim.lsp.Client
+--- Check if a client has been attached to a buffer of a specific filetype. Only
+--- the server name needs to match.
+---@param client vim.lsp.Client|NullLsSource
 ---@param buf integer
 ---@return boolean
 local function is_attached(client, buf)
-    return vim.tbl_contains(get_attached(buf), client.name)
+    local servers = get_attached(buf)
+    for _, server in ipairs(servers) do
+        if server.name == client.name then
+            return true
+        end
+    end
+end
+
+--- Update the list of clients that have been attached to a buffer of a specific
+--- filetype
+---@param client vim.lsp.Client|NullLsSource
+---@param buf integer
+local function update_attached(client, buf)
+    if not is_attached(client, buf) then
+        table.insert(get_attached(buf), client)
+    end
 end
 
 local function make_attach_msg(buf)
     local result = ""
-    local client_ids = get_attached(buf)
-    for _, id in ipairs(client_ids) do
-        local client = vim.lsp.get_client_by_id(id)
-        if client then
-            result = result .. "\n" .. client.name
-            local extras = {}
+    local clients = get_attached(buf)
+    for _, client in ipairs(clients) do
+        result = result .. "\n" .. client.name
+        local extras = {}
+
+        if client.methods then
+            extras = vim.tbl_keys(client.methods)
+        elseif client.server_capabilities then
             if client.server_capabilities.documentFormattingProvider then
                 table.insert(extras, "document")
             end
@@ -54,15 +65,18 @@ local function make_attach_msg(buf)
             if client.server_capabilities.format_actions then
                 table.insert(extras, "actions")
             end
-            if #extras > 0 then
-                result = result .. " -> format: " .. table.concat(extras, ", ")
-            end
+        end
+
+        if #extras > 0 then
+            result = result .. " -> format: " .. table.concat(extras, ", ")
         end
     end
     return result
 end
 
---- Notify about which clients are attached
+--- Notify about which clients are attached.
+--- Each lsp is only show once for each filetype to avoid this message to popup
+--- after opening every file.
 ---@param client vim.lsp.Client
 ---@param buf integer
 M.attach = function(client, buf)

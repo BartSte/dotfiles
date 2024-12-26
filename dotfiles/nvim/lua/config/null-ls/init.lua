@@ -1,6 +1,11 @@
 local null_ls = require("null-ls")
-local notify = require("helpers.lsp.notify")
+local notify = require("helpers.null-ls.notify")
 local mappings = require('config.lsp.mappings')
+
+---@class NullLsSource
+---@field name string
+---@field id integer
+---@field methods table<string,boolean>
 
 local sources = {
     -- C++
@@ -26,6 +31,6 @@ null_ls.setup({
     sources = sources,
     on_attach = function(client, buf)
         mappings.on_lsp_attach(client, buf)
-        notify.attach(client, buf)
+        notify.attach(buf)
     end
 })
