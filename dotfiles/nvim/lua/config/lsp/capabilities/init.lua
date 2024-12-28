@@ -13,8 +13,10 @@ M = vim.tbl_deep_extend("force", M, project_specific)
 ---@param client vim.lsp.Client The client to update
 ---@param bufnr number The buffer number to update
 function M.update(client, bufnr)
-    if M[client.name] then
-        M[client.name](client, bufnr)
+    -- replace - with _
+    local name = string.gsub(client.name, "-", "_")
+    if M[name] then
+        M[name](client, bufnr)
     end
 end
 

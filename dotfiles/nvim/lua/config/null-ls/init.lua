@@ -1,4 +1,5 @@
 local null_ls = require("null-ls")
+local capabilities = require('config.lsp.capabilities')
 local mappings = require('config.lsp.mappings')
 
 ---@class NullLsSource
@@ -29,6 +30,7 @@ vim.list_extend(sources, sources_project)
 null_ls.setup({
     sources = sources,
     on_attach = function(client, buf)
+        capabilities.update(client, buf)
         mappings.on_lsp_attach(client, buf)
         require("helpers.null-ls.notify").attach(buf)
     end
