@@ -3,11 +3,20 @@
 local M = {}
 
 --- Return true if the client has the specified capability.
----@param client vim.lsp.Client The client to check for the capability
+--- Null-ls sources are also supported.
+---@param client vim.lsp.Client|NullLsSource The client to check for the
+---capability
 ---@param capability string The capability to check for
 ---@return boolean
 function M.has_capability(client, capability)
-    return client.server_capabilities[capability] == true
+    if client.server_capabilities and client.server_capabilities[capability] then
+        local value = client.server_capabilities[capability]
+        return value == true or next(value) ~= nil
+    elseif client.methods then
+        return client.methods[capability] == true
+    else
+        return false
+    end
 end
 
 return M

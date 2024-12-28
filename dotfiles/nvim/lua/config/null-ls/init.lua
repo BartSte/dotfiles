@@ -1,5 +1,4 @@
 local null_ls = require("null-ls")
-local notify = require("helpers.null-ls.notify")
 local mappings = require('config.lsp.mappings')
 
 ---@class NullLsSource
@@ -31,6 +30,6 @@ null_ls.setup({
     sources = sources,
     on_attach = function(client, buf)
         mappings.on_lsp_attach(client, buf)
-        notify.attach(buf)
+        require("helpers.null-ls.notify").attach(buf)
     end
 })

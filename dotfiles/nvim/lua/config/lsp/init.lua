@@ -1,3 +1,4 @@
+local fn = require("helpers.fn")
 local lsp = require('lspconfig')
 local helpers = require("helpers.lsp")
 local mappings = require('config.lsp.mappings')
@@ -27,7 +28,7 @@ vim.diagnostic.config({
 ---Here, a decorator is used to update the capabilities of all servers. If the
 ---server is not specified in the capabilities module, no changes are made.
 for server, config in pairs(server_opts) do
-    config.on_attach = require("helpers.fn").decorate({
+    config.on_attach = fn.decorate({
         capabilities.update,
         mappings.on_lsp_attach,
         config.on_attach,

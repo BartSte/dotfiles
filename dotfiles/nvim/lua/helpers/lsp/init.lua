@@ -5,7 +5,7 @@ local path = require("helpers.path")
 ---@field virtualtext VirtualText
 ---@field notify Notify
 ---@field mappings LspMappings
----@field capabilities CapabilitysHelper
+---@field capabilities CapabilityHelper
 local M = path.require_all(path.join(path.config_dir(), "lua", "helpers", "lsp"))
 
 return M

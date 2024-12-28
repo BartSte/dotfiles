@@ -1,11 +1,9 @@
----@class Notify
----@field attach function
----@field progress_per_client table
----@field progress function
-local M = {}
+local fn = require("helpers.fn")
+local null_ls = require("null-ls")
+local capabilities = require("helpers.lsp.capabilities")
 
---- Only the essentials of the client are stored.
----@type vim.lsp.Client[]|NullLsSource[]
+--- The clients that have been attached to a buffer of a specific filetype.
+---@type table<vim.lsp.Client|NullLsSource>
 local attached = {}
 
 ---@type table<string, integer>
@@ -14,7 +12,7 @@ local msg_id = {}
 --- Return the list of clients that have been attached to a buffer of a specific
 --- filetype at least once
 ---@param buf integer
----@return vim.lsp.Client[]|NullLsSource[]
+---@return table <vim.lsp.Client|NullLsSource>
 local function get_attached(buf)
     local ft = vim.bo[buf].filetype
     attached[ft] = attached[ft] or {}
@@ -22,7 +20,8 @@ local function get_attached(buf)
 end
 
 --- Check if a client has been attached to a buffer of a specific filetype. Only
---- the server name needs to match.
+--- the server name needs to match, as each server is only displayed once per
+--- filetype.
 ---@param client vim.lsp.Client|NullLsSource
 ---@param buf integer
 ---@return boolean
@@ -33,6 +32,7 @@ local function is_attached(client, buf)
             return true
         end
     end
+    return false
 end
 
 --- Update the list of clients that have been attached to a buffer of a specific
@@ -45,34 +45,47 @@ local function update_attached(client, buf)
     end
 end
 
+--- Create a message that lists the names of the clients that have been attached
+--- to a buffer of a specific filetype. In addition, also specify if a client
+--- has one or more of the following formatting capabilities: document, range,
+--- or a code action.
+---@param buf integer
+---@return string message A table with a headers: name, range, document, actions
+---and a row for each client that has been attached to the buffer. For example:
+-- | name | range | document | actions |
+-- | ruff |   x   |    x     |         |
 local function make_attach_msg(buf)
-    local result = ""
+    local header = { "name", "range", "document", "actions" }
+    local rows = {}
     local clients = get_attached(buf)
     for _, client in ipairs(clients) do
-        result = result .. "\n" .. client.name
-        local extras = {}
-
-        if client.methods then
-            extras = vim.tbl_keys(client.methods)
-        elseif client.server_capabilities then
-            if client.server_capabilities.documentFormattingProvider then
-                table.insert(extras, "document")
-            end
-            if client.server_capabilities.documentRangeFormattingProvider then
-                table.insert(extras, "range")
-            end
-            -- `format_actions` is a custom field
-            if client.server_capabilities.format_actions then
-                table.insert(extras, "actions")
-            end
-        end
-
-        if #extras > 0 then
-            result = result .. " -> format: " .. table.concat(extras, ", ")
+        local is_lsp = client.server_capabilities ~= nil
+        local is_null_ls = client.methods ~= nil
+        if is_lsp then
+            rows[#rows + 1] = {
+                client.name,
+                capabilities.has_capability(client, "documentRangeFormattingProvider") and "x" or "",
+                capabilities.has_capability(client, "documentFormattingProvider") and "x" or "",
+                capabilities.has_capability(client, "format_actions") and "x" or "",
+            }
+        elseif is_null_ls then
+            rows[#rows + 1] = {
+                client.name,
+                capabilities.has_capability(client, null_ls.methods.RANGE_FORMATTING) and "x" or "",
+                capabilities.has_capability(client, null_ls.methods.FORMATTING) and "x" or "",
+                "" -- not supported yet for null-ls
+            }
         end
     end
-    return result
+    return fn.tabulate(header, rows)
 end
+
+local progress_per_client = vim.defaulttable()
+
+---@class Notify
+---@field attach function
+---@field progress function
+local M = {}
 
 --- Notify about which clients are attached.
 --- Each lsp is only show once for each filetype to avoid this message to popup
@@ -90,7 +103,7 @@ M.attach = function(client, buf)
     end
 end
 
-M.progress_per_client = vim.defaulttable()
+--- Notify about the progress of a request.
 ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
 M.progress = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -98,7 +111,7 @@ M.progress = function(ev)
     if not client or type(value) ~= "table" then
         return
     end
-    local p = M.progress_per_client[client.id]
+    local p = progress_per_client[client.id]
 
     for i = 1, #p + 1 do
         if i == #p + 1 or p[i].token == ev.data.params.token then
@@ -116,16 +129,16 @@ M.progress = function(ev)
     end
 
     local msg = {} ---@type string[]
-    M.progress_per_client[client.id] = vim.tbl_filter(function(v)
+    progress_per_client[client.id] = vim.tbl_filter(function(v)
         return table.insert(msg, v.msg) or not v.done
     end, p)
 
     local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-    vim.notify(table.concat(msg, "\n"), "info", {
+    vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
         id = "lsp_progress",
         title = client.name,
         opts = function(notif)
-            notif.icon = #M.progress_per_client[client.id] == 0 and " "
+            notif.icon = #progress_per_client[client.id] == 0 and " "
                 or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
         end,
     })
