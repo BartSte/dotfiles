@@ -277,6 +277,13 @@ rbg get field | gpg --pinentry-mode loopback --batch --passphrase-fd 0 -d ./foo.
 This will read the password from stdin, instead of using pinentry. This cannot
 be done when you have no access to the command that is calling gpg.
 
+### DNS
+
+Custom dns servers can be set directly through NetworkManager, or by using
+systemd-resolved. The former is simpler but more limited compared to the latter.
+Both configurations can be found in the `dns` folder. For now the NetworkManager
+is used as we do not need a complex setup.
+
 ### Dotfiles-windows (Windows 10 & 11)
 
 - To initialize the repository copy the following line into powershell:
