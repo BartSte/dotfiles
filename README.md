@@ -282,7 +282,15 @@ be done when you have no access to the command that is calling gpg.
 Custom dns servers can be set directly through NetworkManager, or by using
 systemd-resolved. The former is simpler but more limited compared to the latter.
 Both configurations can be found in the `dns` folder. For now the NetworkManager
-is used as we do not need a complex setup.
+is used as we do not need a complex setup. This is setup when running
+`dns/main`.
+
+In addition, the `/etc/resolv.conf`, NetworkManager.conf, and
+`/etc/sudoers` files can be locked using the `dns/lock` script (as root). It
+ensures that the user needs to enter the root password to in order to make the
+files mutable or immutable again. If you set the root password to a long complex
+password, it will discourage you from changing the files. If you want to make
+the files mutable again, you can run the `dns/unlock` script (as root).
 
 ### Dotfiles-windows (Windows 10 & 11)
 
