@@ -3,13 +3,15 @@ return {
         settings = {
             basedpyright = {
                 disableOrganizeImports = true,
+            },
+            python = {
                 analysis = {
                     diagnosticSeverityOverrides = {
-                        reportMissingTypeStubs = "none"
-                    }
-                }
-            }
-        }
+                        reportUnusedCallResult = false,
+                    },
+                },
+            },
+        },
     },
 
     clangd = {

@@ -10,3 +10,4 @@ select = [
     "N",  # PEP8 naming
     "D",  # pydocstyle
 ]
+
