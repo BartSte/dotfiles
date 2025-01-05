@@ -39,9 +39,9 @@ c.hints.leave_on_load = True
 c.hints.scatter = False
 c.hints.uppercase = True
 c.input.insert_mode.auto_enter = True
-c.input.insert_mode.auto_leave = True
+c.input.insert_mode.auto_leave = False
 c.input.insert_mode.auto_load = False
-c.input.insert_mode.leave_on_load = True
+c.input.insert_mode.leave_on_load = False
 c.input.links_included_in_focus_chain = True
 c.keyhint.delay = 0
 c.qt.workarounds.remove_service_workers = True
@@ -55,19 +55,17 @@ c.window.hide_decoration = False
 c.content.javascript.enabled = True
 
 # Per-domain settings
+key: str = "colors.webpage.darkmode.enabled"
 dark: list[str] = ["www.nos.nl"]
+for url in dark:
+    config.set(key, True, url)
+
 light: list[str] = [
     "www.netflix.com",
     "play.max.com",
     "mail.google.com",
     "outlook.live.com",
 ]
-
-key: str = "colors.webpage.darkmode.enabled"
-
-for url in dark:
-    config.set(key, True, url)
-
 for url in light:
     config.set(key, False, url)
 
