@@ -18,7 +18,7 @@ function M.on_lsp_attach(client, buf)
     m.buffer_nnoremap("gra", vim.lsp.buf.code_action)
     m.buffer_nnoremap("grn", vim.lsp.buf.rename)
     m.buffer_nnoremap("grr", vim.lsp.buf.references)
-    helpers.mappings.map_formatter(client)
+    helpers.mappings.map_formatter(client, buf)
 end
 
 return M
