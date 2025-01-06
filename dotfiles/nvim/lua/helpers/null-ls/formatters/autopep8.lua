@@ -14,9 +14,12 @@ return helpers.make_builtin({
     filetypes = { "python" },
     generator_opts = {
         command = "autopep8",
-        args = helpers.range_formatting_args_factory({
-            "-",
-        }, "--line-range", nil, { use_rows = true }),
+        args = helpers.range_formatting_args_factory(
+            { "-" },
+            "--line-range",
+            nil,
+            { use_rows = true }
+        ),
         to_stdin = true,
     },
     factory = helpers.formatter_factory

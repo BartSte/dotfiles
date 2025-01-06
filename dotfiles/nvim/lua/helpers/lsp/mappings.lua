@@ -6,6 +6,7 @@ local helpers = require("helpers.lsp.capabilities")
 ---@field map_formatter function(client: vim.lsp.Client, buf: integer): function
 local M = {}
 local formatters = {}
+local actions = {}
 
 --- Run a formatter on the current buffer.
 ---@return function formatter The formatter function
@@ -20,7 +21,10 @@ end
 local function make_run_actions(client)
     return function()
         vim.lsp.buf.code_action({
-            context = { only = client.server_capabilities.format_actions, diagnostics = {} },
+            context = {
+                only = client.server_capabilities.format_actions,
+                diagnostics = {}
+            },
             apply = true,
         })
     end
@@ -44,19 +48,16 @@ end
 ---@param buf integer The buffer to apply the formatter to
 ---@return function|nil formatter The formatter function
 function M.make_formatter(client, buf)
-    -- `format_actions` is a custom capability that is not part of the LSP spec
-    local has_formater = helpers.has_capability(client, "documentFormattingProvider")
-    if has_formater then
+    if helpers.has_capability(client, "documentFormattingProvider") then
         formatters[buf] = fn.decorate({ formatters[buf], make_buf_format() })
     end
 
-    local has_actions = helpers.has_capability(client, "format_actions")
-
-    if has_actions then
-        formatters[buf] = fn.decorate({ formatters[buf], make_run_actions(client) })
+    -- `format_actions` is a custom capability that is not part of the LSP spec
+    if helpers.has_capability(client, "format_actions") then
+        actions[buf] = fn.decorate({ actions[buf], make_run_actions(client) })
     end
 
-    return formatters[buf]
+    return fn.decorate({ formatters[buf], actions[buf] })
 end
 
 return M
