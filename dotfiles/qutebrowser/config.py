@@ -19,6 +19,9 @@ c.completion.cmd_history_max_items = 500
 c.confirm_quit = ["multiple-tabs", "downloads"]
 c.content.autoplay = False
 c.content.blocking.enabled = True
+c.content.blocking.adblock.lists.extend(
+    ["https://secure.fanboy.co.nz/fanboy-annoyance.txt"]
+)
 c.content.cache.appcache = True
 c.downloads.remove_finished = 50
 c.editor.command = [
@@ -58,7 +61,7 @@ c.content.javascript.enabled = True
 key: str = "colors.webpage.darkmode.enabled"
 dark: list[str] = ["www.nos.nl"]
 for url in dark:
-    config.set(key, True, url)
+    c.set(key, True, url)
 
 light: list[str] = [
     "www.netflix.com",
@@ -67,11 +70,11 @@ light: list[str] = [
     "outlook.live.com",
 ]
 for url in light:
-    config.set(key, False, url)
+    c.set(key, False, url)
 
 # Bindings
-config.bind("<Down>", "move-to-next-line", mode="caret")
-config.bind("<Left>", "move-to-prev-char", mode="caret")
-config.bind("<Right>", "move-to-next-char", mode="caret")
-config.bind("<Up>", "move-to-prev-line", mode="caret")
-config.load_autoconfig()
+c.bind("<Down>", "move-to-next-line", mode="caret")
+c.bind("<Left>", "move-to-prev-char", mode="caret")
+c.bind("<Right>", "move-to-next-char", mode="caret")
+c.bind("<Up>", "move-to-prev-line", mode="caret")
+c.load_autoconfig()
