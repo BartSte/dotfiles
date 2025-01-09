@@ -35,6 +35,7 @@ fzf.setup({
         },
     },
     git     = {
+        toggle_ignore_flag = "--no-ignore --ignore-file /home/barts/.ignore",
         branches = {
             actions = {
                 ["ctrl-e"] = { fn = helpers.git.branch_merge, reload = true },

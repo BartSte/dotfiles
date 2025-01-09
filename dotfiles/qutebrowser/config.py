@@ -19,6 +19,9 @@ c.completion.cmd_history_max_items = 500
 c.confirm_quit = ["multiple-tabs", "downloads"]
 c.content.autoplay = False
 c.content.blocking.enabled = True
+c.content.blocking.adblock.lists.extend(
+    ["https://secure.fanboy.co.nz/fanboy-cookiemonster.txt"]
+)
 c.content.cache.appcache = True
 c.downloads.remove_finished = 50
 c.editor.command = [

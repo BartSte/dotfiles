@@ -106,6 +106,10 @@ end
 --- Notify about the progress of a request.
 ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
 M.progress = function(ev)
+    if vim.v.exiting ~= vim.NIL then
+        return
+    end
+
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local value = ev.data.params.value
     if not client or type(value) ~= "table" then

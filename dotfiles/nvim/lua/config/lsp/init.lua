@@ -12,8 +12,6 @@ lsp_defaults.capabilities = vim.tbl_deep_extend(
     require('cmp_nvim_lsp').default_capabilities()
 )
 
-vim.api.nvim_create_autocmd("LspProgress", { callback = helpers.notify.progress })
-
 vim.diagnostic.config({
     virtual_text = false,
     signs = false,
