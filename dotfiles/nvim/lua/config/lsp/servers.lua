@@ -43,5 +43,6 @@ return {
     cmake = {},
     vimls = {},
     marksman = {},
-    jsonls = {}
+    jsonls = {},
+    ts_ls = {},
 }
