@@ -279,13 +279,13 @@ be done when you have no access to the command that is calling gpg.
 
 ### DNS
 
-Custom dns servers can be set directly through NetworkManager, or by using
-systemd-resolved. The former is simpler but more limited compared to the latter.
-Both configurations can be found in the `dns` folder. For now the NetworkManager
-is used as we do not need a complex setup. This is setup when running
-`dns/main`.
+Custom DNS servers are set manually. This is done by disabling the
+`systemd-resolved` service and enabling `NetworkManager`. Next, by setting
+`dns=none` in het `[main]` section of the `NetworkManager.conf` file, the
+`/etc/resolv.conf` file is not overwritten by `NetworkManager`. Now, we can
+define the DNS servers ourselves. These server will be used by all connections.
 
-In addition, the `/etc/resolv.conf`, NetworkManager.conf, and
+In addition, the `/etc/resolv.conf`, `NetworkManager.conf`, and
 `/etc/sudoers` files can be locked using the `dns/lock` script (as root). It
 ensures that the user needs to enter the root password to in order to make the
 files mutable or immutable again. If you set the root password to a long complex
