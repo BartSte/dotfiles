@@ -133,4 +133,13 @@ M.silent_buffer_tnoremap = bind("t", { buffer = true, silent = true })
 M.silent_buffer_vnoremap = bind("v", { buffer = true, silent = true })
 M.silent_buffer_xnoremap = bind("x", { buffer = true, silent = true })
 
+local expr_opts = { expr = true, noremap = true, silent = true, replace_keycodes = false }
+M.expr_inoremap = bind("i", expr_opts)
+M.expr_nnoremap = bind("n", expr_opts)
+M.expr_vnoremap = bind("v", expr_opts)
+M.expr_xnoremap = bind("x", expr_opts)
+M.expr_onoremap = bind("o", expr_opts)
+M.expr_tnoremap = bind("t", expr_opts)
+M.expr_cnoremap = bind("c", expr_opts)
+
 return M
