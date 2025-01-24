@@ -12,7 +12,7 @@ local actions = {}
 ---@return function formatter The formatter function
 local function make_buf_format()
     return function()
-        vim.lsp.buf.format({ timeout = 5000, async = false })
+        vim.lsp.buf.format({ timeout_ms = 5000, async = false })
     end
 end
 

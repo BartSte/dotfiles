@@ -1,38 +1,30 @@
-local copilot = require("copilot")
-local suggestion = require("copilot.suggestion")
-local keymapper = require("helpers.keymapper")
+vim.g.copilot_filetypes = { oil = false }
 
--- Execute `callback` if the copilot suggestion is visible.
-local function execute_if_suggestion_visible(callback, key)
-    if suggestion.is_visible() then
-        callback()
-    else
-        key = vim.api.nvim_replace_termcodes(key, true, true, true)
-        vim.api.nvim_feedkeys(key, "n", true)
-    end
-end
-
-copilot.setup({
-    panel = { enabled = false },
-    suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        debounce = 75,
-        keymap = {
-            accept_line = "<S-Right>",
-            next = "<C-n>",
-            prev = "<C-p>",
-            toggle_auto_trigger = false
-        },
-    },
-    filetypes = {
-        oil = false,
-        ["*"] = true,
-    },
-    copilot_node_command = 'node', -- Node.js version must be > 16.x
-    server_opts_overrides = {},
+vim.keymap.set('i', '<Right>', 'copilot#Accept("<Right>")', {
+    expr = true,
+    replace_keycodes = false
 })
-keymapper.inoremap("<Right>", function() execute_if_suggestion_visible(suggestion.accept, "<Right>") end)
-keymapper.inoremap("<Left>", function() execute_if_suggestion_visible(suggestion.dismiss, "<Left>") end)
-keymapper.inoremap("<C-Right>", function() execute_if_suggestion_visible(suggestion.accept_word, "") end)
-keymapper.noremap("<leader>co", ":Copilot enable<CR>")
+vim.keymap.set('i', '<C-Right>', 'copilot#AcceptWord("<C-Right>")', {
+    expr = true,
+    replace_keycodes = false
+})
+vim.keymap.set('i', '<S-Right>', 'copilot#AcceptLine("<S-Right>")', {
+    expr = true,
+    replace_keycodes = false
+})
+vim.keymap.set('i', '<Left>', 'copilot#Dismiss("<Left>")', {
+    expr = true,
+    replace_keycodes = false
+})
+vim.keymap.set('n', '<leader>co', ':Copilot enable<CR>', {
+    noremap = true
+})
+vim.keymap.set('i', '<C-n>', 'copilot#Next("<C-n>")', {
+    expr = true,
+    replace_keycodes = false
+})
+vim.keymap.set('i', '<C-p>', 'copilot#Prev("<C-p>")', {
+    expr = true,
+    replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
