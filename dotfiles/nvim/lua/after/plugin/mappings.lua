@@ -57,6 +57,7 @@ m.nnoremap("<C-w>i", "<C-w>L")
 m.nnoremap("<C-w>n", "<C-w>J")
 m.nnoremap("<C-w>z", ":wincmd o<bar>vert new<bar>vert resize 70<CR><C-w>l")
 m.nnoremap("<C-w>a", ":wincmd o<bar>wincmd v<CR>")
+m.nnoremap("<C-w>]", ":wincmd v<CR><C-]>")
 --------------------------------------------------------------------------------
 -- Leader commands
 -- Use the leader key for manipulating the text and appearance of a buffer and
