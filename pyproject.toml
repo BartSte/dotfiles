@@ -1,5 +1,6 @@
 [tool.pyright]
 reportUnusedCallResult = false
+reportImplicitStringConcatenation = false
 
 [tool.ruff]
 line-length = 80

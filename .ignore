@@ -34,3 +34,5 @@ typings/
 venv/
 visual/
 yay/
+
+!dnscache/
