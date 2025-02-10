@@ -35,4 +35,6 @@ venv/
 visual/
 yay/
 
-!dnscache/
+!.build/
+!.github/
+!dnscacher/
