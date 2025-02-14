@@ -34,9 +34,10 @@ c = get_config()  # noqa
 
 ## lines of code to run at IPython startup.
 #  Default: []
-# c.InteractiveShellApp.exec_lines = [
-#     'import numpy as np',
-# ]
+c.InteractiveShellApp.exec_lines = [
+    'from pprint import pp',
+    'from os.path import join, dirname'
+]
 
 ## A list of dotted module names of IPython extensions to load.
 #  Default: []
