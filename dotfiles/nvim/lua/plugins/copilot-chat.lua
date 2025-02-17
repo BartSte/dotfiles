@@ -9,5 +9,9 @@ return {
         config = function()
             require("config.copilot-chat")
         end,
+        cond = function()
+            local has_gitlab = vim.env.GITLAB_TOKEN ~= nil or vim.env.GITLAB_TOKEN ~= ''
+            return not has_gitlab
+        end,
     },
 }
