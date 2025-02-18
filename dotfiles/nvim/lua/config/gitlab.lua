@@ -1,6 +1,7 @@
-local gitlab = require("gitlab")
 local commands = require("gitlab.commands")
+local defaults = require("gitlab.config.defaults")
 local ghost_text = require("gitlab.ghost_text")
+local gitlab = require("gitlab")
 local mapper = require("helpers.keymapper")
 
 local last_suggestion = nil
@@ -92,9 +93,13 @@ local function insert_word()
     insert_text(first_word)
 end
 
+local default_filetypes = defaults.code_suggestions.auto_filetypes
+local auto_filetypes    = { "lua", "markdown", "zsh", "sh", "toml", "yaml" }
+vim.list_extend(auto_filetypes, default_filetypes)
+
 gitlab.setup({
     code_suggestions = {
-        auto_filetypes = { "python", "lua" },
+        auto_filetypes = auto_filetypes,
         ghost_text = {
             enabled = true,
             toggle_enabled = false,
