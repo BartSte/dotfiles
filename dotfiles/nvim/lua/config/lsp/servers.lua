@@ -45,5 +45,6 @@ return {
     marksman = {},
     jsonls = {},
     ts_ls = {},
-    gitlab_ci_ls = {}
+    gitlab_ci_ls = {},
+    yamlls = {}
 }

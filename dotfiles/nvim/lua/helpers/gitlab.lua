@@ -96,7 +96,7 @@ end
 ---@return function(suggestion: table): nil
 TextCache.decorator = function(func)
     return function(suggestion, ...)
-        TextCache.cache = suggestion
+        TextCache.cache = suggestion[1].insertText
         func(suggestion, ...)
     end
 end
@@ -107,8 +107,7 @@ TextCache.first_word = function()
     if not TextCache.cache then
         return ''
     end
-    local text_to_insert = TextCache.cache[1].insertText
-    return split_words(text_to_insert)[1]
+    return split_words(TextCache.cache)[1]
 end
 
 --- Return the first line of the cache.
@@ -117,7 +116,7 @@ TextCache.first_line = function()
     if not TextCache.cache then
         return ''
     end
-    local lines = vim.split(TextCache.cache[1].insertText, '\n')
+    local lines = vim.split(TextCache.cache, '\n')
     return lines[1] or ''
 end
 
