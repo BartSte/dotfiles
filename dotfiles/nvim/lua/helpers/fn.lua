@@ -23,7 +23,7 @@ end
 ---@param header string[] The header of the table
 ---@param rows string[][] The rows of the table
 ---@return string table A table in string format. The table columns are
---- aligned. For example: 
+--- aligned. For example:
 -- | Header 1 | Header 2 | Header 3 |
 -- |    x     |    y     |    z     |
 function M.tabulate(header, rows)

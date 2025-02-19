@@ -7,7 +7,6 @@ function! s:setgruvbox()
 
         hi SpellBad gui=undercurl guisp=Red guifg=Normal
         hi ColorColumn guibg=#32302f
-        hi CopilotSuggestion guifg=gray65 gui=italic 
         hi CursorLineNr gui=NONE guifg=#fe8019 guibg=#32302f
         hi FloatBorder guibg=NONE guifg=gray65
         hi Folded guifg=gray65 guibg=bg
