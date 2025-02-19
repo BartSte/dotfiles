@@ -1,5 +1,6 @@
 return {
     "olimorris/codecompanion.nvim",
+    cond=false,
     config = function()
         require("config.codecompanion")
     end,
