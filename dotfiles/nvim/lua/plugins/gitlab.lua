@@ -1,5 +1,6 @@
 return {
-    'https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim.git',
+    "BartSte/gitlab.vim",
+    branch = "develop",
     cond = function()
         return vim.env.GITLAB_TOKEN ~= nil and vim.env.GITLAB_TOKEN ~= ''
     end,
