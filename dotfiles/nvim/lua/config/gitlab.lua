@@ -16,7 +16,7 @@ gitlab.setup({
             toggle_enabled = false,
             accept_suggestion = '<Right>',
             clear_suggestions = '<Left>',
-            stream = true,
+            stream = false,
         },
     },
     resource_editing = {
