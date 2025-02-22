@@ -5,6 +5,7 @@ function! s:setgruvbox()
         set background=dark
         colorscheme gruvbox-baby
 
+        hi GitLabGhostText guifg=gray65 gui=italic
         hi SpellBad gui=undercurl guisp=Red guifg=Normal
         hi ColorColumn guibg=#32302f
         hi CursorLineNr gui=NONE guifg=#fe8019 guibg=#32302f

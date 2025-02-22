@@ -8,22 +8,22 @@ local auto_filetypes    = { "lua", "markdown", "zsh", "sh", "toml", "yaml" }
 vim.list_extend(auto_filetypes, default_filetypes)
 
 gitlab.setup({
-    code_suggestions = {
-        auto_filetypes = auto_filetypes,
-        ghost_text = {
-            enabled = true,
-            toggle_enabled = false,
-            accept_suggestion = '<Right>',
-            clear_suggestions = '<Left>',
-            stream = false,
-        },
+  code_suggestions = {
+    auto_filetypes = auto_filetypes,
+    ghost_text = {
+      enabled = true,
+      toggle_enabled = false,
+      accept_suggestion = '<Right>',
+      clear_suggestions = '<Left>',
+      stream = false,
     },
-    resource_editing = {
-        enabled = false,
-    },
-    statusline = {
-        enabled = false,
-    },
+  },
+  resource_editing = {
+    enabled = false,
+  },
+  statusline = {
+    enabled = false,
+  },
 })
 commands.create() -- Needed to reset the `FileType` autocommand.
 mapper.inoremap("<C-Right>", require("gitlab.ghost_text").insert_word)
