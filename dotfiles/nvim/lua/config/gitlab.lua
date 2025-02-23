@@ -18,14 +18,15 @@ gitlab.setup({
       restore_word = "<C-Left>",
       insert_line = "<S-Right>",
       restore_line = "<S-Left>",
-      stream = false,
+      stream = true,
     },
   },
   resource_editing = {
-    enabled = false,
+    enabled = true,
   },
   statusline = {
     enabled = false,
   },
 })
 commands.create() -- Needed to reset the `FileType` autocommand.
+
