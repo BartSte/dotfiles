@@ -28,3 +28,5 @@ gitlab.setup({
 commands.create() -- Needed to reset the `FileType` autocommand.
 mapper.inoremap("<C-Right>", require("gitlab.ghost_text").insert_word)
 mapper.inoremap("<S-Right>", require("gitlab.ghost_text").insert_line)
+mapper.inoremap("<C-Left>", require("gitlab.ghost_text").restore_word)
+mapper.inoremap("<S-Left>", require("gitlab.ghost_text").restore_line)
