@@ -1,10 +1,17 @@
+local function openai()
+  return require("codecompanion.adapters").extend(
+    "openai",
+    { schema = { model = { default = "gpt-4o-mini" } } }
+  )
+end
+
 require("codecompanion").setup({
-    strategies = {
-        chat = {
-            adapter = "openai",
-        },
-        inline = {
-            adapter = "openai",
-        }
-    },
+  adapters = {
+    openai = openai,
+  },
+  strategies = {
+    chat = {
+      adapter = "openai",
+    }
+  }
 })
