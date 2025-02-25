@@ -35,7 +35,7 @@
   "orgmode": { "branch": "master", "commit": "c0cdcbdced83ceb9b9f058b402a8bfc5f64ab3a6" },
   "plantuml-syntax": { "branch": "master", "commit": "9d4900aa16674bf5bb8296a72b975317d573b547" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
-  "snacks.nvim": { "branch": "main", "commit": "09ec4adf3f2e7253de829d5eede4c86791cdd309" },
+  "snacks.nvim": { "branch": "main", "commit": "1b63b1811c58f661ad22f390a52aa6723703dc3d" },
   "stay-centered.nvim": { "branch": "main", "commit": "e1a63ccaf2584e97c0ef8e64f9654c9a80d983f6" },
   "tslime.vim": { "branch": "main", "commit": "9b2b99e409336584103b83c597fdb6234875ae25" },
   "undotree": { "branch": "master", "commit": "2556c6800b210b2096b55b66e74b4cc1d9ebbe4f" },
