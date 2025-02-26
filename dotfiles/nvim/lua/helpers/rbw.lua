@@ -1,6 +1,6 @@
 local M = {}
 
---- Return the credentails for the given entry name.
+--- Return the credentials for the given entry name.
 ---@param name string The name of the entry
 ---@return string token
 function M.get(name)
@@ -17,12 +17,15 @@ end
 --- Set the `env` variable to the token stored in the entry `name`.
 ---@param name string The name of the entry
 ---@param env string The environment variable to set to the token
----@return nil
+---@return boolean True if env variable was successfully set, false otherwise.
 function M.set_env(name, env)
   local token = M.get(name)
   if token and #token > 0 then
     vim.env[env] = token
+    return true
   end
+  return false
 end
 
 return M
+
