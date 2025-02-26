@@ -8,7 +8,7 @@ local up = { i = helpers.prev_item_insert, c = helpers.prev_item_cmd }
 local down = { i = helpers.next_item_insert, c = helpers.next_item_cmd }
 local enter = { i = helpers.confirm_select(false), c = helpers.confirm_select(false) }
 local cspace = { i = helpers.toggle_visibility, c = helpers.toggle_visibility }
-local aspace = { i = helpers.toggle_cmp(), c = helpers.toggle_cmp() }
+local aspace = { i = helpers.toggle_cmp, c = helpers.toggle_cmp }
 local menter = { i = helpers.confirm_select(true), c = helpers.confirm_select(true) }
 
 local menu_items = {
