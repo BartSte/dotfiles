@@ -9,7 +9,7 @@
   "codecompanion.nvim": { "branch": "main", "commit": "8fcb2f599d808fd039ecb1219813b9f7be6fc71c" },
   "focus.nvim": { "branch": "master", "commit": "4135f976afe5d6e1fe66dff121db9d06643f439f" },
   "fzf-lua": { "branch": "main", "commit": "9b84b53f3297d4912d7eb95b979e9b27e2e61281" },
-  "gitlab": { "branch": "main", "commit": "7a3e8c46f2e878313b10f0026b4b7ee91361df9a" },
+  "gitlab.vim": { "branch": "main", "commit": "7a3e8c46f2e878313b10f0026b4b7ee91361df9a" },
   "gruvbox-baby": { "branch": "main", "commit": "bd52e62d8134647090108189e69c8b3cd18bdbbf" },
   "hop.nvim": { "branch": "master", "commit": "efe58182f71fbe592f82fb211ab026f2819e855d" },
   "kmonad-vim": { "branch": "master", "commit": "37978445197ab00edeb5b731e9ca90c2b141723f" },
