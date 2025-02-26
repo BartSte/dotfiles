@@ -17,8 +17,14 @@ require("codecompanion").setup({
     },
     inline = {
       adapter = "openai"
+    },
+    cmd = {
+      adapter = "openai",
     }
   }
 })
-mapper.nnoremap("<leader>A", ":CodeCompanion ")
-mapper.vnoremap("<leader>A", ":CodeCompanion ")
+mapper.nnoremap("<leader>ai", ":CodeCompanion ")
+mapper.vnoremap("<leader>ai", ":CodeCompanion ")
+mapper.nnoremap("<leader>ac", ":CodeCompanionChat ")
+mapper.vnoremap("<leader>ac", ":CodeCompanionChat ")
+mapper.nnoremap("<leader>a:", ":CodeCompanionCmd ")
