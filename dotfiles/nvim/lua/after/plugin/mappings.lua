@@ -1,6 +1,8 @@
 local sorters = require("helpers.sorters")
 local m = require("helpers.keymapper")
 
+-- <C-b> is reserved as a "leader" in insert mode
+
 --------------------------------------------------------------------------------
 --- No modifiers
 --------------------------------------------------------------------------------

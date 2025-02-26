@@ -25,6 +25,6 @@ require("codecompanion").setup({
 })
 mapper.nnoremap("<leader>ai", ":CodeCompanion ")
 mapper.vnoremap("<leader>ai", ":CodeCompanion ")
-mapper.nnoremap("<leader>ac", ":CodeCompanionChat ")
+mapper.nnoremap("<leader>ac", ":CodeCompanionChat Toggle<CR>")
 mapper.vnoremap("<leader>ac", ":CodeCompanionChat ")
 mapper.nnoremap("<leader>a:", ":CodeCompanionCmd ")
