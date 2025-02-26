@@ -65,10 +65,10 @@ lualine.setup({
   },
   sections = {
     -- State of the editor
-    lualine_a = { "mode"},
+    lualine_a = { "mode" },
 
     -- Same for all files
-    lualine_b = { projectmarks.shada, projectrc, venv },
+    lualine_b = { projectmarks.shada, projectrc, venv, helpers.code_companion },
 
     -- Changes when switching buffers
     lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks_optimized },
