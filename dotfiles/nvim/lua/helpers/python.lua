@@ -79,6 +79,12 @@ M.open_test_file = function()
     end
 end
 
+--- 
+--- Opens the source file if it is valid and located in the 'src' directory.
+---
+--- If the file is already in the 'src' directory, logs a message
+--- indicating that. If the file tree is invalid, logs a different message.
+--- Otherwise, attempts to open the corresponding source file in the editor.
 M.open_src_file = function()
     local is_src = vim.fn.match(vim.fn.expand('%:p:~:.'), 'src/') == 0
     if is_src then
