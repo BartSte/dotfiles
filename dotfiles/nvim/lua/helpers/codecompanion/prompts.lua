@@ -1,33 +1,55 @@
 ---@class Prompts
 ---@field docstrings table
 ---@field typehints table
-local Prompts = {}
+local M = {}
 
-Prompts.docstring = {
+local function get_format(filetype)
+  local formats = {
+    python = "Google Docstrings",
+    lua = "LuaCATS"
+  }
+  local default = "that is most common for " .. filetype
+  return formats[filetype] or default
+end
+
+M.docstring = {
   strategy = "inline",
-  description = "Write docstrings for the selected function or class.",
+  description = "Write docstrings",
   opts = {
-    is_slash_cmd = true,
+    modes = { "v" },
     auto_submit = true,
+    is_slash_cmd = true,
   },
   prompts = {
     {
+      role = "system",
+      content = function(context)
+        return "Act as a senior " .. context.filetype .. " developer."
+      end,
+    },
+    {
       role = "user",
-      content = [[
+      content = function(context)
+        local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
+        return [[
           <user_prompt>
-          Add a docstrings for the provided functions and/or classes that are
-          part of #buffer. The docstring must be inserted above or below the
-          function/class definition depending on the programming language that
-          is used. Choose the docstring type that is most commonly used, unless
-          the language is specified below:
-          - python: Goolge Docstrings
-          </user_prompt>
+          I have the following code:
+          ```
+          ]] .. context.filetype .. "\n" .. code .. [[
+          ```
+          Add docstring to this code in the format
+          ]] .. get_format(context.filetype) .. [[.
+          <user_prompt>
         ]]
+      end,
+      opts = {
+        contains_code = true,
+      }
     }
-  },
+  }
 }
 
-Prompts.typehint = {
+M.typehint = {
   strategy = "inline",
   description = "Generate type hints for variables, parameters, and return values.",
   opts = {
@@ -50,4 +72,4 @@ Prompts.typehint = {
 }
 
 
-return Prompts
+return M
