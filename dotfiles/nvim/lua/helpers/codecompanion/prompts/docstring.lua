@@ -1,21 +1,27 @@
+--- A user prompt for code snippets.
+--- @return string The user prompt template for code snippets.
 local user_prompt = [[
 <user_prompt>
 I have the following code:
-```
+```%s
 %s
-%s
 ```
-Add new docstrings to the code if there are none. Replace exising docstrings if
+Add new docstrings to the code if there are none. Replace existing docstrings if
 they are already provided.
 %s
 %s
 </user_prompt>
 ]]
 
+--- Contains documentation formats for different languages.
+--- @class FormatDocstrings
+--- @field python string
+--- @field lua string
 local format = {
   python = "Google Docstrings",
   lua = "LuaCATS"
 }
+
 
 local function get_format(context)
   if not format[context.filetype] then return "" end
@@ -34,29 +40,35 @@ def add(a: int, b: int) -> int:
 
   Returns:
       Sum of the two numbers.
-
   """
 ]]
 
 examples.lua = [[
----A point with (x, y) coordinates.
+--- A point with (x, y) coordinates.
 ---@class Point
 ---@field x number
 ---@field y number
 local Point = {x=0, y=0}
 
----Make a point.
----@param x number
----@param y number
----@return Point result A point containing x, y coordinates
-local function Point.new(x, y)
-  return { x=x, y=y }
+--- A string.
+---@type string
+local bar = "some string"
+
+--- Adds two numbers.
+--- @param a number The first number to add.
+--- @param b number The second number to add.
+--- @return number result The sum of `a` and `b`.
+local function add(a, b)
+  return a + b
 end
 ]]
 
+--- Returns an example based on the filetype context.
+--- @param context table The context containing filetype information.
+--- @return string An example code snippet.
 local function get_example(context)
   if not examples[context.filetype] then return "" end
-  local template = "\nFor example:\n\n```%s\n```\n"
+  local template = "\nFor example:\n\n%s\n\n"
   return string.format(template, examples[context.filetype])
 end
 
@@ -64,9 +76,9 @@ return {
   strategy = "inline",
   description = "Write docstrings",
   opts = {
+    short_name = "docstring",
     modes = { "v" },
     auto_submit = true,
-    is_slash_cmd = true,
   },
   prompts = {
     {
