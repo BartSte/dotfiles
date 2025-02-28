@@ -8,11 +8,6 @@ local function openai()
   )
 end
 
-local function make_prompt(name)
-  return function() require("codecompanion").prompt(name) end
-end
-
-
 require("codecompanion").setup({
   adapters = {
     openai = openai,
@@ -41,10 +36,12 @@ require("codecompanion").setup({
   prompt_library = helpers.prompts
 })
 
-mapper.nnoremap("<leader>ai", ":CodeCompanion ")
-mapper.vnoremap("<leader>ai", ":CodeCompanion ")
-mapper.nnoremap("<leader>ac", ":CodeCompanionChat Toggle<CR>")
-mapper.vnoremap("<leader>ac", ":CodeCompanionChat ")
+mapper.nnoremap("<leader>aI", ":CodeCompanion ")
+mapper.vnoremap("<leader>aI", ":CodeCompanion ")
+mapper.vnoremap("<leader>aid", ":CodeCompanion /docstring<CR>")
+mapper.vnoremap("<leader>ait", ":CodeCompanion /typehint<CR>")
+
+mapper.nnoremap("<leader>aC", ":CodeCompanionChat Toggle<CR>")
+mapper.vnoremap("<leader>aC", ":CodeCompanionChat ")
+
 mapper.nnoremap("<leader>a:", ":CodeCompanionCmd ")
-mapper.vnoremap("<leader>apd", make_prompt("docstring"))
-mapper.vnoremap("<leader>apt", make_prompt("typehint"))
