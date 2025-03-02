@@ -1,37 +1,34 @@
+local companion = require("codecompanion")
 local helpers = require("helpers.codecompanion")
 local mapper = require("helpers.keymapper")
 
-local adapter = helpers.adapters.get_by_hostname()
-
-require("codecompanion").setup({
-  adapters = adapter,
+local opts = {
+  adapters = helpers.adapters,
+  prompt_library = helpers.prompts,
   strategies = {
-    chat = { adapter = adapter },
-    cmd = { adapter = adapter, }
     inline = {
-      adapter = adapter_name,
       keymaps = {
-        accept_change = {
-          modes = { n = "<leader>aa" },
-          description = "Accept the suggested change",
-        },
-        reject_change = {
-          modes = { n = "<leader>ar" },
-          description = "Reject the suggested change",
-        },
+        accept_change = { modes = { n = "<leader>aa" }, },
+        reject_change = { modes = { n = "<leader>ar" }, },
       },
     },
   },
-  prompt_library = helpers.prompts
-})
+}
+
+local host_opts = require("projectrc").try_require(
+  "config.codecompanion",
+  vim.fn.hostname(),
+  require("config.codecompanion.default")
+)
+
+opts = vim.tbl_deep_extend("force", opts, host_opts)
+companion.setup(opts)
 
 ---Creates a prompt function for a given name.
 ---@param name string The name of the prompt.
 ---@return function A function that prompts with the specified name.
 local function make_prompt(name)
-  return function()
-    require("codecompanion").prompt(name)
-  end
+  return function() companion.prompt(name) end
 end
 
 mapper.nnoremap("<leader>aI", ":CodeCompanion ")
@@ -43,3 +40,4 @@ mapper.nnoremap("<leader>aC", ":CodeCompanionChat Toggle<CR>")
 mapper.vnoremap("<leader>aC", ":CodeCompanionChat ")
 
 mapper.nnoremap("<leader>a:", ":CodeCompanionCmd ")
+mapper.nnoremap("<leader>a?", helpers.notify.default_models)

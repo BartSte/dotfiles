@@ -1,51 +1,38 @@
-local M = {}
+local adapters = require("codecompanion.adapters")
 
----Extends the OpenAI adapter.
----@return table The extended OpenAI adapter.
-function M.openai()
-  return require("codecompanion.adapters").extend(
+local function make_openai()
+  return adapters.extend(
     "openai",
     {
+      env = {
+        api_key = "cmd: rbw get openai_token"
+      },
       schema = {
         model = {
           default = "gpt-4o-mini"
         }
-      },
-      env = {
-        api_key = "cmd: rbw get openai_token"
-      },
+      }
     }
   )
 end
 
----Extends the DeepSeek adapter.
----@see https://deepseek.com/
----@return table The extended DeepSeek adapter.
-function M.deepseek()
-  return require("codecompanion.adapters").extend(
-    "deepseek",
-    {
-      schema = {
-        model = {
-          default = "deepseek-chat",
-          choices = {
-            "deepseek-chat",
-            "deepseek-reasoner"
-        }
-      },
+local function make_deepseek(opts)
+  opts = opts or {}
+  local adapter = adapters.extend(
+    "deepseek", {
       env = {
         api_key = "cmd: rbw get deepseektoken"
       },
-    }
-  )
+    })
+  adapter = vim.tbl_deep_extend('force', adapter, opts)
+  return adapter
 end
 
-M.hosts_vs_adapter = {
-  ["zbook"] = M.openai,
-  ["bart-asus"] = M.deepseek,
+return {
+  openai = make_openai(),
+  deepseek = make_deepseek(),
+  deepseek_chat = make_deepseek({
+    name = "deepseek_chat",
+    schema = { model = { default = "deepseek-chat" } }
+  }),
 }
-
-function M.get_by_hostname()
-  local hostname = vim.fn.hostname()
-  return M.hosts_vs_adapter[hostname]
-end
