@@ -55,6 +55,12 @@ M.home = function()
   end
 end
 
+
+---Scans a directory for Lua modules and returns their require paths.
+---Processes individual `.lua` files and directories containing `init.lua`.
+---@param directory string The filesystem path to the directory to search
+---@param exclude? string Lua pattern to exclude module paths (default: "/init$")
+---@return string[] modules The module names in `require` compatible format (dotted notation)
 M.glob_modules = function(directory, exclude)
   local default = M.path_separator .. "init$"
   exclude = exclude or default
@@ -89,6 +95,7 @@ M.glob_modules = function(directory, exclude)
 
   return modules
 end
+
 
 --- Return the module name for a directory. The directory is converted to a
 --- module name by removing the all untill the last `lua/` and replacing the
