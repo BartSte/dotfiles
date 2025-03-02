@@ -10,13 +10,13 @@ local M = {}
 ---@param functions table <function|nil>
 ---@return function
 function M.decorate(functions)
-    return function(...)
-        for _, func in pairs(functions) do
-            if func ~= nil then
-                func(...)
-            end
-        end
+  return function(...)
+    for _, func in pairs(functions) do
+      if func ~= nil then
+        func(...)
+      end
     end
+  end
 end
 
 --- Create a table from a header and rows.
@@ -27,36 +27,36 @@ end
 -- | Header 1 | Header 2 | Header 3 |
 -- |    x     |    y     |    z     |
 function M.tabulate(header, rows)
-    local column_widths = {}
-    for i, column in ipairs(header) do
-        column_widths[i] = #column
-    end
+  local column_widths = {}
+  for i, column in ipairs(header) do
+    column_widths[i] = #column
+  end
 
-    for _, row in ipairs(rows) do
-        for i, column in ipairs(row) do
-            column_widths[i] = math.max(column_widths[i], #column)
-        end
+  for _, row in ipairs(rows) do
+    for i, column in ipairs(row) do
+      column_widths[i] = math.max(column_widths[i], #column)
     end
+  end
 
-    local result = {}
-    result[#result + 1] = "|"
-    for i, column in ipairs(header) do
-        result[#result + 1] = " " .. column .. string.rep(" ", column_widths[i] - #column) .. " |"
-    end
+  local result = {}
+  result[#result + 1] = "|"
+  for i, column in ipairs(header) do
+    result[#result + 1] = " " .. column .. string.rep(" ", column_widths[i] - #column) .. " |"
+  end
 
+  result[#result + 1] = "\n|"
+  for i, width in ipairs(column_widths) do
+    result[#result + 1] = string.rep("-", width + 2) .. "|"
+  end
+
+  for _, row in ipairs(rows) do
     result[#result + 1] = "\n|"
-    for i, width in ipairs(column_widths) do
-        result[#result + 1] = string.rep("-", width + 2) .. "|"
+    for i, column in ipairs(row) do
+      result[#result + 1] = " " .. column .. string.rep(" ", column_widths[i] - #column) .. " |"
     end
+  end
 
-    for _, row in ipairs(rows) do
-        result[#result + 1] = "\n|"
-        for i, column in ipairs(row) do
-            result[#result + 1] = " " .. column .. string.rep(" ", column_widths[i] - #column) .. " |"
-        end
-    end
-
-    return table.concat(result)
+  return table.concat(result)
 end
 
 return M

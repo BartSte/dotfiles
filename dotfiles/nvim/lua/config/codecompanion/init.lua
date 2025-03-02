@@ -6,10 +6,15 @@ local opts = {
   adapters = helpers.adapters,
   prompt_library = helpers.prompts,
   strategies = {
+    chat = {
+      keymaps = {
+        regenerate = { modes = { n = "<leader>ar" } },
+      }
+    },
     inline = {
       keymaps = {
-        accept_change = { modes = { n = "<leader>aa" }, },
-        reject_change = { modes = { n = "<leader>ar" }, },
+        accept_change = { modes = { n = "<leader>aa" } },
+        reject_change = { modes = { n = "<leader>ar" } },
       },
     },
   },
