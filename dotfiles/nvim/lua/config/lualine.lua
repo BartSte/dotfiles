@@ -68,7 +68,7 @@ lualine.setup({
     lualine_a = { "mode" },
 
     -- Same for all files
-    lualine_b = { projectmarks.shada, projectrc, venv, helpers.code_companion },
+    lualine_b = { projectmarks.shada, projectrc, venv, helpers.codecompanion_spinner},
 
     -- Changes when switching buffers
     lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks_optimized },
