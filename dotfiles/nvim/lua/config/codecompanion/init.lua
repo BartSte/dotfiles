@@ -20,12 +20,7 @@ local opts = {
   },
 }
 
-local host_opts = require("projectrc").try_require(
-  "config.codecompanion",
-  vim.fn.hostname(),
-  require("config.codecompanion.default")
-)
-
+local host_opts = helpers.require_by_hostname("config.codecompanion")
 opts = vim.tbl_deep_extend("force", opts, host_opts)
 companion.setup(opts)
 
