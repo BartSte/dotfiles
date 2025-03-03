@@ -31,6 +31,21 @@ end
 local examples = {}
 
 examples.python = [[
+class Point:
+    """Represents a 2D Point."""
+
+    x: int
+    y: int
+
+    def __init__(self, x: int, y: int) -> None:
+        """Init.
+        Args:
+          x: the x coordinate.
+          y: the y coordinate.
+        """
+        self.x = x
+        self.y = y
+
 def add(a: int, b: int) -> int:
   """Adds two numbers.
 
@@ -41,6 +56,7 @@ def add(a: int, b: int) -> int:
   Returns:
       Sum of the two numbers.
   """
+  return a + b
 ]]
 
 examples.lua = [[
@@ -92,7 +108,6 @@ return {
       content = function(context)
         local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
         local result = user_prompt.format(user_prompt, context.filetype, code, get_format(context), get_example(context))
-        dd(result)
         return result
       end,
       opts = {
