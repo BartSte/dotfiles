@@ -44,28 +44,17 @@ M.venv = function()
 end
 
 
-M.code_companion = require("lualine.component"):extend()
+M.codecompanion_spinner = require("lualine.component"):extend()
+M.codecompanion_spinner.processing = false
+M.codecompanion_spinner.spinner_index = 1
 
-M.code_companion.processing = false
-M.code_companion.spinner_index = 1
-
-local spinner_symbols = {
-  "⠋",
-  "⠙",
-  "⠹",
-  "⠸",
-  "⠼",
-  "⠴",
-  "⠦",
-  "⠧",
-  "⠇",
-  "⠏",
-}
+local spinner_symbols = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 local spinner_symbols_len = 10
 
--- Initializer
-function M.code_companion:init(options)
-  M.code_companion.super.init(self, options)
+--- Initializes a new CodeCompanionSpinner instance
+---@param options table Configuration options passed to super constructor
+function M.codecompanion_spinner:init(options)
+  M.codecompanion_spinner.super.init(self, options)
 
   local group = vim.api.nvim_create_augroup("CodeCompanionHooks", {})
 
@@ -73,6 +62,7 @@ function M.code_companion:init(options)
     pattern = "CodeCompanionRequest*",
     group = group,
     callback = function(request)
+      self.model = request.data.adapter.model
       if request.match == "CodeCompanionRequestStarted" then
         self.processing = true
       elseif request.match == "CodeCompanionRequestFinished" then
@@ -82,11 +72,12 @@ function M.code_companion:init(options)
   })
 end
 
--- Function that runs every time statusline is updated
-function M.code_companion:update_status()
+--- Updates statusline with spinner animation when processing
+---@return string|nil Current spinner symbol if processing, nil otherwise
+function M.codecompanion_spinner:update_status()
   if self.processing then
     self.spinner_index = (self.spinner_index % spinner_symbols_len) + 1
-    return spinner_symbols[self.spinner_index]
+    return string.format("%s %s", self.model, spinner_symbols[self.spinner_index])
   else
     return nil
   end

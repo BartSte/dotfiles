@@ -26,7 +26,7 @@ gitlab.setup({
     enabled = true,
   },
   statusline = {
-    enabled = false,
+    enabled = false, ---function(status) dd(status) end,
   },
 })
 commands.create() -- Needed to reset the `FileType` autocommand.
