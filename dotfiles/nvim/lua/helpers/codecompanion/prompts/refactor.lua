@@ -23,7 +23,7 @@ return {
   description = "Refactor",
   opts = {
     short_name = "refactor",
-    modes = { "n" },
+    modes = { "v" },
     auto_submit = true,
   },
   prompts = {
@@ -39,6 +39,9 @@ return {
         local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
         return string.format(template, context.filetype, code)
       end,
+      opts = {
+        contains_code = true,
+      }
     }
   }
 }

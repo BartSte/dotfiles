@@ -54,6 +54,9 @@ return {
 
         return string.format(template, branch, branch, branch, diff, branch, log)
       end,
+      opts = {
+        contains_code = true,
+      }
     }
   }
 }
