@@ -1,3 +1,5 @@
+---@class CodeCompanionNotify
+---@field default_models function
 local M = {}
 
 --- Displays the configured adapter models for different strategy types

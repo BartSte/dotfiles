@@ -38,6 +38,7 @@ mapper.vnoremap("<leader>ait", make_prompt("typehint"))
 
 mapper.nnoremap("<leader>aC", ":CodeCompanionChat Toggle<CR>")
 mapper.vnoremap("<leader>aC", ":CodeCompanionChat ")
+mapper.nnoremap("<leader>acc", make_prompt("changes"))
 
 mapper.nnoremap("<leader>a:", ":CodeCompanionCmd ")
 mapper.nnoremap("<leader>a?", helpers.notify.default_models)
