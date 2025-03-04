@@ -6,10 +6,14 @@ return {
       },
       python = {
         analysis = {
+          autoSearchPaths = false,
+          diagnosticMode = "openFilesOnly",
+          useLibraryCodeForTypes = false,
+          exclude = { "venv", ".git", "build", "dist" },
           diagnosticSeverityOverrides = {
             reportUnusedCallResult = false,
           },
-        },
+        }
       },
     },
   },
