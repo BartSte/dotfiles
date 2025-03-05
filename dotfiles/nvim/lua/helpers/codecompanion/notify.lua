@@ -1,4 +1,4 @@
----@class CodeCompanionNotify
+---@class helpers.CodeCompanion.Notify
 ---@field default_models function
 local M = {}
 

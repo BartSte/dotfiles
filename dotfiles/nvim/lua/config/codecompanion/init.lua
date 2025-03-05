@@ -12,6 +12,14 @@ local opts = {
         show_default_prompt_library = false, -- Show the default prompt library in the action palette?
       },
     },
+    chat = {
+      intro_message = "Press ? for options",
+      ---@param tokens string
+      ---@param adapter CodeCompanion.Adapter
+      token_count = function(tokens, adapter) -- The function to display the token count
+        return string.format("%s tokens @%s", tokens, adapter.name)
+      end,
+    }
   },
   strategies = {
     chat = {
@@ -19,10 +27,6 @@ local opts = {
         regenerate = { modes = { n = "<leader>agr" } },
         close = { modes = { n = "<leader>qc", i = "<C-x>q", } },
       },
-      intro_message = "AI chat. Press ? for options",
-      token_count = function(tokens, adapter) -- The function to display the token count
-        return string.format("%s tokens @%s", tokens, adapter)
-      end,
     },
     inline = {
       keymaps = {

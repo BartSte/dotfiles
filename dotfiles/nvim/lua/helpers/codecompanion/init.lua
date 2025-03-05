@@ -3,9 +3,9 @@ local path = require("helpers.path")
 local this_dir = path.join_config_dir("lua", "helpers", "codecompanion")
 
 ---@class helpers.CodeCompanion
----@field adapters CodeCompanionAdapters
----@field prompts CodeCompanionPrompts
----@field notify CodeCompanionNotify
+---@field adapters helpers.CodeCompanion.Adapters
+---@field prompts helpers.CodeCompanion.Prompts
+---@field notify helpers.CodeCompanion.Notify
 ---@field require_by_hostname function Requires a module based on the current
 ---hostname, with fallback to module called `default`.
 local M = path.require_all(this_dir)

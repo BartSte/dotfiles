@@ -53,15 +53,17 @@ local function make_deepseek(opts)
   return adapter
 end
 
----@class CodeCompanionAdapters
----@field openai CodeCompanion.Adapter
+---@class helpers.CodeCompanion.Adapters
+---@field gpt_4o_mini CodeCompanion.Adapter
+---@field o1_mini CodeCompanion.Adapter
 ---@field deepseek CodeCompanion.Adapter
 ---@field deepseek_chat CodeCompanion.Adapter
-local M = {
-  openai_4o = make_openai({ name = "openai_4o", schema = { model = { default = "gpt-4o-mini" } } }),
-  openai_o1 = make_openai({ name = "openai_o1", schema = { model = { default = "o1-mini" } } }),
-  deepseek = make_deepseek(),
-  deepseek_chat = make_deepseek({ name = "deepseek_chat", schema = { model = { default = "deepseek-chat" } } }),
-}
+local M = {}
+
+M.gpt_4o_mini = make_openai({ name = "gpt_4o_mini", schema = { model = { default = "gpt-4o-mini" } } })
+M.o1_mini = make_openai({ name = "o1_mini", schema = { model = { default = "o1-mini" } } })
+M.deepseek = make_deepseek()
+M.deepseek_chat = make_deepseek({ name = "deepseek_chat", schema = { model = { default = "deepseek-chat" } } })
+
 
 return M
