@@ -5,7 +5,6 @@ return {
   strategy = "chat",
   description = "Check the selected code",
   opts = {
-    index = 7,
     is_slash_cmd = false,
     modes = { "v" },
     short_name = "check",

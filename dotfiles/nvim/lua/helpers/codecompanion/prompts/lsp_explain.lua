@@ -5,8 +5,6 @@ return {
   strategy = "chat",
   description = "Explain the LSP diagnostics for the selected code",
   opts = {
-    index = 9,
-    is_slash_cmd = false,
     modes = { "v" },
     short_name = "lsp",
     auto_submit = true,

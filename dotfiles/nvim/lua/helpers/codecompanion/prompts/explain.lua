@@ -5,8 +5,6 @@ return {
   strategy = "chat",
   description = "Explain how code in a buffer works",
   opts = {
-    index = 5,
-    is_slash_cmd = false,
     modes = { "v" },
     short_name = "explain",
     auto_submit = true,

@@ -5,8 +5,6 @@ return {
   strategy = "chat",
   description = "Generate a commit message",
   opts = {
-    index = 10,
-    is_slash_cmd = true,
     short_name = "commit",
     auto_submit = true,
   },

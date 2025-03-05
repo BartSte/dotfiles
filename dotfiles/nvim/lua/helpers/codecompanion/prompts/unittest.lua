@@ -5,8 +5,6 @@ return {
   strategy = "inline",
   description = "Generate unit tests for the selected code",
   opts = {
-    index = 6,
-    is_slash_cmd = false,
     modes = { "v" },
     short_name = "tests",
     auto_submit = true,

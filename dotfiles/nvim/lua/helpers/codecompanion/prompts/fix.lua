@@ -5,8 +5,6 @@ return {
   strategy = "chat",
   description = "Fix the selected code",
   opts = {
-    index = 7,
-    is_slash_cmd = false,
     modes = { "v" },
     short_name = "fix",
     auto_submit = true,
