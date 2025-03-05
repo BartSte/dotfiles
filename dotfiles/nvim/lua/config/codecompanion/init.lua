@@ -5,11 +5,24 @@ local mapper = require("helpers.keymapper")
 local opts = {
   adapters = helpers.adapters,
   prompt_library = helpers.prompts,
+  display = {
+    action_palette = {
+      opts = {
+        show_default_actions = false,        -- Show the default actions in the action palette?
+        show_default_prompt_library = false, -- Show the default prompt library in the action palette?
+      },
+    },
+  },
   strategies = {
     chat = {
       keymaps = {
-        regenerate = { modes = { n = "<leader>ar" } },
-      }
+        regenerate = { modes = { n = "<leader>agr" } },
+        close = { modes = { n = "<leader>qc", i = "<C-x>q", } },
+      },
+      intro_message = "AI chat. Press ? for options",
+      token_count = function(tokens, adapter) -- The function to display the token count
+        return string.format("%s tokens @%s", tokens, adapter)
+      end,
     },
     inline = {
       keymaps = {
@@ -20,6 +33,7 @@ local opts = {
   },
 }
 
+-- Add host specific adapters
 local host_opts = helpers.require_by_hostname("config.codecompanion")
 opts = vim.tbl_deep_extend("force", opts, host_opts)
 companion.setup(opts)
@@ -33,12 +47,22 @@ end
 
 mapper.nnoremap("<leader>aI", ":CodeCompanion ")
 mapper.vnoremap("<leader>aI", ":CodeCompanion ")
+mapper.vnoremap("<leader>aca", ":CodeCompanion Add<CR>")
 mapper.vnoremap("<leader>aid", make_prompt("docstring"))
 mapper.vnoremap("<leader>ait", make_prompt("typehint"))
+mapper.vnoremap("<leader>air", make_prompt("refactor"))
+mapper.vnoremap("<leader>aiu", make_prompt("unittest"))
 
 mapper.nnoremap("<leader>aC", ":CodeCompanionChat Toggle<CR>")
 mapper.vnoremap("<leader>aC", ":CodeCompanionChat ")
-mapper.nnoremap("<leader>acc", make_prompt("changes"))
+mapper.nnoremap("<leader>acc", make_prompt("commit"))
+mapper.nnoremap("<leader>acd", make_prompt("changes"))
+mapper.vnoremap("<leader>ace", make_prompt("explain"))
+mapper.vnoremap("<leader>acF", make_prompt("fix"))
+mapper.vnoremap("<leader>acf", make_prompt("check"))
+mapper.vnoremap("<leader>acl", make_prompt("lsp"))
 
 mapper.nnoremap("<leader>a:", ":CodeCompanionCmd ")
 mapper.nnoremap("<leader>a?", helpers.notify.default_models)
+
+mapper.nnoremap("<leader>aA", ":CodeCompanionActions<CR>")
