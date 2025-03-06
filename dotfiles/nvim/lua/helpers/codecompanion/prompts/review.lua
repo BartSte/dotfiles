@@ -16,31 +16,32 @@ make you review more clear.
 
 If you don't find anything noteworthy, youcan answer with "looks good to me!".
 ]]
+  return string.format(prompt, context.filetype, context.filetype)
 end
 
 local function user_prompt(context)
+  local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
   local prompt = [[
+Review the following code:
+```%s
+%s
+```
 ]]
-  return prompt
+  return string.format(prompt, context.filetype, code)
 end
 
 return {
   strategy = "chat",
   description = "Code review",
   opts = {
-    modes = { "v" },
     short_name = "review",
+    modes = { "v" },
     auto_submit = true,
-    user_prompt = false,
-    stop_context_insertion = true,
   },
   prompts = {
     {
       role = constants.SYSTEM_ROLE,
       content = system_prompt,
-      opts = {
-        visible = false,
-      },
     },
     {
       role = constants.USER_ROLE,

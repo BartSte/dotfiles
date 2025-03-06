@@ -1,13 +1,13 @@
 return {
   strategies = {
     chat = {
-      adapter = "o1_mini",
+      adapter = "o3_mini",
     },
     inline = {
-      adapter = "o1_mini",
+      adapter = "o3_mini",
     },
     cmd = {
-      adapter = "o1_mini",
+      adapter = "o3_mini",
     },
   },
 }

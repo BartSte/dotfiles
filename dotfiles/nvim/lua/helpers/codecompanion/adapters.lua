@@ -14,6 +14,7 @@ local function make_openai(opts)
         model = {
           choices = {
             "o1-mini",
+            "o3-mini",
             "gpt-4o-mini",
           },
         }
@@ -56,12 +57,14 @@ end
 ---@class helpers.CodeCompanion.Adapters
 ---@field gpt_4o_mini CodeCompanion.Adapter
 ---@field o1_mini CodeCompanion.Adapter
+---@field o3_mini CodeCompanion.Adapter
 ---@field deepseek CodeCompanion.Adapter
 ---@field deepseek_chat CodeCompanion.Adapter
 local M = {}
 
 M.gpt_4o_mini = make_openai({ name = "gpt_4o_mini", schema = { model = { default = "gpt-4o-mini" } } })
 M.o1_mini = make_openai({ name = "o1_mini", schema = { model = { default = "o1-mini" } } })
+M.o3_mini = make_openai({ name = "o3_mini", schema = { model = { default = "o3-mini" } } })
 M.deepseek = make_deepseek()
 M.deepseek_chat = make_deepseek({ name = "deepseek_chat", schema = { model = { default = "deepseek-chat" } } })
 

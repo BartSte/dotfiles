@@ -29,4 +29,3 @@ gitlab.setup({
     enabled = false, ---function(status) dd(status) end,
   },
 })
-commands.create() -- Needed to reset the `FileType` autocommand.
