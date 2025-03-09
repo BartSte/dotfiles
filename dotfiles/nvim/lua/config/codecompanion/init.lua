@@ -3,38 +3,38 @@ local helpers = require("helpers.codecompanion")
 local mapper = require("helpers.keymapper")
 
 local opts = {
-  adapters = helpers.adapters,
-  prompt_library = helpers.prompts,
-  display = {
-    action_palette = {
-      opts = {
-        show_default_actions = false,        -- Show the default actions in the action palette?
-        show_default_prompt_library = false, -- Show the default prompt library in the action palette?
-      },
+    adapters = helpers.adapters,
+    prompt_library = helpers.prompts,
+    display = {
+        action_palette = {
+            opts = {
+                show_default_actions = false, -- Show the default actions in the action palette?
+                show_default_prompt_library = false, -- Show the default prompt library in the action palette?
+            },
+        },
+        chat = {
+            intro_message = "Press ? for options",
+            ---@param tokens string
+            ---@param adapter CodeCompanion.Adapter
+            token_count = function(tokens, adapter) -- The function to display the token count
+                return string.format("%s tokens @%s", tokens, adapter.name)
+            end,
+        }
     },
-    chat = {
-      intro_message = "Press ? for options",
-      ---@param tokens string
-      ---@param adapter CodeCompanion.Adapter
-      token_count = function(tokens, adapter) -- The function to display the token count
-        return string.format("%s tokens @%s", tokens, adapter.name)
-      end,
-    }
-  },
-  strategies = {
-    chat = {
-      keymaps = {
-        regenerate = { modes = { n = "<leader>agr" } },
-        close = { modes = { n = "<leader>qc", i = "<C-x>q", } },
-      },
+    strategies = {
+        chat = {
+            keymaps = {
+                regenerate = { modes = { n = "<leader>agr" } },
+                close = { modes = { n = "<leader>qc", i = "<C-x>q", } },
+            },
+        },
+        inline = {
+            keymaps = {
+                accept_change = { modes = { n = "<leader>aa" } },
+                reject_change = { modes = { n = "<leader>ar" } },
+            },
+        },
     },
-    inline = {
-      keymaps = {
-        accept_change = { modes = { n = "<leader>aa" } },
-        reject_change = { modes = { n = "<leader>ar" } },
-      },
-    },
-  },
 }
 
 -- Add host specific adapters
@@ -46,7 +46,7 @@ companion.setup(opts)
 ---@param name string The name of the prompt.
 ---@return function A function that prompts with the specified name.
 local function make_prompt(name)
-  return function() companion.prompt(name) end
+    return function() companion.prompt(name) end
 end
 
 mapper.nnoremap("<leader>aI", ":CodeCompanion ")
@@ -65,6 +65,7 @@ mapper.vnoremap("<leader>ace", make_prompt("explain"))
 mapper.vnoremap("<leader>acF", make_prompt("fix"))
 mapper.vnoremap("<leader>acf", make_prompt("check"))
 mapper.vnoremap("<leader>acl", make_prompt("lsp"))
+mapper.vnoremap("<leader>acr", make_prompt("review"))
 
 mapper.nnoremap("<leader>a:", ":CodeCompanionCmd ")
 mapper.nnoremap("<leader>a?", helpers.notify.default_models)
