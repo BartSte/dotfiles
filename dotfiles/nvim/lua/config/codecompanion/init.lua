@@ -8,7 +8,7 @@ local opts = {
     display = {
         action_palette = {
             opts = {
-                show_default_actions = false, -- Show the default actions in the action palette?
+                show_default_actions = false,        -- Show the default actions in the action palette?
                 show_default_prompt_library = false, -- Show the default prompt library in the action palette?
             },
         },
@@ -16,6 +16,7 @@ local opts = {
             intro_message = "Press ? for options",
             ---@param tokens string
             ---@param adapter CodeCompanion.Adapter
+            ---@return string The string to display
             token_count = function(tokens, adapter) -- The function to display the token count
                 return string.format("%s tokens @%s", tokens, adapter.name)
             end,
@@ -38,6 +39,7 @@ local opts = {
 }
 
 -- Add host specific adapters
+---@type table
 local host_opts = helpers.require_by_hostname("config.codecompanion")
 opts = vim.tbl_deep_extend("force", opts, host_opts)
 companion.setup(opts)
