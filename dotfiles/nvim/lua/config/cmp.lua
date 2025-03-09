@@ -3,13 +3,17 @@ local cmp = require('cmp')
 local helpers = require('helpers.cmp')
 
 -- To enable history scrolling on the command line, cmp is disabled when
--- <Down> or <Up> is pressed. cmp is restored when tab/stab or space are pressed.
-local up = { i = helpers.prev_item_insert, c = helpers.prev_item_cmd }
+-- <Down> or <Up> is pressed. cmp is restored when cspace is pressed.
+local aspace = { i = helpers.disable_abort, c = helpers.disable_abort, n = helpers.disable_abort }
+local cspace = {
+  i = helpers.enable_complete,
+  c = helpers.enable_complete,
+  n = "a<cmd>lua require('helpers.cmp').enable_complete() <CR>"
+}
 local down = { i = helpers.next_item_insert, c = helpers.next_item_cmd }
 local enter = { i = helpers.confirm_select(false), c = helpers.confirm_select(false) }
-local cspace = { i = helpers.toggle_visibility, c = helpers.toggle_visibility }
-local aspace = { i = helpers.toggle_cmp, c = helpers.toggle_cmp }
 local menter = { i = helpers.confirm_select(true), c = helpers.confirm_select(true) }
+local up = { i = helpers.prev_item_insert, c = helpers.prev_item_cmd }
 
 local menu_items = {
   path = 'PATH',
@@ -79,12 +83,16 @@ cmp.setup({
     ['<Down>'] = cmp.mapping(down),
     ['<M-CR>'] = cmp.mapping(menter),
     ['<C-space>'] = cmp.mapping(cspace),
-    ['<M-Space>'] = cmp.mapping(aspace),
+    ['<M-space>'] = cmp.mapping(aspace)
   }
 })
-m.nnoremap("<F24>", "a<cmd>lua require'helpers.cmp'.toggle_visibility()<CR>")
-m.inoremap("<F24>", helpers.toggle_visibility)
-m.cnoremap("<F24>", helpers.toggle_cmp)
+
+--- For cspace to work consistenly across windows and linux within a terminal, I
+--- let Alacritty send F24 when <C-space> is pressed.
+m.cnoremap("<F24>", cspace.c)
+m.inoremap("<F24>", cspace.i)
+m.nnoremap("<F24>", cspace.n)
+m.nnoremap("<M-Space>", aspace.n)
 
 cmp.setup.cmdline({ '/', '?' }, {
   sources = { { name = 'buffer' } }

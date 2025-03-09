@@ -40,6 +40,16 @@ local projectrc = {
   icon = "🛠",
 }
 
+local cmp = {
+  function()
+    if require("helpers.cmp").cmp_enabled then
+      return "cmp"
+    else
+      return ""
+    end
+  end,
+}
+
 local function get_section_separator()
   if vim.fn.has("gui_running") == 1 then
     return { left = "", right = "" }
@@ -68,7 +78,7 @@ lualine.setup({
     lualine_a = { "mode" },
 
     -- Same for all files
-    lualine_b = { projectmarks.shada, projectrc, venv, helpers.codecompanion_spinner},
+    lualine_b = { cmp, projectmarks.shada, projectrc, venv, helpers.codecompanion_spinner },
 
     -- Changes when switching buffers
     lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks_optimized },

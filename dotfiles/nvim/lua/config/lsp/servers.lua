@@ -32,14 +32,33 @@ return {
   bashls = { filetypes = { "sh", "bash", "zsh" } },
 
   lua_ls = {
-    -- Add this to your lua_ls config in neovim
     settings = {
       Lua = {
+        diagnostics = {
+          globals = { 'vim', 'Snacks' },
+          neededFileStatus = {
+            ['codestyle.long_line'] = 'Any',
+          },
+          groupSeverity = {
+            strong = 'Warning',
+          },
+          groupFileStatus = {
+            ['codestyle'] = 'Opened',
+          },
+        },
         workspace = {
+          maxPreload = 2000,
+          preloadFileSize = 500,
+          checkThirdParty = false,
           library = vim.api.nvim_get_runtime_file("lua", true)
         },
-        diagnostics = {
-          globals = { 'Snacks' }
+        format = {
+          enable = true,
+          defaultConfig = {
+            line_length = 100,
+            indent_style = 'space',
+            indent_size = 2,
+          }
         }
       }
     }
