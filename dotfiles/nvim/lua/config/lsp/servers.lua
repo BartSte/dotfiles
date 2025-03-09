@@ -34,6 +34,20 @@ return {
   lua_ls = {
     settings = {
       Lua = {
+        runtime = {
+          version = 'LuaJIT'
+        },
+        completion = {
+          autoRequire = true,
+        },
+        format = {
+          enable = true,
+          defaultConfig = {
+            line_length = 100,
+            indent_style = 'space',
+            indent_size = 2,
+          }
+        },
         diagnostics = {
           globals = { 'vim', 'Snacks' },
           neededFileStatus = {
@@ -52,14 +66,6 @@ return {
           checkThirdParty = false,
           library = vim.api.nvim_get_runtime_file("lua", true)
         },
-        format = {
-          enable = true,
-          defaultConfig = {
-            line_length = 100,
-            indent_style = 'space',
-            indent_size = 2,
-          }
-        }
       }
     }
   },
