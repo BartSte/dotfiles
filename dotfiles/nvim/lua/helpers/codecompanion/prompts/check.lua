@@ -1,21 +1,6 @@
-local fmt = string.format
-local constants = require("codecompanion.config").config.constants
+local constants     = require("codecompanion.config").config.constants
 
-return {
-  strategy = "chat",
-  description = "Check the selected code",
-  opts = {
-    is_slash_cmd = false,
-    modes = { "v" },
-    short_name = "check",
-    auto_submit = true,
-    user_prompt = false,
-    stop_context_insertion = true,
-  },
-  prompts = {
-    {
-      role = constants.SYSTEM_ROLE,
-      content = [[When asked to check code, follow these steps:
+local system_prompt = [[When asked to check code, follow these steps:
 
 - **Identify potential Issues**: Carefully read the provided code and identify any potential issues or improvements. If no issues are found, respond with "No issues found". If you find issues, do the following:
   - **Plan the Fix**: Describe the plan for fixing the code in pseudocode, detailing each step.
@@ -29,31 +14,43 @@ Ensure the fixed code:
 - Follows best practices for readability and maintainability.
 - Is formatted correctly.
 
-Use Markdown formatting and include the programming language name at the start of the code block.]],
-      opts = {
-        visible = false,
-      },
-    },
-    {
-      role = constants.USER_ROLE,
-      content = function(context)
-        local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
+Use Markdown formatting and include the programming language name at the start of the code block.]]
 
-        return fmt(
-          [[Please check this code from buffer %d for potential issues or improvements:
+local user_prompt   = function(context)
+    local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
+    local prompt = [[Please check this code from buffer %d for potential issues or improvements:
 
 ```%s
 %s
 ```
-]],
-          context.bufnr,
-          context.filetype,
-          code
-        )
-      end,
-      opts = {
-        contains_code = true,
-      },
+]]
+    return string.format(prompt, context.bufnr, context.filetype, code)
+end
+return {
+    strategy = "chat",
+    description = "Check the selected code",
+    opts = {
+        is_slash_cmd = false,
+        modes = { "v" },
+        short_name = "check",
+        auto_submit = true,
+        user_prompt = false,
+        stop_context_insertion = true,
     },
-  },
+    prompts = {
+        {
+            role = constants.SYSTEM_ROLE,
+            content = system_prompt,
+            opts = {
+                visible = false,
+            },
+        },
+        {
+            role = constants.USER_ROLE,
+            content = user_prompt,
+            opts = {
+                contains_code = true,
+            },
+        },
+    },
 }
