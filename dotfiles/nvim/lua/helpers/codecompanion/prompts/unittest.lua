@@ -1,12 +1,26 @@
 local fmt = string.format
 local constants = require("codecompanion.config").config.constants
 
+--- Contains documentation formats for different languages.
+--- @class FormatDocstrings
+--- @field python string
+local extras = {
+  python = [[
+For Python, make sure you use the TestCase class from the unittest module.
+]]
+}
+
+
+local function get_extras(context)
+  return extras[context.filetype] or ""
+end
+
 return {
-  strategy = "inline",
+  strategy = "chat",
   description = "Generate unit tests for the selected code",
   opts = {
     modes = { "v" },
-    short_name = "tests",
+    short_name = "unittest",
     auto_submit = true,
     user_prompt = false,
     placement = "new",
@@ -25,7 +39,9 @@ return {
       - Normal cases
       - Edge cases
       - Error handling (if applicable)
-6. Provide the generated unit tests in a clear and organized manner without additional explanations or chat.]],
+6. Provide the generated unit tests in a clear and organized manner without additional explanations or chat.
+7. Do not comment your code. Instead, write more detailed docstrings.
+]],
       opts = {
         visible = false,
       },
@@ -42,11 +58,14 @@ Please generate unit tests for this code from buffer %d:
 ```%s
 %s
 ```
+
+%s
 </user_prompt>
 ]],
           context.bufnr,
           context.filetype,
-          code
+          code,
+          get_extras(context)
         )
       end,
       opts = {
