@@ -1,7 +1,7 @@
-*.swp*
-*autogen
+*.git/
+*autogen/
 *cache*/
-*egg-info*
+*egg-info*/
 *tmp*/
 *venv*/
 .*/
@@ -21,7 +21,7 @@ _deps/
 archive/
 build/
 chrysalis/
-dist
+dist/
 gadgets/
 go/
 message_cache/

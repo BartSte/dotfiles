@@ -48,10 +48,8 @@ end
 M.toggle_cmp = function()
   M.cmp_enabled = not M.cmp_enabled
   if M.cmp_enabled then
-    Snacks.notify.info('cmp enabled')
     M.enable_complete()
   else
-    Snacks.notify.info('cmp disabled')
     M.disable_abort()
   end
 end

@@ -1,13 +1,13 @@
 return {
-  strategies = {
-    chat = {
-      adapter = "deepseek",
+    strategies = {
+        chat = {
+            adapter = "deepseek",
+        },
+        inline = {
+            adapter = "deepseek",
+        },
+        cmd = {
+            adapter = "deepseek_chat",
+        },
     },
-    inline = {
-      adapter = "deepseek",
-    },
-    cmd = {
-      adapter = "deepseek_chat",
-    },
-  },
 }
