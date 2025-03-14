@@ -80,6 +80,7 @@ extras.python = [[
 - use buildin types as much as possible (list is preferred over List)
 - import types from `collections.abc` were possible
 - do not use `Optional` but use ` | None` instead
+- do not escape the double quotes when making docstrings.
 ]]
 
 local function get_extras(context)

@@ -54,6 +54,7 @@ end
 mapper.nnoremap("<leader>a:", ":CodeCompanionCmd ")
 mapper.nnoremap("<leader>a?", helpers.notify.default_models)
 mapper.nnoremap("<leader>aA", ":CodeCompanionActions<CR>")
+mapper.vnoremap("<leader>aA", ":CodeCompanionActions<CR>")
 mapper.nnoremap("<leader>aC", ":CodeCompanionChat Toggle<CR>")
 mapper.nnoremap("<leader>aI", ":CodeCompanion ")
 mapper.vnoremap("<leader>aC", ":CodeCompanionChat ")
