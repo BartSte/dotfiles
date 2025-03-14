@@ -1,3 +1,5 @@
+local filetypes_extras = require("helpers.codecompanion.prompts.extras.filetypes")
+
 --- A user prompt for code snippets.
 --- @return string The user prompt template for code snippets.
 local user_prompt = [[
@@ -18,15 +20,15 @@ Replace existing types if they are incorrect. Add new types if they are missing.
 --- @class FormatTypehints
 --- @field lua string
 local format = {
-  lua = "LuaCATS"
+    lua = "LuaCATS"
 }
 
 --- Returns the docstring format based on the filetype context.
 --- @param context table The context containing filetype information.
 --- @return string The docstring format string.
 local function get_format(context)
-  if not format[context.filetype] then return "" end
-  return string.format("Use the %s style for type annotations.", format[context.filetype])
+    if not format[context.filetype] then return "" end
+    return string.format("Use the %s style for type annotations.", format[context.filetype])
 end
 
 local examples = {}
@@ -70,51 +72,39 @@ end
 ]]
 
 local function get_example(context)
-  if not examples[context.filetype] then return "" end
-  local template = "\nFor example:\n\n%s\n\n"
-  return string.format(template, examples[context.filetype])
-end
-
-local extras = {}
-extras.python = [[
-- use buildin types as much as possible (list is preferred over List)
-- import types from `collections.abc` were possible
-- do not use `Optional` but use ` | None` instead
-- do not escape the double quotes when making docstrings.
-]]
-
-local function get_extras(context)
-  if not extras[context.filetype] then return "" end
-  local template = "Lastly, make sure that:\n%s"
-  return template.format(template, extras[context.filetype])
+    if not examples[context.filetype] then return "" end
+    local template = "\nFor example:\n\n%s\n\n"
+    return string.format(template, examples[context.filetype])
 end
 
 return {
-  strategy = "inline",
-  description = "Add type annotations",
-  opts = {
-    short_name = "typehint",
-    modes = { "v" },
-    auto_submit = true,
-  },
-  prompts = {
-    {
-      role = "system",
-      content = function(context)
-        return "Act as a senior " .. context.filetype .. " developer."
-      end,
+    strategy = "inline",
+    description = "Add type annotations",
+    opts = {
+        short_name = "typehint",
+        modes = { "v" },
+        auto_submit = true,
     },
-    {
-      role = "user",
-      content = function(context)
-        local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
-        local result = user_prompt.format(user_prompt, context.filetype, code, get_format(context), get_example(context),
-          get_extras(context))
-        return result
-      end,
-      opts = {
-        contains_code = true,
-      }
+    prompts = {
+        {
+            role = "system",
+            content = function(context)
+                return "Act as a senior " .. context.filetype .. " developer."
+            end,
+        },
+        {
+            role = "user",
+            content = function(context)
+                local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
+                local result = user_prompt.format(user_prompt, context.filetype, code, get_format(context),
+                    get_example(context),
+                    filetypes_extras(context.filetype)
+                )
+                return result
+            end,
+            opts = {
+                contains_code = true,
+            }
+        }
     }
-  }
 }
