@@ -42,9 +42,9 @@ curl -O https://raw.githubusercontent.com/BartSte/dotfiles-linux/master/dotfiles
 ```
 
 - Complete the environment variables in `~/.dotfiles_config.sh`.
-- Run the script: `~/dotfiles-linux/main`. User interaction is required at the
-  start, to enable bitwarden, and at the end to enable mutt, and khalorg.
-- TODO: explain how to authenticate for khalorg/khard/vdirsyncer/davmail.
+- Run the script: `~/dotfiles-linux/main`. This script first runs all the main
+  files in the modules and later the auth files. User interaction is required at
+  the start, to enable bitwarden, and at the end to enable the rest.
 
 ### Bitwarden
 
