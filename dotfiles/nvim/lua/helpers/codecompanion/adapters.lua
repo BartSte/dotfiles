@@ -4,54 +4,62 @@ local adapters = require("codecompanion.adapters")
 ---@param opts? table Optional table of options to merge into the adapter
 ---@return table adapter The configured OpenAI adapter table
 local function make_openai(opts)
-  local adapter = adapters.extend(
-    "openai",
-    {
-      env = {
-        api_key = "cmd: rbw get openai_token"
-      },
-      schema = {
-        model = {
-          choices = {
-            "o1-mini",
-            "o3-mini",
-            "gpt-4o-mini",
-          },
+    local adapter = adapters.extend(
+        "openai",
+        {
+            env = {
+                api_key = "cmd: rbw get openai_token"
+            },
+            schema = {
+                model = {
+                    choices = {
+                        "o1-mini",
+                        "o3-mini",
+                        "gpt-4o-mini",
+                    },
+                }
+            },
+            temperature = {
+                default = 0,
+                desc = "0 is for coding, 2 is creative writing",
+                validate = function(n)
+                    return n >= 0 and n <= 2, "Must be between 0 and 2"
+                end,
+            }
         }
-      },
-      temperature = {
-        default = 0,
-        desc = "0 is for coding, 2 is creative writing",
-        validate = function(n)
-          return n >= 0 and n <= 2, "Must be between 0 and 2"
-        end,
-      }
-    }
-  )
-  adapter = vim.tbl_deep_extend('force', adapter, opts)
-  return adapter
+    )
+    adapter = vim.tbl_deep_extend('force', adapter, opts)
+    return adapter
 end
 
 --- Creates a Deepseek adapter configuration, optionally merging with provided options
 ---@param opts? table Optional table of options to merge into the adapter
 ---@return table adapter The merged Deepseek adapter configuration
 local function make_deepseek(opts)
-  opts = opts or {}
-  local adapter = adapters.extend(
-    "deepseek", {
-      env = {
-        api_key = "cmd: rbw get deepseektoken"
-      },
-      temperature = {
-        default = 0,
-        desc = "0 is for coding, 1.5 is creative writing",
-        validate = function(n)
-          return n >= 0 and n <= 1.5, "Must be between 0 and 1.5"
-        end,
-      }
-    })
-  adapter = vim.tbl_deep_extend('force', adapter, opts)
-  return adapter
+    opts = opts or {}
+    local adapter = adapters.extend(
+        "deepseek", {
+            env = {
+                api_key = "cmd: rbw get deepseektoken"
+            },
+            schema = {
+                model = {
+                    choices = {
+                        "deepseek",
+                        "deepseek-chat"
+                    },
+                }
+            },
+            temperature = {
+                default = 0,
+                desc = "0 is for coding, 1.5 is creative writing",
+                validate = function(n)
+                    return n >= 0 and n <= 1.5, "Must be between 0 and 1.5"
+                end,
+            }
+        })
+    adapter = vim.tbl_deep_extend('force', adapter, opts)
+    return adapter
 end
 
 ---@class helpers.CodeCompanion.Adapters
