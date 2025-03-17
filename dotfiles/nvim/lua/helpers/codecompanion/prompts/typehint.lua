@@ -98,7 +98,7 @@ return {
                 local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
                 local result = user_prompt.format(user_prompt, context.filetype, code, get_format(context),
                     get_example(context),
-                    filetypes_extras(context.filetype)
+                    filetypes_extras.get(context.filetype)
                 )
                 return result
             end,
