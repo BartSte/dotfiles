@@ -39,7 +39,7 @@ Use Markdown formatting and include the programming language name at the start o
         local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
 
         return fmt(
-          [[Please fix this code from buffer %d:
+          [[Using @editor, please fix this code from buffer %d:
 
 ```%s
 %s
