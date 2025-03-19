@@ -43,11 +43,16 @@ local projectrc = {
 local cmp = {
     function()
         if require("helpers.cmp").cmp_enabled then
-            return "cmp"
+            return ""
         else
             return ""
         end
     end,
+}
+
+local gitlab = {
+    helpers.gitlab.state.get_icon,
+    condition = function() return true end
 }
 
 local function get_section_separator()
@@ -78,7 +83,7 @@ lualine.setup({
         lualine_a = { "mode" },
 
         -- Same for all files
-        lualine_b = { cmp, projectmarks.shada, projectrc, venv, helpers.codecompanion.spinner, helpers.gitlabstate.get_text },
+        lualine_b = { gitlab, cmp, projectmarks.shada, projectrc, venv, helpers.codecompanion.spinner },
 
         -- Changes when switching buffers
         lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks_optimized },

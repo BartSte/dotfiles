@@ -13,7 +13,7 @@ local M = {}
 
 --- CodeCompanion module for lualine integration
 M.codecompanion = require("helpers.lualine.codecompanion")
-M.gitlabstate = require("helpers.lualine.gitlabstate")
+M.gitlab = require("helpers.lualine.gitlab")
 
 --- Gets current tab position and total tabs as formatted string
 ---@return string tab_info Formatted "tab X/Y" string where X is current tab, Y is total tabs
