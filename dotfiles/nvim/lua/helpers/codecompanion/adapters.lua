@@ -42,21 +42,6 @@ local function make_deepseek(opts)
             env = {
                 api_key = "cmd: rbw get deepseektoken"
             },
-            schema = {
-                model = {
-                    choices = {
-                        "deepseek",
-                        "deepseek-chat"
-                    },
-                }
-            },
-            temperature = {
-                default = 0,
-                desc = "0 is for coding, 1.5 is creative writing",
-                validate = function(n)
-                    return n >= 0 and n <= 1.5, "Must be between 0 and 1.5"
-                end,
-            }
         })
     adapter = vim.tbl_deep_extend('force', adapter, opts)
     return adapter
