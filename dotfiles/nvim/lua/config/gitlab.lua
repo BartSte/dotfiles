@@ -17,7 +17,7 @@ gitlab.setup({
             restore_word = "<C-Left>",
             insert_line = "<S-Right>",
             restore_line = "<S-Left>",
-            stream = true,
+            stream = false,
         },
     },
     minimal_message_level = vim.lsp.log_levels.WARN,

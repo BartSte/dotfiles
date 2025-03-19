@@ -1,4 +1,5 @@
 local fzf = require("fzf-lua")
+local actions = require("fzf-lua.actions")
 local map = require("helpers.keymapper")
 local helpers = require("helpers.fzf")
 
@@ -34,6 +35,11 @@ fzf.setup({
             ["shift-up"]   = "preview-page-up",
         },
     },
+    files   = {
+        actions = {
+            ["ctrl-g"] = actions.toggle_ignore
+        }
+    },
     git     = {
         toggle_ignore_flag = "--no-ignore --ignore-file /home/barts/.ignore",
         branches = {
@@ -45,7 +51,7 @@ fzf.setup({
         },
     },
     grep    = {
-        rg_opts   = "--hidden --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
+        rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
     }
 })
 
