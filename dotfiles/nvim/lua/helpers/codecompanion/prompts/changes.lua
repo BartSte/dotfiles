@@ -12,14 +12,14 @@ a git repository. The summary must be suitable for an entry in a changelog file.
 Do not provide any other text than theses bullet points.
 
 The output of the "git diff %s" command is:
-```
+```diff
 %s
 ```
 
 The output of the "git log %s..HEAD" command is:
 ```
 %s
-``
+```
 
 ]]
 

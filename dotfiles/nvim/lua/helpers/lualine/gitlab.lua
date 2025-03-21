@@ -1,17 +1,19 @@
-local globals = require("gitlab.globals")
-
 local M = {}
 M.state = {}
 M.icon = ""
 
-local state = globals.GCS_UNKNOWN
-local state_array = { globals.GCS_UNKNOWN }
+local state = -1 -- same as globals.GCS_UNKNOWN
 
 function M.state.get()
     return state
 end
 
 function M.state.get_icon()
+    local ok, globals = pcall(require, "gitlab.globals")
+    if not ok then
+        return ""
+    end
+
     if state == globals.GCS_AVAILABLE_AND_ENABLED then
         return M.icon
     elseif state == globals.GCS_CHECKING then
