@@ -1,4 +1,5 @@
 local constants = require("codecompanion.config").config.constants
+local helpers = require("helpers.codecompanion.workspace")
 
 return {
     strategy = "chat",
@@ -12,7 +13,7 @@ return {
         {
             type = "file",
             path = {
-                vim.fs.joinpath(vim.fn.getcwd(), "codecompanion-workspace.json"),
+                helpers.find()
             },
         },
     },
@@ -54,7 +55,7 @@ You must create or modify a workspace file through a series of prompts over mult
             role = constants.USER_ROLE,
             content = function()
                 local prompt = ""
-                if vim.fn.filereadable(vim.fs.joinpath(vim.fn.getcwd(), "codecompanion-workspace.json")) == 1 then
+                if vim.fn.filereadable(helpers.find()) == 1 then
                     prompt = [[Can you help me add a group to an existing workspace file?]]
                 else
                     prompt = [[Can you help me create a workspace file?]]

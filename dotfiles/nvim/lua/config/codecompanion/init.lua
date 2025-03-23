@@ -1,24 +1,10 @@
+local p = require("helpers.path")
 local companion = require("codecompanion")
 local helpers = require("helpers.codecompanion")
 local mapper = require("helpers.keymapper")
 
--- local p = require("helpers.path")
--- local workspace = require("codecompanion.strategies.chat.slash_commands.workspace")
--- local function find_custom_workspace_file()
---     local cwd_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
---     return p.join(p.home(), "dotfiles/nvim/workspaces", cwd_name .. ".json")
--- end
---
---
--- local func = workspace.read_workspace_file
--- workspace.read_workspace_file = function(SlashCommand, path)
---     local custom_path = find_custom_workspace_file()
---     if vim.fn.filereadable(path) == 0 and vim.fn.filereadable(custom_path) == 1 then
---         path = custom_path
---     end
---     Snacks.notify("Reading workspace file: " .. (path or "nil"))
---     return func(SlashCommand, path)
--- end
+
+helpers.workspace.patch_workspace_file_path(helpers.workspace.find)
 
 local opts = {
     adapters = helpers.adapters,
