@@ -2,9 +2,27 @@ local companion = require("codecompanion")
 local helpers = require("helpers.codecompanion")
 local mapper = require("helpers.keymapper")
 
+-- local p = require("helpers.path")
+-- local workspace = require("codecompanion.strategies.chat.slash_commands.workspace")
+-- local function find_custom_workspace_file()
+--     local cwd_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+--     return p.join(p.home(), "dotfiles/nvim/workspaces", cwd_name .. ".json")
+-- end
+--
+--
+-- local func = workspace.read_workspace_file
+-- workspace.read_workspace_file = function(SlashCommand, path)
+--     local custom_path = find_custom_workspace_file()
+--     if vim.fn.filereadable(path) == 0 and vim.fn.filereadable(custom_path) == 1 then
+--         path = custom_path
+--     end
+--     Snacks.notify("Reading workspace file: " .. (path or "nil"))
+--     return func(SlashCommand, path)
+-- end
+
 local opts = {
     adapters = helpers.adapters,
-    prompt_library = helpers.prompts,
+    prompt_library = require("config.codecompanion.prompts"),
     display = {
         action_palette = {
             opts = {
@@ -25,8 +43,10 @@ local opts = {
     strategies = {
         chat = {
             keymaps = {
-                regenerate = { modes = { n = "<leader>agr" } },
-                close = { modes = { n = "<leader>qc", i = "<C-x>q", } },
+                regenerate = { modes = { n = "<leader>ar" } },
+                send = { modes = { n = "<leader>aa", i = "<C-x><C-a>" } },
+                stop = { modes = { n = "<leader>aq" } },
+                close = { modes = { n = "<leader>qq", i = "<C-x><C-q>" } },
             },
         },
         inline = {
@@ -40,7 +60,7 @@ local opts = {
 
 -- Add host specific adapters
 ---@type table
-local host_opts = helpers.require_by_hostname("config.codecompanion")
+local host_opts = helpers.require_by_hostname("config.codecompanion.host_specific")
 opts = vim.tbl_deep_extend("force", opts, host_opts)
 companion.setup(opts)
 
@@ -59,7 +79,6 @@ mapper.nnoremap("<leader>aC", ":CodeCompanionChat Toggle<CR>")
 mapper.nnoremap("<leader>aI", ":CodeCompanion ")
 mapper.vnoremap("<leader>aC", ":CodeCompanionChat ")
 mapper.vnoremap("<leader>aI", ":CodeCompanion ")
-mapper.vnoremap("<leader>aca", ":CodeCompanion Add<CR>")
 
 mapper.nnoremap("<leader>acc", make_prompt("commit"))
 mapper.nnoremap("<leader>acd", make_prompt("changes"))

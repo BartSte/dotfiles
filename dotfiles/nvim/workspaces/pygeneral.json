@@ -1,0 +1,64 @@
+{
+    "$schema": "https://raw.githubusercontent.com/olimorris/codecompanion.nvim/refs/heads/main/lua/codecompanion/workspace-schema.json",
+    "name": "pygeneral",
+    "version": "1.0.0",
+    "system_prompt": "pygeneral is a collection of general purpose Python classes and functions that can be used in any other Python project.",
+    "vars": {
+        "src": "src/pygeneral"
+    },
+    "groups": [
+        {
+            "name": "Print Utilities",
+            "system_prompt": "",
+            "opts": {
+                "remove_config_system_prompt": false
+            },
+            "data": [
+                "print_abstract",
+                "print_ansi",
+                "print_bar",
+                "print_counter",
+                "print_init",
+                "print_multiple",
+                "print_rotator"
+            ]
+        }
+    ],
+    "data": {
+        "print_abstract": {
+            "type": "file",
+            "path": "${src}/print/abstract.py",
+            "description": "Base classes for print utilities"
+        },
+        "print_ansi": {
+            "type": "symbols",
+            "path": "${src}/print/ansi.py",
+            "description": "ANSI escape code handling for colored output"
+        },
+        "print_bar": {
+            "type": "symbols",
+            "path": "${src}/print/bar.py",
+            "description": "Progress bar implementations"
+        },
+        "print_counter": {
+            "type": "symbols",
+            "path": "${src}/print/counter.py",
+            "description": "Counting utilities with visual feedback"
+        },
+        "print_init": {
+            "type": "symbols",
+            "path": "${src}/print/__init__.py",
+            "description": "Package initialization and exports"
+        },
+        "print_multiple": {
+            "type": "symbols",
+            "path": "${src}/print/multiple.py",
+            "description": "Parallel output handling for multiple streams"
+        },
+        "print_rotator": {
+            "type": "symbols",
+            "path": "${src}/print/rotator.py",
+            "description": "Rotating status indicator utilities"
+        }
+    }
+}
