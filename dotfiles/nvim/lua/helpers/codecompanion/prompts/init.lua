@@ -11,4 +11,5 @@ local this_dir = path.join_config_dir("lua", "helpers", "codecompanion", "prompt
 ---@field refactor table
 ---@field typehint table
 ---@field unittest table
+---@field workspace table
 return path.require_all(this_dir)
