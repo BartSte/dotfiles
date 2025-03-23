@@ -9,6 +9,10 @@ function M.state.get()
 end
 
 function M.state.get_icon()
+    if vim.api.nvim_get_mode().mode ~= "i" then
+        return M.icon
+    end
+
     local ok, globals = pcall(require, "gitlab.globals")
     if not ok then
         return ""
@@ -16,17 +20,15 @@ function M.state.get_icon()
 
     if state == globals.GCS_AVAILABLE_AND_ENABLED then
         return M.icon
-    elseif state == globals.GCS_CHECKING then
-        return M.icon .. "  "
-    elseif state == globals.GCS_UPDATED then
-        return M.icon .. "  "
-    elseif state == globals.GCS_AVAILABLE_AND_DISABLED then
-        return M.icon .. "  "
-    elseif state == globals.GCS_INSTALLED then
-        return ""
-    elseif state == globals.GCS_UNAVAILABLE then
-        return ""
-    elseif state == globals.GCS_UNKNOWN then
+    elseif state == globals.GCS_WAITING then
+        return M.icon .. " "
+    elseif state == globals.GCS_SUCCESS then
+        return M.icon .. " "
+    elseif state == globals.GCS_FAILED then
+        return M.icon .. " "
+    elseif state == globals.GCS_NONE then
+        return M.icon .. " "
+    else
         return ""
     end
 end
