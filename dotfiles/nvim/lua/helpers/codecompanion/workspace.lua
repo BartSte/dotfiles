@@ -21,14 +21,17 @@ end
 
 ---Sets the workspace file path or a function to retrieve it
 ---@param str_or_func string|fun(): string Path string or function returning path
-function M.patch_workspace_file_path(str_or_func)
+function M.patch_workspace_file_path(custom_path)
     local old_func = workspace.read_workspace_file
     workspace.read_workspace_file = function(SlashCommand, path)
-        if type(str_or_func) == "function" then
-            path = str_or_func()
-        else
-            path = str_or_func
+        if type(custom_path) == "function" then
+            custom_path = custom_path()
         end
+
+        if p.exists(custom_path) then
+            path = custom_path
+        end
+
         return old_func(SlashCommand, path)
     end
 end
