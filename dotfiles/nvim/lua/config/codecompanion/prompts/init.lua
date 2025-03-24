@@ -1,5 +1,5 @@
 local path = require("helpers.path")
-local this_dir = path.join_config_dir("lua", "helpers", "codecompanion", "prompts")
+local this_dir = path.join_config_dir("lua", "config", "codecompanion", "prompts")
 
 ---@class helpers.CodeCompanion.Prompts
 ---@field changes table
@@ -11,4 +11,5 @@ local this_dir = path.join_config_dir("lua", "helpers", "codecompanion", "prompt
 ---@field refactor table
 ---@field typehint table
 ---@field unittest table
+---@field workspace table
 return path.require_all(this_dir)

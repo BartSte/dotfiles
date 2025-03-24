@@ -1,4 +1,4 @@
-local filetypes_extras = require("helpers.codecompanion.prompts.extras.filetypes")
+local filetypes_extras = require("config.codecompanion.prompts.extras.filetypes")
 
 --- A user prompt for code snippets.
 --- @return string The user prompt template for code snippets.
