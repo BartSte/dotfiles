@@ -13,7 +13,7 @@ local M = {}
 ---Defaults to the `workspaces` directory in the nvim config directory.
 ---@return string # Full path to workspace configuration file
 function M.find(dir)
-    dir = dir or p.join(vim.fn.stdpath("config"), "workspaces")
+    dir = dir or p.join(p.home(), "dropbox/Config/workspaces")
     local base = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
     local name = base .. ".json"
     return p.join(dir, name)

@@ -1,8 +1,6 @@
-local p = require("helpers.path")
 local companion = require("codecompanion")
 local helpers = require("helpers.codecompanion")
 local mapper = require("helpers.keymapper")
-
 
 helpers.workspace.patch_workspace_file_path(helpers.workspace.find)
 
@@ -28,6 +26,19 @@ local opts = {
     },
     strategies = {
         chat = {
+            tools = {
+                vectorcode = {
+                    description = "Run VectorCode to retrieve the project context.",
+                    callback = require("vectorcode.integrations").codecompanion.chat.make_tool(),
+                }
+            },
+            slash_commands = {
+                ["buffer"] = { opts = { provider = "fzf_lua" } },
+                ["file"] = { opts = { provider = "fzf_lua" } },
+                ["help"] = { opts = { provider = "fzf_lua" } },
+                ["symbols"] = { opts = { provider = "fzf_lua" } },
+                codebase = require("vectorcode.integrations").codecompanion.chat.make_slash_command(),
+            },
             keymaps = {
                 regenerate = { modes = { n = "<leader>ar" } },
                 send = { modes = { n = "<leader>aa", i = "<C-x><C-a>" } },

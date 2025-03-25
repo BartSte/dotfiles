@@ -1,6 +1,8 @@
 local constants = require("codecompanion.config").config.constants
 local helpers = require("helpers.codecompanion.workspace")
 
+local workspace_file = helpers.find()
+
 return {
     strategy = "chat",
     description = "Generate a Workspace file/group",
@@ -13,7 +15,7 @@ return {
         {
             type = "file",
             path = {
-                helpers.find()
+                workspace_file
             },
         },
     },
