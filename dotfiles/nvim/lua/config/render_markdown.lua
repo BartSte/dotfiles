@@ -4,7 +4,7 @@ require('render-markdown').setup({
     -- Vim modes that will show a rendered view of the markdown file, :h mode(), for all enabled
     -- components. Individual components can be enabled for other modes. Remaining modes will be
     -- unaffected by this plugin.
-    render_modes = { 'n', 'c', 't' },
+    render_modes = true,
     -- Maximum file size (in MB) that this plugin will attempt to render.
     -- Any file larger than this will effectively be ignored.
     max_file_size = 10.0,
@@ -123,7 +123,7 @@ require('render-markdown').setup({
         render_modes = false,
         -- Turn on / off any sign column related rendering.
 
-        sign = { enabled = false },
+        sign = false,
         -- Replaces '#+' of 'atx_h._marker'.
         -- Output is evaluated depending on the type.
         -- | function | `value(context)`              |
