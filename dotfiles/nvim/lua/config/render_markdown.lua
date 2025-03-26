@@ -1,3 +1,5 @@
+local mapper = require("helpers.keymapper")
+
 require('render-markdown').setup({
     -- Whether markdown should be rendered by default.
     enabled = true,
