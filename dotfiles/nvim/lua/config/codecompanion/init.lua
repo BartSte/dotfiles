@@ -29,7 +29,9 @@ local opts = {
             tools = {
                 vectorcode = {
                     description = "Run VectorCode to retrieve the project context.",
-                    callback = require("vectorcode.integrations").codecompanion.chat.make_tool(),
+                    callback = require("vectorcode.integrations").codecompanion.chat.make_tool(
+                        { auto_submit = { ls = true, query = true } }
+                    ),
                 }
             },
             slash_commands = {
