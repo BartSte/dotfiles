@@ -29,7 +29,9 @@ local opts = {
             tools = {
                 vectorcode = {
                     description = "Run VectorCode to retrieve the project context.",
-                    callback = require("vectorcode.integrations").codecompanion.chat.make_tool(),
+                    callback = require("vectorcode.integrations").codecompanion.chat.make_tool(
+                        { auto_submit = { ls = true, query = true } }
+                    ),
                 }
             },
             slash_commands = {
@@ -71,11 +73,13 @@ end
 mapper.nnoremap("<leader>a:", ":CodeCompanionCmd ")
 mapper.nnoremap("<leader>a?", helpers.notify.default_models)
 mapper.nnoremap("<leader>aA", ":CodeCompanionActions<CR>")
-mapper.vnoremap("<leader>aA", ":CodeCompanionActions<CR>")
 mapper.nnoremap("<leader>aC", ":CodeCompanionChat Toggle<CR>")
 mapper.nnoremap("<leader>aI", ":CodeCompanion ")
-mapper.vnoremap("<leader>aC", ":CodeCompanionChat ")
+mapper.nnoremap("<leader>acn", ":CodeCompanionChat<CR>")
+mapper.vnoremap("<leader>aA", ":CodeCompanionActions<CR>")
+mapper.vnoremap("<leader>aC", ":CodeCompanionChat<CR>")
 mapper.vnoremap("<leader>aI", ":CodeCompanion ")
+mapper.vnoremap("<leader>acn", ":CodeCompanionChat<CR>")
 
 mapper.nnoremap("<leader>acc", make_prompt("commit"))
 mapper.nnoremap("<leader>acd", make_prompt("changes"))

@@ -39,6 +39,7 @@ Some directories of the neovim configuration could use some explanation:
 
 ```bash
 curl -O https://raw.githubusercontent.com/BartSte/dotfiles-linux/master/dotfiles-linux/initialize && bash ./initialize; rm ./initialize
+
 ```
 
 - Complete the environment variables in `~/.dotfiles_config.sh`.

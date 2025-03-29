@@ -20,6 +20,16 @@ function M.state.get_icon()
 
     if state == globals.GCS_AVAILABLE_AND_ENABLED then
         return M.icon
+    elseif state == globals.INSTALLED then
+        return M.icon
+    elseif state == globals.GCS_UPDATED then
+        return M.icon
+    elseif state == globals.GCS_UNAVAILABLE then
+        return M.icon .. " "
+    elseif state == globals.GCS_UNKNOWN then
+        return M.icon .. " "
+    elseif state == globals.GCS_AVAILABLE_BUT_DISABLED then
+        return M.icon .. " "
     elseif state == globals.GCS_WAITING then
         return M.icon .. " "
     elseif state == globals.GCS_SUCCESS then
@@ -28,8 +38,10 @@ function M.state.get_icon()
         return M.icon .. " "
     elseif state == globals.GCS_NONE then
         return M.icon .. " "
+    elseif state == globals.GCS_CHECKING then
+        return M.icon .. " "
     else
-        return ""
+        return M.icon .. " "
     end
 end
 
@@ -38,3 +50,18 @@ function M.state.set(value)
 end
 
 return M
+
+--  unavailabe
+--  no tracking
+--  disabled
+--  disabled
+--  unknown
+--  unknown
+--  unknown
+--  unknown
+--locked symbols:
+--
+--  
+--  
+--  
+--  
