@@ -1,5 +1,6 @@
 local defaults          = require("gitlab.config.defaults")
 local gitlab            = require("gitlab")
+local mapper            = require("helpers.keymapper")
 
 local default_filetypes = defaults.code_suggestions.auto_filetypes
 local auto_filetypes    = { "lua", "markdown", "zsh", "bash", "toml", "yaml", "json", "codecompanion" }
@@ -28,3 +29,5 @@ gitlab.setup({
         enabled = require("helpers.lualine.gitlab").state.set
     },
 })
+
+mapper.nnoremap("<leader>ac", ":GitLabCodeSuggestionsStart<CR>")
