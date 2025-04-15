@@ -1,3 +1,5 @@
+local mapper = require("helpers.keymapper")
+
 --- Configure environment variables for aider based on hostname
 --- Sets API keys and model selection depending on current system
 ---@side effect Modifies vim.env with API keys and model selection
@@ -16,3 +18,9 @@ end
 setup_env()
 Snacks.notify(string.format("AIDER_MODEL: %s", vim.env["AIDER_MODEL"]))
 require("prompts").setup()
+
+mapper.nnoremap("<leader>ad", ":AiDocstrings<CR>")
+mapper.nnoremap("<leader>af", ":AiFix<CR>")
+mapper.nnoremap("<leader>at", ":AiTypehints<CR>")
+mapper.nnoremap("<leader>ar", ":AiRefactor<CR>")
+mapper.nnoremap("<leader>au", ":AiTests<CR>")
