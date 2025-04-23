@@ -138,12 +138,4 @@ M.hop_gE = function()
     hint_regex(pattern, opts)
 end
 
---- Detects the begin and end of each WORD which is equivalent to combinings vim's W and E command.
-M.hop_WORDS = function()
-    local pattern = [[\(^\|\s\)\zs\S\|\S\ze\(\s\|$\)]]
-    local opts = {}
-    hint_regex(pattern, opts)
-end
-
-
 return M
