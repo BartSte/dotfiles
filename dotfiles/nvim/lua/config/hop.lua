@@ -8,6 +8,8 @@ local opts = {
     multi_windows = false
 }
 
+local function foo()
+end
 local function set_mappings()
     local o = { "o" }
     local nx = { "n", "x" }
@@ -30,7 +32,6 @@ local function set_mappings()
     vim.keymap.set(o, 'k', func.hop_wo, nmap)
     vim.keymap.set(nx, 'K', func.hop_W, nmap)
     vim.keymap.set(o, 'K', func.hop_Wo, nmap)
-
 end
 
 hop.setup(opts)

@@ -138,4 +138,20 @@ M.hop_gE = function()
     hint_regex(pattern, opts)
 end
 
+--- Combine B, gE, W, and E hops.
+M.hop_BgEWE = function()
+    local pattern_WB = [[\v\S+]]
+    local pattern_EgE = "[^ \t]\\($\\|\\([ \t]\\)\\)\\@="
+    local opts = M.override_opts({})
+    local regex = {
+        oneshot = false,
+        match = function(s)
+            local begin_W, end_W = vim.regex(pattern_WB):match_str(s)
+            local begin_E, end_E = vim.regex(pattern_EgE):match_str(s)
+            return begin_W, begin_E
+        end,
+    }
+    hop.hint_with_regex(regex, opts)
+end
+
 return M
