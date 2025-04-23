@@ -99,11 +99,6 @@ local function hint_regex(pattern, opts)
     hop.hint_with_regex(regex, opts)
 end
 
-M.hop_WORDS = function()
-    local pattern = "[^ \t]\\+"
-    hint_regex(pattern)
-end
-
 M.hop_W = function()
     local pattern = "[^ \t]\\+"
     local opts = { direction = hint.HintDirection.AFTER_CURSOR }
