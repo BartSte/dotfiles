@@ -99,11 +99,6 @@ local function hint_regex(pattern, opts)
     hop.hint_with_regex(regex, opts)
 end
 
-M.hop_WORDS = function()
-    local pattern = "[^ \t]\\+"
-    hint_regex(pattern)
-end
-
 M.hop_W = function()
     local pattern = "[^ \t]\\+"
     local opts = { direction = hint.HintDirection.AFTER_CURSOR }
@@ -142,5 +137,13 @@ M.hop_gE = function()
     }
     hint_regex(pattern, opts)
 end
+
+--- Detects the begin and end of each WORD which is equivalent to combinings vim's W and E command.
+M.hop_WORDS = function()
+    local pattern =  [[\v\S+]]
+    local opts = {}
+    hint_regex(pattern, opts)
+end
+
 
 return M
