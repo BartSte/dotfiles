@@ -8,8 +8,6 @@ local opts = {
     multi_windows = false
 }
 
-local function foo()
-end
 local function set_mappings()
     local nxo = { "n", "x", "o" }
     local nmap = { noremap = true }
