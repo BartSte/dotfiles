@@ -148,7 +148,13 @@ M.hop_bgewe = function()
         match = function(s)
             local begin_w, end_w = vim.regex(pattern_wb):match_str(s)
             local begin_e, end_e = vim.regex(pattern_ege):match_str(s)
-            return begin_w, begin_e
+            if begin_w == nil then
+                return begin_e, end_e
+            elseif begin_e == nil then
+                return begin_w, end_w
+            else
+                return begin_w, begin_e
+            end
         end,
     }
     hop.hint_with_regex(regex, opts)

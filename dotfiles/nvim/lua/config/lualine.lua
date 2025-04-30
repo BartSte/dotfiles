@@ -2,6 +2,7 @@ local icons = require("nvim-web-devicons")
 local lualine = require("lualine")
 local helpers = require("helpers.lualine")
 local projectmarks = require("projectmarks.lualine")
+local prompts = require("prompts.lualine").aider_icon
 
 local venv = {
     helpers.venv,
@@ -40,16 +41,6 @@ local projectrc = {
     icon = "🛠",
 }
 
-local cmp = {
-    function()
-        if require("helpers.cmp").cmp_enabled then
-            return ""
-        else
-            return ""
-        end
-    end,
-}
-
 local gitlab = {
     helpers.gitlab.state.get_icon,
     condition = function() return true end
@@ -83,7 +74,7 @@ lualine.setup({
         lualine_a = { "mode" },
 
         -- Same for all files
-        lualine_b = { gitlab, helpers.codecompanion.spinner, projectmarks.shada, projectrc, venv },
+        lualine_b = { prompts, gitlab, helpers.codecompanion.spinner, projectmarks.shada, projectrc, venv },
 
         -- Changes when switching buffers
         lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks_optimized },

@@ -11,7 +11,7 @@ local function setup_env()
         vim.env["AIDER_MODEL"] = "deepseek/deepseek-reasoner"
     elseif hostname == "zbook" then
         rbw.set_env("OPENAI_API_KEY")
-        vim.env["AIDER_MODEL"] = "o3-mini"
+        vim.env["AIDER_MODEL"] = "o4-mini"
     end
 end
 
