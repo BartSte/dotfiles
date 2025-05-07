@@ -34,11 +34,11 @@ local template_komeco = [[
 
 * MEET Notulen %<%Y-%m-%d %H:%M>
 
-  :PROPERTIES:
-  :ATTENDEES:
-  :ORGANIZER:
-  :LOCATION:
-  :END:
+:PROPERTIES:
+:ATTENDEES:
+:ORGANIZER:
+:LOCATION:
+:END:
 
 ** Opening
 
@@ -62,11 +62,11 @@ local template_komeco = [[
 
 ** Besluitenlijst
 
-    -
+-
 
 ** Actiepunten
 
-    - [ ]
+- [ ]
 ]]
 
 local custom_exports = {
