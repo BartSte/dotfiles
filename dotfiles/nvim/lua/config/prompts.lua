@@ -16,11 +16,14 @@ local function setup_env()
 end
 
 setup_env()
-Snacks.notify(string.format("AIDER_MODEL: %s", vim.env["AIDER_MODEL"]))
-require("prompts").setup()
+require("prompts").setup({
+    notify = true,
+    loglevel = "INFO"
+})
 
 mapper.nnoremap("<leader>ad", ":AiDocstrings<CR>")
 mapper.nnoremap("<leader>af", ":AiFix<CR>")
 mapper.nnoremap("<leader>at", ":AiTypehints<CR>")
 mapper.nnoremap("<leader>ar", ":AiRefactor<CR>")
 mapper.nnoremap("<leader>au", ":AiTests<CR>")
+mapper.nnoremap("<leader>aq", ":AiAbort<CR>")

@@ -11,7 +11,6 @@ gitlab.setup({
         auto_filetypes = auto_filetypes,
         ghost_text = {
             enabled = true,
-            toggle_enabled = "<C-b>a",
             accept_suggestion = '<Right>',
             clear_suggestions = '<Left>',
             insert_word = "<C-Right>",
