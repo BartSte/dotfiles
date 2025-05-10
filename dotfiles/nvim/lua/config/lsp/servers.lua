@@ -1,3 +1,4 @@
+---@type table<string, vim.lsp.Config>
 return {
     basedpyright = {
         settings = {
