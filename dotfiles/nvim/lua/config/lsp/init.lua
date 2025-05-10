@@ -25,12 +25,13 @@ vim.diagnostic.config({
 ---to a server. Server capabilities can be specified in the capabilities module.
 ---Here, a decorator is used to update the capabilities of all servers. If the
 ---server is not specified in the capabilities module, no changes are made.
-for server, config in pairs(server_opts) do
+for name, config in pairs(server_opts) do
     config.on_attach = fn.decorate({
         capabilities.update,
         mappings.on_lsp_attach,
         config.on_attach,
         helpers.notify.attach,
     })
-    lsp[server].setup(config)
+    vim.lsp.config(name, config)
+    vim.lsp.enable(name)
 end

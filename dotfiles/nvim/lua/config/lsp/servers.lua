@@ -1,3 +1,4 @@
+---@type table<string, vim.lsp.Config>
 return {
     basedpyright = {
         settings = {
@@ -41,9 +42,7 @@ return {
         }
     },
 
-    ruff = {
-        extra_args = { "--select", "F401", "--fix" }
-    },
+    ruff = {},
     cmake = {},
     vimls = {},
     marksman = {},
