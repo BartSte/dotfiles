@@ -42,9 +42,7 @@ return {
         }
     },
 
-    ruff = {
-        extra_args = { "--select", "F401", "--fix" }
-    },
+    ruff = {},
     cmake = {},
     vimls = {},
     marksman = {},

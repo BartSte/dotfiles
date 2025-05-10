@@ -25,14 +25,19 @@ vim.diagnostic.config({
 ---to a server. Server capabilities can be specified in the capabilities module.
 ---Here, a decorator is used to update the capabilities of all servers. If the
 ---server is not specified in the capabilities module, no changes are made.
+<<<<<<< HEAD
 for server, config in pairs(server_opts) do
     --TODO: the on_attach hook is not called for each new buffer. Only for each new client. Only null-ls is created for eacht new buffer. I gues this behavior changed?
 
+=======
+for name, config in pairs(server_opts) do
+>>>>>>> 14e5a1a2c7a4af59c54a5e844ceb9b2c9a6f53dd
     config.on_attach = fn.decorate({
         capabilities.update,
         mappings.on_lsp_attach,
         config.on_attach,
         helpers.notify.attach,
     })
-    lsp[server].setup(config)
+    vim.lsp.config(name, config)
+    vim.lsp.enable(name)
 end
