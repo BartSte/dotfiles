@@ -29,9 +29,9 @@ local sources_project = require("projectrc").require("config.null-ls", opts)
 vim.list_extend(sources, sources_project)
 null_ls.setup({
     sources = sources,
-    on_attach = function(client, buf)
-        capabilities.update(client, buf)
-        mappings.on_lsp_attach(client, buf)
-        require("helpers.null-ls.notify").attach(buf)
-    end
+    -- on_attach = function(client, buf)
+    --     capabilities.update(client, buf)
+    --     mappings.on_lsp_attach(client, buf)
+    --     require("helpers.null-ls.notify").attach(buf)
+    -- end
 })
