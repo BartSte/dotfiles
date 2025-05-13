@@ -10,9 +10,6 @@ return {
         -- contrast to mason-lspconfig, which has antoher order.
         require("mason").setup()
         require("config.null-ls")
-        require("mason-null-ls").setup({
-            -- Custom formatters so they are not picked up by mason-null-ls
-            ensure_installed = { "autopep8", "autoflake", "shellcheck" },
-        })
+        require("config.mason-null-ls")
     end
 }
