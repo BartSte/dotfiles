@@ -10,10 +10,10 @@ return {
                     autoSearchPaths = false,
                     diagnosticMode = "openFilesOnly",
                     useLibraryCodeForTypes = false,
-                    exclude = { "venv", ".git", "build", "dist" },
-                    diagnosticSeverityOverrides = {
-                        reportUnusedCallResult = false,
-                    },
+                    exclude = { ".venv", "venv", ".git", "build", "dist" },
+                    -- diagnosticSeverityOverrides = {
+                    --     reportUnusedCallResult = false,
+                    -- },
                 }
             },
         },
