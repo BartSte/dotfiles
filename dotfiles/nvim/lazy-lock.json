@@ -23,6 +23,7 @@
   "neogen": { "branch": "main", "commit": "d7f9461727751fb07f82011051338a9aba07581d" },
   "neovim-gui-shim": { "branch": "master", "commit": "4d10bf3f68b9c0903bd1d9e456571d1d2ec16fde" },
   "none-ls.nvim": { "branch": "main", "commit": "90e4a27ccaa25979a6b732b9f06dfa43b54957b7" },
+  "nvim-bartste-prompts": { "branch": "master", "commit": "32f61d7d2a8c27ca5384ccfd8fddae4f24368805" },
   "nvim-cmp": { "branch": "main", "commit": "b5311ab3ed9c846b585c0c15b7559be131ec4be9" },
   "nvim-khalorg": { "branch": "main", "commit": "f7bfd997040bf24653c4a916bee84632e08873b1" },
   "nvim-lspconfig": { "branch": "master", "commit": "61e5109c8cf24807e4ae29813a3a82b31821dd45" },
