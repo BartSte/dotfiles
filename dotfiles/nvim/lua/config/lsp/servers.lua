@@ -6,6 +6,7 @@ return {
                 disableOrganizeImports = true,
         },
     },
+},
 
     clangd = {
         cmd = {
