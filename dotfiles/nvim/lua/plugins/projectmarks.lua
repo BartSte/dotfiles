@@ -1,7 +1,6 @@
 return {
     'BartSte/nvim-project-marks',
-    branch = "develop",
-    lazy = false,
+    event = "VeryLazy",
     config = function()
         require('config.projectmarks')
     end,

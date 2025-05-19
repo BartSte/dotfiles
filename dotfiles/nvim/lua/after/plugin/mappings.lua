@@ -3,6 +3,9 @@ local m = require("helpers.keymapper")
 
 -- <C-b> is reserved as a "leader" in insert mode
 
+-- Unused:
+-- k, j, l, L
+
 --------------------------------------------------------------------------------
 --- No modifiers
 --------------------------------------------------------------------------------
@@ -29,8 +32,6 @@ m.vnoremap("_", '"_')
 -- the control key should be avoided as it is often used by vim or plugins. This
 -- way, it is easier to adopt the defaults.
 --------------------------------------------------------------------------------
-m.nnoremap("<c-k>", "K")
-m.noremap("\\", "J")
 
 -- Insert/command mode delete
 m.cnoremap("<C-BS>", "<C-w>")

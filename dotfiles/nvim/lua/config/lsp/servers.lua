@@ -1,22 +1,12 @@
+---@type table<string, vim.lsp.Config>
 return {
     basedpyright = {
         settings = {
             basedpyright = {
                 disableOrganizeImports = true,
-            },
-            python = {
-                analysis = {
-                    autoSearchPaths = false,
-                    diagnosticMode = "openFilesOnly",
-                    useLibraryCodeForTypes = false,
-                    exclude = { "venv", ".git", "build", "dist" },
-                    diagnosticSeverityOverrides = {
-                        reportUnusedCallResult = false,
-                    },
-                }
-            },
         },
     },
+},
 
     clangd = {
         cmd = {
@@ -41,9 +31,7 @@ return {
         }
     },
 
-    ruff = {
-        extra_args = { "--select", "F401", "--fix" }
-    },
+    ruff = {},
     cmake = {},
     vimls = {},
     marksman = {},

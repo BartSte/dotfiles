@@ -1,4 +1,5 @@
 local fzf = require("fzf-lua")
+local actions = require("fzf-lua.actions")
 local map = require("helpers.keymapper")
 local helpers = require("helpers.fzf")
 
@@ -34,6 +35,11 @@ fzf.setup({
             ["shift-up"]   = "preview-page-up",
         },
     },
+    files   = {
+        actions = {
+            ["ctrl-g"] = actions.toggle_ignore
+        }
+    },
     git     = {
         toggle_ignore_flag = "--no-ignore --ignore-file /home/barts/.ignore",
         branches = {
@@ -45,7 +51,7 @@ fzf.setup({
         },
     },
     grep    = {
-        rg_opts   = "--hidden --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
+        rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
     }
 })
 
@@ -53,15 +59,17 @@ map.nnoremap("<a-c>", helpers.dirs.cwd)
 map.nnoremap("<a-C>", helpers.dirs.home)
 map.nnoremap("<a-V>", helpers.dirs.nvim)
 
-map.nnoremap("<a-o>", helpers.files.cwd)
-map.nnoremap("<a-O>", helpers.files.home)
-map.nnoremap("<a-f>", helpers.insert.files.cwd)
-map.nnoremap("<a-F>", helpers.insert.files.home)
-map.nnoremap("<a-d>", helpers.insert.dirs.cwd)
+map.inoremap("<a-f>", helpers.insert.files.cwd)
+map.inoremap("<a-F>", helpers.insert.files.home)
 map.nnoremap("<a-D>", helpers.insert.dirs.home)
+map.nnoremap("<a-F>", helpers.insert.files.home)
+map.nnoremap("<a-O>", helpers.files.home)
+map.nnoremap("<a-d>", helpers.insert.dirs.cwd)
+map.nnoremap("<a-f>", helpers.insert.files.cwd)
+map.nnoremap("<a-o>", helpers.files.cwd)
+map.nnoremap("<a-r>", helpers.files.org)
 map.nnoremap("<a-s>", helpers.files.buffer_dir)
 map.nnoremap("<a-v>", helpers.files.nvim)
-map.nnoremap("<a-r>", helpers.files.org)
 
 map.nnoremap("<a-B>", fzf.git_branches)
 map.nnoremap("<a-T>", fzf.git_tags)

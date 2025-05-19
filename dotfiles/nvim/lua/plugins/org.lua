@@ -11,7 +11,10 @@ return {
     },
     cond = function() return vim.fn.has('linux') == 1 end,
     dependencies = {
-        'BartSte/nvim-khalorg',
+        {
+            'BartSte/nvim-khalorg',
+            -- dir = "~/code/nvim-khalorg"
+        },
         'dhruvasagar/vim-table-mode',
     }
 }

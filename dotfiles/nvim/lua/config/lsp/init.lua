@@ -1,16 +1,7 @@
-local fn = require("helpers.fn")
-local lsp = require('lspconfig')
 local helpers = require("helpers.lsp")
 local mappings = require('config.lsp.mappings')
 local server_opts = require('config.lsp.servers')
 local capabilities = require('config.lsp.capabilities')
-local lsp_defaults = require('lspconfig').util.default_config
-
-lsp_defaults.capabilities = vim.tbl_deep_extend(
-    'force',
-    lsp_defaults.capabilities,
-    require('cmp_nvim_lsp').default_capabilities()
-)
 
 vim.diagnostic.config({
     virtual_text = false,
@@ -23,14 +14,22 @@ vim.diagnostic.config({
 
 ---The on_attach function can be used to setup configurations that are specific
 ---to a server. Server capabilities can be specified in the capabilities module.
----Here, a decorator is used to update the capabilities of all servers. If the
----server is not specified in the capabilities module, no changes are made.
-for server, config in pairs(server_opts) do
-    config.on_attach = fn.decorate({
-        capabilities.update,
-        mappings.on_lsp_attach,
-        config.on_attach,
-        helpers.notify.attach,
-    })
-    lsp[server].setup(config)
+for name, config in pairs(server_opts) do
+    vim.lsp.config(name, config)
+    vim.lsp.enable(name)
 end
+
+---Instead of using the client's on_attach hook, the LspAttach autocommand is
+---used because the latter is triggered for each new buffer, which is not the
+---case for the former.
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if not client or client == nil then
+            return
+        end
+        capabilities.update(client, ev.buf)
+        mappings.on_lsp_attach(client, ev.buf)
+        helpers.notify.attach(client, ev.buf)
+    end,
+})

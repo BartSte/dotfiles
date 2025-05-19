@@ -7,7 +7,6 @@ local M = {}
 --- Set up mappings that apply to all LSP servers
 function M.on_lsp_attach(client, buf)
     local helpers = require("helpers.lsp")
-    m.buffer_nnoremap("<C-k>", vim.lsp.buf.hover)
     m.buffer_nnoremap("<C-s>", vim.lsp.buf.signature_help)
     m.buffer_nnoremap("<space>lua", helpers.underline.all)
     m.buffer_nnoremap("<space>lue", helpers.underline.error)
