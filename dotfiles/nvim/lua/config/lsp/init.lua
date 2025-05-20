@@ -25,9 +25,9 @@ local function decorate_root_dir(root_dir)
         return nil
     end
     if type(root_dir) == "function" then
-        return root_dir(bufnr, callback)
+        root_dir(bufnr, callback)
     end
-    return root_dir
+    callback(root_dir)
     end
 end
 
