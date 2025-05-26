@@ -22,7 +22,8 @@ require("prompts").setup({
 
 mapper.nnoremap("<leader>ad", ":AiDocstrings<CR>")
 mapper.nnoremap("<leader>af", ":AiFix<CR>")
-mapper.nnoremap("<leader>at", ":AiTypehints<CR>")
-mapper.nnoremap("<leader>ar", ":AiRefactor<CR>")
-mapper.nnoremap("<leader>au", ":AiTests<CR>")
 mapper.nnoremap("<leader>aq", ":AiAbort<CR>")
+mapper.nnoremap("<leader>ar", ":AiRefactor<CR>")
+mapper.nnoremap("<leader>at", ":AiTetsts>")
+mapper.nnoremap("<leader>au", ":AiUndo<CR>")
+mapper.nnoremap("<leader>ay", ":AiTypehints<CR>")
