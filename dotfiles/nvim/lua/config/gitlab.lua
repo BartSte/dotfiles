@@ -20,7 +20,7 @@ gitlab.setup({
             stream = false,
         },
     },
-    minimal_message_level = vim.lsp.log_levels.WARN,
+    minimal_message_level = vim.lsp.log_levels.DEBUG,
     resource_editing = {
         enabled = true,
     },

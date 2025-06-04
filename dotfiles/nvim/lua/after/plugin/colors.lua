@@ -1,11 +1,13 @@
 local set = vim.api.nvim_set_hl
 
+local cursorline_bg = '#111111'
+
 local highlight_setters = {
     ["gruvbox-baby"] = function()
         set(0, 'GitLabGhostText', { fg = 'gray65', italic = true })
         set(0, 'SpellBad', { undercurl = true, sp = 'Red' })
         set(0, 'ColorColumn', { bg = '#32302f' })
-        set(0, 'CursorLineNr', { fg = '#fe8019', bg = '#32302f' })
+        set(0, 'CursorLineNr', { fg = '#fe8019', bg = cursorline_bg })
         set(0, 'FloatBorder', { fg = 'gray65', bg = 'NONE' })
         set(0, 'Folded', { fg = 'gray65' })
         set(0, 'HighlightedyankRegion', { reverse = true, fg = '#fe8019', bg = '#1d2021' })
@@ -23,8 +25,8 @@ local highlight_setters = {
         set(0, 'TreesitterContextLineNumber', { fg = '#fe8019', bg = '#32302f' })
         set(0, 'WinSeparator', { fg = 'gray23' })
 
-        -- set(0, 'CursorLine', { bg = '#111111' })
-        -- set(0, 'Normal', { bg = "#000000" })
+        set(0, 'CursorLine', { bg = cursorline_bg })
+        set(0, 'Normal', { bg = "#000000" })
     end
 }
 
