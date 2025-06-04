@@ -6,7 +6,6 @@ local color1 = '#222222'
 --- Sets highlight groups for the gruvbox-baby color scheme
 local highlight_setters = {
     ["gruvbox-baby"] = function()
-        vim.notify("Set gruvbox highlights", "info", {})
         --- Set various highlight groups for gruvbox-baby theme
         set(0, 'ColorColumn', { bg = color1 })
         set(0, 'CursorLine', { bg = color1 })
@@ -27,23 +26,6 @@ local highlight_setters = {
         set(0, 'TreesitterContextBottom', { bold = true, bg = color1 })
         set(0, 'TreesitterContextLineNumber', { fg = '#fe8019', bg = color1 })
         set(0, 'WinSeparator', { fg = color1 })
-
-
-        set(0, "lualine_b_insert", { bg = 'black' })
-        set(0, "lualine_b_normal", { bg = 'black' })
-        set(0, "lualine_b_visual", { bg = 'black' })
-        set(0, "lualine_b_command", { bg = 'black' })
-        set(0, "lualine_b_replace", { bg = 'black' })
-        set(0, "lualine_b_inactive", { bg = 'black' })
-        set(0, "lualine_b_terminal", { bg = 'black' })
-
-        set(0, "lualine_c_insert", { bg = 'black' })
-        set(0, "lualine_c_normal", { bg = 'black' })
-        set(0, "lualine_c_visual", { bg = 'black' })
-        set(0, "lualine_c_command", { bg = 'black' })
-        set(0, "lualine_c_replace", { bg = 'black' })
-        set(0, "lualine_c_inactive", { bg = 'black' })
-        set(0, "lualine_c_terminal", { bg = 'black' })
     end
 }
 

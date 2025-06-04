@@ -62,12 +62,50 @@ local get_component_separator = function()
     end
 end
 
+local c = require("gruvbox-baby.colors").config()
+c.background = "#000000"
+local custom = {
+    normal = {
+        a = { bg = c.light_blue, fg = c.dark, gui = "bold" },
+        b = { bg = c.background, fg = c.light_blue },
+        c = { bg = c.background, fg = c.milk },
+    },
+    insert = {
+        a = { bg = c.bright_yellow, fg = c.dark, gui = "bold" },
+        b = { bg = c.background, fg = c.bright_yellow },
+        c = { bg = c.background, fg = c.milk },
+    },
+    visual = {
+        a = { bg = c.milk, fg = c.dark, gui = "bold" },
+        b = { bg = c.background, fg = c.milk },
+        c = { bg = c.background, fg = c.milk },
+    },
+    replace = {
+        a = { bg = c.error_red, fg = c.dark, gui = "bold" },
+        b = { bg = c.background, fg = c.error_red },
+        c = { bg = c.background, fg = c.milk },
+    },
+    command = {
+        a = { bg = c.soft_green, fg = c.dark, gui = "bold" },
+        b = { bg = c.background, fg = c.soft_green },
+        c = { bg = c.background, fg = c.milk },
+    },
+    inactive = {
+        a = { bg = c.dark_gray, fg = c.gray, gui = "bold" },
+        b = { bg = c.dark_gray, fg = c.gray },
+        c = { bg = c.dark_gray, fg = c.gray },
+    },
+}
+
+custom.terminal = custom.insert
+
 lualine.setup({
     options = {
         icons_enabled = true,
         section_separators = get_section_separator(),
         component_separators = get_component_separator(),
         globalstatus = true,
+        theme = custom
     },
     sections = {
         -- State of the editor
