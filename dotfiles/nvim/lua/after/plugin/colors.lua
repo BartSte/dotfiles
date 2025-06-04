@@ -22,6 +22,9 @@ local highlight_setters = {
         set(0, 'TreesitterContextBottom', { bold = true, bg = '#31302f' })
         set(0, 'TreesitterContextLineNumber', { fg = '#fe8019', bg = '#32302f' })
         set(0, 'WinSeparator', { fg = 'gray23' })
+
+        -- set(0, 'CursorLine', { bg = '#111111' })
+        -- set(0, 'Normal', { bg = "#000000" })
     end
 }
 
