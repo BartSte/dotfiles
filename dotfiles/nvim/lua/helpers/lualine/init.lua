@@ -1,6 +1,5 @@
 ---@class Helpers.LuaLine
 --- Module providing custom components for lualine statusline.
----@field codecompanion CodeCompanion helper module interface
 ---@field tabs function Gets formatted current/total tab information
 ---@field venv function Retrieves Python virtual environment name
 ---@field shada function Tracks shada file status (unimplemented)
@@ -11,8 +10,6 @@
 ---@return LuaLine
 local M = {}
 
---- CodeCompanion module for lualine integration
-M.codecompanion = require("helpers.lualine.codecompanion")
 M.gitlab = require("helpers.lualine.gitlab")
 
 --- Gets current tab position and total tabs as formatted string
