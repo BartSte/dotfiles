@@ -1,12 +1,8 @@
---- Configures highlight groups for color schemes
 local set = vim.api.nvim_set_hl
-
 local color1 = '#222222'
 
---- Sets highlight groups for the gruvbox-baby color scheme
 local highlight_setters = {
     ["gruvbox-baby"] = function()
-        --- Set various highlight groups for gruvbox-baby theme
         set(0, 'ColorColumn', { bg = color1 })
         set(0, 'CursorLine', { bg = color1 })
         set(0, 'CursorLineNr', { fg = '#fe8019', bg = color1 })
@@ -29,14 +25,24 @@ local highlight_setters = {
     end
 }
 
+
+local function apply_highlights(colorscheme)
+    local callback = highlight_setters[colorscheme]
+    if callback then
+        callback()
+    end
+end
+
+local function set_lualine(colorscheme)
+    local theme = require("config.lualine.themes")[colorscheme] or 'auto'
+    require("lualine").setup({ options = { theme = theme } })
+end
+
 --- Applies color scheme specific highlights when the colorscheme changes
 vim.api.nvim_create_autocmd('ColorScheme', {
     callback = function()
-        --- Lookup and execute highlight setter for current colorscheme
-        local callback = highlight_setters[vim.g.colors_name]
-        if callback then
-            callback()
-        end
+        apply_highlights(vim.g.colors_name)
+        set_lualine(vim.g.colors_name)
     end
 })
 vim.cmd("colorscheme gruvbox-baby")
