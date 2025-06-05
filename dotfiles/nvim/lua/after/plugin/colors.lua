@@ -8,8 +8,6 @@ local highlight_setters = {
         set(0, 'CursorLineNr', { fg = '#fe8019', bg = color1 })
         set(0, 'FloatBorder', { fg = 'gray65', bg = 'NONE' })
         set(0, 'Folded', { fg = 'gray65' })
-        set(0, 'GitLabGhostText', { fg = 'gray65', italic = true })
-        set(0, 'HighlightedyankRegion', { reverse = true, fg = '#fe8019', bg = '#1d2021' })
         set(0, 'IncSearch', { reverse = true, fg = '#fe8019', bg = '#1d2021' })
         set(0, 'LineNr', { fg = 'LightGray' })
         set(0, 'MatchParen', { bold = true, fg = '#fe8019', bg = '#1d2021' })
@@ -31,6 +29,8 @@ local function apply_highlights(colorscheme)
     if callback then
         callback()
     end
+    set(0, 'GitLabGhostText', { fg = 'gray65', italic = true })
+    set(0, 'HighlightedyankRegion', { reverse = true, fg = '#fe8019', bg = '#1d2021' })
 end
 
 local function set_lualine(colorscheme)
