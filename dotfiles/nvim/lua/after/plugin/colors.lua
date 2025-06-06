@@ -45,4 +45,4 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         set_lualine(vim.g.colors_name)
     end
 })
-vim.cmd("colorscheme gruvbox-baby")
+vim.cmd("colorscheme kanagawa")

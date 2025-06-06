@@ -20,26 +20,7 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            -- Default options:
-            require('kanagawa').setup({
-                compile = true,
-                colors = {
-                    palette = {
-                        dragonBlack0 = "#000000",
-                        dragonBlack1 = "#050603",
-                        dragonBlack2 = "#10100d",
-                        dragonBlack3 = "#0b0a0a",
-                        dragonBlack4 = "#1b1b1b",
-                        dragonBlack5 = "#2c2c2a",
-                        dragonBlack6 = "#55524e",
-                    },
-                },
-                theme = "dragon",
-                background = {
-                    dark = "dragon",
-                    light = "lotus"
-                },
-            })
+            require("config.kanagawa")
         end
     }
 }
