@@ -1,4 +1,3 @@
-
 local function make_gruvbox()
     local colors = require("gruvbox-baby.colors").config()
     colors.background = "#000000"
@@ -36,6 +35,11 @@ local function make_gruvbox()
     }
     theme.terminal = theme.insert
     return theme
+end
+
+local function make_kangawa()
+
+
 end
 
 local M = {
