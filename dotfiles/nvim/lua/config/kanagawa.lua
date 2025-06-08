@@ -1,8 +1,5 @@
 local kanagawa = require("kanagawa")
 local colors = require("helpers.colors")
-local default_dragon = require("kanagawa.colors").setup({ theme = "dragon" })
-local saturation = 3
-local ligth_delta = 0.08
 local m = require("helpers.keymapper")
 
 kanagawa.setup({
@@ -17,7 +14,6 @@ kanagawa.setup({
     dimInactive = false,   -- dim inactive window `:h hl-NormalNC`
     terminalColors = true, -- define vim.g.terminal_color_{0,17}
     colors = {             -- add/modify theme and palette colors
-        palette = colors.boost_palette(default_dragon.palette, saturation, ligth_delta),
         theme = {
             all = {
                 ui = {
@@ -75,10 +71,7 @@ local function boost_palette(new_saturation, new_ligth_delta)
     end
     saturation = new_saturation
     ligth_delta = new_ligth_delta
-
     local new_palette = colors.boost_palette(default_dragon.palette, saturation, ligth_delta)
-    kanagawa.setup({ colors = { palette = new_palette } })
-    kanagawa.load()
     Snacks.notify(string.format("Saturation: %s\nLight delta: %s", saturation, ligth_delta), notify_opts)
 end
 
