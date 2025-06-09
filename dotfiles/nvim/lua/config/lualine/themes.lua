@@ -37,10 +37,15 @@ local function make_gruvbox()
     return theme
 end
 
-local function make_kangawa()
-
-
+local function make_kanagawa()
+    local colors = require("kanagawa.colors").setup({ theme = 'dragon' })
+    --- TODO: circular require
+    local theme = require("lualine.themes.auto")
+    theme.normal.c.bg = colors.theme.ui.bg
+    return theme
 end
+
+
 
 local M = {
     ["gruvbox-baby"] = make_gruvbox()
