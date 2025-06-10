@@ -5,5 +5,6 @@ require("saturate").setup({
     after = function(palette)
         require("kanagawa").setup({ colors = { palette = palette } })
         require("kanagawa").load()
+        vim.cmd("colorscheme kanagawa")
     end
 })
