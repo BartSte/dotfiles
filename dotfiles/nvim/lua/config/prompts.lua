@@ -14,7 +14,7 @@ local function setup_env()
     end
 end
 
-setup_env() -- TODO: this one is slow due to rbw?
+setup_env()
 require("prompts").setup({
     notify = true,
     loglevel = "INFO"
