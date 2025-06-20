@@ -1,13 +1,14 @@
-nnoremap <silent><leader>G :G<CR>:wincmd H<CR>}<Down><Down>
-nnoremap <silent><leader>gd :silent! normal gf<CR>:wincmd o<bar>Gvdiffsplit<CR>
 nnoremap <leader>gD :Gvdiffsplit<space>
+nnoremap <leader>gT :G push --tags -f
+nnoremap <leader>gU :G push -f
 nnoremap <leader>ge :G merge<space>
-nnoremap <silent><leader>gf :G fetch<cr>
-nnoremap <silent><leader>gp :G pull<cr>
 nnoremap <leader>gr :G rebase<space>
 nnoremap <leader>gs :G switch<space>
-nnoremap <leader>gt :G switch -t origin/
-nnoremap <leader>gU :G push -f
+nnoremap <silent><leader>G :G<CR>:wincmd H<CR>}<Down><Down>
+nnoremap <silent><leader>gd :silent! normal gf<CR>:wincmd o<bar>Gvdiffsplit<CR>
+nnoremap <silent><leader>gf :G fetch<cr>
+nnoremap <silent><leader>gp :G pull<cr>
+nnoremap <silent><leader>gt :G push --tags<CR>
 nnoremap <silent><leader>gu :G push<cr>
 
 " Display all diffs in a collection of tabs.
