@@ -1,15 +1,27 @@
-nnoremap <leader>gD :Gvdiffsplit<space>
-nnoremap <leader>gT :G push --tags -f
-nnoremap <leader>gU :G push -f
-nnoremap <leader>ge :G merge<space>
-nnoremap <leader>gr :G rebase<space>
+nnoremap <leader>G :G<CR>:wincmd H<CR>}<Down><Down>
+
+nnoremap <leader>gf :G fetch<cr>
+nnoremap <leader>gp :G pull<cr>
 nnoremap <leader>gs :G switch<space>
-nnoremap <silent><leader>G :G<CR>:wincmd H<CR>}<Down><Down>
-nnoremap <silent><leader>gd :silent! normal gf<CR>:wincmd o<bar>Gvdiffsplit<CR>
-nnoremap <silent><leader>gf :G fetch<cr>
-nnoremap <silent><leader>gp :G pull<cr>
-nnoremap <silent><leader>gt :G push --tags<CR>
-nnoremap <silent><leader>gu :G push<cr>
+
+nnoremap <leader>gu :G push<cr>
+nnoremap <leader>gt :G push --tags<CR>
+nnoremap <leader>gU :G push -f
+nnoremap <leader>gT :G push --tags -f
+
+nnoremap <leader>gac :G cherry-pick --abort<CR>
+nnoremap <leader>gcc :G cherry-pick --continue<CR>
+
+nnoremap <leader>ge :G merge<space>
+nnoremap <leader>gae :G merge --abort<CR>
+nnoremap <leader>gce :G merge --continue<CR>
+
+nnoremap <leader>gr :G rebase<space>
+nnoremap <leader>gar :G rebase --abort<CR>
+nnoremap <leader>gcr :G rebase --continue<CR>
+
+nnoremap <leader>gd :silent! normal gf<CR>:wincmd o<bar>Gvdiffsplit<CR>
+nnoremap <leader>gD :Gvdiffsplit<space>
 
 " Display all diffs in a collection of tabs.
 nnoremap <leader>gy :G difftool -y<space>
