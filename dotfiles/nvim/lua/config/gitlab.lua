@@ -23,7 +23,7 @@ gitlab.setup({
             stream = false,
         },
     },
-    minimal_message_level = vim.lsp.log_levels.ERROR,
+    minimal_message_level = vim.lsp.log_levels.WARN,
     resource_editing = {
         enabled = true,
     },
