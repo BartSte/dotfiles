@@ -3,7 +3,7 @@ local gitlab            = require("gitlab")
 local mapper            = require("helpers.keymapper")
 
 local default_filetypes = defaults.code_suggestions.auto_filetypes
-local auto_filetypes    = { "lua", "markdown", "zsh", "bash", "toml", "yaml", "json" }
+local auto_filetypes    = { "lua", "markdown", "zsh", "bash", "toml", "yaml", "json", "org" }
 vim.list_extend(auto_filetypes, default_filetypes)
 vim.schedule(function()
     require("helpers.rbw").set_env("gitlabtoken", "GITLAB_TOKEN")

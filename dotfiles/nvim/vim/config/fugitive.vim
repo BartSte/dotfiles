@@ -2,6 +2,7 @@ nnoremap <leader>G :G<CR>:wincmd H<CR>}<Down><Down>
 
 nnoremap <leader>gf :G fetch<cr>
 nnoremap <leader>gp :G pull<cr>
+nnoremap <leader>gP :!git-update<cr>
 nnoremap <leader>gs :G switch<space>
 
 nnoremap <leader>gu :G push<cr>
