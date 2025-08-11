@@ -10,7 +10,7 @@ local function setup_env()
         vim.env["AIDER_MODEL"] = "deepseek/deepseek-reasoner"
     elseif hostname == "zbook" then
         vim.schedule(function() require("helpers.rbw").set_env("OPENAI_API_KEY") end)
-        vim.env["AIDER_MODEL"] = "o4-mini"
+        vim.env["AIDER_MODEL"] = "gpt-5"
     end
 end
 
