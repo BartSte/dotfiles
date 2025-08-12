@@ -3,7 +3,7 @@ vim.cmd("syntax on")
 
 vim.g.mapleader = " "
 vim.opt.autoindent = true
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 0
 vim.opt.colorcolumn = ""
 vim.opt.colorcolumn = "+1"
 vim.opt.cursorline = true
