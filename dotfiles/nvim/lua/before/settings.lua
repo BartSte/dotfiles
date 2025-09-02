@@ -34,6 +34,7 @@ vim.opt.updatetime = 750
 vim.opt.wildmenu = false
 vim.opt.wrap = false
 vim.opt.writebackup = false
+vim.opt.conceallevel = 2
 vim.ui.open = require("helpers.platform").open
 
 if vim.fn.has("termguicolors") then
