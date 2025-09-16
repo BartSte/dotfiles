@@ -4,6 +4,3 @@ function FoldText()
     local fill_count = vim.fn.winwidth('%') - #line - #tostring(number_of_lines) - 14
     return line .. ' ' .. string.rep('.', fill_count) .. ' (' .. number_of_lines .. ' L)'
 end
-
-vim.cmd('set foldtext=v:lua.FoldText()')
-vim.cmd('set fillchars=fold:\\ ')

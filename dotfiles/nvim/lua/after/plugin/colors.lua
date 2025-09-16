@@ -20,6 +20,10 @@ local highlight_setters = {
         set(0, 'TreesitterContextBottom', { bold = true, bg = color1 })
         set(0, 'TreesitterContextLineNumber', { fg = '#fe8019', bg = color1 })
         set(0, 'WinSeparator', { fg = color1 })
+    end,
+    ["kanagawa"] = function()
+        set(0, 'Folded', { fg = 'gray65' })
+        set(0, 'LineNr', { fg = 'LightGray' })
     end
 }
 
