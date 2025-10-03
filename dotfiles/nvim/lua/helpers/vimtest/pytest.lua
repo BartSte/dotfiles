@@ -57,12 +57,12 @@ M.make_strategy = function(opts)
     opts = vim.tbl_deep_extend('force', default_opts, opts or {})
     return function(cmd)
         if vim.fn.has('win32') == 1 then
-            vim.notify('Pytest not supported on Windows. Use WSL instead.',
-                vim.log.levels.WARN)
+            vim.notify('pytest.lua is not supported on Windows. Use WSL instead.', vim.log.levels.WARN)
         else
             local args = opts.args .. ' --log-level=' .. opts.loglevel
 
             cmd = replace(cmd, "^python[^ ]+", get_py())
+            cmd = replace(cmd, "^uv run pytest", get_py() .. " -m pytest")
             cmd = opts.prefix .. ' ' .. cmd .. ' ' .. args
 
             tslime.send_to_tmux(cmd .. '\n')
