@@ -42,11 +42,6 @@ local projectrc = {
     icon = "🛠",
 }
 
-local gitlab = {
-    helpers.gitlab.state.get_icon,
-    condition = function() return true end
-}
-
 local function get_section_separator()
     if vim.fn.has("gui_running") == 1 then
         return { left = "", right = "" }
@@ -76,7 +71,7 @@ lualine.setup({
         lualine_a = { "mode" },
 
         -- Same for all files
-        lualine_b = { prompts, gitlab, projectmarks.shada, projectrc, venv },
+        lualine_b = { prompts, projectmarks.shada, projectrc, venv },
 
         -- Changes when switching buffers
         lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks_optimized },

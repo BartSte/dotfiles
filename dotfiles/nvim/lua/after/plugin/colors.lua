@@ -33,7 +33,6 @@ local function apply_highlights(colorscheme)
     if callback then
         callback()
     end
-    set(0, 'GitLabGhostText', { fg = 'gray65', italic = true })
     set(0, 'HighlightedyankRegion', { reverse = true, fg = '#fe8019', bg = '#1d2021' })
 end
 
