@@ -25,13 +25,57 @@ local function get_test_file(src_file)
     local test_dir = get_test_dir()
     local test_file = vim.fn.substitute(src_file, 'src/[^/]*', test_dir, '')
     test_file = vim.fn.substitute(test_file, "/", "/test_", "g")
+
+    local dir = vim.fn.fnamemodify(test_file, ':h')
+    local filename = vim.fn.fnamemodify(test_file, ':t')
+
+    if filename:sub(1, 5) == 'test_' then
+        local remainder = filename:sub(6)
+        if remainder:sub(1, 1) == '_' then
+            remainder = remainder:sub(2)
+            filename = 'test_' .. remainder
+        end
+    end
+
+    if dir == '.' or dir == '' then
+        test_file = filename
+    else
+        test_file = dir .. '/' .. filename
+    end
+
     return vim.fn.substitute(test_file, "//", "/", "g")
 end
 
 local function get_src_file(test_file)
     local src_file = vim.fn.substitute(test_file, 'tests[^/]*', 'src/*/', '')
     src_file = vim.fn.substitute(src_file, "/test_", "/", "g")
-    return vim.fn.substitute(src_file, "//", "/", "g")
+
+    src_file = vim.fn.substitute(src_file, "//", "/", "g")
+
+    local matches = vim.fn.glob(src_file, false, true)
+    if #matches > 0 then
+        return matches[1]
+    end
+
+    local dir = vim.fn.fnamemodify(src_file, ':h')
+    local filename = vim.fn.fnamemodify(src_file, ':t')
+    if filename == '' then
+        return src_file
+    end
+
+    local underscore_file
+    if dir == '.' or dir == '' then
+        underscore_file = '_' .. filename
+    else
+        underscore_file = dir .. '/_' .. filename
+    end
+
+    matches = vim.fn.glob(underscore_file, false, true)
+    if #matches > 0 then
+        return matches[1]
+    end
+
+    return src_file
 end
 
 --- Toggle between source and test file.
