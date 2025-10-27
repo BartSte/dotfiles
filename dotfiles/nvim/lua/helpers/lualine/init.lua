@@ -10,8 +10,6 @@
 ---@return LuaLine
 local M = {}
 
-M.gitlab = require("helpers.lualine.gitlab")
-
 --- Gets current tab position and total tabs as formatted string
 ---@return string tab_info Formatted "tab X/Y" string where X is current tab, Y is total tabs
 M.tabs = function()
