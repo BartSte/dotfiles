@@ -142,7 +142,8 @@ M.git = {}
 ---@return string branch The branch name
 local function strip_selected_branch(selected)
     local branch = string.gsub(selected[1], "^ *remotes/", "")
-    branch = string.gsub(branch, "%s+", "")
+    branch = branch:match("^%s*(.-)%s*$")
+    branch = branch:match("^(%S+)")
     if type(branch) ~= "string" or #branch == 0 then
         error("Branch name is empty.")
     else
@@ -162,8 +163,8 @@ local function git_call(cmd, opts, success_msg)
     cmd = fzf.path.git_cwd(cmd, opts)
     local output, rc = fzf.utils.io_systemlist(cmd)
     if rc ~= 0 then
-        fzf.utils.err("error for cmd: " .. table.concat(cmd, " "))
-        fzf.utils.err(unpack(output))
+        fzf.utils.error("error for cmd: " .. table.concat(cmd, " "))
+        fzf.utils.error(unpack(output))
     elseif success_msg then
         fzf.utils.info(success_msg)
     end

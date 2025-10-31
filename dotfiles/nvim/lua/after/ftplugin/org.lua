@@ -8,4 +8,3 @@ vim.opt_local.colorcolumn = '100'
 vim.opt_local.wrap = true
 
 keymapper.nnoremap('<leader>oie', ": lua require('config.fzf').get_email()<CR>")
-keymapper.nnoremap('<leader>f', ':normal! gg=G<CR><C-o>')
