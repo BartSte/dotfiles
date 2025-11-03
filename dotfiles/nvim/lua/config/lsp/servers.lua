@@ -37,5 +37,6 @@ return {
     marksman = {},
     jsonls = {},
     ts_ls = {},
-    yamlls = {}
+    yamlls = {},
+    taplo = {},
 }

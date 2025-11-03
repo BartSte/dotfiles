@@ -7,8 +7,8 @@ nnoremap <leader>gs :G switch<space>
 
 nnoremap <leader>gu :G push<cr>
 nnoremap <leader>gt :G push --tags<CR>
-nnoremap <leader>gU :G push -f
-nnoremap <leader>gT :G push --tags -f
+nnoremap <leader>gU :G push --force-with-lease
+nnoremap <leader>gT :G push --tags --force-with-lease
 
 nnoremap <leader>gac :G cherry-pick --abort<CR>
 nnoremap <leader>gcc :G cherry-pick --continue<CR>
