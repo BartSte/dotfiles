@@ -1,6 +1,6 @@
 return {
     -- "BartSte/nvim-bartste-prompts",
-    dir = "~/code/nvim-bartste-prompts",
+    dir = "~/code/personal/nvim-bartste-prompts",
     --- Initialize and configure the prompts plugin
     -- @param plugin PluginSpec The plugin specification table
     -- @return nil
