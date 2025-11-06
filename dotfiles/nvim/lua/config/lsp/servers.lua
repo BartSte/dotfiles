@@ -1,9 +1,18 @@
 ---@type table<string, vim.lsp.Config>
 return {
     basedpyright = {
+        single_file_support = false,
         settings = {
             basedpyright = {
                 disableOrganizeImports = true,
+                analysis = {
+                    inlayHints = {
+                        variableTypes = true,
+                        callArgumentNamesMatching = true, 
+                        functionReturnTypes = true,
+                        genericTypes = true,
+                    }
+                },
         },
     },
 },
