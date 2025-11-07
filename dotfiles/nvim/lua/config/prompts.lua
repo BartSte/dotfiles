@@ -31,7 +31,7 @@ mapper.nnoremap("<leader>ay", ":AiTypehints<CR>")
 mapper.nnoremap("<leader>ae", ":AiExplain<CR>")
 mapper.nnoremap("<leader>aa", ":AiAsk<CR>")
 mapper.nnoremap("<leader>ao", ":AiShowOutput<CR>")
-
+mapper.nnoremap("<leader>ac", ":AiCommit<CR>")
 mapper.vnoremap("<leader>ad", ":AiDocstrings<CR>")
 mapper.vnoremap("<leader>af", ":AiFix<CR>")
 mapper.vnoremap("<leader>ar", ":AiRefactor<CR>")
