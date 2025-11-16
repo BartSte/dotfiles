@@ -8,14 +8,14 @@ return {
                 analysis = {
                     inlayHints = {
                         variableTypes = true,
-                        callArgumentNamesMatching = true, 
+                        callArgumentNamesMatching = true,
                         functionReturnTypes = true,
                         genericTypes = true,
                     }
                 },
+            },
         },
     },
-},
 
     clangd = {
         cmd = {
@@ -48,4 +48,5 @@ return {
     ts_ls = {},
     yamlls = {},
     taplo = {},
+    ltex= {},
 }
