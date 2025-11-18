@@ -82,4 +82,17 @@ function M.is_empty(x)
     return false
 end
 
+--- Attempt to require a module, returning a fallback value when unavailable.
+---@param module_name string The name of the module to load.
+---@param fallback any A fallback value returned if the module cannot be required.
+---@return any module The loaded module or the provided fallback value.
+function M.try_require(module_name, fallback)
+    local status, module = pcall(require, module_name)
+    if status then
+        return module
+    else
+        return fallback
+    end
+end
+
 return M
