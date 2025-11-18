@@ -4,6 +4,7 @@ return {
     --- Initialize and configure the prompts plugin
     -- @param plugin PluginSpec The plugin specification table
     -- @return nil
+    cond = 
     event = { "BufReadPre", "BufNewFile" },
     config = function()
         require("config.prompts")
