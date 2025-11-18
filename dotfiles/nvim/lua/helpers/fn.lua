@@ -5,10 +5,9 @@
 ---@field tabulate function(header: table, rows: table): string
 local M = {}
 
---- Decorate a set of functions to be called in order. They all receive the same
---- arguments.
----@param functions table <function|nil>
----@return function
+--- Create a composite function that executes each provided callback in order.
+---@param functions table<number, function|nil> Collection of functions to decorate.
+---@return function decorated Function that runs every callback with the same arguments.
 function M.decorate(functions)
     return function(...)
         for _, func in pairs(functions) do
@@ -19,13 +18,10 @@ function M.decorate(functions)
     end
 end
 
---- Create a table from a header and rows.
----@param header string[] The header of the table
----@param rows string[][] The rows of the table
----@return string table A table in string format. The table columns are
---- aligned. For example:
--- | Header 1 | Header 2 | Header 3 |
--- |    x     |    y     |    z     |
+--- Format a header and rows into an aligned markdown-like table.
+---@param header string[] The header of the table.
+---@param rows string[][] The rows of the table.
+---@return string formatted_table A formatted table string with aligned columns.
 function M.tabulate(header, rows)
     local column_widths = {}
     for i, column in ipairs(header) do
@@ -57,6 +53,33 @@ function M.tabulate(header, rows)
     end
 
     return table.concat(result)
+end
+
+--- Determine whether a value is considered empty or nil-like.
+---@param x any The value to evaluate for emptiness.
+---@return boolean is_empty True when the value is nil, blank, or an empty table.
+function M.is_empty(x)
+    -- nil
+    if x == nil then
+        return true
+    end
+
+    -- empty string or whitespace-only string
+    if type(x) == "string" and x:match("^%s*$") then
+        return true
+    end
+
+    -- empty table
+    if type(x) == "table" then
+        if vim.tbl_isempty(x) then
+            return true
+        elseif #x == 1 and M.is_empty(x[1]) then
+            return true
+        end
+        return true
+    end
+
+    return false
 end
 
 return M

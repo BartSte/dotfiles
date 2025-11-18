@@ -8,14 +8,14 @@ return {
                 analysis = {
                     inlayHints = {
                         variableTypes = true,
-                        callArgumentNamesMatching = true, 
+                        callArgumentNamesMatching = true,
                         functionReturnTypes = true,
                         genericTypes = true,
                     }
                 },
+            },
         },
     },
-},
 
     clangd = {
         cmd = {
