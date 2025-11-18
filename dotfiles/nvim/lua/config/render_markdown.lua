@@ -642,7 +642,7 @@ require('render-markdown').setup({
         comment = {
 
             -- Turn on / off HTML comment concealing.
-            conceal = true,
+            conceal = false,
             -- Optional text to inline before the concealed comment.
             text = nil,
             -- Highlight for the inlined text.

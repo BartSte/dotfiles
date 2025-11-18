@@ -1,10 +1,31 @@
-local fn = vim.fn
+local platform = require("helpers.platform")
+local map = require("helpers.keymapper")
+local fn = require("helpers.fn")
 
-local is_windows = fn.has('win32') == 1 or vim.env.WH ~= nil
-vim.g.mkdp_browser = is_windows and [[C:\Program Files\Qutebrowser\qutebrowser.exe]] or fn.expand('$BROWSER')
+--- Set sync scroll option for markdown preview
+--- @param value number|nil When nil, toggle the current value.
+--- @return nil
+local function set_sync_scroll(value)
+    local options = vim.g.mkdp_preview_options
+    options.disable_sync_scroll = value or (1 - options.disable_sync_scroll)
+    vim.g.mkdp_preview_options = options
+end
 
+--- Set theme for markdown preview
+--- @param value string|nil When nil, toggle between 'dark' and 'light'.
+--- @return nil
+local function set_theme(value)
+    -- local theme = fn.is_empty(value) or (vim.g.mkdp_theme == 'dark' and 'light' or 'dark')
+    if fn.is_empty(value) then
+        value = vim.g.mkdp_theme == 'dark' and 'light' or 'dark'
+    end
+    vim.g.mkdp_theme = value
+    vim.notify(string.format("Markdown theme: %s", value), vim.log.levels.INFO)
+end
+
+vim.g.mkdp_browser = platform.is_linux() and vim.fn.expand("$WINWSLBROWSER") or vim.fn.expand("$BROWSER")
 vim.g.mkdp_auto_start = 0
-vim.g.mkdp_auto_close = 0
+vim.g.mkdp_auto_close = 1
 vim.g.mkdp_refresh_slow = 0
 vim.g.mkdp_command_for_global = 0
 vim.g.mkdp_open_to_the_world = 0
@@ -17,13 +38,12 @@ vim.g.mkdp_port = ''
 vim.g.mkdp_page_title = '「${name}」'
 vim.g.mkdp_filetypes = { 'markdown' }
 vim.g.mkdp_theme = 'dark'
-
 vim.g.mkdp_preview_options = {
     mkit = {},
     katex = {},
     uml = {},
     maid = {},
-    disable_sync_scroll = 0,
+    disable_sync_scroll = 1,
     sync_scroll_type = 'middle',
     hide_yaml_meta = 1,
     sequence_diagrams = {},
@@ -33,6 +53,20 @@ vim.g.mkdp_preview_options = {
     toc = {},
 }
 
-local M = {}
+vim.api.nvim_create_user_command("MarkdownScrollSync", function(opts)
+    set_sync_scroll(tonumber(opts.args))
+end, {
+    nargs = "?",
+    complete = "file",
+})
 
-return M
+vim.api.nvim_create_user_command("MarkdownTheme", function(opts)
+    set_theme(opts.args)
+end, {
+    nargs = "?",
+    complete = function() return { "dark", "light" } end
+})
+
+map.nnoremap("<leader>mp", "<cmd>MarkdownPreviewToggle<CR>")
+map.nnoremap("<leader>ms", "<cmd>MarkdownScrollSync<CR>")
+map.nnoremap("<leader>mt", "<cmd>MarkdownTheme<CR>")

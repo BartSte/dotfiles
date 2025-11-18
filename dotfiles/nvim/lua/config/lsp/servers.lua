@@ -48,5 +48,4 @@ return {
     ts_ls = {},
     yamlls = {},
     taplo = {},
-    ltex= {},
 }
