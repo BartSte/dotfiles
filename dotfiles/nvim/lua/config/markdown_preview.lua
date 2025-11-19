@@ -53,20 +53,41 @@ vim.g.mkdp_preview_options = {
     toc = {},
 }
 
-vim.api.nvim_create_user_command("MarkdownScrollSync", function(opts)
-    set_sync_scroll(tonumber(opts.args))
-end, {
-    nargs = "?",
-    complete = "file",
-})
+local commands = {
+    {
+        name = "MarkdownScrollSync",
+        func = function(opts) set_sync_scroll(tonumber(opts.args)) end,
+        opts = {
+            nargs = "?",
+            complete = function() return { "0", "1" } end
+        }
+    },
+    {
+        name = "MarkdownScrollSyncOnce",
+        func = function()
+            local old = vim.g.mkdp_preview_options.disable_sync_scroll
+            set_sync_scroll(1)
+            set_sync_scroll(old)
+        end,
+        opts = {
+            nargs = 0,
+        }
+    },
+    {
+        name = "MarkdownTheme",
+        func = function(opts) set_theme(opts.args) end,
+        opts = {
+            nargs = "?",
+            complete = function() return { "dark", "light" } end
+        }
+    },
+}
 
-vim.api.nvim_create_user_command("MarkdownTheme", function(opts)
-    set_theme(opts.args)
-end, {
-    nargs = "?",
-    complete = function() return { "dark", "light" } end
-})
+for _, cmd in ipairs(commands) do
+    vim.api.nvim_create_user_command(cmd.name, cmd.func, cmd.opts)
+end
 
 map.nnoremap("<leader>mp", "<cmd>MarkdownPreviewToggle<CR>")
 map.nnoremap("<leader>ms", "<cmd>MarkdownScrollSync<CR>")
+map.nnoremap("<leader>mS", "<cmd>MarkdownScrollSyncOnce<CR>")
 map.nnoremap("<leader>mt", "<cmd>MarkdownTheme<CR>")
