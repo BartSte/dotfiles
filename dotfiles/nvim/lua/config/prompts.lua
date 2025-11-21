@@ -18,7 +18,7 @@ end
 setup_env()
 require("prompts").setup({
     notify = true,
-    loglevel = "DEBUG"
+    loglevel = "INFO"
 })
 
 mapper.nnoremap("<leader>ad", ":AiDocstrings<CR>")
