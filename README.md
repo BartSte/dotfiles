@@ -385,6 +385,17 @@ path=("$PWD/.venv/bin" $path)
 - Only files under `PROJECTRC_HOME` are sourced.
 - A file is loaded only if it is a regular, readable file inside `PROJECTRC_HOME`.
 
+## Aider
+
+You can install pywright to let aider scrape the web. Arch does not officially support pywright but it works as long as you install the dependencies yourself. You should do at least:
+
+```bash
+yay -S enchant icu66-bin libwebp0.5
+/some/path/uv/tools/aider-chat/bin/python3 -m playwright install
+```
+The other missing dependencies will be reported and are more easy to figure out.
+
+
 ## Background
 
 The following sections explain how the 3 repositories work together.

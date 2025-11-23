@@ -4,7 +4,7 @@ local M = {}
 
 -- Returns the output of `wpy -wpy-path` if it exists, otherwise returns ''.
 local function wsl_win_py()
-    if vim.fn.executable('wpy') == 1 then
+    if vim.env.WVENV ~= nil and vim.fn.executable('wpy') == 1 then
         local stdout = vim.fn.system('wpy --wpy-path')
         return string.gsub(stdout, '\n$', '') -- Remove trailing newline
     else
