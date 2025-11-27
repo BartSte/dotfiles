@@ -9,7 +9,7 @@ local M = {}
 ---@param destination string Output path for the rendered artifact.
 ---@return string[] command List of command arguments for `mmdc`.
 local function make_command(source, destination)
-    local command = { "mmdc", "-i", source, "-o", destination }
+    local command = { "mmdc", "-i", source, "-o", destination, "--scale", "3" }
 
     local puppeteer_config = vim.fn.expand("~/.puppeteer.json")
     if vim.fn.filereadable(puppeteer_config) == 1 then
