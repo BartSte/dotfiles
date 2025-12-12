@@ -21,6 +21,8 @@ nnoremap <leader>gr :G rebase<space>
 nnoremap <leader>gar :G rebase --abort<CR>
 nnoremap <leader>gcr :G rebase --continue<CR>
 
+nnoremap <leader>gR :G reset<space>
+
 nnoremap <leader>gd :silent! normal gf<CR>:wincmd o<bar>Gvdiffsplit<CR>
 nnoremap <leader>gD :Gvdiffsplit<space>
 
