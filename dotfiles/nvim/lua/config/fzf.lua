@@ -70,6 +70,7 @@ map.nnoremap("<a-o>", helpers.files.cwd)
 map.nnoremap("<a-r>", helpers.files.org)
 map.nnoremap("<a-s>", helpers.files.buffer_dir)
 map.nnoremap("<a-v>", helpers.files.nvim)
+map.nnoremap("<a-y>", helpers.files.diffsplit)
 
 map.nnoremap("<a-B>", fzf.git_branches)
 map.nnoremap("<a-T>", fzf.git_tags)
