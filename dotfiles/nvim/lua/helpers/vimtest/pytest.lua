@@ -3,32 +3,17 @@ local tslime = require('helpers.tslime')
 local M = {}
 
 -- Returns the output of `wpy -wpy-path` if it exists, otherwise returns ''.
-local function wsl_win_py()
-    if vim.env.WIN_VENV ~= nil and vim.fn.executable('wpy') == 1 then
-        local stdout = vim.fn.system('wpy --wpy-path')
-        return string.gsub(stdout, '\n$', '') -- Remove trailing newline
-    else
-        return ''
-    end
-end
-
--- Returns the path to the python executable in the Linux venv.
-local function linux_py()
-    if vim.env.VIRTUAL_ENV == nil then
-        return 'python3'
-    else
-        return vim.env.VIRTUAL_ENV .. '/bin/python'
-    end
+local function use_wuv()
+    return vim.env.WIN_VENV ~= nil and vim.fn.executable('wpy') == 1
 end
 
 -- When running WSL and a venv is returned by `wpy -p`, use that venv. If not,
 -- return the $VIRTUAL_ENV that corresponds to the OS.
-local function get_py()
-    local wsl_win_venv = wsl_win_py()
-    if wsl_win_venv ~= '' then
-        return wsl_win_venv
+local function make_cmd()
+    if use_wuv() then
+        return "wuv run --with ipdb pytest "
     else
-        return linux_py()
+        return "uv run --with ipdb pytest "
     end
 end
 
@@ -61,8 +46,8 @@ M.make_strategy = function(opts)
         else
             local args = opts.args .. ' --log-level=' .. opts.loglevel
 
-            cmd = replace(cmd, "^python[^ ]+", get_py())
-            cmd = replace(cmd, "^uv run pytest", get_py() .. " -m pytest")
+            cmd = replace(cmd, "^python[^ ]+", make_cmd())
+            cmd = replace(cmd, "uv run pytest", make_cmd())
             cmd = opts.prefix .. ' ' .. cmd .. ' ' .. args
 
             tslime.send_to_tmux(cmd .. '\n')
