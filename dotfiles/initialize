@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+function clone_bare() {
+  local url="$1" dir="$2"
+  if [[ ! -d "$dir" ]]; then
+    git clone --bare "$url" "$dir"
+  fi
+}
+
+function checkout_worktree() {
+  local gitdir="$1"
+  git --work-tree="$HOME" --git-dir="$gitdir" checkout -f
+}
+
+# Ensure git exists
+if ! command -v git >/dev/null 2>&1; then
+  if command -v pacman >/dev/null 2>&1; then
+    sudo pacman -S git --noconfirm
+  elif command -v apt-get >/dev/null 2>&1; then
+    sudo apt-get update -y
+    sudo apt-get install -y git
+  else
+    echo "Please install git first." >&2
+    exit 1
+  fi
+fi
+
+github="https://github.com/BartSte"
+
+base="$github/dotfiles.git"
+base_dir="$HOME/dotfiles.git"
+
+lin="$github/dotfiles-linux.git"
+lin_dir="$HOME/dotfiles-linux.git"
+
+arch="$github/dotfiles-arch.git"
+arch_dir="$HOME/dotfiles-arch.git"
+
+pi="$github/dotfiles-pi.git"
+pi_dir="$HOME/dotfiles-pi.git"
+
+# Base layer
+clone_bare "$base" "$base_dir"
+checkout_worktree "$base_dir"
+
+# Linux common layer
+clone_bare "$lin" "$lin_dir"
+checkout_worktree "$lin_dir"
+
+# Detect distro layer
+layer=""
+if [[ -f /etc/arch-release ]] || command -v pacman >/dev/null 2>&1; then
+  layer="arch"
+elif [[ -f /proc/device-tree/model ]] && grep -qi "Raspberry Pi" /proc/device-tree/model; then
+  layer="pi"
+fi
+
+if [[ "$layer" == "arch" ]]; then
+  clone_bare "$arch" "$arch_dir"
+  checkout_worktree "$arch_dir"
+elif [[ "$layer" == "pi" ]]; then
+  clone_bare "$pi" "$pi_dir"
+  checkout_worktree "$pi_dir"
+else
+  echo "No distro-specific layer detected; using base + linux only."
+fi
+
+# Setup environment vars file
+source "$HOME/dotfiles-linux/home/.zshenv" || true
+if [[ ! -f "$HOME/.dotfiles_config.sh" ]]; then
+  cat > "$HOME/.dotfiles_config.sh" <<'EOF'
+export BWEMAIL=
+export MICROSOFT_ACCOUNT=
+EOF
+fi
+
+echo "Initialize complete. Now run:"
+
+echo "  ~/dotfiles-linux/main"
+if [[ "$layer" == "arch" ]]; then
+  echo "  ~/dotfiles-arch/main"
+elif [[ "$layer" == "pi" ]]; then
+  echo "  ~/dotfiles-pi/main"
+fi
