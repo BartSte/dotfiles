@@ -11,10 +11,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run dotfiles initialize (isolated HOME)
+      - name: Run CI init script
         shell: bash
-        run: |
-          set -euo pipefail
-          export HOME="$GITHUB_WORKSPACE/_home"
-          mkdir -p "$HOME"
-          bash ./dotfiles/initialize
+        run: ./dotfiles/tests/ci-init.sh
