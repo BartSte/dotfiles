@@ -1,0 +1,20 @@
+name: test-initialize
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  initialize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run dotfiles initialize (isolated HOME)
+        shell: bash
+        run: |
+          set -euo pipefail
+          export HOME="$GITHUB_WORKSPACE/_home"
+          mkdir -p "$HOME"
+          bash ./dotfiles/initialize
