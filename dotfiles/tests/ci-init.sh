@@ -12,16 +12,9 @@ bash "$GITHUB_WORKSPACE/dotfiles/initialize"
 [[ -d "$HOME/dotfiles-linux.git" ]] || { echo "Missing bare repo: dotfiles-linux.git"; exit 1; }
 [[ -f "$HOME/.dotfiles_config.sh" ]] || { echo "Missing .dotfiles_config.sh"; exit 1; }
 
-arch_exists=false
-pi_exists=false
-[[ -d "$HOME/dotfiles-arch.git" ]] && arch_exists=true
-[[ -d "$HOME/dotfiles-pi.git" ]] && pi_exists=true
-
-if $arch_exists && $pi_exists; then
-  echo "Both arch and pi layers present; expected only one."; exit 1;
-fi
-if ! $arch_exists && ! $pi_exists; then
-  echo "No distro layer present; expected arch or pi."; exit 1;
+# In CI (ubuntu-latest), we only expect base + linux layers.
+if [[ -d "$HOME/dotfiles-arch.git" ]] || [[ -d "$HOME/dotfiles-pi.git" ]]; then
+  echo "Unexpected distro layer present in CI."; exit 1;
 fi
 
 echo "init OK"
