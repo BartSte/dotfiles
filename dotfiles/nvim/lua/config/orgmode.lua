@@ -5,11 +5,11 @@ local khalorg = require('khalorg')
 local dropbox_home = path.join(path.home(), 'dropbox')
 local dropbox_org = path.join(dropbox_home, 'org')
 local main = path.join(dropbox_org, 'main.org')
-local agenda = path.join(dropbox_org, 'outlook.org')
 local personal = path.join(dropbox_org, 'personal.org')
 local gedachten = path.join(dropbox_org, 'gedachten.org')
 local komeco = path.join(dropbox_org, 'komeco.org')
-local outlook = path.join(dropbox_org, 'outlook.org')
+local outlook_personal = path.join(dropbox_org, 'outlook_personal.org')
+local outlook_work = path.join(dropbox_org, 'outlook_work.org')
 
 khalorg.setup({
     calendar = 'outlook_local'
@@ -109,7 +109,7 @@ local templates = {
 orgmode.setup({
     mappings = mappings,
     org_default_notes_file = main,
-    org_agenda_files = { main, agenda, personal, gedachten },
+    org_agenda_files = { main, outlook_personal, outlook_work, personal, gedachten },
     org_blank_before_new_entry = { heading = true, plain_list_item = false },
     org_hide_emphasis_markers = true,
     org_custom_exports = custom_exports,
