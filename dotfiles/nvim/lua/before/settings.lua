@@ -2,6 +2,7 @@ vim.cmd("filetype on")
 vim.cmd("syntax on")
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 vim.opt.autoindent = true
 vim.opt.cmdheight = 0
 vim.opt.colorcolumn = ""
