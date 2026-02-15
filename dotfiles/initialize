@@ -2,28 +2,28 @@
 set -eo pipefail
 
 function clone_bare() {
-  local url="$1" dir="$2"
-  if [[ ! -d "$dir" ]]; then
-    git clone --bare "$url" "$dir"
-  fi
+    local url="$1" dir="$2"
+    if [[ ! -d "$dir" ]]; then
+        git clone --bare "$url" "$dir"
+    fi
 }
 
 function checkout_worktree() {
-  local gitdir="$1"
-  git --work-tree="$HOME" --git-dir="$gitdir" checkout -f
+    local gitdir="$1"
+    git --work-tree="$HOME" --git-dir="$gitdir" checkout -f
 }
 
 # Ensure git exists
 if ! command -v git >/dev/null 2>&1; then
-  if command -v pacman >/dev/null 2>&1; then
-    sudo pacman -S git --noconfirm
-  elif command -v apt-get >/dev/null 2>&1; then
-    sudo apt-get update -y
-    sudo apt-get install -y git
-  else
-    echo "Please install git first." >&2
-    exit 1
-  fi
+    if command -v pacman >/dev/null 2>&1; then
+        sudo pacman -S git --noconfirm
+    elif command -v apt-get >/dev/null 2>&1; then
+        sudo apt-get update -y
+        sudo apt-get install -y git
+    else
+        echo "Please install git first." >&2
+        exit 1
+    fi
 fi
 
 github="https://github.com/BartSte"
@@ -41,7 +41,7 @@ pi="$github/dotfiles-pi.git"
 pi_dir="$HOME/dotfiles-pi.git"
 
 secret_https="$github/dotfiles-secret.git"
-secret_ssh="git@github.com:BartSte/dotfiles-secret.git"
+secret_ssh="git@github-personal:BartSte/dotfiles-secret.git"
 secret_dir="$HOME/dotfiles-secret.git"
 
 # Base layer
@@ -56,39 +56,39 @@ checkout_worktree "$lin_dir"
 # This repo is private and may require GitHub auth (gh/SSH). We never want init to fail if
 # access isn't available yet.
 if [[ ! -d "$secret_dir" ]]; then
-  if git clone --bare "$secret_https" "$secret_dir" 2>/dev/null; then
-    checkout_worktree "$secret_dir"
-  elif git clone --bare "$secret_ssh" "$secret_dir" 2>/dev/null; then
-    checkout_worktree "$secret_dir"
-  else
-    echo "Note: could not clone private repo dotfiles-secret (skipping)."
-    echo "      You can clone it later with:"
-    echo "        git clone --bare $secret_https $secret_dir"
-  fi
+    if git clone --bare "$secret_https" "$secret_dir" 2>/dev/null; then
+        checkout_worktree "$secret_dir"
+    elif git clone --bare "$secret_ssh" "$secret_dir" 2>/dev/null; then
+        checkout_worktree "$secret_dir"
+    else
+        echo "Note: could not clone private repo dotfiles-secret (skipping)."
+        echo "      You can clone it later with:"
+        echo "        git clone --bare $secret_https $secret_dir"
+    fi
 fi
 
 # Detect distro layer
 layer=""
 if [[ -f /etc/arch-release ]] || command -v pacman >/dev/null 2>&1; then
-  layer="arch"
+    layer="arch"
 elif [[ -f /proc/device-tree/model ]] && grep -qi "Raspberry Pi" /proc/device-tree/model; then
-  layer="pi"
+    layer="pi"
 fi
 
 if [[ "$layer" == "arch" ]]; then
-  clone_bare "$arch" "$arch_dir"
-  checkout_worktree "$arch_dir"
+    clone_bare "$arch" "$arch_dir"
+    checkout_worktree "$arch_dir"
 elif [[ "$layer" == "pi" ]]; then
-  clone_bare "$pi" "$pi_dir"
-  checkout_worktree "$pi_dir"
+    clone_bare "$pi" "$pi_dir"
+    checkout_worktree "$pi_dir"
 else
-  echo "No distro-specific layer detected; using base + linux only."
+    echo "No distro-specific layer detected; using base + linux only."
 fi
 
 # Setup environment vars file
 source "$HOME/dotfiles-linux/home/.zshenv" || true
 if [[ ! -f "$HOME/.dotfiles_config.sh" ]]; then
-  cat > "$HOME/.dotfiles_config.sh" <<'EOF'
+    cat >"$HOME/.dotfiles_config.sh" <<'EOF'
 export BWEMAIL=
 export MICROSOFT_ACCOUNT=
 EOF
@@ -98,7 +98,7 @@ echo "Initialize complete. Now run:"
 
 echo "  ~/dotfiles-linux/main"
 if [[ "$layer" == "arch" ]]; then
-  echo "  ~/dotfiles-arch/main"
+    echo "  ~/dotfiles-arch/main"
 elif [[ "$layer" == "pi" ]]; then
-  echo "  ~/dotfiles-pi/main"
+    echo "  ~/dotfiles-pi/main"
 fi
