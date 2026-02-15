@@ -12,7 +12,7 @@ local outlook_personal = path.join(dropbox_org, 'outlook_personal.org')
 local outlook_work = path.join(dropbox_org, 'outlook_work.org')
 
 khalorg.setup({
-    calendar = 'outlook_local'
+    calendar = 'outlook_personal',
 })
 
 local template_gedachte = [[
