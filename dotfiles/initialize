@@ -40,6 +40,10 @@ arch_dir="$HOME/dotfiles-arch.git"
 pi="$github/dotfiles-pi.git"
 pi_dir="$HOME/dotfiles-pi.git"
 
+secret_https="$github/dotfiles-secret.git"
+secret_ssh="git@github.com:BartSte/dotfiles-secret.git"
+secret_dir="$HOME/dotfiles-secret.git"
+
 # Base layer
 clone_bare "$base" "$base_dir"
 checkout_worktree "$base_dir"
@@ -47,6 +51,21 @@ checkout_worktree "$base_dir"
 # Linux common layer
 clone_bare "$lin" "$lin_dir"
 checkout_worktree "$lin_dir"
+
+# Private layer (optional): dotfiles-secret
+# This repo is private and may require GitHub auth (gh/SSH). We never want init to fail if
+# access isn't available yet.
+if [[ ! -d "$secret_dir" ]]; then
+  if git clone --bare "$secret_https" "$secret_dir" 2>/dev/null; then
+    checkout_worktree "$secret_dir"
+  elif git clone --bare "$secret_ssh" "$secret_dir" 2>/dev/null; then
+    checkout_worktree "$secret_dir"
+  else
+    echo "Note: could not clone private repo dotfiles-secret (skipping)."
+    echo "      You can clone it later with:"
+    echo "        git clone --bare $secret_https $secret_dir"
+  fi
+fi
 
 # Detect distro layer
 layer=""
