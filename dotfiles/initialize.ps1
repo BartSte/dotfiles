@@ -11,19 +11,19 @@ function clone($repo, $directory) {
 }
 
 function checkout($directory) {
-    git --work-tree=$env:USERPROFILE --git-dir=$directory checkout
+    git --work-tree="$env:USERPROFILE" --git-dir="$directory" checkout --force
 }
 
 $github="https://github.com/BartSte" 
 
 $base="$github/dotfiles.git" 
-$base_dir="/dotfiles.git"
+$base_dir="$env:USERPROFILE/dotfiles.git"
 
 $win="$github/dotfiles-windows.git"
-$win_dir="/dotfiles-windows.git"
+$win_dir="$env:USERPROFILE/dotfiles-windows.git"
 
 $secret="$github/dotfiles-secret.git"
-$secret_dir="/dotfiles-secret.git"
+$secret_dir="$env:USERPROFILE/dotfiles-secret.git"
 
 Write-Host "# Installing scoop"
 Install-Scoop
