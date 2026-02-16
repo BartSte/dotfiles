@@ -65,6 +65,8 @@ if [[ ! -d "$secret_dir" ]]; then
         echo "      You can clone it later with:"
         echo "        git clone --bare $secret_https $secret_dir"
     fi
+else
+    checkout_worktree "$secret_dir"
 fi
 
 # Detect distro layer
