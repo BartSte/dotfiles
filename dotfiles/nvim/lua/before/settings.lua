@@ -8,6 +8,7 @@ vim.opt.cmdheight = 0
 vim.opt.colorcolumn = ""
 vim.opt.colorcolumn = "+1"
 vim.opt.conceallevel = 2
+vim.opt.concealcursor = "nc"
 vim.opt.cursorline = true
 vim.opt.diffopt:append("vertical", "iblank", "closeoff")
 vim.opt.expandtab = true

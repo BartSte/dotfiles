@@ -16,5 +16,8 @@ return {
             -- dir = "~/code/nvim-khalorg"
         },
         'dhruvasagar/vim-table-mode',
+        'nvim-treesitter/nvim-treesitter',
+        'nvim-orgmode/org-bullets.nvim',
+        'lukas-reineke/headlines.nvim',
     }
 }

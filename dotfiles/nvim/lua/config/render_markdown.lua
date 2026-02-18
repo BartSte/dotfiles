@@ -26,7 +26,7 @@ require('render-markdown').setup({
     -- Only intended to be used for plugin development / debugging.
     log_runtime = false,
     -- Filetypes this plugin will run on.
-    file_types = { 'markdown' },
+    file_types = { 'markdown'},
     -- Additional events that will trigger this plugin's render loop.
     change_events = {},
     -- Out of the box language injections for known filetypes that allow markdown to be interpreted
