@@ -1,4 +1,5 @@
 local mapper = require "helpers.keymapper"
+
 require "octo".setup {
     use_local_fs = false,                      -- use local files on right side of reviews
     enable_builtin = false,                    -- shows a list of builtin actions when no action is provided
