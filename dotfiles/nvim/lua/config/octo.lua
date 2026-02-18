@@ -1,3 +1,4 @@
+local mapper = require "helpers.keymapper"
 require "octo".setup {
     use_local_fs = false,                      -- use local files on right side of reviews
     enable_builtin = false,                    -- shows a list of builtin actions when no action is provided
@@ -384,3 +385,8 @@ require "octo".setup {
         },
     },
 }
+
+mapper.nnoremap("<leader>nl", "<cmd>Octo notification list<CR>")
+mapper.nnoremap("<leader>np", "<cmd>Octo pr list<CR>")
+mapper.nnoremap("<leader>nr", "<cmd>Octo search is:pr is:open review-requested:@me<CR>")
+mapper.nnoremap("<leader>na", "<cmd>Octo search is:pr is:open assignee:@me<CR>")
