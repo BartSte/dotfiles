@@ -5,8 +5,10 @@ local helpers = require("helpers.lsp.capabilities")
 ---@class LspMappings
 ---@field map_formatter function(client: vim.lsp.Client, buf: integer): function
 local M = {}
+local IGNORE = { "GitHub Copilot" }
 local formatters = {}
 local actions = {}
+
 
 --- Run a formatter on the current buffer.
 ---@return function formatter The formatter function
@@ -44,30 +46,37 @@ function M.map_formatter(client, buf, lhs)
 end
 
 --- Create a formatter function that can run code actions alongside the formatter.
----@param client vim.lsp.Client The client to use for the formatter
----@param buf integer The buffer to apply the formatter to
+---@param client vim.lsp.Client? The client to use for the formatter
+---@param buf integer? The buffer to apply the formatter to
 ---@return function|nil formatter The formatter function
 function M.make_formatter(client, buf)
+    buf = buf or vim.api.nvim_get_current_buf()
+    local client_name = client and client.name or "Unknown"
+
+    if vim.tbl_contains(IGNORE, client_name) then
+        return nil
+    end
+
     if helpers.has_capability(client, "documentFormattingProvider") then
         formatters[buf] = fn.decorate({ formatters[buf], make_buf_format() })
     end
 
     -- `format_actions` is a custom capability that is not part of the LSP spec
-    if helpers.has_capability(client, "format_actions") then
+    if client and helpers.has_capability(client, "format_actions") then
         actions[buf] = fn.decorate({ actions[buf], make_run_actions(client) })
     end
 
     if not formatters[buf] and not actions[buf] then
-        return M.gggqG
+        return M.gggqEq
     else
         return fn.decorate({ formatters[buf], actions[buf] })
     end
 end
 
 --- Run gggqG and then return to the cursor before the command was run.
-function M.gggqG()
+function M.gggqEq()
     local pos = vim.api.nvim_win_get_cursor(0)
-    vim.cmd("normal! gggqG")
+    vim.cmd("normal! gggq=")
     vim.api.nvim_win_set_cursor(0, pos)
 end
 

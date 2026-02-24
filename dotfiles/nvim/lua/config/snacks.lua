@@ -5,6 +5,12 @@ snacks.setup {
     bigfile = { enabled = true },
     quickfile = { enabled = true },
     notifier = { enabled = true },
+    gitbrowse = {
+        config = function(opts, defaults)
+            table.insert(opts.remote_patterns, 1, { "-work", ".com" })
+            table.insert(opts.remote_patterns, 1, { "-personal", ".com" })
+        end,
+    }
 }
 
 m.nnoremap("<space>qq", Snacks.bufdelete.delete)
