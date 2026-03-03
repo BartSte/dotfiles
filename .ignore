@@ -37,5 +37,5 @@ yay/
 
 !.build/
 !.github/
-!.clawdbot/
+!.openclaw/
 !dnscacher/
