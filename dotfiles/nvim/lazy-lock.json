@@ -27,7 +27,7 @@
   "none-ls.nvim": { "branch": "main", "commit": "f61f46ded0ca9edce7a09b674f8e162d10921426" },
   "nvim-cmp": { "branch": "main", "commit": "da88697d7f45d16852c6b2769dc52387d1ddc45f" },
   "nvim-khalorg": { "branch": "main", "commit": "0986b14736026d8ccefa08e13f3ea4e5c716e705" },
-  "nvim-lspconfig": { "branch": "master", "commit": "ead0f5f342d8d323441e7d4b88f0fc436a81ad5f" },
+  "nvim-lspconfig": { "branch": "master", "commit": "2b87d107942b9eebef768512f5849330335a9493" },
   "nvim-project-marks": { "branch": "main", "commit": "ddf9135ac359762af9905795a6a97ee79126bd7c" },
   "nvim-projectrc": { "branch": "main", "commit": "5946b164790c20e56015421a56b2c3822b4ed2f4" },
   "nvim-saturate": { "branch": "main", "commit": "fc4f27b820cb97f482b5e53d29a19e066249ef43" },
@@ -40,7 +40,7 @@
   "orgmode": { "branch": "master", "commit": "f3ea61f6d71486c9062d40efe3c882050758e9b3" },
   "plantuml-syntax": { "branch": "master", "commit": "9d4900aa16674bf5bb8296a72b975317d573b547" },
   "plenary.nvim": { "branch": "master", "commit": "b9fd5226c2f76c951fc8ed5923d85e4de065e509" },
-  "render-markdown.nvim": { "branch": "main", "commit": "bd482f9a4827c9422231a7db1439c5cff1e69ae0" },
+  "render-markdown.nvim": { "branch": "main", "commit": "907505549edc2f90c82fc429348af03ee8c3a825" },
   "snacks.nvim": { "branch": "main", "commit": "9912042fc8bca2209105526ac7534e9a0c2071b2" },
   "stay-centered.nvim": { "branch": "main", "commit": "e1a63ccaf2584e97c0ef8e64f9654c9a80d983f6" },
   "tslime.vim": { "branch": "main", "commit": "9b2b99e409336584103b83c597fdb6234875ae25" },
@@ -51,5 +51,5 @@
   "vim-gtest": { "branch": "master", "commit": "41e299172401cd5549a3dc3542b9d4d9ffc8b50d" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-table-mode": { "branch": "master", "commit": "bb025308a45c67c7c8f0763ba37bc2ee3f534df0" },
-  "vim-test": { "branch": "master", "commit": "931c6cfdd3069df52c4486b25200e4b10d0595c8" }
+  "vim-test": { "branch": "master", "commit": "9b063a510635c052af087c470039d80843ab9929" }
 }
