@@ -55,6 +55,10 @@ fzf.setup({
     }
 })
 
+vim.api.nvim_create_user_command("FzfDiffsplit", function()
+    helpers.files.diffsplit()
+end, { desc = "Diff current buffer with an fzf-selected file" })
+
 map.nnoremap("<a-c>", helpers.dirs.cwd)
 map.nnoremap("<a-C>", helpers.dirs.home)
 map.nnoremap("<a-V>", helpers.dirs.nvim)

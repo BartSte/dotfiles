@@ -57,7 +57,11 @@ end
 ---@param selected string|table|nil
 ---@return nil
 local function diffsplit(selected)
-    vim.cmd("diffsplit " .. select_first(selected))
+    local target = select_first(selected)
+    if not target then
+        return
+    end
+    vim.cmd("diffsplit " .. vim.fn.fnameescape(target))
 end
 
 --- Insert a file path selected from the picker into the buffer.
