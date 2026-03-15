@@ -1,6 +1,7 @@
 local fzf = require("fzf-lua")
 local join = require("helpers.path").join
 local path = require("helpers.path")
+local uv = vim.uv or vim.loop
 local M = {}
 
 --- Remove non-printable ASCII characters from the provided text.
@@ -53,15 +54,60 @@ local function select_first(selected)
     return strip_text(selected)
 end
 
+--- Resolve an fzf selection into an absolute path.
+---@param selected string|table|nil
+---@param opts table|nil
+---@return string|nil
+local function select_path(selected, opts)
+    opts = opts or {}
+    local entry = select_first(selected)
+    if not entry then
+        return
+    end
+    local parsed = fzf.path.entry_to_file(entry, opts)
+    local target = parsed and (parsed.bufname or parsed.path) or entry
+    if not target then
+        return
+    end
+    if not fzf.path.is_absolute(target) then
+        local cwd = opts.cwd or opts._cwd or vim.fn.getcwd()
+        target = fzf.path.join({ cwd, target })
+    end
+    return fzf.path.normalize(target)
+end
+
 --- Open the selected file in a diff split window.
 ---@param selected string|table|nil
+---@param opts table|nil
 ---@return nil
-local function diffsplit(selected)
-    local target = select_first(selected)
+local function diffsplit(selected, opts)
+    local target = select_path(selected, opts)
     if not target then
         return
     end
     vim.cmd("diffsplit " .. vim.fn.fnameescape(target))
+end
+
+--- Open a selected directory in Oil (or fallback to :edit).
+---@param selected string|table|nil
+---@param opts table|nil
+---@return nil
+local function open_directory(selected, opts)
+    local target = select_path(selected, opts)
+    if not target then
+        return
+    end
+    local stat = uv.fs_stat(target)
+    if not stat or stat.type ~= "directory" then
+        vim.cmd("edit " .. vim.fn.fnameescape(target))
+        return
+    end
+    local ok, oil = pcall(require, "oil")
+    if ok then
+        oil.open(target)
+    else
+        vim.cmd("edit " .. vim.fn.fnameescape(target))
+    end
 end
 
 --- Insert a file path selected from the picker into the buffer.
@@ -162,6 +208,7 @@ M.dirs.opts = {
     previewer = false,
     git_icons = false,
     preview   = "exa --icons --color=always -T -L 1 -a {2} | head -200",
+    actions   = { enter = open_directory },
 }
 M.dirs.cwd = dir_cmd
 
