@@ -9,3 +9,8 @@ vim.opt_local.wrap = true
 
 mappings.map_formatter()
 keymapper.nnoremap('<leader>oie', ": lua require('config.fzf').get_email()<CR>")
+keymapper.buffer_inoremap(
+    '<S-CR>',
+    '<cmd>lua require("orgmode").action("org_mappings.meta_return")<CR>',
+    { silent = true }
+)

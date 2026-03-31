@@ -1,1 +1,2 @@
 WRN 2026-03-13T08:07:10.066 ?.126787   server_start:199: Failed to start server: permission denied: /run/user/1000//
+WRN 2026-03-23T15:30:25.283 ?.2        server_start:199: Failed to start server: read-only file system: /run/user/1000//nvim.2.0

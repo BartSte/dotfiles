@@ -78,6 +78,7 @@ local custom_exports = {
 
 local mappings = {
     org = {
+        org_return = false,
         org_toggle_checkbox = { '<C-Space>', '<S-F12>' }
     }
 }
