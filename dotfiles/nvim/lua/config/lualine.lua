@@ -1,10 +1,7 @@
-local fn = require("helpers.fn")
 local helpers = require("helpers.lualine")
 local icons = require("nvim-web-devicons")
 local lualine = require("lualine")
 local projectmarks = require("projectmarks.lualine")
-local themes = require("config.lualine.themes")
-local prompts = fn.try_require("prompts.lualine")
 
 local venv = {
     helpers.venv,
@@ -65,7 +62,7 @@ lualine.setup({
         section_separators = get_section_separator(),
         component_separators = get_component_separator(),
         globalstatus = true,
-        theme = themes[vim.g.colors_name] or 'auto'
+        theme = 'auto'
     },
     sections = {
         -- State of the editor

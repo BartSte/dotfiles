@@ -79,7 +79,7 @@ local custom_exports = {
 local mappings = {
     org = {
         org_return = false,
-        org_toggle_checkbox = { '<C-Space>', '<S-F12>' }
+        org_toggle_checkbox = { '<C-Space>', '<S-F12>' },
     }
 }
 
@@ -110,16 +110,18 @@ local templates = {
 orgmode.setup({
     mappings = mappings,
     org_default_notes_file = main,
-    org_agenda_files = { main, outlook_personal, outlook_work, personal, gedachten },
+    org_agenda_files = { main, outlook_personal, outlook_work, personal },
     org_blank_before_new_entry = { heading = true, plain_list_item = false },
+    org_highlight_latex_and_related = 'native',
     org_hide_emphasis_markers = true,
     org_custom_exports = custom_exports,
     win_split_mode = 'vertical',
-    org_todo_keywords = { 'TODO', 'MEET', 'NEXT', 'WAIT', '|', 'DONE', 'CANCEL' },
+    org_todo_keywords = { 'TODO', 'ACTIVE', 'WAIT', 'STALE', '|', 'DONE' },
     org_capture_templates = templates,
     org_todo_keyword_faces = {
+        ACTIVE = 'foreground cyan :weight bold',
         WAIT = ':foreground orange :weight bold',
-        NEXT = ':foreground yellow :weight bold',
-        CANCEL = ':foreground magenta :weight bold'
+        STALE = ':foreground magenta :weight bold',
     },
+    org_adapt_indentation = false,
 })

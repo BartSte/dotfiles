@@ -67,17 +67,10 @@ function M.make_formatter(client, buf)
     end
 
     if not formatters[buf] and not actions[buf] then
-        return M.gggqEq
+        return nil
     else
         return fn.decorate({ formatters[buf], actions[buf] })
     end
-end
-
---- Run gggqG and then return to the cursor before the command was run.
-function M.gggqEq()
-    local pos = vim.api.nvim_win_get_cursor(0)
-    vim.cmd("normal! gggq=")
-    vim.api.nvim_win_set_cursor(0, pos)
 end
 
 return M
