@@ -8,4 +8,14 @@ M.highlight_word = function()
     end
 end
 
+--- Runs `gggqG` on the current buffer before returning the cursor to its
+--- original position.
+---@return nil
+function M.gggqG()
+    local pos = vim.api.nvim_win_get_cursor(0)
+    vim.cmd("normal! gggqG")
+    vim.api.nvim_win_set_cursor(0, pos)
+end
+
+
 return M
