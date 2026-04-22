@@ -1,5 +1,29 @@
 local mapper = require("helpers.keymapper")
 
+local function diffget_range(source, start_line, end_line)
+    local first = math.min(start_line, end_line)
+    local last = math.max(start_line, end_line)
+    vim.cmd(('%d,%ddiffget %s'):format(first, last, source))
+end
+
+local function diffget_visual(source)
+    local start_line = vim.fn.line("'<")
+    local end_line = vim.fn.line("'>")
+    diffget_range(source, start_line, end_line)
+end
+
+local function make_diffget_operator(source)
+    return function()
+        vim.go.operatorfunc = function(_)
+            local start_line = vim.fn.line("'[")
+            local end_line = vim.fn.line("']")
+            diffget_range(source, start_line, end_line)
+        end
+
+        return 'g@'
+    end
+end
+
 mapper.nnoremap('<leader>G', function()
     vim.cmd('G')
     vim.cmd('wincmd H')
@@ -30,5 +54,13 @@ mapper.nnoremap('<leader>gD', ':Gvdiffsplit ')
 mapper.nnoremap('<leader>gy', ':G difftool -y ')
 mapper.silent_nnoremap('<leader>gm', '<Cmd>diffget //2<CR>')
 mapper.silent_nnoremap('<leader>gi', '<Cmd>diffget //3<CR>')
+mapper.silent_xnoremap('<leader>gm', function()
+    diffget_visual('//2')
+end)
+mapper.silent_xnoremap('<leader>gi', function()
+    diffget_visual('//3')
+end)
+mapper.expr_nnoremap('<leader>gM', make_diffget_operator('//2'))
+mapper.expr_nnoremap('<leader>gI', make_diffget_operator('//3'))
 mapper.silent_nnoremap('<leader>g<CR>', [[/<[<]\+\|==[=]\+\|>[>]\+<CR>]])
 mapper.silent_nnoremap('<leader>g<BS>', [[?<[<]\+\|==[=]\+\|>[>]\+<CR>]])
