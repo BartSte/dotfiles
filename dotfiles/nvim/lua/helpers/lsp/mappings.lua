@@ -1,6 +1,7 @@
 local m = require("helpers.keymapper")
 local fn = require("helpers.fn")
 local helpers = require("helpers.lsp.capabilities")
+local mappings = require("helpers.mappings")
 
 ---@class LspMappings
 ---@field map_formatter function(client: vim.lsp.Client, buf: integer): function
@@ -67,17 +68,10 @@ function M.make_formatter(client, buf)
     end
 
     if not formatters[buf] and not actions[buf] then
-        return M.gggqEq
+        return mappings.gggqG
     else
         return fn.decorate({ formatters[buf], actions[buf] })
     end
-end
-
---- Run gggqG and then return to the cursor before the command was run.
-function M.gggqEq()
-    local pos = vim.api.nvim_win_get_cursor(0)
-    vim.cmd("normal! gggq=")
-    vim.api.nvim_win_set_cursor(0, pos)
 end
 
 return M

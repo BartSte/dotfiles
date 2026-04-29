@@ -1,11 +1,7 @@
-local fn = require("helpers.fn")
 local helpers = require("helpers.lualine")
 local icons = require("nvim-web-devicons")
 local lualine = require("lualine")
 local projectmarks = require("projectmarks.lualine")
-local themes = require("config.lualine.themes")
-local prompts = fn.try_require("prompts.lualine")
-local aider_icon = prompts and prompts.aider_icon
 
 local venv = {
     helpers.venv,
@@ -66,14 +62,14 @@ lualine.setup({
         section_separators = get_section_separator(),
         component_separators = get_component_separator(),
         globalstatus = true,
-        theme = themes[vim.g.colors_name] or 'auto'
+        theme = 'auto'
     },
     sections = {
         -- State of the editor
         lualine_a = { "mode" },
 
         -- Same for all files
-        lualine_b = { aider_icon, projectmarks.shada, projectrc, venv },
+        lualine_b = { projectmarks.shada, projectrc, venv },
 
         -- Changes when switching buffers
         lualine_c = { "branch", "diff", "diagnostics", projectmarks.marks_optimized },

@@ -44,6 +44,10 @@ secret_https="$github/dotfiles-secret.git"
 secret_ssh="git@github-personal:BartSte/dotfiles-secret.git"
 secret_dir="$HOME/dotfiles-secret.git"
 
+openclaw_https="$github/dotfiles-openclaw.git"
+openclaw_ssh="git@github-personal:BartSte/dotfiles-openclaw.git"
+openclaw_dir="$HOME/dotfiles-openclaw.git"
+
 # Base layer
 clone_bare "$base" "$base_dir"
 checkout_worktree "$base_dir"
@@ -67,6 +71,23 @@ if [[ ! -d "$secret_dir" ]]; then
     fi
 else
     checkout_worktree "$secret_dir"
+fi
+
+# Private layer (optional): dotfiles-openclaw
+# This repo is private and may require GitHub auth (gh/SSH). We never want init to fail if
+# access isn't available yet.
+if [[ ! -d "$openclaw_dir" ]]; then
+    if git clone --bare "$openclaw_https" "$openclaw_dir" 2>/dev/null; then
+        checkout_worktree "$openclaw_dir"
+    elif git clone --bare "$openclaw_ssh" "$openclaw_dir" 2>/dev/null; then
+        checkout_worktree "$openclaw_dir"
+    else
+        echo "Note: could not clone private repo dotfiles-openclaw (skipping)."
+        echo "      You can clone it later with:"
+        echo "        git clone --bare $openclaw_https $openclaw_dir"
+    fi
+else
+    checkout_worktree "$openclaw_dir"
 fi
 
 # Detect distro layer
