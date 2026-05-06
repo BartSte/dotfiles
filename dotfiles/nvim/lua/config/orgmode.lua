@@ -111,6 +111,7 @@ orgmode.setup({
     mappings = mappings,
     org_default_notes_file = main,
     org_agenda_files = { main, outlook_personal, outlook_work, personal },
+    org_agenda_span = 'month',
     org_blank_before_new_entry = { heading = true, plain_list_item = false },
     org_highlight_latex_and_related = 'native',
     org_hide_emphasis_markers = true,
