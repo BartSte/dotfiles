@@ -1,0 +1,18 @@
+[
+  (namespace_definition)
+  (class_specifier)
+  (struct_specifier)
+  (union_specifier)
+  (enum_specifier)
+  (function_definition)
+  (declaration_list)
+  (field_declaration_list)
+  (compound_statement)
+  (initializer_list)
+  (parameter_list)
+  (argument_list)
+  (template_parameter_list)
+  (condition_clause)
+  (switch_statement)
+  (case_statement)
+] @fold
