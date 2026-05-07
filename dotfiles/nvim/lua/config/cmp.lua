@@ -12,7 +12,7 @@ local cspace = {
 }
 local down = { i = helpers.next_item_insert, c = helpers.next_item_cmd }
 local enter = { i = helpers.confirm_select(false), c = helpers.confirm_select(false) }
-local menter = { i = helpers.confirm_select(true), c = helpers.confirm_select(true) }
+local cy = { i = helpers.confirm_select(true), c = helpers.confirm_select(true) }
 local up = { i = helpers.prev_item_insert, c = helpers.prev_item_cmd }
 
 local menu_items = {
@@ -81,7 +81,7 @@ cmp.setup({
         ['<C-u>'] = cmp.mapping.scroll_docs(4),
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<Down>'] = cmp.mapping(down),
-        ['<M-CR>'] = cmp.mapping(menter),
+        ['<C-y>'] = cmp.mapping(cy),
         ['<C-space>'] = cmp.mapping(cspace),
         ['<M-space>'] = cmp.mapping(aspace)
     }
