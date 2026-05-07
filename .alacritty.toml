@@ -38,3 +38,8 @@ mods = "Control|Shift"
 chars = "\u001B[24;2~"
 key = "Space"
 mods = "Control"
+
+[[keyboard.bindings]]
+key = "Enter"
+mods = "Alt"
+chars = "\u000a"
