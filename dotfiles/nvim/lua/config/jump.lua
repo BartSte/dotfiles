@@ -6,4 +6,4 @@ require('jump').setup({
   label = 'FlashLabel',
 })
 
-vim.keymap.set({ 'n', 'x', 'o' }, 's', require('jump').start, {})
+vim.keymap.set({ 'n', 'x', 'o' }, 'h', require('jump').start, {})
