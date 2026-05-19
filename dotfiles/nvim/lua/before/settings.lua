@@ -51,6 +51,24 @@ vim.opt.foldlevelstart = 99
 local fold_augroup = vim.api.nvim_create_augroup("fold_method_selection", { clear = true })
 
 local function set_fold_method()
+    if vim.wo.diff then
+        local winid = vim.api.nvim_get_current_win()
+
+        vim.schedule(function()
+            if not vim.api.nvim_win_is_valid(winid) or not vim.wo[winid].diff then
+                return
+            end
+
+            vim.api.nvim_win_call(winid, function()
+                vim.cmd("silent! normal! zR")
+            end)
+            vim.wo[winid].foldenable = false
+            vim.wo[winid].foldlevel = 99
+        end)
+
+        return
+    end
+
     local filetype = vim.bo.filetype
     local lang = vim.treesitter.language.get_lang(filetype) or filetype
     local has_folds = lang and #vim.api.nvim_get_runtime_file("queries/" .. lang .. "/folds.scm", true) > 0
@@ -66,7 +84,7 @@ local function set_fold_method()
     end
 end
 
-vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "DiffUpdated", "FileType", "WinEnter" }, {
     group = fold_augroup,
     callback = set_fold_method,
 })
