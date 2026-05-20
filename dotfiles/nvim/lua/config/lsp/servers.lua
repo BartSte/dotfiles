@@ -29,34 +29,7 @@ return {
     },
 
     bashls = { filetypes = { "sh", "bash", "zsh" } },
-
-    lua_ls = {
-        settings = {
-            Lua = {
-                codeLens = {
-                    enable = true
-                },
-                hint = {
-                    enable = true,
-                    semicolon = "Disable"
-                },
-                runtime = {
-                    path = {
-                        "?.lua",
-                        "?/init.lua",
-                        "lua/?.lua",
-                        "lua/?/init.lua",
-                    },
-                    version = "LuaJIT",
-                },
-                workspace = {
-                    library = vim.api.nvim_get_runtime_file("", true),
-                    checkThirdParty = false,
-                },
-            }
-        }
-    },
-
+    lua_ls = {},
     ruff = {},
     cmake = {},
     vimls = {},
