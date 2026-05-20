@@ -1,6 +1,12 @@
 vim.cmd("filetype on")
 vim.cmd("syntax on")
 
+vim.filetype.add({
+    extension = {
+        txt = "text",
+    },
+})
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.opt.autoindent = true

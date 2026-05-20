@@ -40,6 +40,15 @@ return {
                     enable = true,
                     semicolon = "Disable"
                 },
+                runtime = {
+                    path = {
+                        "?.lua",
+                        "?/init.lua",
+                        "lua/?.lua",
+                        "lua/?/init.lua",
+                    },
+                    version = "LuaJIT",
+                },
                 workspace = {
                     library = vim.api.nvim_get_runtime_file("", true),
                     checkThirdParty = false,
@@ -52,6 +61,19 @@ return {
     cmake = {},
     vimls = {},
     marksman = {},
+    ltex_plus = {
+        filetypes = { "markdown", "org", "text", "gitcommit" },
+        settings = {
+            ltex = {
+                additionalRules = {
+                    enablePickyRules = true,
+                    motherTongue = "en",
+                },
+                checkFrequency = "save",
+                language = "en-US",
+            },
+        },
+    },
     jsonls = {},
     ts_ls = {},
     yamlls = {},
