@@ -16,18 +16,21 @@ vim.diagnostic.config({
 })
 
 --- Wraps and decorates the root_dir function or path.
----@param root_dir string|function Original root directory string or function.
----@return function A function that resolves the root directory for a given buffer.
+---@param root_dir string|function|nil Original root directory string or function.
+---@return function|nil A function that resolves the root directory for a given buffer.
 local function decorate_root_dir(root_dir)
-    return function(bufnr, callback)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    if fname:sub(1, 11) == "fugitive://" then
+    if root_dir == nil then
         return nil
     end
-    if type(root_dir) == "function" then
-        root_dir(bufnr, callback)
-    end
-    callback(root_dir)
+    return function(bufnr, callback)
+        local fname = vim.api.nvim_buf_get_name(bufnr)
+        if fname:sub(1, 11) == "fugitive://" then
+            return nil
+        end
+        if type(root_dir) == "function" then
+            return root_dir(bufnr, callback)
+        end
+        callback(root_dir)
     end
 end
 
@@ -35,7 +38,9 @@ end
 ---The on_attach function can be used to setup configurations that are specific
 ---to a server. Server capabilities can be specified in the capabilities module.
 for name, config in pairs(server_opts) do
-    config.root_dir = decorate_root_dir(config.root_dir)
+    if config.root_dir ~= nil then
+        config.root_dir = decorate_root_dir(config.root_dir)
+    end
     vim.lsp.config(name, config)
     vim.lsp.enable(name)
 end

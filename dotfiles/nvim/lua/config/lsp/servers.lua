@@ -1,3 +1,16 @@
+local function nvim_config_root(bufnr, callback)
+    local path = require("helpers.path")
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    local dotfiles_nvim = path.join(path.home(), "dotfiles", "nvim")
+
+    if fname:sub(1, #dotfiles_nvim) == dotfiles_nvim then
+        callback(dotfiles_nvim)
+        return
+    end
+
+    callback(path.config_dir())
+end
+
 ---@type table<string, vim.lsp.Config>
 return {
     basedpyright = {
@@ -29,7 +42,38 @@ return {
     },
 
     bashls = { filetypes = { "sh", "bash", "zsh" } },
-    lua_ls = {},
+    lua_ls = {
+        root_dir = nvim_config_root,
+        settings = {
+            Lua = {
+                codeLens = {
+                    enable = true,
+                },
+                diagnostics = {
+                    globals = {
+                        "vim",
+                        "Snacks",
+                    },
+                },
+                hint = {
+                    enable = true,
+                    semicolon = "Disable",
+                },
+                runtime = {
+                    version = "LuaJIT",
+                    path = {
+                        "?.lua",
+                        "?/init.lua",
+                        "lua/?.lua",
+                        "lua/?/init.lua",
+                    },
+                },
+                workspace = {
+                    checkThirdParty = false,
+                },
+            },
+        },
+    },
     ruff = {},
     cmake = {},
     vimls = {},
