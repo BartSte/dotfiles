@@ -4,12 +4,15 @@ local helpers = require("helpers.lsp.capabilities")
 local mappings = require("helpers.mappings")
 
 ---@class LspMappings
----@field map_formatter function(client: vim.lsp.Client, buf: integer): function
+---@field map_formatter fun(client: vim.lsp.Client, buf: integer, lhs?: string): nil
+---@field make_formatter fun(client?: vim.lsp.Client, buf?: integer): function|nil
 local M = {}
 local IGNORE = { "GitHub Copilot" }
 local formatters = {}
 local actions = {}
 
+---@class LspServerCapabilitiesWithFormatActions: lsp.ServerCapabilities
+---@field format_actions? string[]
 
 --- Run a formatter on the current buffer.
 ---@return function formatter The formatter function
@@ -23,9 +26,11 @@ end
 ---@param client vim.lsp.Client The client to use for the actions
 local function make_run_actions(client)
     return function()
+        local server_capabilities = client.server_capabilities
+        ---@cast server_capabilities LspServerCapabilitiesWithFormatActions
         vim.lsp.buf.code_action({
             context = {
-                only = client.server_capabilities.format_actions,
+                only = server_capabilities.format_actions,
                 diagnostics = {}
             },
             apply = true,
@@ -38,7 +43,7 @@ end
 ---@param client vim.lsp.Client The client to use for the formatter
 ---@param buf integer The buffer to apply the formatter to
 ---@param lhs string The keybinding to map to the formatter
----@return function formatter The formatter function
+---@return nil
 function M.map_formatter(client, buf, lhs)
     local formatter = M.make_formatter(client, buf)
     if formatter then
@@ -58,7 +63,7 @@ function M.make_formatter(client, buf)
         return nil
     end
 
-    if helpers.has_capability(client, "documentFormattingProvider") then
+    if client and helpers.has_capability(client, "documentFormattingProvider") then
         formatters[buf] = fn.decorate({ formatters[buf], make_buf_format() })
     end
 

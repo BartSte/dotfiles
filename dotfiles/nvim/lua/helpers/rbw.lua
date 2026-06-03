@@ -16,7 +16,7 @@ end
 
 --- Set the `env` variable to the token stored in the entry `name`.
 ---@param name string The name of the entry
----@param env string | nil The environment variable to set to the token
+---@param env? string The environment variable to set to the token
 ---@return boolean True if env variable was successfully set, false otherwise.
 function M.set_env(name, env)
     env = env or name

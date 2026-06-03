@@ -1,5 +1,5 @@
 ---@class CapabilityHelper
----@field has_capability fun(client: vim.lsp.Client, capability: string): boolean
+---@field has_capability fun(client: vim.lsp.Client|NullLsSource?, capability: string): boolean
 local M = {}
 
 --- Return true if the client has the specified capability.
@@ -14,7 +14,10 @@ function M.has_capability(client, capability)
     end
     if client.server_capabilities and client.server_capabilities[capability] then
         local value = client.server_capabilities[capability]
-        return value == true or next(value) ~= nil
+        if type(value) == "table" then
+            return next(value) ~= nil
+        end
+        return value == true
     elseif client.methods then
         return client.methods[capability] == true
     else

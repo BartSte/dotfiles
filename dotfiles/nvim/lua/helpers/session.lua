@@ -1,7 +1,6 @@
 local path = require("helpers.path")
 
----@module session
----@class M
+---@class SessionHelper
 ---@field directory string The root directory for sessions
 ---@field save fun():nil Save the current session
 ---@field load fun():nil Load the session for the current directory

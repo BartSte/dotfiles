@@ -1,9 +1,11 @@
 local null_ls = require("null-ls")
 
 ---@class NullLsNotify
----@field attach function(buf: integer)
+---@field attach fun(buf: integer): nil
 local M = {}
 
+---@param buf integer
+---@return nil
 function M.attach(buf)
     local attached = null_ls.get_sources()
     local ft = vim.bo[buf].filetype

@@ -10,7 +10,7 @@ end
 ---Split string into a table of strings using a separator.
 ---@param inputString string The string to split.
 ---@param sep string The separator to use.
----@return table table A table of strings.
+---@return string[] parts A table of strings.
 M.split = function(inputString, sep)
     local fields = {}
 
@@ -48,11 +48,16 @@ end
 --- Return the home directory of the current user.
 ---@return string The home directory.
 M.home = function()
+    local home
     if vim.fn.has('win32') == 1 then
-        return os.getenv('USERPROFILE')
+        home = os.getenv('USERPROFILE')
     else
-        return os.getenv('HOME')
+        home = os.getenv('HOME')
     end
+    if not home then
+        error("Could not determine home directory.")
+    end
+    return home
 end
 
 
@@ -116,8 +121,7 @@ end
 
 --- Similar to `join`, but now for module names, which are separated by a dot.
 ---@param module string The module name. For example `helpers`.
----@vararg string The parts of the module name to join. For example `path` and
---join
+---@param ... string The parts of the module name to join. For example `path` and `join`
 ---@return string module The joined module name. For example
 --`helpers.path.join`.
 M.module_join = function(module, ...)
@@ -135,17 +139,17 @@ end
 
 --- Normalize a path.
 --- I hate windows separators...
---- @param path string The path to normalize.
---- @return string The normalized path.
+---@param path string The path to normalize.
+---@return string The normalized path.
 M.norm = function(path)
-    return path:gsub("\\", "/")
+    return (path:gsub("\\", "/"))
 end
 
 --- Return top level directory of a path.
 ---@param path string The path to get the top level directory from.
 ---@return string The top level directory.
 M.top_dir = function(path)
-    return M.norm(vim.fn.fnamemodify(path, ":p:h")):match("([^/]+)$")
+    return M.norm(vim.fn.fnamemodify(path, ":p:h")):match("([^/]+)$") or ""
 end
 
 --- Return the configuration directory.

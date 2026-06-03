@@ -8,7 +8,7 @@ local M = {}
 ---@param text string
 ---@return string
 local function strip_text(text)
-    return text:gsub("[^\x20-\x7E]", "")
+    return (text:gsub("[^\x20-\x7E]", ""))
 end
 
 --- Insert the first selected entry into the current buffer.
@@ -132,7 +132,7 @@ local function insert_dir(directory)
 end
 
 --- Extract a sanitized branch name from the selection.
----@param selected table
+---@param selected string[]
 ---@return string
 local function strip_selected_branch(selected)
     local branch = string.gsub(selected[1], "^ *remotes/", "")
@@ -146,7 +146,7 @@ local function strip_selected_branch(selected)
 end
 
 --- Run a git subcommand and report success or failure.
----@param cmd table
+---@param cmd string[]
 ---@param opts table|nil
 ---@param success_msg string|nil
 ---@return nil
@@ -154,10 +154,11 @@ local function git_call(cmd, opts, success_msg)
     if not cmd or #cmd == 0 then
         error("cmd is empty.")
     end
-    cmd = fzf.path.git_cwd(cmd, opts)
-    local output, rc = fzf.utils.io_systemlist(cmd)
+    local git_cmd = fzf.path.git_cwd(cmd, opts or {})
+    ---@cast git_cmd string[]
+    local output, rc = fzf.utils.io_systemlist(git_cmd)
     if rc ~= 0 then
-        fzf.utils.error("error for cmd: " .. table.concat(cmd, " "))
+        fzf.utils.error("error for cmd: " .. table.concat(git_cmd, " "))
         fzf.utils.error(unpack(output))
     elseif success_msg then
         fzf.utils.info(success_msg)
@@ -261,7 +262,7 @@ end
 M.git = {}
 
 --- Check out a remote branch and set up tracking.
----@param selected table
+---@param selected string[]
 ---@param opts table|nil
 ---@return nil
 function M.git.branch_track(selected, opts)
@@ -272,7 +273,7 @@ function M.git.branch_track(selected, opts)
 end
 
 --- Rebase the current branch onto the selected remote branch.
----@param selected table
+---@param selected string[]
 ---@param opts table|nil
 ---@return nil
 function M.git.branch_rebase(selected, opts)
@@ -283,7 +284,7 @@ function M.git.branch_rebase(selected, opts)
 end
 
 --- Merge the selected remote branch into the current branch.
----@param selected table
+---@param selected string[]
 ---@param opts table|nil
 ---@return nil
 function M.git.branch_merge(selected, opts)

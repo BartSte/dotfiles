@@ -1,8 +1,10 @@
 -- General functions that are too small to be in their own module.
 
 ---@class FunctionHelpers
----@field decorate function
----@field tabulate function(header: table, rows: table): string
+---@field decorate fun(functions: table<integer, function?>): function
+---@field tabulate fun(header: string[], rows: string[][]): string
+---@field is_empty fun(x: any): boolean
+---@field try_require fun(module_name: string, fallback: any): any
 local M = {}
 
 --- Create a composite function that executes each provided callback in order.

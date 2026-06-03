@@ -1,13 +1,7 @@
 ---@class Helpers.LuaLine
 --- Module providing custom components for lualine statusline.
----@field tabs function Gets formatted current/total tab information
----@field venv function Retrieves Python virtual environment name
----@field shada function Tracks shada file status (unimplemented)
----@field marks function Handles mark tracking (unimplemented)
----@field mark_exists function Checks mark existence (unimplemented)
----@field find_marks function Locates marks (unimplemented)
----@field extract_venv_name function Recursively extracts venv name
----@return LuaLine
+---@field tabs fun(): string Gets formatted current/total tab information
+---@field venv fun(): string|nil Retrieves Python virtual environment name
 local M = {}
 
 --- Gets current tab position and total tabs as formatted string
@@ -19,10 +13,13 @@ M.tabs = function()
 end
 
 --- Recursively extracts virtual environment name from path
----@param venv string Path to virtual environment
----@param exclude? table<string> Names to exclude from detection (default: venv/.venv)
+---@param venv string|nil Path to virtual environment
+---@param exclude? string[] Names to exclude from detection (default: venv/.venv)
 ---@return string|nil name Extracted environment name or nil if no valid name found
 local function extract_venv_name(venv, exclude)
+    if not venv then
+        return nil
+    end
     exclude = exclude or { "venv", ".venv" }
     venv = string.gsub(venv, "\\", "/")
     local name = string.match(venv, "/([^/]*)$")

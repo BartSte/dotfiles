@@ -3,7 +3,7 @@ local null_ls = require("null-ls")
 local capabilities = require("helpers.lsp.capabilities")
 
 --- The clients that have been attached to a buffer of a specific filetype.
----@type table<vim.lsp.Client|NullLsSource>
+---@type table<string, (vim.lsp.Client|NullLsSource)[]>
 local attached = {}
 
 ---@type table<string, integer>
@@ -12,7 +12,7 @@ local msg_id = {}
 --- Return the list of clients that have been attached to a buffer of a specific
 --- filetype at least once
 ---@param buf integer
----@return table <vim.lsp.Client|NullLsSource>
+---@return (vim.lsp.Client|NullLsSource)[]
 local function get_attached(buf)
     local ft = vim.bo[buf].filetype
     attached[ft] = attached[ft] or {}
@@ -83,8 +83,8 @@ end
 local progress_per_client = vim.defaulttable()
 
 ---@class Notify
----@field attach function
----@field progress function
+---@field attach fun(client: vim.lsp.Client, buf: integer): nil
+---@field progress fun(ev: {data: {client_id: integer, params: lsp.ProgressParams}}): nil
 local M = {}
 
 --- Notify about which clients are attached.
@@ -104,6 +104,12 @@ M.attach = function(client, buf)
 end
 
 --- Notify about the progress of a request.
+---@class LspWorkDoneProgressValue
+---@field kind string
+---@field title? string
+---@field message? string
+---@field percentage? integer
+
 ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
 M.progress = function(ev)
     if vim.v.exiting ~= vim.NIL then
@@ -115,6 +121,7 @@ M.progress = function(ev)
     if not client or type(value) ~= "table" then
         return
     end
+    ---@cast value LspWorkDoneProgressValue
     local p = progress_per_client[client.id]
 
     for i = 1, #p + 1 do

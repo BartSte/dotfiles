@@ -1,4 +1,4 @@
-local mappers = require('helpers.keymapper') 
+local mappers = require('helpers.keymapper')
 require('neogen').setup {
     enabled = true,
     languages = {

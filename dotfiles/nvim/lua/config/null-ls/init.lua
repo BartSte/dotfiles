@@ -6,6 +6,7 @@ local mappings = require('config.lsp.mappings')
 ---@field name string
 ---@field id integer
 ---@field methods table<string,boolean>
+---@field filetypes? table<string, boolean>
 
 local sources = {
     -- C++

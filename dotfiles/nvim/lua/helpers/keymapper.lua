@@ -1,62 +1,74 @@
+---@alias KeymapRhs string|function
+---@alias KeymapBinder fun(lhs: string, rhs: KeymapRhs, opts?: vim.keymap.set.Opts): nil
 ---@class KeyMapper
----@field cmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field imap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field nmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field omap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field vmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field xmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field cnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field inoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field nnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field noremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field onoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field tnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field vnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field xnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_cmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_imap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_nmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_omap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_vmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_xmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_cnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_inoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_nnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_noremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_onoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_tnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_vnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field buffer_xnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_cmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_imap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_nmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_omap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_vmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_xmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_cnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_inoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_nnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_noremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_onoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_tnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_vnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_xnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_cmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_imap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_nmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_omap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_vmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_xmap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_cnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_inoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_nnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_noremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_onoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_tnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_vnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
----@field silent_buffer_xnoremap fun(lhs: string, rhs: string | function, opts: table?): nil
+---@field cmap KeymapBinder
+---@field imap KeymapBinder
+---@field nmap KeymapBinder
+---@field omap KeymapBinder
+---@field vmap KeymapBinder
+---@field xmap KeymapBinder
+---@field cnoremap KeymapBinder
+---@field inoremap KeymapBinder
+---@field nnoremap KeymapBinder
+---@field noremap KeymapBinder
+---@field onoremap KeymapBinder
+---@field tnoremap KeymapBinder
+---@field vnoremap KeymapBinder
+---@field xnoremap KeymapBinder
+---@field buffer_cmap KeymapBinder
+---@field buffer_imap KeymapBinder
+---@field buffer_nmap KeymapBinder
+---@field buffer_omap KeymapBinder
+---@field buffer_vmap KeymapBinder
+---@field buffer_xmap KeymapBinder
+---@field buffer_cnoremap KeymapBinder
+---@field buffer_inoremap KeymapBinder
+---@field buffer_nnoremap KeymapBinder
+---@field buffer_noremap KeymapBinder
+---@field buffer_onoremap KeymapBinder
+---@field buffer_tnoremap KeymapBinder
+---@field buffer_vnoremap KeymapBinder
+---@field buffer_xnoremap KeymapBinder
+---@field silent_cmap KeymapBinder
+---@field silent_imap KeymapBinder
+---@field silent_nmap KeymapBinder
+---@field silent_omap KeymapBinder
+---@field silent_vmap KeymapBinder
+---@field silent_xmap KeymapBinder
+---@field silent_cnoremap KeymapBinder
+---@field silent_inoremap KeymapBinder
+---@field silent_nnoremap KeymapBinder
+---@field silent_noremap KeymapBinder
+---@field silent_onoremap KeymapBinder
+---@field silent_tnoremap KeymapBinder
+---@field silent_vnoremap KeymapBinder
+---@field silent_xnoremap KeymapBinder
+---@field silent_buffer_cmap KeymapBinder
+---@field silent_buffer_imap KeymapBinder
+---@field silent_buffer_nmap KeymapBinder
+---@field silent_buffer_omap KeymapBinder
+---@field silent_buffer_vmap KeymapBinder
+---@field silent_buffer_xmap KeymapBinder
+---@field silent_buffer_cnoremap KeymapBinder
+---@field silent_buffer_inoremap KeymapBinder
+---@field silent_buffer_nnoremap KeymapBinder
+---@field silent_buffer_noremap KeymapBinder
+---@field silent_buffer_onoremap KeymapBinder
+---@field silent_buffer_tnoremap KeymapBinder
+---@field silent_buffer_vnoremap KeymapBinder
+---@field silent_buffer_xnoremap KeymapBinder
+---@field expr_inoremap KeymapBinder
+---@field expr_nnoremap KeymapBinder
+---@field expr_vnoremap KeymapBinder
+---@field expr_xnoremap KeymapBinder
+---@field expr_onoremap KeymapBinder
+---@field expr_tnoremap KeymapBinder
+---@field expr_cnoremap KeymapBinder
 local M = {}
 
+---@param op string|string[]
+---@param outer_opts? vim.keymap.set.Opts
+---@return KeymapBinder
 local function bind(op, outer_opts)
     outer_opts = outer_opts or { noremap = true }
 

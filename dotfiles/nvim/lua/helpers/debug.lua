@@ -1,5 +1,5 @@
 ---@class Debug
----@field setup function
+---@field setup fun(): nil
 local M = {}
 
 --- See https://github.com/folke/snacks.nvim/blob/main/docs/debug.md

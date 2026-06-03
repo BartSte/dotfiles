@@ -1,6 +1,6 @@
 ---@class Capabilities
 ---Functions that configure the server capabilities.
----@field update function(client: lsp.Client, bufnr: number) Update the server
+---@field update fun(client: vim.lsp.Client, bufnr: number): nil Update the server
 ---capabilities for the given client and buffer. If the client is not specified,
 ---in this module, no changes are made.
 local M = {}

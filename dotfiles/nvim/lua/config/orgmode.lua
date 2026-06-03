@@ -103,7 +103,7 @@ local templates = {
         description = 'Event',
         template =
         '*\n\n:PROPERTIES:\n:ATTENDEES: \n:LOCATION: \n:ORGANIZER: \n:RRULE: \n:STATUS: \n:UID: \n:URL: \n:UNTIL: \n:END:\n',
-        target = outlook
+        target = outlook_personal
     }
 }
 

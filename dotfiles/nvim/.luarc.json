@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "runtime.version": "LuaJIT",
+  "runtime.path": [
+    "?.lua",
+    "?/init.lua",
+    "lua/?.lua",
+    "lua/?/init.lua"
+  ],
+  "workspace.library": [
+    "/usr/share/nvim/runtime/lua",
+    "/usr/share/nvim/runtime/lua/vim/lsp",
+    "/usr/share/nvim/runtime/lua/vim/_meta",
+    "/home/barts/.local/share/nvim/lazy/lazy.nvim/lua",
+    "/home/barts/.local/share/nvim/lazy/lazy.nvim/lua/lazy",
+    "/home/barts/.local/share/nvim/lazy/nvim-lspconfig/lua",
+    "/home/barts/.local/share/nvim/lazy/nvim-cmp/lua",
+    "/home/barts/.local/share/nvim/lazy/fzf-lua/lua",
+    "/home/barts/.local/share/nvim/lazy/oil.nvim/lua",
+    "/home/barts/.local/share/nvim/lazy/snacks.nvim/lua",
+    "/home/barts/.local/share/nvim/lazy/render-markdown.nvim/lua",
+    "/home/barts/.local/share/nvim/lazy/nvim-treesitter/lua",
+    "/home/barts/.local/share/nvim/lazy/orgmode/lua",
+    "/home/barts/.local/share/nvim/lazy/hop.nvim/lua",
+    "/home/barts/.local/share/nvim/lazy/null-ls.nvim/lua"
+  ],
+  "workspace.checkThirdParty": false,
+  "diagnostics.globals": [
+    "vim",
+    "Snacks"
+  ],
+  "diagnostics.disable": [
+    "codestyle-check",
+    "deprecated",
+    "different-requires",
+    "missing-fields"
+  ],
+  "diagnostics.neededFileStatus": {
+    "codestyle-check": "Any",
+    "duplicate-doc-field": "Any",
+    "duplicate-doc-param": "Any",
+    "undefined-doc-class": "Any",
+    "undefined-doc-name": "Any"
+  }
+}

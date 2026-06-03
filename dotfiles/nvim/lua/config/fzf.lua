@@ -15,7 +15,7 @@ fzf.setup({
         height  = 0.9,
         width   = 0.9,
         preview = {
-            hidden = "hidden",
+            hidden = true,
         }
     },
     keymap  = {

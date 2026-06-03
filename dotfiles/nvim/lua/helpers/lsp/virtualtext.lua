@@ -1,7 +1,8 @@
 ---@class VirtualText
----@field off function
----@field error function
----@field all function
+---@field off fun(): nil
+---@field error fun(): nil
+---@field all fun(): nil
+---@field rotate fun(): nil
 local M = {}
 
 function M.off()
