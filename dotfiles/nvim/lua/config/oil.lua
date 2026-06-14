@@ -69,6 +69,11 @@ oil.setup({
             winblend = 10,
         },
     },
+    -- Use regular loaded buffers for previews so normal filetype detection,
+    -- syntax scripts, and Treesitter highlighting all apply.
+    preview_win = {
+        preview_method = "load",
+    },
     -- Configuration for the actions floating preview window
     preview = {
         -- Width dimensions can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
