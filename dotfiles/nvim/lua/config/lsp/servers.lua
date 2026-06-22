@@ -20,6 +20,11 @@ local basedpyright_project_markers = {
     "Pipfile",
 }
 
+local marksman_project_markers = {
+    ".marksman.toml",
+    ".git",
+}
+
 ---@param fname string
 ---@return string|nil
 local function find_git_root(fname)
@@ -29,15 +34,29 @@ local function find_git_root(fname)
     end
 
     local stat = vim.uv.fs_stat(git_marker)
+    local git_root
     if stat and stat.type == "file" then
-        return vim.fs.dirname(git_marker)
+        git_root = vim.fs.dirname(git_marker)
+    elseif stat and stat.type == "directory" and vim.uv.fs_stat(vim.fs.joinpath(git_marker, "HEAD")) then
+        git_root = vim.fs.dirname(git_marker)
     end
 
-    if stat and stat.type == "directory" and vim.uv.fs_stat(vim.fs.joinpath(git_marker, "HEAD")) then
-        return vim.fs.dirname(git_marker)
+    if git_root == vim.uv.os_homedir() then
+        return nil
     end
 
-    return nil
+    return git_root
+end
+
+---@param fname string
+---@param markers string[]
+---@return string|nil
+local function find_project_root(fname, markers)
+    local root = vim.fs.root(fname, markers)
+    if root == vim.uv.os_homedir() then
+        return nil
+    end
+    return root
 end
 
 ---@type table<string, vim.lsp.Config>
@@ -52,7 +71,7 @@ return {
                 return
             end
 
-            local project_root = vim.fs.root(fname, basedpyright_project_markers)
+            local project_root = find_project_root(fname, basedpyright_project_markers)
             if project_root then
                 on_dir(project_root)
             end
@@ -119,9 +138,18 @@ return {
     ruff = {},
     cmake = {},
     vimls = {},
-    marksman = {},
+    marksman = {
+        single_file_support = false,
+        root_dir = function(bufnr, on_dir)
+            local fname = vim.api.nvim_buf_get_name(bufnr)
+            local project_root = find_project_root(fname, marksman_project_markers)
+            if project_root then
+                on_dir(project_root)
+            end
+        end,
+    },
     ltex_plus = {
-        filetypes = { "markdown", "org", "text", "gitcommit" },
+        filetypes = { "markdown", "org" },
         settings = {
             ltex = {
                 additionalRules = {

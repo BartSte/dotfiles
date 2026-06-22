@@ -6,6 +6,8 @@ local mappings     = require('config.lsp.mappings')
 local server_opts  = require('config.lsp.servers')
 local util         = require("lspconfig.util")
 
+vim.lsp.log.set_level(vim.lsp.log.levels.WARN)
+
 vim.diagnostic.config({
     virtual_text = false,
     signs = false,
