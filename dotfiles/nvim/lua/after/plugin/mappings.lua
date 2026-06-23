@@ -4,7 +4,7 @@ local m = require("helpers.keymapper")
 -- <C-b> is reserved as a "leader" in insert mode
 
 -- Unused:
--- k, j, l, L
+-- k, j, L
 
 --------------------------------------------------------------------------------
 --- No modifiers
@@ -14,6 +14,7 @@ m.nnoremap("ZA", ":wqa<CR>")
 m.vnoremap("p", "pgvy")
 m.nnoremap("Q", require("helpers.wininfo").toggle_quickfix)
 m.noremap("gF", "<cmd>wincmd v<bar>wincmd l<CR>gf")
+m.nnoremap("l", ":e<CR>")
 
 -- Use <BS> for moving up
 m.nnoremap("<BS>", "k")
