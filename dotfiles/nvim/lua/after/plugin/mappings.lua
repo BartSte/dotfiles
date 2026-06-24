@@ -15,6 +15,7 @@ m.vnoremap("p", "pgvy")
 m.nnoremap("Q", require("helpers.wininfo").toggle_quickfix)
 m.noremap("gF", "<cmd>wincmd v<bar>wincmd l<CR>gf")
 m.nnoremap("l", ":e<CR>")
+m.nnoremap("j", ":let @+=@%<CR>")
 
 -- Use <BS> for moving up
 m.nnoremap("<BS>", "k")
