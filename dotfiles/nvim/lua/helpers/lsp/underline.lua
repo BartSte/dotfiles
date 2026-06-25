@@ -2,7 +2,7 @@
 ---@field off fun(): nil
 ---@field error fun(): nil
 ---@field all fun(): nil
----@field rotate fun(): nil
+---@field toggle fun(): nil
 local M = {}
 
 M.underline = {}
@@ -31,14 +31,16 @@ function M.all()
 end
 
 local ID = "lsp_underline"
-local index = 0
-local opts = { M.off, M.error, M.all }
-local names = { "off", "error", "all" }
-function M.rotate()
-    index = (index % #opts) + 1
-    opts[index]()
+function M.toggle()
+    if vim.diagnostic.config().underline == false then
+        M.all()
+        vim.notify("Diagnostics underline: all", vim.log.levels.INFO, { title = "Underline", id = ID })
+        return
+    end
+
+    M.off()
     vim.notify(
-        string.format("Diagnostics underline: %s", names[index]),
+        "Diagnostics underline: off",
         vim.log.levels.INFO,
         { title = "Underline", id = ID }
     )

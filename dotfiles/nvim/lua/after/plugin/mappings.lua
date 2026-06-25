@@ -1,10 +1,11 @@
 local sorters = require("helpers.sorters")
 local m = require("helpers.keymapper")
+local lsp_helpers = require("helpers.lsp")
 
 -- <C-b> is reserved as a "leader" in insert mode
 
 -- Unused:
--- k, j, L
+-- L
 
 --------------------------------------------------------------------------------
 --- No modifiers
@@ -14,8 +15,9 @@ m.nnoremap("ZA", ":wqa<CR>")
 m.vnoremap("p", "pgvy")
 m.nnoremap("Q", require("helpers.wininfo").toggle_quickfix)
 m.noremap("gF", "<cmd>wincmd v<bar>wincmd l<CR>gf")
-m.nnoremap("l", ":e<CR>")
-m.nnoremap("j", ":let @+=@%<CR>")
+m.nnoremap("j", lsp_helpers.virtualtext.toggle)
+m.nnoremap("l", lsp_helpers.underline.toggle)
+m.nnoremap("k", ":e<CR>")
 
 -- Use <BS> for moving up
 m.nnoremap("<BS>", "k")
