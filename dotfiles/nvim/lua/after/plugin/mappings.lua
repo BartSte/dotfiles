@@ -15,9 +15,9 @@ m.nnoremap("ZA", ":wqa<CR>")
 m.vnoremap("p", "pgvy")
 m.nnoremap("Q", require("helpers.wininfo").toggle_quickfix)
 m.noremap("gF", "<cmd>wincmd v<bar>wincmd l<CR>gf")
-m.nnoremap("j", lsp_helpers.virtualtext.toggle)
-m.nnoremap("l", lsp_helpers.underline.toggle)
-m.nnoremap("k", ":e<CR>")
+m.nnoremap("j", lsp_helpers.underline.toggle)
+m.nnoremap("l", lsp_helpers.restart)
+m.nnoremap("k", lsp_helpers.virtualtext.toggle)
 
 -- Use <BS> for moving up
 m.nnoremap("<BS>", "k")
