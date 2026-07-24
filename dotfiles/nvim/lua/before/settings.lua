@@ -1,6 +1,3 @@
-vim.cmd("filetype on")
-vim.cmd("syntax on")
-
 vim.filetype.add({
     extension = {
         txt = "text",
@@ -21,6 +18,7 @@ vim.opt.expandtab = true
 vim.opt.ignorecase = true
 vim.opt.mouse = ""
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.pumheight = 10
 vim.opt.pumwidth = 15
 vim.opt.shiftwidth = 4
@@ -48,52 +46,10 @@ if vim.fn.isdirectory(path.join(dotfiles_nvim, "queries")) == 1 then
     vim.opt.runtimepath:append(dotfiles_nvim)
 end
 
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldmethod = "expr"
+vim.opt.foldmethod = "manual"
 vim.opt.foldtext = "v:lua.FoldText()"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
-
-local fold_augroup = vim.api.nvim_create_augroup("fold_method_selection", { clear = true })
-
-local function set_fold_method()
-    if vim.wo.diff then
-        local winid = vim.api.nvim_get_current_win()
-
-        vim.schedule(function()
-            if not vim.api.nvim_win_is_valid(winid) or not vim.wo[winid].diff then
-                return
-            end
-
-            vim.api.nvim_win_call(winid, function()
-                vim.cmd("silent! normal! zR")
-            end)
-            vim.wo[winid].foldenable = false
-            vim.wo[winid].foldlevel = 99
-        end)
-
-        return
-    end
-
-    local filetype = vim.bo.filetype
-    local lang = vim.treesitter.language.get_lang(filetype) or filetype
-    local has_folds = lang and #vim.api.nvim_get_runtime_file("queries/" .. lang .. "/folds.scm", true) > 0
-    local ok, parser = pcall(vim.treesitter.get_parser, 0, lang)
-    local has_parser = ok and parser ~= nil
-
-    if has_folds and has_parser then
-        vim.opt_local.foldmethod = "expr"
-        vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-    else
-        vim.opt_local.foldmethod = "indent"
-        vim.opt_local.foldexpr = "0"
-    end
-end
-
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "DiffUpdated", "FileType", "WinEnter" }, {
-    group = fold_augroup,
-    callback = set_fold_method,
-})
 
 if vim.fn.has("termguicolors") then
     vim.opt.termguicolors = true
