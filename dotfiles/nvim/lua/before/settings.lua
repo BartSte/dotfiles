@@ -13,7 +13,14 @@ vim.opt.colorcolumn = "+1"
 vim.opt.conceallevel = 2
 vim.opt.concealcursor = "nc"
 vim.opt.cursorline = true
-vim.opt.diffopt:append("vertical", "iblank", "closeoff")
+vim.opt.diffopt:remove("linematch:40")
+vim.opt.diffopt:append({
+    "vertical",
+    "iblank",
+    "closeoff",
+    "algorithm:histogram",
+    "linematch:60",
+})
 vim.opt.expandtab = true
 vim.opt.ignorecase = true
 vim.opt.mouse = ""
