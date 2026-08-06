@@ -39,7 +39,6 @@ return {
         "<leader>gR",
         "<leader>gd",
         "<leader>gD",
-        "<leader>gy",
         { "<leader>gm", mode = { "n", "x" } },
         { "<leader>gi", mode = { "n", "x" } },
         "<leader>gM",
