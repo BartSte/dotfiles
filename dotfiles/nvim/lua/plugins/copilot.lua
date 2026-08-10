@@ -1,6 +1,6 @@
 return {
     "github/copilot.vim",
-    event = "InsertEnter",
+    lazy = false,
     cmd = "Copilot",
     keys = "<leader>co",
     cond = function()

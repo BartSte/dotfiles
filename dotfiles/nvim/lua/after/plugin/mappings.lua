@@ -46,10 +46,6 @@ m.cnoremap("<C-h>", "<C-w>")
 m.inoremap("<C-BS>", "<C-w>")
 m.inoremap("<C-Del>", "<C-o>dE")
 m.inoremap("<C-h>", "<C-w>")
-
---- Quickfix buffer navigation
-m.nnoremap("<C-p>", ":cprev<CR>")
-m.nnoremap("<C-n>", ":cnext<CR>")
 --------------------------------------------------------------------------------
 -- Alt commands
 -- For navigation between buffers and windows.
