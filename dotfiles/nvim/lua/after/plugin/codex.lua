@@ -11,9 +11,9 @@ end, {
     range = true,
 })
 
-vim.keymap.set("n", "<leader>cs", codex.send_path, {
+vim.keymap.set("n", "<leader>as", codex.send_path, {
     desc = "Send the current path to Codex",
 })
-vim.keymap.set("x", "<leader>cs", codex.send_visual, {
+vim.keymap.set("x", "<leader>as", codex.send_visual, {
     desc = "Send the visual selection to Codex",
 })
