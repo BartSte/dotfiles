@@ -1,6 +1,6 @@
 return {
     "github/copilot.vim",
-    event = { "BufReadPre", "BufNewFile" },
+    lazy = false,
     cmd = "Copilot",
     keys = "<leader>co",
     cond = function()

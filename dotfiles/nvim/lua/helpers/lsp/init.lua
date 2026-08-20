@@ -3,6 +3,7 @@ local path = require("helpers.path")
 ---@class HelpersLsp
 ---@field underline Underline
 ---@field virtualtext VirtualText
+---@field restart fun(): nil
 ---@field notify Notify
 ---@field mappings LspMappings
 ---@field capabilities CapabilityHelper

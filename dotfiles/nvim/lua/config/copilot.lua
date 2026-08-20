@@ -2,6 +2,7 @@ local keymapper = require("helpers.keymapper")
 
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_filetypes = { oil = false }
+vim.g.copilot_hide_during_completion = false
 
 keymapper.expr_inoremap("<Right>", 'copilot#Accept("<Right>")')
 keymapper.expr_inoremap("<C-Right>", 'copilot#AcceptWord("<C-Right>")')

@@ -1,6 +1,6 @@
 local capabilities = require('config.lsp.capabilities')
 local fn           = require("helpers.fn")
-local helpers      = require("helpers.lsp")
+local notify       = require("helpers.lsp.notify")
 local lspconfig    = require("lspconfig")
 local mappings     = require('config.lsp.mappings')
 local server_opts  = require('config.lsp.servers')
@@ -60,6 +60,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
         capabilities.update(client, ev.buf)
         mappings.on_lsp_attach(client, ev.buf)
-        helpers.notify.attach(client, ev.buf)
+        notify.attach(client, ev.buf)
     end,
 })

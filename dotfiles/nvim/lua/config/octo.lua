@@ -225,7 +225,7 @@ require "octo".setup {
         pull_request = {
 
             pr_options = { lhs = "<CR>", desc = "show PR options" },
-            checkout_pr = { lhs = "<localleader>po", desc = "checkout PR" },
+            checkout_pr = { lhs = "", desc = "checkout PR" },
             merge_pr = { lhs = "<localleader>pm", desc = "merge PR" },
 
             squash_and_merge_pr = { lhs = "<localleader>psm", desc = "squash and merge PR" },
@@ -392,4 +392,6 @@ mapper.nnoremap("<leader>np", "<cmd>Octo pr list<CR>")
 mapper.nnoremap("<leader>nr", "<cmd>Octo search is:pr is:open review-requested:@me<CR>")
 mapper.nnoremap("<leader>na", "<cmd>Octo search is:pr is:open assignee:@me<CR>")
 mapper.nnoremap("<localleader>vb", "<cmd>Octo review browse<CR>")
+mapper.nnoremap("<localleader>po", require("helpers.octo").open_pr_project,
+    { desc = "update, check out, and open PR tmux project" })
 mapper.nnoremap("<localleader>pM", "<cmd>Octo pr merge auto<CR>")
