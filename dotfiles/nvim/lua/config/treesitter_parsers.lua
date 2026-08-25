@@ -3,6 +3,7 @@ return {
     "cpp",
     "gitcommit",
     "json",
+    "kotlin",
     "lua",
     "make",
     "markdown",

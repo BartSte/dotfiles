@@ -162,6 +162,9 @@ return {
         },
     },
     jsonls = {},
+    kotlin_lsp = {
+        single_file_support = false,
+    },
     ts_ls = {},
     yamlls = {},
     taplo = {},

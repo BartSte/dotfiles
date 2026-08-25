@@ -10,7 +10,8 @@ vim.lsp.log.set_level(vim.lsp.log.levels.WARN)
 
 vim.diagnostic.config({
     virtual_text = false,
-    signs = false,
+    virtual_lines = { current_line = true },
+    signs = true,
     update_in_insert = false,
     underline = true,
     severity_sort = true,
