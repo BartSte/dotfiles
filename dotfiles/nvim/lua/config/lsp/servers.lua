@@ -162,7 +162,14 @@ return {
         },
     },
     jsonls = {},
-    kotlin_lsp = {
+    kmp_lsp = {
+        cmd = { "kmp-lsp" },
+        filetypes = { "kotlin" },
+        root_markers = {
+            { "settings.gradle", "settings.gradle.kts", "workspace.json" },
+            { "build.gradle", "build.gradle.kts", "pom.xml" },
+            ".git",
+        },
         single_file_support = false,
     },
     ts_ls = {},
