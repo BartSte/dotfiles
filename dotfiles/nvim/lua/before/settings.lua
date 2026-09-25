@@ -11,7 +11,7 @@ vim.opt.cmdheight = 0
 vim.opt.colorcolumn = ""
 vim.opt.colorcolumn = "+1"
 vim.opt.conceallevel = 2
-vim.opt.concealcursor = "nc"
+vim.opt.concealcursor = ""
 vim.opt.cursorline = true
 vim.opt.diffopt:remove("linematch:40")
 vim.opt.diffopt:append({

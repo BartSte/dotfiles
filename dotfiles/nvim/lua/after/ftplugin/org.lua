@@ -2,8 +2,6 @@ local keymapper = require('helpers.keymapper')
 local mappings = require('helpers.mappings')
 
 vim.opt_local.breakindent = true
-vim.opt_local.concealcursor = "nc"
-vim.opt_local.conceallevel = 2
 vim.opt_local.expandtab = true
 vim.opt_local.formatoptions:append("n")
 vim.opt_local.formatoptions:append("q")
