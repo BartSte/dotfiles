@@ -17,3 +17,6 @@ vim.keymap.set("n", "<leader>as", codex.send_path, {
 vim.keymap.set("x", "<leader>as", codex.send_visual, {
     desc = "Send the visual selection to Codex",
 })
+vim.keymap.set("n", "<leader>ac", ":!codex-commit<cr>", {
+    desc = "Commit the staged changes using Codex",
+})
