@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+source_file="$script_dir/.tridactylrc"
+target_file="$HOME/.tridactylrc"
+
+if [[ ! -f "$source_file" ]]; then
+    printf 'Tridactyl config not found: %s\n' "$source_file" >&2
+    exit 1
+fi
+
+if [[ -d "$target_file" ]]; then
+    printf 'Tridactyl target is a directory: %s\n' "$target_file" >&2
+    exit 1
+fi
+
+ln -sfn -- "$source_file" "$target_file"
+printf 'Installed %s\n' "$target_file"
