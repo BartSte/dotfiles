@@ -10,7 +10,7 @@ require "octo".setup {
         ["github-work"] = "github.com",
         ["github-personal"] = "github.com"
     },                          -- SSH aliases. e.g. `ssh_aliases = {["github.com-work"] = "github.com"}`. The key part will be interpreted as an anchored Lua pattern.
-    picker = "fzf-lua",                        -- or "fzf-lua" or "snacks" or "default"
+    picker = "snacks",                         -- or "fzf-lua" or "snacks" or "default"
     picker_config = {
         use_emojis = false,                    -- only used by "fzf-lua" picker for now
         search_static = true,                  -- Whether to use static search results (true) or dynamic search (false)
@@ -91,7 +91,11 @@ require "octo".setup {
     github_hostname = "", -- GitHub Enterprise host
     snippet_context_lines = 4, -- number or lines around commented lines
     gh_cmd = "gh", -- Command to use when calling Github CLI
-    gh_env = {}, -- extra environment variables to pass on to GitHub CLI, can be a table or function returning a table
+    gh_env = {
+        BROWSER = vim.env.BROWSER,
+        LINBROWSER = vim.env.LINBROWSER,
+        WSLBROWSER = vim.env.WSLBROWSER,
+    }, -- extra environment variables to pass on to GitHub CLI, can be a table or function returning a table
 
     timeout = 5000, -- timeout for requests between the remote server
     default_to_projects_v2 = false, -- use projects v2 for the `Octo card ...` command by default. Both legacy and v2 commands are available under `Octo cardlegacy ...` and `Octo cardv2 ...` respectively.
@@ -225,7 +229,7 @@ require "octo".setup {
         pull_request = {
 
             pr_options = { lhs = "<CR>", desc = "show PR options" },
-            checkout_pr = { lhs = "<localleader>po", desc = "checkout PR" },
+            checkout_pr = { lhs = "", desc = "checkout PR" },
             merge_pr = { lhs = "<localleader>pm", desc = "merge PR" },
 
             squash_and_merge_pr = { lhs = "<localleader>psm", desc = "squash and merge PR" },
@@ -390,6 +394,15 @@ require "octo".setup {
 mapper.nnoremap("<leader>nl", "<cmd>Octo notification list<CR>")
 mapper.nnoremap("<leader>np", "<cmd>Octo pr list<CR>")
 mapper.nnoremap("<leader>nr", "<cmd>Octo search is:pr is:open review-requested:@me<CR>")
-mapper.nnoremap("<leader>na", "<cmd>Octo search is:pr is:open assignee:@me<CR>")
+mapper.nnoremap("<leader>na", function()
+    require("octo.picker").search {
+        prompt = {
+            "is:pr is:open assignee:@me",
+            "is:pr is:open author:@me -assignee:@me",
+        },
+    }
+end)
 mapper.nnoremap("<localleader>vb", "<cmd>Octo review browse<CR>")
+mapper.nnoremap("<localleader>po", require("helpers.octo").open_pr_project,
+    { desc = "update, check out, and open PR tmux project" })
 mapper.nnoremap("<localleader>pM", "<cmd>Octo pr merge auto<CR>")

@@ -2,7 +2,7 @@
 ---@field off fun(): nil
 ---@field error fun(): nil
 ---@field all fun(): nil
----@field rotate fun(): nil
+---@field toggle fun(): nil
 local M = {}
 
 function M.off()
@@ -29,14 +29,16 @@ function M.all()
 end
 
 local ID = "lsp_virtual_text"
-local index = 0
-local opts = { M.off, M.error, M.all }
-local names = { "off", "error", "all" }
-function M.rotate()
-    index = (index % #opts) + 1
-    opts[index]()
+function M.toggle()
+    if vim.diagnostic.config().virtual_text == false then
+        M.all()
+        vim.notify("Diagnostics text: all", vim.log.levels.INFO, { title = "Virtual text", id = ID })
+        return
+    end
+
+    M.off()
     vim.notify(
-        string.format("Diagnostics text: %s", names[index]),
+        "Diagnostics text: off",
         vim.log.levels.INFO,
         { title = "Virtual text", id = ID }
     )

@@ -22,8 +22,11 @@ chars = "\b"
 key = "Back"
 mods = "Control"
 
-# Bindings mapped to F13-F24 keys to enable binds that are otherwise not
-# possible in a terminal
+[[keyboard.bindings]]
+chars = "\u001B[32;5u"
+key = "Space"
+mods = "Control"
+
 [[keyboard.bindings]]
 chars = "\u001B[21;2~"
 key = "Tab"
@@ -33,11 +36,6 @@ mods = "Control"
 chars = "\u001B[22;2~"
 key = "Tab"
 mods = "Control|Shift"
-
-[[keyboard.bindings]]
-chars = "\u001B[24;2~"
-key = "Space"
-mods = "Control"
 
 [[keyboard.bindings]]
 key = "Enter"

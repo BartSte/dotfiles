@@ -1,13 +1,16 @@
 local capabilities = require('config.lsp.capabilities')
 local fn           = require("helpers.fn")
-local helpers      = require("helpers.lsp")
+local notify       = require("helpers.lsp.notify")
 local lspconfig    = require("lspconfig")
 local mappings     = require('config.lsp.mappings')
 local server_opts  = require('config.lsp.servers')
 local util         = require("lspconfig.util")
 
+vim.lsp.log.set_level(vim.lsp.log.levels.WARN)
+
 vim.diagnostic.config({
     virtual_text = false,
+    virtual_lines = false,
     signs = false,
     update_in_insert = false,
     underline = true,
@@ -58,6 +61,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
         capabilities.update(client, ev.buf)
         mappings.on_lsp_attach(client, ev.buf)
-        helpers.notify.attach(client, ev.buf)
+        notify.attach(client, ev.buf)
     end,
 })
