@@ -1,4 +1,7 @@
 local m = require("helpers.keymapper")
+local formatter = require("helpers.lsp.mappings")
+local underline = require("helpers.lsp.underline")
+local virtualtext = require("helpers.lsp.virtualtext")
 
 ---@class MappingsLsp
 ---@field on_lsp_attach fun(client: vim.lsp.Client, buf: integer): nil Set up mappings that apply to all LSP servers
@@ -32,19 +35,18 @@ end
 ---@param buf integer
 ---@return nil
 function M.on_lsp_attach(client, buf)
-    local helpers = require("helpers.lsp")
     m.buffer_nnoremap("<C-s>", vim.lsp.buf.signature_help)
-    m.buffer_nnoremap("<space>lua", helpers.underline.all)
-    m.buffer_nnoremap("<space>lue", helpers.underline.error)
-    m.buffer_nnoremap("<space>luo", helpers.underline.off)
-    m.buffer_nnoremap("<space>lva", helpers.virtualtext.all)
-    m.buffer_nnoremap("<space>lve", helpers.virtualtext.error)
-    m.buffer_nnoremap("<space>lvo", helpers.virtualtext.off)
+    m.buffer_nnoremap("<space>lua", underline.all)
+    m.buffer_nnoremap("<space>lue", underline.error)
+    m.buffer_nnoremap("<space>luo", underline.off)
+    m.buffer_nnoremap("<space>lva", virtualtext.all)
+    m.buffer_nnoremap("<space>lve", virtualtext.error)
+    m.buffer_nnoremap("<space>lvo", virtualtext.off)
     m.buffer_nnoremap("gra", vim.lsp.buf.code_action)
     m.buffer_nnoremap("grn", vim.lsp.buf.rename)
     m.buffer_nnoremap("grr", vim.lsp.buf.references)
     m.buffer_nnoremap("<C-]>", vim.lsp.buf.definition)
-    helpers.mappings.map_formatter(client, buf)
+    formatter.map_formatter(client, buf)
 
     if client.name == "ltex_plus" then
         m.silent_buffer_nnoremap("<leader>le", function()

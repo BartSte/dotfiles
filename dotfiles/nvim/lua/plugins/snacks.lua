@@ -6,7 +6,6 @@ return {
         require("config.snacks")
     end,
     dependencies = {
-        "echasnovski/mini.icons",
         "nvim-tree/nvim-web-devicons"
     }
 }

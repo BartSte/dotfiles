@@ -1,6 +1,10 @@
 local map = require("helpers.keymapper")
 local helpers = require("helpers.python")
 
+-- Use the configured Python LSP server instead of Neovim's legacy
+-- python3complete provider, which requires pynvim in the Python host.
+vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
+
 map.buffer_nnoremap('<leader>b', 'obreakpoint()<Esc>')
 map.buffer_nnoremap('<leader>B', 'Obreakpoint()<Esc>')
 

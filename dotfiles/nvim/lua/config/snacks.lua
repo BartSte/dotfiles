@@ -3,7 +3,6 @@ local snacks = require("snacks")
 
 snacks.setup {
     bigfile = { enabled = true },
-    quickfile = { enabled = true },
     notifier = { enabled = true },
     gitbrowse = {
         config = function(opts, defaults)

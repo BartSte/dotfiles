@@ -23,4 +23,4 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         apply_highlights(vim.g.colors_name)
     end
 })
-vim.cmd("colorscheme kanagawa")
+apply_highlights(vim.g.colors_name)

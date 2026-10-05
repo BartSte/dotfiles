@@ -1,6 +1,5 @@
 local function after(palette)
     require("kanagawa").setup({ colors = { palette = palette } })
-    require("kanagawa").load()
     vim.cmd("colorscheme kanagawa")
 end
 

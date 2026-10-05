@@ -1,0 +1,15 @@
+return {
+    "bash",
+    "cpp",
+    "gitcommit",
+    "json",
+    "kotlin",
+    "lua",
+    "make",
+    "markdown",
+    "markdown_inline",
+    "python",
+    "toml",
+    "vim",
+    "yaml",
+}
