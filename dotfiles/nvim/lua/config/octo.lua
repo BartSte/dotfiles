@@ -404,5 +404,5 @@ mapper.nnoremap("<leader>na", function()
 end)
 mapper.nnoremap("<localleader>vb", "<cmd>Octo review browse<CR>")
 mapper.nnoremap("<localleader>po", require("helpers.octo").open_pr_project,
-    { desc = "update, check out, and open PR tmux project" })
+    { desc = "open PR worktree in tmux" })
 mapper.nnoremap("<localleader>pM", "<cmd>Octo pr merge auto<CR>")
