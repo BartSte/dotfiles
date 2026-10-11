@@ -1,0 +1,394 @@
+" ============================================================================
+" Tridactyl default bindings
+" Source: tridactyl/tridactyl src/lib/config.ts
+" ============================================================================
+
+
+" ============================================================================
+" NORMAL MODE
+" ============================================================================
+
+bind <A-p> pin
+bind <A-m> mute toggle
+bind <F1> help
+
+bind o fillcmdline open
+bind O current_url open
+bind w fillcmdline winopen
+bind W current_url winopen
+bind t fillcmdline tabopen
+bind T current_url tabopen
+
+bind ]] followpage next
+bind [[ followpage prev
+
+bind [c urlincrement -1
+bind ]c urlincrement 1
+bind <C-x> urlincrement -1
+bind <C-a> urlincrement 1
+
+bind yy clipboard yank
+bind ys clipboard yankshort
+bind yq text2qr --timeout 5
+bind yc clipboard yankcanon
+bind ym clipboard yankmd
+bind yo clipboard yankorg
+bind yt clipboard yanktitle
+
+bind gh home
+bind gH home true
+
+bind p clipboard open
+bind P clipboard tabopen
+
+bind j scrollline 10
+bind <C-e> scrollline 10
+bind k scrollline -10
+bind <C-y> scrollline -10
+bind h scrollpx -50
+bind l scrollpx 50
+
+bind G scrollto 100
+bind gg scrollto 0
+bind $ scrollto 100 x
+bind ^ scrollto 0 x
+
+bind <C-u> scrollpage -0.5
+bind <C-d> scrollpage 0.5
+bind <C-f> scrollpage 1
+bind <C-b> scrollpage -1
+
+bind <C-v> nmode ignore 1 mode normal
+
+bind H back
+bind L forward
+
+bind <C-o> jumpprev
+bind <C-i> jumpnext
+
+bind d tabclose
+bind D js tri.excmds.composite('tabprev;', 'tabclose #')
+
+bind gx0 tabclosealltoleft
+bind gx$ tabclosealltoright
+
+bind << tabmove -1
+bind >> tabmove +1
+
+bind u undo
+bind U undo window
+
+bind r reload
+bind R reloadhard
+bind x stop
+
+bind gi focusinput
+bind gI hintinput
+
+bind g? rot13
+bind g! jumble
+bind g; changelistjump -1
+
+bind J tabprev
+bind K tabnext
+bind gt tabnext_gt
+bind gT tabprev
+
+bind gsh splitnext
+bind gsl splitnext
+bind gsw splitnext
+
+bind g^ tabfirst
+bind g0 tabfirst
+bind g$ tablast
+
+bind ga tabaudio
+
+bind gr reader
+bind gu urlparent
+bind gU urlroot
+bind gf viewsource
+
+bind : fillcmdline_notrail
+
+bind s fillcmdline open search
+bind S fillcmdline tabopen search
+
+bind M gobble 1 quickmark
+
+bind B fillcmdline taball
+bind b fillcmdline tab
+
+bind ZZ qall
+
+
+" ============================================================================
+" HINTS
+" ============================================================================
+
+bind f hint
+bind F hint -b
+bind gF hint -qb
+
+bind ;i hint -i
+bind ;b hint -b
+bind ;o hint
+bind ;I hint -I
+bind ;k hint -k
+bind ;K hint -K
+bind ;y hint -y
+bind ;Y hint -cF img i => tri.excmds.yankimage(tri.urlutils.getAbsoluteURL(i.src))
+bind ;p hint -p
+bind ;h hint -h
+
+bind v hint -h
+
+bind ;P hint -P
+bind ;r hint -r
+bind ;s hint -s
+bind ;S hint -S
+bind ;a hint -a
+bind ;A hint -A
+bind ;; hint -; *
+bind ;# hint -#
+bind ;v hint -W mpvsafe
+bind ;V hint -V
+bind ;w hint -w
+bind ;t hint -W tabopen
+
+bind ;O hint -W fillcmdline_notrail open 
+bind ;W hint -W fillcmdline_notrail winopen 
+bind ;T hint -W fillcmdline_notrail tabopen 
+
+bind ;d hint -W tabopen --discard
+bind ;gd hint -qW tabopen --discard
+
+bind ;z hint -z
+
+bind ;m hint -JFc img i => tri.excmds.open('https://lens.google.com/uploadbyurl?url='+i.src)
+bind ;M hint -JFc img i => tri.excmds.tabopen('https://lens.google.com/uploadbyurl?url='+i.src)
+
+bind ;gi hint -qi
+bind ;gI hint -qI
+bind ;gk hint -qk
+bind ;gy hint -qy
+bind ;gp hint -qp
+bind ;gP hint -qP
+bind ;gr hint -qr
+bind ;gs hint -qs
+bind ;gS hint -qS
+bind ;ga hint -qa
+bind ;gA hint -qA
+bind ;g; hint -q;
+bind ;g# hint -q#
+bind ;gv hint -qW mpvsafe
+bind ;gw hint -qw
+bind ;gb hint -qb
+bind ;gF hint -qb
+bind ;gf hint -q
+
+
+" ============================================================================
+" MODE CONTROL
+" ============================================================================
+
+bind <S-Insert> mode ignore
+bind <AC-Escape> mode ignore
+bind <AC-`> mode ignore
+bind <S-Escape> mode ignore
+
+bind <Escape> composite mode normal ; hidecmdline
+bind <C-[> composite mode normal ; hidecmdline
+
+
+" ============================================================================
+" BOOKMARKS
+" ============================================================================
+
+bind a current_url bmark
+bind A bmark
+
+
+" ============================================================================
+" ZOOM
+" ============================================================================
+
+bind zi zoom 0.1 true
+bind zo zoom -0.1 true
+bind zm zoom 0.5 true
+bind zr zoom -0.5 true
+bind zM zoom 0.5 true
+bind zR zoom -0.5 true
+bind zz zoom 0
+bind zI zoom 3
+bind zO zoom 0.3
+
+
+" ============================================================================
+" MISC
+" ============================================================================
+
+bind . repeat
+
+bind m gobble 1 markadd
+bind ` gobble 1 markjump
+
+
+" Easter egg present in upstream defaults
+bind <AS-ArrowUp><AS-ArrowUp><AS-ArrowDown><AS-ArrowDown><AS-ArrowLeft><AS-ArrowRight><AS-ArrowLeft><AS-ArrowRight>ba open https://www.youtube.com/watch?v=M3iOROuTuMA
+
+
+" ============================================================================
+" INSERT MODE
+" ============================================================================
+
+bind --mode=insert <Escape> composite unfocus | mode normal
+bind --mode=insert <C-[> composite unfocus | mode normal
+bind --mode=insert <C-i> editor
+bind --mode=insert <AC-Escape> mode normal
+bind --mode=insert <AC-`> mode normal
+bind --mode=insert <S-Escape> mode ignore
+bind --mode=insert <C-o> nmode normal 1 mode ignore
+
+
+" ============================================================================
+" INPUT MODE
+"
+" Input mode inherits insert mode.
+" ============================================================================
+
+bind --mode=input <Tab> focusinput -n
+bind --mode=input <S-Tab> focusinput -N
+
+
+" ============================================================================
+" IGNORE MODE
+" ============================================================================
+
+bind --mode=ignore <S-Insert> mode normal
+bind --mode=ignore <AC-Escape> mode normal
+bind --mode=ignore <AC-`> mode normal
+bind --mode=ignore <S-Escape> mode normal
+bind --mode=ignore <C-o> nmode normal 1 mode ignore
+
+
+" ============================================================================
+" EX / COMMAND-LINE MODE
+" ============================================================================
+
+bind --mode=ex <Enter> ex.accept_line
+bind --mode=ex <C-Enter> ex.execute_ex_on_completion
+bind --mode=ex <C-j> ex.accept_line
+bind --mode=ex <C-m> ex.accept_line
+
+bind --mode=ex <Escape> ex.hide_and_clear
+bind --mode=ex <C-[> ex.hide_and_clear
+
+bind --mode=ex <ArrowUp> ex.prev_history_or_completion
+bind --mode=ex <ArrowDown> ex.next_history_or_completion
+
+bind --mode=ex <PageUp> ex.prev_completion 15
+bind --mode=ex <PageDown> ex.next_completion 15
+
+bind --mode=ex <S-Delete> ex.execute_ex_on_completion_args tabclose
+
+bind --mode=ex <A-b> text.backward_word
+bind --mode=ex <A-f> text.forward_word
+bind --mode=ex <C-e> text.end_of_line
+bind --mode=ex <A-d> text.kill_word
+bind --mode=ex <S-Backspace> text.backward_kill_word
+bind --mode=ex <C-u> text.backward_kill_line
+bind --mode=ex <C-k> text.kill_line
+
+bind --mode=ex <C-f> ex.complete
+bind --mode=ex <Tab> ex.next_completion
+bind --mode=ex <S-Tab> ex.prev_completion
+bind --mode=ex <Space> ex.insert_character_or_completion
+bind --mode=ex <C-Space> ex.insert_space
+
+bind --mode=ex <C-o>yy ex.copy_completion
+bind --mode=ex <C-o>t ex.execute_ex_on_completion_args tabopen -b
+bind --mode=ex <C-o>w ex.execute_ex_on_completion_args winopen
+bind --mode=ex <C-o>x ex.execute_ex_on_all_completions
+
+
+" ============================================================================
+" VISUAL MODE
+"
+" Visual mode inherits normal mode.
+" ============================================================================
+
+bind --mode=visual <Escape> composite js tri.dom.getSelection().empty(); mode normal; hidecmdline
+bind --mode=visual <C-[> composite js tri.dom.getSelection().empty(); mode normal ; hidecmdline
+
+bind --mode=visual y composite js tri.dom.getSelection().toString() | clipboard yank
+
+bind --mode=visual # composite js document.location + '#:~:text=' + encodeURIComponent(tri.dom.getSelection().toString()) | clipboard yank
+
+bind --mode=visual s composite js tri.dom.getSelection().toString() | fillcmdline open search
+bind --mode=visual S composite js tri.dom.getSelection().toString() | fillcmdline tabopen search
+
+bind --mode=visual l js -d@ const sel = tri.dom.getSelection(); for (let i = 0; i < (JS_ARGS[1] || 1); i++) tri.visual.extendByCharacter(sel, "forward"); @
+
+bind --mode=visual h js -d@ const sel = tri.dom.getSelection(); for (let i = 0; i < (JS_ARGS[1] || 1); i++) tri.visual.extendByCharacter(sel, "backward"); @
+
+bind --mode=visual e js -d@ for (let i = 0; i < (JS_ARGS[1] || 1); i++) tri.dom.getSelection().modify("extend","forward","word") @
+
+bind --mode=visual w js -d@ for (let i = 0; i < (JS_ARGS[1] || 1); i++) tri.visual.extendByWord(tri.dom.getSelection()) @
+
+bind --mode=visual b js -d@ let s=tri.dom.getSelection(); for (let i = 0; i < (JS_ARGS[1] || 1); i++) { s.modify("extend","backward","character"); s.modify("extend","backward","word"); s.modify("extend","forward","character"); } @
+
+bind --mode=visual j js -d@ for (let i = 0; i < (JS_ARGS[1] || 1); i++) tri.dom.getSelection().modify("extend","forward","line") @
+
+bind --mode=visual k js -d@ for (let i = 0; i < (JS_ARGS[1] || 1); i++) tri.dom.getSelection().modify("extend","backward","line") @
+
+bind --mode=visual q composite js tri.dom.getSelection().toString() | text2qr --timeout 5
+
+bind --mode=visual $ js tri.dom.getSelection().modify("extend","forward","lineboundary")
+bind --mode=visual 0 js tri.dom.getSelection().modify("extend","backward","lineboundary")
+
+bind --mode=visual = js -d@ let s = tri.dom.getSelection(); for (let i = 0; i < (JS_ARGS[1] || 1); i++) { let n = s.anchorNode.parentNode; let r = n.ownerDocument.createRange(); s.removeAllRanges(); r.selectNodeContents(n); s.addRange(r); } @
+
+bind --mode=visual o js tri.visual.reverseSelection(tri.dom.getSelection())
+
+
+" ============================================================================
+" HINT MODE
+" ============================================================================
+
+bind --mode=hint <Backspace> hint.popKey
+bind --mode=hint <Escape> hint.reset
+bind --mode=hint <C-[> hint.reset
+
+bind --mode=hint <Tab> hint.focusNextHint
+bind --mode=hint <S-Tab> hint.focusPreviousHint
+
+bind --mode=hint <ArrowUp> hint.focusTopHint
+bind --mode=hint <ArrowDown> hint.focusBottomHint
+bind --mode=hint <ArrowLeft> hint.focusLeftHint
+bind --mode=hint <ArrowRight> hint.focusRightHint
+
+bind --mode=hint <Enter> hint.selectFocusedHint
+bind --mode=hint <Space> hint.selectFocusedHint
+
+
+" ============================================================================
+" BROWSER-WIDE BINDINGS
+"
+" These can work even on pages where normal Tridactyl content scripts cannot.
+" ============================================================================
+
+bind --mode=browser <C-,> escapehatch
+bind --mode=browser <C-6> tab #
+
+
+" ============================================================================
+" DEFAULT SITE-SPECIFIC BINDINGS
+" ============================================================================
+
+" Google
+bindurl www.google.com gi composite focusinput -l ; text.end_of_line
+
+" WhatsApp Web
+bindurl ^https://web.whatsapp.com f hint -c [tabindex]:not(.two)>div,a
+bindurl ^https://web.whatsapp.com F hint -bc [tabindex]:not(.two)>div,a

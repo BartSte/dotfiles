@@ -2,7 +2,7 @@ local M = {}
 
 local title = "Octo PR project"
 
----Update, check out, and open the tmux project for the current Octo PR.
+---Open the current Octo PR in a Git worktree and tmux session.
 ---@return nil
 function M.open_pr_project()
     if not vim.env.TMUX or vim.env.TMUX == "" then
