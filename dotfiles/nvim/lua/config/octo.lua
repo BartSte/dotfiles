@@ -394,7 +394,14 @@ require "octo".setup {
 mapper.nnoremap("<leader>nl", "<cmd>Octo notification list<CR>")
 mapper.nnoremap("<leader>np", "<cmd>Octo pr list<CR>")
 mapper.nnoremap("<leader>nr", "<cmd>Octo search is:pr is:open review-requested:@me<CR>")
-mapper.nnoremap("<leader>na", "<cmd>Octo search is:pr is:open assignee:@me<CR>")
+mapper.nnoremap("<leader>na", function()
+    require("octo.picker").search {
+        prompt = {
+            "is:pr is:open assignee:@me",
+            "is:pr is:open author:@me -assignee:@me",
+        },
+    }
+end)
 mapper.nnoremap("<localleader>vb", "<cmd>Octo review browse<CR>")
 mapper.nnoremap("<localleader>po", require("helpers.octo").open_pr_project,
     { desc = "update, check out, and open PR tmux project" })
