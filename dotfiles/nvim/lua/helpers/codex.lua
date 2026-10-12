@@ -169,7 +169,8 @@ end
 ---@param last_line integer The last one-based line number.
 M.send_lines = function(first_line, last_line)
     local lines = vim.api.nvim_buf_get_lines(0, first_line - 1, last_line, false)
-    M.send(M.fenced(lines, vim.bo.filetype))
+    local fenced = M.fenced(lines, vim.bo.filetype)
+    M.send(fenced .. "\n")
 end
 
 ---Send the exact active visual selection.

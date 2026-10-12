@@ -63,6 +63,16 @@ end
 return {
     basedpyright = {
         single_file_support = false,
+        before_init = function(_, config)
+            if vim.fn.has("linux") == 1 and vim.env.VIRTUAL_ENV then
+                local python = vim.fs.joinpath(vim.env.VIRTUAL_ENV, "bin", "python")
+                if vim.fn.executable(python) == 1 then
+                    config.settings = vim.tbl_deep_extend("force", config.settings or {}, {
+                        python = { pythonPath = python },
+                    })
+                end
+            end
+        end,
         root_dir = function(bufnr, on_dir)
             local fname = vim.api.nvim_buf_get_name(bufnr)
             local git_root = find_git_root(fname)
