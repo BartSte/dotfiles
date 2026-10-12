@@ -180,7 +180,7 @@ M.send_visual = function()
         vim.fn.getpos("."),
         { type = vim.fn.mode() }
     )
-    M.send(M.fenced(lines, vim.bo.filetype))
+    M.send(M.fenced(lines, vim.bo.filetype) .. "\n")
 end
 
 return M
