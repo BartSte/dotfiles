@@ -11,8 +11,15 @@ end, {
     range = true,
 })
 
-vim.keymap.set("n", "<leader>as", codex.send_path, {
+vim.keymap.set("n", "<leader>af", codex.send_path, {
     desc = "Send the current path to Codex",
+})
+vim.keymap.set("n", "<leader>as", function()
+    vim.go.operatorfunc = "v:lua.require'helpers.codex'.send_operator"
+    return "g@"
+end, {
+    expr = true,
+    desc = "Send a motion or text object to Codex",
 })
 vim.keymap.set("x", "<leader>as", codex.send_visual, {
     desc = "Send the visual selection to Codex",

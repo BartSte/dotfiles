@@ -173,6 +173,18 @@ M.send_lines = function(first_line, last_line)
     M.send(fenced .. "\n")
 end
 
+---Send the range selected by an operator motion.
+---@param motion_type string The operator selection type: char, line, or block.
+M.send_operator = function(motion_type)
+    local region_types = { char = "v", line = "V", block = "\022" }
+    local lines = vim.fn.getregion(
+        vim.fn.getpos("'["),
+        vim.fn.getpos("']"),
+        { type = region_types[motion_type] }
+    )
+    M.send(M.fenced(lines, vim.bo.filetype) .. "\n")
+end
+
 ---Send the exact active visual selection.
 M.send_visual = function()
     local lines = vim.fn.getregion(
