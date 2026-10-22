@@ -14,8 +14,10 @@ fzf.setup({
     winopts = {
         height  = 0.9,
         width   = 0.9,
+        border  = "rounded",
         preview = {
             hidden = true,
+            border = "rounded",
         }
     },
     keymap  = {

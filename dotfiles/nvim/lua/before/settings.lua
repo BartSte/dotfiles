@@ -8,6 +8,13 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.opt.autoindent = true
 vim.opt.cmdheight = 0
+-- Set the global status line before Kanagawa generates its highlights.
+vim.opt.laststatus = 3
+vim.opt.winborder = "rounded"
+vim.opt.winblend = 0
+vim.opt.pumblend = 0
+vim.opt.scrolloff = 5
+vim.opt.sidescrolloff = 8
 vim.opt.colorcolumn = ""
 vim.opt.colorcolumn = "+1"
 vim.opt.conceallevel = 2
