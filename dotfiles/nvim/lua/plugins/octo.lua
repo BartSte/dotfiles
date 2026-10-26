@@ -1,6 +1,7 @@
 return {
     "pwntester/octo.nvim",
     cmd = "Octo",
+    event = "VeryLazy",
     keys = {
         { "<leader>pp", function() require("helpers.pr_inbox").open("all") end, desc = "PRs: combined inbox" },
         { "<leader>pr", function() require("helpers.pr_inbox").open("review") end, desc = "PRs: needs your review" },
@@ -17,5 +18,6 @@ return {
     },
     config = function()
         require("config.octo")
+        require("helpers.pr_inbox").setup()
     end
 }
