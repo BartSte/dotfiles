@@ -79,6 +79,7 @@ m.nnoremap("<C-w>]", ":wincmd v<CR><C-]>")
     | /   | highlight word        |          |
     | l   | lsp                   | lsp      |
     | g   | git                   | fugitive |
+    | p   | pull request inbox    | octo     |
     | q   | delete buffer         | bufdelete|
     | o   | org commands          | orgmode  |
     | n   | notifier              | neogen   |

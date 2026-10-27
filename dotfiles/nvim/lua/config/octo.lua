@@ -10,7 +10,7 @@ require "octo".setup {
         ["github-work"] = "github.com",
         ["github-personal"] = "github.com"
     },                          -- SSH aliases. e.g. `ssh_aliases = {["github.com-work"] = "github.com"}`. The key part will be interpreted as an anchored Lua pattern.
-    picker = "snacks",                         -- or "fzf-lua" or "snacks" or "default"
+    picker = "fzf-lua",                        -- or "fzf-lua" or "snacks" or "default"
     picker_config = {
         use_emojis = false,                    -- only used by "fzf-lua" picker for now
         search_static = true,                  -- Whether to use static search results (true) or dynamic search (false)
@@ -391,23 +391,6 @@ require "octo".setup {
     },
 }
 
-mapper.nnoremap("<leader>nl", "<cmd>Octo notification list<CR>")
-mapper.nnoremap("<leader>np", function()
-    require("octo.picker").search {
-        prompt = "is:pr is:open author:@me",
-    }
-end)
-mapper.nnoremap("<leader>nr", "<cmd>Octo search is:pr is:open review-requested:@me<CR>")
-mapper.nnoremap("<leader>na", function()
-    require("octo.picker").search {
-        prompt = {
-            -- Reviewer requested changes.
-            "is:pr is:open author:@me draft:false review:changes_requested",
-            -- CI failed. Exclude the first query's results to avoid duplicates.
-            "is:pr is:open author:@me draft:false status:failure -review:changes_requested",
-        },
-    }
-end)
 mapper.nnoremap("<localleader>vb", "<cmd>Octo review browse<CR>")
 mapper.nnoremap("<localleader>po", require("helpers.octo").open_pr_project,
     { desc = "open PR worktree in tmux" })
