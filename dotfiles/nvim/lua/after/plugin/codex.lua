@@ -24,6 +24,12 @@ end, {
 vim.keymap.set("x", "<leader>as", codex.send_visual, {
     desc = "Send the visual selection to Codex",
 })
+vim.keymap.set("n", "<leader>aS", function()
+    local line = vim.api.nvim_win_get_cursor(0)[1]
+    codex.send_lines(line, line)
+end, {
+    desc = "Send the current line to Codex",
+})
 vim.keymap.set("n", "<leader>ac", ":!codex-commit<cr>", {
     desc = "Commit the staged changes using Codex",
 })

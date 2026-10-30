@@ -1,6 +1,6 @@
 local keymapper = require('helpers.keymapper')
 
---TODO: added the following using tslime:-
+--TODO: add the following using the tmux helper:
 -- - When hitting F5, lldb is launched in tmux window 1
 -- - When hitting F9, a breakpoint is send to lldb while it is running
 

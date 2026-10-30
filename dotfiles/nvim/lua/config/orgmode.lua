@@ -4,12 +4,13 @@ local khalorg = require('khalorg')
 
 local dropbox_home = path.join(path.home(), 'dropbox')
 local dropbox_org = path.join(dropbox_home, 'org')
+local dropbox_generated_org = path.join(dropbox_home, 'generated')
 local main = path.join(dropbox_org, 'main.org')
 local personal = path.join(dropbox_org, 'personal.org')
 local gedachten = path.join(dropbox_org, 'gedachten.org')
 local komeco = path.join(dropbox_org, 'komeco.org')
-local outlook_personal = path.join(dropbox_org, 'outlook_personal.org')
-local outlook_work = path.join(dropbox_org, 'outlook_work.org')
+local outlook_personal = path.join(dropbox_generated_org, 'outlook_personal.org')
+local outlook_work = path.join(dropbox_generated_org, 'outlook_work.org')
 
 khalorg.setup({
     calendar = 'outlook_personal',

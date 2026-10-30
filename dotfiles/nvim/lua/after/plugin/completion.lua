@@ -1,6 +1,7 @@
 -- Completion options ---------------------------------------------------------
 
-vim.opt.autocomplete = true
+-- Request completion with Ctrl-Space instead of on each keystroke.
+vim.opt.autocomplete = false
 vim.opt.complete = { "o^30", ".^20", "F^20" }
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup", "fuzzy" }
 vim.opt.pumborder = "rounded"
@@ -48,7 +49,7 @@ local completion_group = vim.api.nvim_create_augroup("native_completion", { clea
 
 local function enable_lsp_completion(client, bufnr)
     if client:supports_method("textDocument/completion") then
-        vim.lsp.completion.enable(true, client.id, bufnr)
+        vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
     end
 end
 
@@ -97,7 +98,8 @@ end
 
 vim.keymap.set("i", "<Up>", completion_navigation("<C-p>", "<Up>"), { expr = true })
 vim.keymap.set("i", "<Down>", completion_navigation("<C-n>", "<Down>"), { expr = true })
-vim.keymap.set("i", "<C-Space>", "<C-n>", { desc = "Trigger completion" })
+vim.keymap.set("i", "<C-Space>", "<C-n>", { desc = "Request completion" })
+vim.keymap.set("n", "<C-Space>", "a<C-n>", { desc = "Insert after cursor and request completion" })
 vim.keymap.set("i", "<C-y>", function()
     local selected = vim.fn.complete_info({ "selected" }).selected
 

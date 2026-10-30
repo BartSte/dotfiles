@@ -10,17 +10,31 @@ end
 
 
 if os.getenv('WH') then
+    -- tmux popups can inherit a PATH without Windows executables.
+    local clip = vim.fn.exepath('clip.exe')
+    if clip == '' then
+        clip = '/mnt/c/Windows/System32/clip.exe'
+    end
+    local powershell = vim.fn.exepath('pwsh.exe')
+    if powershell == '' then
+        powershell = '/mnt/c/Program Files/PowerShell/7/pwsh.exe'
+        if vim.fn.executable(powershell) == 0 then
+            powershell = '/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe'
+        end
+    end
+    local paste = {
+        powershell, '-NoLogo', '-NoProfile', '-ExecutionPolicy', 'RemoteSigned', '-Command',
+        '[Console]::OutputEncoding=[System.Text.Encoding]::UTF8; [Console]::Out.Write(([string](Get-Clipboard -Raw)).Replace("`r", ""))',
+    }
     vim.g.clipboard = {
         name = 'WslClipboard',
         copy = {
-            ['+'] = 'clip.exe',
-            ['*'] = 'clip.exe',
+            ['+'] = { clip },
+            ['*'] = { clip },
         },
         paste = {
-            ['+'] =
-            'pwsh.exe -NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-            ['*'] =
-            'pwsh.exe -NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            ['+'] = paste,
+            ['*'] = paste,
         },
         cache_enabled = 0,
     }

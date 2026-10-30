@@ -1,4 +1,4 @@
-local tslime = require('helpers.tslime')
+local tmux = require('helpers.tmux')
 
 local M = {}
 
@@ -29,7 +29,7 @@ M.make_strategy = function(opts)
             cmd = string.gsub(cmd, "^uv run pytest", wuv)
             cmd = string.format("%s %s %s", opts.prefix, cmd, args)
 
-            tslime.send_to_tmux(cmd .. '\n')
+            tmux.send_command(cmd)
         end
     end
 end
