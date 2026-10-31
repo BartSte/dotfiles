@@ -8,12 +8,15 @@ local function cache_context()
     local directory = vim.env.GH_CONFIG_DIR or vim.fs.joinpath(vim.env.XDG_CONFIG_HOME
         or vim.fs.joinpath(vim.env.HOME, ".config"), "gh")
     local stat = vim.uv.fs_stat(vim.fs.joinpath(directory, "hosts.yml"))
+    local account = vim.system({ "git", "config", "--get", "gh.user" }, { text = true }):wait()
     -- Account switches update hosts.yml. Hash the context without storing tokens
     -- or reading credential files, and never reuse another account's snapshot.
     return vim.fn.sha256(vim.json.encode({
         command = config.gh_cmd, host = config.github_hostname, environment = config.gh_env,
         token = vim.env.GH_TOKEN or vim.env.GITHUB_TOKEN, gh_host = vim.env.GH_HOST,
         config_directory = directory, modified = stat and stat.mtime,
+        repository_account = account.code == 0 and vim.trim(account.stdout) or "",
+        working_directory = vim.fn.getcwd(),
     }))
 end
 

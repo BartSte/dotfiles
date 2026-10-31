@@ -26,11 +26,16 @@ if os.getenv('WH') then
         powershell, '-NoLogo', '-NoProfile', '-ExecutionPolicy', 'RemoteSigned', '-Command',
         '[Console]::OutputEncoding=[System.Text.Encoding]::UTF8; [Console]::Out.Write(([string](Get-Clipboard -Raw)).Replace("`r", ""))',
     }
+    -- clip.exe otherwise interprets UTF-8 bytes using a Windows code page.
+    local copy = {
+        'bash', '-o', 'pipefail', '-c',
+        'iconv -f UTF-8 -t UTF-16LE | "$1"', 'wsl-clipboard', clip,
+    }
     vim.g.clipboard = {
         name = 'WslClipboard',
         copy = {
-            ['+'] = { clip },
-            ['*'] = { clip },
+            ['+'] = copy,
+            ['*'] = copy,
         },
         paste = {
             ['+'] = paste,

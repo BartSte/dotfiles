@@ -3,6 +3,7 @@ return {
     cmd = "Octo",
     event = "VeryLazy",
     keys = {
+        { "<leader>pc", "<cmd>Octo pr list<CR>", desc = "PRs: current repository" },
         { "<leader>pp", function() require("helpers.pr_inbox").open("all") end, desc = "PRs: combined inbox" },
         { "<leader>pr", function() require("helpers.pr_inbox").open("review") end, desc = "PRs: needs your review" },
         { "<leader>pt", function() require("helpers.pr_inbox").open("team") end, desc = "PRs: needs your teams' review" },
