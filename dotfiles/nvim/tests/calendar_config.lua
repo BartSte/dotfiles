@@ -1,19 +1,41 @@
 local root = vim.fn.fnamemodify(debug.getinfo(1, 'S').source:sub(2), ':h:h')
-vim.env.CALENDAR_BRIDGE_HOST = nil
-local configured, bridge_options
-package.loaded.orgmode = {setup=function(opts) configured=opts end}
-package.loaded['helpers.path'] = {home=function() return '/home/test-user' end, join=function(...) return table.concat({...}, '/') end}
-package.loaded['config.calendar_bridge'] = {setup=function(opts) bridge_options=opts end, new=function() end, edit=function() end}
-package.loaded.khalorg = {setup=function() error('Local Khalorg writes must not be enabled') end}
+local configured, plugin_options, selected
+package.loaded.orgmode = { setup = function(opts) configured = opts end }
+local scratch = vim.fn.tempname()
+package.loaded['helpers.path'] = {
+    home = function() return scratch end,
+    join = function(...) return table.concat({...}, '/') end,
+}
+vim.env.XDG_DATA_HOME = scratch
+package.loaded.khalorg = {
+    setup = function(opts) plugin_options = opts end,
+    new = function(opts) selected = opts end,
+    edit = function(opts) selected = opts end,
+    edit_all = function(opts) selected = opts end,
+    list = function(opts) selected = opts end,
+}
 dofile(root .. '/lua/config/orgmode.lua')
-assert(bridge_options, 'The Pi bridge must be configured')
-assert(bridge_options.host == 'pi', "The calendar client must use Bart's literal SSH alias pi")
-assert(not configured.org_custom_exports.d, 'No calendar deletion action is permitted')
-assert(not configured.org_custom_exports.s, 'No local whole-file sync action is permitted')
-assert(configured.org_custom_exports.e.action == package.loaded['config.calendar_bridge'].edit)
-for _, key in ipairs({'e','w'}) do
-  local capture = configured.org_capture_templates[key]
-  assert(capture.target:find('/calendar-bridge/drafts/',1,true), 'Capture must use local drafts')
-  assert(capture.template:find(':CALENDAR: outlook_',1,true))
+assert(plugin_options.executable == 'khalorg-local')
+assert(not configured.org_custom_exports.d and not configured.org_custom_exports.s)
+for _, key in ipairs({'e', 'w'}) do
+    local capture = configured.org_capture_templates[key]
+    assert(capture.target:find('/khalorg/inbox/', 1, true))
+    assert(not capture.target:find('dropbox', 1, true))
 end
-print('PASS: calendar configuration disables local writes and captures into local drafts')
+vim.cmd('edit ' .. scratch .. '/khalorg/inbox/outlook_work.org')
+configured.org_custom_exports.n.action()
+assert(selected.calendar == 'outlook_work', 'Work captures must not use the personal calendar')
+vim.cmd('edit ' .. scratch .. '/khalorg/agendas/outlook_personal.org')
+assert(vim.bo.readonly, 'Generated agendas must resist accidental writes')
+configured.org_custom_exports.e.action()
+assert(selected.calendar == 'outlook_personal')
+local called
+vim.system = function(argv, _, callback)
+    called = argv
+    callback({code = 1, stderr = 'Synthetic network failure'})
+end
+selected.on_complete({code = 0})
+assert(called[1] == 'mycalsync' and called[2] == '--verbose', 'Edits must refresh through the local stack')
+vim.wait(30)
+vim.fn.delete(scratch, 'rf')
+print('PASS: local plugin routing, capture isolation, generated files, and refresh callback')

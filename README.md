@@ -1,6 +1,7 @@
 # BartSte dotfiles
 
-Each dotfiles repository tracks this README. Their bare Git checkouts share the home directory.
+The base repository owns this overview. Each layer owns a README inside its own directory.
+The bare Git checkouts share the home directory, so each file path must have one owner.
 
 These repositories put configuration files in the home directory:
 
@@ -189,148 +190,120 @@ Project-specific, plugin-managed, and Codex-managed system skills retain their e
 
 ## Calendar setup
 
-### What each device does
-
-The Raspberry Pi is the only Outlook bridge in this workflow.
-It handles `outlook_personal` and `outlook_work`.
-The laptop reads calendar files in Neovim and sends explicit edit requests to the Pi.
-Android uses the Outlook app directly.
-
-The read path is:
+The laptop and Raspberry Pi each connect to Outlook independently.
+Each machine uses its own DavMail, vdirsyncer, khal storage, and Khalorg installation.
+Outlook carries calendar changes between the machines.
+The laptop does not need the Pi for calendar edits or synchronization.
 
 ```text
-Outlook -> DavMail and vdirsyncer on the Pi -> Org exports -> Dropbox -> laptop
+Each machine: Outlook <-> DavMail <-> vdirsyncer <-> khal -> khalorg -> local Org agendas
+Laptop edits: Neovim -> nvim-khalorg -> local khal -> vdirsyncer -> Outlook
+Phone reads:  Pi Org agendas -> read-only WebDAV over Tailscale HTTPS -> Orgzly Revived
 ```
 
-The write path is separate:
+### Local synchronization
 
-```text
-Local Neovim draft -> SSH alias pi -> calendar-submit on the Pi -> Outlook
-```
-
-Dropbox carries the calendar view, not edit requests.
-Syncthing is not part of this setup.
-
-### Files and schedules
-
-The Pi stores its local calendar data under `~/.local/share/calendar/`.
-It exports these files:
-
-- `~/dropbox/generated/outlook_personal.org`
-- `~/dropbox/generated/outlook_work.org`
-
-`calsync.timer` runs every five minutes.
-Its service runs `mycalsync`, exports both calendars, and uploads the exact files to Dropbox.
-`dropboxpull.timer` copies Dropbox files back to the Pi every ten minutes.
-The laptop uses its existing Dropbox sync.
-
-The Org exports are read-only calendar views.
-The Pi never treats their contents as automatic write requests.
-A later export restores entries removed from these views.
-
-### Edit an event in Neovim
-
-1. Open an event from the agenda or an exported calendar file.
-2. Run `:CalendarDraft` to create an editable local copy.
-3. Edit and save the draft.
-4. Run `:CalendarApply` to send the request to the Pi.
-5. Save the draft after confirmation updates its event metadata.
-
-The first release supports title, description, location, and date changes for plain, non-recurring events.
-Use Outlook for invitations, recurring events, unsupported property changes, and ambiguous daylight-saving times.
-The server rejects unsupported changes instead of silently ignoring them.
-
-To create an event, use the personal or work capture template.
-Save the local draft, then run `:CalendarNew` on its event heading.
-Saving a draft alone does not create an Outlook event.
-
-### Deletion safety
-
-**Delete events in Outlook, not in Org.**
-
-This workflow has no Neovim calendar-delete action.
-Removing an Org entry, subtree, or exported file does not request an Outlook deletion.
-An empty or damaged export is not a calendar write request either.
-
-Drafts and pending requests stay outside Dropbox, under Neovim's local state directory:
-
-- `calendar-bridge/drafts/` contains editable drafts.
-- `calendar-bridge/pending/` contains saved requests and confirmed results.
-
-Use `:echo stdpath('state')` to find that directory.
-Dropbox cannot overwrite these local drafts.
-
-### SSH, conflicts, and offline use
-
-The laptop uses the literal SSH alias `pi`.
-Its existing SSH configuration supplies the username, address, and key.
-The separate `pi-ts` alias is not selected automatically.
-Set `CALENDAR_BRIDGE_HOST` before starting Neovim to override the destination.
-
-Test the connection from the laptop with:
+`mycalsync` synchronizes `outlook_work` and `outlook_personal` sequentially.
+The two DavMail profiles use the same port, so they cannot run together.
+`calsync.timer` runs five minutes after the previous cycle finishes on each machine.
+Run a cycle manually with:
 
 ```sh
-ssh -o BatchMode=yes pi true
+mycalsync --verbose
+systemctl --user status calsync.service calsync.timer
+journalctl --user -u calsync.service --since today
 ```
 
-A successful connection produces no output.
-The Pi also requires `~/.config/calendar-bridge/server`, containing its hostname.
-This private marker enables the server role. Do not copy it to the laptop.
+The local calendar storage is under `~/.local/share/calendar/`.
+The generated agendas are `~/.local/share/khalorg/agendas/outlook_personal.org` and `outlook_work.org`.
+An explicit `XDG_DATA_HOME` changes the agenda root on the laptop.
+The Pi WebDAV unit serves the standard path shown here.
+The export range is today through the next 365 days.
+Exports replace files atomically after success. Failed exports retain the previous file.
+Unchanged exports retain their modification times.
 
-Each exported event has a UID and a `BRIDGE_BASELINE` value.
-The baseline identifies the event version used for the draft.
-If the calendar event changes, the Pi rejects a stale edit and keeps its pending text.
-Start a fresh draft from the latest calendar view to resolve the difference manually.
+Scheduled jobs never import Org files.
+An empty, missing, damaged, or deleted Org agenda cannot request an Outlook event change.
+Vdirsyncer still synchronizes calendar storage in both directions; it also uploads explicit local edits.
+Keep Outlook as the event deletion interface.
 
-Offline drafts remain local.
-A failed submission also keeps its original request, with a unique request ID.
-Retry the saved request with the command shown by Neovim:
+Preserve each machine's live DavMail authentication settings.
+The laptop and Pi can use different authentication modes.
+Do not run the complete vdirsyncer installer to repair one setting: it copies authentication templates.
+
+### Neovim editing
+
+The existing `nvim-khalorg` plugin provides event operations.
+`khalorg-local` shares a local lock with `calsync` and blocks whole-file sync and deletion.
+The dotfiles contain calendar routing and refresh configuration, without a second calendar client.
+
+Use the Orgmode export menu, `<leader>oe`:
+
+| Action | Result |
+| ------ | ------ |
+| `n` | Create the selected event in the local calendar |
+| `e` | Edit the selected event's properties |
+| `E` | Edit its properties and dates |
+| `L` | List the calendar in an editable buffer |
+| `C` | Choose a calendar to list |
+
+The personal and work capture templates write to `~/.local/share/khalorg/inbox/`.
+These files remain local and never enter the generated agenda directory.
+Save a new capture, run `n`, then save again to retain the UID that the plugin adds.
+Existing UIDs block accidental creation of the same captured event.
+
+For an existing event, run `L` or `C` to obtain an editable view.
+Save the view to the appropriate inbox file before editing:
 
 ```vim
-:CalendarRetry <request-uuid>
+:saveas ~/.local/share/khalorg/inbox/outlook_work.org
 ```
 
-A retry uses the original payload and request ID.
-It does not create another event after a successful creation.
-Do not remove the request ID to repeat an uncertain creation.
+If that inbox file already contains unfinished work, choose another local filename.
+For an unrecognized filename, the menu asks which calendar to use.
+Retain the event UID, edit the selected event, and run `e` or `E`.
+Generated agenda buffers resist accidental writes with the normal `:write` command.
+Keep unfinished edits in the inbox rather than forcing a write to a generated agenda.
 
-If the buffer changes during submission, Neovim preserves the saved result without replacing the newer buffer text.
-A local save is not proof of an Outlook update.
-Confirmation follows the Pi's outbound sync, another remote sync, and verification of the intended event fields.
+After a successful action, Neovim runs `mycalsync` locally.
+If the upload fails, keep the saved event and retry `mycalsync` after the connection recovers.
+Do not repeat event creation to retry an upload.
+Modified buffers remain intact during refresh; resolve any disk-change prompt before replacing their text.
 
-### Android setup (manual)
+Local capture editing works offline. Outlook upload waits for a working connection.
+This version does not add durable request receipts or cross-device conflict resolution.
+Refresh before editing an existing event. Avoid concurrent edits to that event from different devices.
 
-1. Install or open Outlook for Android.
-2. Add the personal and work accounts through the app's account settings.
-3. Complete each account's normal sign-in steps.
-4. Open Calendar and use its menu to enable both calendars.
-5. Select Agenda view.
-6. Confirm a known event from each account, including its date and time.
-7. Confirm an all-day event as well.
+### Orgzly Revived on Android
 
-Android does not need Org files, Syncthing, or a connection to the Pi.
-Account access can depend on the work organization's rules.
-See [Microsoft's Android account setup](https://support.microsoft.com/en-gb/outlook/install-mobile/set-up-email-in-the-outlook-for-android-app)
-and [calendar quick start](https://support.microsoft.com/en-us/outlook/outlook-for-ios-and-android-quick-start).
+The Pi serves only the two generated agendas through authenticated, read-only WebDAV.
+WebDAV transfers Org files. CalDAV is not the phone interface for this setup.
+Tailscale Serve provides HTTPS inside the tailnet, without public internet exposure.
 
-### Checks and recovery
+See the [Pi WebDAV setup](https://github.com/BartSte/dotfiles-pi/blob/main/dotfiles-pi/calendar-webdav/README.md)
+for credentials, endpoint discovery, automatic sync settings, and phone acceptance checks.
+Enable Tailscale on the phone before synchronization.
+The phone keeps downloaded notebooks available offline.
+Phone edits cannot change the Pi exports or Outlook.
 
-Check the Pi's service and schedule with:
+Orgzly Revived supports WebDAV auto-sync, as recorded in its
+[changelog](https://www.orgzlyrevived.com/changelog).
+Enable the available auto-sync triggers under Settings, Sync, Auto-sync.
+Check the installed app's options rather than assuming a fixed background refresh interval.
 
-```sh
-systemctl --user status calsync.service calsync.timer
-systemctl --user list-timers calsync.timer
-```
+### Migration and recovery
 
-Private server receipts live under `~/.local/state/calendar-bridge/requests/` by default.
-Copies of replaced projection text live under `~/.local/state/calendar-bridge/projections/`.
-Rollout snapshots live under `~/.local/state/calendar-bridge/backups/`.
-Keep recovery files outside Dropbox. They contain private calendar text.
+Private snapshots live under `~/.local/state/calendar-simplify/backup-*/` on each machine.
+They preserve calendar storage, sync state, live configuration, and previous bridge state.
+Older bridge drafts and pending requests remain recovery data; nothing replays them automatically.
+Inspect unfinished work manually before applying an event through the local plugin.
+Do not upload old calendar snapshots over current Outlook data.
 
-See the [calendar bridge guide](https://github.com/BartSte/dotfiles-linux/blob/master/dotfiles-linux/docs/calendar-bridge.md)
-for supported operations and recovery details.
-The [calendar tests](https://github.com/BartSte/dotfiles-linux/blob/master/dotfiles-linux/tests/calendar-sync/README.md)
-use synthetic calendars and do not connect to Outlook.
+The SSH calendar commands, custom Neovim bridge, and Python mutation backend are removed.
+Calendar publication no longer uses Dropbox.
+Other Org notes, generated training files, and Dropbox services retain their existing workflow.
+The [calendar checks](https://github.com/BartSte/dotfiles-linux/blob/master/dotfiles-linux/tests/calendar-sync/README.md)
+use synthetic calendar data and never create Outlook test events.
 
 ## Dropbox files
 
@@ -340,7 +313,6 @@ Do not edit the files in `generated` as personal notes.
 
 | Files in `~/dropbox/generated`                 | Publisher on the Raspberry Pi                       |
 | ---------------------------------------------- | --------------------------------------------------- |
-| `outlook_personal.org`, `outlook_work.org`     | `calsync.timer` runs `dotfiles-linux/bin/mycalsync` |
 | `activities.org`                               | `garmin-activities.timer` runs Summit               |
 | `personal_records.org`                         | `garmin-update.timer` runs Summit                   |
 | `training-schedule.org`, `recent-training.csv` | The Hermes training schedule publisher              |
@@ -370,4 +342,8 @@ The Dropbox remote is named `dropbox` in the rclone configuration.
 `dots` shows their status.
 `dotc` commits changes in the available repositories, and `dotu` commits, pulls, and pushes them.
 `dotc` stages the layer directories, but it does not stage this root README.
-Stage this README separately in each repository that must receive the update.
+Stage this overview only in the base repository with `base add README.md`.
+Each other repository tracks its own `<layer>/README.md`.
+When migrating another checkout, preserve its README content before pulling a root README removal.
+After pulling those removals, use `base restore -- README.md` if Git deletes the overview.
+Layer READMEs inside directories do not appear automatically as GitHub repository front pages.
