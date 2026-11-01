@@ -227,6 +227,16 @@ An empty, missing, damaged, or deleted Org agenda cannot request an Outlook even
 Vdirsyncer still synchronizes calendar storage in both directions; it also uploads explicit local edits.
 Keep Outlook as the event deletion interface.
 
+If `rbw` supplies credentials, unlock its vault in an interactive terminal before background sync:
+
+```sh
+rbw unlock
+systemctl --user start calsync.service
+```
+
+A locked vault blocks synchronization. A background service cannot answer an interactive password prompt.
+Existing exported agendas remain available until authentication works again.
+
 Preserve each machine's live DavMail authentication settings.
 The laptop and Pi can use different authentication modes.
 Do not run the complete vdirsyncer installer to repair one setting: it copies authentication templates.
