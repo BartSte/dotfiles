@@ -1,4 +1,5 @@
 local root = vim.fn.fnamemodify(debug.getinfo(1, 'S').source:sub(2), ':h:h')
+vim.env.CALENDAR_BRIDGE_HOST = nil
 local configured, bridge_options
 package.loaded.orgmode = {setup=function(opts) configured=opts end}
 package.loaded['helpers.path'] = {home=function() return '/home/test-user' end, join=function(...) return table.concat({...}, '/') end}
@@ -6,6 +7,7 @@ package.loaded['config.calendar_bridge'] = {setup=function(opts) bridge_options=
 package.loaded.khalorg = {setup=function() error('Local Khalorg writes must not be enabled') end}
 dofile(root .. '/lua/config/orgmode.lua')
 assert(bridge_options, 'The Pi bridge must be configured')
+assert(bridge_options.host == 'pi', "The calendar client must use Bart's literal SSH alias pi")
 assert(not configured.org_custom_exports.d, 'No calendar deletion action is permitted')
 assert(not configured.org_custom_exports.s, 'No local whole-file sync action is permitted')
 assert(configured.org_custom_exports.e.action == package.loaded['config.calendar_bridge'].edit)

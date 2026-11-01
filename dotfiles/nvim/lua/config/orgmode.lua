@@ -13,6 +13,7 @@ local outlook_personal = path.join(dropbox_generated_org, 'outlook_personal.org'
 local outlook_work = path.join(dropbox_generated_org, 'outlook_work.org')
 local calendar_drafts = vim.fn.stdpath('state') .. '/calendar-bridge/drafts'
 calendar_bridge.setup({
+    host = vim.env.CALENDAR_BRIDGE_HOST or 'pi',
     calendars = {
         outlook_personal = outlook_personal,
         outlook_work = outlook_work,
