@@ -11,9 +11,27 @@ local gedachten = path.join(dropbox_org, 'gedachten.org')
 local komeco = path.join(dropbox_org, 'komeco.org')
 local outlook_personal = path.join(dropbox_generated_org, 'outlook_personal.org')
 local outlook_work = path.join(dropbox_generated_org, 'outlook_work.org')
+local data_home = vim.env.XDG_DATA_HOME
+if not data_home or data_home == '' then
+    data_home = path.join(path.home(), '.local', 'share')
+end
 
 khalorg.setup({
     calendar = 'outlook_personal',
+    write_uid = true,
+    calendars = {
+        outlook_personal = { org_file = outlook_personal },
+        outlook_work = { org_file = outlook_work },
+    },
+    -- Keep these defaults aligned with calsync.
+    sync = {
+        start = 'today',
+        stop = '365d',
+        state_dir = path.join(data_home, 'khalorg'),
+        conflict_resolution = 'khal',
+        edit_dates = false,
+        delete_on_sync = false,
+    },
 })
 
 local template_gedachte = [[
@@ -70,11 +88,35 @@ local template_komeco = [[
 - [ ]
 ]]
 
+local template_event = table.concat({
+    '* %?',
+    '  %^{Event date and time}T',
+    '  :PROPERTIES:',
+    '  :ATTENDEES:',
+    '  :LOCATION:',
+    '  :ORGANIZER:',
+    '  :STATUS:',
+    '  :UID:',
+    '  :URL:',
+    '  :UNTIL:',
+    '  :END:',
+    '',
+}, '\n')
+
 local custom_exports = {
     n = { label = 'Add a new khal item', action = khalorg.new },
     d = { label = 'Delete a khal item', action = khalorg.delete },
     e = { label = 'Edit properties of a khal item', action = khalorg.edit },
-    E = { label = 'Edit properties & dates of a khal item', action = khalorg.edit_all }
+    E = { label = 'Edit properties & dates of a khal item', action = khalorg.edit_all },
+    s = { label = 'Sync this calendar', action = khalorg.sync },
+    S = { label = 'Preview calendar sync', action = khalorg.sync_dry_run },
+    L = { label = 'List calendar events', action = khalorg.list },
+    C = {
+        label = 'Choose a calendar to list',
+        action = function()
+            vim.cmd('KhalorgCalendar')
+        end,
+    },
 }
 
 local mappings = {
@@ -101,10 +143,14 @@ local templates = {
         target = komeco
     },
     e = {
-        description = 'Event',
-        template =
-        '*\n\n:PROPERTIES:\n:ATTENDEES: \n:LOCATION: \n:ORGANIZER: \n:RRULE: \n:STATUS: \n:UID: \n:URL: \n:UNTIL: \n:END:\n',
+        description = 'Personal event',
+        template = template_event,
         target = outlook_personal
+    },
+    w = {
+        description = 'Work event',
+        template = template_event,
+        target = outlook_work,
     }
 }
 
