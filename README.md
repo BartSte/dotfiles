@@ -1,160 +1,134 @@
 # BartSte dotfiles
 
-The base repository owns this overview. Each layer owns a README inside its own directory.
-The bare Git checkouts share the home directory, so each file path must have one owner.
+These repositories share the home directory as their Git worktree.
+The base repository owns this README. Each file path must have one repository owner.
 
-These repositories put configuration files in the home directory:
-
-| Repository         | Purpose                                                                         |
-| ------------------ | ------------------------------------------------------------------------------- |
-| `dotfiles`         | Base files, Neovim configuration, and Linux and Windows initialization scripts  |
-| `dotfiles-linux`   | Linux configuration for the shell, Git, mail, calendars, Codex, and other tools |
-| `dotfiles-arch`    | Arch packages, Sway, Waybar, DNS, firewall, and systemd units                   |
-| `dotfiles-pi`      | Raspberry Pi packages, services, network setup, and application setup           |
-| `dotfiles-windows` | Windows and PowerShell setup                                                    |
-| `dotfiles-secret`  | Optional private configuration, including Codex and qutebrowser files           |
-
-The Linux initializer checks out the selected repositories into `$HOME` from separate bare Git repositories.
-It installs the base and Linux layers, then selects the Arch or Raspberry Pi layer.
-It also tries to check out `dotfiles-secret` when access is available.
-
-The private `dotfiles-hermes` workspace is separate from `dotfiles-secret`.
-The Raspberry Pi setup runs `~/dotfiles-hermes/main` when that workspace exists.
+| Repository | Purpose |
+| ---------- | ------- |
+| `dotfiles` | Neovim configuration and initialization scripts |
+| `dotfiles-linux` | Shell, tmux, Git, mail, calendars, Codex, and command-line tools |
+| `dotfiles-arch` | Arch packages, Sway, Waybar, DNS, firewall, and systemd units |
+| `dotfiles-pi` | Raspberry Pi packages, network, services, and applications |
+| `dotfiles-windows` | Windows and PowerShell configuration |
+| `dotfiles-secret` | Optional private configuration |
 
 ## Linux installation
 
-Run the initializer on Arch Linux or a Raspberry Pi:
+The initializer installs the base and Linux repositories as bare Git repositories.
+On Arch Linux and Raspberry Pi, it also installs the platform repository.
+The initializer also attempts to install the optional private repository.
+It can overwrite existing configuration files in the home directory.
+
+Run the initializer:
 
 ```bash
 curl -fsSLo /tmp/dotfiles-initialize https://raw.githubusercontent.com/BartSte/dotfiles/master/dotfiles/initialize
 bash /tmp/dotfiles-initialize
 ```
 
-The initializer can replace tracked files in your home directory.
-It creates `~/.dotfiles_config.sh` when that file does not exist.
-Set the values that you use before you run the setup scripts:
+Edit `~/.dotfiles_config.sh` before setup:
 
-```bash
-export BWEMAIL=
-export MICROSOFT_ACCOUNT=
-```
+| Variable | Value |
+| -------- | ----- |
+| `BWEMAIL` | Email address for the Bitwarden account |
+| `MICROSOFT_ACCOUNT` | Bitwarden item for the NeoMutt account |
 
-Run the common setup, then the setup for your machine:
+Run the common setup:
 
 ```bash
 ~/dotfiles-linux/main
-~/dotfiles-arch/main    # Arch Linux
-# or
-~/dotfiles-pi/main      # Raspberry Pi
 ```
 
-Run `~/dotfiles-linux/auth` for interactive login and pairing steps.
-The `main` scripts run module setup and can install packages or request input.
-The `auth` scripts handle services such as Bitwarden, Git, calendars, and Dropbox.
+On Arch Linux, run its setup:
+
+```bash
+~/dotfiles-arch/main
+```
+
+On a Raspberry Pi, run its setup:
+
+```bash
+~/dotfiles-pi/main
+```
+
+Run the interactive authentication steps for Bitwarden, Git, calendars, and Dropbox:
+
+```bash
+~/dotfiles-linux/auth
+```
+
+Start a new Zsh session after setup.
+The `main` scripts install and configure modules. The `auth` scripts handle interactive authentication.
+Keep passwords and API tokens outside Git.
+
+### WSL
+
+The Linux setup installs WSL integration and enables systemd through `/etc/wsl.conf`.
+After the first setup, restart WSL from PowerShell:
+
+```powershell
+wsl --shutdown
+```
+
+Use `wuv` and `wpy` for Windows Python environments from WSL.
+Work Python projects use the Windows environment associated with the original repository.
 
 ## Windows installation
 
-The Windows initializer is in the base repository at `dotfiles/initialize.ps1`.
-Run it in PowerShell:
+Run the Windows initializer in PowerShell:
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/BartSte/dotfiles/master/dotfiles/initialize.ps1'))
 ```
 
-If the initializer did not create `$HOME/dotfiles-config.ps1`, copy the template:
+The initializer installs Scoop, Git, and the base and Windows repositories.
+It also attempts to install the private repository.
+
+If `$HOME/dotfiles-config.ps1` does not exist, copy the template:
 
 ```powershell
 Copy-Item "$HOME/dotfiles-windows/default_config.ps1" "$HOME/dotfiles-config.ps1"
 ```
 
-Edit the values in `$HOME/dotfiles-config.ps1`, then run:
+Edit `$HOME/dotfiles-config.ps1`.
+Then run the Windows setup:
 
 ```powershell
 & "$HOME/dotfiles-windows/main.ps1"
 ```
 
-The Windows setup uses the base and Windows repositories.
-It needs `$HOME/dotfiles-config.ps1` before `main.ps1` runs.
-
-## Repository contents
-
-### Base: `dotfiles`
-
-`dotfiles/nvim` contains the Neovim configuration.
-Its Lua configuration uses `lua/before`, `lua/config`, `lua/helpers`, `lua/plugins`, and `lua/after`.
-The `vim` and `queries` directories contain Vim configuration and Tree-sitter queries.
-The base repository also contains qutebrowser files and the two initialization scripts.
-
-### Linux: `dotfiles-linux`
-
-This layer contains Zsh, tmux, Git, NeoMutt, isync, vdirsyncer, khal, khalorg, khard, Codex, and command-line scripts.
-Mail configuration is under `dotfiles-linux/mutt`.
-Calendar configuration is under `dotfiles-linux/vdirsyncer`, `khal`, and `khalorg`.
-The `MICROSOFT_ACCOUNT` value selects the NeoMutt account.
-The configuration reads credentials with `bw-cli-get` or `rbw`.
-
-### Arch: `dotfiles-arch`
-
-This layer contains package lists and setup for Sway, Waybar, DNS, firewall rules, qutebrowser, and systemd units.
-The `dropboxsync.timer` unit belongs to this layer.
-
-### Raspberry Pi: `dotfiles-pi`
-
-This layer contains apt, network, Tailscale, UFW, pipx, and systemd setup.
-It also contains setup modules for Summit, Hermes, and the grocery agent.
-The Hermes module runs the separate private workspace when that workspace exists.
-
-### Windows: `dotfiles-windows`
-
-`main.ps1` configures PowerShell, dependencies, Windows settings, Git, Neovim, Alacritty, KMonad, Caps Lock, and qutebrowser.
-Its `default_config.ps1` is a template for the local `dotfiles-config.ps1` file.
-
-### Private configuration
-
-`dotfiles-secret` holds versioned private configuration, including Codex configuration and qutebrowser URLs.
-Keep passwords and API tokens in a credential store such as `rbw`.
-Do not commit them to the dotfiles repositories.
-
 ## Projects and worktrees
 
-Repositories under `~/code/work` and `~/code/personal` can have an optional language folder, such as `python`, `shell`, or `kt`.
-New worktrees use a `worktrees` folder beside the original repository.
-The source path determines the category and language. The commands do not detect the programming language.
+Store repositories under `~/code/work` or `~/code/personal`, with an optional language directory.
+New worktrees use `worktrees/<repository>/<branch>` beside the original repository.
+Branch directory names replace `/` with `-`. PR directories use `pr-<number>`.
 
-| Original repository          | New branch worktree                                  |
-| ---------------------------- | ---------------------------------------------------- |
-| `~/code/work/python/repo`    | `~/code/work/python/worktrees/repo--feature-task`    |
-| `~/code/personal/shell/repo` | `~/code/personal/shell/worktrees/repo--feature-task` |
-| `~/code/work/repo`           | `~/code/work/worktrees/repo--feature-task`           |
-| `~/code/personal/repo`       | `~/code/personal/worktrees/repo--feature-task`       |
+| Original repository | Worktree for `feature/task` |
+| ------------------- | --------------------------- |
+| `~/code/work/python/repo` | `~/code/work/python/worktrees/repo/feature-task` |
+| `~/code/personal/repo` | `~/code/personal/worktrees/repo/feature-task` |
 
-Branch worktree names use `repo--branch`, with `/` replaced by `-` in the branch name.
-PR worktree names use `repo--pr-NUMBER`, and the worktree uses the PR source branch.
-Repositories outside the work and personal categories use `~/code/worktrees`.
-Existing worktrees retain their current paths. The commands reopen a worktree when the requested branch already has one.
-Commands run from a linked worktree use the original repository to determine the destination.
+Repositories outside these categories use `~/code/worktrees/<repository>/<branch>`.
+The commands reuse an existing worktree for the requested branch.
 
-### tmux commands
+### tmux
 
 The tmux prefix is `Ctrl-t`. Press the prefix, then the shortcut key.
 
-| Shortcut | Action                                                                           |
-| -------- | -------------------------------------------------------------------------------- |
-| `f`      | Open the fzf picker for repositories and worktrees                               |
-| `b`      | Open the fzf picker for local and remote branches in the current repository      |
-| `a`      | Open the picker for active Codex panes                                           |
-| `D`      | Remove the current managed worktree and its tmux sessions if Git permits removal |
+| Shortcut | Action |
+| -------- | ------ |
+| `f` | Select a repository or worktree |
+| `b` | Select a local or remote branch |
+| `a` | Select an active Codex pane |
+| `H` | Open the Pi session through SSH alias `pi` |
+| `D` | Remove the current managed worktree and its tmux sessions |
 
 The repository picker reads `~/.config/tmux-session/dirs`.
-The installed configuration includes work repositories, personal repositories, and the legacy `~/code/worktrees` folder.
-The picker finds worktrees in the category and language folders.
-The branch picker creates a worktree or opens the existing checkout for the selected branch.
-Remote selections create local branches that track the selected remote branch.
-New project sessions contain `nvim`, `shell`, and `codex` windows.
-The removal command protects the main checkout and does not force removal of worktrees with local changes.
+Project sessions contain `nvim`, `shell`, and `codex` windows.
+Worktree removal protects the main checkout and refuses local changes.
 
-Use these commands from a shell:
+Use the same tools from a shell:
 
 ```bash
 tsp                             # Pick a repository or worktree
@@ -166,27 +140,23 @@ tsp-pr OWNER/REPO 42 main feature/task
 
 `tsp-wt` accepts an optional project directory after the branch name.
 New branches start at the current HEAD unless a matching remote branch exists.
-`tsp-pr` resolves the repository through the same directory configuration and uses `gh` to check out the PR.
+Fetch remote branches before selection.
+`tsp-pr` uses `gh` to open a PR worktree.
 
 ### Project configuration
 
 The Zsh loader reads `dotfiles-linux/zsh/projectrc/mappings.conf` at shell startup.
-It selects snippets from `dotfiles-linux/zsh/projectrc/projectrc.d` with the original checkout path and the relative subdirectory.
-This keeps project-specific configuration available in both grouped and legacy worktrees.
-The loader does not reload snippets after a directory change.
-On WSL, work Python projects use the Windows virtual environment associated with the original repository.
+It selects snippets from `projectrc.d` for the original repository and current subdirectory.
+Linked worktrees use the same project configuration.
 
-The Zsh `codex` wrapper selects `~/.codex-personal` for original checkouts under `~/code/personal`.
-Other paths use `~/.codex`. An explicit `CODEX_HOME` takes precedence.
-The wrapper selects the account for each invocation, including directory overrides and calls from linked worktrees.
-For the active Codex pane, the tmux status bar shows `Codex: Work` or `Codex: Personal`.
-The label uses the running process's `CODEX_HOME`, including explicit overrides. Other configuration directories show `Codex: Custom`.
-The label identifies the selected configuration directory. It does not verify the credentials stored there.
-Grouped worktrees also remain under the existing ancestor `AGENTS.md` files for their category and language.
+The Zsh `codex` wrapper selects `~/.codex-personal` for repositories under `~/code/personal`.
+Other repositories use `~/.codex`. An explicit `CODEX_HOME` takes precedence.
+The selection also applies to linked worktrees.
+The tmux status bar shows the selected Codex configuration.
 
-User-owned general-purpose Codex skills belong in `~/dotfiles-linux/codex/skills/<skill-name>`.
-After a skill change, run `~/dotfiles-linux/codex/main` to install its symlink under `~/.codex/skills`.
-Project-specific, plugin-managed, and Codex-managed system skills retain their existing locations.
+Store user-owned Codex skills under `~/dotfiles-linux/codex/skills/<skill-name>`.
+After a skill change, run `~/dotfiles-linux/codex/main` to install its symlink.
+Project-specific, plugin-managed, and system skills retain their existing locations.
 
 ## Calendar setup
 
@@ -224,15 +194,16 @@ Use the Orgmode export menu, `<leader>oe`:
 | `C` | Choose a calendar to list |
 
 The personal and work capture templates save local files under `~/.local/share/khalorg/inbox/`.
-Save a new capture. Run `n`, then save again to retain its UID.
-For an existing event, use `L` or `C` and save an editable copy before making changes:
+Save a new capture. Run `n`. Save again to retain its UID.
+For an existing event, use `L` or `C` to open an editable view.
+Save a local copy before you edit the event:
 
 ```vim
 :saveas ~/.local/share/khalorg/inbox/outlook_work.org
 ```
 
 If the inbox file contains unfinished work, choose another filename.
-Retain the UID when editing an event.
+Retain the event UID.
 Keep unfinished edits in the inbox, separate from the generated agendas.
 Use Outlook to delete events.
 
@@ -246,7 +217,8 @@ for configuration and troubleshooting.
 
 Enable Tailscale on the phone.
 Add the Pi's HTTPS WebDAV endpoint as an Orgzly Revived repository with its dedicated username and password.
-Download both calendar notebooks and enable the available options under Settings, Sync, Auto-sync.
+Download both calendar notebooks.
+Enable the available options under Settings, Sync, Auto-sync.
 Phone access is read-only. Downloaded notebooks remain available offline.
 
 See the [Pi WebDAV setup](https://github.com/BartSte/dotfiles-pi/blob/main/dotfiles-pi/calendar-webdav/README.md)
@@ -256,38 +228,33 @@ for server setup, credentials, and Android configuration.
 
 `~/dropbox/org` contains personal Org notes and their archives.
 `~/dropbox/generated` contains files that scheduled jobs replace.
-Do not edit the files in `generated` as personal notes.
+Do not edit generated files as personal notes.
 
-| Files in `~/dropbox/generated`                 | Publisher on the Raspberry Pi                       |
-| ---------------------------------------------- | --------------------------------------------------- |
-| `activities.org`                               | `garmin-activities.timer` runs Summit               |
-| `personal_records.org`                         | `garmin-update.timer` runs Summit                   |
-| `training-schedule.org`, `recent-training.csv` | The Hermes training schedule publisher              |
+| Files in `~/dropbox/generated` | Publisher on the Raspberry Pi |
+| ----------------------------- | ----------------------------- |
+| `activities.org` | `garmin-activities.timer` through Summit |
+| `personal_records.org` | `garmin-update.timer` through Summit |
+| `training-schedule.org`, `recent-training.csv` | Hermes training publisher |
 
-The Pi service definitions live in `dotfiles-pi/systemd/user`.
-The Pi publishes generated files to Dropbox.
-Its `dropboxpull.timer` copies remote files to `~/dropbox`.
-That pull excludes `activities.org` and `personal_records.org` because Summit writes them locally.
+The Pi publishes these generated files to the rclone remote named `dropbox`.
+Its `dropboxpull.timer` downloads other Dropbox content every ten minutes.
+It excludes `activities.org` and `personal_records.org` because Summit writes them locally.
+On Arch Linux, `dropboxsync.timer` synchronizes `~/dropbox` in both directions through `rclone bisync`.
 
-On Arch Linux, `dropboxsync.timer` runs `rclone bisync` between Dropbox and `~/dropbox`.
-It syncs both `org` and `generated`.
-The Dropbox remote is named `dropbox` in the rclone configuration.
+## Dotfiles commands
 
-## Bare Git repositories
+The Zsh configuration defines these Git commands for the bare repositories:
 
-`dotfiles-linux/zsh/git.zsh` defines these commands:
+| Repository | Git command | Status command |
+| ---------- | ----------- | -------------- |
+| Base | `base` | `bases` |
+| Linux | `lin` | `lins` |
+| Arch | `linarch` | `linarchs` |
+| Raspberry Pi | `linpi` | `linpis` |
+| Private configuration | `secret` | `secrets` |
 
-| Repository            | Git command | Status command |
-| --------------------- | ----------- | -------------- |
-| Base                  | `base`      | `bases`        |
-| Linux                 | `lin`       | `lins`         |
-| Arch                  | `linarch`   | `linarchs`     |
-| Raspberry Pi          | `linpi`     | `linpis`       |
-| Private configuration | `secret`    | `secrets`      |
-
-`dot` runs a Git command across the available repositories.
-`dots` shows their status.
-`dotc` commits changes in the available repositories, and `dotu` commits, pulls, and pushes them.
-`dotc` stages the layer directories, but it does not stage this root README.
-Stage this overview only in the base repository with `base add README.md`.
-Each other repository tracks its own `<layer>/README.md`.
+`dot` runs a Git command across the installed repositories. `dots` shows their status.
+`dotc "message"` stages and commits the layer directories.
+`dotu` commits, pulls, and pushes changes across the installed repositories.
+Stage this README separately with `base add README.md`.
+The Linux, Arch, Pi, and private repositories each own a README inside their layer directory.
