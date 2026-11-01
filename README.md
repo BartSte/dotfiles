@@ -4,14 +4,14 @@ Each dotfiles repository tracks this README. Their bare Git checkouts share the 
 
 These repositories put configuration files in the home directory:
 
-| Repository | Purpose |
-| --- | --- |
-| `dotfiles` | Base files, Neovim configuration, and Linux and Windows initialization scripts |
-| `dotfiles-linux` | Linux configuration for the shell, Git, mail, calendars, Codex, and other tools |
-| `dotfiles-arch` | Arch packages, Sway, Waybar, DNS, firewall, and systemd units |
-| `dotfiles-pi` | Raspberry Pi packages, services, network setup, and application setup |
-| `dotfiles-windows` | Windows and PowerShell setup |
-| `dotfiles-secret` | Optional private configuration, including Codex and qutebrowser files |
+| Repository         | Purpose                                                                         |
+| ------------------ | ------------------------------------------------------------------------------- |
+| `dotfiles`         | Base files, Neovim configuration, and Linux and Windows initialization scripts  |
+| `dotfiles-linux`   | Linux configuration for the shell, Git, mail, calendars, Codex, and other tools |
+| `dotfiles-arch`    | Arch packages, Sway, Waybar, DNS, firewall, and systemd units                   |
+| `dotfiles-pi`      | Raspberry Pi packages, services, network setup, and application setup           |
+| `dotfiles-windows` | Windows and PowerShell setup                                                    |
+| `dotfiles-secret`  | Optional private configuration, including Codex and qutebrowser files           |
 
 The Linux initializer checks out the selected repositories into `$HOME` from separate bare Git repositories.
 It installs the base and Linux layers, then selects the Arch or Raspberry Pi layer.
@@ -115,18 +115,90 @@ Its `default_config.ps1` is a template for the local `dotfiles-config.ps1` file.
 Keep passwords and API tokens in a credential store such as `rbw`.
 Do not commit them to the dotfiles repositories.
 
+## Projects and worktrees
+
+Repositories under `~/code/work` and `~/code/personal` can have an optional language folder, such as `python`, `shell`, or `kt`.
+New worktrees use a `worktrees` folder beside the original repository.
+The source path determines the category and language. The commands do not detect the programming language.
+
+| Original repository          | New branch worktree                                  |
+| ---------------------------- | ---------------------------------------------------- |
+| `~/code/work/python/repo`    | `~/code/work/python/worktrees/repo--feature-task`    |
+| `~/code/personal/shell/repo` | `~/code/personal/shell/worktrees/repo--feature-task` |
+| `~/code/work/repo`           | `~/code/work/worktrees/repo--feature-task`           |
+| `~/code/personal/repo`       | `~/code/personal/worktrees/repo--feature-task`       |
+
+Branch worktree names use `repo--branch`, with `/` replaced by `-` in the branch name.
+PR worktree names use `repo--pr-NUMBER`, and the worktree uses the PR source branch.
+Repositories outside the work and personal categories use `~/code/worktrees`.
+Existing worktrees retain their current paths. The commands reopen a worktree when the requested branch already has one.
+Commands run from a linked worktree use the original repository to determine the destination.
+
+### tmux commands
+
+The tmux prefix is `Ctrl-t`. Press the prefix, then the shortcut key.
+
+| Shortcut | Action                                                                           |
+| -------- | -------------------------------------------------------------------------------- |
+| `f`      | Open the fzf picker for repositories and worktrees                               |
+| `b`      | Open the fzf picker for local and remote branches in the current repository      |
+| `a`      | Open the picker for active Codex panes                                           |
+| `D`      | Remove the current managed worktree and its tmux sessions if Git permits removal |
+
+The repository picker reads `~/.config/tmux-session/dirs`.
+The installed configuration includes work repositories, personal repositories, and the legacy `~/code/worktrees` folder.
+The picker finds worktrees in the category and language folders.
+The branch picker creates a worktree or opens the existing checkout for the selected branch.
+Remote selections create local branches that track the selected remote branch.
+New project sessions contain `nvim`, `shell`, and `codex` windows.
+The removal command protects the main checkout and does not force removal of worktrees with local changes.
+
+Use these commands from a shell:
+
+```bash
+tsp                             # Pick a repository or worktree
+tsp-branches                    # Pick a branch in the current repository
+tsp-wt feature/task             # Open or create a branch worktree
+tsp-wt --remote origin feature/task
+tsp-pr OWNER/REPO 42 main feature/task
+```
+
+`tsp-wt` accepts an optional project directory after the branch name.
+New branches start at the current HEAD unless a matching remote branch exists.
+`tsp-pr` resolves the repository through the same directory configuration and uses `gh` to check out the PR.
+
+### Project configuration
+
+The Zsh loader reads `dotfiles-linux/zsh/projectrc/mappings.conf` at shell startup.
+It selects snippets from `dotfiles-linux/zsh/projectrc/projectrc.d` with the original checkout path and the relative subdirectory.
+This keeps project-specific configuration available in both grouped and legacy worktrees.
+The loader does not reload snippets after a directory change.
+On WSL, work Python projects use the Windows virtual environment associated with the original repository.
+
+The Zsh `codex` wrapper selects `~/.codex-personal` for original checkouts under `~/code/personal`.
+Other paths use `~/.codex`. An explicit `CODEX_HOME` takes precedence.
+The wrapper selects the account for each invocation, including directory overrides and calls from linked worktrees.
+For the active Codex pane, the tmux status bar shows `Codex: Work` or `Codex: Personal`.
+The label uses the running process's `CODEX_HOME`, including explicit overrides. Other configuration directories show `Codex: Custom`.
+The label identifies the selected configuration directory. It does not verify the credentials stored there.
+Grouped worktrees also remain under the existing ancestor `AGENTS.md` files for their category and language.
+
+User-owned general-purpose Codex skills belong in `~/dotfiles-linux/codex/skills/<skill-name>`.
+After a skill change, run `~/dotfiles-linux/codex/main` to install its symlink under `~/.codex/skills`.
+Project-specific, plugin-managed, and Codex-managed system skills retain their existing locations.
+
 ## Dropbox files
 
 `~/dropbox/org` contains personal Org notes and their archives.
 `~/dropbox/generated` contains files that scheduled jobs replace.
 Do not edit the files in `generated` as personal notes.
 
-| Files in `~/dropbox/generated` | Publisher on the Raspberry Pi |
-| --- | --- |
-| `outlook_personal.org`, `outlook_work.org` | `calsync.timer` runs `dotfiles-linux/bin/mycalsync` |
-| `activities.org` | `garmin-activities.timer` runs Summit |
-| `personal_records.org` | `garmin-update.timer` runs Summit |
-| `training-schedule.org`, `recent-training.csv` | The Hermes training schedule publisher |
+| Files in `~/dropbox/generated`                 | Publisher on the Raspberry Pi                       |
+| ---------------------------------------------- | --------------------------------------------------- |
+| `outlook_personal.org`, `outlook_work.org`     | `calsync.timer` runs `dotfiles-linux/bin/mycalsync` |
+| `activities.org`                               | `garmin-activities.timer` runs Summit               |
+| `personal_records.org`                         | `garmin-update.timer` runs Summit                   |
+| `training-schedule.org`, `recent-training.csv` | The Hermes training schedule publisher              |
 
 The Pi service definitions live in `dotfiles-pi/systemd/user`.
 The Pi publishes generated files to Dropbox.
@@ -141,13 +213,13 @@ The Dropbox remote is named `dropbox` in the rclone configuration.
 
 `dotfiles-linux/zsh/git.zsh` defines these commands:
 
-| Repository | Git command | Status command |
-| --- | --- | --- |
-| Base | `base` | `bases` |
-| Linux | `lin` | `lins` |
-| Arch | `linarch` | `linarchs` |
-| Raspberry Pi | `linpi` | `linpis` |
-| Private configuration | `secret` | `secrets` |
+| Repository            | Git command | Status command |
+| --------------------- | ----------- | -------------- |
+| Base                  | `base`      | `bases`        |
+| Linux                 | `lin`       | `lins`         |
+| Arch                  | `linarch`   | `linarchs`     |
+| Raspberry Pi          | `linpi`     | `linpis`       |
+| Private configuration | `secret`    | `secrets`      |
 
 `dot` runs a Git command across the available repositories.
 `dots` shows their status.
