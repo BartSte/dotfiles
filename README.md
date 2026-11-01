@@ -187,6 +187,151 @@ User-owned general-purpose Codex skills belong in `~/dotfiles-linux/codex/skills
 After a skill change, run `~/dotfiles-linux/codex/main` to install its symlink under `~/.codex/skills`.
 Project-specific, plugin-managed, and Codex-managed system skills retain their existing locations.
 
+## Calendar setup
+
+### What each device does
+
+The Raspberry Pi is the only Outlook bridge in this workflow.
+It handles `outlook_personal` and `outlook_work`.
+The laptop reads calendar files in Neovim and sends explicit edit requests to the Pi.
+Android uses the Outlook app directly.
+
+The read path is:
+
+```text
+Outlook -> DavMail and vdirsyncer on the Pi -> Org exports -> Dropbox -> laptop
+```
+
+The write path is separate:
+
+```text
+Local Neovim draft -> SSH alias pi -> calendar-submit on the Pi -> Outlook
+```
+
+Dropbox carries the calendar view, not edit requests.
+Syncthing is not part of this setup.
+
+### Files and schedules
+
+The Pi stores its local calendar data under `~/.local/share/calendar/`.
+It exports these files:
+
+- `~/dropbox/generated/outlook_personal.org`
+- `~/dropbox/generated/outlook_work.org`
+
+`calsync.timer` runs every five minutes.
+Its service runs `mycalsync`, exports both calendars, and uploads the exact files to Dropbox.
+`dropboxpull.timer` copies Dropbox files back to the Pi every ten minutes.
+The laptop uses its existing Dropbox sync.
+
+The Org exports are read-only calendar views.
+The Pi never treats their contents as automatic write requests.
+A later export restores entries removed from these views.
+
+### Edit an event in Neovim
+
+1. Open an event from the agenda or an exported calendar file.
+2. Run `:CalendarDraft` to create an editable local copy.
+3. Edit and save the draft.
+4. Run `:CalendarApply` to send the request to the Pi.
+5. Save the draft after confirmation updates its event metadata.
+
+The first release supports title, description, location, and date changes for plain, non-recurring events.
+Use Outlook for invitations, recurring events, unsupported property changes, and ambiguous daylight-saving times.
+The server rejects unsupported changes instead of silently ignoring them.
+
+To create an event, use the personal or work capture template.
+Save the local draft, then run `:CalendarNew` on its event heading.
+Saving a draft alone does not create an Outlook event.
+
+### Deletion safety
+
+**Delete events in Outlook, not in Org.**
+
+This workflow has no Neovim calendar-delete action.
+Removing an Org entry, subtree, or exported file does not request an Outlook deletion.
+An empty or damaged export is not a calendar write request either.
+
+Drafts and pending requests stay outside Dropbox, under Neovim's local state directory:
+
+- `calendar-bridge/drafts/` contains editable drafts.
+- `calendar-bridge/pending/` contains saved requests and confirmed results.
+
+Use `:echo stdpath('state')` to find that directory.
+Dropbox cannot overwrite these local drafts.
+
+### SSH, conflicts, and offline use
+
+The laptop uses the literal SSH alias `pi`.
+Its existing SSH configuration supplies the username, address, and key.
+The separate `pi-ts` alias is not selected automatically.
+Set `CALENDAR_BRIDGE_HOST` before starting Neovim to override the destination.
+
+Test the connection from the laptop with:
+
+```sh
+ssh -o BatchMode=yes pi true
+```
+
+A successful connection produces no output.
+The Pi also requires `~/.config/calendar-bridge/server`, containing its hostname.
+This private marker enables the server role. Do not copy it to the laptop.
+
+Each exported event has a UID and a `BRIDGE_BASELINE` value.
+The baseline identifies the event version used for the draft.
+If the calendar event changes, the Pi rejects a stale edit and keeps its pending text.
+Start a fresh draft from the latest calendar view to resolve the difference manually.
+
+Offline drafts remain local.
+A failed submission also keeps its original request, with a unique request ID.
+Retry the saved request with the command shown by Neovim:
+
+```vim
+:CalendarRetry <request-uuid>
+```
+
+A retry uses the original payload and request ID.
+It does not create another event after a successful creation.
+Do not remove the request ID to repeat an uncertain creation.
+
+If the buffer changes during submission, Neovim preserves the saved result without replacing the newer buffer text.
+A local save is not proof of an Outlook update.
+Confirmation follows the Pi's outbound sync, another remote sync, and verification of the intended event fields.
+
+### Android setup (manual)
+
+1. Install or open Outlook for Android.
+2. Add the personal and work accounts through the app's account settings.
+3. Complete each account's normal sign-in steps.
+4. Open Calendar and use its menu to enable both calendars.
+5. Select Agenda view.
+6. Confirm a known event from each account, including its date and time.
+7. Confirm an all-day event as well.
+
+Android does not need Org files, Syncthing, or a connection to the Pi.
+Account access can depend on the work organization's rules.
+See [Microsoft's Android account setup](https://support.microsoft.com/en-gb/outlook/install-mobile/set-up-email-in-the-outlook-for-android-app)
+and [calendar quick start](https://support.microsoft.com/en-us/outlook/outlook-for-ios-and-android-quick-start).
+
+### Checks and recovery
+
+Check the Pi's service and schedule with:
+
+```sh
+systemctl --user status calsync.service calsync.timer
+systemctl --user list-timers calsync.timer
+```
+
+Private server receipts live under `~/.local/state/calendar-bridge/requests/` by default.
+Copies of replaced projection text live under `~/.local/state/calendar-bridge/projections/`.
+Rollout snapshots live under `~/.local/state/calendar-bridge/backups/`.
+Keep recovery files outside Dropbox. They contain private calendar text.
+
+See the [calendar bridge guide](https://github.com/BartSte/dotfiles-linux/blob/master/dotfiles-linux/docs/calendar-bridge.md)
+for supported operations and recovery details.
+The [calendar tests](https://github.com/BartSte/dotfiles-linux/blob/master/dotfiles-linux/tests/calendar-sync/README.md)
+use synthetic calendars and do not connect to Outlook.
+
 ## Dropbox files
 
 `~/dropbox/org` contains personal Org notes and their archives.
