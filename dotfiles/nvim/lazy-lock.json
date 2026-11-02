@@ -36,5 +36,5 @@
   "vim-gtest": { "branch": "master", "commit": "41e299172401cd5549a3dc3542b9d4d9ffc8b50d" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-table-mode": { "branch": "master", "commit": "bb025308a45c67c7c8f0763ba37bc2ee3f534df0" },
-  "vim-test": { "branch": "master", "commit": "a9bfcd4ed4f6a4494a9f2569d8c9277ff31bb13e" }
+  "vim-test": { "branch": "master", "commit": "7a5f7e1848b573de556adffe718097933d827d32" }
 }
