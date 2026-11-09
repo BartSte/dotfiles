@@ -28,6 +28,7 @@ local titles = {
     waiting = "Waiting for review or checks",
     action = "Needs action",
     ready = "Ready to merge",
+    followup = "Previously reviewed PRs",
 }
 
 local badges = {
@@ -37,6 +38,7 @@ local badges = {
     waiting = { "WAITING", "255;210;110" },
     action = { "ACTION", "255;125;145" },
     ready = { "MERGE", "120;220;160" },
+    followup = { "FOLLOW-UP", "155;190;190" },
 }
 
 local function strip_color(text)
@@ -57,7 +59,16 @@ local search_fields = [[
     pageInfo { hasNextPage endCursor }
     nodes {
       ... on PullRequest {
-        number title url state isDraft headRefOid
+        number title url state isDraft headRefOid updatedAt baseRefName headRefName
+        additions deletions author { login }
+        comments(last: 1) { nodes { id updatedAt author { login } } }
+        reviews(last: 20) {
+          nodes { author { login } state submittedAt commit { oid } }
+          pageInfo { hasPreviousPage }
+        }
+        timelineItems(last: 1, itemTypes: [REVIEW_REQUESTED_EVENT]) {
+          nodes { ... on ReviewRequestedEvent { id createdAt } }
+        }
         mergeable mergeStateStatus reviewDecision isInMergeQueue
         repository { nameWithOwner }
         commits(last: 1) {
@@ -177,17 +188,20 @@ end
 
 local function filter_for(group, login)
     if group == "review" then
-        return "user-review-requested:" .. login
+        return "user-review-requested:" .. login .. " -author:" .. login
     elseif group == "team" then
-        return "team-review-requested-user:" .. login
+        return "team-review-requested-user:" .. login .. " -author:" .. login
+    elseif group == "reviewed" then
+        return "reviewed-by:" .. login .. " -author:" .. login
     end
     return "author:" .. login
 end
 
 local function fetch_combined(callback, on_error)
-    -- Batch the three sources in one request. Only unfinished sources need
+    -- Batch the sources in one request. Only unfinished sources need
     -- another request when there are more than 50 results.
-    local sources = { "review", "team", "authored" }
+    local sources = { "review", "authored", "team", "reviewed" }
+    local coverage = {}
     local results, seen, after, complete = {}, {}, {}, {}
     for _, source in ipairs(sources) do
         results[source], seen[source] = {}, {}
@@ -203,7 +217,8 @@ local function fetch_combined(callback, on_error)
                 variables[source .. "After"] = after[source] or vim.NIL
             end
         end
-        local query = "query(" .. table.concat(definitions, ", ") .. ") {" .. table.concat(fields, "\n") .. "}"
+        local query = "query(" .. table.concat(definitions, ", ") .. ") { viewer { login } "
+            .. table.concat(fields, "\n") .. "}"
         graphql(query, variables, function(data)
             local more = false
             for _, source in ipairs(sources) do
@@ -216,6 +231,7 @@ local function fetch_combined(callback, on_error)
                         end
                     end
                     complete[source] = not connection.pageInfo.hasNextPage or #results[source] >= 1000
+                    coverage[source] = { count = connection.issueCount, complete = connection.issueCount <= 1000 }
                     after[source] = connection.pageInfo.endCursor
                     if complete[source] and connection.issueCount > 1000 then
                         notify("GitHub search limits " .. source .. " to 1,000 PRs. Results are incomplete.", vim.log.levels.WARN)
@@ -237,41 +253,57 @@ local function fetch_combined(callback, on_error)
                         by_url[pr.url] = item
                         combined[#combined + 1] = item
                     end
-                    local category = source == "authored" and state.classify(pr) or source
+                    local category = source == "authored" and state.classify(pr)
+                        or source == "reviewed" and "followup" or source
                     item.inbox_categories[#item.inbox_categories + 1] = category
                 end
             end
-            callback(combined)
+            callback(combined, data.viewer.login, coverage)
         end, on_error)
     end
     batch()
 end
 
-local function load_snapshot(callback, quiet)
+local function load_snapshot(callback, quiet, on_error)
     local context = cache_context()
     if pending and pending.context == context then
-        pending.callbacks[#pending.callbacks + 1] = { success = callback, quiet = quiet }
+        pending.callbacks[#pending.callbacks + 1] = { success = callback, quiet = quiet, error = on_error }
         return
     end
-    local request = { context = context, callbacks = { { success = callback, quiet = quiet } } }
+    local request = { context = context, callbacks = { { success = callback, quiet = quiet, error = on_error } } }
     pending = request
     -- Snapshot refreshes always go to GitHub. Reopening the picker does not.
-    fetch_combined(function(prs)
+    fetch_combined(function(prs, login, coverage)
         if pending == request then pending = nil end
-        if cache_context() ~= context then return end
-        snapshot = { context = context, prs = prs, updated_at = os.time() }
+        if cache_context() ~= context then
+            for _, waiter in ipairs(request.callbacks) do
+                if waiter.error then waiter.error("GitHub account context changed. Refresh again.") end
+            end
+            return
+        end
+        local host = require("octo.config").values.github_hostname
+        if not host or host == "" then host = vim.env.GH_HOST or "github.com" end
+        snapshot = { context = context, prs = prs, updated_at = os.time(), login = login, host = host,
+            coverage = coverage }
         for _, waiter in ipairs(request.callbacks) do
             if waiter.success then waiter.success(snapshot) end
         end
     end, function(message)
         if pending == request then pending = nil end
+        local reported = false
         for _, waiter in ipairs(request.callbacks) do
-            if not waiter.quiet then
+            if waiter.error then waiter.error(message) end
+            if not waiter.quiet and not reported then
                 notify(message, vim.log.levels.ERROR)
-                break
+                reported = true
             end
         end
     end)
+end
+
+---Collect a fresh account-scoped snapshot for the persistent daily board.
+function M.collect(callback, on_error)
+    load_snapshot(callback, true, on_error)
 end
 
 ---Warm every PR list without opening a picker or reporting background errors.

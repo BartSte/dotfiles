@@ -45,7 +45,8 @@ for name, config in pairs(server_opts) do
         config.root_dir = decorate_root_dir(config.root_dir)
     end
     vim.lsp.config(name, config)
-    vim.lsp.enable(name)
+    -- Keep Kotlin LSP opt-in: indexing can consume excessive CPU and memory.
+    vim.lsp.enable(name, name ~= "kmp_lsp")
 end
 
 ---Instead of using the client's on_attach hook, the LspAttach autocommand is

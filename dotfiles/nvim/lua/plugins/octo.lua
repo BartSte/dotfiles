@@ -1,10 +1,11 @@
 return {
     "pwntester/octo.nvim",
-    cmd = "Octo",
+    cmd = { "Octo", "PrAttention" },
     event = "VeryLazy",
     keys = {
         { "<leader>pc", "<cmd>Octo pr list<CR>", desc = "PRs: current repository" },
-        { "<leader>pp", function() require("helpers.pr_inbox").open("all") end, desc = "PRs: combined inbox" },
+        { "<leader>pp", function() require("helpers.pr_attention").open() end, desc = "PRs: daily attention queue" },
+        { "<leader>pi", function() require("helpers.pr_inbox").open("all") end, desc = "PRs: combined picker" },
         { "<leader>pr", function() require("helpers.pr_inbox").open("review") end, desc = "PRs: needs your review" },
         { "<leader>pt", function() require("helpers.pr_inbox").open("team") end, desc = "PRs: needs your teams' review" },
         { "<leader>pd", function() require("helpers.pr_inbox").open("drafts") end, desc = "PRs: your drafts" },
@@ -20,5 +21,6 @@ return {
     config = function()
         require("config.octo")
         require("helpers.pr_inbox").setup()
+        require("helpers.pr_attention").setup()
     end
 }

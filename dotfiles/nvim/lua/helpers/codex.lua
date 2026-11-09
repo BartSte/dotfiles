@@ -8,6 +8,8 @@ local PANE_FORMAT = table.concat({
     "#{pane_current_path}",
     "#{pane_title}",
     "#{pane_current_command}",
+    "#{session_path}",
+    "#{window_name}",
 }, FIELD_SEPARATOR)
 
 ---@class CodexPane
@@ -16,6 +18,8 @@ local PANE_FORMAT = table.concat({
 ---@field index string
 ---@field path string
 ---@field title string
+---@field session_path string
+---@field window_name string
 ---@field target string
 
 local function notify(message, level)
@@ -50,13 +54,15 @@ local function parse_panes(stdout)
     local panes = {}
     for _, line in ipairs(vim.split(stdout, "\n", { plain = true, trimempty = true })) do
         local fields = vim.split(line, FIELD_SEPARATOR, { plain = true })
-        if #fields == 6 and fields[6] == "codex" then
+        if #fields == 8 and fields[6] == "codex" then
             local pane = {
                 session = fields[1],
                 window = fields[2],
                 index = fields[3],
                 path = fields[4],
                 title = fields[5],
+                session_path = fields[7],
+                window_name = fields[8],
                 target = string.format("%s:%s.%s", fields[1], fields[2], fields[3]),
             }
             table.insert(panes, pane)
@@ -65,7 +71,14 @@ local function parse_panes(stdout)
     return panes
 end
 
-local function send_to_pane(payload, pane)
+local function send_to_pane(payload, pane, options)
+    local config
+    if options and options.directory then
+        -- Keep this handoff literal even if the pane exits to a shell before delivery.
+        config = vim.fn.tempname()
+        vim.fn.writefile({ vim.json.encode({ reset = false, actions = { { regex = "^codex$", paste = "{0}" } } }) }, config)
+        vim.fn.setfperm(config, "rw-------")
+    end
     local argv = {
         "key2pane",
         "--session",
@@ -74,13 +87,28 @@ local function send_to_pane(payload, pane)
         pane.window,
         "--index",
         pane.index,
-        payload,
     }
-    run(argv, function(result)
+    if config then vim.list_extend(argv, { "--config", config, "--noreset" }) end
+    vim.list_extend(argv, { "--", payload })
+    local started = run(argv, function(result)
+        if config then vim.fn.delete(config) end
         if result.code ~= 0 then
             notify(process_error("key2pane failed", result), vim.log.levels.ERROR)
+        elseif options and options.focus then
+            run({ "tmux", "select-window", "-t", pane.session .. ":" .. pane.window }, function(window_result)
+                if window_result.code ~= 0 then
+                    notify(process_error("Cannot focus Codex window", window_result), vim.log.levels.ERROR)
+                    return
+                end
+                run({ "tmux", "select-pane", "-t", pane.target }, function(pane_result)
+                    if pane_result.code ~= 0 then
+                        notify(process_error("Cannot focus Codex pane", pane_result), vim.log.levels.ERROR)
+                    end
+                end)
+            end)
         end
     end)
+    if not started and config then vim.fn.delete(config) end
 end
 
 local function select_pane(payload, panes)
@@ -110,9 +138,11 @@ local function select_pane(payload, panes)
     end)
 end
 
----Send text to a Codex pane in the current tmux session.
+---Send text to a Codex pane, optionally in a specific worktree's session.
 ---@param payload string The text to send.
-M.send = function(payload)
+---@param options? table Worktree directory, focus flag, and startup wait_ms.
+M.send = function(payload, options)
+    options = options or {}
     if vim.fn.executable("tmux") ~= 1 then
         notify("The tmux executable is not available.", vim.log.levels.ERROR)
         return
@@ -128,22 +158,52 @@ M.send = function(payload)
         return
     end
 
-    local argv = {
-        "tmux",
-        "list-panes",
-        "-s",
-        "-t",
-        current_pane,
-        "-F",
-        PANE_FORMAT,
-    }
-    run(argv, function(result)
-        if result.code ~= 0 then
-            notify(process_error("tmux pane search failed", result), vim.log.levels.ERROR)
-            return
-        end
-        select_pane(payload, parse_panes(result.stdout or ""))
-    end)
+    local argv = { "tmux", "list-panes" }
+    if options.directory then
+        vim.list_extend(argv, { "-a" })
+    else
+        vim.list_extend(argv, { "-s", "-t", current_pane })
+    end
+    vim.list_extend(argv, { "-F", PANE_FORMAT })
+    local function normalized(path)
+        return vim.uv.fs_realpath(path) or vim.fs.normalize(path)
+    end
+    local directory = options.directory and normalized(options.directory)
+    local deadline = vim.uv.hrtime() + (options.wait_ms or 0) * 1000000
+    local function search()
+        run(argv, function(result)
+            if result.code ~= 0 then
+                notify(process_error("tmux pane search failed", result), vim.log.levels.ERROR)
+                return
+            end
+            local panes = parse_panes(result.stdout or "")
+            if not directory then
+                select_pane(payload, panes)
+                return
+            end
+            panes = vim.tbl_filter(function(pane)
+                local path = normalized(pane.path)
+                return normalized(pane.session_path) == directory
+                    and (path == directory or path:sub(1, #directory + 1) == directory .. "/")
+            end, panes)
+            if #panes == 0 and vim.uv.hrtime() < deadline then
+                vim.defer_fn(search, 150)
+            elseif #panes == 0 then
+                notify("No Codex pane started in the PR worktree. Use C in the queue to copy the brief.", vim.log.levels.WARN)
+            else
+                if #panes > 1 then
+                    local dedicated = vim.tbl_filter(function(pane) return pane.window_name == "codex" end, panes)
+                    if #dedicated == 1 then panes = dedicated end
+                end
+                if #panes ~= 1 then
+                    notify("Multiple Codex panes match the PR worktree. Use CodexSend in the intended session.", vim.log.levels.WARN)
+                    return
+                end
+                send_to_pane(payload, panes[1], options)
+            end
+        end)
+    end
+    search()
 end
 
 ---Format complete lines as a Markdown fenced block.
