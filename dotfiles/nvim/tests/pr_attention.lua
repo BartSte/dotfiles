@@ -55,31 +55,66 @@ assert(select(2, memory.describe(item, "bart")) == "ACTIVITY", "COMMENTED review
 
 -- Exercise the board through its real buffer mappings, with synthetic read-only discovery.
 local callbacks, on_error
+local notifications, actual_notify = {}, vim.notify
+vim.notify = function(message, level, options)
+    notifications[#notifications + 1] = { message = message, level = level, options = options }
+end
 package.loaded["helpers.pr_inbox"] = { collect = function(success, failure) callbacks, on_error = success, failure end }
 package.loaded["helpers.pr_attention"] = nil
 local board = require("helpers.pr_attention")
 board.open()
 local buffer = vim.api.nvim_get_current_buf()
+local function content() return table.concat(vim.api.nvim_buf_get_lines(buffer, 0, -1, false), "\n") end
+local initial_notice = notifications[#notifications]
+assert(initial_notice.message == "Loading PR queue..." and initial_notice.options.timeout == false)
+local notification_count = #notifications
+board.refresh()
+assert(#notifications == notification_count + 1
+    and notifications[#notifications].options.id ~= initial_notice.options.id,
+    "A repeated refresh must explain the busy state without replacing the loader")
+assert(not content():find("Loading", 1, true), "Loading belongs in notifications, not the board")
+on_error("Synthetic initial failure")
+assert(notifications[#notifications].level == vim.log.levels.ERROR)
+assert(not notifications[#notifications].message:find("previous snapshot", 1, true),
+    "An initial failure must not claim that a previous snapshot exists")
+board.refresh()
 item = pr()
 callbacks({ host = "github.com", login = "bart", updated_at = os.time(), prs = { item }, coverage = {} })
-local function content() return table.concat(vim.api.nvim_buf_get_lines(buffer, 0, -1, false), "\n") end
+local completed_notice = notifications[#notifications]
+assert(completed_notice.options.id == initial_notice.options.id and completed_notice.options.timeout ~= false,
+    "A successful refresh must replace the persistent loader with a temporary result")
 local function action(key)
     for _, mapping in ipairs(vim.api.nvim_buf_get_keymap(buffer, "n")) do
         if mapping.lhs == key then return mapping.callback() end
     end
     error("Missing mapping: " .. key)
 end
+vim.api.nvim_win_set_cursor(0, { 1, 0 })
+local before_invalid_action = content()
+action("d")
+assert(content() == before_invalid_action and notifications[#notifications].message:find("No PR selected", 1, true),
+    "An action on the header must explain why it did nothing")
 for line, text in ipairs(vim.api.nvim_buf_get_lines(buffer, 0, -1, false)) do
     if text:find("project#42", 1, true) then vim.api.nvim_win_set_cursor(0, { line, 0 }); break end
 end
 action("d")
 assert(content():find("0 to inspect", 1, true), "Checking a snapshot completes its local queue item")
 action("a")
-assert(content():find("CHECKED", 1, true), "Checked items remain inspectable")
+assert(content():find("", 1, true), "Checked items remain inspectable with their status icon")
+assert(notifications[#notifications].message == "Showing all PRs.", "The filter key must acknowledge the new state")
 board.refresh()
+assert(not content():find("refreshing", 1, true), "Refresh progress must not alter the board")
+local previous_content = content()
+action("d")
+assert(content() == previous_content and notifications[#notifications].message:find("still loading", 1, true),
+    "PR actions during refresh must explain why they cannot run")
 on_error("Synthetic network failure")
-assert(content():find("REFRESH FAILED", 1, true) and content():find("project#42", 1, true),
-    "A failed refresh must preserve the previous snapshot")
+assert(content() == previous_content, "A failed refresh must preserve the previous board")
+local failed_notice = notifications[#notifications]
+assert(failed_notice.message:find("Synthetic network failure", 1, true)
+    and failed_notice.level == vim.log.levels.ERROR
+    and failed_notice.options.id == initial_notice.options.id and failed_notice.options.timeout ~= false,
+    "A failed refresh must replace the persistent loader with an error notification")
 
 -- A changed head must produce a terminal comparison against the saved assessment.
 item.headRefOid = string.rep("c", 40)
@@ -98,10 +133,53 @@ vim.system = function(argv, _, callback)
     } }) })
 end
 action("D")
+assert(notifications[#notifications].message:find("Loading changes", 1, true),
+    "The changes key must acknowledge the request before the asynchronous result")
 assert(vim.wait(100, function() return vim.bo.filetype == "diff" end))
 assert(compared[#compared]:find(string.rep("b", 40) .. "..." .. string.rep("c", 40), 1, true))
 assert(table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n"):find("+new", 1, true))
 vim.system = actual_system
+vim.notify = actual_notify
+
+-- Selection details must not move PR rows or intercept normal cursor movement.
+vim.api.nvim_set_current_buf(buffer)
+local second = pr()
+second.url, second.number, second.reviews = "https://github.com/example/project/pull/43", 43, { nodes = {} }
+item.baseRefName, item.reviewDecision = "develop", "APPROVED"
+item.commits = { nodes = { { commit = { statusCheckRollup = { state = "SUCCESS" } } } } }
+second.commits = { nodes = { { commit = { statusCheckRollup = vim.NIL } } } }
+board.refresh()
+callbacks({ host = "github.com", login = "bart", updated_at = os.time(), prs = { item, second }, coverage = {} })
+local function details()
+    return vim.api.nvim_buf_get_extmarks(buffer, vim.api.nvim_create_namespace("PrAttentionDetails"),
+        0, -1, { details = true })
+end
+local positions = {}
+for line, value in ipairs(vim.api.nvim_buf_get_lines(buffer, 0, -1, false)) do
+    if value:find("project#42", 1, true) then positions[1] = line end
+    if value:find("project#43", 1, true) then positions[2] = line end
+end
+local stable_content = content()
+vim.api.nvim_win_set_cursor(0, { 1, 0 })
+vim.api.nvim_exec_autocmds("CursorMoved", { buffer = buffer })
+assert(#details() == 0, "Ordinary details stay hidden when no PR is selected")
+for _, line in ipairs(positions) do
+    vim.api.nvim_win_set_cursor(0, { line, 0 })
+    vim.api.nvim_exec_autocmds("CursorMoved", { buffer = buffer })
+    local marks = details()
+    assert(#marks == 1 and marks[1][2] == line - 1, "Only the selected PR must show ordinary details")
+    assert(content() == stable_content and vim.api.nvim_win_get_cursor(0)[1] == line,
+        "Selection details must preserve buffer rows and cursor position")
+    local text = vim.inspect(marks[1][4].virt_lines)
+    if line == positions[1] then
+        assert(text:find("@colleague", 1, true) and text:find("develop", 1, true)
+            and text:find("CI passed", 1, true) and text:find("approved", 1, true),
+            "Selected details must show the author, base branch, CI result, and review state")
+    else
+        assert(text:find("CI not reported", 1, true) and not text:find("CI passed", 1, true),
+            "Missing CI metadata must never imply success")
+    end
+end
 
 vim.fn.delete(temporary, "rf")
 print("PASS: review baselines, activity, deterministic fingerprints, account isolation, deferrals, persistence, and board actions")

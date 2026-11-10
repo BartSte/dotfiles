@@ -17,7 +17,7 @@
   "none-ls.nvim": { "branch": "main", "commit": "0b281893e36fe147077b49f022bf9cd78af3ad12" },
   "nvim-jump": { "branch": "main", "commit": "f58eb5a36c414c19965e1c4d5dfb74d5a1f21ede" },
   "nvim-khalorg": { "branch": "main", "commit": "1d2ab912f31b42775ba89df0e8c63666cdc88ddf" },
-  "nvim-lspconfig": { "branch": "master", "commit": "993d048db0d83d8e8ba3f9cb376456321acdcce3" },
+  "nvim-lspconfig": { "branch": "master", "commit": "443d92c6bea761ab54cdde46fb197a2b4d614bdd" },
   "nvim-project-marks": { "branch": "main", "commit": "ddf9135ac359762af9905795a6a97ee79126bd7c" },
   "nvim-projectrc": { "branch": "main", "commit": "0397f16a4a015372fed93f9b66b044537755ebe7" },
   "nvim-treesitter": { "branch": "main", "commit": "19bdfc04f40ed2ccb3340591d125f759b0406875" },
@@ -36,5 +36,5 @@
   "vim-gtest": { "branch": "master", "commit": "41e299172401cd5549a3dc3542b9d4d9ffc8b50d" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-table-mode": { "branch": "master", "commit": "bb025308a45c67c7c8f0763ba37bc2ee3f534df0" },
-  "vim-test": { "branch": "master", "commit": "4c6ba11524388562f2ad3636dc02cd479204aaff" }
+  "vim-test": { "branch": "master", "commit": "29d4a674f970a463c636049beb081f15e511665c" }
 }
