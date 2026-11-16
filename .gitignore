@@ -11,3 +11,9 @@ dotfiles-windows.git
 dotfiles.git
 nvim.shada
 nvim.log
+
+# Private synchronized files, enrolled endpoints, and runtime credentials.
+/Files/
+/.config/ftpu-files/
+/.config/FreeFileSync/
+/.local/state/ftpu-files/

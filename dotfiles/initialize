@@ -101,6 +101,8 @@ echo "Initialize complete. Now run:"
 echo "  ~/dotfiles-linux/main"
 if [[ "$layer" == "arch" ]]; then
     echo "  ~/dotfiles-arch/main"
+    echo "Optional Files sync: ~/dotfiles-linux/files/auth"
+    echo "Guide: ~/dotfiles-linux/docs/ftpu-files.md"
 elif [[ "$layer" == "pi" ]]; then
     echo "  ~/dotfiles-pi/main"
 fi
