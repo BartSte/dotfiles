@@ -191,7 +191,7 @@ end
 ---@return nil
 function M.files.org()
     file_cmd({
-        cwd = join(path.home(), "dropbox", "org"),
+        cwd = join(path.home(), "Files", "Notes"),
         cmd = "fd --color=never --type f --hidden --follow --exclude .git | grep -v org_archive$"
     })
 end

@@ -20,8 +20,8 @@ assert(not configured.org_custom_exports.d and not configured.org_custom_exports
 for _, key in ipairs({'e', 'w'}) do
     local capture = configured.org_capture_templates[key]
     assert(capture.target:find('/khalorg/inbox/', 1, true))
-    assert(not capture.target:find('dropbox', 1, true))
 end
+assert(configured.org_default_notes_file == scratch .. '/Files/Notes/main.org')
 vim.cmd('edit ' .. scratch .. '/khalorg/inbox/outlook_work.org')
 configured.org_custom_exports.n.action()
 assert(selected.calendar == 'outlook_work', 'Work captures must not use the personal calendar')
