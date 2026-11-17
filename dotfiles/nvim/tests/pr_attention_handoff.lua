@@ -3,214 +3,197 @@ vim.opt.rtp:append(root)
 local temporary = vim.fn.tempname()
 local directory = temporary .. "/worktree with spaces"
 vim.fn.mkdir(directory, "p")
-vim.env.XDG_STATE_HOME, vim.env.TMUX = temporary, "test-tmux"
-local pr = { url = "https://github.com/example/project/pull/42", number = 42, title = "Example",
-    repository = { nameWithOwner = "example/project" }, author = { login = "colleague" },
-    headRefOid = string.rep("b", 40), inbox_categories = { "review" } }
-package.loaded["helpers.pr_inbox"] = { collect = function(callback)
-    callback({ host = "github.com", login = "bart", updated_at = os.time(), prs = { pr }, coverage = {} })
-end }
-package.loaded["octo.config"] = { values = { gh_cmd = "gh" } }
+vim.env.XDG_STATE_HOME = temporary
+local socket = "pr-attention-test-" .. vim.fn.getpid()
 local actual_system, actual_executable = vim.system, vim.fn.executable
-vim.fn.executable = function() return 1 end
-local calls, deliveries, fail_preparation, stale = {}, 0, false, false
-local conflict_callback, conflict_prompt, mergeable, output_path
-local merge_present, unresolved = false, ""
-local current_head, remote_head = pr.headRefOid, pr.headRefOid
-local commits, pushes = 0, 0
-package.loaded["helpers.codex"] = { send = function(payload, options)
-    assert(#calls == 3 and calls[3][1] == "tsp", "Open the worktree session before inserting the prompt")
-    assert(options.directory == directory and options.focus and options.wait_ms > 0)
-    assert(payload:find(pr.url, 1, true) and payload:find(pr.headRefOid, 1, true))
-    assert(payload:find("$pr-post", 1, true) and payload:find("before approval", 1, true))
-    deliveries = deliveries + 1
-end }
-vim.system = function(argv, _, callback)
-    if argv[1] == "git" then
-        local result = { code = 0, stdout = "", stderr = "" }
-        if argv[4] == "rev-parse" then
-            if argv[5] == "HEAD" then result.stdout = current_head .. "\n"
-            else result.code, result.stdout = merge_present and 0 or 1, merge_present and string.rep("c", 40) or "" end
-        elseif argv[4] == "diff" and argv[5] == "--name-only" then result.stdout = unresolved
-        elseif argv[4] == "commit" then
-            commits = commits + 1
-            current_head, merge_present = string.rep("d", 40), false
-        elseif argv[4] == "push" then
-            assert(not vim.tbl_contains(argv, "--force"))
-            assert(argv[#argv] == current_head .. ":refs/heads/feature/review")
-            pushes, remote_head = pushes + 1, current_head
+local function isolated_tmux(arguments)
+    local argv = { "tmux", "-L", socket, "-f", "/dev/null" }
+    vim.list_extend(argv, arguments)
+    return argv
+end
+local function run_tmux(...)
+    local result = actual_system(isolated_tmux({ ... }), { text = true }):wait()
+    assert(result.code == 0, result.stderr)
+    return vim.trim(result.stdout)
+end
+local ok, err = xpcall(function()
+    local source = run_tmux("new-session", "-d", "-P", "-F", "#{pane_id}", "-s", "queue", "-c", directory, "cat")
+    vim.env.TMUX, vim.env.TMUX_PANE = "isolated-test-server", source
+    -- An interactive stand-in records its literal argument and stays alive in tmux.
+    local fixture = temporary .. "/fixture.lua"
+    vim.fn.writefile({
+        'vim.fn.writefile({ vim.json.encode({ directory = vim.fn.getcwd(), prompt = arg[2] }) }, arg[1])',
+        'vim.wait(60000, function() return false end)',
+    }, fixture)
+    local pr = { url = "https://github.com/example/project/pull/42", number = 42, title = "Example",
+        repository = { nameWithOwner = "example/project" }, author = { login = "colleague" },
+        headRefOid = string.rep("b", 40), inbox_categories = { "review" } }
+    package.loaded["helpers.pr_inbox"] = { collect = function(callback)
+        callback({ host = "github.com", login = "bart", updated_at = os.time(), prs = { pr }, coverage = {} })
+    end }
+    package.loaded["octo.config"] = { values = { gh_cmd = "gh" } }
+    local calls, sessions, notices = {}, {}, {}
+    local fail_preparation, stale, closed, fail_launch, missing_codex = false, false, false, false, false
+    local mergeable, fresh_author = "CONFLICTING", nil
+    vim.notify = function(message) notices[#notices + 1] = message end
+    vim.fn.executable = function(name) return name == "codex" and missing_codex and 0 or 1 end
+    vim.system = function(argv, options, callback)
+        calls[#calls + 1] = argv
+        local result = { code = 0, stderr = "", stdout = "" }
+        if argv[1] == "tmux" then
+            local command = vim.list_slice(argv, 2)
+            if command[1] == "new-window" then
+                if fail_launch then
+                    callback({ code = 1, stdout = "", stderr = "Synthetic tmux launch failure" })
+                    return
+                end
+                local index = assert(vim.fn.index(command, "codex") + 1)
+                assert(index > 0 and command[index + 1] == "--cd" and command[index + 2] == directory)
+                local prompt = command[index + 3]
+                assert(#command == index + 3, "Codex must receive one literal prompt argument")
+                local output = temporary .. "/session-" .. (#sessions + 1) .. ".json"
+                sessions[#sessions + 1] = { prompt = prompt, output = output }
+                command = vim.list_slice(command, 1, index - 1)
+                vim.list_extend(command, { "nvim", "--headless", "-u", "NONE", "-l", fixture, output, prompt })
+            end
+            return actual_system(isolated_tmux(command), options, callback)
+        elseif argv[1] == "gh" then
+            assert(argv[2] == "pr" and argv[3] == "view", "The queue must only read GitHub metadata")
+            result.stdout = vim.json.encode({ headRefOid = stale and string.rep("c", 40) or pr.headRefOid,
+                baseRefName = "main", headRefName = "feature/review", author = { login = fresh_author or pr.author.login },
+                state = closed and "CLOSED" or "OPEN", mergeable = mergeable })
+        elseif argv[1] == "tsp-pr" then
+            assert(argv[2] == "--prepare-only" and argv[3] == "--expected-head" and argv[4] == pr.headRefOid)
+            result.code = fail_preparation and 1 or 0
+            result.stderr = fail_preparation and "Synthetic worktree update failure" or ""
+            result.stdout = directory .. "\n"
+        elseif argv[1] == "tsp" then
+            assert(argv[2] == directory)
+        else error("Unexpected command: " .. argv[1]) end
+        callback(result)
+    end
+    local queue = require("helpers.pr_attention")
+    queue.open()
+    local buffer = vim.api.nvim_get_current_buf()
+    local tabs = #vim.api.nvim_list_tabpages()
+    local function select_pr()
+        for line, text in ipairs(vim.api.nvim_buf_get_lines(buffer, 0, -1, false)) do
+            if text:find("project#42", 1, true) then vim.api.nvim_win_set_cursor(0, { line, 0 }); return end
         end
-        if callback then callback(result) end
-        return { wait = function() return result end }
+        error("PR missing")
     end
-    calls[#calls + 1] = argv
-    local result = { code = 0, stderr = "", stdout = "" }
-    if argv[1] == "gh" then
-        result.stdout = vim.json.encode({ headRefOid = stale and string.rep("c", 40) or remote_head,
-            baseRefName = "main", headRefName = "feature/review", author = pr.author,
-            headRepository = { name = "project" }, headRepositoryOwner = { login = "example" },
-            state = "OPEN", mergeable = mergeable or "CONFLICTING" })
-    elseif argv[1] == "tsp-pr" then
-        assert(argv[2] == "--prepare-only" and argv[3] == "--expected-head" and argv[4] == pr.headRefOid)
-        result.code = fail_preparation and 1 or 0
-        result.stderr = fail_preparation and "Synthetic worktree update failure" or ""
-        result.stdout = directory .. "\n"
-    elseif argv[1] == "tsp" then
-        assert(argv[2] == directory)
-    elseif argv[1] == "codex" then
-        assert(argv[2] == "exec" and argv[3] == "--cd" and argv[4] == directory)
-        output_path = argv[vim.fn.index(argv, "--output-last-message") + 2]
-        assert(vim.fn.filereadable(output_path) == 1, "Codex must save its final response outside the worktree")
-        conflict_prompt, conflict_callback = argv[#argv], callback
-        return
-    else error("Unexpected command: " .. argv[1]) end
-    callback(result)
-end
-local queue = require("helpers.pr_attention")
-queue.open()
-local buffer = vim.api.nvim_get_current_buf()
-for line, text in ipairs(vim.api.nvim_buf_get_lines(buffer, 0, -1, false)) do
-    if text:find("project#42", 1, true) then vim.api.nvim_win_set_cursor(0, { line, 0 }); break end
-end
-local function action(key)
-    for _, mapping in ipairs(vim.api.nvim_buf_get_keymap(buffer, "n")) do
-        if mapping.lhs == key then return mapping.callback() end
+    local function mapping(key)
+        for _, entry in ipairs(vim.api.nvim_buf_get_keymap(buffer, "n")) do
+            if entry.lhs == key then return entry.callback end
+        end
     end
-    error("Missing mapping: " .. key)
-end
-action("c")
-action("c")
-assert(vim.wait(1000, function() return deliveries == 1 end), "A repeated key must not create duplicate handoffs")
-assert(#calls == 3)
-
-calls, fail_preparation = {}, true
-action("c")
-vim.wait(100)
-assert(#calls == 2 and deliveries == 1, "Failed preparation must not open a session or insert a prompt")
-
-calls, fail_preparation, stale = {}, false, true
-action("c")
-vim.wait(100)
-assert(#calls == 1 and deliveries == 1, "A stale head must stop before worktree changes or prompt insertion")
-
-calls, stale = {}, false
-action("w")
-assert(vim.wait(1000, function() return #calls == 3 end))
-vim.wait(20)
-assert(deliveries == 1, "The worktree-only action must not insert a prompt")
-
--- Conflict resolution starts its own task and never uses a colleague's PR.
-calls = {}
-action("m")
-assert(#calls == 0, "Conflict resolution must reject PRs by other authors")
-pr.author.login = "bart"
-mergeable = "MERGEABLE"
-action("m")
-vim.wait(50)
-assert(#calls == 1, "A PR without conflicts must not start a worktree or a Codex task")
-
-calls, mergeable = {}, "CONFLICTING"
-vim.env.TMUX = nil
-action("m")
-action("m")
-assert(vim.wait(1000, function() return conflict_callback ~= nil end))
-assert(#calls == 3 and calls[3][1] == "codex" and deliveries == 1,
-    "Resolve conflicts without opening or switching to a tmux session")
-assert(vim.api.nvim_get_current_buf() == buffer, "Starting conflict resolution must preserve focus")
-assert(conflict_prompt:find(pr.url, 1, true) and conflict_prompt:find(pr.headRefOid, 1, true))
-assert(conflict_prompt:find("--no-commit --no-ff", 1, true)
-    and conflict_prompt:find("Do not commit, push", 1, true), "Resolutions must remain local and uncommitted")
-action("m")
-assert(#calls == 3, "Repeated keys must not start concurrent conflict tasks for one PR")
-action("M")
-assert(table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n"):find("still running", 1, true))
-vim.cmd("close")
-conflict_callback({ code = 1, stdout = "", stderr = "Synthetic conflict task failure" })
-assert(vim.wait(1000, function()
-    return table.concat(vim.fn.readfile(output_path:gsub("%.output$", "")), "\n"):find("Task exit code: 1", 1, true) ~= nil
-end))
-assert(vim.api.nvim_get_current_buf() == buffer, "Task completion must not steal focus")
-action("M")
-assert(table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n"):find("Synthetic conflict task failure", 1, true))
-vim.cmd("close")
-conflict_callback, calls = nil, {}
-action("m")
-assert(vim.wait(1000, function() return conflict_callback ~= nil end), "A failed task must allow retry")
-vim.fn.writefile({ "Resolved example.lua. No commit or push." }, output_path)
-merge_present = true
-conflict_callback({ code = 0, stdout = "", stderr = "" })
-assert(vim.wait(1000, function()
-    return table.concat(vim.fn.readfile(output_path:gsub("%.output$", "")), "\n"):find("Task exit code: 0", 1, true) ~= nil
-end))
-assert(vim.api.nvim_get_current_buf() == buffer)
-action("M")
-assert(table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n"):find("Resolved example.lua", 1, true))
-assert(table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n"):find("Ready for review", 1, true))
-vim.cmd("close")
-action("M")
-assert(table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n"):find("Resolved example.lua", 1, true),
-    "A closed report must remain available on disk")
-vim.cmd("close")
-vim.api.nvim_buf_delete(buffer, { force = true })
-package.loaded["helpers.pr_attention"] = nil
-queue = require("helpers.pr_attention")
-queue.open()
-buffer = vim.api.nvim_get_current_buf()
-action("a")
-for line, text in ipairs(vim.api.nvim_buf_get_lines(buffer, 0, -1, false)) do
-    if text:find("project#42", 1, true) then vim.api.nvim_win_set_cursor(0, { line, 0 }); break end
-end
-action("M")
-assert(table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n"):find("Resolved example.lua", 1, true),
-    "Reports must survive a fresh module instance without in-memory task state")
-
--- A zero exit code with Git conflicts must need a decision and support resume.
-vim.cmd("close")
-unresolved = "policy.html\n"
-action("M")
-assert(table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n"):find("Needs a decision", 1, true))
-local function report_action(key)
-    for _, mapping in ipairs(vim.api.nvim_buf_get_keymap(0, "n")) do
-        if mapping.lhs == key then return mapping.callback() end
+    local function action(key) return assert(mapping(key), "Missing mapping: " .. key)() end
+    local function wait_for_session(count)
+        assert(vim.wait(3000, function()
+            return #sessions == count and vim.fn.filereadable(sessions[count].output) == 1
+                and run_tmux("display-message", "-p", "-t", "queue:", "#{@pr_attention_url}") == pr.url
+        end), "Codex window did not start and become active")
+        vim.wait(50)
+        local captured = vim.json.decode(table.concat(vim.fn.readfile(sessions[count].output), "\n"))
+        assert(captured.directory == directory and captured.prompt == sessions[count].prompt,
+            "tmux must preserve the worktree and prompt literally, including $pr-post")
+        assert(vim.api.nvim_get_current_buf() == buffer and #vim.api.nvim_list_tabpages() == tabs,
+            "Codex must leave Neovim on the queue without opening terminal buffers or tabs")
     end
-    error("Missing report mapping: " .. key)
-end
-local original_input, original_select = vim.ui.input, vim.ui.select
-vim.ui.input = function(_, callback) callback("Use policy version 5.") end
-conflict_callback = nil
-local before_resume = #calls
-report_action("m")
-assert(vim.wait(1000, function() return conflict_callback ~= nil end))
-assert(#calls == before_resume + 2, "Resuming must use fresh metadata and Codex without preparing or replacing the worktree")
-assert(conflict_prompt:find("Use policy version 5.", 1, true)
-    and conflict_prompt:find("Resume the existing local merge", 1, true))
-vim.fn.writefile({ "Policy version needs a decision." }, output_path)
-conflict_callback({ code = 0, stdout = "", stderr = "" })
-assert(vim.wait(1000, function()
-    return table.concat(vim.fn.readfile(output_path:gsub("%.output$", "") .. ".json"), "\n"):find("Needs a decision", 1, true) ~= nil
-end), "Exit zero with unresolved files must not report readiness")
+    local function close_codex()
+        run_tmux("kill-window", "-t", "queue:codex-example-project-42")
+    end
+    for _, key in ipairs({ "c", "C", "m", "M" }) do assert(not mapping(key), "Old Codex action remains: " .. key) end
+    select_pr()
+    vim.env.TMUX = nil
+    action("R")
+    assert(#calls == 0 and notices[#notices]:find("inside tmux", 1, true))
+    vim.env.TMUX = "isolated-test-server"
+    action("R")
+    action("R")
+    wait_for_session(1)
+    local prompt = sessions[1].prompt
+    for _, text in ipairs({ pr.url, pr.headRefOid, "$pr-post", "/review", "every pending comment", "Critically review my pending comments",
+        "Do not edit or delete them without my approval", "before approval", "do not submit that review", "_Codex (AI) for Bart._" }) do
+        assert(prompt:find(text, 1, true), "Missing review requirement: " .. text)
+    end
+    local first_calls = #calls
+    run_tmux("select-window", "-t", source)
+    action("R")
+    assert(vim.wait(1000, function() return #calls == first_calls + 3 end))
+    vim.wait(50)
+    assert(#sessions == 1 and run_tmux("display-message", "-p", "-t", "queue:", "#{window_name}") == "codex-example-project-42",
+        "Repeated actions must return to the existing Codex window")
 
--- Local review, commit, and push require separate explicit confirmations.
-unresolved = ""
-vim.api.nvim_set_current_buf(buffer)
-for line, text in ipairs(vim.api.nvim_buf_get_lines(buffer, 0, -1, false)) do
-    if text:find("project#42", 1, true) then vim.api.nvim_win_set_cursor(0, { line, 0 }); break end
-end
-action("M")
-vim.ui.select = function(_, _, callback) callback("Cancel", 1) end
-report_action("c")
-vim.wait(50)
-assert(commits == 0 and pushes == 0, "Cancelling review must not commit or push")
-vim.ui.select = function(choices, _, callback) callback(choices[2], 2) end
-report_action("c")
-assert(vim.wait(1000, function() return commits == 1 end))
-assert(vim.wait(1000, function()
-    return table.concat(vim.fn.readfile(output_path:gsub("%.output$", "") .. ".json"), "\n"):find("Committed locally", 1, true) ~= nil
-end))
-assert(pushes == 0, "A local commit must not push automatically")
-report_action("p")
-assert(vim.wait(1000, function() return pushes == 1 end))
-vim.ui.input, vim.ui.select = original_input, original_select
+    -- Session lookup must survive a fresh module instance, including a stale queue head.
+    vim.api.nvim_buf_delete(buffer, { force = true })
+    package.loaded["helpers.pr_attention"] = nil
+    queue = require("helpers.pr_attention")
+    queue.open()
+    buffer = vim.api.nvim_get_current_buf()
+    select_pr()
+    first_calls, stale = #calls, true
+    action("R")
+    assert(vim.wait(1000, function() return #calls == first_calls + 3 end))
+    vim.wait(50)
+    assert(#sessions == 1, "An existing conversation must reopen without preparing or resetting its worktree")
+    close_codex()
+
+    calls, stale, fail_preparation = {}, false, true
+    action("R")
+    assert(vim.wait(1000, function() return notices[#notices] == "Synthetic worktree update failure" end))
+    assert(#sessions == 1)
+    calls, fail_preparation, stale = {}, false, true
+    action("R")
+    assert(vim.wait(1000, function() return #calls == 2 end))
+    vim.wait(50)
+    assert(#sessions == 1, "A stale head must stop before worktree preparation")
+    calls, stale, closed = {}, false, true
+    action("R")
+    assert(vim.wait(1000, function() return #calls == 2 end))
+    vim.wait(50)
+    assert(#sessions == 1, "A closed PR must not start a review")
+    calls, closed, missing_codex = {}, false, true
+    action("R")
+    assert(#calls == 0 and #sessions == 1)
+    missing_codex, fail_launch = false, true
+    action("R")
+    assert(vim.wait(1000, function() return notices[#notices]:find("Synthetic tmux launch failure", 1, true) ~= nil end))
+    fail_launch = false
+
+    calls = {}
+    action("F")
+    assert(vim.wait(1000, function() return notices[#notices]:find("own PRs only", 1, true) ~= nil end))
+    assert(#calls == 1, "A colleague's PR must not prepare a resolver worktree")
+    pr.author.login, fresh_author = "bart", "colleague"
+    calls = {}
+    action("F")
+    assert(vim.wait(1000, function() return #calls == 2 end))
+    vim.wait(50)
+    assert(#sessions == 1, "Fresh metadata must confirm ownership")
+    calls, fresh_author, mergeable = {}, nil, "MERGEABLE"
+    action("F")
+    assert(vim.wait(1000, function() return #calls == 2 end))
+    vim.wait(50)
+    assert(#sessions == 1, "A PR without conflicts must not start a resolver")
+    calls, mergeable = {}, "CONFLICTING"
+    action("F")
+    wait_for_session(2)
+    prompt = sessions[2].prompt
+    for _, text in ipairs({ pr.url, pr.headRefOid, "rebasing", "commit all intended", "no unfinished Git operation",
+        "including forks", "ask me in this interactive session", "git status is clean", "Run the relevant tests",
+        "Do not push", "explicit approval", "--force-with-lease=refs/heads/<source-branch>:<recorded-remote-SHA>",
+        "only remaining Git operation" }) do
+        assert(prompt:find(text, 1, true), "Missing conflict requirement: " .. text)
+    end
+    close_codex()
+    calls = {}
+    action("w")
+    assert(vim.wait(1000, function() return #calls == 3 end))
+    assert(calls[3][1] == "tsp" and #sessions == 2)
+    print("PASS: real isolated tmux windows, literal prompts, window switching, restart reuse, unchanged Neovim UI, and failure recovery")
+end, debug.traceback)
+actual_system(isolated_tmux({ "kill-server" }), { text = true }):wait()
 vim.system, vim.fn.executable = actual_system, actual_executable
 vim.fn.delete(temporary, "rf")
-print("PASS: queue handoffs, stale heads, conflict task ownership, duplicate keys, reports, and failure recovery")
+assert(ok, err)

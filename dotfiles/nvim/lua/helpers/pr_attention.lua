@@ -4,9 +4,6 @@ local board, snapshot, rows, checkpoints = nil, nil, {}, {}
 local show_all, loading, generation = false, false, 0
 local context_directory
 local opening = false
-local conflict_jobs = {}
-local conflict_summary
-local resolve_conflicts
 local groups = { "Requested reviews", "Team requests", "Review follow-ups", "Your PRs" }
 local namespace = vim.api.nvim_create_namespace("PrAttention")
 local detail_namespace = vim.api.nvim_create_namespace("PrAttentionDetails")
@@ -198,8 +195,6 @@ local function render()
         local pr_width, added_width, removed_width = 0, 0, 0
         for _, pr in ipairs(snapshot.prs) do
             local group, status, reason, quiet = memory.describe(pr, snapshot.login, checkpoints[pr.url])
-            local local_status = conflict_summary and conflict_summary(pr)
-            if local_status then quiet = false end
             if status == "CHECKED" or status == "SNOOZED" then checked = checked + 1
             elseif quiet then waiting = waiting + 1
             else active = active + 1 end
@@ -213,7 +208,6 @@ local function render()
                 removed_width = math.max(removed_width, vim.fn.strdisplaywidth(removed))
                 buckets[group][#buckets[group] + 1] = {
                     pr = pr, status = status, reason = reason, label = label, added = added, removed = removed,
-                    local_status = local_status,
                 }
             end
         end
@@ -256,21 +250,13 @@ local function render()
                 local reason = item.reason:gsub("%c", " ")
                 local parts = { { indent }, { item.status, "PrAttentionStatus" .. item.status:gsub("%W", "") },
                     { "  ·  " .. reason, "PrAttentionMuted" } }
-                if item.local_status then
-                    local source = item.local_status:find("Ready for review", 1, true) and "DiagnosticHint"
-                        or item.local_status:find("Failed", 1, true) and "DiagnosticError" or "DiagnosticWarn"
-                    vim.list_extend(parts, { { "  ·  ", "PrAttentionMuted" },
-                        { (source == "DiagnosticHint" and " " or source == "DiagnosticError" and " " or " ")
-                            .. item.local_status, source }, { "   M report", "PrAttentionMuted" } })
-                end
-                detail_rows[#lines] = { pr = pr, parts = parts, context = pr_context(pr, snapshot.login, indent, width), blocker =
-                    (item.local_status and (item.local_status:find("Needs a decision", 1, true)
-                        or item.local_status:find("Failed", 1, true))) or reason:lower():find("fail", 1, true) }
+                detail_rows[#lines] = { pr = pr, parts = parts,
+                    context = pr_context(pr, snapshot.login, indent, width), blocker = reason:lower():find("fail", 1, true) }
             end
         end
         add("")
         add(margin .. string.rep("─", math.max(1, math.min(width - 2 * #margin, 72))), "PrAttentionRule")
-        controls({ { "o", "open" }, { "c", "Codex" }, { "m", "resolve" }, { "M", "report" },
+        controls({ { "o", "open" }, { "R", "review" }, { "F", "conflicts" },
             { "r", "refresh" }, { "?", "keys" } })
         if show_all then add(margin .. "Showing all PRs · a to hide quiet items", "PrAttentionMuted") end
     else
@@ -328,8 +314,9 @@ local function show_keys()
         "    Action required", "    Checked locally", "  󰒲  Deferred", "    Waiting for others",
         "    Previously reviewed", "    Merge candidate", "    Draft", "",
         "Open", "  o  Open in Octo", "  b  Open in the browser",
-        "  D  Changes since the last assessment", "  w  Open the worktree", "  c  Open in Codex", "  C  Copy the Codex brief",
-        "", "Resolve", "  m  Resolve conflicts or resume with a decision", "  M  Saved report, diff, commit, and push",
+        "  D  Changes since the last assessment", "  w  Open the worktree",
+        "", "Codex (interactive)", "  R  Review the PR and your pending comments; approve before posting",
+        "  F  Rebase and resolve your PR conflicts; commit everything and stop before pushing",
         "", "Queue", "  d  Mark this snapshot checked", "  s  Defer until tomorrow", "  u  Undo the local checkpoint",
         "  a  Show or hide quiet PRs", "  r  Refresh", "  q  Close", "", "Press q to return.",
     })
@@ -398,9 +385,9 @@ local function changes()
     end)
 end
 
-local function open_worktree(pr, on_open, resolve_conflicts)
+local function open_worktree(pr, on_open, conflicts)
     if not pr then return end
-    if not resolve_conflicts and (not vim.env.TMUX or vim.env.TMUX == "") then
+    if not vim.env.TMUX or vim.env.TMUX == "" then
         notify("Open Neovim inside tmux to use the worktree action."); return
     end
     if snapshot.host ~= "github.com" then notify("tsp-pr currently supports github.com repositories only."); return end
@@ -410,14 +397,19 @@ local function open_worktree(pr, on_open, resolve_conflicts)
     local directory = context_directory
     -- Resolve fresh refs; tsp-pr keeps existing worktrees and their local changes.
     local fields = "baseRefName,headRefName,headRefOid"
-        .. (resolve_conflicts and ",author,state,mergeable" or "")
+        .. (on_open and ",author,state,mergeable" or "")
     command({ "pr", "view", pr.url, "--json", fields }, function(output)
         local refs = vim.json.decode(output)
         if refs.headRefOid ~= pr.headRefOid then
             opening = false
             notify("The head changed. Refresh and inspect the new snapshot before opening this worktree."); return
         end
-        if resolve_conflicts then
+        if on_open and refs.state ~= "OPEN" then
+            opening = false
+            notify("This action requires an open PR.", vim.log.levels.WARN)
+            return
+        end
+        if conflicts then
             if not refs.author or refs.author == vim.NIL or refs.author.login ~= snapshot.login or refs.state ~= "OPEN" then
                 opening = false
                 notify("Conflict resolution requires an open PR that you authored.", vim.log.levels.WARN)
@@ -443,8 +435,7 @@ local function open_worktree(pr, on_open, resolve_conflicts)
                     notify("tsp-pr did not return a valid worktree path.", vim.log.levels.ERROR)
                     return
                 end
-                if resolve_conflicts then
-                    opening = false
+                if on_open then
                     on_open(path, refs)
                     return
                 end
@@ -452,8 +443,6 @@ local function open_worktree(pr, on_open, resolve_conflicts)
                     opening = false
                     if session_result.code ~= 0 then
                         notify(vim.trim(session_result.stderr), vim.log.levels.ERROR)
-                    elseif on_open then
-                        on_open(path, refs)
                     else
                         feedback("Opened the worktree for " .. label(pr) .. ".")
                     end
@@ -462,343 +451,117 @@ local function open_worktree(pr, on_open, resolve_conflicts)
     end, function() opening = false end)
 end
 
-local function conflict_report_path(pr)
-    local root = vim.env.XDG_STATE_HOME or vim.fs.joinpath(vim.env.HOME, ".local", "state")
-    return vim.fs.joinpath(root, "codex", "pr-attention", snapshot.host, snapshot.login,
-        "conflicts", vim.fn.sha256(pr.url) .. ".md")
-end
-
-local function local_git(path, args)
-    local argv = { "git", "-C", path }
-    vim.list_extend(argv, args)
-    return vim.system(argv, { text = true, timeout = 10000 }):wait()
-end
-
-local function read_conflict(pr)
-    local path = conflict_report_path(pr)
-    if vim.fn.filereadable(path .. ".json") == 1 then
-        local ok, state = pcall(vim.json.decode, table.concat(vim.fn.readfile(path .. ".json"), "\n"))
-        if ok and type(state) == "table" and state.url == pr.url then return state end
-    elseif vim.fn.filereadable(path) == 1 then
-        -- Import reports from the first version without changing the worktree.
-        local worktree = table.concat(vim.fn.readfile(path), "\n"):match("\nWorktree: ([^\n]+)")
-        if worktree then return { url = pr.url, path = worktree, head = pr.headRefOid, state = "Inspect local merge",
-            exit_code = tonumber(table.concat(vim.fn.readfile(path), "\n"):match("Task exit code: (%-?%d+)")) } end
-    end
-end
-
-local function write_conflict(report_path, state)
-    vim.fn.mkdir(vim.fs.dirname(report_path), "p")
-    local temporary = report_path .. ".json.tmp"
-    vim.fn.writefile({ vim.json.encode(state) }, temporary)
-    assert(vim.fn.rename(temporary, report_path .. ".json") == 0, "Cannot save conflict state")
-end
-
-conflict_summary = function(pr)
-    if conflict_jobs[pr.url] then return "Resolving locally" end
-    local state = read_conflict(pr)
-    if not state then return end
-    if state.head ~= pr.headRefOid and state.commit ~= pr.headRefOid then return "Local report is stale · press M" end
-    return state.state .. (state.state == "Ready for review" and " · commit and push pending" or "")
-end
-
-local function inspect_conflict(state, exit_code)
-    if state.pid and vim.uv.kill(state.pid, 0) ~= nil then
-        state.state, state.blocker = "Resolving locally", "Wait for the running task to finish."
-        state.unresolved = state.unresolved or {}
-        return state
-    end
-    state.pid = nil
-    local head = local_git(state.path, { "rev-parse", "HEAD" })
-    local merge = local_git(state.path, { "rev-parse", "--verify", "-q", "MERGE_HEAD" })
-    local unresolved = local_git(state.path, { "diff", "--name-only", "--diff-filter=U" })
-    state.unresolved = vim.split(vim.trim(unresolved.stdout or ""), "\n", { trimempty = true })
-    if state.merge_head and merge.code == 0 and state.merge_head ~= vim.trim(merge.stdout) then
-        state.state, state.blocker = "Failed", "The merge target changed. Inspect the checkout before continuing."
-        return state
-    end
-    state.merge_head = merge.code == 0 and vim.trim(merge.stdout) or nil
-    if head.code ~= 0 or unresolved.code ~= 0 then
-        state.state = "Failed"
-        state.blocker = "Cannot inspect the local checkout."
-    elseif vim.trim(head.stdout) ~= (state.commit or state.head) then
-        state.state, state.blocker = "Failed", "The local HEAD changed. Inspect the checkout before continuing."
-    elseif exit_code and exit_code ~= 0 then
-        state.state, state.blocker = "Failed", "The resolver failed. Read the task report before retrying."
-    elseif #state.unresolved > 0 then
-        state.state, state.blocker = "Needs a decision", "Unresolved files: " .. table.concat(state.unresolved, ", ")
-    elseif state.commit then
-        state.state, state.blocker = state.state == "Published" and "Published" or "Committed locally", nil
-    elseif state.merge_head then
-        state.state, state.blocker = "Ready for review", nil
+local function codex_prompt(pr, conflicts)
+    local prompt = {
+        "PR: " .. pr.url,
+        "Expected PR head: " .. pr.headRefOid,
+        "Read the repository instructions and refresh the PR metadata before starting.",
+        "Verify that the remote PR head and local HEAD match the expected head. Stop if either differs.",
+    }
+    if conflicts then
+        vim.list_extend(prompt, {
+            "Resolve this PR's conflicts by rebasing its branch onto the current base branch.",
+            "You are authorized to fetch, rebase, resolve conflicts, run tests, and commit all intended resolution changes locally.",
+            "First require a clean worktree and no unfinished Git operation. Preserve existing work and stop if these checks fail.",
+            "Resolve the base repository, base branch, source repository, and source branch from fresh PR metadata, including forks.",
+            "Record the remote source branch SHA before rebasing. It must match the expected PR head.",
+            "Fetch the current base and rebase onto that exact fetched commit. Preserve the intent of both changes.",
+            "If a resolution needs an unclear product decision, ask me in this interactive session and then continue.",
+            "Run the relevant tests and inspect the complete resulting diff for unintended changes and conflict markers.",
+            "Finish the rebase and commit all intended changes. Leave no staged, unstaged, or untracked resolution files.",
+            "Verify that git status is clean and no rebase or merge remains in progress before declaring success.",
+            "If tests fail or work remains blocked, explain the failure and do not claim the branch is ready to push.",
+            "Do not push, post comments, or merge the PR without my explicit approval in this session.",
+            "Show the final commits, resolution diff, test results, and exact force-push command for my inspection.",
+            "Target the fresh PR source repository and branch explicitly in that command, including for forks.",
+            "Use --force-with-lease=refs/heads/<source-branch>:<recorded-remote-SHA>; never use plain --force.",
+            "Stop for my review. The only remaining Git operation on success must be the force push, which I can approve or run myself.",
+        })
     else
-        state.state, state.blocker = "Failed", "No local merge is available. Read the task report."
+        vim.list_extend(prompt, {
+            "Use $pr-post to perform a code review of this PR and prepare the exact review draft for my approval.",
+            "Run /review for the current PR head, unless current-head findings already exist and remain valid.",
+            "Fetch my pending review body and every pending comment, including their IDs and diff targets.",
+            "Critically review my pending comments against the current code as well as your own findings.",
+            "Explain which of my comments are valid, stale, duplicate, or need changes, and propose exact edits where necessary.",
+            "Preserve existing pending comments. Do not edit or delete them without my approval of those exact actions.",
+            "Show the complete proposed review, including all existing pending comments that submission will publish.",
+            "Let me select findings, request edits, and approve whether to submit or keep the review pending.",
+            "Do not edit code or write to GitHub before approval. Do not submit a review or approve the PR automatically.",
+            "If pending comments cannot be retrieved completely, explain the limit and do not submit that review.",
+            "Include this final line in each new or edited external comment and review summary: _Codex (AI) for Bart._",
+        })
     end
-    return state
+    return table.concat(prompt, "\n")
 end
 
-local function fresh_pr(pr, callback)
-    command({ "pr", "view", pr.url, "--json",
-        "author,state,headRefOid,headRefName,headRepository,headRepositoryOwner,baseRefName" }, function(output)
-        local refs = vim.json.decode(output)
-        if not refs.author or refs.author == vim.NIL or refs.author.login ~= snapshot.login or refs.state ~= "OPEN" then
-            notify("This action requires your own open PR.", vim.log.levels.WARN); return
-        end
-        callback(refs)
-    end)
-end
-
-local function publish_conflict(pr, state, report_path, push)
-    if conflict_jobs[pr.url] then feedback("Wait for conflict resolution to finish."); return end
-    fresh_pr(pr, function(refs)
-        inspect_conflict(state, state.exit_code)
-        if refs.headRefOid ~= state.head or (push and not state.commit)
-            or (not push and state.state ~= "Ready for review") or #state.unresolved > 0 then
-            notify("The PR or local merge changed. Reopen M and inspect the result.", vim.log.levels.WARN); return
-        end
-        local diff = local_git(state.path, { "diff", "--cached", "--binary" })
-        local changes = diff.stdout
-        if diff.code ~= 0 then notify("Cannot inspect the staged diff.", vim.log.levels.ERROR); return end
-        vim.ui.select({ "Cancel", push and "Push reviewed commit" or "Commit reviewed merge" },
-            { prompt = push and "Push this commit to the PR branch?" or "Did you review the diff and test results?" }, function(choice, index)
-                if not choice or index ~= 2 then return end
-                local function run(message)
-                    inspect_conflict(state, state.exit_code)
-                    local current_diff = local_git(state.path, { "diff", "--cached", "--binary" })
-                    if state.state == "Failed" or state.state == "Resolving locally" or #state.unresolved > 0
-                        or current_diff.code ~= 0 or current_diff.stdout ~= changes then
-                        notify("The checkout changed during confirmation. Inspect it again.", vim.log.levels.WARN); return
-                    end
-                    local argv = { "git", "-C", state.path }
-                    if push then
-                        if not refs.headRepository or refs.headRepository == vim.NIL or not refs.headRepositoryOwner
-                            or refs.headRepositoryOwner == vim.NIL then
-                            notify("Cannot identify the PR source repository.", vim.log.levels.ERROR); return
-                        end
-                        vim.list_extend(argv, { "push", "--", "https://github.com/" .. refs.headRepositoryOwner.login
-                            .. "/" .. refs.headRepository.name .. ".git", state.commit .. ":refs/heads/" .. refs.headRefName })
-                    else
-                        if state.state ~= "Ready for review" then feedback("The local merge is no longer ready."); return end
-                        vim.list_extend(argv, { "commit", "-m", message })
-                    end
-                    conflict_jobs[pr.url] = true
-                    vim.system(argv, { text = true }, vim.schedule_wrap(function(result)
-                        conflict_jobs[pr.url] = nil
-                        if result.code ~= 0 then notify(vim.trim(result.stderr or "Git action failed"), vim.log.levels.ERROR); return end
-                        if push then state.state = "Published"
-                        else
-                            state.commit = vim.trim(local_git(state.path, { "rev-parse", "HEAD" }).stdout)
-                            state.state = "Committed locally"
-                        end
-                        write_conflict(report_path, state)
-                        render()
-                        notify(push and "Pushed the reviewed merge. Refresh the queue." or "Committed locally. Press p in the report to push.")
-                    end))
-                end
-                if push then run()
-                else vim.ui.input({ prompt = "Commit message: ", default = "chore: resolve merge conflicts" }, function(message)
-                    if message and vim.trim(message) ~= "" then run(message) end
-                end) end
-            end)
-    end)
-end
-
-local function conflict_report(pr)
-    pr = pr or selected()
-    if not pr then return end
-    local path = conflict_report_path(pr)
-    if vim.fn.filereadable(path) == 0 then
-        feedback("No conflict report saved for " .. label(pr) .. ".")
-        return
-    end
-    local state = read_conflict(pr)
-    local lines = vim.fn.readfile(path)
-    if state and not conflict_jobs[pr.url] then
-        inspect_conflict(state, state.exit_code)
-        write_conflict(path, state)
-        render()
-        local overview = { "Local status: " .. state.state, state.blocker or "", "",
-            "d: inspect diff    m: resume with a decision    c: commit reviewed merge    p: push reviewed commit", "",
-            "Tests and resolver decisions appear in the task report below.", "" }
-        vim.list_extend(overview, lines)
-        lines = overview
-    end
-    if conflict_jobs[pr.url] then
-        table.insert(lines, 1, "The task is still running in the background. Reopen this report with M after it finishes.")
-    elseif not table.concat(lines, "\n"):find("Task exit code:", 1, true) and vim.fn.filereadable(path .. ".output") == 1 then
-        local output = vim.fn.readfile(path .. ".output")
-        if #output > 0 then
-            vim.list_extend(lines, { "", "## Saved Codex response", "", "The original task exit status is unavailable.", "" })
-            vim.list_extend(lines, output)
-        end
-    end
-    local buffer = scratch("conflicts-" .. pr.number, lines)
-    if state then
-        vim.keymap.set("n", "m", function() resolve_conflicts(pr) end, { buffer = buffer })
-        vim.keymap.set("n", "d", function()
-            local staged = local_git(state.path, { "diff", "--cached" })
-            local unstaged = local_git(state.path, { "diff" })
-            scratch("merge-diff-" .. pr.number, vim.split((staged.stdout or "") .. "\n" .. (unstaged.stdout or ""), "\n"), "diff")
-        end, { buffer = buffer })
-        vim.keymap.set("n", "c", function() publish_conflict(pr, state, path, false) end, { buffer = buffer })
-        vim.keymap.set("n", "p", function() publish_conflict(pr, state, path, true) end, { buffer = buffer })
-    end
-end
-
-resolve_conflicts = function(pr)
-    pr = pr or selected()
-    if not pr then return end
-    if not pr.author or pr.author == vim.NIL or pr.author.login ~= snapshot.login then
-        notify("Conflict resolution is available for your own PRs only.", vim.log.levels.WARN)
-        return
-    end
-    if conflict_jobs[pr.url] then
-        feedback("Conflict resolution is already running for " .. label(pr) .. ". Press M for its report."); return
-    end
-    if vim.fn.executable("codex") ~= 1 then notify("The codex executable is not available.", vim.log.levels.ERROR); return end
-    local report_path = conflict_report_path(pr)
-    local previous = read_conflict(pr)
-    local function start(path, refs, decision)
-        local prior_report = decision and table.concat(vim.fn.readfile(report_path), "\n") or ""
-        local prompt = table.concat({
-            "Resolve all merge conflicts locally for my PR: " .. pr.url,
-            "Expected PR head: " .. pr.headRefOid,
-            "Base branch: " .. refs.baseRefName,
-            decision and ("Expected MERGE_HEAD: " .. previous.merge_head) or "",
-            "You are authorized to fetch the current base branch, start a local merge, and edit conflict resolutions.",
-            "Read the repository instructions and inspect the PR intent before resolving conflicts.",
-            decision and "Resume the existing local merge. Preserve its resolved files and all existing local changes."
-                or "First verify the checkout matches the expected head and has no local changes or unfinished Git operations.",
-            "If any precondition fails, stop and explain the blocker. Preserve all existing work.",
-            decision and "Verify the existing MERGE_HEAD. Continue only the recorded merge."
-                or "Resolve the base repository and branch from fresh PR metadata. Fetch that base, including for a fork PR.",
-            decision and "Do not start another merge or fetch a different base into this merge. Do not rebase or rewrite history."
-                or "Merge the fetched base into this PR with --no-commit --no-ff. Do not rebase or rewrite history.",
-            "Resolve each conflict from the intent of both changes. Do not choose ours or theirs for all files.",
-            "If a resolution requires an unclear product decision, leave that conflict unresolved and explain the decision needed.",
-            "Run the relevant tests and inspect the final diff for conflict markers and unintended changes.",
-            "Do not commit, push, post comments, or merge the PR on GitHub. Leave the local merge for my review.",
-            "Report the resolved files, remaining conflicts, test results, and any decisions that need my input.",
-            decision and ("User decision for this continuation: " .. decision .. "\nPrevious report:\n" .. prior_report) or "",
-        }, "\n")
-        local id = "pr_attention_conflicts_" .. pr.url
-        local output_path = report_path .. ".output"
-        local heading = { "# Conflict resolution: " .. label(pr), "", "Worktree: " .. path,
-            "Started: " .. os.date("%Y-%m-%d %H:%M:%S"), "",
-            "Inspect the local merge before committing or pushing.", "" }
-        local saved, save_error = pcall(function()
-            vim.fn.mkdir(vim.fs.dirname(report_path), "p")
-            vim.fn.writefile(vim.list_extend(vim.deepcopy(heading), {
-                "Task started in the background. Completion appears through a Neovim notification.",
-                "After a Neovim restart, live task status is unavailable here.",
-            }), report_path)
-            vim.fn.writefile({}, output_path)
-        end)
-        if not saved then notify("Cannot save conflict report: " .. tostring(save_error), vim.log.levels.ERROR); return end
-        local state = { url = pr.url, path = path, head = pr.headRefOid, state = "Resolving locally" }
-        write_conflict(report_path, state)
-        conflict_jobs[pr.url] = true
-        render()
-        progress_notice("Resolving conflicts for " .. label(pr) .. " in the background. Press M for the report.\n"
-            .. "Worktree: " .. path, id)
-        local function save_report(result)
-            local report = vim.fn.readfile(output_path)
-            if #report == 0 then report = vim.split(vim.trim(result.stdout or ""), "\n", { plain = true }) end
-            if #report == 0 or (#report == 1 and report[1] == "") then report = { "Codex returned no report." } end
-            vim.list_extend(report, { "", "Task exit code: " .. result.code })
-            if result.code ~= 0 then
-                vim.list_extend(report, { "", vim.trim(result.stderr or "") })
-            end
-            local written, err = pcall(vim.fn.writefile, vim.list_extend(vim.deepcopy(heading), report), report_path)
-            if not written then notify("Cannot save conflict report: " .. tostring(err), vim.log.levels.ERROR) end
-        end
-        local ok, process = pcall(vim.system, { "codex", "exec", "--cd", path, "--color", "never",
-            "--output-last-message", output_path, prompt },
-            { cwd = path, text = true }, vim.schedule_wrap(function(result)
-                conflict_jobs[pr.url] = nil
-                state.pid = nil
-                save_report(result)
-                state.exit_code = result.code
-                inspect_conflict(state, result.code)
-                write_conflict(report_path, state)
-                render()
-                notify(state.state .. ": " .. label(pr)
-                    .. ". Press M in PR attention to inspect the saved report.\nWorktree: " .. path,
-                    state.state == "Ready for review" and vim.log.levels.INFO or vim.log.levels.WARN, { id = id })
-            end))
-        if not ok then
-            conflict_jobs[pr.url] = nil
-            save_report({ code = -1, stderr = tostring(process) })
-            state.state, state.exit_code = "Failed", -1
-            write_conflict(report_path, state)
-            notify("Cannot start conflict resolution: " .. tostring(process), vim.log.levels.ERROR, { id = id })
-        elseif process and process.pid then
-            state.pid = process.pid
-            write_conflict(report_path, state)
-        end
-    end
-    if previous then
-        inspect_conflict(previous, previous.exit_code)
-        write_conflict(report_path, previous)
-        if previous.state == "Resolving locally" then feedback("Conflict resolution is already running. Press M for its report."); return end
-        if previous.state == "Ready for review" or previous.commit then
-            feedback("The merge is already resolved locally. Press M to review, commit, or push."); return
-        end
-        if previous.merge_head then
-            if previous.head ~= pr.headRefOid or local_git(previous.path, { "rev-parse", "HEAD" }).stdout:gsub("%s+$", "") ~= pr.headRefOid then
-                notify("The PR head changed. Inspect the existing merge before resuming.", vim.log.levels.WARN); return
-            end
-            if vim.bo.filetype == "pr_attention" then conflict_report(pr) end
-            vim.ui.input({ prompt = "Decision or instructions for the remaining conflict: " }, function(decision)
-                if not decision or vim.trim(decision) == "" then return end
-                fresh_pr(pr, function(refs)
-                    local current = inspect_conflict(vim.deepcopy(previous))
-                    if refs.headRefOid ~= previous.head or current.merge_head ~= previous.merge_head or current.state == "Failed" then
-                        notify("The PR or merge changed. Inspect it before resuming.", vim.log.levels.WARN); return
-                    end
-                    start(previous.path, refs, decision)
-                end)
-            end)
+local function tmux(arguments, callback)
+    local argv = { "tmux" }
+    vim.list_extend(argv, arguments)
+    vim.system(argv, { text = true }, vim.schedule_wrap(function(result)
+        if result.code ~= 0 then
+            opening = false
+            notify("Cannot open Codex window: " .. vim.trim(result.stderr or "tmux failed"), vim.log.levels.ERROR)
             return
         end
-    end
-    open_worktree(pr, start, true)
+        callback(result.stdout or "")
+    end))
 end
 
-local function brief(pr)
-    local baseline, source = memory.baseline(pr, snapshot.login, checkpoints[pr.url])
-    local own = pr.author and pr.author ~= vim.NIL and pr.author.login == snapshot.login
-    local prompt = {
-        "Use $pr-attention to prepare this selected PR only: " .. pr.url,
-        "Expected head: " .. pr.headRefOid,
-        baseline and ("Previous assessment: " .. baseline .. " (" .. source .. ").") or "No previous assessment is known.",
-        own and "Assess feedback critically with $pr-respond." or "Review the current PR with $pr-post.",
-        "Refresh the head and feedback. Inspect the complete relevant context, including changes since the previous assessment.",
-        "Prepare exact proposals. Do not edit code or write to GitHub before approval.",
-    }
-    return prompt
+local function focus_codex(window, pane)
+    tmux({ "select-window", "-t", window }, function()
+        tmux({ "select-pane", "-t", pane }, function() opening = false end)
+    end)
 end
 
-local function copy_brief()
+local function start_codex(conflicts)
     local pr = selected()
     if not pr then return end
-    local prompt = brief(pr)
-    vim.fn.setreg("+", table.concat(prompt, "\n"))
-    scratch("codex-brief", vim.list_extend({ "# Codex brief", "" }, prompt))
-    notify("Copied the brief to the clipboard. Paste it into the PR worktree's Codex window.")
-end
-
-local function send_brief()
-    local pr = selected()
-    if not pr then return end
-    if vim.fn.executable("key2pane") ~= 1 then
-        notify("key2pane is required to insert the Codex brief.", vim.log.levels.ERROR)
+    local source = vim.env.TMUX_PANE
+    if not vim.env.TMUX or vim.env.TMUX == "" or not source or source == "" then
+        notify("Open Neovim inside tmux to use the Codex actions.", vim.log.levels.WARN)
         return
     end
-    local payload = table.concat(brief(pr), "\n")
-    open_worktree(pr, function(path)
-        feedback("Sending the brief for " .. label(pr) .. " to Codex...")
-        require("helpers.codex").send(payload, { directory = path, focus = true, wait_ms = 10000 })
+    if opening then feedback("A PR window is already opening."); return end
+    if vim.fn.executable("tmux") ~= 1 or vim.fn.executable("codex") ~= 1 then
+        notify("The tmux and codex executables are required.", vim.log.levels.ERROR)
+        return
+    end
+    opening = true
+    -- Pane metadata survives Neovim restarts. Dead panes cannot receive a new task.
+    tmux({ "list-panes", "-s", "-t", source, "-F",
+        "#{session_id}\t#{window_id}\t#{pane_id}\t#{pane_dead}\t#{@pr_attention_url}" }, function(output)
+        local session
+        for _, line in ipairs(vim.split(output, "\n", { trimempty = true })) do
+            local fields = vim.split(line, "\t", { plain = true })
+            session = session or fields[1]
+            if fields[4] == "0" and fields[5] == pr.url then
+                focus_codex(fields[2], fields[3])
+                return
+            end
+        end
+        opening = false
+        if not session then notify("Cannot identify the current tmux session.", vim.log.levels.ERROR); return end
+        if conflicts and (not pr.author or pr.author == vim.NIL or pr.author.login ~= snapshot.login) then
+            notify("Conflict resolution is available for your own PRs only.", vim.log.levels.WARN)
+            return
+        end
+        open_worktree(pr, function(path)
+            local name = "codex-" .. pr.repository.nameWithOwner:gsub("/", "-") .. "-" .. pr.number
+            -- Multiple command arguments make tmux execute Codex directly, without shell interpolation.
+            tmux({ "new-window", "-d", "-P", "-F", "#{window_id}\t#{pane_id}", "-t", session .. ":",
+                "-n", name, "-c", path, "codex", "--cd", path, codex_prompt(pr, conflicts) }, function(created)
+                local window, pane = created:match("^(%S+)\t(%S+)")
+                if not pane then
+                    opening = false
+                    notify("tmux did not return the Codex window and pane IDs.", vim.log.levels.ERROR)
+                    return
+                end
+                tmux({ "set-option", "-p", "-t", pane, "@pr_attention_url", pr.url }, function()
+                    focus_codex(window, pane)
+                end)
+            end)
+        end, conflicts)
     end)
 end
 
@@ -817,11 +580,6 @@ function M.refresh()
             local record, err = memory.read(result.host, result.login, pr.url)
             checkpoints[pr.url] = record
             if err then notify(err, vim.log.levels.WARN) end
-            local state = read_conflict(pr)
-            if state and not conflict_jobs[pr.url] then
-                inspect_conflict(state, state.exit_code)
-                write_conflict(conflict_report_path(pr), state)
-            end
         end
         render()
         refresh_result("PR queue refreshed.")
@@ -868,8 +626,8 @@ function M.open()
                 render()
                 feedback(show_all and "Showing all PRs." or "Showing PRs that need attention.")
             end,
-            D = changes, w = function() open_worktree(selected()) end, c = send_brief, C = copy_brief,
-            m = resolve_conflicts, M = conflict_report,
+            D = changes, w = function() open_worktree(selected()) end,
+            R = function() start_codex(false) end, F = function() start_codex(true) end,
             ["?"] = show_keys,
             b = function()
                 local pr = selected()
