@@ -27,31 +27,42 @@ khalorg.setup({
 })
 
 -- Keep file routing and refresh policy here; the plugin owns calendar operations.
+local function handle_sync_result(result)
+    if result.code ~= 0 then
+        vim.notify('The local edit remains saved in khal. Outlook sync failed; retry mycalsync, not event creation.\n'
+            .. (result.stderr or ''), vim.log.levels.ERROR)
+        return
+    end
+    vim.notify('Local calendars synchronized with Outlook.')
+    vim.cmd('checktime')
+end
+
+local function sync_calendars()
+    vim.system({ 'mycalsync', '--verbose' }, { text = true }, vim.schedule_wrap(handle_sync_result))
+end
+
+local function run_calendar_action(method, calendar)
+    if not calendar then return end
+    khalorg[method]({
+        calendar = calendar,
+        on_complete = function(result)
+            if result.code == 0 and method ~= 'list' then sync_calendars() end
+        end,
+    })
+end
+
+local function select_calendar(callback)
+    local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':t:r')
+    if name == 'outlook_personal' or name == 'outlook_work' then
+        callback(name)
+    else
+        vim.ui.select({ 'outlook_personal', 'outlook_work' }, { prompt = 'Calendar:' }, callback)
+    end
+end
+
 local function calendar_action(method)
     return function()
-        local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':t:r')
-        local function run(calendar)
-            if not calendar then return end
-            khalorg[method]({ calendar = calendar, on_complete = function(result)
-                if result.code ~= 0 or method == 'list' then return end
-                vim.system({ 'mycalsync', '--verbose' }, { text = true }, function(sync_result)
-                    vim.schedule(function()
-                        if sync_result.code ~= 0 then
-                            vim.notify('The local edit remains saved in khal. Outlook sync failed; retry mycalsync, not event creation.\n'
-                                .. (sync_result.stderr or ''), vim.log.levels.ERROR)
-                        else
-                            vim.notify('Local calendars synchronized with Outlook.')
-                            vim.cmd('checktime')
-                        end
-                    end)
-                end)
-            end })
-        end
-        if name == 'outlook_personal' or name == 'outlook_work' then
-            run(name)
-        else
-            vim.ui.select({ 'outlook_personal', 'outlook_work' }, { prompt = 'Calendar:' }, run)
-        end
+        select_calendar(function(calendar) run_calendar_action(method, calendar) end)
     end
 end
 
