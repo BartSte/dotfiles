@@ -2,12 +2,11 @@ local orgmode = require('orgmode')
 local path = require('helpers.path')
 local khalorg = require('khalorg')
 
-local dropbox_home = path.join(path.home(), 'dropbox')
-local dropbox_org = path.join(dropbox_home, 'org')
-local main = path.join(dropbox_org, 'main.org')
-local personal = path.join(dropbox_org, 'personal.org')
-local gedachten = path.join(dropbox_org, 'gedachten.org')
-local komeco = path.join(dropbox_org, 'komeco.org')
+local notes = path.join(path.home(), 'Files', 'Notes')
+local main = path.join(notes, 'main.org')
+local personal = path.join(notes, 'personal.org')
+local gedachten = path.join(notes, 'gedachten.org')
+local komeco = path.join(notes, 'komeco.org')
 local data_home = vim.env.XDG_DATA_HOME
 if not data_home or data_home == '' then data_home = path.join(path.home(), '.local', 'share') end
 local calendar_home = path.join(data_home, 'khalorg')
