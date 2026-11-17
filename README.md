@@ -51,7 +51,7 @@ On a Raspberry Pi, run its setup:
 ~/dotfiles-pi/main
 ```
 
-Run the interactive authentication steps for Bitwarden, Git, calendars, and Dropbox:
+Run the interactive authentication steps for Bitwarden, Git, calendars, and Files:
 
 ```bash
 ~/dotfiles-linux/auth
@@ -224,22 +224,33 @@ Phone access is read-only. Downloaded notebooks remain available offline.
 See the [Pi WebDAV setup](https://github.com/BartSte/dotfiles-pi/blob/main/dotfiles-pi/calendar-webdav/README.md)
 for server setup, credentials, and Android configuration.
 
-## Dropbox files
+## Shared Files
 
-`~/dropbox/org` contains personal Org notes and their archives.
-`~/dropbox/generated` contains files that scheduled jobs replace.
-Do not edit generated files as personal notes.
+`~/Files` contains working documents, notes, and project files.
+Neovim uses `~/Files/Notes` for personal Org notes and captures.
+Calendar agendas stay in the local Khalorg data directory.
 
-| Files in `~/dropbox/generated` | Publisher on the Raspberry Pi |
-| ----------------------------- | ----------------------------- |
-| `activities.org` | `garmin-activities.timer` through Summit |
-| `personal_records.org` | `garmin-update.timer` through Summit |
-| `training-schedule.org`, `recent-training.csv` | Hermes training publisher |
+On Zbook, FreeFileSync synchronizes this folder through SFTP over Tailscale.
+The timer runs every five minutes. The active Zbook profile propagates deletions and preserves versioned copies.
+Conflicts need manual review. Android needs the matching deletion setting on its active Files pair.
+Use `ftpu-files sync`, `ftpu-files preview`, and `ftpu-files status`.
 
-The Pi publishes these generated files to the rclone remote named `dropbox`.
-Its `dropboxpull.timer` downloads other Dropbox content every ten minutes.
-It excludes `activities.org` and `personal_records.org` because Summit writes them locally.
-On Arch Linux, `dropboxsync.timer` synchronizes `~/dropbox` in both directions through `rclone bisync`.
+`sync` and scheduled jobs run without a desktop window. `preview` opens an interactive comparison.
+New profiles leave deletion propagation off. Enable it explicitly with `ftpu-files deletions on`.
+Deleted and overwritten copies go to `~/.local/state/ftpu-files/versions`, outside the synchronized folder.
+`ftpu-files deletions off` stops future deletion propagation. It does not restore files already deleted.
+
+Before resuming Android's Files pair, enable **Sync deletions** there or keep that pair paused.
+A pair with deletions disabled can restore files deleted elsewhere.
+Keep `*.ffs_db`, `*.ffs_lock`, and `*.ffs_tmp` excluded on Android.
+Camera and WhatsApp backup settings remain separate.
+Keep an independent backup and test recovery before enabling deletion propagation on another device.
+See the [Files guide](https://github.com/BartSte/dotfiles-linux/blob/master/dotfiles-linux/docs/ftpu-files.md) for setup and recovery.
+
+On the Pi, the `ftpu-files-view.service` provides a live view of the drive at `~/Files`.
+Komeco uses `Files/Projects/Komeco/Transcription` through SFTP.
+Encrypted assistant recovery archives live under `HekkieBackups/Recovery` on the drive.
+Previous local cloud files are preserved under `Archive/Migrations/PreviousCloud`.
 
 ## Dotfiles commands
 
@@ -258,3 +269,5 @@ The Zsh configuration defines these Git commands for the bare repositories:
 `dotu` commits, pulls, and pushes changes across the installed repositories.
 Stage this README separately with `base add README.md`.
 The Linux, Arch, Pi, and private repositories each own a README inside their layer directory.
+
+_Codex (AI) for Bart._
